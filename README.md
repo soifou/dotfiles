@@ -34,7 +34,7 @@ ZSH_THEME="theme_name"
 ##### Set your zsh plugins (for auto-completion)
 Check the list of available plugins here `~/dotfiles/oh-my-zsh/plugins/` then edit your zshrc file and load plugins you want :
 ``` bash
-plugins=(git debian symfony2 composer zsh-syntax-highlighting repo sudo bundler web-search)
+plugins=(git debian symfony2 composer)
 ```
 ##### Choose the shell you want
 If you want revert bash as default shell just do :
