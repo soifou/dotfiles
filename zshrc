@@ -27,7 +27,7 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git debian symfony2 composer zsh-syntax-highlighting repo sudo bundler web-search)
+plugins=(git debian symfony2 capistrano vagrant sublime composer zsh-syntax-highlighting repo sudo bundler web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -42,16 +42,16 @@ fi
 
 # Shell Aliases
 ## Git Aliases
-alias gs='git status '
-alias ga='git add '
-alias gb='git branch '
-alias gc='git commit'
-alias gd='git diff'
-alias go='git checkout '
-alias gk='gitk --all&'
-alias gx='gitx --all'
-alias got='git '
-alias get='git '
+# alias gs='git status '
+# alias ga='git add '
+# alias gb='git branch '
+# alias gc='git commit'
+# alias gd='git diff'
+# alias go='git checkout '
+# alias gk='gitk --all&'
+# alias gx='gitx --all'
+# alias got='git '
+# alias get='git '
 
 ## Vagrant Aliases
 # alias vag='vagrant'
