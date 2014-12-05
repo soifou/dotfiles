@@ -2,6 +2,7 @@
 	"installed_packages":
 	[
 		"Bootstrap 3 Snippets",
+		"jQuery",
 		"PHP-Twig",
 		"Predawn",
 		"SideBarEnhancements",
