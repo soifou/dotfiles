@@ -232,7 +232,7 @@ gauge = {
     caption_fg_colour=0xFFFFFF,    caption_fg_alpha=0.5,
 },
 {
-    name='downspeedf',           arg='usb0',                     max_value=100,
+    name='downspeedf',           arg='eth2',                     max_value=100,
     x=70,                          y=692,
     graph_radius=54,
     graph_thickness=19,
@@ -253,7 +253,7 @@ gauge = {
     caption_fg_colour=0xFFFFFF,    caption_fg_alpha=0.5,
 },
 {
-    name='upspeedf',           arg='usb0',                     max_value=100,
+    name='upspeedf',           arg='eth2',                     max_value=100,
     x=70,                          y=692,
     graph_radius=32,
     graph_thickness=7,
