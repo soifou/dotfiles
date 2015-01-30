@@ -3,7 +3,7 @@
 My [Conky] configuration file using the [Lua] programming language.
 This version is a fork of Seajey's conkyrc which is a fork of [conkyrc_lunatico] which is itself a fork of [conkyrc_orange] =)
 
-![Screenshot taken Jan 30 2015](https://github.com/soifou/dotfiles/conky/conky.png)
+![Screenshot taken Jan 30 2015](https://raw.githubusercontent.com/soifou/dotfiles/master/conky/conky.png)
 
 ### Installation
 
