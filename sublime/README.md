@@ -10,9 +10,9 @@ Overview
 
 Requirements
 ------------
-- Sublime Text
-- Sublime Package
-- Source Code Pro font
+- [Sublime Text]
+- [Sublime Package]
+- [Source Code Pro font]
 
 Installation
 ------------
