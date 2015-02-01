@@ -26,7 +26,7 @@ ZSH_THEME="lukerandall"
 COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
+# Example format: plugins=(ssh-agent rails git textmate ruby lighthouse)
 plugins=(git debian symfony2 capistrano vagrant sublime composer zsh-syntax-highlighting repo sudo bundler web-search)
 
 source $ZSH/oh-my-zsh.sh
@@ -39,6 +39,17 @@ fi
 if [ -f $HOME/.profile ]; then
   source $HOME/.profile  # Read Mac .profile, if present.
 fi
+
+# enable agent forwarding support
+# zstyle :omz:plugins:ssh-agent agent-forwarding on
+#
+# load multiple identities use the identities style
+# zstyle :omz:plugins:ssh-agent identities id_dsa id_rsa
+#
+# set the maximum lifetime of the identities, use the lifetime style. 
+# The lifetime may be specified in seconds or as described in sshd_config(5) (see TIME FORMATS)
+# If left unspecified, the default lifetime is forever.
+# zstyle :omz:plugins:ssh-agent lifetime 4h
 
 # Shell Aliases
 ## Git Aliases
