@@ -17,6 +17,18 @@ Requirements
 Installation
 ------------
 
+[Source Code Pro font]
+``` bash
+$ wget https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip
+$ unzip 1.017R.zip && cd source-code-pro-1.017R
+# mkdir -p /usr/share/fonts/truetype/source-code-pro
+# cp *.ttf /usr/share/fonts/truetype/source-code-pro/
+# fc-cache
+```
+
+Then install [Sublime Text] and [Sublime Package]
+
+Finally, install my config
 ``` bash
 cd ~/dotfiles/sublime
 chmod +x install.sh
