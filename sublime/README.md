@@ -25,4 +25,4 @@ chmod +x install.sh
 
 [Sublime Text]: http://www.sublimetext.com/
 [Sublime Package]: https://sublime.wbond.net/installation
-[Source Code Pro font]: http://sourceforge.net/projects/sourcecodepro.adobe/
+[Source Code Pro font]: https://github.com/adobe-fonts/source-code-pro
