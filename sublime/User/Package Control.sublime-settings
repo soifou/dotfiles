@@ -5,12 +5,16 @@
 	"installed_packages":
 	[
 		"Bootstrap 3 Snippets",
+		"Git-StatusBar",
 		"jQuery",
 		"Package Control",
 		"PHP-Twig",
 		"Predawn",
+		"Project Manager",
 		"SideBarEnhancements",
 		"Smarty",
+		"SublimeLinter",
+		"SublimeLinter-phpcs",
 		"Theme - Spacegray"
 	]
 }
