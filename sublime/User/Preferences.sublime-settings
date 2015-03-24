@@ -9,10 +9,10 @@
 	"enable_tab_scrolling": false,
 	"folder_exclude_patterns":
 	[
+		".capistrano",
 		".git",
 		".rsync_cache",
-		"app/cache",
-		"web/*"
+		"app/cache"
 	],
 	"font_face": "Source Code Pro Semibold",
 	"font_options":
