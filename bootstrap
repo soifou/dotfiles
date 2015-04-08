@@ -131,11 +131,13 @@ configure_vim() {
 # }
 
 delete_backups() {
+    rm -rf $HOME/.gitconfig.dotbackup
+    rm -rf $HOME/.gitignore.dotbackup
+    rm -rf $HOME/.vim.dotbackup
+    rm -rf $HOME/.vimrc.dotbackup
     rm -rf $HOME/.oh-my-zsh.dotbackup
     rm -rf $HOME/.zcompdump.dotbackup
     rm -rf $HOME/.zshrc.dotbackup
-    rm -rf $HOME/.gitconfig.dotbackup
-    rm -rf $HOME/.gitignore.dotbackup
 }
 
 # update() {

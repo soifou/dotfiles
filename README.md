@@ -1,33 +1,29 @@
 Dotfiles
 ========
 
-This repository includes a part of my dotfiles (mainly for vim, bash and zsh), intended to backup purpose.
+This repository includes a part of my dotfiles, intended to backup purpose. It was greatly inspired by [Michael Malley's dotfiles] and [Alan Christopher Thomas's dotfiles] repositories, thanks go to them.
 
-It was greatly inspired by Michael Malley's dotfiles repository available here https://github.com/michaeljsmalley/dotfiles, thanks go to him.
-
+Theses dotfiles are custom config for :
+- Bash
+- Conky
+- Git
+- SublimeText
+- Vim
+- Zsh
 
 Installation
 ------------
-
 ``` bash
 git clone git://github.com/soifou/dotfiles ~/dotfiles
 cd ~/dotfiles
-chmod +x install.sh
-./install.sh
+chmod +x bootstrap
+./bootstrap -h
 ```
-
-The included setup script (install.sh) will do the following things :
-
-1. Back up any existing dotfiles in your home directory to `~/dotfiles_old/`
-2. Create symlinks to the dotfiles in `~/dotfiles/` in your home directory
-3. Clone the `oh-my-zsh` repository from GitHub
-4. Install zsh
-5. Set zsh as the default shell.
 
 Configuration
 -------------
 ##### Set your zsh theme
-Check the list of available here `~/dotfiles/oh-my-zsh/themes/` then edit your zshrc file and set your theme like this :
+Check the list of themes available here `~/dotfiles/oh-my-zsh/themes/` then edit your zshrc file and set your theme like this :
 ``` bash
 ZSH_THEME="theme_name"
 ```
@@ -52,3 +48,5 @@ bash
 ```
 
 [zsh themes]:http://zshthem.es/
+[Michael Malley's dotfiles]:https://github.com/michaeljsmalley/dotfiles
+[Alan Christopher Thomas's dotfiles]:https://github.com/alanctkc/dotfiles
