@@ -1,0 +1,16 @@
+[user]
+	name = [[GIT_NAME]]
+	email = [[GIT_EMAIL]]
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[merge]
+    conflictstyle = diff3
+[push]
+	default = current
+[alias]
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph
+    ignored = !git ls-files -v | grep "^[[:lower:]]"
+[core]
+	excludesfile = ~/.gitignore

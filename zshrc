@@ -7,7 +7,6 @@ ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each time that oh-my-zsh is loaded.
-#ZSH_THEME="random"
 ZSH_THEME="lukerandall"
 
 # Set to this to use case-sensitive completion
@@ -46,7 +45,7 @@ fi
 # load multiple identities use the identities style
 # zstyle :omz:plugins:ssh-agent identities id_dsa id_rsa
 #
-# set the maximum lifetime of the identities, use the lifetime style. 
+# set the maximum lifetime of the identities, use the lifetime style.
 # The lifetime may be specified in seconds or as described in sshd_config(5) (see TIME FORMATS)
 # If left unspecified, the default lifetime is forever.
 # zstyle :omz:plugins:ssh-agent lifetime 4h
