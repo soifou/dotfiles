@@ -1,6 +1,5 @@
 .directory
 oh-my-zsh/
 zsh-completions/
-vim/vim
+vim/bundle
 vim/.netrwhist
-private

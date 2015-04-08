@@ -6,11 +6,12 @@
 "                                                                            "
 " Sections:                                                                  "
 "   01. General ................. General Vim behavior                       "
-"   02. Events .................. General autocmd events                     "
-"   03. Theme/Colors ............ Colors, fonts, etc.                        "
-"   04. Vim UI .................. User interface behavior                    "
-"   05. Text Formatting/Layout .. Text, tab, indentation related             "
-"   06. Custom Commands ......... Any custom command aliases                 "
+"   02. Plugins.................. Vundle                                     "
+"   03. Events .................. General autocmd events                     "
+"   04. Theme/Colors ............ Colors, fonts, etc.                        "
+"   05. Vim UI .................. User interface behavior                    "
+"   06. Text Formatting/Layout .. Text, tab, indentation related             "
+"   07. Custom Commands ......... Any custom command aliases                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -19,7 +20,37 @@
 set nocompatible         " get rid of Vi compatibility mode. SET FIRST!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 02. Events                                                                 "
+" 02. Vundle                                                                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype off  " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle
+" required!
+Plugin 'gmarik/Vundle.vim'
+
+" Plugins
+" vim-scripts
+" Plugin 'Wombat'
+" Plugin 'wombat256.vim'
+" Plugin 'genutils'
+" github
+" Plugin 'groenewege/vim-less'
+" Plugin 'plasticboy/vim-markdown'
+" Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'tpope/vim-git'
+" Plugin 'bling/vim-airline'
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'ervandew/supertab'
+" Plugin 'Lokaltog/vim-easymotion'
+" Plugin 'embear/vim-localvimrc'
+" Plugin 'ntpeters/vim-better-whitespace'
+
+call vundle#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 03. Events                                                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 
@@ -31,9 +62,9 @@ autocmd FileType javascript setlocal sw=2 ts=2 sts=2
 
 " Enable omnicompletion (to use, hold Ctrl+X then Ctrl+O while in Insert mode.
 set ofu=syntaxcomplete#Complete
-
+set noswapfile            " No swap files, use version control instead
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 03. Theme/Colors                                                           "
+" 04. Theme/Colors                                                           "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256              " enable 256-color mode.
 syntax enable             " enable syntax highlighting (previously syntax on).
@@ -53,7 +84,7 @@ augroup markdown
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 04. Vim UI                                                                 "
+" 05. Vim UI                                                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number                " show line numbers
 set numberwidth=6         " make the number gutter 6 characters wide
@@ -68,7 +99,7 @@ set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \ \%h%m%r%
 set visualbell
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 05. Text Formatting/Layout                                                 "
+" 06. Text Formatting/Layout                                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autoindent            " auto-indent
 set tabstop=4             " tab spacing
@@ -79,9 +110,10 @@ set expandtab             " use spaces instead of tabs
 set smartindent           " automatically insert one extra level of indentation
 set smarttab              " use tabs at the start of a line, spaces elsewhere
 set nowrap                " don't wrap text
+set backspace=2           " fix Delete (backspace) on Mac OS X
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 06. Custom Commands                                                        "
+" 07. Custom Commands                                                        "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Prettify JSON files making them easier to read

@@ -5,11 +5,13 @@ echo_version() {
 }
 
 backup_file() {
+    rm $HOME/$1.dotbackup
     test -e $HOME/$1 && cp -LiR $HOME/$1 $HOME/$1.dotbackup && rm -rf $HOME/$1
     true
 }
 
 backup_directory() {
+    rm -rf $HOME/$1.dotbackup
     test -d $HOME/$1.dotbackup && echo -n "~/$1.dotbackup: " && rm -rI $HOME/$1.dotbackup
     test -d $HOME/$1 && cp -LR $HOME/$1 $HOME/$1.dotbackup && rm -rf $HOME/$1
     true
@@ -113,7 +115,7 @@ configure_vim() {
     echo "Configuring vim..."
     link_file vimrc .vimrc
     link_directory vim .vim
-    clone_or_pull_repo gmarik/vundle .vim/bundle/vundle
+    clone_or_pull_repo gmarik/vundle .vim/bundle/Vundle.vim
     echo "Installing Vim plugins. Please wait..."
     vim +PluginInstall +qall > /dev/null 2>&1
 }
@@ -155,26 +157,28 @@ do
         -h | --help | -\?)
             echo "Dotfiles - Bootstrap available commands";
             echo "---------------------------------------";
+            echo "--bash - Create a bashrc file and set it as default shell";
+            echo "--delete-backups - Remove all dotbackup files";
             echo "--git - Create config/ignore Git files for the current user";
             echo "--git-name - Set your Git display name";
             echo "--git-email - Set your Git email";
-            echo "--delete-backups - Remove all dotbackup files";
-            echo "--bash - Create a bashrc file and set it as default shell";
+            echo "--vim - Create custom vimrc, add colors/syntax/plugins"
             echo "--zsh - Install and config Zsh as default shell";
             exit 0; ;;
+        -v | --version) echo_version; exit 0; ;;
+
         --git) GIT=1; shift; ;;
         --git-name) GIT_NAME=$2; shift 2; ;;
         --git-email) GIT_EMAIL=$2; shift 2; ;;
 
-        --delete-backups) DELETE_BACKUPS=1; shift; ;;
-
         --bash) BASH=1; shift; ;;
         --zsh) ZSH=1; shift; ;;
+        --vim) VIM=1; shift; ;;
+
+        --delete-backups) DELETE_BACKUPS=1; shift; ;;
 
         --update) UPDATE=1; shift; ;;
         --no-virtualenv) NO_VIRTUALENVWRAPPER=1; shift; ;;
-        --no-vim) NO_VIM=1; shift; ;;
-        -v | --version) echo_version; exit 0; ;;
         --) shift; break; ;;
         -*) printf >&2 'WARNING: Unknown option (ignored): %s\n' "$1"; shift; ;;
         *) break; ;;
@@ -199,6 +203,7 @@ fi
 # if [ "$NO_BASH" != 1 ] || [ "$NO_ZSH" != 1 ]; then
 #     configure_shell
 # fi
+
 if [ "$BASH" == 1 ]; then
     configure_bash
 fi
@@ -208,6 +213,9 @@ fi
 if [ "$GIT" == 1 ]; then
     configure_git
 fi
+if [ "$VIM" == 1 ]; then
+    configure_vim
+fi
 # if [ "$NO_I3" != 1 ]; then
 #     configure_i3
 # fi
@@ -216,9 +224,6 @@ fi
 # fi
 # if [ "$NO_IPYTHON" != 1 ]; then
 #     configure_ipython
-# fi
-# if [ "$NO_VIM" != 1 ]; then
-#     configure_vim
 # fi
 
 echo "Done."
