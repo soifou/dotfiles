@@ -3,5 +3,6 @@
 	{ "keys": ["ctrl+alt+h"], "command": "open_browser", "args": { "url": "http://php.net/manual/en/function.%s.php" }},
 	{ "keys": ["ctrl+alt+w"], "command": "open_browser", "args": { "url": "https://codex.wordpress.org/Function_Reference/%s" }},
 	{ "keys": ["ctrl+alt+y"], "command": "open_browser", "args": { "url": "http://docs.python.org/library/%s" }},
-    { "keys": ["super+ctrl+r"], "command": "reindent" , "args": { "single_line": false }}
+    { "keys": ["super+ctrl+r"], "command": "reindent" , "args": { "single_line": false }},
+    { "keys": ["ctrl+shift+s"], "command": "save_all" }
 ]
