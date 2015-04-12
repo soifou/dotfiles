@@ -87,15 +87,17 @@ configure_zsh() {
     if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
         echo "zsh is already installed... skip"
     else
-        if [ "$OSTYPE" == "darwin"* ]; then
+        $ostype = $(uname);
+        if [ $ostype == "Darwin" ]; then
             echo "OSX : Please install zsh via homebrew - brew install zsh"
-        else
+        elif [ $ostype == "Linux" ]; then
             sudo apt-get install zsh
+            echo "Set default shell to zsh"
+            chsh -s $(which zsh)
+        else
+            echo "Your OS is neither MacOS or Linux... skip"
         fi
     fi
-
-    echo "Set default shell to zsh"
-    chsh -s $(which zsh)
 }
 
 configure_git() {
@@ -120,6 +122,41 @@ configure_vim() {
     vim +PluginInstall +qall > /dev/null 2>&1
 }
 
+configure_sublime() {
+    font_url = https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip
+    package_control_url = https://packagecontrol.io/Package%20Control.sublime-package
+    plugins = (open_browser)
+
+    $ostype = $(uname);
+    if [ $ostype == "Darwin" ]; then
+        $sublime_dir = "$HOME/Library/Application\ Support/Sublime\ Text/"
+        $fonts_dir = "$HOME/Library/Fonts/"
+    else
+        $sublime_dir = "$HOME/.config/sublime-text-3/"
+        $fonts_dir = "$HOME/.fonts/"
+    fi
+
+    # echo "Install Source Code Pro font"
+    # mkdir -p $HOME/tmp $fonts_dir/truetype/source-code-pro
+    # wget -P $HOME/tmp $font_url
+    # unzip 1.017R.zip && cd source-code-pro-1.017R
+    # cp *.ttf $fonts_dir/truetype/source-code-pro/
+    # fc-cache
+
+    echo "Download Sublime Package Control"
+    wget -P "$sublime_dir/Installed\ Packages" $package_control_url
+
+    echo "Configuring sublime text..."
+    link_directory sublime/User "$sublime_dir/Packages/User"
+
+    echo "Add custom plugins"
+    for plugin in "${plugins[@]}"
+    do
+        link_directory sublime/$plugin "$sublime_dir/Packages/$plugin"
+    done
+
+}
+
 # configure_ipython() {
 #     echo "Configuring ipython..."
 #     if [ "$OSTYPE" == "darwin"* ]; then
@@ -133,9 +170,9 @@ configure_vim() {
 delete_backups() {
     rm -rf $HOME/.gitconfig.dotbackup
     rm -rf $HOME/.gitignore.dotbackup
+    rm -rf $HOME/.oh-my-zsh.dotbackup
     rm -rf $HOME/.vim.dotbackup
     rm -rf $HOME/.vimrc.dotbackup
-    rm -rf $HOME/.oh-my-zsh.dotbackup
     rm -rf $HOME/.zcompdump.dotbackup
     rm -rf $HOME/.zshrc.dotbackup
 }
@@ -164,6 +201,7 @@ do
             echo "--git - Create config/ignore Git files for the current user";
             echo "--git-name - Set your Git display name";
             echo "--git-email - Set your Git email";
+            echo "--sublime - Configure preferences, add custom/useful plugins for sublime text editor"
             echo "--vim - Create custom vimrc, add colors/syntax/plugins"
             echo "--zsh - Install and config Zsh as default shell";
             exit 0; ;;
@@ -176,6 +214,8 @@ do
         --bash) BASH=1; shift; ;;
         --zsh) ZSH=1; shift; ;;
         --vim) VIM=1; shift; ;;
+
+        --sublime) SUBLIME=1; shift; ;;
 
         --delete-backups) DELETE_BACKUPS=1; shift; ;;
 
@@ -209,14 +249,17 @@ fi
 if [ "$BASH" == 1 ]; then
     configure_bash
 fi
-if [ "$ZSH" == 1 ]; then
-    configure_zsh
-fi
 if [ "$GIT" == 1 ]; then
     configure_git
 fi
+if [ "$SUBLIME" == 1 ]; then
+    configure_sublime
+fi
 if [ "$VIM" == 1 ]; then
     configure_vim
+fi
+if [ "$ZSH" == 1 ]; then
+    configure_zsh
 fi
 # if [ "$NO_I3" != 1 ]; then
 #     configure_i3

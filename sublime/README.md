@@ -30,9 +30,7 @@ Then install [Sublime Text] and [Sublime Package]
 
 Finally, install my config
 ``` bash
-cd ~/dotfiles/sublime
-chmod +x install.sh
-./install.sh
+$ sh bootstrap --sublime
 ```
 
 [Sublime Text]: http://www.sublimetext.com/
