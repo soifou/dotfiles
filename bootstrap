@@ -124,10 +124,10 @@ configure_vim() {
 
 install_source_code_pro_font() {
 	echo "Installing Source Code Pro font..."
-	
+
 	font_url=https://github.com/adobe-fonts/source-code-pro/archive/1.017R.tar.gz
 	ostype=$(uname);
-	
+
     if [ $ostype == "Darwin" ]; then
         fonts_dir="$HOME/Library/Fonts/"
     else
@@ -140,7 +140,7 @@ install_source_code_pro_font() {
     tar -zxf $HOME/tmp/1.017R.tar.gz -C $HOME/tmp
     cp $HOME/tmp/source-code-pro-1.017R/TTF/*.ttf $fonts_dir
     rm -r $HOME/tmp
-    
+
     echo "Font installed ! Clean user font cache"
     if [ $ostype == "Darwin" ]; then
     	atsutil databases -removeUser
@@ -152,7 +152,7 @@ install_source_code_pro_font() {
 }
 
 configure_sublime() {
-    
+
     package_control_url=https://packagecontrol.io/Package%20Control.sublime-package
     plugins=(open_browser)
 
@@ -163,7 +163,16 @@ configure_sublime() {
         sublime_dir="$HOME/.config/sublime-text-3"
     fi
 
-    echo "Configuring preferences sublime text..."
+    # revert change - testing
+    # rm "$sublime_dir/Packages/User"
+    # rm -r "$sublime_dir/Installed Packages"
+    # for plugin in "${plugins[@]}"
+    # do
+    #     echo "    * removing $plugin plugin"
+    #     rm "$sublime_dir/Packages/$plugin"
+    # done
+
+    echo "Configuring preferences for Sublime Text..."
     if [[ -d "$sublime_dir/Packages/User" ]]; then
         echo "Backup current customer config"
         mv "$sublime_dir/Packages/User" "$sublime_dir/Packages/User.dotbackup"
@@ -173,13 +182,16 @@ configure_sublime() {
 	echo "Download Sublime Package Control"
     wget -P "$sublime_dir/Installed Packages" $package_control_url
 
- #    echo "Add custom plugins"
- #    for plugin in "${plugins[@]}"
- #    do
- #        link_directory sublime/$plugin "$sublime_dir/Packages/$plugin"
- #    done
-
-	# echo "Ready ! At the next start Sublime Text will fetch/upgrade packages"
+    echo "Add custom Sublime plugins"
+    echo " "
+    for plugin in "${plugins[@]}"
+    do
+        echo "    * adding $plugin plugin"
+        ln -s $HOME/dotfiles/sublime/$plugin "$sublime_dir/Packages/$plugin"
+    done
+    echo " "
+    echo "--------------------- "
+	echo "Ready ! At the next start Sublime Text will fetch/upgrade packages"
 
 }
 

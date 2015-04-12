@@ -3,36 +3,36 @@ My Sublime Text configuration files
 
 Overview
 --------
-- Keymap shortcuts to look into website API languages or frameworks (see `open_browser/` folder)
-- Custom settings for the editor himself (theme, font, settings)
-- Config of my installed plugins
-- Auto-completion for my daily languages
-
-Requirements
-------------
-- [Sublime Text]
-- [Sublime Package]
-- [Source Code Pro font]
+- Themes: 
+    * Predawn (current)
+    * Spacegray
+- Plugins : 
+    * Package Control
+    * Project Manager 
+    * Sidebar Enhancements
+    * Smarty (completion)
+    * Markdown
+    * Twitter Bootstrap 3 (snippets)
+    * Git status bar
+    * jQuery 
+    * PHP-Twig
+    * open_browser (keymap shortcuts to look into website API languages or frameworks)
+- Fonts :
+    * [Source Code Pro font]
+- Editor setting :
+    * Almost all comes from the creator of Predawn theme
 
 Installation
 ------------
 
-[Source Code Pro font]
-``` bash
-$ wget https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip
-$ unzip 1.017R.zip && cd source-code-pro-1.017R
-# mkdir -p /usr/share/fonts/truetype/source-code-pro
-# cp *.ttf /usr/share/fonts/truetype/source-code-pro/
-# fc-cache
-```
+Install [Sublime Text 3] then 
 
-Then install [Sublime Text] and [Sublime Package]
-
-Finally, install my config
 ``` bash
 $ sh bootstrap --sublime
 ```
 
-[Sublime Text]: http://www.sublimetext.com/
+Just start Sublime Text and wait for Package Control fetch and advertise you when it is ready to code. 
+
+[Sublime Text 3]: http://www.sublimetext.com/3
 [Sublime Package]: https://sublime.wbond.net/installation
 [Source Code Pro font]: https://github.com/adobe-fonts/source-code-pro
