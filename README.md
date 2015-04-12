@@ -7,7 +7,7 @@ Theses dotfiles are custom config for :
 - Bash
 - Conky
 - Git
-- SublimeText
+- Sublime Text
 - Vim
 - Zsh
 
