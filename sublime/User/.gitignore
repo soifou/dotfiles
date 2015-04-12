@@ -3,4 +3,5 @@
 *.merged-ca-bundle
 *.system-ca-bundle
 *.user-ca-bundle
+HaoGist.sublime-settings
 Projects/
