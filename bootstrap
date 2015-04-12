@@ -122,38 +122,60 @@ configure_vim() {
     vim +PluginInstall +qall > /dev/null 2>&1
 }
 
-configure_sublime() {
-    font_url = https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip
-    package_control_url = https://packagecontrol.io/Package%20Control.sublime-package
-    plugins = (open_browser)
-
-    $ostype = $(uname);
+install_source_code_pro_font() {
+	echo "Installing Source Code Pro font..."
+	
+	font_url=https://github.com/adobe-fonts/source-code-pro/archive/1.017R.tar.gz
+	ostype=$(uname);
+	
     if [ $ostype == "Darwin" ]; then
-        $sublime_dir = "$HOME/Library/Application\ Support/Sublime\ Text/"
-        $fonts_dir = "$HOME/Library/Fonts/"
+        fonts_dir="$HOME/Library/Fonts/"
     else
-        $sublime_dir = "$HOME/.config/sublime-text-3/"
-        $fonts_dir = "$HOME/.fonts/"
+        mkdir -p $HOME/.fonts/truetype/source-code-pro
+        fonts_dir="$HOME/.fonts/truetype/source-code-pro/"
     fi
 
-    # echo "Install Source Code Pro font"
-    # mkdir -p $HOME/tmp $fonts_dir/truetype/source-code-pro
-    # wget -P $HOME/tmp $font_url
-    # unzip 1.017R.zip && cd source-code-pro-1.017R
-    # cp *.ttf $fonts_dir/truetype/source-code-pro/
-    # fc-cache
+    mkdir -p $HOME/tmp
+    wget -P $HOME/tmp $font_url
+    tar -zxf $HOME/tmp/1.017R.tar.gz -C $HOME/tmp
+    cp $HOME/tmp/source-code-pro-1.017R/TTF/*.ttf $fonts_dir
+    rm -r $HOME/tmp
+    
+    echo "Font installed ! Clean user font cache"
+    if [ $ostype == "Darwin" ]; then
+    	atsutil databases -removeUser
+		atsutil server -shutdown
+		atsutil server -ping
+	else
+    	fc-cache
+    fi
+}
 
-    echo "Download Sublime Package Control"
-    wget -P "$sublime_dir/Installed\ Packages" $package_control_url
+configure_sublime() {
+    
+    package_control_url=https://packagecontrol.io/Package%20Control.sublime-package
+    plugins=(open_browser)
 
-    echo "Configuring sublime text..."
+    ostype=$(uname);
+    if [ $ostype == "Darwin" ]; then
+        sublime_dir="$HOME/Library/Application\ Support/Sublime\ Text\ 3/"
+    else
+        sublime_dir="$HOME/.config/sublime-text-3/"
+    fi
+
+    echo "Configuring preferences sublime text..."
     link_directory sublime/User "$sublime_dir/Packages/User"
 
-    echo "Add custom plugins"
-    for plugin in "${plugins[@]}"
-    do
-        link_directory sublime/$plugin "$sublime_dir/Packages/$plugin"
-    done
+	#echo "Download Sublime Package Control"
+    #wget -P "$sublime_dir/Installed\ Packages" $package_control_url
+
+    #echo "Add custom plugins"
+    #for plugin in "${plugins[@]}"
+    #do
+    #    link_directory sublime/$plugin "$sublime_dir/Packages/$plugin"
+    #done
+
+	echo "Ready ! At the next start Sublime Text will fetch/upgrade packages"
 
 }
 
