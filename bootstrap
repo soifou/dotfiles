@@ -158,24 +158,28 @@ configure_sublime() {
 
     ostype=$(uname);
     if [ $ostype == "Darwin" ]; then
-        sublime_dir="$HOME/Library/Application\ Support/Sublime\ Text\ 3/"
+        sublime_dir="$HOME/Library/Application Support/Sublime Text 3"
     else
-        sublime_dir="$HOME/.config/sublime-text-3/"
+        sublime_dir="$HOME/.config/sublime-text-3"
     fi
 
     echo "Configuring preferences sublime text..."
-    link_directory sublime/User "$sublime_dir/Packages/User"
+    if [[ -d "$sublime_dir/Packages/User" ]]; then
+        echo "Backup current customer config"
+        mv "$sublime_dir/Packages/User" "$sublime_dir/Packages/User.dotbackup"
+    fi
+    ln -s $HOME/dotfiles/sublime/User "$sublime_dir/Packages/"
 
-	#echo "Download Sublime Package Control"
-    #wget -P "$sublime_dir/Installed\ Packages" $package_control_url
+	echo "Download Sublime Package Control"
+    wget -P "$sublime_dir/Installed Packages" $package_control_url
 
-    #echo "Add custom plugins"
-    #for plugin in "${plugins[@]}"
-    #do
-    #    link_directory sublime/$plugin "$sublime_dir/Packages/$plugin"
-    #done
+ #    echo "Add custom plugins"
+ #    for plugin in "${plugins[@]}"
+ #    do
+ #        link_directory sublime/$plugin "$sublime_dir/Packages/$plugin"
+ #    done
 
-	echo "Ready ! At the next start Sublime Text will fetch/upgrade packages"
+	# echo "Ready ! At the next start Sublime Text will fetch/upgrade packages"
 
 }
 
