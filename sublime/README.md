@@ -9,6 +9,7 @@ Overview
 - Plugins : 
     * Package Control
     * Project Manager 
+    * HaoGist
     * Sidebar Enhancements
     * Smarty (completion)
     * Markdown

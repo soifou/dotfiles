@@ -4,4 +4,5 @@
 *.system-ca-bundle
 *.user-ca-bundle
 HaoGist.sublime-settings
+HaoGist/
 Projects/

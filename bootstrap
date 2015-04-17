@@ -233,7 +233,7 @@ do
     case $1 in
         -h | --help | -\?)
             echo "Dotfiles - Bootstrap available commands";
-            echo "---------------------------------------";
+            echo "";
             echo "--bash - Create a bashrc file and set it as default shell";
             echo "--delete-backups - Remove all dotbackup files";
             echo "--git - Create config/ignore Git files for the current user";
