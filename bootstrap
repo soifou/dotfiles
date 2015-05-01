@@ -90,7 +90,7 @@ configure_zsh() {
     if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
         echo "zsh is already installed... skip"
     else
-        $ostype = $(uname);
+        ostype=$(uname);
         if [ $ostype == "Darwin" ]; then
             echo "OSX : Please install zsh via homebrew - brew install zsh"
         elif [ $ostype == "Linux" ]; then
