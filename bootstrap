@@ -18,12 +18,16 @@ backup_directory() {
 }
 
 link_file() {
-    backup_file $2
+    if [[ -f $HOME/$2 ]]; then
+        backup_file $2
+    fi
     ln -s `pwd`/$1 $HOME/$2
 }
 
 link_directory() {
-    backup_directory $2
+    if [[ -f $HOME/$2 ]]; then
+        backup_directory $2
+    fi
     ln -s `pwd`/$1 $HOME/$2
 }
 
