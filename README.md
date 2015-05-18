@@ -17,7 +17,7 @@ Installation
 git clone git://github.com/soifou/dotfiles ~/dotfiles
 cd ~/dotfiles
 chmod +x bootstrap
-sh bootstrap -h
+bash bootstrap -h
 ```
 
 Configuration

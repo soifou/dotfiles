@@ -29,7 +29,7 @@ Installation
 Install [Sublime Text 3] then 
 
 ``` bash
-$ sh bootstrap --sublime
+$ bash bootstrap --sublime
 ```
 
 Just start Sublime Text and wait for Package Control fetch and advertise you when it is ready to code. 
