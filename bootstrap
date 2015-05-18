@@ -80,7 +80,11 @@ configure_zsh() {
         clone_or_pull_repo robbyrussell/oh-my-zsh .oh-my-zsh
     fi
 
-    link_file zshrc .zshrc
+    # Backup any existing zshrc
+    if [ -f $HOME/.zshrc/ ]; then
+        backup_file .zshrc
+    fi
+    cp `pwd`/zshrc $HOME/.zshrc
     backup_file .zcompdump
 
     # Install zsh if needed
