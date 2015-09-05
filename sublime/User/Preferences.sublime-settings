@@ -1,8 +1,10 @@
 {
+	"always_show_minimap_viewport": true,
+	"bold_folder_labels": false,
 	"caret_extra_width": 1,
 	"caret_style": "phase",
 	"close_windows_when_empty": false,
-	"color_scheme": "Packages/Predawn/predawn.tmTheme",
+	"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
 	"copy_with_empty_selection": false,
 	"drag_text": false,
 	"draw_minimap_border": true,
@@ -14,28 +16,35 @@
 		".rsync_cache",
 		"app/cache"
 	],
-	"font_face": "Source Code Pro Semibold",
+	"font_face": "Source Code Pro",
 	"font_options":
 	[
-		"no_round"
+		"gray_antialias"
 	],
-	"font_size": 9,
+	"font_size": 12,
 	"highlight_line": true,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"line_padding_bottom": 3,
+	"line_padding_top": 3,
 	"match_brackets_content": false,
 	"match_selection": true,
 	"match_tags": true,
+	"material_theme_panel_separator": true,
 	"open_files_in_new_window": false,
 	"overlay_scroll_bars": "enabled",
 	"preview_on_click": true,
 	"scroll_past_end": true,
 	"scroll_speed": 5.0,
 	"show_full_path": false,
-	"tabs_small": true,
-	"theme": "predawn-DEV.sublime-theme",
+	"theme": "Material-Theme.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": false

@@ -131,7 +131,7 @@ configure_vim() {
 
 install_source_code_pro_font() {
 	echo "Installing Source Code Pro font..."
-
+    # see: https://github.com/adobe-fonts/source-code-pro/tags
 	font_url=https://github.com/adobe-fonts/source-code-pro/archive/1.017R.tar.gz
 	ostype=$(uname);
 
