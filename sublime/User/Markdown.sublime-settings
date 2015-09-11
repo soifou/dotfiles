@@ -1,5 +1,5 @@
 {
-    "color_scheme": "Packages/Predawn/predawn-markdown.tmTheme",
+    "color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
     "draw_centered": true, // Centers the column in the window
     "draw_indent_guides": false,
     "trim_trailing_white_space_on_save": false,

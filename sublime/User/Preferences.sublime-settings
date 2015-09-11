@@ -17,23 +17,15 @@
 		"app/cache"
 	],
 	"font_face": "Source Code Pro",
-	"font_options":
-	[
-		"gray_antialias"
-	],
-	"font_size": 12,
+	"font_size": 15,
 	"highlight_line": true,
-	"ignored_packages":
-	[
-		"Vintage"
-	],
 	"indent_guide_options":
 	[
 		"draw_normal",
 		"draw_active"
 	],
-	"line_padding_bottom": 3,
-	"line_padding_top": 3,
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
 	"match_brackets_content": false,
 	"match_selection": true,
 	"match_tags": true,
@@ -43,6 +35,7 @@
 	"preview_on_click": true,
 	"scroll_past_end": true,
 	"scroll_speed": 5.0,
+	"show_encoding": true,
 	"show_full_path": false,
 	"theme": "Material-Theme.sublime-theme",
 	"translate_tabs_to_spaces": true,
