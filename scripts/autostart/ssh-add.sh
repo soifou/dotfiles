@@ -1,2 +1,2 @@
 #!/bin/sh
-ssh-add /home/$USER/.ssh/id_rsa /home/$USER/.ssh/id_dsa < /dev/null
+ssh-add $HOME/.ssh/id_rsa $HOME/.ssh/id_dsa </dev/null
