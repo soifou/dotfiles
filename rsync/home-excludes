@@ -1,0 +1,181 @@
+###############################################
+# Common                                      #
+###############################################
+# Cache files
+- .thumbnails/
+- .cache/
+- *.cache
+
+# Temporary files
+- tmp/
+- temp/
+- *.tmp
+- *.lock
+- lockfile
+
+# Backup files
+- *~
+- \#*\#
+- *.bak
+
+# Log files
+- *.log
+- *.log.*
+
+# Commonly distributed OSes cache file
+- .DS_Store
+- Thumbs.db
+
+###############################################
+# not worth a backup                          #
+###############################################
+.android
+.ansible
+.aptitude
+.audacity-data/AutoSave
+
+.atom/.apm
+.atom/.node-gyp
+.atom/atom-shell
+.atom/compile-cache
+.atom/storage
+
+.berkshelf
+.bundler
+
+.cache
+# Cached info about audio CDs
+.cddb
+.composer/cache
+.composer/vendor
+.cordova
+
+###############################################
+# Config                                      #
+###############################################
+.config/akonadi
+
+.config/Atom-Shell
+.config/Atom
+
+.config/Brackets/cef_data
+.config/Brackets/extensions
+.config/Brackets/live-dev-profile
+
+.config/Clementine/networkcache
+
+.config/chromium-backup/Default/Local Storage
+.config/chromium-backup/Default/Session Storage
+.config/chromium-backup/Default/Application Cache
+.config/chromium-backup/Default/History Index *
+.config/chromium-backup/ShaderCache
+.config/chromium-backup/Default/Service Worker/CacheStorage
+
+.config/sublime-text-3/Cache
+.config/sublime-text-3/Index
+
+.dbus
+
+.fontconfig/*.cache*
+.freerdp
+
+.gconf
+.gem
+.gvfs
+
+###############################################
+# KDE                                         #
+###############################################
+.kde4/cache-*
+.kde4/socket-*
+.kde4/tmp-*
+.kde/cache-*
+.kde/socket-*
+.kde/tmp-*
+.kde/share/apps/nepomuk
+# Recent documents on KDE
+.kde/share/apps/RecentDocuments
+# Contains a history of the Klipper clipboard (KDE)
+.kde/share/apps/klipper
+# You will loose saved scrolling positions of PDFs
+.kde/share/apps/okular/docdata
+.kde/share/apps/gwenview/recentfolders
+# Cached other users' profile pics
+.kde/share/apps/kmess/displaypics
+# Cached emoticons of others
+.kde/share/apps/kmess/customemoticons
+# Dolphin
+.kde/share/apps/dolphin/view_properties/local
+.kde/share/apps/dolphin/view_properties/search
+
+.local/share/akonadi
+.local/share/Trash
+
+.loki/ut/Cache
+.loki/ut/Logs
+.luckyBackup/logs
+
+###############################################
+# Mozilla Firefox                             #
+###############################################
+.mozilla/firefox/*backup-*
+.mozilla/firefox/*/Cache
+# in case Fx crashes dumps will be stored in this
+.mozilla/firefox/*/minidumps
+# session-specific
+.mozilla/firefox/*/.parentlock
+# phishing database, recreated
+.mozilla/firefox/*/urlclassifier3.sqlite
+# blacklisted extensions
+.mozilla/firefox/*/blocklist.xml
+# extension database, recreated on startup
+.mozilla/firefox/*/extensions.sqlite
+.mozilla/firefox/*/extensions.sqlite-journal
+.mozilla/firefox/*/extensions.rdf
+.mozilla/firefox/*/extensions.ini
+.mozilla/firefox/*/extensions.cache
+# cached UI data, recreated
+.mozilla/firefox/*/XUL.mfasl
+.mozilla/firefox/*/XPC.mfasl
+.mozilla/firefox/*/xpti.dat
+.mozilla/firefox/*/compreg.dat
+
+.node-gyp
+.npm
+.nv
+
+.oh-my-zsh
+
+.qmc2
+
+.residualvm/logs
+
+.scummvm/logs
+.ssh/*.old
+
+.vagrant.d
+
+.wine
+.wp-cli/cache
+
+.xbmc/temp
+
+cache
+Desktop
+dotfiles/oh-my-zsh
+dotfiles/vim/bundle
+dotfiles/vim/.netrwhist
+dotfiles/zsh-completions
+Downloads
+Music
+Pictures
+Public
+Templates
+tmp
+Videos
+
+.pulse-cookir
+.recently-used
+.Xauthority
+.xsession-errors
+.zsh_history_corrupt

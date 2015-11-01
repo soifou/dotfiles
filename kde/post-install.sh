@@ -1,8 +1,25 @@
 # Linux x64 Debian Jessie + KDE
 
-# nano
-nano /etc/apt/sources.list
-# add 'contrib non-free'
+vim /etc/apt/sources.list
+# jessie
+# deb http://ftp.fr.debian.org/debian/ jessie main contrib non-free
+# jessie updates
+# deb http://ftp.fr.debian.org/debian/ jessie-updates main contrib non-free
+# jessie-backports
+# deb http://ftp.fr.debian.org/debian jessie-backports main contrib non-free
+# jessie security
+# deb http://security.debian.org/ jessie/updates main contrib non-free
+# jessie multimedia
+# deb http://www.deb-multimedia.org jessie main non-free
+## source list for check:
+#deb http://ftp.by.debian.org/debian/ jessie main non-free
+#deb http://security.debian.org/ jessie/updates main non-free
+#deb http://ftp.by.debian.org/debian/ jessie-updates main non-free
+#deb http://ftp.by.debian.org/debian/ jessie-backports main non-free
+#deb http://manpages.ylsoftware.com/debian/ all main
+#deb http://dl.google.com/linux/chrome/deb/ stable main
+#deb http://www.deb-multimedia.org jessie main non-free
+#deb http://download.virtualbox.org/virtualbox/debian wheezy contrib non-free
 # disable src repos
 
 # add new repos
@@ -14,31 +31,25 @@ apt-add-repository 'deb http://www.deb-multimedia.org wheezy main non-free'
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
 dpkg --add-architecture i386
-apt-get update && apt-get install -y deb-multimedia-keyring
+apt-get update
+
+# debian multimedia
+wget http://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2015.6.1_all.deb
+dpkg -i deb-multimedia-keyring_2015.6.1_all.deb
+rm deb-multimedia-keyring_2015.6.1_all.deb
 
 # SUDO
 apt-get install -y sudo kdesu gksu
-nano /etc/sudoers
+vim /etc/sudoers
 ## add {%user%} ALL=(ALL) ALL
 
 # fix repos if you need
 kdesudo software-properties-kde
 
-## source list for check:
-#deb http://ftp.by.debian.org/debian/ jessie main non-free
-#deb http://security.debian.org/ jessie/updates main non-free
-#deb http://ftp.by.debian.org/debian/ jessie-updates main non-free
-#deb http://ftp.by.debian.org/debian/ jessie-backports main non-free
-#deb http://manpages.ylsoftware.com/debian/ all main
-#deb http://dl.google.com/linux/chrome/deb/ stable main
-#deb http://www.deb-multimedia.org jessie main non-free
-#deb http://download.virtualbox.org/virtualbox/debian wheezy contrib non-free
-
 # problem with duplicate
 # http://serverfault.com/questions/376392/apt-get-duplicate-sources-list-entry-for-google-chrome-ubuntu-11-10
 # >> When you installed chrome it most likely added a file in /etc/apt/sources.list.d/ named google-chrome.list.
 # You should remove the line you manually added, and just keep the file that is in there, which is what the chrome package uses.
-
 
 # configure locales
 dpkg-reconfigure locales
@@ -59,14 +70,14 @@ apt-get install -y kdegames gtk3-engines-oxygen gtk2-engines-oxygen gtk2-engines
 # VIRTUAL BOX
 apt-get install -y virtualbox-4.3 virtualbox-guest-additions-iso
 # add your user to "vboxusers" group
-nano /etc/group
+vim /etc/group
 
 # IF YOU NEED unetbootin
 # need add repository with wheezy
 # 'deb http://ftp.by.debian.org/debian/ wheezy main contrib non-free'
 
 # grub. speedup loading
-nano /etc/default/grub
+vim /etc/default/grub
 # set the numbers, save
 update-grub
 update-grub2
@@ -84,9 +95,6 @@ sudo cp ~/.gtkrc-2.0 /root/.gtkrc-2.0
 
 # SSH
 # chmod 0700 {%private-key-ssh-rsa-file-path%}
-
-
-
 
 
 ## DEV tools:
@@ -147,7 +155,7 @@ apt-get install -y postgresql pgadmin3 pgadmin3-data pgadmin3-dbg
 
 #  ARDUINO
 sudo apt-get install arduino-core arduino arduino-mk
-nano /etc/group
+vim /etc/group
 # add "dialout" user into group of your user. restart OS (or logout) !!!!
 
 # JAVA: download from oracle
