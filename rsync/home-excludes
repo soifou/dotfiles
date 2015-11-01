@@ -36,8 +36,8 @@
 
 .atom/.apm
 .atom/.node-gyp
-.atom/atom-shell
 .atom/compile-cache
+.atom/packages
 .atom/storage
 
 .berkshelf

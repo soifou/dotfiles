@@ -58,6 +58,15 @@ dpkg-reconfigure locales
 # full upgrade
 apt-get install -f && apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoclean -y && apt-get autoremove -y
 
+# install packages from file
+# see: https://wiki.debian.org/ListInstalledPackages
+# apt-get install dselect
+# dpkg --set-selections < package-selections
+# apt-get dselect-upgrade
+# or in one shot
+# aptitude install $(cat package-selections | awk '{print $1}')
+
+
 # BASE packages
 apt-get install -y ttf-* vlc vlc-*
 apt-get install -y cpufrequtils cputool hardinfo partitionmanager firmware-linux firmware-linux-free firmware-linux-nonfree unrar
@@ -112,17 +121,13 @@ pip install --upgrade virtualenv
 
 # ruby
 apt-get install -y ruby ruby-full gem
-gem install sass
-gem install compass
-gem install hpricot
-gem install premailer
+gem install sass compass hpricot premailer
 
 # nodejs
 apt-get install -y node npm
 npm i -g n
 n stable
 npm update -g npm
-#ln -s /usr/bin/nodejs /usr/bin/node
 npm i -g node-gyp
 n latest && n stable && n --stable
 node-gyp --python /usr/bin/python2.7
@@ -138,30 +143,29 @@ apt-get install s3cmd
 # add %access key% and %secret%
 
 # Apache + Php
-#apt-get install -y apache2 apache2-mpm-prefork apache2-utils apache2.2-common libapache2-mod-php5 libapr1 libaprutil1
-# NGINX +  Php
+# apt-get install -y apache2 apache2-mpm-prefork apache2-utils apache2.2-common libapache2-mod-php5 libapr1 libaprutil1
+# NGINX + PHP
 apt-get install -y nginx php5 php5-fpm
+
 # MySQL
 apt-get install -y libdbd-mysql-perl libdbi-perl libnet-daemon-perl libpq5 mysql-client mysql-common mysql-server mysql-server php5-common php5-mysql phpmyadmin
-
 # MongoDB
-apt-get install -y mongodb mongodb-clients mongodb-server mongodb
-
+# apt-get install -y mongodb mongodb-clients mongodb-server mongodb
 # PostgreSQL
-apt-get install -y postgresql pgadmin3 pgadmin3-data pgadmin3-dbg
+# apt-get install -y postgresql pgadmin3 pgadmin3-data pgadmin3-dbg
 # passwd postgres
 # su postgres
 # createuser -sdrP pgdbuser
 
-#  ARDUINO
-sudo apt-get install arduino-core arduino arduino-mk
-vim /etc/group
+# ARDUINO
+# apt-get install arduino-core arduino arduino-mk
+# vim /etc/group
 # add "dialout" user into group of your user. restart OS (or logout) !!!!
 
 # JAVA: download from oracle
-apt-get install -y java-package
-make-jpkg ./Program/installed/jdk-8u25-linux-x64.tar.gz #for example
+# apt-get install -y java-package
+# make-jpkg ./Program/installed/jdk-8u25-linux-x64.tar.gz #for example
 
 # SCALA SBT
-echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
-apt-get update && apt-get install sbt -y
+# echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+# apt-get update && apt-get install sbt -y

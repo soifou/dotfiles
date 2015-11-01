@@ -158,12 +158,32 @@ install_source_code_pro_font() {
     fi
 }
 
-configure_sublime() {
+configure_atom() {
+    url=https://atom.io/download/deb
+    file=atom.deb
 
+    echo "Download and install latest Atom text editor"
+    echo " "
+    cd $HOME
+    wget $url -O $file
+    sudo dpkg -i $file
+    rm $file
+
+    echo "Add custom Atom plugins"
+    plugins=(atom-material-syntax atom-material-syntax-light atom-material-ui minimap predawn-syntax predawn-ui project-manager tool-bar tool-bar-main)
+    for plugin in "${plugins[@]}"
+    do
+        apm install $plugin
+    done
+    echo "---------------------"
+    echo "Atom has been successfully installed !"
+}
+
+configure_sublime() {
     package_control_url=https://packagecontrol.io/Package%20Control.sublime-package
     plugins=(open_browser)
-
     ostype=$(uname);
+
     if [ $ostype == "Darwin" ]; then
         sublime_dir="$HOME/Library/Application Support/Sublime Text 3"
     else
@@ -242,11 +262,16 @@ do
             echo "Dotfiles - Bootstrap available commands";
             echo "";
             echo "--bash - Create a bashrc file and set it as default shell";
+
             echo "--delete-backups - Remove all dotbackup files";
+
             echo "--git - Create config/ignore Git files for the current user";
             echo "--git-name - Set your Git display name";
             echo "--git-email - Set your Git email";
+
+            echo "--atom - Install and configure preferences, add custom/useful plugins for atom text editor"
             echo "--sublime - Configure preferences, add custom/useful plugins for sublime text editor"
+
             echo "--vim - Create custom vimrc, add colors/syntax/plugins"
             echo "--zsh - Install and config Zsh as default shell";
             exit 0; ;;
@@ -260,6 +285,7 @@ do
         --zsh) ZSH=1; shift; ;;
         --vim) VIM=1; shift; ;;
 
+        --atom) ATOM=1; shift; ;;
         --sublime) SUBLIME=1; shift; ;;
 
         --delete-backups) DELETE_BACKUPS=1; shift; ;;
@@ -296,6 +322,9 @@ if [ "$BASH" == 1 ]; then
 fi
 if [ "$GIT" == 1 ]; then
     configure_git
+fi
+if [ "$ATOM" == 1 ]; then
+    configure_atom
 fi
 if [ "$SUBLIME" == 1 ]; then
     configure_sublime
