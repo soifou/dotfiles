@@ -72,6 +72,7 @@ fi
 
 ## Miscellaneous Aliases
 alias htop='sudo htop'
+alias mkv2mp4="bash ~/dotfiles/scripts/mkv2mp4.sh"
 
 # Shell Functions
 
