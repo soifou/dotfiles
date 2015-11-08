@@ -108,6 +108,8 @@
 .kde/share/apps/dolphin/view_properties/local
 .kde/share/apps/dolphin/view_properties/search
 
+.kodi
+
 .local/share/akonadi
 .local/share/Trash
 
