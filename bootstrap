@@ -13,7 +13,6 @@ backup_file() {
 }
 
 backup_directory() {
-
     rm -rf $HOME/$1.dotbackup
     test -d $HOME/$1.dotbackup && echo -n "~/$1.dotbackup: " && rm -rI $HOME/$1.dotbackup
     test -d $HOME/$1 && cp -LR $HOME/$1 $HOME/$1.dotbackup && rm -rf $HOME/$1
@@ -45,28 +44,35 @@ clone_or_pull_repo() {
     fi
 }
 
-# load_zsh_modules() {
-#     echo "Loading zsh modules..."
-#     while read l; do
-#         IFS=/ read -a path <<< "$l"
-#         clone_or_pull_repo "$l" ".zsh_modules/${path[1]}"
-#     done < $HOME/.zmodules
-# }
+load_zsh_modules() {
+    echo "Loading zsh modules..."
+    while read l; do
+        IFS=/ read -a path <<< "$l"
+        clone_or_pull_repo "$l" ".zsh_modules/${path[1]}"
+    done < $HOME/.zmodules
+}
 
 # install_virtualenvwrapper() {
 #     echo "Installing virtualenvwrapper..."
 #     curl -s https://raw.githubusercontent.com/brainsik/virtualenv-burrito/master/virtualenv-burrito.sh | exclude_profile=1 $SHELL || true
 # }
 
-configure_shell() {
-    echo "Configuring common shell environment..."
-    link_file .bash_aliases .bash_aliases
-    link_file .shenv .shenv
-    if [ "$OSTYPE" == "darwin"* ]; then
-        copy_file .bash_local-mac .bash_local
-    else
-        copy_file .bash_local-linux .bash_local
-    fi
+# configure_shell() {
+#     echo "Configuring common shell environment..."
+#     link_file .bash_aliases .bash_aliases
+#     link_file .shenv .shenv
+#     if [ "$OSTYPE" == "darwin"* ]; then
+#         copy_file .bash_local-mac .bash_local
+#     else
+#         copy_file .bash_local-linux .bash_local
+#     fi
+# }
+
+
+
+configure_ack() {
+    echo "Configuring ack..."
+    link_file ackrc .ackrc
 }
 
 configure_bash() {
@@ -219,7 +225,6 @@ configure_sublime() {
     echo " "
     echo "--------------------- "
 	echo "Ready ! At the next start Sublime Text will fetch/upgrade packages"
-
 }
 
 # configure_ipython() {
@@ -233,6 +238,7 @@ configure_sublime() {
 # }
 
 delete_backups() {
+    rm -rf $HOME/.ackrc.dotbackup
     rm -rf $HOME/.gitconfig.dotbackup
     rm -rf $HOME/.gitignore.dotbackup
     rm -rf $HOME/.oh-my-zsh.dotbackup
@@ -259,37 +265,32 @@ while :
 do
     case $1 in
         -h | --help | -\?)
+            echo "";
             echo "Dotfiles - Bootstrap available commands";
             echo "";
-            echo "--bash - Create a bashrc file and set it as default shell";
-
-            echo "--delete-backups - Remove all dotbackup files";
-
-            echo "--git - Create config/ignore Git files for the current user";
-            echo "--git-name - Set your Git display name";
-            echo "--git-email - Set your Git email";
-
-            echo "--atom - Install and configure preferences, add custom/useful plugins for atom text editor"
-            echo "--sublime - Configure preferences, add custom/useful plugins for sublime text editor"
-
-            echo "--vim - Create custom vimrc, add colors/syntax/plugins"
-            echo "--zsh - Install and config Zsh as default shell";
+            echo "--ack             Ack custom config";
+            echo "--atom            Install and configure preferences, add custom/useful plugins for atom text editor"
+            echo "--bash            Create a bashrc file and set it as default shell";
+            echo "--delete-backups  Remove all dotbackup files";
+            echo "--git             Create config/ignore Git files for the current user";
+            echo "--git-name        Set your Git display name";
+            echo "--git-email       Set your Git email";
+            echo "--sublime         Configure preferences, add custom/useful plugins for sublime text editor"
+            echo "--vim             Create custom vimrc, add colors/syntax/plugins"
+            echo "--zsh             Install and config Zsh as default shell";
             exit 0; ;;
         -v | --version) echo_version; exit 0; ;;
 
+        --ack) ACK=1; shift; ;;
+        --atom) ATOM=1; shift; ;;
+        --bash) BASH=1; shift; ;;
+        --delete-backups) DELETE_BACKUPS=1; shift; ;;
         --git) GIT=1; shift; ;;
         --git-name) GIT_NAME=$2; shift 2; ;;
         --git-email) GIT_EMAIL=$2; shift 2; ;;
-
-        --bash) BASH=1; shift; ;;
-        --zsh) ZSH=1; shift; ;;
-        --vim) VIM=1; shift; ;;
-
-        --atom) ATOM=1; shift; ;;
         --sublime) SUBLIME=1; shift; ;;
-
-        --delete-backups) DELETE_BACKUPS=1; shift; ;;
-
+        --vim) VIM=1; shift; ;;
+        --zsh) ZSH=1; shift; ;;
         --update) UPDATE=1; shift; ;;
         --no-virtualenv) NO_VIRTUALENVWRAPPER=1; shift; ;;
         --) shift; break; ;;
@@ -317,14 +318,17 @@ fi
 #     configure_shell
 # fi
 
+if [ "$ACK" == 1 ]; then
+    configure_ack
+fi
+if [ "$ATOM" == 1 ]; then
+    configure_atom
+fi
 if [ "$BASH" == 1 ]; then
     configure_bash
 fi
 if [ "$GIT" == 1 ]; then
     configure_git
-fi
-if [ "$ATOM" == 1 ]; then
-    configure_atom
 fi
 if [ "$SUBLIME" == 1 ]; then
     configure_sublime

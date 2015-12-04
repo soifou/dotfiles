@@ -1,11 +1,5 @@
-# My custom shell scripts
-Sets of my custom shell scripts. Note I'm on KDE, some programs runs only with this distribution (ie. Yakuake). As usual, adapt to fit your needs.
+# Autostart scripts
 
-## Scripts list
-- kodi.sh : Launch Kodi Media Center in fullscreen using `wmctrl`.
-- mysql-createdb : Create db, user, pass in one shot.
-
-## Autostart scripts
 It does the following things at startup :
 - launch Yakuake
 - launch Conky with my custom configuration

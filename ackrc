@@ -1,0 +1,12 @@
+# Ignore some dirs
+--ignore-dir=cache
+--ignore-dir=logs
+--ignore-dir=web/js
+--ignore-dir=web/css
+
+# Add custom type
+--type-set=sh=.sh
+--type-set=twig=.twig
+--type-set=yml=.yml
+--type-set=json=.json
+--type-set=md=.md
