@@ -13,5 +13,6 @@
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph
     ignored = !git ls-files -v | grep "^[[:lower:]]"
     changedfiles = "!git diff --name-only master `git rev-parse --abbrev-ref HEAD`"
+    countcommits = shortlog -sn
 [core]
 	excludesfile = ~/.gitignore
