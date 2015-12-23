@@ -139,6 +139,7 @@ install_source_code_pro_font() {
 	echo "Installing Source Code Pro font..."
     # see: https://github.com/adobe-fonts/source-code-pro/tags
 	font_url=https://github.com/adobe-fonts/source-code-pro/archive/1.017R.tar.gz
+    # font_url=https://github.com/adobe-fonts/source-code-pro/archive/2.010R-ro/1.030R-it.tar.gz
 	ostype=$(uname);
 
     if [ $ostype == "Darwin" ]; then

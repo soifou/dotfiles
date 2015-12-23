@@ -4,8 +4,14 @@ source $HOME/.antigen/antigen.zsh
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle capistrano
+antigen bundle composer
+antigen bundle debian
+antigen bundle docker
+antigen bundle fabric
 antigen bundle git
-antigen bundle sudo
+antigen bundle sublime
+antigen bundle symfony2
 antigen bundle web-search
 
 # Syntax highlighting bundle.
