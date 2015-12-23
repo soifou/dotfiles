@@ -40,7 +40,7 @@ Plugin 'gmarik/Vundle.vim'
 " Plugin 'plasticboy/vim-markdown'
 " Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'tpope/vim-git'
-" Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 " Plugin 'scrooloose/nerdtree'
 " Plugin 'ervandew/supertab'
 " Plugin 'Lokaltog/vim-easymotion'
@@ -69,7 +69,7 @@ set noswapfile            " No swap files, use version control instead
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256              " enable 256-color mode.
 syntax enable             " enable syntax highlighting (previously syntax on).
-colorscheme molokai       " set colorscheme
+" colorscheme molokai       " set colorscheme
 
 " Prettify JSON files
 autocmd BufRead,BufNewFile *.json set filetype=json
@@ -102,16 +102,16 @@ set visualbell
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 06. Text Formatting/Layout                                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set autoindent            " auto-indent
-set tabstop=4             " tab spacing
-set softtabstop=4         " unify
-set shiftwidth=4          " indent/outdent by 2 columns
-set shiftround            " always indent/outdent to the nearest tabstop
-set expandtab             " use spaces instead of tabs
-set smartindent           " automatically insert one extra level of indentation
-set smarttab              " use tabs at the start of a line, spaces elsewhere
-set nowrap                " don't wrap text
-set backspace=2           " fix Delete (backspace) on Mac OS X
+" set autoindent            " auto-indent
+" set tabstop=4             " tab spacing
+" set softtabstop=4         " unify
+" set shiftwidth=4          " indent/outdent by 2 columns
+" set shiftround            " always indent/outdent to the nearest tabstop
+" set expandtab             " use spaces instead of tabs
+" set smartindent           " automatically insert one extra level of indentation
+" set smarttab              " use tabs at the start of a line, spaces elsewhere
+" set nowrap                " don't wrap text
+" set backspace=2           " fix Delete (backspace) on Mac OS X
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 07. Custom Commands                                                        "
@@ -119,3 +119,7 @@ set backspace=2           " fix Delete (backspace) on Mac OS X
 
 " Prettify JSON files making them easier to read
 command PrettyJSON %!python -m json.tool
+
+" Airline custom config
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'sol'
