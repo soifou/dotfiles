@@ -1,0 +1,7 @@
+# powerlevel9k : Only print user@hostname when not normal user
+export DEFAULT_USER=soifou
+
+# Set EDITOR to /usr/bin/vim if Vim is installed
+if [ -f /usr/bin/vim ]; then
+  export EDITOR=/usr/bin/vim
+fi

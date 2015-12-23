@@ -83,10 +83,10 @@ configure_bash() {
 }
 
 configure_zsh() {
-    # Clone oh-my-zsh repository from GitHub only if it isn't already present
-    if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
-        echo "Clone oh-my-zsh repository"
-        clone_or_pull_repo robbyrussell/oh-my-zsh .oh-my-zsh
+    # Clone antigen repository from GitHub only if it isn't already present
+    if [[ ! -d $HOME/.antigen/ ]]; then
+        echo "Clone antigen repository"
+        clone_or_pull_repo zsh-users/antigen .antigen
     fi
 
     # Backup any existing zshrc

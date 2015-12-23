@@ -1,0 +1,6 @@
+# generate a random secure password
+genpasswd() {
+   length=$1
+   if [ -z $length ]; then length=20; fi
+   tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${length} | xargs
+}
