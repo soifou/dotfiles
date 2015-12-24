@@ -1,3 +1,5 @@
+PATH=/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin
+
 source $HOME/.antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
