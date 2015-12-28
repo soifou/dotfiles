@@ -31,6 +31,7 @@
 ###############################################
 .android
 .ansible
+.antigen
 .aptitude
 .audacity-data/AutoSave
 
@@ -116,6 +117,7 @@
 .loki/ut/Cache
 .loki/ut/Logs
 .luckyBackup/logs
+.luckybackup-snaphots/default.profile/logs/
 
 ###############################################
 # Mozilla Firefox                             #
@@ -164,7 +166,6 @@
 
 cache
 Desktop
-dotfiles/oh-my-zsh
 dotfiles/vim/bundle
 dotfiles/vim/.netrwhist
 dotfiles/zsh-completions
