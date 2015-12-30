@@ -623,6 +623,7 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 # Show the iTerm2 Dock icon
 /usr/libexec/PlistBuddy -c "Delete :LSUIElement" ${HOME}/Applications/iTerm.app/Contents/Info.plist
 
+# Notification iterm2 https://gist.github.com/spinscale/33805a950330455adac0
 ###############################################################################
 # Time Machine                                                                #
 ###############################################################################
