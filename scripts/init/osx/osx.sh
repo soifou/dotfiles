@@ -618,6 +618,11 @@ open "${HOME}/init/Solarized Dark.itermcolors"
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
+# Hide the iTerm2 Dock icon.
+/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' ${HOME}/Applications/iTerm.app/Contents/Info.plist
+# Show the iTerm2 Dock icon
+/usr/libexec/PlistBuddy -c "Delete :LSUIElement" ${HOME}/Applications/iTerm.app/Contents/Info.plist
+
 ###############################################################################
 # Time Machine                                                                #
 ###############################################################################
