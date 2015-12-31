@@ -32,7 +32,7 @@ POWERLEVEL9K_STATUS_VERBOSE=false
 antigen apply
 
 # Add custom aliases
-source $HOME/dotfiles/alias
+source $HOME/dotfiles/aliases
 
 # Add custom exports
 source $HOME/dotfiles/exports

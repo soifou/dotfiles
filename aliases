@@ -1,0 +1,13 @@
+# Global aliases
+
+alias htop='sudo htop'
+alias mkv2mp4="bash ~/dotfiles/scripts/mkv2mp4.sh"
+alias homebackup="luckybackup -c default.profile"
+
+os=$(uname)
+
+# OSX aliases
+if [[ $os == "Darwin" ]]; then
+    # Lock the screen (when going AFK)
+    alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+fi

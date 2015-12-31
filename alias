@@ -1,3 +1,0 @@
-alias htop='sudo htop'
-alias mkv2mp4="bash ~/dotfiles/scripts/mkv2mp4.sh"
-alias homebackup="luckybackup -c default.profile"
