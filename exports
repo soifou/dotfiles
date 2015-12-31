@@ -1,8 +1,13 @@
-# powerlevel9k : Only print user@hostname when not normal user
-export DEFAULT_USER=soifou
+os=$(uname)
 
-# Support more than 256 colors
-export TERM="xterm-256color"
+if [[ $os == "Darwin" ]]; then
+    export DEFAULT_USER=soifou
+elif [[ $os == "Linux" ]]; then
+    # powerlevel9k : Only print user@hostname when not normal user
+    export DEFAULT_USER=soif
+    # Support more than 256 colors
+    export TERM="xterm-256color"
+fi
 
 # Set EDITOR to /usr/bin/vim if Vim is installed
 if [ -f /usr/bin/vim ]; then
