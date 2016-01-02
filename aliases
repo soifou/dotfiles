@@ -4,10 +4,16 @@ alias htop='sudo htop'
 alias mkv2mp4="bash ~/dotfiles/scripts/mkv2mp4.sh"
 alias homebackup="luckybackup -c default.profile"
 
-os=$(uname)
-
 # OSX aliases
-if [[ $os == "Darwin" ]]; then
+if [[ `uname` == "Darwin" ]]; then
     # Lock the screen (when going AFK)
     alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+    # Recursively delete `.DS_Store` files
+    alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+    # Show/hide hidden files in Finder
+    alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+    alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+    # Hide/show all desktop icons (useful when presenting)
+    alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+    alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 fi
