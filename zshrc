@@ -1,5 +1,12 @@
 PATH=/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin
 
+# Add custom aliases
+source $HOME/dotfiles/aliases
+# Add custom exports
+source $HOME/dotfiles/exports
+# Add custom shell functions
+source $HOME/dotfiles/functions
+# Add antigen defaults
 source $HOME/.antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
@@ -16,6 +23,15 @@ antigen bundle sublime
 antigen bundle symfony2
 antigen bundle web-search
 
+# OS specific plugins
+if [[ `uname` == "Darwin" ]]; then
+    antigen bundle brew
+    antigen bundle brew-cask
+    antigen bundle osx
+elif [[ `uname` == "Linux" ]]; then
+    # none so far
+fi
+
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
@@ -30,12 +46,3 @@ POWERLEVEL9K_STATUS_VERBOSE=false
 
 # Tell antigen that you're done.
 antigen apply
-
-# Add custom aliases
-source $HOME/dotfiles/aliases
-
-# Add custom exports
-source $HOME/dotfiles/exports
-
-# Add custom shell functions
-source $HOME/dotfiles/functions
