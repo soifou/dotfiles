@@ -115,26 +115,31 @@ brew install caskroom/cask/brew-cask
 brew tap caskroom/versions
 
 # Install graphical utilities
+brew cask install alfred
+brew cask install flux
+brew cask install iterm2
+
 brew cask install sublime-text3
-# brew cask install totalterminal
 brew cask install chromium
 brew cask install gimp
 brew cask install libreoffice
 brew cask install clementine
 # brew cask install retroarch
+
 brew cask install virtualbox
 brew cask install vagrant
 brew cask install docker
 brew cask install docker-compose
 brew cask install docker-machine
+
 brew cask install transmission
 brew cask install hipchat
 brew cask install xtrafinder
 brew cask install imagemagick
 brew cask install vlc
 brew cask install handbrake
-# brew cask install alfred
-# brew cask alfred
+
+
 # brew cask install google-chrome
 # brew cask install google-drive
 # brew cask install dropbox
