@@ -1,8 +1,7 @@
-os=$(uname)
 
-if [[ $os == "Darwin" ]]; then
+if [[ `uname` == "Darwin" ]]; then
     export DEFAULT_USER=soifou
-elif [[ $os == "Linux" ]]; then
+elif [[ `uname` == "Linux" ]]; then
     # powerlevel9k : Only print user@hostname when not normal user
     export DEFAULT_USER=soif
     # Support more than 256 colors

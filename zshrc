@@ -1,11 +1,11 @@
 PATH=/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin
 
-# Add custom aliases
-source $HOME/dotfiles/aliases
 # Add custom exports
 source $HOME/dotfiles/exports
 # Add custom shell functions
 source $HOME/dotfiles/functions
+# Add custom aliases
+source $HOME/dotfiles/aliases
 # Add antigen defaults
 source $HOME/.antigen/antigen.zsh
 
