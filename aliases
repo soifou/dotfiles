@@ -1,11 +1,13 @@
 # Global aliases
-
 alias htop='sudo htop'
 alias mkv2mp4="bash ~/dotfiles/scripts/mkv2mp4.sh"
-alias homebackup="luckybackup -c default.profile"
+
+# Linux aliases
+if [[ `uname` == "Linux" ]]; then
+    alias homebackup="luckybackup -c default.profile"
 
 # OSX aliases
-if [[ `uname` == "Darwin" ]]; then
+elif [[ `uname` == "Darwin" ]]; then
     # Lock the screen (when going AFK)
     alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
     # Recursively delete `.DS_Store` files

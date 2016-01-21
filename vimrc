@@ -123,3 +123,6 @@ command PrettyJSON %!python -m json.tool
 " Airline custom config
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'sol'
+
+" Backspace key should delete chars (mac only)
+set backspace=indent,eol,start
