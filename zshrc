@@ -18,6 +18,7 @@ antigen bundle composer
 antigen bundle debian
 antigen bundle docker
 antigen bundle fabric
+antigen bundle gem
 antigen bundle git
 antigen bundle sublime
 antigen bundle symfony2
