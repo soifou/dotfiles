@@ -5,6 +5,7 @@ alias mkv2mp4="bash ~/dotfiles/scripts/mkv2mp4.sh"
 # Linux aliases
 if [[ `uname` == "Linux" ]]; then
     alias homebackup="luckybackup -c default.profile"
+    eval "$(rbenv init -)"
 
 # OSX aliases
 elif [[ `uname` == "Darwin" ]]; then
