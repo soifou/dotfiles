@@ -105,14 +105,8 @@ sudo cp ~/.gtkrc-2.0 /root/.gtkrc-2.0
 # SSH
 # chmod 0700 {%private-key-ssh-rsa-file-path%}
 
-
 ## DEV tools:
 apt-get install -y httpie curl gcc git ssh gitk kdiff3 imagemagick
-git config --global user.name "user"
-git config --global user.email user@example.com
-git config --global core.editor kate
-git config --global merge.tool kdiff3
-git config --global push.default simple
 
 # python
 apt-get install -y python2.7 python-pip python-setuptools python-virtualenv uild-essential autoconf libtool pkg-config python-opengl python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 qt4-dev-tools qt4-designer libqtgui4 libqtcore4 libqt4-xml libqt4-test libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3 python-dev
@@ -120,8 +114,14 @@ pip install --upgrade pip
 pip install --upgrade virtualenv
 
 # ruby
-apt-get install -y ruby ruby-full gem
-gem install sass compass hpricot premailer
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+cd ~/.rbenv && src/configure && make -C src
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+rbenv install 2.2.4
+rbenv global 2.2.4
+apt-get install -y gem
+gem install bundler
+# gem env home
 
 # nodejs
 apt-get install -y node npm
