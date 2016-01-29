@@ -1,4 +1,4 @@
-PATH=/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin
+PATH=/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
 # Add custom exports
 source $HOME/dotfiles/exports
@@ -13,6 +13,7 @@ source $HOME/.antigen/antigen.zsh
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle bundler
 antigen bundle capistrano
 antigen bundle composer
 antigen bundle debian
