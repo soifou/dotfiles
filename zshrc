@@ -9,33 +9,31 @@ source $HOME/dotfiles/aliases
 # Add antigen defaults
 source $HOME/.antigen/antigen.zsh
 
-# Load the oh-my-zsh's library.
+# Load the oh-my-zsh's library and common bundles.
 antigen use oh-my-zsh
+antigen bundles <<EOBUNDLES
+bundler
+capistrano
+command-not-found
+composer
+docker
+fabric
+gem
+git
+sublime
+symfony2
+web-search
+zsh-users/zsh-syntax-highlighting
+EOBUNDLES
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle bundler
-antigen bundle capistrano
-antigen bundle composer
-antigen bundle debian
-antigen bundle docker
-antigen bundle fabric
-antigen bundle gem
-antigen bundle git
-antigen bundle sublime
-antigen bundle symfony2
-antigen bundle web-search
-
-# OS specific plugins
+# Load OS specific bundles
 if [[ `uname` == "Darwin" ]]; then
     antigen bundle brew
     antigen bundle brew-cask
     antigen bundle osx
 elif [[ `uname` == "Linux" ]]; then
-    # none so far
+    antigen bundle debian
 fi
-
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
 antigen theme bhilburn/powerlevel9k powerlevel9k
