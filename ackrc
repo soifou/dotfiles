@@ -10,3 +10,4 @@
 --type-set=yml=.yml
 --type-set=json=.json
 --type-set=md=.md
+--type-set=tpl=.tpl
