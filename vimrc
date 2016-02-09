@@ -31,21 +31,9 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Plugins
-" vim-scripts
-" Plugin 'Wombat'
-" Plugin 'wombat256.vim'
-" Plugin 'genutils'
 " github
-" Plugin 'groenewege/vim-less'
-" Plugin 'plasticboy/vim-markdown'
-" Plugin 'ctrlpvim/ctrlp.vim'
-" Plugin 'tpope/vim-git'
-Plugin 'bling/vim-airline'
-" Plugin 'scrooloose/nerdtree'
-" Plugin 'ervandew/supertab'
-" Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'embear/vim-localvimrc'
-" Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-airline/vim-airline'
 
 call vundle#end()
 
@@ -69,7 +57,10 @@ set noswapfile            " No swap files, use version control instead
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256              " enable 256-color mode.
 syntax enable             " enable syntax highlighting (previously syntax on).
-" colorscheme molokai       " set colorscheme
+
+" Use the Solarized Dark theme
+set background=dark
+colorscheme solarized
 
 " Prettify JSON files
 autocmd BufRead,BufNewFile *.json set filetype=json
@@ -116,7 +107,6 @@ set visualbell
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 07. Custom Commands                                                        "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Prettify JSON files making them easier to read
 command PrettyJSON %!python -m json.tool
 
