@@ -271,7 +271,7 @@ do
             echo "";
             echo "--ack             Ack custom config";
             echo "--atom            Install and configure preferences, add custom/useful plugins for atom text editor"
-            echo "--bash            Create a bashrc file and set it as default shell";
+            #echo "--bash            Create a bashrc file and set it as default shell";
             echo "--delete-backups  Remove all dotbackup files";
             echo "--font-scp        Install Source Code Pro font";
             echo "--git             Create config/ignore Git files for the current user";
@@ -285,7 +285,7 @@ do
 
         --ack) ACK=1; shift; ;;
         --atom) ATOM=1; shift; ;;
-        --bash) BASH=1; shift; ;;
+        #--bash) BASH=1; shift; ;;
         --delete-backups) DELETE_BACKUPS=1; shift; ;;
         --font-scp) FONT_SCP=1; shift; ;;
         --git) GIT=1; shift; ;;
@@ -327,9 +327,9 @@ fi
 if [ "$ATOM" == 1 ]; then
     configure_atom
 fi
-if [ "$BASH" == 1 ]; then
-    configure_bash
-fi
+# if [ "$BASH" == 1 ]; then
+#     configure_bash
+# fi
 if [ "$FONT_SCP" == 1 ]; then
     install_source_code_pro_font
 fi
