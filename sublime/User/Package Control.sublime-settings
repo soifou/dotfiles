@@ -12,12 +12,11 @@
 		"jQuery",
 		"Material Theme",
 		"Package Control",
+		"PHP-Twig",
 		"Project Manager",
 		"Rsync SSH",
 		"Sass",
 		"SideBarEnhancements",
-		"Smarty",
-		"Theme - Spacegray",
-		"Twig"
+		"Theme - Spacegray"
 	]
 }
