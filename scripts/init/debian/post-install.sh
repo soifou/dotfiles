@@ -117,6 +117,8 @@ pip install --upgrade virtualenv
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 cd ~/.rbenv && src/configure && make -C src
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+# export PATH="$HOME/.rbenv/bin:$PATH" >> $HOME/.zshrc
+# source $HOME/.zshrc
 rbenv install 2.2.4
 rbenv global 2.2.4
 apt-get install -y gem
