@@ -91,10 +91,24 @@ vim /etc/default/grub
 update-grub
 update-grub2
 
-# Skype
-## download archive from http://www.skype.com/ru/download-skype/skype-for-computer/
-dpkg -i {%skype-install-file%}.deb
-apt-get install -f
+# Hipchat
+echo "deb http://downloads.hipchat.com/linux/apt stable main" > \
+    /etc/apt/sources.list.d/atlassian-hipchat.list
+wget -O - https://www.hipchat.com/keys/hipchat-linux.key | apt-key add -
+apt-get update
+apt-get -y install hipchat
+
+# Google Chrome
+sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+apt-get update
+apt-get install -y google-chrome-stable
+
+# Flux for lighting
+add-apt-repository ppa:kilian/f.lux
+apt-get update
+apt-get -y install fluxgui
+# TODO: Add flux to list of startup applications
 
 # change gtk styles to qtcurve and copy files after that
 sudo cp ~/.gtkrc-2.0 /root/.gtkrc-2.0
