@@ -4,5 +4,13 @@
 	{ "keys": ["ctrl+alt+w"], "command": "open_browser", "args": { "url": "https://codex.wordpress.org/Function_Reference/%s" }},
 	{ "keys": ["ctrl+alt+y"], "command": "open_browser", "args": { "url": "http://docs.python.org/library/%s" }},
     { "keys": ["super+ctrl+r"], "command": "reindent" , "args": { "single_line": false }},
-    { "keys": ["ctrl+shift+s"], "command": "save_all" }
+    { "keys": ["ctrl+shift+s"], "command": "save_all" },
+    { "keys": ["ctrl+space"], "command": "auto_complete" },
+    { "keys": ["ctrl+space"], "command": "replace_completion_with_auto_complete", "context":
+          [
+               { "key": "last_command", "operator": "equal", "operand": "insert_best_completion" },
+               { "key": "auto_complete_visible", "operator": "equal", "operand": false },
+               { "key": "setting.tab_completion", "operator": "equal", "operand": true }
+          ]
+     }
 ]
