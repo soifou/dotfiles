@@ -38,10 +38,14 @@ wget http://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multim
 dpkg -i deb-multimedia-keyring_2015.6.1_all.deb
 rm deb-multimedia-keyring_2015.6.1_all.deb
 
+# create user
+useradd -s /bin/bash -m -d /home/user -g sudo user -p XXXXXXXX
+
 # SUDO
 apt-get install -y sudo kdesu gksu
 vim /etc/sudoers
-## add {%user%} ALL=(ALL) ALL
+# at EOF
+# user ALL=(ALL) NOPASSWD: ALL
 
 # fix repos if you need
 kdesudo software-properties-kde
@@ -120,7 +124,7 @@ sudo cp ~/.gtkrc-2.0 /root/.gtkrc-2.0
 # chmod 0700 {%private-key-ssh-rsa-file-path%}
 
 ## DEV tools:
-apt-get install -y httpie curl gcc git ssh gitk kdiff3 imagemagick
+apt-get install -y httpie curl gcc git ssh gitk kdiff3 imagemagick ack-grep
 
 # python
 apt-get install -y python2.7 python-pip python-setuptools python-virtualenv uild-essential autoconf libtool pkg-config python-opengl python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 qt4-dev-tools qt4-designer libqtgui4 libqtcore4 libqt4-xml libqt4-test libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3 python-dev
@@ -158,13 +162,34 @@ apt-get install s3cmd
 # s3cmd --configure
 # add %access key% and %secret%
 
+# Nginx, MariaDB and PHP 7
+echo "Adding dotdeb apt repositories for Nginx and PHP 7.0"
+echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list
+echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list
+wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add -
+echo "Adding official MariaDB repositories"
+apt-get install software-properties-common
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
+add-apt-repository 'deb [arch=amd64,i386] http://mariadb.mirror.nucleus.be/repo/10.1/debian jessie main'
+echo "Updating apt"
+apt-get update
+echo "Installing Nginx"
+apt-get install nginx
+echo "Installing PHP-FPM"
+# unfortunately there is no `php-gd` and `php-imagic` modules for this version atm
+apt-get install php-fpm php-cli php-mysql php-curl php-mcrypt php-json
+echo "Installing MySQL"
+apt-get install mariadb-server mariadb-client
+mysql_secure_installation
+echo "Installing Fail2Ban and iptables-persistent"
+apt-get install fail2ban iptables-persistent
+
 # Apache + Php
 # apt-get install -y apache2 apache2-mpm-prefork apache2-utils apache2.2-common libapache2-mod-php5 libapr1 libaprutil1
 # NGINX + PHP
-apt-get install -y nginx php5 php5-fpm
-
+# apt-get install -y nginx php5 php5-fpm
 # MySQL
-apt-get install -y libdbd-mysql-perl libdbi-perl libnet-daemon-perl libpq5 mysql-client mysql-common mysql-server mysql-server php5-common php5-mysql phpmyadmin
+# apt-get install -y libdbd-mysql-perl libdbi-perl libnet-daemon-perl libpq5 mysql-client mysql-common mysql-server mysql-server php5-common php5-mysql phpmyadmin
 # MongoDB
 # apt-get install -y mongodb mongodb-clients mongodb-server mongodb
 # PostgreSQL
@@ -172,16 +197,3 @@ apt-get install -y libdbd-mysql-perl libdbi-perl libnet-daemon-perl libpq5 mysql
 # passwd postgres
 # su postgres
 # createuser -sdrP pgdbuser
-
-# ARDUINO
-# apt-get install arduino-core arduino arduino-mk
-# vim /etc/group
-# add "dialout" user into group of your user. restart OS (or logout) !!!!
-
-# JAVA: download from oracle
-# apt-get install -y java-package
-# make-jpkg ./Program/installed/jdk-8u25-linux-x64.tar.gz #for example
-
-# SCALA SBT
-# echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
-# apt-get update && apt-get install sbt -y
