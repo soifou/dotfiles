@@ -20,6 +20,7 @@ docker
 fabric
 gem
 git
+pip
 sublime
 symfony2
 web-search
