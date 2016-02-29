@@ -116,6 +116,7 @@ brew tap caskroom/versions
 
 # Install graphical utilities
 brew cask install alfred
+brew cask install clipmenu
 brew cask install flux
 brew cask install iterm2
 
