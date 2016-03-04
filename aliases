@@ -20,7 +20,7 @@ elif [[ `uname` == "Darwin" ]]; then
     alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
     alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
     # Watch Arte TV
-    alias arte="python2 ~/Development/python/arteVIDEOS/arteVIDEOS.py -d ~/Videos/tv/arte"
+    alias arte="python2 ~/Development/tools/arteVIDEOS/arteVIDEOS.py -d ~/Videos/tv/arte"
     # Docker aliases for dev environment
     eval $(docker-machine env dev-nfs)
     # alias php="docker_alias /directory php:5.6-fpm php"
