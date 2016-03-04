@@ -9,6 +9,9 @@ source $HOME/dotfiles/aliases
 # Add antigen defaults
 source $HOME/.antigen/antigen.zsh
 
+# Load my custom plugins
+antigen bundle $HOME/dotfiles/completions/zsh --no-local-clone
+
 # Load the oh-my-zsh's library and common bundles.
 antigen use oh-my-zsh
 antigen bundles <<EOBUNDLES

@@ -1,0 +1,9 @@
+#compdef gws
+# Zsh completion for gws
+
+_available_commands(){
+    _alternative 'cmds:commands:(init update status fetch ff check)'
+}
+
+_arguments \
+    "1: :_available_commands"
