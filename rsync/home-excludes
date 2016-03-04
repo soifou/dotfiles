@@ -17,6 +17,7 @@
 - *~
 - \#*\#
 - *.bak
+- *.dotbackup
 
 # Log files
 - *.log
@@ -50,6 +51,9 @@
 .composer/cache
 .composer/vendor
 .cordova
+
+.gws
+.rbenv
 
 ###############################################
 # Config                                      #
