@@ -16,20 +16,14 @@ vim /etc/apt/sources.list
 #deb http://security.debian.org/ jessie/updates main non-free
 #deb http://ftp.by.debian.org/debian/ jessie-updates main non-free
 #deb http://ftp.by.debian.org/debian/ jessie-backports main non-free
-#deb http://manpages.ylsoftware.com/debian/ all main
-#deb http://dl.google.com/linux/chrome/deb/ stable main
-#deb http://www.deb-multimedia.org jessie main non-free
-#deb http://download.virtualbox.org/virtualbox/debian wheezy contrib non-free
 # disable src repos
 
 # add new repos
 apt-get install -y python-software-properties software-properties-common apt-transport-https
 apt-add-repository 'deb http://manpages.ylsoftware.com/debian/ all main'
 apt-add-repository 'deb http://dl.google.com/linux/chrome/deb/ stable main'
-apt-add-repository 'deb http://download.virtualbox.org/virtualbox/debian wheezy contrib non-free'
 apt-add-repository 'deb http://www.deb-multimedia.org wheezy main non-free'
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
 dpkg --add-architecture i386
 apt-get update
 
@@ -74,16 +68,21 @@ apt-get install -f && apt-get update && apt-get upgrade -y && apt-get dist-upgra
 # BASE packages
 apt-get install -y ttf-* vlc vlc-*
 apt-get install -y cpufrequtils cputool hardinfo partitionmanager firmware-linux firmware-linux-free firmware-linux-nonfree unrar
-apt-get install -y audacity font-manager libreoffice libreoffice-l10n-ru shutter filezilla gimp xclip libcurl3-dev iceweasel genisoimage florence accountsservice ntp google-chrome-stable
+apt-get install -y audacity font-manager libreoffice libreoffice-l10n-ru shutter filezilla gimp xclip libcurl3-dev iceweasel genisoimage florence accountsservice ntp
 # ADDITIONAL packages
 apt-get install -y gwenview synergy quicksynergy
 apt-get install -y guake
 # KDE packages
 apt-get install -y kdegames gtk3-engines-oxygen gtk2-engines-oxygen gtk2-engines-qtcurve kde-l10n-ru plasma-widget-smooth-tasks kde-style-oxygen kde-config-* yakuake kdeconnect ktorrent okular okular-extra-backends clementine libreoffice-kde software-properties-kde lightdm-kde-greeter krusader kruler
-# VIRTUAL BOX
-apt-get install -y virtualbox-4.3 virtualbox-guest-additions-iso
+
+# virtualbox 5
+# https://www.virtualbox.org/wiki/Linux_Downloads#Debian-basedLinuxdistributions
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian `lsb_release -c | awk '"'"'{print $2}'"'"'` contrib" > /etc/apt/sources.list.d/virtualbox.list'
+apt-get update
+apt-get install dkms virtualbox-5.0
 # add your user to "vboxusers" group
-vim /etc/group
+usermod -aG vboxusers user
 
 # IF YOU NEED unetbootin
 # need add repository with wheezy
@@ -95,43 +94,29 @@ vim /etc/default/grub
 update-grub
 update-grub2
 
-# Hipchat
-echo "deb http://downloads.hipchat.com/linux/apt stable main" > \
-    /etc/apt/sources.list.d/atlassian-hipchat.list
-wget -O - https://www.hipchat.com/keys/hipchat-linux.key | apt-key add -
-apt-get update
-apt-get -y install hipchat
-
-# Google Chrome
-sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-apt-get update
-apt-get install -y google-chrome-stable
-
-# Flux for lighting
-add-apt-repository ppa:kilian/f.lux
-apt-get update
-apt-get -y install fluxgui
-# TODO: Add flux to list of startup applications
 
 # change gtk styles to qtcurve and copy files after that
-sudo cp ~/.gtkrc-2.0 /root/.gtkrc-2.0
-
-# fix pulseaudio
-# https://wiki.debian.org/ru/PulseAudio
+#sudo cp ~/.gtkrc-2.0 /root/.gtkrc-2.0
 
 # SSH
 # chmod 0700 {%private-key-ssh-rsa-file-path%}
 
-## DEV tools:
-apt-get install -y httpie curl gcc git ssh gitk kdiff3 imagemagick ack-grep
+# DEV TOOLS
+apt-get install -y build-essential curl git ssh kdiff3-qt ack-grep
 
-# python
-apt-get install -y python2.7 python-pip python-setuptools python-virtualenv uild-essential autoconf libtool pkg-config python-opengl python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 qt4-dev-tools qt4-designer libqtgui4 libqtcore4 libqt4-xml libqt4-test libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3 python-dev
+# PYTHON
+apt-get install -y python-pip
 pip install --upgrade pip
-pip install --upgrade virtualenv
+git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+# source $HOME/.zshrc
+pyenv install 2.7.9
+pyenv local 2.7.9
+# pip install [package1]
 
-# ruby
+# RUBY
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 cd ~/.rbenv && src/configure && make -C src
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
@@ -143,7 +128,7 @@ apt-get install -y gem
 gem install bundler
 # gem env home
 
-# nodejs
+# NODEJS
 apt-get install -y node npm
 npm i -g n
 n stable
@@ -155,12 +140,34 @@ npm config set python /usr/bin/python2.7
 npm i -g bower express grunt-cli gulp yo knex generator-generator generator-htmlemail forever static-server eslint less
 
 # DOCKER
-apt-get install docker.io
+apt-get purge lxc-docker* docker.io*
+apt-get update
+apt-get install -y apt-transport-https ca-certificates
+apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+echo deb https://apt.dockerproject.org/repo debian-jessie main >> /etc/apt/source.list.d/docker.list
+apt-get install docker-engine
+usermod -aG docker <your_username>
+service docker start
 
-# S3 http://s3tools.org/s3cmd-howto
-apt-get install s3cmd
-# s3cmd --configure
-# add %access key% and %secret%
+# HIPCHAT
+echo "deb http://downloads.hipchat.com/linux/apt stable main" > \
+    /etc/apt/sources.list.d/atlassian-hipchat.list
+wget -O - https://www.hipchat.com/keys/hipchat-linux.key | apt-key add -
+apt-get update
+apt-get -y install hipchat
+
+# CHROMIUM
+sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+apt-get update
+apt-get install -y google-chrome-stable
+
+# FLUX
+add-apt-repository ppa:kilian/f.lux
+apt-get update
+apt-get -y install fluxgui
+# TODO: Add flux to list of startup applications
+
 
 # Nginx, MariaDB and PHP 7
 echo "Adding dotdeb apt repositories for Nginx and PHP 7.0"
@@ -183,17 +190,3 @@ apt-get install mariadb-server mariadb-client
 mysql_secure_installation
 echo "Installing Fail2Ban and iptables-persistent"
 apt-get install fail2ban iptables-persistent
-
-# Apache + Php
-# apt-get install -y apache2 apache2-mpm-prefork apache2-utils apache2.2-common libapache2-mod-php5 libapr1 libaprutil1
-# NGINX + PHP
-# apt-get install -y nginx php5 php5-fpm
-# MySQL
-# apt-get install -y libdbd-mysql-perl libdbi-perl libnet-daemon-perl libpq5 mysql-client mysql-common mysql-server mysql-server php5-common php5-mysql phpmyadmin
-# MongoDB
-# apt-get install -y mongodb mongodb-clients mongodb-server mongodb
-# PostgreSQL
-# apt-get install -y postgresql pgadmin3 pgadmin3-data pgadmin3-dbg
-# passwd postgres
-# su postgres
-# createuser -sdrP pgdbuser

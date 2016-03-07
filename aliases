@@ -6,7 +6,6 @@ alias adminer-selfupdate="wget https://www.adminer.org/latest-mysql-en.php -O ./
 # Linux aliases
 if [[ `uname` == "Linux" ]]; then
     alias homebackup="luckybackup -c default.profile"
-    eval "$(rbenv init -)"
 
 # OSX aliases
 elif [[ `uname` == "Darwin" ]]; then
