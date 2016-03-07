@@ -27,6 +27,7 @@
 
 # OS generated files #
 ######################
+.cap_tasks?
 .DS_Store
 .DS_Store?
 ._*

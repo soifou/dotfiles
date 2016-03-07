@@ -1,7 +1,7 @@
 # Global aliases
 alias htop='sudo htop'
 alias mkv2mp4="bash ~/dotfiles/scripts/mkv2mp4.sh"
-alias adminer-selfupdate="wget https://www.adminer.org/latest-mysql-en.php -O $(pwd)/index.php"
+alias adminer-selfupdate="wget https://www.adminer.org/latest-mysql-en.php -O ./index.php"
 
 # Linux aliases
 if [[ `uname` == "Linux" ]]; then
