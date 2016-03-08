@@ -7,12 +7,17 @@ elif [[ `uname` == "Linux" ]]; then
     # Support more than 256 colors
     export TERM="xterm-256color"
     # add Rbenv
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
+    export RBENV_ROOT="$HOME/.rbenv"
+    if [ -d "${RBENV_ROOT}" ]; then
+        export PATH="${RBENV_ROOT}/bin:$PATH"
+        eval "$(rbenv init -)"
+    fi
     # add Pyenv
     export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
+    if [ -d "${PYENV_ROOT}" ]; then
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init -)"
+    fi
 fi
 
 # Set EDITOR to /usr/bin/vim if Vim is installed
