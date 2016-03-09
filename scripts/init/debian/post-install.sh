@@ -117,6 +117,7 @@ pyenv local 2.7.9
 # pip install [package1]
 
 # RUBY
+apt-get install -y libreadline-dev
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 cd ~/.rbenv && src/configure && make -C src
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
