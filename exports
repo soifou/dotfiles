@@ -1,6 +1,12 @@
-
 if [[ `uname` == "Darwin" ]]; then
+    # powerlevel9k : Only print user@hostname when not normal user
     export DEFAULT_USER=soifou
+    # use brewed coreutils instead of default one
+    export COREUTILS_ROOT="/usr/local/opt/coreutils/libexec"
+    if [ -d "${COREUTILS_ROOT}" ]; then
+        export PATH="${COREUTILS_ROOT}/gnubin:$PATH"
+    fi
+
 elif [[ `uname` == "Linux" ]]; then
     # powerlevel9k : Only print user@hostname when not normal user
     export DEFAULT_USER=soif
