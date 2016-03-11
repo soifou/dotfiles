@@ -23,6 +23,7 @@ docker
 fabric
 gem
 git
+n98-magerun
 pip
 sublime
 symfony2
