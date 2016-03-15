@@ -1,6 +1,8 @@
 if [[ `uname` == "Darwin" ]]; then
     # powerlevel9k : Only print user@hostname when not normal user
     export DEFAULT_USER=soifou
+    # set my development path
+    export DEVELOPMENT_PATH="/Users/$DEFAULT_USER/Development"
     # use brewed coreutils instead of default one
     export COREUTILS_ROOT="/usr/local/opt/coreutils/libexec"
     if [ -d "${COREUTILS_ROOT}" ]; then
@@ -10,6 +12,8 @@ if [[ `uname` == "Darwin" ]]; then
 elif [[ `uname` == "Linux" ]]; then
     # powerlevel9k : Only print user@hostname when not normal user
     export DEFAULT_USER=soif
+    # set my development path
+    export DEVELOPMENT_PATH="/media/maestro/dev"
     # Support more than 256 colors
     export TERM="xterm-256color"
     # add Rbenv
