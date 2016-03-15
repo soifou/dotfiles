@@ -28,7 +28,6 @@ brew upgrade --all
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
 sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
-
 # Install some other useful utilities like `sponge`.
 brew install moreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
@@ -94,6 +93,7 @@ brew install ack
 # brew install dark-mode
 brew install fabric
 brew install git
+brew install gws
 # brew install git-lfs
 brew install imagemagick --with-webp
 # brew install lua
