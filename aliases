@@ -6,6 +6,7 @@ alias adminer-selfupdate="wget https://www.adminer.org/latest-mysql-en.php -O ./
 # Linux aliases
 if [[ `uname` == "Linux" ]]; then
     alias homebackup="luckybackup -c default.profile"
+    alias phars-selfupdate="fab -f $DEVELOPMENT_PATH/soifou/fabric/home/fabfile.py update_phars"
 
 # OSX aliases
 elif [[ `uname` == "Darwin" ]]; then
@@ -20,7 +21,7 @@ elif [[ `uname` == "Darwin" ]]; then
     alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
     alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
     # Watch Arte TV
-    alias arte="python2 ~/Development/tools/arteVIDEOS/arteVIDEOS.py -d ~/Videos/tv/arte"
+    alias arte="python2 $DEVELOPMENT_PATH/tools/arteVIDEOS/arteVIDEOS.py -d ~/Videos/tv/arte"
     # Docker aliases for dev environment
     eval $(docker-machine env dev-nfs)
     # alias php="docker_alias /directory php:5.6-fpm php"
