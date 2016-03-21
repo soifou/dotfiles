@@ -6,6 +6,7 @@
 	"installed_packages":
 	[
 		"Bootstrap 3 Snippets",
+		"Dockerfile Syntax Highlighting",
 		"Git-StatusBar",
 		"HaoGist",
 		"Jekyll",
@@ -13,6 +14,7 @@
 		"Material Theme",
 		"Package Control",
 		"PHP-Twig",
+		"PlainTasks",
 		"Project Manager",
 		"Rsync SSH",
 		"Sass",

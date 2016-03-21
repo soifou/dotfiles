@@ -15,7 +15,8 @@
 		".capistrano",
 		".git",
 		".rsync_cache",
-		"app/cache"
+		"app/cache",
+		"var/cache"
 	],
 	"font_face": "Source Code Pro",
 	"font_size": 13,
