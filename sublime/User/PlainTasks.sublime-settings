@@ -1,10 +1,10 @@
 {
-    "color_scheme": "Packages/User/PlainTasks/tasks-markdown.hidden-tmTheme",
+    "color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
     "open_tasks_bullet": "☐", // options: - | ❍ | ❑ | ■ | □ | ☐ | ▪ | ▫ | – | — ≡ → › | [ ]
     "done_tasks_bullet": "✔", // options: + | ✓ | ✔ | √ | [x]
     "cancelled_tasks_bullet": "✘", // options: x | ✘ | [-]
     "before_tasks_bullet_margin": 1,
-    "date_format": "(%d-%m-%y %H:%M)",
+    "date_format": "(%d/%m/%y %H:%M)",
     "done_tag": true, // related to @cancelled as well
     "project_tag": true, // if true - postfix archived task with project tag, if false - prefix
     "archive_name": "Archive:", // make sure it is the unique project name within your todo files
