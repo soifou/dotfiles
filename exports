@@ -11,9 +11,9 @@ if [[ `uname` == "Darwin" ]]; then
 
 elif [[ `uname` == "Linux" ]]; then
     # powerlevel9k : Only print user@hostname when not normal user
-    export DEFAULT_USER=soif
+    export DEFAULT_USER=soifou
     # set my development path
-    export DEVELOPMENT_PATH="/media/maestro/dev"
+    export DEVELOPMENT_PATH="/media/midgar/dev"
     # Support more than 256 colors
     export TERM="xterm-256color"
     # add Rbenv
