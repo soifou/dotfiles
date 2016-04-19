@@ -7,6 +7,7 @@
 	"close_windows_when_empty": false,
 	"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
 	"copy_with_empty_selection": false,
+	"detect_indentation": false,
 	"drag_text": false,
 	"draw_minimap_border": true,
 	"enable_tab_scrolling": false,
@@ -45,6 +46,7 @@
 	"show_encoding": true,
 	"show_full_path": false,
 	"theme": "Material-Theme.sublime-theme",
+	"tab_size": 4,
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": false
