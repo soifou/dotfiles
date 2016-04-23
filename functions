@@ -15,6 +15,17 @@ function docker_alias() {
         -v $(pwd):$1 -w $1 \
         ${@:2}
 }
+function docker_start() {
+    docker-machine start dev-nfs
+    eval $(docker-machine env dev-nfs)
+    cd $DEVELOPMENT_PATH/docker
+    docker-compose up -d
+}
+function docker_stop() {
+    cd $DEVELOPMENT_PATH/docker
+    docker-compose stop
+    docker-machine stop dev-nfs
+}
 
 # List commands from commandlinefu website
 function cmdfu() {

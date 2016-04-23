@@ -25,7 +25,9 @@ elif [[ `uname` == "Darwin" ]]; then
     # Brew cask upgrade
     alias brewcask-upgrade='for c in `brew cask list`; do ! brew cask info $c | grep -qF "Not installed" || brew cask install $c; done'
     # Docker aliases for dev environment
-    eval $(docker-machine env dev-nfs)
+    if [[ `docker-machine status dev-nfs` == "Running" ]]; then
+        eval $(docker-machine env dev-nfs)
+    fi
     # alias php="docker_alias /directory php:5.6-fpm php"
     # alias php="docker run --rm -v ~/Development/docker/php/php.ini:/usr/local/etc/php/conf.d/30-custom.ini -v "$PWD":/directory -w /directory php:5.6-fpm php"
     # alias php="docker exec -ti -v $(pwd):/var/www/html -w /var/www/html docker_web_1 php"

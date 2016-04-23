@@ -1,4 +1,6 @@
 if [[ `uname` == "Darwin" ]]; then
+    # homebrew path
+    export PATH="/usr/local/sbin:$PATH"
     # powerlevel9k : Only print user@hostname when not normal user
     export DEFAULT_USER=soifou
     # set my development path
