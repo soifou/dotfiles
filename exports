@@ -18,6 +18,13 @@ elif [[ `uname` == "Linux" ]]; then
     export DEVELOPMENT_PATH="/media/midgar/dev"
     # Support more than 256 colors
     export TERM="xterm-256color"
+    # add PHPBrew
+    export PHPBREW_ROOT="$HOME/.phpbrew"
+    if [ -d "${PHPBREW_ROOT}" ]; then
+        export PHPBREW_SET_PROMPT=1
+        export PHPBREW_RC_ENABLE=1
+        source $PHPBREW_ROOT/bashrc
+    fi
     # add Rbenv
     export RBENV_ROOT="$HOME/.rbenv"
     if [ -d "${RBENV_ROOT}" ]; then

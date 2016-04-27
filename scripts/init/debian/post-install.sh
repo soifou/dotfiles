@@ -168,26 +168,3 @@ add-apt-repository ppa:kilian/f.lux
 apt-get update
 apt-get -y install fluxgui
 # TODO: Add flux to list of startup applications
-
-
-# Nginx, MariaDB and PHP 7
-echo "Adding dotdeb apt repositories for Nginx and PHP 7.0"
-echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list
-echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list
-wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-echo "Adding official MariaDB repositories"
-apt-get install software-properties-common
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
-add-apt-repository 'deb [arch=amd64,i386] http://mariadb.mirror.nucleus.be/repo/10.1/debian jessie main'
-echo "Updating apt"
-apt-get update
-echo "Installing Nginx"
-apt-get install nginx
-echo "Installing PHP-FPM"
-# unfortunately there is no `php-gd` and `php-imagic` modules for this version atm
-apt-get install php-fpm php-cli php-mysql php-curl php-mcrypt php-json
-echo "Installing MySQL"
-apt-get install mariadb-server mariadb-client
-mysql_secure_installation
-echo "Installing Fail2Ban and iptables-persistent"
-apt-get install fail2ban iptables-persistent
