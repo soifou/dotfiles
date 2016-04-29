@@ -7,6 +7,10 @@ alias adminer-selfupdate="wget https://www.adminer.org/latest-mysql-en.php -O ./
 if [[ `uname` == "Linux" ]]; then
     alias homebackup="luckybackup -c default.profile"
     alias phars-selfupdate="fab -f $DEVELOPMENT_PATH/soifou/fabric/home/fabfile.py update_phars"
+    if [[ -n $PHPBREW_ROOT ]]; then
+        alias php5="phpbrew fpm stop && phpbrew use php-5.6.20 && phpbrew fpm start && phpbrew list"
+        alias php7="phpbrew fpm stop && phpbrew use php-7.0.5 && phpbrew fpm start && phpbrew list"
+    fi
 
 # OSX aliases
 elif [[ `uname` == "Darwin" ]]; then
