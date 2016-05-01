@@ -9,6 +9,14 @@ function genpasswd() {
     fi
 }
 
+# PHP Composer docker container
+function composer() {
+    echo "Current working directory: '"$(pwd)"'"
+    # cd $DEVELOPMENT_PATH && docker-compose run composer
+    # cd $DEVELOPMENT_PATH/docker && docker-compose run composer composer $@
+    docker run --rm -v $(pwd):/app -v ~/.ssh:/root/.ssh -l docker_db composer/composer $@
+}
+
 # Run commands inside docker containers to keep your OS untouched using alias
 function docker_alias() {
     docker run -it --rm \

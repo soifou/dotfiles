@@ -28,8 +28,10 @@ elif [[ `uname` == "Darwin" ]]; then
     if [[ `docker-machine status dev-nfs` == "Running" ]]; then
         eval $(docker-machine env dev-nfs)
         alias docker-rm-images-untagged='docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")'
-        alias docker-rm-containers='docker ps --filter status=dead --filter status=exited -aq | xargs -r docker rm -v'
+        #alias docker-rm-containers='docker ps --filter status=dead --filter status=exited -aq | xargs -r docker rm -v'
+        alias docker-rm-containers="docker rm -v $(docker ps -a -q -f status=exited)"
         alias dclean='docker ps -a | grep -v '\''CONTAINER\|_config\|_data\|_run'\'' | cut -c-12 | xargs docker rm'
+        alias php7cc="docker run -it --rm -v $(pwd):/app ypereirareis/php7cc"
         # alias php7cc="docker_alias ypereirareis/php7cc php7cc"
         # alias php="docker_alias /directory php:5.6-fpm php"
         # alias php="docker run --rm -v ~/Development/docker/php/php.ini:/usr/local/etc/php/conf.d/30-custom.ini -v "$PWD":/directory -w /directory php:5.6-fpm php"
