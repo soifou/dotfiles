@@ -58,5 +58,8 @@ function php7cc() {
     docker run -it --rm -v `pwd`:/app ypereirareis/php7cc
 }
 function symfony() {
-    docker run --rm -it -u `id -u` -v `pwd`:/tmp -w /tmp romqin/symfony-installer
+    docker run -it --rm \
+        -u $(id -u):$(id -g) \
+        -v $(pwd):/app \
+        ypereirareis/symfony-installer $1 $2 $3
 }
