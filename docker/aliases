@@ -1,0 +1,12 @@
+alias docker-rm-images-untagged='docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")'
+alias docker-rm-containers="docker rm -v $(docker ps -a -q -f status=exited)"
+#alias docker-rm-containers='docker ps --filter status=dead --filter status=exited -aq | xargs -r docker rm -v'
+alias dclean='docker ps -a | grep -v '\''CONTAINER\|_config\|_data\|_run'\'' | cut -c-12 | xargs docker rm'
+# alias node="docker run -it --rm -v \`pwd\`:/pwd -w /pwd node:0.12.2-slim node"
+# alias npm="docker run -it --rm -v \`pwd\`:/pwd -w /pwd node:0.12.2-slim npm"
+# alias gulp='docker run --rm -v $(pwd)/:/mnt/ -e UID=$(id -u) -e GID=$(id -g) zenoss/gulp gulp'
+# alias php="docker_alias /directory php:5.6-fpm php"
+# alias php="docker run --rm -v ~/Development/docker/php/php.ini:/usr/local/etc/php/conf.d/30-custom.ini -v "$PWD":/directory -w /directory php:5.6-fpm php"
+# alias php="docker exec -ti -v $(pwd):/var/www/html -w /var/www/html docker_web_1 php"
+alias mysql="docker exec -i docker_db mysql"
+alias wp="docker exec -ti docker_php wp --allow-root"
