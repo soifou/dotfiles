@@ -10,4 +10,3 @@ alias dclean='docker ps -a | grep -v '\''CONTAINER\|_config\|_data\|_run'\'' | c
 # alias php="docker exec -ti -v $(pwd):/var/www/html -w /var/www/html docker_web_1 php"
 alias mysql="docker exec -i docker_db mysql"
 alias mysqldump="docker exec -i docker_db mysqldump"
-# alias wp="docker exec -ti docker_php wp --allow-root"
