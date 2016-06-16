@@ -1,5 +1,5 @@
 [
-    { "keys": ["ctrl+m"], "command": "goto_definition" }
+    { "keys": ["ctrl+m"], "command": "goto_definition" },
     { "keys": ["ctrl+alt+g"], "command": "open_browser", "args": { "url": "http://www.google.fr/#q=%s" }},
     { "keys": ["ctrl+alt+h"], "command": "open_browser", "args": { "url": "http://php.net/manual/en/function.%s.php" }},
     { "keys": ["ctrl+alt+w"], "command": "open_browser", "args": { "url": "https://codex.wordpress.org/Function_Reference/%s" }},

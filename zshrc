@@ -51,3 +51,6 @@ POWERLEVEL9K_STATUS_VERBOSE=false
 
 # Tell antigen that you're done.
 antigen apply
+
+# Move to my workdir
+cd $DEVELOPMENT_PATH
