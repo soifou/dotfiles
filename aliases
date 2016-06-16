@@ -1,7 +1,7 @@
 # Global aliases
 alias htop='sudo htop'
 alias mkvmp4="bash ~/dotfiles/scripts/utils/mkvmp4.sh"
-alias adminer-selfupdate="wget https://www.adminer.org/latest-mysql-en.php -O ./index.php"
+alias adminer-selfupdate="wget https://www.adminer.org/latest-mysql-en.php -O $DEVELOPMENT_PATH/adminer/index.php"
 alias git-branch-check="git remote show origin && git remote prune origin --dry-run"
 
 # Linux aliases

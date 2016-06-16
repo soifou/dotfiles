@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo_version() {
-    echo "v1.0.0";
+    print_info "v1.0.0";
 }
 
 backup_file() {
@@ -52,23 +52,6 @@ load_zsh_modules() {
     done < $HOME/.zmodules
 }
 
-# install_virtualenvwrapper() {
-#     echo "Installing virtualenvwrapper..."
-#     curl -s https://raw.githubusercontent.com/brainsik/virtualenv-burrito/master/virtualenv-burrito.sh | exclude_profile=1 $SHELL || true
-# }
-
-# configure_shell() {
-#     echo "Configuring common shell environment..."
-#     link_file .bash_aliases .bash_aliases
-#     link_file .shenv .shenv
-#     if [ "$OSTYPE" == "darwin"* ]; then
-#         copy_file .bash_local-mac .bash_local
-#     else
-#         copy_file .bash_local-linux .bash_local
-#     fi
-# }
-
-
 
 configure_ack() {
     echo "Configuring ack..."
@@ -114,7 +97,7 @@ configure_zsh() {
 }
 
 configure_git() {
-    echo "Configuring git..."
+    print_info "Configuring git..."
     if [ -z "$GIT_NAME" ]; then
         read -p "Git user.name: " GIT_NAME
     fi
@@ -124,6 +107,7 @@ configure_git() {
     backup_file .gitconfig
     sed -e 's/\[\[GIT_NAME\]\]/'"$GIT_NAME"'/g' -e 's/\[\[GIT_EMAIL\]\]/'"$GIT_EMAIL"'/g' `pwd`/git/gitconfig > $HOME/.gitconfig
     link_file git/gitignore .gitignore
+    print_success "Git configuration done!"
 }
 
 configure_vim() {
@@ -166,24 +150,26 @@ install_source_code_pro_font() {
 }
 
 configure_atom() {
-    url=https://atom.io/download/deb
-    file=atom.deb
+    if [[ `uname` == 'Linux' ]]; then
+        url=https://atom.io/download/deb
+        file=atom.deb
 
-    echo "Download and install latest Atom text editor"
-    echo " "
-    cd $HOME
-    wget $url -O $file
-    sudo dpkg -i $file
-    rm $file
+        echo "Download and install latest Atom text editor"
+        echo " "
+        cd $HOME
+        wget $url -O $file
+        sudo dpkg -i $file
+        rm $file
 
-    echo "Add custom Atom plugins"
-    plugins=(atom-material-syntax atom-material-syntax-light atom-material-ui minimap predawn-syntax predawn-ui project-manager tool-bar tool-bar-main)
-    for plugin in "${plugins[@]}"
-    do
-        apm install $plugin
-    done
-    echo "---------------------"
-    echo "Atom has been successfully installed !"
+        echo "Add custom Atom plugins"
+        plugins=(atom-material-syntax atom-material-syntax-light atom-material-ui minimap predawn-syntax predawn-ui project-manager tool-bar tool-bar-main)
+        for plugin in "${plugins[@]}"
+        do
+            apm install $plugin
+        done
+        echo "---------------------"
+        echo "Atom has been successfully installed !"
+    fi
 }
 
 configure_sublime() {
@@ -228,15 +214,22 @@ configure_sublime() {
 	echo "Ready ! At the next start Sublime Text will fetch/upgrade packages"
 }
 
-# configure_ipython() {
-#     echo "Configuring ipython..."
-#     if [ "$OSTYPE" == "darwin"* ]; then
-#         link_directory .ipython .ipython
-#     else
-#         mkdir -p $HOME/.config
-#         link_directory .ipython .config/ipython
-#     fi
-# }
+print_success() {
+    # Print output in green
+    printf "\e[0;32m  [✔] $1\e[0m\n"
+}
+print_error() {
+    # Print output in red
+    printf "\e[0;31m  [✖] $1 $2\e[0m\n"
+}
+print_info() {
+    # Print output in purple
+    printf "\e[0;35m $1\e[0m\n"
+}
+print_question() {
+    # Print output in yellow
+    printf "\e[0;33m  [?] $1\e[0m"
+}
 
 delete_backups() {
     rm -rf $HOME/.ackrc.dotbackup
@@ -266,26 +259,25 @@ while :
 do
     case $1 in
         -h | --help | -\?)
-            echo "";
-            echo "Dotfiles - Bootstrap available commands";
-            echo "";
-            echo "--ack             Ack custom config";
-            echo "--atom            Install and configure preferences, add custom/useful plugins for atom text editor"
-            #echo "--bash            Create a bashrc file and set it as default shell";
-            echo "--delete-backups  Remove all dotbackup files";
-            echo "--font-scp        Install Source Code Pro font";
-            echo "--git             Create config/ignore Git files for the current user";
-            echo "--git-name        Set your Git display name";
-            echo "--git-email       Set your Git email";
-            echo "--sublime         Configure preferences, add custom/useful plugins for sublime text editor"
-            echo "--vim             Create custom vimrc, add colors/syntax/plugins"
-            echo "--zsh             Install and config Zsh as default shell";
+            print_info "";
+            print_info "Dotfiles - Bootstrap available commands";
+            print_info "";
+            print_info "--ack             Ack custom config";
+            print_info "--atom            Install and configure preferences, add custom/useful plugins for atom text editor"
+            print_info "--delete-backups  Remove all dotbackup files";
+            print_info "--font-scp        Install Source Code Pro font";
+            print_info "--git             Create config/ignore Git files for the current user";
+            print_info "--git-name        Set your Git display name";
+            print_info "--git-email       Set your Git email";
+            print_info "--sublime         Configure preferences, add custom/useful plugins for sublime text editor"
+            print_info "--vim             Create custom vimrc, add colors/syntax/plugins"
+            print_info "--zsh             Install and config Zsh as default shell";
+            print_info "";
             exit 0; ;;
         -v | --version) echo_version; exit 0; ;;
 
         --ack) ACK=1; shift; ;;
         --atom) ATOM=1; shift; ;;
-        #--bash) BASH=1; shift; ;;
         --delete-backups) DELETE_BACKUPS=1; shift; ;;
         --font-scp) FONT_SCP=1; shift; ;;
         --git) GIT=1; shift; ;;
@@ -307,29 +299,12 @@ if [ "$DELETE_BACKUPS" == 1 ]; then
     echo "Backups deleted."
     exit 0
 fi
-
-# if [ "$UPDATE" == 1 ]; then
-#     update
-#     echo "Done."
-#     exit 0
-# fi
-
-# if [ "$NO_VIRTUALENVWRAPPER" != 1 ]; then
-#     install_virtualenvwrapper
-# fi
-# if [ "$NO_BASH" != 1 ] || [ "$NO_ZSH" != 1 ]; then
-#     configure_shell
-# fi
-
 if [ "$ACK" == 1 ]; then
     configure_ack
 fi
 if [ "$ATOM" == 1 ]; then
     configure_atom
 fi
-# if [ "$BASH" == 1 ]; then
-#     configure_bash
-# fi
 if [ "$FONT_SCP" == 1 ]; then
     install_source_code_pro_font
 fi
@@ -345,17 +320,7 @@ fi
 if [ "$ZSH" == 1 ]; then
     configure_zsh
 fi
-# if [ "$NO_I3" != 1 ]; then
-#     configure_i3
-# fi
-# if [ "$NO_TMUX" != 1 ]; then
-#     configure_tmux
-# fi
-# if [ "$NO_IPYTHON" != 1 ]; then
-#     configure_ipython
-# fi
 
 echo "Done."
-
 
 # credits : https://github.com/alanctkc/dotfiles/blob/master/bootstrap.sh

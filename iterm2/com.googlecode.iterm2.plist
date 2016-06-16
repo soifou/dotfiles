@@ -1345,6 +1345,8 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/Documents/backup</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -1370,7 +1372,7 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>322</string>
+		<string>302</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
@@ -1417,11 +1419,11 @@
 			<key>Ansi 10 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.38298487663269043</real>
+				<real>0.083339519798755646</real>
 				<key>Green Component</key>
-				<real>0.35665956139564514</real>
+				<real>0.63826137781143188</real>
 				<key>Red Component</key>
-				<real>0.27671992778778076</real>
+				<real>0.048775941133499146</real>
 			</dict>
 			<key>Ansi 11 Color</key>
 			<dict>
@@ -1471,11 +1473,11 @@
 			<key>Ansi 2 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.020208755508065224</real>
+				<real>0.0</real>
 				<key>Green Component</key>
-				<real>0.54115492105484009</real>
+				<real>0.60480022430419922</real>
 				<key>Red Component</key>
-				<real>0.44977453351020813</real>
+				<real>0.14560997486114502</real>
 			</dict>
 			<key>Ansi 3 Color</key>
 			<dict>

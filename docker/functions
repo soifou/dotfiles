@@ -22,18 +22,20 @@ function composer() {
         -v ~/.composer:/home/composer/.composer \
         -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro \
         --net=docker_default \
-        graze/composer ${@:1}
+        soifou/composer ${@:1}
 }
 function php7cc() {
     docker run -it --rm \
         -v $(pwd):/app \
+        --net=docker_default \
         ypereirareis/php7cc $1
 }
 function symfony() {
     docker run -it --rm \
-        -u $(id -u):$(id -g) \
-        -v $(pwd):/app \
-        ypereirareis/symfony-installer ${@:1}
+        -v $HOME:$HOME \
+        -w $PWD \
+        -u `id -u`:`id -g` \
+        iamluc/sf-installer ${@:1}
 }
 function wp() {
     docker run -it --rm \
