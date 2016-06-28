@@ -93,6 +93,7 @@ brew install ack
 # brew install dark-mode
 brew install fabric
 brew install git
+brew install diff-so-fancy
 brew install gws
 # brew install git-lfs
 brew install httpie
@@ -109,6 +110,13 @@ brew install ssh-copy-id
 brew install tree
 # brew install webkit2png
 # brew install zopfli
+
+# Docker stuff
+brew install docker
+brew install docker-clean
+brew install docker-compose
+brew install docker-machine
+brew install docker-machine-nfs
 
 # Install Homebrew cask : http://caskroom.io/
 brew install caskroom/cask/brew-cask
@@ -130,25 +138,19 @@ brew cask install clipmenu
 brew cask install flux
 brew cask install iterm2
 
-brew cask install sublime-text3
+brew cask install sublime-text
 brew cask install chromium
 brew cask install gimp
 brew cask install libreoffice
 brew cask install clementine
 
 brew cask install virtualbox
-brew cask install docker
-brew cask install docker-clean
-brew cask install docker-compose
-brew cask install docker-machine
-brew cask install docker-machine-nfs
 
 brew cask install transmission
-brew cask install hipchat
+brew cask install slack
 brew cask install imagemagick
 brew cask install vlc
 brew cask install handbrake
-
 
 # brew cask install google-chrome
 # brew cask install google-drive
