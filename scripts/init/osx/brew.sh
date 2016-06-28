@@ -95,6 +95,7 @@ brew install fabric
 brew install git
 brew install gws
 # brew install git-lfs
+brew install httpie
 brew install imagemagick --with-webp
 # brew install lua
 # brew install lynx
@@ -114,6 +115,15 @@ brew install caskroom/cask/brew-cask
 # Get alternate versions of Casks (e.g. betas, nightly releases, old versions)
 brew tap caskroom/versions
 
+# Get Casks that install fonts
+brew tap caskroom/fonts
+# Install some dev fonts patched in use with powerline
+brew cask install font-inconsolata-for-powerline
+brew cask install font-source-code-pro font-sauce-code-powerline
+brew cask install font-anonymous-pro-for-powerline
+brew cask install font-roboto-mono-for-powerline
+brew cask install font-ubuntu-mono-powerline
+
 # Install graphical utilities
 brew cask install alfred
 brew cask install clipmenu
@@ -125,17 +135,16 @@ brew cask install chromium
 brew cask install gimp
 brew cask install libreoffice
 brew cask install clementine
-# brew cask install retroarch
 
 brew cask install virtualbox
-brew cask install vagrant
 brew cask install docker
+brew cask install docker-clean
 brew cask install docker-compose
 brew cask install docker-machine
+brew cask install docker-machine-nfs
 
 brew cask install transmission
 brew cask install hipchat
-brew cask install xtrafinder
 brew cask install imagemagick
 brew cask install vlc
 brew cask install handbrake
