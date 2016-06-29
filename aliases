@@ -32,10 +32,10 @@ elif [[ `uname` == "Darwin" ]]; then
     alias arte="python2 $DEVELOPMENT_PATH/tools/arteVIDEOS/arteVIDEOS.py -d ~/Videos/tv/arte"
     # Brew cask upgrade
     alias brewcask-upgrade='for c in `brew cask list`; do ! brew cask info $c | grep -qF "Not installed" || brew cask install $c; done'
-    # Docker aliases for dev environment
-    if [[ `docker-machine status dev-nfs` == "Running" ]]; then
-        eval $(docker-machine env dev-nfs)
-        source $HOME/dotfiles/docker/exports
+    # Docker for my dev environment
+    source $HOME/dotfiles/docker/exports
+    if [[ `docker-machine status $DOCKER_MACHINE_NAME` == "Running" ]]; then
+        eval $(docker-machine env $DOCKER_MACHINE_NAME)
         source $HOME/dotfiles/docker/functions
         source $HOME/dotfiles/docker/aliases
     fi
