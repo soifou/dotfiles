@@ -25,9 +25,8 @@ function dico() { curl -s dict://dict.org/d:${1}:wn | sed '/^[1-2]/d' | sed '$d'
 function dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d'; }
 
 function docker_start() {
-    docker-machine start dev-nfs
-    eval $(docker-machine env dev-nfs)
+    docker-machine start $DOCKER_MACHINE_NAME
+    eval $(docker-machine env $DOCKER_MACHINE_NAME)
     cd $DEVELOPMENT_PATH/docker
-    docker-compose up -d
-    source ~/.zshrc
+    make start
 }

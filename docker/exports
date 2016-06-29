@@ -1,0 +1,4 @@
+# my default docker machine name
+DOCKER_MACHINE_NAME="dev-nfs"
+# my default docker network name
+DOCKER_NETWORK_NAME="lamp-network"

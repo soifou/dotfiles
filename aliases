@@ -35,6 +35,7 @@ elif [[ `uname` == "Darwin" ]]; then
     # Docker aliases for dev environment
     if [[ `docker-machine status dev-nfs` == "Running" ]]; then
         eval $(docker-machine env dev-nfs)
+        source $HOME/dotfiles/docker/exports
         source $HOME/dotfiles/docker/functions
         source $HOME/dotfiles/docker/aliases
     fi

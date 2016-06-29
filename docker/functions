@@ -1,8 +1,6 @@
 function docker_stop() {
     cd $DEVELOPMENT_PATH/docker
-    docker-compose stop
-    docker-machine stop dev-nfs
-    source ~/.zshrc
+    make down
 }
 # Run commands inside docker containers to keep your OS untouched using alias
 function docker_alias() {
@@ -16,18 +14,35 @@ function gitcheck() {
         -v `pwd`:/files:ro \
         badele/alpine-gitcheck
 }
+
+function php() {
+    x=$(pwd)
+    y=${x#$DEVELOPMENT_PATH}
+    # relative="`echo ${y##/*}`"
+    # prefix=$DEVELOPMENT_PATH
+    # path=$(pwd)
+    # echo $path | sed "s/^$prefix//"
+    # result=${path#$prefix}
+    # echo $result
+    # RELATIVE_PATH=$(pwd)
+    # echo ${"$RELATIVE_PATH#$DEVELOPMENT_PATH"}
+    # echo $DEVELOPMENT_PATH
+    # docker exec -i docker_php \
+    #     php7 /app$y
+}
+
 function composer() {
     docker run --rm -it \
         -v $(pwd):/usr/src/app \
         -v ~/.composer:/home/composer/.composer \
         -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro \
-        --net=docker_default \
+        --net=$DOCKER_NETWORK_NAME \
         soifou/composer ${@:1}
 }
 function php7cc() {
     docker run -it --rm \
         -v $(pwd):/app \
-        --net=docker_default \
+        --net=$DOCKER_NETWORK_NAME \
         ypereirareis/php7cc $1
 }
 function symfony() {
@@ -40,6 +55,6 @@ function symfony() {
 function wp() {
     docker run -it --rm \
         -v $(pwd):/mnt \
-        --net=docker_default \
+        --net=$DOCKER_NETWORK_NAME \
         mbodenhamer/alpine-wpcli wp --path=/mnt ${@:1}
 }
