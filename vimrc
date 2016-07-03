@@ -32,6 +32,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugins
 " github repo
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'kristijanhusak/vim-hybrid-material'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
@@ -59,7 +60,12 @@ syntax enable             " enable syntax highlighting (previously syntax on).
 
 " Use the Solarized Dark theme
 set background=dark
-colorscheme solarized
+" colorscheme solarized
+colorscheme hybrid_material
+" Airline custom config
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'hybrid'
+let g:airline#extensions#tabline#enabled = 1
 
 " Prettify JSON files
 autocmd BufRead,BufNewFile *.json set filetype=json
@@ -102,16 +108,11 @@ set visualbell
 " set smarttab              " use tabs at the start of a line, spaces elsewhere
 " set nowrap                " don't wrap text
 " set backspace=2           " fix Delete (backspace) on Mac OS X
+" Backspace key should delete chars (mac only)
+set backspace=indent,eol,start
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 07. Custom Commands                                                        "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Prettify JSON files making them easier to read
 command PrettyJSON %!python -m json.tool
-
-" Airline custom config
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized'
-
-" Backspace key should delete chars (mac only)
-set backspace=indent,eol,start
