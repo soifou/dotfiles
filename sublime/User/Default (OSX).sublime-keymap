@@ -1,5 +1,6 @@
 [
     { "keys": ["super+m"], "command": "goto_definition" },
+    { "keys": ["super+i"], "command": "increment_selection" },
     {
         "keys": ["super+&"],
         "command": "set_layout",

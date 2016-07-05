@@ -118,6 +118,13 @@ brew install docker-compose
 brew install docker-machine
 brew install docker-machine-nfs
 
+# Ruby stuff
+brew install rbenv ruby-build
+eval "$(rbenv init -)"
+rbenv install 2.3.1
+rbenv global 2.3.1
+gem install bundler
+
 # Install Homebrew cask : http://caskroom.io/
 brew install caskroom/cask/brew-cask
 # Get alternate versions of Casks (e.g. betas, nightly releases, old versions)

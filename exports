@@ -1,3 +1,10 @@
+# add Rbenv
+export RBENV_ROOT="$HOME/.rbenv"
+if [ -d "${RBENV_ROOT}" ]; then
+    export PATH="${RBENV_ROOT}/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
+
 if [[ `uname` == "Darwin" ]]; then
     # homebrew path
     export PATH="/usr/local/sbin:$PATH"
@@ -24,12 +31,6 @@ elif [[ `uname` == "Linux" ]]; then
         export PHPBREW_SET_PROMPT=1
         export PHPBREW_RC_ENABLE=1
         source $PHPBREW_ROOT/bashrc
-    fi
-    # add Rbenv
-    export RBENV_ROOT="$HOME/.rbenv"
-    if [ -d "${RBENV_ROOT}" ]; then
-        export PATH="${RBENV_ROOT}/bin:$PATH"
-        eval "$(rbenv init -)"
     fi
     # add Pyenv
     export PYENV_ROOT="$HOME/.pyenv"
