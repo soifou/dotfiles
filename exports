@@ -17,6 +17,13 @@ if [[ `uname` == "Darwin" ]]; then
     if [ -d "${COREUTILS_ROOT}" ]; then
         export PATH="${COREUTILS_ROOT}/gnubin:$PATH"
     fi
+    # Docker toolbox for my dev environment
+    source $HOME/dotfiles/docker/exports
+    source $HOME/dotfiles/docker/functions
+    if [[ `docker-machine status $DOCKER_MACHINE_NAME` == "Running" ]]; then
+        source $HOME/dotfiles/docker/aliases
+        eval $(docker-machine env $DOCKER_MACHINE_NAME)
+    fi
 
 elif [[ `uname` == "Linux" ]]; then
     # powerlevel9k : Only print user@hostname when not normal user

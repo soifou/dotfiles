@@ -23,12 +23,3 @@ function down4me() {
 # Dict protocol
 function dico() { curl -s dict://dict.org/d:${1}:wn | sed '/^[1-2]/d' | sed '$d'; }
 function dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d'; }
-
-function docker_start() {
-    docker-machine start $DOCKER_MACHINE_NAME
-    eval $(docker-machine env $DOCKER_MACHINE_NAME)
-    source $HOME/dotfiles/docker/functions
-    source $HOME/dotfiles/docker/aliases
-    cd $DEVELOPMENT_PATH/docker
-    make start
-}

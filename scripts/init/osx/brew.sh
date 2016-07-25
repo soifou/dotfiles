@@ -92,10 +92,14 @@ brew install woff2
 brew install ack
 # brew install dark-mode
 brew install fabric
+# Git stuff
 brew install git
 brew install diff-so-fancy
 brew install gws
 # brew install git-lfs
+brew tap git-time-metric/gtm
+brew install gtm
+
 brew install httpie
 brew install imagemagick --with-webp
 # brew install lua
@@ -111,14 +115,17 @@ brew install tree
 # brew install webkit2png
 # brew install zopfli
 
-# Docker stuff
+# Docker toolbox stuff
 brew install docker
 brew install docker-clean
-brew install docker-compose
+# @NOTE: docker-compose is also installed with cask
+# if you install docker mac UI this one is useless
+# brew install docker-compose
 brew install docker-machine
+# speed up the share with NFS
 brew install docker-machine-nfs
 
-# Ruby stuff
+# Ruby stuff - override OSX build-in version
 brew install rbenv ruby-build
 eval "$(rbenv init -)"
 rbenv install 2.3.1
@@ -144,31 +151,22 @@ brew cask install alfred
 brew cask install clipmenu
 brew cask install flux
 brew cask install iterm2
-
 brew cask install sublime-text
 brew cask install chromium
 brew cask install gimp
 brew cask install libreoffice
 brew cask install clementine
-
-brew cask install virtualbox
-
 brew cask install transmission
 brew cask install slack
 brew cask install imagemagick
 brew cask install vlc
 brew cask install handbrake
-
-# brew cask install google-chrome
-# brew cask install google-drive
-# brew cask install dropbox
-# brew cask install spotify
-# brew cask install amethyst
-# brew cask install inskape
-# brew cask install calibre
-# brew cask install fitbit-connect
-# brew cask install rcdefaultapp
-
+# needed at least for docker toolbox
+brew cask install virtualbox
+# Docker Mac stuff
+brew cask install docker
+brew cask install docker-compose
+brew cask install kitematic
 
 # Remove outdated versions from the cellar.
 brew cleanup

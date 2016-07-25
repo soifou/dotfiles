@@ -1420,7 +1420,7 @@
 	<key>HiddenAdvancedFontRendering</key>
 	<false/>
 	<key>HideActivityIndicator</key>
-	<true/>
+	<false/>
 	<key>HideMenuBarInFullscreen</key>
 	<false/>
 	<key>HideScrollbar</key>
@@ -1480,7 +1480,7 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>302</string>
+		<string>322</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
@@ -1492,11 +1492,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>440 285 714 221 0 0 1440 877 </string>
+	<string>447 246 714 330 0 0 1440 877 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>476 361 924 485 0 0 1440 877 </string>
+	<string>476 419 606 456 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 401 1436 476 0 0 1440 877 </string>
+	<string>0 401 1440 476 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2954,10 +2954,23 @@
 			<string>/Users/soifou</string>
 		</dict>
 	</array>
+	<key>NoSyncConfirmBeta</key>
+	<true/>
+	<key>NoSyncInstallationId</key>
+	<string>D206DD8A-2FCB-48A7-8B65-753D50AAB1FE</string>
+	<key>NoSyncLastTipTime</key>
+	<real>489474223.60594499</real>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
+	<true/>
+	<key>NoSyncPermissionToShowTip</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>471943473.11294198</real>
+	<key>NoSyncTipsToNotShow</key>
+	<array>
+		<string>000</string>
+		<string>0000</string>
+	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -3022,9 +3035,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=62</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
+	<key>SULastCheckTime</key>
+	<date>2016-07-06T05:38:29Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -3039,6 +3054,8 @@
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
 	<integer>6</integer>
+	<key>TabStyle</key>
+	<integer>0</integer>
 	<key>TabViewType</key>
 	<integer>1</integer>
 	<key>ThreeFingerEmulates</key>
@@ -3066,6 +3083,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.1.4</string>
+	<string>3.0.4</string>
 </dict>
 </plist>
