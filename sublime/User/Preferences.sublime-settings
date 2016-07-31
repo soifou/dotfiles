@@ -25,7 +25,7 @@
 		"gray_antialias",
 		"subpixel_antialias"
 	],
-	"font_size": 14,
+	"font_size": 13,
 	"highlight_line": true,
 	"ignored_packages":
 	[
@@ -41,7 +41,7 @@
 	"match_brackets_content": false,
 	"match_selection": true,
 	"match_tags": true,
-	"material_theme_compact_sidebar": true,
+	"material_theme_compact_sidebar": false,
 	"material_theme_panel_separator": true,
 	"open_files_in_new_window": false,
 	"overlay_scroll_bars": "enabled",

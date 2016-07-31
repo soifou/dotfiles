@@ -32,6 +32,10 @@ elif [[ `uname` == "Linux" ]]; then
     export DEVELOPMENT_PATH="/media/midgar/dev"
     # Support more than 256 colors
     export TERM="xterm-256color"
+    # add docker
+    source $HOME/dotfiles/docker/exports
+    source $HOME/dotfiles/docker/functions
+    source $HOME/dotfiles/docker/aliases
     # add PHPBrew
     export PHPBREW_ROOT="$HOME/.phpbrew"
     if [ -d "${PHPBREW_ROOT}" ]; then
