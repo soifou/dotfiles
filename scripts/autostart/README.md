@@ -1,10 +1,5 @@
 # Autostart scripts
 
-It does the following things at startup :
-- launch Yakuake
-- launch Conky with my custom configuration
-- launch ssh-add to add my private ssh keys to ssh-agent
-
 You have to symlink the `autostart` directory depending your distribution.
 
 If you use KDE 4  
