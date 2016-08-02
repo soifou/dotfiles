@@ -80,12 +80,12 @@ function wp() {
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/wpcli-alpine wp --path=/mnt ${@:1}
+        soifou/wpcli-alpine ${@:1}
 }
 function n98() {
     docker run -it --rm \
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/n98-magerun-alpine n98-magerun --skip-root-check --root-dir=/mnt ${@:1}
+        soifou/n98-magerun-alpine ${@:1}
 }

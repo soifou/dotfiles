@@ -6,6 +6,7 @@
 	"installed_packages":
 	[
 		"Bootstrap 3 Snippets",
+		"BracketHighlighter",
 		"Dockerfile Syntax Highlighting",
 		"ExpandRegion",
 		"Foundation 5 Snippets",

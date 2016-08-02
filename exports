@@ -4,6 +4,14 @@ if [ -d "${RBENV_ROOT}" ]; then
     export PATH="${RBENV_ROOT}/bin:$PATH"
     eval "$(rbenv init -)"
 fi
+# add Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+if [ -d "${PYENV_ROOT}" ]; then
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
+# export custom Docker vars
+source $HOME/dotfiles/docker/exports
 
 if [[ `uname` == "Darwin" ]]; then
     # homebrew path
@@ -18,11 +26,10 @@ if [[ `uname` == "Darwin" ]]; then
         export PATH="${COREUTILS_ROOT}/gnubin:$PATH"
     fi
     # Docker toolbox for my dev environment
-    source $HOME/dotfiles/docker/exports
-    source $HOME/dotfiles/docker/functions
     if [[ `docker-machine status $DOCKER_MACHINE_NAME` == "Running" ]]; then
-        source $HOME/dotfiles/docker/aliases
         eval $(docker-machine env $DOCKER_MACHINE_NAME)
+        source $HOME/dotfiles/docker/functions
+        source $HOME/dotfiles/docker/aliases
     fi
 
 elif [[ `uname` == "Linux" ]]; then
@@ -33,7 +40,6 @@ elif [[ `uname` == "Linux" ]]; then
     # Support more than 256 colors
     export TERM="xterm-256color"
     # add docker
-    source $HOME/dotfiles/docker/exports
     source $HOME/dotfiles/docker/functions
     source $HOME/dotfiles/docker/aliases
     # add PHPBrew
@@ -42,12 +48,6 @@ elif [[ `uname` == "Linux" ]]; then
         export PHPBREW_SET_PROMPT=1
         export PHPBREW_RC_ENABLE=1
         source $PHPBREW_ROOT/bashrc
-    fi
-    # add Pyenv
-    export PYENV_ROOT="$HOME/.pyenv"
-    if [ -d "${PYENV_ROOT}" ]; then
-        export PATH="$PYENV_ROOT/bin:$PATH"
-        eval "$(pyenv init -)"
     fi
 fi
 

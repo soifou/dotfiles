@@ -18,12 +18,10 @@ antigen bundles <<EOBUNDLES
 bundler
 capistrano
 command-not-found
-composer
 docker
 fabric
 gem
 git
-n98-magerun
 pip
 sublime
 symfony2

@@ -7,4 +7,4 @@
 echo -n "Enter MKV file path: "
 read mkv_file
 filename="${mkv_file%.*}.mp4"
-ffmpeg -i "$mkv_file" -c:v copy -c:a copy "$filename"
+ffmpeg -i "$mkv_file" -c:v copy -c:a aac -strict experimental -b:a 320k "$filename"
