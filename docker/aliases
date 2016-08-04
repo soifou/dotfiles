@@ -5,8 +5,8 @@ alias dclean='docker ps -a | grep -v '\''CONTAINER\|_config\|_data\|_run'\'' | c
 # alias node="docker run -it --rm -v \`pwd\`:/pwd -w /pwd node:0.12.2-slim node"
 # alias npm="docker run -it --rm -v \`pwd\`:/pwd -w /pwd node:0.12.2-slim npm"
 # alias gulp='docker run --rm -v $(pwd)/:/mnt/ -e UID=$(id -u) -e GID=$(id -g) zenoss/gulp gulp'
-# alias php="docker_alias /directory php:5.6-fpm php"
-# alias php="docker run --rm -v ~/Development/docker/php/php.ini:/usr/local/etc/php/conf.d/30-custom.ini -v "$PWD":/directory -w /directory php:5.6-fpm php"
-# alias php="docker exec -ti -v $(pwd):/var/www/html -w /var/www/html docker_web_1 php"
 alias mysql="docker exec -i docker_db mysql"
 alias mysqldump="docker exec -i docker_db mysqldump"
+
+
+alias lamp="docker-compose -f $DOCKER_REPOSITORY_PATH/docker-compose.yml"

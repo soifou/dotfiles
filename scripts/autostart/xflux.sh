@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # get your coordonoates from here: http://www.gpsies.com/coordinate.do#help-findAdress
-POSTCODE=69160
-LATITUDE=45.7529414
-LONGITUDE=4.7770379
+# POSTCODE=XXXX
+# LATITUDE=XXXX
+# LONGITUDE=XXXX
 
-/usr/local/bin/xflux -z $POSTCODE -l $LATITUDE -g $LONGITUDE
+/usr/local/bin/xflux -z $MY_POSTCODE -l $MY_LATITUDE -g $MY_LONGITUDE

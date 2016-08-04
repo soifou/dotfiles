@@ -1,3 +1,8 @@
+# powerlevel9k : Only print user@hostname when not normal user
+# export DEFAULT_USER=me
+# set my development path
+# export DEVELOPMENT_PATH="/Users/$DEFAULT_USER/Development"
+
 # add Rbenv
 export RBENV_ROOT="$HOME/.rbenv"
 if [ -d "${RBENV_ROOT}" ]; then
@@ -16,10 +21,6 @@ source $HOME/dotfiles/docker/exports
 if [[ `uname` == "Darwin" ]]; then
     # homebrew path
     export PATH="/usr/local/sbin:$PATH"
-    # powerlevel9k : Only print user@hostname when not normal user
-    export DEFAULT_USER=soifou
-    # set my development path
-    export DEVELOPMENT_PATH="/Users/$DEFAULT_USER/Development"
     # use brewed coreutils instead of default one
     export COREUTILS_ROOT="$(brew --prefix coreutils)/libexec"
     if [ -d "${COREUTILS_ROOT}" ]; then
@@ -33,10 +34,6 @@ if [[ `uname` == "Darwin" ]]; then
     fi
 
 elif [[ `uname` == "Linux" ]]; then
-    # powerlevel9k : Only print user@hostname when not normal user
-    export DEFAULT_USER=soifou
-    # set my development path
-    export DEVELOPMENT_PATH="/media/midgar/dev"
     # Support more than 256 colors
     export TERM="xterm-256color"
     # add docker

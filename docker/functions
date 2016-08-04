@@ -58,7 +58,6 @@ function composer() {
         -v $(pwd):/usr/src/app \
         -v ~/.composer:/home/composer/.composer \
         -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro \
-        -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
         soifou/composer-alpine ${@:1}
 }
