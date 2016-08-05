@@ -118,9 +118,6 @@ brew install tree
 # Docker toolbox stuff
 brew install docker
 brew install docker-clean
-# @NOTE: docker-compose is also installed with cask
-# if you install docker mac UI this one is useless
-# brew install docker-compose
 brew install docker-machine
 # speed up the share with NFS
 brew install docker-machine-nfs
@@ -165,7 +162,6 @@ brew cask install handbrake
 brew cask install virtualbox
 # Docker Mac stuff
 brew cask install docker
-brew cask install docker-compose
 brew cask install kitematic
 
 # Remove outdated versions from the cellar.
