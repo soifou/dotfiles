@@ -90,8 +90,7 @@ brew install woff2
 
 # Install other useful binaries.
 brew install ack
-# brew install dark-mode
-brew install fabric
+
 # Git stuff
 brew install git
 brew install diff-so-fancy
@@ -121,6 +120,15 @@ brew install docker-clean
 brew install docker-machine
 # speed up the share with NFS
 brew install docker-machine-nfs
+
+# Python stuff
+brew install readline xz
+brew install pyenv
+brew install fabric
+eval "$(pyenv init -)"
+pyenv install 2.7.10
+pyenv install 3.5.2
+pyenv global 2.7.10
 
 # Ruby stuff - override OSX build-in version
 brew install rbenv ruby-build
