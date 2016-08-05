@@ -91,8 +91,8 @@ git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 # export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
 # source $HOME/.zshrc
-pyenv install 2.7.9
-pyenv local 2.7.9
+pyenv install 2.7.10
+pyenv global 2.7.10
 # pip install [package1]
 
 # RUBY
