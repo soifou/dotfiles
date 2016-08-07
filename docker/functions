@@ -38,30 +38,26 @@ function gitcheck() {
         badele/alpine-gitcheck
 }
 
-function php() {
+function getCurrentPath() {
     ABSOLUTE_PATH=$(pwd)
     RELATIVE_PATH="${ABSOLUTE_PATH//$DEVELOPMENT_PATH}"
-    # since we're working inside the lamp network
     # we should stick to the php container working path (/app)
-    DOCKER_CURRENT_PATH="/app$RELATIVE_PATH"
+    echo "/app$RELATIVE_PATH"
+}
+function php() {
     docker run -ti --rm \
         --name php7-cli-running-script \
-        -v "$PWD":$DOCKER_CURRENT_PATH \
-        -w $DOCKER_CURRENT_PATH \
+        -v "$PWD":$(getCurrentPath) \
+        -w $(getCurrentPath) \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-7.0 ${@:1}
 }
-function php-5.6() {
-    ABSOLUTE_PATH=$(pwd)
-    RELATIVE_PATH="${ABSOLUTE_PATH//$DEVELOPMENT_PATH}"
-    # since we're working inside the lamp network
-    # we should stick to the php container working path (/app)
-    DOCKER_CURRENT_PATH="/app$RELATIVE_PATH"
+function php5() {
     docker run -ti --rm \
         --name php5-cli-running-script \
-        -v "$PWD":$DOCKER_CURRENT_PATH \
-        -w $DOCKER_CURRENT_PATH \
+        -v "$PWD":$(getCurrentPath) \
+        -w $(getCurrentPath) \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-5.6 ${@:1}
