@@ -20,6 +20,7 @@ antigen bundles <<EOBUNDLES
 bundler
 capistrano
 command-not-found
+composer
 docker
 fabric
 gem
