@@ -69,7 +69,7 @@ lua_draw_hook_post main
 # Header with base system info
 TEXT
 ${font Source Code Pro Black:size=13}${color4}SYSTEM ${hr 2}
-${offset 35}${font Source Code Pro Semibold:size=12,weight:normal}${color1}${exec lsb_release -d | cut -c14-54}
+${offset 35}${font Source Code Pro Semibold:size=11,weight:normal}${color1}${exec lsb_release -d | cut -c14-54}
 ${offset 105}${font Source Code Pro Semibold:size=10,weight:normal}${color3}kernel ${alignr}${color1}$kernel
 ${offset 105}${font Source Code Pro Semibold:size=10,weight:normal}${color3}cpu ${alignr}${color1}${exec cat /proc/cpuinfo | grep -m1 "model name" | cut -c32-52}
 ${offset 105}${font Source Code Pro Semibold:size=10,weight:normal}${color3}graphic ${alignr}${color1}${exec lspci | grep VGA | cut -c62-75}
@@ -105,18 +105,18 @@ ${voffset -25}
 ${offset 105}${font Source Code Pro Semibold:size=10,weight:normal}${color1}root ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}${color5}${fs_free /} ${font Source Code Pro Semibold:size=10,weight:normal}${color4}${fs_used /}
 ${offset 105}${font Source Code Pro Semibold:size=10,weight:normal}${color1}home ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}${color5}${fs_free /home} ${font Source Code Pro Semibold:size=10,weight:normal}${color4}${fs_used /home}
 ${offset 105}${font Source Code Pro Semibold:size=10,weight:normal}${color1}maestro ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}${color5}${fs_free /media/maestro} ${font Source Code Pro Semibold:size=10,weight:normal}${color4}${fs_used /media/maestro}
-${offset 105}${font Source Code Pro Semibold:size=10,weight:normal}${color1}shiva ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}${color5}${fs_free /media/shiva} ${font Source Code Pro Semibold:size=10,weight:normal}${color4}${fs_used /media/shiva}
-${offset 105}${font Source Code Pro Semibold:size=10,weight:normal}${color1}bahamut ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}${color5}${fs_free /media/bahamut} ${font Source Code Pro Semibold:size=10,weight:normal}${color4}${fs_used /media/bahamut}
+#${offset 105}${font Source Code Pro Semibold:size=10,weight:normal}${color1}shiva ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}${color5}${fs_free /media/shiva} ${font Source Code Pro Semibold:size=10,weight:normal}${color4}${fs_used /media/shiva}
+#${offset 105}${font Source Code Pro Semibold:size=10,weight:normal}${color1}bahamut ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}${color5}${fs_free /media/bahamut} ${font Source Code Pro Semibold:size=10,weight:normal}${color4}${fs_used /media/bahamut}
 
 # Network data. ETHERNET ring is mostly useless but looks pretty, main info is in the graphs
 ${voffset 60}
 ${offset 90}${font Source Code Pro Black:size=13}${color5}NETWORK
 ${offset 105}${font Source Code Pro Semibold:size=10}${color3}uptime ${alignr}${color1}$uptime
-${offset 105}${font Source Code Pro Semibold:size=10}${color3}int. ip ${alignr}${color1}${addr eth2}
+${offset 105}${font Source Code Pro Semibold:size=10}${color3}int. ip ${alignr}${color1}${addr eth0}
 ${offset 105}${font Source Code Pro Semibold:size=10}${color3}ext. ip ${alignr}${color1}${execi 600 curl http://ifconfig.me/ip; echo}
 
 ${voffset -14}
-${offset 15}${color1}${font Source Code Pro Semibold:size=10,weight:normal}Upload ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}$color2${upspeed eth2} / ${totalup}
-${offset 15}${upspeedgraph eth2 40,285 4B1B0C FF5C2B 100 -l}
-${offset 15}${color1}${font Source Code Pro Semibold:size=10,weight:normal}Download ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}$color2${downspeed eth2} / ${totaldown}
-${offset 15}${downspeedgraph eth2 40,285 324D23 77B753 100 -l}
+${offset 15}${color1}${font Source Code Pro Semibold:size=10,weight:normal}Upload ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}$color2${upspeed eth0} / ${totalup}
+${offset 15}${upspeedgraph eth0 40,285 4B1B0C FF5C2B 100 -l}
+${offset 15}${color1}${font Source Code Pro Semibold:size=10,weight:normal}Download ${alignr}${font Source Code Pro Semibold:size=10,weight:normal}$color2${downspeed eth0} / ${totaldown}
+${offset 15}${downspeedgraph eth0 40,285 324D23 77B753 100 -l}
