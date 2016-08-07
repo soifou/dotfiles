@@ -95,6 +95,15 @@ pyenv install 2.7.10
 pyenv global 2.7.10
 # pip install [package1]
 
+# FONTS POWERLINE (via PIP)
+# @see: https://levlaz.org/installing-powerline-in-debian/
+pip install git+git://github.com/Lokaltog/powerline
+wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf
+wget https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
+mv PowerlineSymbols.otf /usr/share/fonts/
+fc-cache -vf
+mv 10-powerline-symbols.conf /etc/fonts/conf.d/
+
 # RUBY
 apt-get install -y libreadline-dev
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
