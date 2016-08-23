@@ -6,7 +6,8 @@ alias h5ai-selfupdate="cd $DEVELOPMENT_PATH/tools/h5ai && git pull && npm instal
 # Watch Arte TV
 alias arte="python2 $DEVELOPMENT_PATH/tools/arteVIDEOS/arteVIDEOS.py -d ~/Videos/tv/arte"
 # alias phars-selfupdate="fab -f $DEVELOPMENT_PATH/$DEFAULT_USER/fabric/home/fabfile.py update_phars"
-
+# stay connected with Free Wifi
+alias freewifi="while true ; do wget --quiet --no-check-certificate --post-data 'login=$FREEWIFI_ID&password=$FREEWIFI_PASS&submit=Valider' 'https://wifi.free.fr/Auth' -O '/dev/null' ; sleep 600; done"
 # Linux aliases
 if [[ `uname` == "Linux" ]]; then
     alias homebackup="luckybackup -c default.profile"
