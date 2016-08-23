@@ -27,11 +27,15 @@
 
 # OS generated files #
 ######################
+# OSX
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
+# KDE
+.directory
+# Windows
 ehthumbs.db
 Thumbs.db
 
