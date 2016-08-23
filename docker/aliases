@@ -10,3 +10,4 @@ alias mysqldump="docker exec -i docker_db mysqldump"
 
 
 alias lamp="docker-compose -f $DOCKER_REPOSITORY_PATH/docker-compose.yml"
+alias lamp-switch="lamp stop php web && lamp up -d web php"
