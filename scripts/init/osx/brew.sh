@@ -172,5 +172,9 @@ brew cask install virtualbox
 brew cask install docker
 brew cask install kitematic
 
+# install cool cask upgrade script
+curl -s https://gist.githubusercontent.com/atais/9c72e469b1cbec35c7c430ce03de2a6b/raw/beb8fa4ee3bb72cfb0030d069d50fbb4f8f54150/cask_upgrade.sh > /usr/local/bin/cask-upgrade
+chmod +x /usr/local/bin/cask-upgrade
+
 # Remove outdated versions from the cellar.
 brew cleanup
