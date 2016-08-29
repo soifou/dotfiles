@@ -1,4 +1,4 @@
-function docker-start() {
+docker-start() {
     if [ -z "$1" ]
       then
         echo "No argument supplied : mac or toolbox ?"
@@ -26,25 +26,20 @@ function docker-start() {
 }
 
 # Run commands inside docker containers to keep your OS untouched using alias
-function docker_alias() {
+docker_alias() {
     docker run -it --rm \
         # -w="": Working directory inside the container
         -v $(pwd):$1 -w $1 \
         ${@:2}
 }
-function gitcheck() {
-    docker run --rm \
-        -v `pwd`:/files:ro \
-        badele/alpine-gitcheck
-}
 
-function getCurrentPath() {
+getCurrentPath() {
     ABSOLUTE_PATH=$(pwd)
     RELATIVE_PATH="${ABSOLUTE_PATH//$DEVELOPMENT_PATH}"
     # we should stick to the php container working path (/app)
     echo "/app$RELATIVE_PATH"
 }
-function php() {
+php() {
     docker run -ti --rm \
         --name php7-cli-running-script \
         -v "$PWD":$(getCurrentPath) \
@@ -53,7 +48,7 @@ function php() {
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-7.0 ${@:1}
 }
-function php5() {
+php5() {
     docker run -ti --rm \
         --name php5-cli-running-script \
         -v "$PWD":$(getCurrentPath) \
@@ -62,8 +57,7 @@ function php5() {
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-5.6 ${@:1}
 }
-
-function composer() {
+composer() {
     docker run --rm -it \
         -v $(pwd):/usr/src/app \
         -v ~/.composer:/home/composer/.composer \
@@ -72,30 +66,50 @@ function composer() {
         --net=$DOCKER_NETWORK_NAME \
         soifou/composer-alpine ${@:1}
 }
-function php7cc() {
+php7cc() {
     docker run -it --rm \
         -v $(pwd):/app \
         --net=$DOCKER_NETWORK_NAME \
         ypereirareis/php7cc $1
 }
-function symfony() {
+symfony() {
     docker run -it --rm \
         -v $HOME:$HOME \
         -w $PWD \
         -u `id -u`:`id -g` \
         iamluc/sf-installer ${@:1}
 }
-function wp() {
+wp() {
     docker run -it --rm \
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
         soifou/wpcli-alpine ${@:1}
 }
-function n98() {
+n98() {
     docker run -it --rm \
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
         soifou/n98-magerun-alpine ${@:1}
+}
+gitcheck() {
+    docker run --rm \
+        -v `pwd`:/files:ro \
+        badele/alpine-gitcheck
+}
+mutt() {
+    docker run -it --rm \
+        --name mutt \
+        -v /etc/localtime:/etc/localtime \
+        -e GMAIL -e GMAIL_NAME \
+        -e GMAIL_PASS -e GMAIL_FROM \
+        jess/mutt
+}
+htop() {
+    docker run --rm -it \
+        --pid host \
+        --net none \
+        --name htop \
+        jess/htop
 }
