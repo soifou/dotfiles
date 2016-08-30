@@ -5,9 +5,12 @@ alias dclean='docker ps -a | grep -v '\''CONTAINER\|_config\|_data\|_run'\'' | c
 # alias node="docker run -it --rm -v \`pwd\`:/pwd -w /pwd node:0.12.2-slim node"
 # alias npm="docker run -it --rm -v \`pwd\`:/pwd -w /pwd node:0.12.2-slim npm"
 # alias gulp='docker run --rm -v $(pwd)/:/mnt/ -e UID=$(id -u) -e GID=$(id -g) zenoss/gulp gulp'
+
 alias mysql="docker exec -it docker_db mysql"
 alias mysqldump="docker exec -i docker_db mysqldump"
 
+# all containers output is too wide
+alias dps='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"'
 
 alias lamp="docker-compose -f $DOCKER_REPOSITORY_PATH/docker-compose.yml"
 alias lamp-switch="lamp stop php web && lamp up -d web php"
