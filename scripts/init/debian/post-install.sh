@@ -60,10 +60,11 @@ apt-get install -f && apt-get update && apt-get upgrade -y && apt-get dist-upgra
 # aptitude install $(cat package-selections | awk '{print $1}')
 
 # BASE packages
-apt-get install -y cpufrequtils cputool hardinfo partitionmanager
+apt-get install -y partitionmanager ffmpegthumbs
+# set video previews in Dolphin: Settings > General > Previews > Video Files (ffmpegthumbs)
 apt-get install -y audacity libreoffice gimp iceweasel vlc vlc-*
 # KDE packages
-apt-get install -y yakuake ksshaskpass okular libreoffice-kde software-properties-kde
+apt-get install -y yakuake ksshaskpass okular libreoffice-kde software-properties-kde transmission-qt
 # Style
 apt-get install -y gtk3-engines-oxygen gtk2-engines-oxygen gtk2-engines-qtcurve kde-style-oxygen
 apt-get install -y kde-config-gtk-style
