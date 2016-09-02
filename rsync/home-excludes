@@ -82,7 +82,7 @@
 .config/sublime-text-3/Backup
 .config/sublime-text-3/Cache
 .config/sublime-text-3/Index
-
+.config/sublime-text-3/Local/*.sublime_session
 .dbus
 
 .fontconfig/*.cache*
@@ -119,6 +119,7 @@
 
 .local/share/akonadi
 .local/share/Trash
+.local/share/org.kde.gwenview/recentfolders
 
 .loki/ut/Cache
 .loki/ut/Logs
