@@ -9,7 +9,7 @@ alias arte="python2 $DEVELOPMENT_PATH/tools/arteVIDEOS/arteVIDEOS.py -d ~/Videos
 alias freewifi="while true ; do wget --quiet --no-check-certificate --post-data 'login=$FREEWIFI_ID&password=$FREEWIFI_PASS&submit=Valider' 'https://wifi.free.fr/Auth' -O '/dev/null' ; sleep 600; done"
 # Linux aliases
 if [[ `uname` == "Linux" ]]; then
-    alias homebackup="luckybackup -c default.profile"
+    alias homebackup="luckybackup -c --no-questions default.profile"
     # if [[ -n $PHPBREW_ROOT ]]; then
     #     alias php5="phpbrew fpm stop && phpbrew use php-5.6.20 && phpbrew fpm start && phpbrew list"
     #     alias php7="phpbrew fpm stop && phpbrew use php-7.0.5 && phpbrew fpm start && phpbrew list"
