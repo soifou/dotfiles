@@ -43,6 +43,7 @@
 .atom/storage
 
 .berkshelf
+.bundle
 .bundler
 
 .cache
@@ -50,10 +51,6 @@
 .cddb
 .composer/cache
 .composer/vendor
-.cordova
-
-.gws
-.rbenv
 
 ###############################################
 # Config                                      #
@@ -69,6 +66,7 @@
 
 .config/Clementine/networkcache
 
+.config/chromium
 .config/chromium-backup/Default/Local Storage
 .config/chromium-backup/Default/Session Storage
 .config/chromium-backup/Default/Application Cache
@@ -76,6 +74,12 @@
 .config/chromium-backup/ShaderCache
 .config/chromium-backup/Default/Service Worker/CacheStorage
 
+.config/session
+
+.config/Slack/Cache
+.config/Slack/GPUCache/
+
+.config/sublime-text-3/Backup
 .config/sublime-text-3/Cache
 .config/sublime-text-3/Index
 
@@ -85,8 +89,8 @@
 .freerdp
 
 .gconf
-.gem
 .gvfs
+.kodi
 
 ###############################################
 # KDE                                         #
@@ -113,13 +117,12 @@
 .kde/share/apps/dolphin/view_properties/local
 .kde/share/apps/dolphin/view_properties/search
 
-.kodi
-
 .local/share/akonadi
 .local/share/Trash
 
 .loki/ut/Cache
 .loki/ut/Logs
+
 .luckyBackup/logs
 .luckybackup-snaphots/default.profile/logs/
 
@@ -148,32 +151,37 @@
 .mozilla/firefox/*/xpti.dat
 .mozilla/firefox/*/compreg.dat
 
+###############################################
+# Python / Ruby / NodeJS / NPM                #
+###############################################
+.gem
+.pyenv
+.rbenv
+.pip
 .node-gyp
 .npm
+
 .nv
+.pulse
 
-.oh-my-zsh
-
+###############################################
+# Games                                       #
+###############################################
 .qmc2
-
 .residualvm/logs
-
 .scummvm/logs
-.ssh/*.old
 
-.vagrant.d
 
 .wine
 .wp-cli/cache
 
-.xbmc/temp
+.kodi/temp
 
 cache
 Desktop
-dotfiles/vim/bundle
-dotfiles/vim/.netrwhist
-dotfiles/zsh-completions
+Development
 Documents
+dotfiles
 Downloads
 Music
 Pictures
