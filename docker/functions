@@ -25,6 +25,12 @@ docker-start() {
     fi
 }
 
+docker-clean() {
+    docker run --rm \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        zzrot/docker-clean ${@:1}
+}
+
 # Run commands inside docker containers to keep your OS untouched using alias
 docker_alias() {
     docker run -it --rm \
@@ -64,7 +70,7 @@ composer() {
         -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/composer-alpine ${@:1}
+        soifou/composer-alpine:php-7.0 ${@:1}
 }
 php7cc() {
     docker run -it --rm \

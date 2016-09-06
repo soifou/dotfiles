@@ -116,7 +116,6 @@ brew install tree
 
 # Docker toolbox stuff
 brew install docker
-brew install docker-clean
 brew install docker-machine
 # speed up the share with NFS
 brew install docker-machine-nfs
