@@ -1,4 +1,8 @@
+#!/bin/sh
+###############################################################
 # Linux x64 Debian Jessie + KDE
+# This is a more a walkthrough than a real post-install script
+###############################################################
 
 # https://wiki.debian.org/SourcesList
 vim /etc/apt/sources.list
@@ -85,7 +89,7 @@ update-grub2
 apt-get install -y build-essential curl git ssh kdiff3-qt ack-grep
 
 # PYTHON
-apt-get install -y python-pip
+apt-get install -y python-pip libncurses5 libncurses5-dev libncursesw5
 pip install --upgrade pip
 git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 # export PYENV_ROOT="$HOME/.pyenv"
@@ -94,7 +98,7 @@ git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 # source $HOME/.zshrc
 pyenv install 2.7.10
 pyenv global 2.7.10
-# pip install [package1]
+# pip install fabric httpie glances
 
 # FONTS POWERLINE (via PIP)
 # @see: https://levlaz.org/installing-powerline-in-debian/
