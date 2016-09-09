@@ -32,7 +32,6 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugins
 " github repo
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'kristijanhusak/vim-hybrid-material'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
@@ -60,11 +59,15 @@ syntax enable             " enable syntax highlighting (previously syntax on).
 
 " Use the Solarized Dark theme
 set background=dark
-" colorscheme solarized
-colorscheme hybrid_material
+let g:solarized_termtrans=1
+let g:solarized_termcolors=16
+"let g:solarized_contrast="high"
+"let g:solarized_visibility="high"
+colorscheme solarized
+
 " Airline custom config
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'hybrid'
+let g:airline_theme = 'solarized'
 let g:airline#extensions#tabline#enabled = 1
 
 " Prettify JSON files
