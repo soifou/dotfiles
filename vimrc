@@ -34,6 +34,7 @@ Plugin 'VundleVim/Vundle.vim'
 " github repo
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -62,15 +63,15 @@ syntax enable             " enable syntax highlighting (previously syntax on).
 
 " Use the Solarized Dark theme
 set background=dark
-let g:solarized_termtrans=1
-let g:solarized_termcolors=16
-"let g:solarized_contrast="high"
-"let g:solarized_visibility="high"
-colorscheme solarized
+" let g:solarized_termtrans=1
+" let g:solarized_termcolors=256
+" let g:solarized_contrast="high"
+" let g:solarized_visibility="high"
+colorscheme zenburn
 
 " Airline custom config
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'cool'
+let g:airline_theme = 'zenburn'
 let g:airline#extensions#tabline#enabled = 1
 
 " Prettify JSON files
