@@ -18,6 +18,7 @@
 " 01. General                                                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible         " get rid of Vi compatibility mode. SET FIRST!
+set encoding=utf-8
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 02. Vundle : https://github.com/VundleVim/Vundle.Vim                                                                "
@@ -31,6 +32,8 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
 " github repo
+Plugin 'scrooloose/nerdtree'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -67,7 +70,7 @@ colorscheme solarized
 
 " Airline custom config
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'cool'
 let g:airline#extensions#tabline#enabled = 1
 
 " Prettify JSON files
@@ -97,6 +100,9 @@ set ruler                 " Always show info along bottom.
 set showmatch
 set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \ \%h%m%r%=%-40(bytval=0x%B,%n%Y%)\%P
 set visualbell
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 06. Text Formatting/Layout                                                 "
@@ -119,3 +125,16 @@ set backspace=indent,eol,start
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Prettify JSON files making them easier to read
 command PrettyJSON %!python -m json.tool
+
+" open FuzzyFinder with Ctrl+p
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" open NERDtree with Ctrl+n
+map <C-n> :NERDTreeToggle<CR>
+
+" split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
