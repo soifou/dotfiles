@@ -3,4 +3,4 @@ DOCKER_MACHINE_NAME="dev-nfs"
 # my default docker network name
 DOCKER_NETWORK_NAME="lamp-network"
 # my default docker repository
-DOCKER_REPOSITORY_PATH=$DEVELOPMENT_PATH/docker-lamp
+DOCKER_REPOSITORY_PATH=$DEVELOPMENT_PATH/$USER/docker
