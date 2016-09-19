@@ -90,6 +90,9 @@
 
 .gconf
 .gvfs
+
+.icons
+
 .kodi
 
 ###############################################
@@ -101,7 +104,7 @@
 .kde/cache-*
 .kde/socket-*
 .kde/tmp-*
-.kde/share/apps/nepomuk
+
 # Recent documents on KDE
 .kde/share/apps/RecentDocuments
 # Contains a history of the Klipper clipboard (KDE)
@@ -116,6 +119,9 @@
 # Dolphin
 .kde/share/apps/dolphin/view_properties/local
 .kde/share/apps/dolphin/view_properties/search
+# Unused stuff
+.kde/share/apps/nepomuk
+.kde/share/apps/ktorrent
 
 .local/share/akonadi
 .local/share/Trash
