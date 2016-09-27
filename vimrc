@@ -38,6 +38,7 @@ Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 
 call vundle#end()
 filetype plugin indent on " required
