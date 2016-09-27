@@ -4,3 +4,5 @@ DOCKER_MACHINE_NAME="dev-nfs"
 DOCKER_NETWORK_NAME="lamp-network"
 # my default docker repository
 DOCKER_REPOSITORY_PATH=$DEVELOPMENT_PATH/$USER/docker
+# my default web root path in the web container
+DOCKER_WEBROOT_PATH="/app"

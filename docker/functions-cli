@@ -1,9 +1,12 @@
-# guess project path inside the php docker container
+# guess project path inside the web container
 getContainerPath() {
-    ABSOLUTE_PATH=$(pwd -P)
-    RELATIVE_PATH="${ABSOLUTE_PATH//$DEVELOPMENT_PATH}"
-    # we should stick to the php container working path (/app)
-    echo "/app$RELATIVE_PATH"
+    if [[ $DOCKER_WEBROOT_PATH == '/app' ]]; then
+        ABSOLUTE_PATH=$(pwd -P)
+        RELATIVE_PATH="${ABSOLUTE_PATH//$DEVELOPMENT_PATH}"
+        echo "$DOCKER_WEBROOT_PATH$RELATIVE_PATH"
+    else
+        echo "$DOCKER_WEBROOT_PATH"
+    fi
 }
 php() {
     docker run -ti --rm \
