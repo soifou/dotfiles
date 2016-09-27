@@ -66,7 +66,8 @@ apt-get install -f && apt-get update && apt-get upgrade -y && apt-get dist-upgra
 # BASE packages
 apt-get install -y partitionmanager ffmpegthumbs
 # set video previews in Dolphin: Settings > General > Previews > Video Files (ffmpegthumbs)
-apt-get install -y audacity libreoffice gimp iceweasel vlc vlc-*
+apt-get install -y audacity libreoffice libreoffice-style-sifr gimp firefox-esr vlc vlc-*
+# set LibreOffice icons set: Tools > Options... > View
 # KDE packages
 apt-get install -y yakuake ksshaskpass okular libreoffice-kde software-properties-kde transmission-qt
 # Style
@@ -87,6 +88,11 @@ update-grub2
 
 # DEV TOOLS
 apt-get install -y build-essential curl git ssh kdiff3-qt ack-grep
+
+# Install a nice KDE icons set
+mkdir -p /home/$USER/.icons
+git clone --depth=1 --branch=master https://github.com/PapirusDevelopmentTeam/papirus-icon-theme-kde /home/$USER/.icons
+ln -s /home/$USER/.icons/papirus-arc /home/$USER/.kde/share/icons/papirus-arc
 
 # PYTHON
 apt-get install -y python-pip libncurses5 libncurses5-dev libncursesw5
@@ -122,6 +128,19 @@ apt-get install -y gem
 gem install bundler
 # gem env home
 
+# VIM (with ruby, python and powerline support)
+# @see: http://juniway.blogspot.fr/2015/12/install-vim-with-python-support.html
+# @see: https://gist.github.com/jmcantrell/156438bfacaa7111bf0f
+apt-get install libncurses5-dev libreadline6-dev
+git clone --depth=1 https://github.com/vim/vim.git $HOME/vimsrc
+cd $HOME/vimsrc
+# make distclean
+./configure --with-features=huge --enable-gui=no --enable-python --enable-multibyte --enable-rubyinterp --enable-pythoninterp --with-python-config-dir=$(pyenv prefix)/lib/python2.7/config --enable-perlinterp --enable-luainterp --enable-cscope --prefix=/usr
+make # VIMRUNTIMEDIR=/usr/share/vim/vim74
+make install
+rm -rf $HOME/vimsrc
+
+
 # NODEJS
 apt-get install -y node npm
 npm i -g n
@@ -149,7 +168,7 @@ chmod +x /usr/local/bin/docker-compose
 
 # VIRTUALBOX 5
 # https://www.virtualbox.org/wiki/Linux_Downloads#Debian-basedLinuxdistributions
-wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 sh -c "echo 'deb http://download.virtualbox.org/virtualbox/debian '$(lsb_release -cs)' contrib non-free' > /etc/apt/sources.list.d/virtualbox.list"
 apt-get update
 apt-get install dkms virtualbox-5.1
