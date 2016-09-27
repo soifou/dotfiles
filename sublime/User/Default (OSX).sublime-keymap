@@ -1,4 +1,6 @@
 [
+    { "keys": ["super+alt+f"], "command": "expand_fqcn", "args": {"leading_separator": true} },
+    { "keys": ["super+alt+u"], "command": "find_use" },
     { "keys": ["super+m"], "command": "goto_definition" },
     { "keys": ["super+i"], "command": "increment_selection" },
     {
