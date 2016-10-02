@@ -76,7 +76,7 @@ configure_zsh() {
     if [ -f $HOME/.zshrc/ ]; then
         backup_file .zshrc
     fi
-    cp `pwd`/zshrc $HOME/.zshrc
+    link_file zshrc .zshrc
     backup_file .zcompdump
 
     # Install zsh if needed
