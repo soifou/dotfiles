@@ -8,6 +8,7 @@ source $HOME/dotfiles/exports
 source $HOME/dotfiles/functions
 # Add custom aliases
 source $HOME/dotfiles/aliases
+
 # Add antigen defaults
 source $HOME/.antigen/antigen.zsh
-antigen init $HOME/dotfiles/antigenrc
+source $HOME/dotfiles/antigenrc
