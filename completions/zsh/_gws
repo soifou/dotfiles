@@ -7,11 +7,11 @@ options=(
     '--version -v: Show gws version'
 )
 arguments=(
-    "init:Detect the repositories and create the projects list" \
-    "update:Update the workspace to get new repositories from projects list" \
-    "status:Print status for all repositories in the workspace" \
+    "check:Check the workspace for all repositories (known/unknown/missing)" \
     "fetch:Print status for all repositories in the workspace, but fetch the origin before" \
     "ff:Print status for all repositories in the workspace, but fast forward from origin before" \
-    "check:Check the workspace for all repositories (known/unknown/missing)"
+    "init:Detect the repositories and create the projects list" \
+    "status:Print status for all repositories in the workspace" \
+    "update:Update the workspace to get new repositories from projects list"
 )
 _describe 'values' options -- arguments
