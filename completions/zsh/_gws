@@ -3,8 +3,8 @@
 
 local -a options arguments
 options=(
-    '--help -h:Show gws help' \
-    '--version -v: Show gws version'
+    '--help:Show gws help' \
+    '--version:Show gws version'
 )
 arguments=(
     "check:Check the workspace for all repositories (known/unknown/missing)" \
