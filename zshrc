@@ -8,7 +8,6 @@ source $HOME/dotfiles/exports
 source $HOME/dotfiles/functions
 # Add custom aliases
 source $HOME/dotfiles/aliases
-
 # Add antigen defaults
 source $HOME/.antigen/antigen.zsh
 
@@ -29,8 +28,8 @@ git
 pip
 sublime
 symfony2
+rupa/z
 zsh-users/zsh-syntax-highlighting
-zsh-users/zsh-history-substring-search
 EOBUNDLES
 
 # Load OS specific bundles
