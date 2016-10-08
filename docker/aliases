@@ -10,6 +10,8 @@ alias mysql-cli="docker exec -it lamp_db mysql -uroot -proot"
 alias mysql="docker exec -i lamp_db mysql"
 alias mysqldump="docker exec -i lamp_db mysqldump"
 
+alias docker-compose-upgrade="bash $HOME/dotfiles/scripts/utils/docker-compose-updater.sh"
+
 # all containers output is too wide
 alias dps='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"'
 
