@@ -111,6 +111,19 @@ configure_git() {
 }
 
 configure_vim() {
+    if [ -f /bin/vim -o -f /usr/bin/vim ]; then
+        echo "Configuring vim..."
+    else
+        ostype=$(uname);
+        if [ $ostype == "Darwin" ]; then
+            echo "OSX : Please install zsh via homebrew - brew install vim"
+        elif [ $ostype == "Linux" ]; then
+            sudo apt-get install vim
+            echo "Set default shell to vim"
+        else
+            echo "Your OS is neither MacOS or Linux... skip"
+        fi
+    fi
     echo "Configuring vim..."
     link_file vimrc .vimrc
     link_directory vim .vim
