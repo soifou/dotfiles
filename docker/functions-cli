@@ -76,6 +76,25 @@ gitcheck() {
         -v `pwd`:/files:ro \
         badele/alpine-gitcheck
 }
+drush() {
+    docker run --rm -it \
+        --name drush \
+        -v $(pwd):/var/www/html \
+        -v ~/.composer:/home/composer/.composer \
+        -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro \
+        --net=$DOCKER_NETWORK_NAME \
+        drupaldocker/drush:8-alpine drush ${@:1}
+}
+drupal() {
+    docker run -ti --rm \
+        --name drupal-cli \
+        -v "$PWD":$(getContainerPath) \
+        -v ~/console:/.console \
+        -w $(getContainerPath) \
+        -u `id -u`:`id -g` \
+        --net=$DOCKER_NETWORK_NAME \
+        drupalconsole/console:alpine ${@:1}
+}
 mutt() {
     docker run -it --rm \
         --name mutt \
