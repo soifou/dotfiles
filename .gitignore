@@ -1,4 +1,4 @@
 .directory
 vim/bundle
 vim/.netrwhist
-private
+private.zsh

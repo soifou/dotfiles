@@ -89,7 +89,7 @@ drupal() {
     docker run -ti --rm \
         --name drupal-cli \
         -v "$PWD":$(getContainerPath) \
-        -v ~/console:/.console \
+        -v ~/.console:/.console \
         -w $(getContainerPath) \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \

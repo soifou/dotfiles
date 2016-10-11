@@ -1,7 +1,9 @@
-# powerlevel9k : Only print user@hostname when not normal user
-# export DEFAULT_USER=me
-# set my development path
-# export DEVELOPMENT_PATH="/Users/$DEFAULT_USER/Development"
+# Set EDITOR to /usr/bin/vim if Vim is installed
+if [ -f /usr/bin/vim ]; then
+  export EDITOR=/usr/bin/vim
+fi
+
+export LESS="-FSRXI"
 
 # add Rbenv
 export RBENV_ROOT="$HOME/.rbenv"
@@ -34,8 +36,6 @@ if [[ `uname` == "Darwin" ]]; then
     fi
 
 elif [[ `uname` == "Linux" ]]; then
-    # Support more than 256 colors
-    export TERM="xterm-256color"
     # add docker
     source $HOME/dotfiles/docker/functions
     source $HOME/dotfiles/docker/aliases
@@ -46,9 +46,4 @@ elif [[ `uname` == "Linux" ]]; then
         export PHPBREW_RC_ENABLE=1
         source $PHPBREW_ROOT/bashrc
     fi
-fi
-
-# Set EDITOR to /usr/bin/vim if Vim is installed
-if [ -f /usr/bin/vim ]; then
-  export EDITOR=/usr/bin/vim
 fi

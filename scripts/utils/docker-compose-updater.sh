@@ -20,7 +20,7 @@ else
 fi
 
 if [ ! -f $lastReleaseCache ] || [ "$(( $(date +"%s") - $(stat -c "%Y" $lastReleaseCache) ))" -gt "86400" ]; then
-    print_info 'Checking lastest docker-compose version...'
+    print_info 'Checking latest docker-compose version...'
     wget -q -O- $lastReleasesUrl | \
         egrep -m1 -o '/docker/compose/releases/tag/([0-9]\.[0-9]\.[0-9])' | \
         egrep -o '([0-9]\.[0-9]\.[0-9])' \

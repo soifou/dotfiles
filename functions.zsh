@@ -14,17 +14,13 @@ function cmdfu() {
     | sed 's/ /-/g')/$(echo -n $@ | base64)/plaintext" ;
 }
 # Is website down for everyone or just me ?
-function down4me() {
-    curl -s "http://www.isup.me/$1" | sed '/just you/!d;s/<[^>]*>//g';
-}
+function down4me() { curl -s "http://www.isup.me/$1" | sed '/just you/!d;s/<[^>]*>//g'; }
 # Cool CLI weather display
-function weather() {
-    curl wttr.in/$1
-}
-function whatsmyip() {
-    externalIp=`curl -s httpbin.org/ip | grep origin | awk -F: '{print $2}'`
-    echo "My external IP :$externalIp"
-}
+function weather() { curl wttr.in/$1 }
+# Get external IP
+function whatsmyip() { echo "My external IP :`curl -s httpbin.org/ip | grep origin | awk -F: '{print $2}'`" }
 # Dict protocol
 function dico() { curl -s dict://dict.org/d:${1}:wn | sed '/^[1-2]/d' | sed '$d'; }
 function dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d'; }
+# Print a chuck norris joke
+function chuck() { timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jshon -e value -e joke -u }
