@@ -39,9 +39,9 @@ antigen apply
 
 # Source my customs
 source $HOME/dotfiles/history.zsh
-source $HOME/dotfiles/exports.zsh
 if [ -e "$HOME/dotfiles/private.zsh" ]; then
     source $HOME/dotfiles/private.zsh
 fi
+source $HOME/dotfiles/exports.zsh
 source $HOME/dotfiles/functions.zsh
 source $HOME/dotfiles/aliases.zsh
