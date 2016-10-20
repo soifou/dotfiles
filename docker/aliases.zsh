@@ -13,8 +13,4 @@ alias mysqldump="docker exec -i lamp_db mysqldump"
 alias docker-compose-upgrade="bash $HOME/dotfiles/scripts/utils/docker-compose-updater.sh"
 
 # all containers output is too wide
-alias dps='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"'
-
-alias lamp="docker-compose -f $DOCKER_REPOSITORY_PATH/compose/lamp/docker-compose.yml"
-alias lamp-switch="lamp stop php web && lamp up -d web php"
-alias graylog="docker-compose -f $DOCKER_REPOSITORY_PATH/compose/graylog/docker-compose.yml"
+alias dps='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}"'

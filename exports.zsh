@@ -17,8 +17,6 @@ if [ -d "${PYENV_ROOT}" ]; then
     export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
 fi
-# export custom Docker vars
-source $HOME/dotfiles/docker/exports
 
 if [[ `uname` == "Darwin" ]]; then
     # homebrew path
@@ -31,14 +29,20 @@ if [[ `uname` == "Darwin" ]]; then
     # Docker toolbox for my dev environment
     if [[ `docker-machine status $DOCKER_MACHINE_NAME` == "Running" ]]; then
         eval $(docker-machine env $DOCKER_MACHINE_NAME)
-        source $HOME/dotfiles/docker/functions
-        source $HOME/dotfiles/docker/aliases
+        source $HOME/dotfiles/docker/functions.zsh
+        source $HOME/dotfiles/docker/aliases.zsh
+        if [ -e "$HOME/dotfiles/docker/private.zsh" ]; then
+            source $HOME/dotfiles/docker/private.zsh
+        fi
     fi
 
 elif [[ `uname` == "Linux" ]]; then
     # add docker
-    source $HOME/dotfiles/docker/functions
-    source $HOME/dotfiles/docker/aliases
+    source $HOME/dotfiles/docker/functions.zsh
+    source $HOME/dotfiles/docker/aliases.zsh
+    if [ -e "$HOME/dotfiles/docker/private.zsh" ]; then
+        source $HOME/dotfiles/docker/private.zsh
+    fi
     # add PHPBrew
     export PHPBREW_ROOT="$HOME/.phpbrew"
     if [ -d "${PHPBREW_ROOT}" ]; then

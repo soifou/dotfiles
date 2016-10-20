@@ -21,7 +21,7 @@ docker-start() {
         eval $(docker-machine env $DOCKER_MACHINE_NAME)
         cd $DEVELOPMENT_PATH/docker
         make start
-        source $HOME/dotfiles/docker/aliases
+        source $HOME/dotfiles/docker/aliases.zsh
     fi
 }
 
@@ -40,6 +40,6 @@ docker_alias() {
 }
 
 # Load my docker CLI commands
-source $HOME/dotfiles/docker/functions-cli
+source $HOME/dotfiles/docker/functions-cli.zsh
 # Load my docker UI commands
-source $HOME/dotfiles/docker/functions-ui
+source $HOME/dotfiles/docker/functions-ui.zsh
