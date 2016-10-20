@@ -38,10 +38,12 @@ if [[ `uname` == "Darwin" ]]; then
 
 elif [[ `uname` == "Linux" ]]; then
     # add docker
-    source $HOME/dotfiles/docker/functions.zsh
-    source $HOME/dotfiles/docker/aliases.zsh
-    if [ -e "$HOME/dotfiles/docker/private.zsh" ]; then
-        source $HOME/dotfiles/docker/private.zsh
+    if [ -f /usr/bin/docker ]; then
+        source $HOME/dotfiles/docker/functions.zsh
+        source $HOME/dotfiles/docker/aliases.zsh
+        if [ -e "$HOME/dotfiles/docker/private.zsh" ]; then
+            source $HOME/dotfiles/docker/private.zsh
+        fi
     fi
     # add PHPBrew
     export PHPBREW_ROOT="$HOME/.phpbrew"
