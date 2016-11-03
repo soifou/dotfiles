@@ -14,4 +14,4 @@ class OpenBrowserCommand(sublime_plugin.TextCommand):
         if re.search("php.net", url):
             selection = selection.replace("_", "-")
 
-        webbrowser.open(url % selection)
+        webbrowser.open_new_tab(url % selection)

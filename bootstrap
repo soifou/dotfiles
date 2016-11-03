@@ -187,7 +187,7 @@ configure_atom() {
 
 configure_sublime() {
     package_control_url=https://packagecontrol.io/Package%20Control.sublime-package
-    plugins=(open_browser)
+    plugins=(soifou)
     ostype=$(uname);
 
     if [ $ostype == "Darwin" ]; then
