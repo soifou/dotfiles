@@ -1,3 +1,10 @@
+# install npm utils (bower generate-md grunt gulp node npm yarn)
+# @see: https://github.com/mkenney/docker-npm
+export DOCKER_NPM_UTILS=$DOCKER_REPOSITORY_PATH/github/docker-npm
+if [ -d "${DOCKER_NPM_UTILS}" ]; then
+    export PATH="${DOCKER_NPM_UTILS}/bin:$PATH"
+fi
+
 # guess project path inside the web container
 getContainerPath() {
     if [[ $DOCKER_WEBROOT_PATH == '/app' ]]; then
@@ -49,13 +56,6 @@ php7cc() {
         -v $(pwd):/app \
         --net=$DOCKER_NETWORK_NAME \
         ypereirareis/php7cc $1
-}
-symfony() {
-    docker run -it --rm \
-        -v $HOME:$HOME \
-        -w $PWD \
-        -u `id -u`:`id -g` \
-        iamluc/sf-installer ${@:1}
 }
 wp() {
     docker run -it --rm \
