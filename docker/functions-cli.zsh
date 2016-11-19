@@ -110,3 +110,9 @@ htop() {
         --name htop \
         jess/htop
 }
+kahlan() {
+    docker run --rm -it \
+        --name kahlan \
+        -v $(pwd):/app \
+        kahlan/kahlan:3.0-alpine ${@:1}
+}
