@@ -91,8 +91,8 @@ apt-get install -y build-essential curl git ssh kdiff3-qt ack-grep
 
 # Install a nice KDE icons set
 mkdir -p /home/$USER/.icons
-git clone --depth=1 --branch=master https://github.com/PapirusDevelopmentTeam/papirus-icon-theme-kde /home/$USER/.icons
-ln -s /home/$USER/.icons/papirus-arc /home/$USER/.kde/share/icons/papirus-arc
+git clone --depth=1 --branch=master https://github.com/PapirusDevelopmentTeam/papirus-icon-theme /home/$USER/.icons
+ln -s /home/$USER/.icons/Papirus /home/$USER/.kde/share/icons/Papirus
 
 # PYTHON
 apt-get install -y python-pip libncurses5 libncurses5-dev libncursesw5
