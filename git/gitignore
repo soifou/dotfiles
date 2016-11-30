@@ -43,3 +43,4 @@ Thumbs.db
 ##########
 *.crt
 *.phpbrewrc
+node_modules
