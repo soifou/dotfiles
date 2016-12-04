@@ -101,6 +101,7 @@ brew install gtm
 
 brew install httpie
 brew install imagemagick --with-webp
+brew install keybase
 # brew install lua
 # brew install lynx
 brew install p7zip
