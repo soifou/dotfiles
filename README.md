@@ -14,6 +14,7 @@ chmod +x bootstrap
 bash bootstrap -h
 ```
 
+
 ## Credits
 - [Michael Malley's dotfiles](https://github.com/michaeljsmalley/dotfiles)
 - [Alan Christopher Thomas's dotfiles](https://github.com/alanctkc/dotfiles)

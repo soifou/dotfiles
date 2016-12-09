@@ -94,6 +94,12 @@ mkdir -p /home/$USER/.icons
 git clone --depth=1 --branch=master https://github.com/PapirusDevelopmentTeam/papirus-icon-theme /home/$USER/.icons
 ln -s /home/$USER/.icons/Papirus /home/$USER/.kde/share/icons/Papirus
 
+# Keybase.io
+curl -O https://prerelease.keybase.io/keybase_amd64.deb
+dpkg -i keybase_amd64.deb
+apt-get install -f
+#run_keybase
+
 # PYTHON
 apt-get install -y python-pip libncurses5 libncurses5-dev libncursesw5
 pip install --upgrade pip

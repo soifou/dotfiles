@@ -29,6 +29,8 @@
     prune = true
 [push]
     default = current
+[fetch]
+    prune = true
 [alias]
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph
     ignored = !git ls-files -v | grep "^[[:lower:]]"
