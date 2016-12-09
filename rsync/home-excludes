@@ -52,6 +52,10 @@
 .composer/cache
 .composer/vendor
 
+
+.nylas/compile-cache
+.nylas/packages/n1-ido
+
 ###############################################
 # Config                                      #
 ###############################################
@@ -76,6 +80,11 @@
 
 .config/session
 
+.config/Keybase/Cache
+.config/Mattermost/GPUCache
+.config/Mattermost/Cache
+.config/Nylas N1/Cache
+.config/Nylas N1/GPUCache
 .config/Slack/Cache
 .config/Slack/GPUCache/
 
@@ -83,16 +92,13 @@
 .config/sublime-text-3/Cache
 .config/sublime-text-3/Index
 .config/sublime-text-3/Local/*.sublime_session
-.dbus
 
+.dbus
 .fontconfig/*.cache*
 .freerdp
-
 .gconf
 .gvfs
-
 .icons
-
 .kodi
 
 ###############################################
