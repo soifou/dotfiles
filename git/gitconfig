@@ -25,6 +25,8 @@
     untracked = cyan
 [merge]
     conflictstyle = diff3
+[fetch]
+    prune = true
 [push]
     default = current
 [alias]
