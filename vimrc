@@ -110,7 +110,7 @@ set foldlevel=99
 " 06. Text Formatting/Layout                                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set autoindent            " auto-indent
-" set tabstop=4             " tab spacing
+set tabstop=4             " tab spacing
 " set softtabstop=4         " unify
 " set shiftwidth=4          " indent/outdent by 2 columns
 " set shiftround            " always indent/outdent to the nearest tabstop
