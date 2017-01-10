@@ -91,6 +91,12 @@ brew install woff2
 # Install other useful binaries.
 brew install ack
 
+brew install cmus
+# or if you have warning about deprecated output audio
+# $ brew install --HEAD cmus
+# $ brew cleanup
+# :set output_plugin=coreaudio
+
 # Git stuff
 brew install git
 brew install diff-so-fancy
