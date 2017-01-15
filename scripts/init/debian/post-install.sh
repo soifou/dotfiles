@@ -104,13 +104,15 @@ apt-get install -f
 apt-get install -y python-pip libncurses5 libncurses5-dev libncursesw5
 pip install --upgrade pip
 git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
 # export PYENV_ROOT="$HOME/.pyenv"
 # export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)
 # source $HOME/.zshrc
 pyenv install 2.7.10
 pyenv global 2.7.10
-# pip install fabric httpie glances
+# pip install something cool
 
 # FONTS POWERLINE (via PIP)
 # @see: https://levlaz.org/installing-powerline-in-debian/
