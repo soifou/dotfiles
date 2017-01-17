@@ -1,5 +1,5 @@
 # Generate a random secure password
-function genpasswd() {
+genpasswd() {
     length=$1
     if [ -z $length ]; then length=20; fi
     if [[ `uname` == "Darwin" ]]; then
@@ -9,18 +9,27 @@ function genpasswd() {
     fi
 }
 # List commands from commandlinefu website
-function cmdfu() {
+cmdfu() {
     curl "http://www.commandlinefu.com/commands/matching/$(echo "$@" \
     | sed 's/ /-/g')/$(echo -n $@ | base64)/plaintext" ;
 }
 # Is website down for everyone or just me ?
-function down4me() { curl -s "http://www.isup.me/$1" | sed '/just you/!d;s/<[^>]*>//g'; }
+down4me() { curl -s "http://www.isup.me/$1" | sed '/just you/!d;s/<[^>]*>//g'; }
 # Cool CLI weather display
-function weather() { curl wttr.in/$1 }
+weather() { curl wttr.in/$1 }
 # Get external IP
-function whatsmyip() { echo "My external IP :`curl -s httpbin.org/ip | grep origin | awk -F: '{print $2}'`" }
+whatsmyip() { echo "My external IP :`curl -s httpbin.org/ip | grep origin | awk -F: '{print $2}'`" }
 # Dict protocol
-function dico() { curl -s dict://dict.org/d:${1}:wn | sed '/^[1-2]/d' | sed '$d'; }
-function dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d'; }
+dico() { curl -s dict://dict.org/d:${1}:wn | sed '/^[1-2]/d' | sed '$d'; }
+dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d'; }
 # Print a chuck norris joke
-function chuck() { timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jshon -e value -e joke -u }
+chuck() { timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jshon -e value -e joke -u }
+
+# python functino
+if [ -d "${PYENV_ROOT}" ]; then
+    # uninstall package with dependencies
+    pip-uninstall() {
+        for dep in $(pip show $1 | grep Requires | sed 's/Requires: //g; s/,//g') ; do pip uninstall -y $dep ; done
+        pip uninstall -y $1
+    }
+fi
