@@ -109,7 +109,6 @@ git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-vi
 # export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)
-# source $HOME/.zshrc
 pyenv install 2.7.10
 pyenv global 2.7.10
 # pip install something cool
@@ -128,13 +127,17 @@ apt-get install -y libreadline-dev
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 cd ~/.rbenv && src/configure && make -C src
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-# export PATH="$HOME/.rbenv/bin:$PATH" >> $HOME/.zshrc
-# source $HOME/.zshrc
+# PATH="$HOME/.rbenv/bin:$PATH" rbenv
 rbenv install 2.2.4
 rbenv global 2.2.4
 apt-get install -y gem
 gem install bundler
 # gem env home
+
+# LINUXBREW
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
+# PATH="$HOME/.linuxbrew/bin:$PATH" brew
+
 
 # VIM (with ruby, python and powerline support)
 # @see: http://juniway.blogspot.fr/2015/12/install-vim-with-python-support.html
@@ -150,15 +153,11 @@ rm -rf $HOME/vimsrc
 
 
 # NODEJS
-apt-get install -y node npm
-npm i -g n
-n stable
-npm update -g npm
-npm i -g node-gyp
-n latest && n stable && n --stable
-#node-gyp --python /home/user/.pyenv/shims/python
-npm config set python /home/<user>/.pyenv/shims/python
-npm i -g bower express grunt-cli gulp yo knex generator-generator generator-htmlemail forever static-server eslint less
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+# export NVM_DIR="/home/serverstaging/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm install node
+
 
 # DOCKER
 apt-get remove --purge lxc-docker* docker.io*
