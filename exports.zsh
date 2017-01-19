@@ -53,4 +53,9 @@ elif [[ `uname` == "Linux" ]]; then
         export PHPBREW_RC_ENABLE=1
         source $PHPBREW_ROOT/bashrc
     fi
+    # add LinuxBrew
+    export LINUXBREW_ROOT="$HOME/.linuxbrew"
+    if [ -d "${LINUXBREW_ROOT}" ]; then
+        export PATH="$LINUXBREW_ROOT/bin:$PATH"
+    fi
 fi
