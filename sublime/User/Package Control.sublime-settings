@@ -9,7 +9,7 @@
 		"BracketHighlighter",
 		"Dockerfile Syntax Highlighting",
 		"ExpandRegion",
-		"Foundation 5 Snippets",
+		"FileManager",
 		"GitStatusBar",
 		"HaoGist",
 		"Jinja2",
@@ -21,8 +21,6 @@
 		"PlainTasks",
 		"ProjectManager",
 		"Rsync SSH",
-		"Sass",
-		"SideBarEnhancements",
 		"Smarty",
 		"zz File Icons"
 	]
