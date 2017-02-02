@@ -34,7 +34,7 @@
 [alias]
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph
     ignored = !git ls-files -v | grep "^[[:lower:]]"
-    countcommits = shortlog -sn
+    count-commits = shortlog -sn
     blc = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) - %(color:red)%(objectname:short)%(color:reset) - %(color:yellow)%(refname:short)%(color:reset) - (%(color:green)%(committerdate:relative)%(color:reset)) - %(authorname) - %(contents:subject)'
 [core]
     excludesfile = ~/.gitignore
