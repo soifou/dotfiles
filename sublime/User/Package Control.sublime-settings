@@ -5,6 +5,7 @@
 	],
 	"installed_packages":
 	[
+		"A File Icon",
 		"Bootstrap 3 Snippets",
 		"BracketHighlighter",
 		"Dockerfile Syntax Highlighting",
@@ -21,7 +22,6 @@
 		"PlainTasks",
 		"ProjectManager",
 		"Rsync SSH",
-		"Smarty",
-		"zz File Icons"
+		"Smarty"
 	]
 }
