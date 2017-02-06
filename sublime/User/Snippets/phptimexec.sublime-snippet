@@ -1,0 +1,13 @@
+<snippet>
+    <content><![CDATA[
+\$beginTime = microtime(true);
+$1
+var_dump("It takes " . number_format(microtime(true) - \$beginTime, 2) . " seconds to execute");
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>phptimexec</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.php</scope>
+    <!-- Optional: Set a description for the snippet -->
+    <description>PHP Execution Time</description>
+</snippet>
