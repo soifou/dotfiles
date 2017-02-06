@@ -1,10 +1,3 @@
-# install npm utils (bower generate-md grunt gulp node npm yarn)
-# @see: https://github.com/mkenney/docker-npm
-export DOCKER_NPM_UTILS=$DOCKER_REPOSITORY_PATH/github/docker-npm
-if [ -d "${DOCKER_NPM_UTILS}" ]; then
-    export PATH="${DOCKER_NPM_UTILS}/bin:$PATH"
-fi
-
 # guess project path inside the web container
 getContainerPath() {
     if [[ $DOCKER_WEBROOT_PATH == '/app' ]]; then
@@ -17,16 +10,22 @@ getContainerPath() {
 }
 php() {
     docker run -ti --rm \
-        --name php7-cli-running-script \
+        -v "$PWD":$(getContainerPath) \
+        -w $(getContainerPath) \
+        -u `id -u`:`id -g` \
+        --net=$DOCKER_NETWORK_NAME \
+        soifou/php-alpine:cli-7.1 ${@:1}
+}
+php7.0() {
+    docker run -ti --rm \
         -v "$PWD":$(getContainerPath) \
         -w $(getContainerPath) \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-7.0 ${@:1}
 }
-php5() {
+php5.6() {
     docker run -ti --rm \
-        --name php5-cli-running-script \
         -v "$PWD":$(getContainerPath) \
         -w $(getContainerPath) \
         -u `id -u`:`id -g` \
@@ -78,7 +77,6 @@ gitcheck() {
 }
 drush() {
     docker run --rm -it \
-        --name drush \
         -v $(pwd):/var/www/html \
         -v ~/.composer:/home/composer/.composer \
         -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro \
@@ -87,7 +85,6 @@ drush() {
 }
 drupal() {
     docker run -ti --rm \
-        --name drupal-cli \
         -v "$PWD":$(getContainerPath) \
         -v ~/.console:/.console \
         -w $(getContainerPath) \
@@ -97,7 +94,6 @@ drupal() {
 }
 mutt() {
     docker run -it --rm \
-        --name mutt \
         -v /etc/localtime:/etc/localtime \
         -e GMAIL -e GMAIL_NAME \
         -e GMAIL_PASS -e GMAIL_FROM \
@@ -112,7 +108,6 @@ htop() {
 }
 kahlan() {
     docker run --rm -it \
-        --name kahlan \
         -v $(pwd):/app \
         kahlan/kahlan:3.0-alpine ${@:1}
 }
