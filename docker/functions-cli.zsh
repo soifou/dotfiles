@@ -61,7 +61,7 @@ wp() {
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/wpcli-alpine:1.0.0 ${@:1}
+        soifou/wpcli-alpine:latest ${@:1}
 }
 n98() {
     docker run -it --rm \
