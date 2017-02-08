@@ -19,6 +19,12 @@ if [ -d "${PYENV_ROOT}" ]; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
+# add Node Version Manager (nvm)
+export NVM_ROOT="$HOME/.nvm"
+if [ -d "${NVM_ROOT}" ]; then
+    source "$NVM_ROOT/nvm.sh"
+fi
+
 if [[ `uname` == "Darwin" ]]; then
     # homebrew path
     export PATH="/usr/local/sbin:$PATH"
