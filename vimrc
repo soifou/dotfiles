@@ -38,6 +38,7 @@ Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 
 call vundle#end()
@@ -64,15 +65,16 @@ syntax enable             " enable syntax highlighting (previously syntax on).
 
 " Use the Solarized Dark theme
 set background=dark
-" let g:solarized_termtrans=1
-" let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+" let g:solarized_termcolors=16
 " let g:solarized_contrast="high"
 " let g:solarized_visibility="high"
-colorscheme zenburn
+colorscheme solarized
+" set guitermcolors
 
 " Airline custom config
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'zenburn'
+let g:airline_theme = 'solarized'
 let g:airline#extensions#tabline#enabled = 1
 
 " Prettify JSON files
@@ -140,3 +142,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" indent guide toggle (:hi to get colors depending on your scheme)
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=0 guibg=Grey40
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
