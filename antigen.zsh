@@ -16,6 +16,7 @@ docker
 fabric
 gem
 git
+nvm
 pip
 sublime
 symfony2
