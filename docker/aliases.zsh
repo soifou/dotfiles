@@ -6,6 +6,8 @@ alias dclean='docker ps -a | grep -v '\''CONTAINER\|_config\|_data\|_run'\'' | c
 # alias npm="docker run -it --rm -v \`pwd\`:/pwd -w /pwd node:0.12.2-slim npm"
 # alias gulp='docker run --rm -v $(pwd)/:/mnt/ -e UID=$(id -u) -e GID=$(id -g) zenoss/gulp gulp'
 
+alias mongo-cli="docker exec -it lamp_mongodb mongo"
+
 alias mysql-cli="docker exec -it lamp_db mysql -uroot -proot"
 alias mysql="docker exec -i lamp_db mysql"
 alias mysqldump="docker exec -i lamp_db mysqldump"

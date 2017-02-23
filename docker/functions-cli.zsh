@@ -1,9 +1,8 @@
 # guess project path inside the web container
 getContainerPath() {
     if [[ $DOCKER_WEBROOT_PATH == '/app' ]]; then
-        ABSOLUTE_PATH=$(pwd -P)
-        RELATIVE_PATH="${ABSOLUTE_PATH//$DEVELOPMENT_PATH}"
-        echo "$DOCKER_WEBROOT_PATH$RELATIVE_PATH"
+        PROJECT=$(pwd -P | sed -e "s@$DEVELOPMENT_PATH/@@g")
+        echo "$DOCKER_WEBROOT_PATH/$PROJECT"
     else
         echo "$DOCKER_WEBROOT_PATH"
     fi
