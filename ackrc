@@ -5,9 +5,10 @@
 --ignore-dir=web/css
 
 # Add custom type
---type-set=sh=.sh
---type-set=twig=.twig
---type-set=yml=.yml
 --type-set=json=.json
 --type-set=md=.md
+--type-set=phtml=.phtml
+--type-set=sh=.sh
 --type-set=tpl=.tpl
+--type-set=twig=.twig
+--type-set=yml=.yml
