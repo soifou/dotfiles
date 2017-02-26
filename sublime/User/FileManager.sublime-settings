@@ -1,4 +1,5 @@
 // Your settings for FileManager. See the default file to see the different options.
 {
-    "reveal_in_sidebar": true
+    "reveal_in_sidebar": true,
+    "explicitly_refresh_sidebar": true
 }
