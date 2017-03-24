@@ -11,7 +11,6 @@ bundler
 capistrano
 colored-man-pages
 command-not-found
-composer
 docker
 fabric
 gem
