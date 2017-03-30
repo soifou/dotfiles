@@ -52,7 +52,7 @@ composer() {
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --env SSH_AUTH_SOCK=/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/composer:test ${@:1}
+        composer ${@:1}
 }
 composer-7.0() {
     docker run --rm -it \
