@@ -148,4 +148,3 @@ __composer_commands () {
 }
 
 _composer "$@"
-0
