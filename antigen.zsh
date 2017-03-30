@@ -9,17 +9,20 @@ antigen use oh-my-zsh
 antigen bundles <<EOBUNDLES
 bundler
 capistrano
-colored-man-pages
 command-not-found
+composer
 docker
 fabric
 gem
 git
+n98-magerun
 nvm
 pip
 sublime
-symfony2
+wp-cli
 rupa/z
+zlsun/solarized-man
+zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-history-substring-search
 EOBUNDLES

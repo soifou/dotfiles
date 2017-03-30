@@ -8,7 +8,12 @@ getContainerPath() {
     fi
 }
 php() {
-    docker run -ti --rm \
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
         -v "$PWD":$(getContainerPath) \
         -w $(getContainerPath) \
         -u `id -u`:`id -g` \
@@ -26,12 +31,30 @@ php7.0() {
 php5.6() {
     docker run -ti --rm \
         -v "$PWD":$(getContainerPath) \
+        -v $HOME/.ssh:/ssh \
         -w $(getContainerPath) \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-5.6 ${@:1}
 }
 composer() {
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        -u $(id -u):$(id -g) \
+        -v ~/.composer:/composer \
+        -v /etc/passwd:/etc/passwd:ro \
+        -v /etc/group:/etc/group:ro \
+        -v $(pwd):/app \
+        -v $SSH_AUTH_SOCK:/ssh-auth.sock \
+        --env SSH_AUTH_SOCK=/ssh-auth.sock \
+        --net=$DOCKER_NETWORK_NAME \
+        soifou/composer:test ${@:1}
+}
+composer-7.0() {
     docker run --rm -it \
         -v $(pwd):/usr/src/app \
         -v ~/.composer:/home/composer/.composer \
@@ -40,7 +63,7 @@ composer() {
         --net=$DOCKER_NETWORK_NAME \
         soifou/composer ${@:1}
 }
-c5() {
+composer-5.6() {
     docker run --rm -it \
         -v $(pwd):/usr/src/app \
         -v ~/.composer:/home/composer/.composer \
@@ -56,14 +79,24 @@ php7cc() {
         ypereirareis/php7cc $1
 }
 wp() {
-    docker run -it --rm \
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
         soifou/wpcli-alpine:latest ${@:1}
 }
 n98() {
-    docker run -it --rm \
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
