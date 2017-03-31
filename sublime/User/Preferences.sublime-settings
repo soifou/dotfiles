@@ -19,7 +19,7 @@
 		"app/cache",
 		"var/cache"
 	],
-	"font_face": "Source Code Pro",
+	"font_face": "SourceCodePro+Powerline+Awesome Regular",
 	"font_options":
 	[
 		"gray_antialias",
