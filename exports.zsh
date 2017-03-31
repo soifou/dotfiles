@@ -44,6 +44,9 @@ if [[ `uname` == "Darwin" ]]; then
     fi
 
 elif [[ `uname` == "Linux" ]]; then
+    # SSH
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
     # add docker
     if [ -f /usr/bin/docker ]; then
         source $HOME/dotfiles/docker/functions.zsh
