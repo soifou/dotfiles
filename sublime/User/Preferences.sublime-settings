@@ -22,7 +22,6 @@
 	"font_face": "SourceCodePro+Powerline+Awesome Regular",
 	"font_options":
 	[
-		"gray_antialias",
 		"subpixel_antialias"
 	],
 	"font_size": 14,
@@ -36,8 +35,8 @@
 		"draw_normal",
 		"draw_active"
 	],
-	"line_padding_bottom": 1,
-	"line_padding_top": 1,
+	"line_padding_bottom": 2,
+	"line_padding_top": 2,
 	"match_brackets_content": false,
 	"match_selection": true,
 	"match_tags": true,
