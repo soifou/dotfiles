@@ -1,6 +1,7 @@
 [
     { "keys": ["alt+n"], "command": "insert", "args": {"characters": "~"} },
     { "keys": ["ctrl+n"], "command": "fm_create" },
+    { "keys": ["alt+shift+f"], "command": "reindent", "args": {"single_line": false} },
     { "keys": ["super+alt+f"], "command": "expand_fqcn", "args": {"leading_separator": true} },
     { "keys": ["super+alt+u"], "command": "find_use" },
     { "keys": ["super+alt+p"], "command": "dev_docs" },

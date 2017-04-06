@@ -1914,13 +1914,13 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>428 276 714 244 0 0 1440 877 </string>
+	<string>428 275 714 111 0 0 1440 877 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>476 419 606 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 139 606 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>316 328 796 473 0 0 1440 877 </string>
+	<string>316 284 796 473 0 0 1440 877 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -2062,12 +2062,16 @@
 			</dict>
 			<key>Ansi 8 Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.15170273184776306</real>
+				<real>0.41295546293258667</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.11783610284328461</real>
+				<real>0.31959635019302368</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.066364333033561707</real>
 			</dict>
 			<key>Ansi 9 Color</key>
 			<dict>
@@ -2545,12 +2549,16 @@
 			</dict>
 			<key>Selection Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.19370138645172119</real>
+				<real>0.19502738118171692</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.15575926005840302</real>
+				<real>0.15706241130828857</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.013736780732870102</real>
 			</dict>
 			<key>Semantic History</key>
 			<dict>

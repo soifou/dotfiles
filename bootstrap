@@ -180,7 +180,7 @@ configure_atom() {
         rm $file
 
         echo "Add custom Atom plugins"
-        plugins=(atom-material-syntax atom-material-syntax-light atom-material-ui minimap predawn-syntax predawn-ui project-manager tool-bar tool-bar-main)
+        plugins=(atom-material-syntax atom-material-ui minimap language-docker project-manager tool-bar tool-bar-main)
         for plugin in "${plugins[@]}"
         do
             apm install $plugin

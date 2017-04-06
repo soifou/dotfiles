@@ -1,6 +1,5 @@
 # Global aliases
 alias mkvmp4="bash ~/dotfiles/scripts/utils/mkvmp4.sh"
-alias adminer-selfupdate="wget https://www.adminer.org/latest-mysql-en.php -O $DEVELOPMENT_PATH/adminer/adminer.php"
 alias h5ai-selfupdate="cd $DEVELOPMENT_PATH/tools/h5ai && git pull && npm install && npm run build && mv build/h5ai-*.zip ../.. && cd $DEVELOPMENT_PATH && rm -rf _h5ai && unzip h5ai-*.zip && rm h5ai-*.zip"
 # stay connected with Free Wifi
 alias freewifi="while true ; do wget --quiet --no-check-certificate --post-data 'login=$FREEWIFI_ID&password=$FREEWIFI_PASS&submit=Valider' 'https://wifi.free.fr/Auth' -O '/dev/null' ; sleep 600; done"
