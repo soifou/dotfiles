@@ -92,7 +92,7 @@ php7cc() {
     docker run -it --rm \
         -v $(pwd):/app \
         --net=$DOCKER_NETWORK_NAME \
-        ypereirareis/php7cc $1
+        ypereirareis/php7cc:latest php7cc $1
 }
 wp() {
     tty=
