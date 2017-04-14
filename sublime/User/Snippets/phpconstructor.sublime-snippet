@@ -1,0 +1,14 @@
+<snippet>
+    <content><![CDATA[
+/**
+ * Constructor
+ */
+public function __construct($1)
+{
+    $2
+}
+]]></content>
+    <tabTrigger>phpcon</tabTrigger>
+    <scope>source.php</scope>
+    <description>Declare a constructor</description>
+</snippet>
