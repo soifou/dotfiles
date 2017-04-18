@@ -15,7 +15,7 @@ if [ "$atom_version" == "$latest" ]; then
 fi
 
 echo 'Upgrading atom...'
-wget https://github.com/atom/atom/releases/download/v$latest/atom-amd64.deb -O /tmp/atom-amd64.deb
+wget -q --show-progress --progress=bar:force https://github.com/atom/atom/releases/download/v$latest/atom-amd64.deb -O /tmp/atom-amd64.deb
 sudo dpkg -i /tmp/atom-amd64.deb
 rm /tmp/atom-amd64.deb
 echo "  > Atom v$latest is set to the latest version. Exiting..."
