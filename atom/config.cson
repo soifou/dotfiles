@@ -26,7 +26,7 @@
     ]
   editor:
     fontFamily: "SourceCodePro+Powerline+Awesome Regular"
-    fontSize: 17
+    fontSize: 14
     invisibles: {}
     showIndentGuide: true
     tabLength: 4

@@ -1,7 +1,7 @@
 {
     "editor.cursorBlinking": "phase",
     "editor.cursorStyle": "line",
-    "editor.fontSize": 18,
+    "editor.fontSize": 14,
     "editor.lineHeight": 24,
     "editor.tabSize": 4,
     "explorer.openEditors.visible": 0,
