@@ -34,7 +34,7 @@ if [ "$latestVersion" != "$currentVersion" ]; then
     curl -L https://github.com/docker/compose/releases/download/${latestVersion}/docker-compose-`uname -s`-`uname -m` > /tmp/docker-compose && \
         mv /tmp/docker-compose /usr/local/bin && \
         chmod +x /usr/local/bin/docker-compose && \
-    print_success 'docker-compose is now up to date :)'
+    print_success "Docker-compose has been upgraded to $latestVersion"
 else
     echo "Already up-to-date."
 fi
