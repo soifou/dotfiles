@@ -1,0 +1,50 @@
+"*":
+  "atom-material-ui":
+    depth: true
+    fontSize: "Big"
+    tabs: {}
+    treeView:
+      compactList: true
+    ui:
+      panelContrast: true
+      panelShadows: true
+  core:
+    audioBeep: false
+    disabledPackages: [
+      "language-objective-c"
+      "language-java"
+      "language-go"
+      "language-csharp"
+      "language-clojure"
+      "language-c"
+    ]
+    projectHome: "/media/maestro/dev"
+    telemetryConsent: "no"
+    themes: [
+      "atom-material-ui"
+      "atom-material-syntax"
+    ]
+  editor:
+    fontFamily: "SourceCodePro+Powerline+Awesome Regular"
+    fontSize: 17
+    invisibles: {}
+    showIndentGuide: true
+    tabLength: 4
+    tabType: "soft"
+  "exception-reporting":
+    userId: "0cfdc790-e936-e71e-41b3-54beca2e3827"
+  metrics:
+    userId: "54932bdb-4edf-75e1-d566-868619fc9a9c"
+  minimap: {}
+  "project-manager":
+    alwaysOpenInSameWindow: true
+    environmentSpecificProjects: true
+    ignoreDirectories: "node_modules, .git"
+    includeGitRepositories: true
+  tabs:
+    usePreviewTabs: true
+  "tool-bar":
+    position: "Left"
+  "tree-view": {}
+  welcome:
+    showOnStartup: false
