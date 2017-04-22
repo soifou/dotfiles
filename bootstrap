@@ -167,26 +167,59 @@ install_source_code_pro_font() {
     fi
 }
 
-configure_atom() {
+configure_vscode() {
+    echo "Configuring preferences for VSCode..."
+    if [ "$(uname -s)" = "Darwin" ]; then
+        VSCODE_HOME="$HOME/Library/Application Support/Code"
+    else
+        VSCODE_HOME="$HOME/.config/Code"
+    fi
+    if [[ -d "$VSCODE_HOME/User" ]]; then
+        echo "Backup current VSCode config"
+        mv "$VSCODE_HOME/User" "$VSCODE_HOME/User.dotbackup"
+    fi
+    ln -s $HOME/dotfiles/vscode/User "$VSCODE_HOME/User"
+
+
     if [[ `uname` == 'Linux' ]]; then
-        url=https://atom.io/download/deb
-        file=atom.deb
+        echo "Download and install latest VSCode text editor"
+        bash $HOME/dotfiles/scripts/utils/updater/vscode.sh
+    fi
 
-        echo "Download and install latest Atom text editor"
-        echo " "
-        cd $HOME
-        wget $url -O $file
-        sudo dpkg -i $file
-        rm $file
+    if test "$(which code)"; then
+        echo "Add VSCode plugins"
+        # from `code --list-extensions`
+        modules="
+            alefragnani.project-manager
+            Equinusocio.vsc-material-theme
+            ms-vscode.sublime-keybindings
+        "
+        for module in $modules; do
+            code --install-extension "$module" || true
+        done
+    fi
+}
 
-        echo "Add custom Atom plugins"
+configure_atom() {
+    echo "Configuring preferences for Atom..."
+    if [[ -d "$HOME/.atom" ]]; then
+        echo "Backup current atom config"
+        mv "$HOME/.atom" "$HOME/.atom.dotbackup"
+    fi
+    ln -s $HOME/dotfiles/atom "$HOME/.atom"
+
+    echo "Download and install latest Atom text editor"
+    if [[ `uname` == 'Linux' ]]; then
+        bash $HOME/dotfiles/scripts/utils/updater/atom.sh
+    fi
+
+    if test "$(which apm)"; then
+        echo "Add Atom plugins"
         plugins=(atom-material-syntax atom-material-ui minimap language-docker project-manager tool-bar tool-bar-main)
         for plugin in "${plugins[@]}"
         do
-            apm install $plugin
+            apm install $plugin || true
         done
-        echo "---------------------"
-        echo "Atom has been successfully installed !"
     fi
 }
 
@@ -227,9 +260,7 @@ configure_sublime() {
         echo "    * adding $plugin plugin"
         ln -s $HOME/dotfiles/sublime/$plugin "$sublime_dir/Packages/$plugin"
     done
-    echo " "
-    echo "--------------------- "
-	echo "Ready ! At the next start Sublime Text will fetch/upgrade packages"
+	echo "Done! At the next start Sublime Text will fetch/upgrade packages"
 }
 
 print_success() {
@@ -290,6 +321,7 @@ do
             print_info "--pip             Pip custom config";
             print_info "--sublime         Configure preferences, add custom/useful plugins for sublime text editor"
             print_info "--vim             Create custom vimrc, add colors/syntax/plugins"
+            print_info "--vscode          Configure VSCode"
             print_info "--zsh             Install and config Zsh as default shell";
             print_info "";
             exit 0; ;;
@@ -305,6 +337,7 @@ do
         --pip) PIP=1; shift; ;;
         --sublime) SUBLIME=1; shift; ;;
         --vim) VIM=1; shift; ;;
+        --vscode) VSCODE=1; shift; ;;
         --zsh) ZSH=1; shift; ;;
         --update) UPDATE=1; shift; ;;
         --) shift; break; ;;
@@ -338,6 +371,9 @@ if [ "$SUBLIME" == 1 ]; then
 fi
 if [ "$VIM" == 1 ]; then
     configure_vim
+fi
+if [ "$VSCODE" == 1 ]; then
+    configure_vscode
 fi
 if [ "$ZSH" == 1 ]; then
     configure_zsh
