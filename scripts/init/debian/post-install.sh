@@ -173,6 +173,7 @@ service docker start
 curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
+
 # VIRTUALBOX 5
 # https://www.virtualbox.org/wiki/Linux_Downloads#Debian-basedLinuxdistributions
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
@@ -182,17 +183,12 @@ apt-get install dkms virtualbox-5.1
 # add your user to "vboxusers" group
 usermod -aG vboxusers $USER
 
+
 # CHROMIUM
 apt-get install -y chromium
 
-# FLUX
-# see: https://github.com/xflux-gui/xflux-gui
-apt-get install -y python-appindicator python-xdg python-pexpect python-gconf python-gtk2 python-glade2 libxxf86vm1
-cd /tmp
-git clone https://github.com/xflux-gui/xflux-gui.git
-cd xflux-gui
-python ./setup.py install
-# TODO: Add flux to list of startup applications
+# REDSHIFT (flux like opensource)
+apt-get install -y redshift
 
 # SLACK
 wget https://downloads.slack-edge.com/linux_releases/slack-desktop-2.1.0-amd64.deb
