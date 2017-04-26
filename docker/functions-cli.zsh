@@ -159,3 +159,14 @@ kahlan() {
         -v $(pwd):/app \
         kahlan/kahlan:3.0-alpine ${@:1}
 }
+ngrok() {
+    NGROK_CONTAINER_NAME=ngrok_web
+    docker run --rm -it -d \
+        -v $HOME/.ngrok2/ngrok.yml:/home/ngrok/.ngrok2/ngrok.yml \
+        --name $NGROK_CONTAINER_NAME \
+        -p 4040 \
+        --link "$1":http \
+        --net=$DOCKER_NETWORK_NAME \
+        wernight/ngrok ngrok http http:80
+    echo "\e[0;35mngrok address -> http://$(docker-machine ip $DOCKER_MACHINE_NAME):$(docker port $NGROK_CONTAINER_NAME | awk -F: '{ print $2}')\e[0m\n"
+}
