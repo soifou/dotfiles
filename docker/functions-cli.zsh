@@ -168,5 +168,5 @@ ngrok() {
         --link "$1":http \
         --net=$DOCKER_NETWORK_NAME \
         wernight/ngrok ngrok http http:80
-    echo "\e[0;35mngrok address -> http://$(docker-machine ip $DOCKER_MACHINE_NAME):$(docker port $NGROK_CONTAINER_NAME | awk -F: '{ print $2}')\e[0m\n"
+    echo "\e[0;35mngrok address -> http://local.dev:$(docker port $NGROK_CONTAINER_NAME | awk -F: '{ print $2}')\e[0m\n"
 }
