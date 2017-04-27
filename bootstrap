@@ -181,8 +181,8 @@ configure_vscode() {
     ln -s $HOME/dotfiles/vscode/User "$VSCODE_HOME/User"
 
 
-    if [[ `uname` == 'Linux' ]]; then
-        echo "Download and install latest VSCode text editor"
+    echo "Download and install latest VSCode text editor"
+    if [ -f /etc/debian_version ]; then
         bash $HOME/dotfiles/scripts/utils/updater/vscode.sh
     fi
 
@@ -209,7 +209,7 @@ configure_atom() {
     ln -s $HOME/dotfiles/atom "$HOME/.atom"
 
     echo "Download and install latest Atom text editor"
-    if [[ `uname` == 'Linux' ]]; then
+    if [ -f /etc/debian_version ]; then
         bash $HOME/dotfiles/scripts/utils/updater/atom.sh
     fi
 
