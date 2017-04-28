@@ -19,7 +19,7 @@
 		"app/cache",
 		"var/cache"
 	],
-	"font_face": "SourceCodePro+Powerline+Awesome Regular",
+	"font_face": "SauceCodePro Nerd Font",
 	"font_options":
 	[
 		"subpixel_antialias"

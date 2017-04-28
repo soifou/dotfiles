@@ -1922,17 +1922,17 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>394 193 714 376 0 0 1440 878 </string>
+	<string>394 193 714 421 0 0 1440 878 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>476 419 606 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 139 606 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>316 316 796 473 0 0 1440 878 </string>
+	<string>332 208 796 473 0 0 1440 878 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 294 592 584 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 377 1440 501 0 0 1440 878 </string>
+	<string>0 434 1440 444 0 0 1440 878 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2123,7 +2123,7 @@
 			<key>Blend</key>
 			<real>0.30000001192092896</real>
 			<key>Blink Allowed</key>
-			<true/>
+			<false/>
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
@@ -2208,7 +2208,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>1.076683687876506</real>
+			<real>1.003597985692771</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -2525,11 +2525,11 @@
 			<key>Name</key>
 			<string>Soifou</string>
 			<key>Non Ascii Font</key>
-			<string>SourceCodePro-Regular 14</string>
+			<string>MesloLGSDZNerdFontC-RegularForPowerline 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>MesloLGMDZ-RegularForPowerline 14</string>
+			<string>MesloLGSDZNerdFontC-RegularForPowerline 14</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -2584,7 +2584,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Silence Bell</key>
-			<false/>
+			<true/>
 			<key>Smart Cursor Color</key>
 			<true/>
 			<key>Smart Selection Rules</key>
@@ -2703,11 +2703,11 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>0.92481786012649536</real>
+			<real>1.0553263836596387</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
