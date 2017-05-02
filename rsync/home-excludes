@@ -5,71 +5,34 @@
 - .thumbnails/
 - .cache/
 - *.cache
-
 # Temporary files
 - tmp/
 - temp/
 - *.tmp
 - *.lock
 - lockfile
-
 # Backup files
 - *~
 - \#*\#
 - *.bak
 - *.dotbackup
-
 # Log files
 - *.log
 - *.log.*
-
 # Commonly distributed OSes cache file
 - .DS_Store
 - Thumbs.db
 
 ###############################################
-# not worth a backup                          #
-###############################################
-.android
-.ansible
-.antigen
-.aptitude
-.audacity-data/AutoSave
-
-.atom/.apm
-.atom/.node-gyp
-.atom/compile-cache
-.atom/packages
-.atom/storage
-
-.berkshelf
-.bundle
-.bundler
-
-.cache
-# Cached info about audio CDs
-.cddb
-.composer/cache
-.composer/vendor
-
-
-.nylas/compile-cache
-.nylas/packages/n1-ido
-
-###############################################
 # Config                                      #
 ###############################################
 .config/akonadi
-
 .config/Atom-Shell
 .config/Atom
-
 .config/Brackets/cef_data
 .config/Brackets/extensions
 .config/Brackets/live-dev-profile
-
 .config/Clementine/networkcache
-
 .config/chromium
 .config/chromium-backup/Default/Local Storage
 .config/chromium-backup/Default/Session Storage
@@ -77,29 +40,17 @@
 .config/chromium-backup/Default/History Index *
 .config/chromium-backup/ShaderCache
 .config/chromium-backup/Default/Service Worker/CacheStorage
-
+.config/Code
 .config/session
-
 .config/Keybase/Cache
+.config/Keybase/GPUCache
 .config/Mattermost/GPUCache
 .config/Mattermost/Cache
-.config/Nylas N1/Cache
-.config/Nylas N1/GPUCache
+.config/Nylas Mail/Cache
+.config/Nylas Mail/GPUCache
 .config/Slack/Cache
 .config/Slack/GPUCache/
-
-.config/sublime-text-3/Backup
-.config/sublime-text-3/Cache
-.config/sublime-text-3/Index
-.config/sublime-text-3/Local/*.sublime_session
-
-.dbus
-.fontconfig/*.cache*
-.freerdp
-.gconf
-.gvfs
-.icons
-.kodi
+.config/sublime-text-3
 
 ###############################################
 # KDE                                         #
@@ -110,7 +61,6 @@
 .kde/cache-*
 .kde/socket-*
 .kde/tmp-*
-
 # Recent documents on KDE
 .kde/share/apps/RecentDocuments
 # Contains a history of the Klipper clipboard (KDE)
@@ -129,15 +79,15 @@
 .kde/share/apps/nepomuk
 .kde/share/apps/ktorrent
 
+###############################################
+# LOCAL                                       #
+###############################################
 .local/share/akonadi
-.local/share/Trash
+.local/share/icons
+.local/share/icons
+.local/share/keybase/kbfs_block_cache
 .local/share/org.kde.gwenview/recentfolders
-
-.loki/ut/Cache
-.loki/ut/Logs
-
-.luckyBackup/logs
-.luckybackup-snaphots/default.profile/logs/
+.local/share/Trash
 
 ###############################################
 # Mozilla Firefox                             #
@@ -146,6 +96,7 @@
 .mozilla/firefox/*/Cache
 # in case Fx crashes dumps will be stored in this
 .mozilla/firefox/*/minidumps
+.mozilla/firefox/Crash Reports/
 # session-specific
 .mozilla/firefox/*/.parentlock
 # phishing database, recreated
@@ -165,17 +116,24 @@
 .mozilla/firefox/*/compreg.dat
 
 ###############################################
-# Python / Ruby / NodeJS / NPM                #
+# Development                                 #
 ###############################################
+.ansible
+.ansible_galaxy
+.bundler
+.composer/cache
+.composer/vendor
 .gem
 .pyenv
 .rbenv
 .pip
+.linuxbrew
 .node-gyp
 .npm
-
+.nvm
 .nv
 .pulse
+.wp-cli/cache
 
 ###############################################
 # Games                                       #
@@ -184,12 +142,9 @@
 .residualvm/logs
 .scummvm/logs
 
-
-.wine
-.wp-cli/cache
-
-.kodi/temp
-
+###############################################
+# User Folders                                #
+###############################################
 cache
 Desktop
 Development
@@ -203,8 +158,37 @@ Templates
 tmp
 Videos
 
+###############################################
+# not worth a backup                          #
+###############################################
+.android
+.antigen
+.aptitude
+.audacity-data/AutoSave
+.atom
+.berkshelf
+.bundle
+.cache
+# Cached info about audio CDs
+.cddb
+.cinderclient
+.dbus
+.fontconfig/*.cache*
+.freerdp
+.gconf
+.gvfs
+.icons
+.kodi
+.loki/ut/Cache
+.loki/ut/Logs
+.luckybackup-snaphots/default.profile/logs/
+.luckyBackup/logs
+.nylas-mail
 .pulse-cookir
 .recently-used
+.vscode
+.wine
 .Xauthority
 .xsession-errors
+.zcompdump.*
 .zsh_history_corrupt
