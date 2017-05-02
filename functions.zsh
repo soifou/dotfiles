@@ -24,6 +24,19 @@ dico() { curl -s dict://dict.org/d:${1}:wn | sed '/^[1-2]/d' | sed '$d'; }
 dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d'; }
 # Print a chuck norris joke
 chuck() { timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jshon -e value -e joke -u }
+# reveal aliases typed on prompt
+reveal-alias() {
+    preexec_functions=()
+    function expand_aliases {
+      input_command=$1
+      expanded_command=$2
+      if [ $input_command != $expanded_command ]; then
+        print -nP $PROMPT
+        echo $expanded_command
+      fi
+    }
+    preexec_functions+=expand_aliases
+}
 # Python function
 if [ -d "${PYENV_ROOT}" ]; then
     # uninstall package with dependencies

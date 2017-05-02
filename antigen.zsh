@@ -30,8 +30,7 @@ EOBUNDLES
 if [[ `uname` == "Darwin" ]]; then
     antigen bundle brew
     antigen bundle brew-cask
-    antigen bundle osx
-elif [[ `uname` == "Linux" ]]; then
+elif [ -f /etc/debian_version ]; then
     antigen bundle debian
 fi
 
