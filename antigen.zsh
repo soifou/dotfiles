@@ -35,6 +35,7 @@ elif [ -f /etc/debian_version ]; then
 fi
 
 # Load the theme.
+POWERLEVEL9K_INSTALLATION_PATH=$HOME/.antigen/bundles/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
 antigen theme bhilburn/powerlevel9k powerlevel9k
 
 DEFAULT_USER=$USER # Only print user@hostname when not normal user
