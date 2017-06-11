@@ -170,3 +170,12 @@ ngrok() {
         wernight/ngrok ngrok http http:80
     echo "\e[0;35mngrok address -> http://local.dev:$(docker port $NGROK_CONTAINER_NAME | awk -F: '{ print $2}')\e[0m\n"
 }
+adb() {
+    if [[ $(docker ps | grep adbd | wc -l) == 0 ]]; then
+        echo "\e[0;35mStarting an adbd server..."
+        docker run -d --privileged -v /dev/bus/usb:/dev/bus/usb --name adbd sorccu/adb
+    fi
+    docker run --rm -ti \
+        --net container:adbd \
+        sorccu/adb adb ${@:1}
+}
