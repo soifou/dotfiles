@@ -1,45 +1,5 @@
-# Add antigen defaults
-source $HOME/.antigen/antigen.zsh
-
-# Load my custom plugins
-antigen bundle $HOME/dotfiles/completions/zsh --no-local-clone
-
-# Load the oh-my-zsh's library and common bundles.
-antigen use oh-my-zsh
-antigen bundles <<EOBUNDLES
-bundler
-capistrano
-command-not-found
-docker
-fabric
-gem
-git
-n98-magerun
-nvm
-pip
-sublime
-wp-cli
-rupa/z
-zlsun/solarized-man
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-syntax-highlighting
-zsh-users/zsh-history-substring-search
-EOBUNDLES
-
-# Load OS specific bundles
-if [[ `uname` == "Darwin" ]]; then
-    antigen bundle brew
-    antigen bundle brew-cask
-elif [ -f /etc/debian_version ]; then
-    antigen bundle debian
-fi
-
-# Load the theme.
-POWERLEVEL9K_INSTALLATION_PATH=$HOME/.antigen/bundles/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
-antigen theme bhilburn/powerlevel9k powerlevel9k
-
 DEFAULT_USER=$USER # Only print user@hostname when not normal user
-POWERLEVEL9K_MODE='nerdfont-fontconfig' # POWERLEVEL9K >= 0.6.x
+POWERLEVEL9K_MODE='nerdfont-complete' # POWERLEVEL9K >= 0.6.x
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context dir dir_writable vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status nvm rbenv pyenv time)
@@ -75,12 +35,53 @@ POWERLEVEL9K_PYENV_BACKGROUND="black"
 POWERLEVEL9K_PYENV_FOREGROUND="249"
 POWERLEVEL9K_PYENV_VISUAL_IDENTIFIER_COLOR="yellow"
 
-POWERLEVEL9K_NODE_ICON='\ue618 '
+POWERLEVEL9K_NODE_ICON='\ue718 '
 POWERLEVEL9K_NVM_BACKGROUND="black"
 POWERLEVEL9K_NVM_FOREGROUND="249"
 POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_COLOR="green"
 
 POWERLEVEL9K_STATUS_VERBOSE=false
+
+# Add antigen defaults
+source $HOME/.antigen/antigen.zsh
+export ANTIGEN_COMPDUMP=$HOME/.zcompdump
+
+# Load my custom plugins
+antigen bundle $HOME/dotfiles/completions/zsh --no-local-clone
+
+# Load the oh-my-zsh's library and common bundles.
+antigen use oh-my-zsh
+antigen bundles <<EOBUNDLES
+bundler
+capistrano
+command-not-found
+docker
+fabric
+gem
+git
+n98-magerun
+nvm
+pip
+sublime
+wp-cli
+rupa/z
+zlsun/solarized-man
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+EOBUNDLES
+
+# Load OS specific bundles
+if [[ `uname` == "Darwin" ]]; then
+    antigen bundle brew
+    antigen bundle brew-cask
+elif [ -f /etc/debian_version ]; then
+    antigen bundle debian
+fi
+
+# Load the theme.
+POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
+antigen theme bhilburn/powerlevel9k powerlevel9k
 
 # Tell antigen that you're done.
 antigen apply
