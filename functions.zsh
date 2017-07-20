@@ -24,6 +24,8 @@ dico() { curl -s dict://dict.org/d:${1}:wn | sed '/^[1-2]/d' | sed '$d'; }
 dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d'; }
 # Print a chuck norris joke
 chuck() { timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jshon -e value -e joke -u }
+# Validate all XML files in the current directory and below
+xmllint() { find . -type f -name "*.xml" -exec xmllint --noout {} \; }
 # reveal aliases typed on prompt
 reveal-alias() {
     preexec_functions=()
