@@ -59,8 +59,8 @@ docker
 fabric
 gem
 git
+lukechilds/zsh-better-npm-completion
 n98-magerun
-nvm
 pip
 sublime
 wp-cli
