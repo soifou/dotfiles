@@ -106,7 +106,7 @@ wp() {
         --net=$DOCKER_NETWORK_NAME \
         soifou/wpcli-alpine:latest ${@:1}
 }
-n98() {
+n98-magerun() {
     tty=
     tty -s && tty=--tty
     docker run \
