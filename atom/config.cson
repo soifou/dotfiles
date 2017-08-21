@@ -1,4 +1,8 @@
 "*":
+  "atom-autocomplete-php":
+    binPhp: "/usr/local/bin/php"
+    insertNewlinesForUseStatements: true
+    verboseErrors: true
   "atom-material-ui":
     depth: true
     fontSize: "Big"
@@ -29,6 +33,7 @@
       "desktop.ini"
       "node_modules"
     ]
+    packagesWithKeymapsDisabled: []
     telemetryConsent: "no"
     themes: [
       "atom-material-ui"
@@ -36,13 +41,16 @@
     ]
   editor:
     fontFamily: "SauceCodePro Nerd Font"
-    fontSize: 14
     invisibles: {}
     showIndentGuide: true
     tabLength: 4
     tabType: "soft"
   "exception-reporting":
     userId: "0cfdc790-e936-e71e-41b3-54beca2e3827"
+  "highlight-line":
+    enableBackgroundColor: true
+  "linter-ui-default":
+    showPanel: true
   metrics:
     userId: "54932bdb-4edf-75e1-d566-868619fc9a9c"
   minimap: {}

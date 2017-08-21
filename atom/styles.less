@@ -6,9 +6,15 @@ html, body,
 .tab-bar .tab,
 .command-palette,
 atom-pane,
-status-bar {
+status-bar,
+.fuzzy-finder,
+.modal.overlay {
     font-family: @font-family;
     font-size: @font-size;
+}
+
+.tree-view {
+    font-size: 11px;
 }
 
 status-bar .git-view {
@@ -17,12 +23,10 @@ status-bar .git-view {
 
 .modal.overlay {
     width: 800px;
-    margin-top: 50px;
-    margin-left: -350px;
+    margin-top: 40px;
+    margin-left: -300px;
 }
 
 .fuzzy-finder {
-    font-family: @font-family;
-    font-size: @font-size;
     width: 784px;
 }
