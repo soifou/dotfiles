@@ -1,5 +1,6 @@
 "*":
   "atom-autocomplete-php":
+    binPhp: "/usr/local/bin/php"
     verboseErrors: true
   "atom-material-ui":
     depth: true
