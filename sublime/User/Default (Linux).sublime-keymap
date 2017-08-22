@@ -1,4 +1,6 @@
 [
+    { "keys": ["alt+shift+up"], "command": "select_lines", "args": {"forward": false} },
+    { "keys": ["alt+shift+down"], "command": "select_lines", "args": {"forward": true} },
     { "keys": ["ctrl+shift+u"], "command": "find_use" },
     { "keys": ["ctrl+shift+f"], "command": "expand_fqcn", "args": {"leading_separator": true} },
     { "keys": ["ctrl+alt+g"], "command": "open_browser", "args": { "url": "http://www.google.fr/#q=%s" }},
