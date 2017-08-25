@@ -44,5 +44,6 @@ Thumbs.db
 ##########
 *.crt
 *.phpbrewrc
+*.php_cs.cache
 node_modules
 *.nvmrc
