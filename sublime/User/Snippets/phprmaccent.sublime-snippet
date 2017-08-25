@@ -1,0 +1,16 @@
+<snippet>
+    <content><![CDATA[
+// @NOTE: need intl php extension
+\$transliterator = \Transliterator::createFromRules(
+    ':: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: Lower(); :: NFC;',
+    \Transliterator::FORWARD
+);
+$1 = \$transliterator->transliterate($1);
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>phpnoaccent</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.php</scope>
+    <!-- Optional: Set a description for the snippet -->
+    <description>Remove accent from string</description>
+</snippet>
