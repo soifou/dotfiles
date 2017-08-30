@@ -24,7 +24,7 @@ export NVM_ROOT="$HOME/.nvm"
 if [ -d "${NVM_ROOT}" ]; then
     # NVM is slow: https://github.com/creationix/nvm/issues/860
     source "$NVM_ROOT/nvm.sh" --no-use
-    export PATH=$HOME/.nvm/versions/node/v6.9.5/bin/:$PATH
+    export PATH=$HOME/.nvm/versions/node/v6.9.5/bin:$PATH
 fi
 
 if [[ `uname` == "Darwin" ]]; then
