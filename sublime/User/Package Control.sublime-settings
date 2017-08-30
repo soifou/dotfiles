@@ -18,7 +18,6 @@
 		"HaoGist",
 		"Jinja2",
 		"jQuery",
-		"LESS",
 		"MarkdownLivePreview",
 		"Material Theme",
 		"Package Control",
@@ -29,6 +28,10 @@
 		"PlainTasks",
 		"ProjectManager",
 		"Rsync SSH",
-		"Smarty"
+		"Smarty",
+		"SublimeLinter",
+		"SublimeLinter-csslint",
+		"SublimeLinter-jshint",
+		"SublimeLinter-php"
 	]
 }
