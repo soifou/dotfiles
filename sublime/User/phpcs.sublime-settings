@@ -1,0 +1,8 @@
+{
+    "phpcs_executable_path": "~/.composer/vendor/bin/phpcs",
+    "phpcs_show_quick_panel": false,
+    "phpcs_show_gutter_marks": false,
+    "php_cs_fixer_on_save": false,
+    "php_cs_fixer_show_quick_panel": false,
+    "php_cs_fixer_executable_path": "~/.composer/vendor/bin/php-cs-fixer",
+}
