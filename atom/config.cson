@@ -40,6 +40,7 @@
     ]
   editor:
     fontFamily: "SauceCodePro Nerd Font"
+    fontSize: 18
     invisibles: {}
     showIndentGuide: true
     tabLength: 4
