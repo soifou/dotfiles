@@ -32,6 +32,8 @@
 		"SublimeLinter",
 		"SublimeLinter-csslint",
 		"SublimeLinter-jshint",
-		"SublimeLinter-php"
+		"SublimeLinter-pep8",
+		"SublimeLinter-php",
+		"SublimeLinter-rubocop"
 	]
 }
