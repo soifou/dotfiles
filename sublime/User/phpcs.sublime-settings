@@ -1,8 +1,17 @@
 {
+    "show_debug": true,
     "phpcs_executable_path": "~/.composer/vendor/bin/phpcs",
     "phpcs_show_quick_panel": false,
-    "phpcs_show_gutter_marks": false,
+    "phpcs_show_gutter_marks": true,
     "php_cs_fixer_on_save": false,
     "php_cs_fixer_show_quick_panel": false,
     "php_cs_fixer_executable_path": "~/.composer/vendor/bin/php-cs-fixer",
+    "php_cs_fixer_additional_args": {
+        "--rules": "@Symfony,-@PSR1,-blank_line_before_return,strict_comparison",
+        "--allow-risky": "yes"
+    },
+    "phpcbf_executable_path": "~/.composer/vendor/bin/phpcbf",
+    "phpmd_run": true,
+    "phpmd_command_on_save": true,
+    "phpmd_executable_path": "~/.composer/vendor/bin/phpmd"
 }

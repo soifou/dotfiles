@@ -13,7 +13,7 @@
 		{
 			"csslint":
 			{
-				"@disable": false,
+				"@disable": true,
 				"args":
 				[
 				],
@@ -26,13 +26,26 @@
 			},
 			"jshint":
 			{
-				"@disable": false,
+				"@disable": true,
 				"args":
 				[
 				],
 				"excludes":
 				[
 				]
+			},
+			"pep8":
+			{
+				"@disable": true,
+				"args":
+				[
+				],
+				"excludes":
+				[
+				],
+				"ignore": "",
+				"max-line-length": null,
+				"select": ""
 			},
 			"php":
 			{
@@ -41,6 +54,16 @@
 				[
 				],
 				"cmd": "/usr/local/bin/php",
+				"excludes":
+				[
+				]
+			},
+			"rubocop":
+			{
+				"@disable": true,
+				"args":
+				[
+				],
 				"excludes":
 				[
 				]
