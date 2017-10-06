@@ -1,1 +1,4 @@
 workspaceStorage/
+projects.json
+sync.lock
+syncLocalSettings.json

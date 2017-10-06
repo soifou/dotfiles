@@ -1,0 +1,15 @@
+Equinusocio.vsc-material-theme
+HvyIndustries.crane
+PeterJausovec.vscode-docker
+Shan.code-settings-sync
+alefragnani.project-manager
+bmewburn.vscode-intelephense-client
+caonUlisses.phplt
+christian-kohler.path-intellisense
+cxfksword.goto-documentation
+linyang95.php-symbols
+ms-vscode.sublime-keybindings
+neilbrayfield.php-docblocker
+patbenatar.advanced-new-file
+whatwedo.twig
+yahya-gilany.vscode-pomodoro

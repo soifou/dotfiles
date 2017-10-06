@@ -45,35 +45,34 @@ clone_or_pull_repo() {
 }
 
 load_zsh_modules() {
-    echo "Loading zsh modules..."
+    print_info "Loading zsh modules..."
     while read l; do
         IFS=/ read -a path <<< "$l"
         clone_or_pull_repo "$l" ".zsh_modules/${path[1]}"
     done < $HOME/.zmodules
 }
 
-
 configure_ack() {
-    echo "Configuring ack..."
+    print_info "Configuring ack..."
     link_file ackrc .ackrc
 }
 
 configure_pip() {
-    echo "Configuring pip..."
+    print_info "Configuring pip..."
     link_file pip.conf .pip/pip.conf
 }
 
 configure_bash() {
-    echo "Configuring bash..."
+    print_info "Configuring bash..."
     link_file bashrc .bashrc
-    echo "Set default shell to bash"
+    print_info "Set default shell to bash"
     chsh -s $(which bash)
 }
 
 configure_zsh() {
     # Clone antigen repository from GitHub only if it isn't already present
     if [[ ! -d $HOME/.antigen/ ]]; then
-        echo "Clone antigen repository"
+        print_info "Clone antigen repository"
         clone_or_pull_repo zsh-users/antigen .antigen
     fi
 
@@ -93,7 +92,7 @@ configure_zsh() {
             echo "OSX : Please install zsh via homebrew - brew install zsh"
         elif [ $ostype == "Linux" ]; then
             sudo apt-get install zsh
-            echo "Set default shell to zsh"
+            print_info "Set default shell to zsh"
             chsh -s $(which zsh)
         else
             echo "Your OS is neither MacOS or Linux... skip"
@@ -112,63 +111,34 @@ configure_git() {
     backup_file .gitconfig
     sed -e 's/\[\[GIT_NAME\]\]/'"$GIT_NAME"'/g' -e 's/\[\[GIT_EMAIL\]\]/'"$GIT_EMAIL"'/g' `pwd`/git/gitconfig > $HOME/.gitconfig
     link_file git/gitignore .gitignore
+
     print_success "Git configuration done!"
 }
 
 configure_vim() {
     if [ -f /bin/vim -o -f /usr/bin/vim ]; then
-        echo "Configuring vim..."
+        print_info "Configuring vim..."
     else
         ostype=$(uname);
         if [ $ostype == "Darwin" ]; then
-            echo "OSX : Please install zsh via homebrew - brew install vim"
+            print_info "OSX : Please install zsh via homebrew - brew install vim"
         elif [ $ostype == "Linux" ]; then
             sudo apt-get install vim
-            echo "Set default shell to vim"
+            print_info "Set default shell to vim"
         else
-            echo "Your OS is neither MacOS or Linux... skip"
+            print_error "Your OS is neither MacOS or Linux... skip"
         fi
     fi
-    echo "Configuring vim..."
+    print_info "Configuring vim..."
     link_file vimrc .vimrc
     link_directory vim .vim
     clone_or_pull_repo gmarik/vundle .vim/bundle/Vundle.vim
-    echo "Installing Vim plugins. Please wait..."
+    print_info "Installing Vim plugins. Please wait..."
     vim +PluginInstall +qall > /dev/null 2>&1
 }
 
-install_source_code_pro_font() {
-	echo "Installing Source Code Pro font..."
-    font_url=https://github.com/adobe-fonts/source-code-pro/archive/2.010R-ro/1.030R-it.tar.gz
-	ostype=$(uname);
-
-    if [ $ostype == "Darwin" ]; then
-        fonts_dir="$HOME/Library/Fonts/"
-    else
-        mkdir -p $HOME/.fonts/truetype/source-code-pro
-        fonts_dir="$HOME/.fonts/truetype/source-code-pro/"
-    fi
-
-    tmp_dir="$HOME/tmp/dotfiles/fonts"
-
-    mkdir -p $tmp_dir
-    wget -O $tmp_dir/sourcecodepro.tar.gz $font_url
-    tar -zxf $tmp_dir/sourcecodepro.tar.gz -C $tmp_dir
-    cp $tmp_dir/source-code-pro-*/TTF/*.ttf $fonts_dir
-    rm -r $tmp_dir
-
-    echo "Font installed ! Clean user font cache"
-    if [ $ostype == "Darwin" ]; then
-    	atsutil databases -removeUser
-		atsutil server -shutdown
-		atsutil server -ping
-	else
-    	fc-cache
-    fi
-}
-
 configure_vscode() {
-    echo "Configuring preferences for VSCode..."
+    print_info "Configuring preferences for VSCode..."
     if [ "$(uname -s)" = "Darwin" ]; then
         VSCODE_HOME="$HOME/Library/Application Support/Code"
     else
@@ -180,46 +150,39 @@ configure_vscode() {
     fi
     ln -s $HOME/dotfiles/vscode/User "$VSCODE_HOME/User"
 
-
-    echo "Download and install latest VSCode text editor"
+    print_info "Download and install latest VSCode text editor"
     if [ -f /etc/debian_version ]; then
         bash $HOME/dotfiles/scripts/utils/updater/vscode.sh
     fi
 
     if test "$(which code)"; then
-        echo "Add VSCode plugins"
-        # from `code --list-extensions`
-        modules="
-            alefragnani.project-manager
-            Equinusocio.vsc-material-theme
-            ms-vscode.sublime-keybindings
-        "
-        for module in $modules; do
+        print_info "Add VSCode plugins"
+        # https://code.visualstudio.com/docs/editor/command-line
+        # $ code --list-extensions > $HOME/dotfiles/vscode/package-list.txt
+        while read module; do
             code --install-extension "$module" || true
-        done
+        done <$HOME/dotfiles/vscode/package-list.txt
     fi
 }
 
 configure_atom() {
-    echo "Configuring preferences for Atom..."
+    print_info "Configuring preferences for Atom..."
     if [[ -d "$HOME/.atom" ]]; then
         echo "Backup current atom config"
         mv "$HOME/.atom" "$HOME/.atom.dotbackup"
     fi
     ln -s $HOME/dotfiles/atom "$HOME/.atom"
 
-    echo "Download and install latest Atom text editor"
+    print_info "Download and install latest Atom text editor"
     if [ -f /etc/debian_version ]; then
         bash $HOME/dotfiles/scripts/utils/updater/atom.sh
     fi
 
     if test "$(which apm)"; then
-        echo "Add Atom plugins"
-        plugins=(atom-material-syntax atom-material-ui minimap language-docker project-manager tool-bar tool-bar-main)
-        for plugin in "${plugins[@]}"
-        do
-            apm install $plugin || true
-        done
+        print_info "Add Atom plugins"
+        # https://discuss.atom.io/t/installed-packages-list-into-single-file/12227/2
+        # $ apm list --installed --bare > $HOME/dotfiles/atom/package-list.txt
+        apm install --packages-file $HOME/dotfiles/atom/package-list.txt
     fi
 }
 
@@ -243,24 +206,22 @@ configure_sublime() {
     #     rm "$sublime_dir/Packages/$plugin"
     # done
 
-    echo "Configuring preferences for Sublime Text..."
+    print_info "Configuring preferences for Sublime Text..."
     if [[ -d "$sublime_dir/Packages/User" ]]; then
         echo "Backup current customer config"
         mv "$sublime_dir/Packages/User" "$sublime_dir/Packages/User.dotbackup"
     fi
     ln -s $HOME/dotfiles/sublime/User "$sublime_dir/Packages/"
 
-	echo "Download Sublime Package Control"
+	print_info "Download Sublime Package Control"
     wget -P "$sublime_dir/Installed Packages" $package_control_url
 
-    echo "Add custom Sublime plugins"
-    echo " "
+    print_info "Add custom Sublime plugins"
     for plugin in "${plugins[@]}"
     do
-        echo "    * adding $plugin plugin"
         ln -s $HOME/dotfiles/sublime/$plugin "$sublime_dir/Packages/$plugin"
     done
-	echo "Done! At the next start Sublime Text will fetch/upgrade packages"
+	print_info "Done! At the next start Sublime Text will fetch/upgrade packages"
 }
 
 print_success() {
@@ -314,7 +275,6 @@ do
             print_info "--ack             Ack custom config";
             print_info "--atom            Install and configure preferences, add custom/useful plugins for atom text editor"
             print_info "--delete-backups  Remove all dotbackup files";
-            print_info "--font-scp        Install Source Code Pro font";
             print_info "--git             Create config/ignore Git files for the current user";
             print_info "--git-name        Set your Git display name";
             print_info "--git-email       Set your Git email";
@@ -356,9 +316,6 @@ if [ "$ACK" == 1 ]; then
 fi
 if [ "$ATOM" == 1 ]; then
     configure_atom
-fi
-if [ "$FONT_SCP" == 1 ]; then
-    install_source_code_pro_font
 fi
 if [ "$GIT" == 1 ]; then
     configure_git
