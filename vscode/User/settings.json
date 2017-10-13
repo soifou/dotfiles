@@ -21,5 +21,6 @@
     "materialTheme.cache.workbench.settings": {
         "themeColours": "Default"
     },
-    "workbench.editor.labelFormat":"medium"
+    "workbench.editor.labelFormat": "medium",
+    "window.menuBarVisibility": "toggle"
 }

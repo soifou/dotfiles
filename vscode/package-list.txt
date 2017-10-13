@@ -12,4 +12,5 @@ ms-vscode.sublime-keybindings
 neilbrayfield.php-docblocker
 patbenatar.advanced-new-file
 whatwedo.twig
+rebornix.Ruby
 yahya-gilany.vscode-pomodoro
