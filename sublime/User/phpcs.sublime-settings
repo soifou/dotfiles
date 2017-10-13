@@ -7,7 +7,7 @@
     "php_cs_fixer_show_quick_panel": false,
     "php_cs_fixer_executable_path": "~/.composer/vendor/bin/php-cs-fixer",
     "php_cs_fixer_additional_args": {
-        "--rules": "@Symfony,-@PSR1,-blank_line_before_return,strict_comparison",
+        "--rules": "@Symfony,@DoctrineAnnotation,-@PSR1,@PSR2,-blank_line_before_return,strict_comparison,single_line_comment_style,self_accessor,ordered_imports,ordered_class_elements,object_operator_without_whitespace,not_operator_with_space,normalize_index_brace,no_useless_return,no_useless_else,no_unused_imports,no_unneeded_curly_braces,no_short_echo_tag,align_multiline_comment",
         "--allow-risky": "yes"
     },
     "phpcbf_executable_path": "~/.composer/vendor/bin/phpcbf",
