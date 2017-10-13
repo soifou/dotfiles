@@ -40,6 +40,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
+Plugin 'ryanoasis/vim-devicons'
 
 call vundle#end()
 filetype plugin indent on " required
