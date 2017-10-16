@@ -35,6 +35,7 @@ elif [[ `uname` == "Darwin" ]]; then
     alias show-desktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
     alias hide-desktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
     # Hide/show the iTerm2 Dock icon.
-    alias show-iterm="/usr/libexec/PlistBuddy -c \"Delete :LSUIElement\" /Applications/iTerm.app/Contents/Info.plist"
-    alias hide-iterm="/usr/libexec/PlistBuddy -c \"Add :LSUIElement bool true\" /Applications/iTerm.app/Contents/Info.plist"
+    # useless in iTerm 3.1.x: Appearance > System > Exclude from Dock and App switcher
+    # alias show-iterm="/usr/libexec/PlistBuddy -c \"Delete :LSUIElement\" /Applications/iTerm.app/Contents/Info.plist"
+    # alias hide-iterm="/usr/libexec/PlistBuddy -c \"Add :LSUIElement bool true\" /Applications/iTerm.app/Contents/Info.plist"
 fi
