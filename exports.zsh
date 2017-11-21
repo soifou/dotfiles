@@ -55,7 +55,12 @@ if [[ `uname` == "Darwin" ]]; then
 
 elif [[ `uname` == "Linux" ]]; then
     # SSH
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    if [ ! -S $XDG_RUNTIME_DIR/ssh-agent.socket ]; then
+        eval `ssh-agent`
+        ln -sf "$SSH_AUTH_SOCK" $XDG_RUNTIME_DIR/ssh-agent.socket
+    fi
+    export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+    ssh-add -l > /dev/null || ssh-add
 
     # add docker
     if [ -f /usr/bin/docker ]; then
