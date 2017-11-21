@@ -157,7 +157,8 @@ htop() {
 kahlan() {
     docker run --rm -it \
         -v $(pwd):/app \
-        kahlan/kahlan:3.0-alpine ${@:1}
+        --net=$DOCKER_NETWORK_NAME \
+        soifou/kahlan:latest ${@:1}
 }
 ngrok() {
     NGROK_CONTAINER_NAME=ngrok_web
