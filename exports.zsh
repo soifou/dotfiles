@@ -25,6 +25,14 @@ if [ -d "${NVM_ROOT}" ]; then
     # NVM is slow: https://github.com/creationix/nvm/issues/860
     source "$NVM_ROOT/nvm.sh" --no-use
     export PATH=$HOME/.nvm/versions/node/v6.9.5/bin:$PATH
+    # Calling nvm use automatically in a directory with a .nvmrc file
+    autoload -U add-zsh-hook
+    load-nvmrc() {
+        if [[ -f .nvmrc && -r .nvmrc ]]; then
+            nvm use
+        fi
+    }
+    add-zsh-hook chpwd load-nvmrc
 fi
 
 if [[ `uname` == "Darwin" ]]; then
