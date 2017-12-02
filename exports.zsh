@@ -5,6 +5,22 @@ fi
 
 export LESS="-FSRXI"
 
+# add my custom scripts
+if [ -d "$HOME/.bin" ]; then
+    export PATH="$HOME/.bin:$PATH"
+fi
+# add PHPBrew
+export PHPBREW_ROOT="$HOME/.phpbrew"
+if [ -d "${PHPBREW_ROOT}" ]; then
+    export PHPBREW_SET_PROMPT=1
+    export PHPBREW_RC_ENABLE=1
+    source $PHPBREW_ROOT/bashrc
+fi
+# add Composer
+export COMPOSER_ROOT="$HOME/.composer"
+if [ -d "${COMPOSER_ROOT}" ]; then
+    export PATH="$COMPOSER_ROOT/vendor/bin:$PATH"
+fi
 # add Rbenv
 export RBENV_ROOT="$HOME/.rbenv"
 if [ -d "${RBENV_ROOT}" ]; then
@@ -18,7 +34,6 @@ if [ -d "${PYENV_ROOT}" ]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
-
 # add Node Version Manager (nvm)
 export NVM_ROOT="$HOME/.nvm"
 if [ -d "${NVM_ROOT}" ]; then
@@ -61,7 +76,6 @@ elif [[ `uname` == "Linux" ]]; then
     fi
     export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
     ssh-add -l > /dev/null || ssh-add
-
     # add docker
     if [ -f /usr/bin/docker ]; then
         source $HOME/dotfiles/docker/functions.zsh
@@ -69,13 +83,6 @@ elif [[ `uname` == "Linux" ]]; then
         if [ -e "$HOME/dotfiles/docker/private.zsh" ]; then
             source $HOME/dotfiles/docker/private.zsh
         fi
-    fi
-    # add PHPBrew
-    export PHPBREW_ROOT="$HOME/.phpbrew"
-    if [ -d "${PHPBREW_ROOT}" ]; then
-        export PHPBREW_SET_PROMPT=1
-        export PHPBREW_RC_ENABLE=1
-        source $PHPBREW_ROOT/bashrc
     fi
     # add LinuxBrew
     export LINUXBREW_ROOT="$HOME/.linuxbrew"
