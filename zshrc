@@ -2,15 +2,15 @@
 # zmodload zsh/zprof
 # date "+%s.%N"
 
-source $HOME/dotfiles/preload.zsh
-source $HOME/dotfiles/antigen.zsh
-source $HOME/dotfiles/history.zsh
-if [ -e "$HOME/dotfiles/private.zsh" ]; then
-    source $HOME/dotfiles/private.zsh
+source $HOME/dotfiles/zsh/preload.zsh
+source $HOME/dotfiles/zsh/antigen.zsh
+source $HOME/dotfiles/zsh/history.zsh
+if [ -e "$HOME/dotfiles/zsh/private.zsh" ]; then
+    source $HOME/dotfiles/zsh/private.zsh
 fi
-source $HOME/dotfiles/exports.zsh
-source $HOME/dotfiles/functions.zsh
-source $HOME/dotfiles/aliases.zsh
+source $HOME/dotfiles/zsh/exports.zsh
+source $HOME/dotfiles/zsh/functions.zsh
+source $HOME/dotfiles/zsh/aliases.zsh
 
 # uncomment to finish profiling
 # zprof

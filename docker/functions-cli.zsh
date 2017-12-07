@@ -52,7 +52,6 @@ composer() {
         $tty \
         --interactive \
         --rm \
-        -u $(id -u):$(id -g) \
         -v ~/.composer:/composer \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
@@ -60,7 +59,7 @@ composer() {
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --env SSH_AUTH_SOCK=/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/composer:php-7.1 ${@:1}
+        soifou/composer:php-7.2 ${@:1}
 }
 composer-7.0() {
     tty=
