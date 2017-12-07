@@ -1,5 +1,5 @@
 .directory
-antigen.zsh.zwc
+*.zsh.zwc
 private.zsh
 vim/.netrwhist
 vim/bundle
