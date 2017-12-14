@@ -26,30 +26,29 @@
 ###############################################
 # Config                                      #
 ###############################################
+.config/*/Cache
+.config/*/GPUCache
+.config/*/IndexedDB/
+.config/*/Local Storage
+.config/*/localStorage
+.config/*/networkcache
+.config/*/ShaderCache
+
 .config/akonadi
-.config/Atom-Shell
 .config/Atom
+.config/Atom-Shell
 .config/Brackets/cef_data
 .config/Brackets/extensions
 .config/Brackets/live-dev-profile
-.config/Clementine/networkcache
 .config/chromium
-.config/chromium-backup/Default/Local Storage
-.config/chromium-backup/Default/Session Storage
-.config/chromium-backup/Default/Application Cache
-.config/chromium-backup/Default/History Index *
-.config/chromium-backup/ShaderCache
-.config/chromium-backup/Default/Service Worker/CacheStorage
+.config/chromium-backup/*/Application Cache
+.config/chromium-backup/*/History Index *
+.config/chromium-backup/*/Local Storage
+.config/chromium-backup/*/Service Worker/CacheStorage
+.config/chromium-backup/*/Session Storage
 .config/Code
+.config/Insomnia/responses/*
 .config/session
-.config/Keybase/Cache
-.config/Keybase/GPUCache
-.config/Mattermost/GPUCache
-.config/Mattermost/Cache
-.config/Nylas Mail/Cache
-.config/Nylas Mail/GPUCache
-.config/Slack/Cache
-.config/Slack/GPUCache/
 .config/sublime-text-3
 
 ###############################################
@@ -84,14 +83,16 @@
 ###############################################
 .local/share/akonadi
 .local/share/icons
-.local/share/icons
 .local/share/keybase/kbfs_block_cache
+.local/share/keybase/kbfs_sync_cache
 .local/share/org.kde.gwenview/recentfolders
 .local/share/Trash
+.local/share/RecentDocuments
 
 ###############################################
 # Mozilla Firefox                             #
 ###############################################
+.mozilla/firefox_old
 .mozilla/firefox/*backup-*
 .mozilla/firefox/*/Cache
 # in case Fx crashes dumps will be stored in this
@@ -124,15 +125,17 @@
 .composer/cache
 .composer/vendor
 .gem
-.pyenv
-.rbenv
-.pip
 .linuxbrew
 .node-gyp
+.novaclient
 .npm
-.nvm
 .nv
+.nvm
+.pdepend
+.pip
 .pulse
+.pyenv
+.rbenv
 .wp-cli/cache
 
 ###############################################
@@ -161,15 +164,15 @@ Videos
 ###############################################
 # not worth a backup                          #
 ###############################################
+# Cached info about audio CDs
 .android
 .antigen
 .aptitude
-.audacity-data/AutoSave
 .atom
+.audacity-data/AutoSave
 .berkshelf
 .bundle
 .cache
-# Cached info about audio CDs
 .cddb
 .cinderclient
 .dbus
@@ -183,9 +186,9 @@ Videos
 .loki/ut/Logs
 .luckybackup-snaphots/default.profile/logs/
 .luckyBackup/logs
-.nylas-mail
 .pulse-cookir
 .recently-used
+.v8flags.*.json
 .vscode
 .wine
 .Xauthority
