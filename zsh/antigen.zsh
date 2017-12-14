@@ -1,5 +1,5 @@
 # powerlevel9k tweaks
-source $HOME/dotfiles/zsh/pl9k.zsh
+#source $HOME/dotfiles/zsh/pl9k.zsh
 
 # Add antigen defaults
 source $HOME/.antigen/antigen.zsh
@@ -39,7 +39,7 @@ elif [ -f /etc/debian_version ]; then
 fi
 
 # Load the theme.
-antigen theme bhilburn/powerlevel9k powerlevel9k
+#antigen theme bhilburn/powerlevel9k powerlevel9k
 
 # Tell antigen that you're done.
 antigen apply
