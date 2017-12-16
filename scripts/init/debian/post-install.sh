@@ -154,9 +154,13 @@ rm -rf $HOME/vimsrc
 
 # NODEJS
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
-# export NVM_DIR="/home/serverstaging/.nvm"
+git clone https://github.com/creationix/nvm.git $HOME/.nvm
+# export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm install node
+nvm install --lts=carbon
+# @NOTE: don't use codename for the alias since our export will check existing name in ~/.nvm/versions/
+# you can however use the codename alias in .nvmrc file
+nvm alias default v8.9.3
 
 
 # DOCKER
