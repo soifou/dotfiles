@@ -150,7 +150,7 @@ configure_vscode() {
     else
         VSCODE_HOME="$HOME/.config/Code"
     fi
-    if [[ -d "$VSCODE_HOME/User" ]]; then
+    if [[ ! -L "$VSCODE_HOME/User" && -d "$VSCODE_HOME/User" ]]; then
         echo "Backup current VSCode config"
         mv "$VSCODE_HOME/User" "$VSCODE_HOME/User.dotbackup"
     fi
