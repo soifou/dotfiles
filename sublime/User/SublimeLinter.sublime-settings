@@ -53,14 +53,23 @@
 				"args":
 				[
 				],
-				"cmd": "/usr/local/bin/php",
+				"excludes":
+				[
+				]
+			},
+			"phpcsfixer":
+			{
+				"@disable": false,
+				"args":
+				[
+				],
 				"excludes":
 				[
 				]
 			},
 			"rubocop":
 			{
-				"@disable": true,
+				"@disable": false,
 				"args":
 				[
 				],
@@ -76,15 +85,17 @@
 		{
 			"linux":
 			[
-				"~/.nvm/versions/node/v6.9.5/bin",
+				"~/.nvm/versions/node/v8.9.3/bin",
 				"~/.rbenv/shims",
-				"~/.pyenv/shims"
+				"~/.pyenv/shims",
+				"~/.phpenv/shims"
 			],
 			"osx":
 			[
-				"~/.nvm/versions/node/v6.9.5/bin",
+				"~/.nvm/versions/node/v8.9.3/bin",
 				"~/.rbenv/shims",
-				"~/.pyenv/shims"
+				"~/.pyenv/shims",
+                "~/.phpenv/shims"
 			],
 			"windows":
 			[

@@ -10,6 +10,7 @@ christian-kohler.path-intellisense
 cxfksword.goto-documentation
 formulahendry.auto-close-tag
 formulahendry.auto-rename-tag
+kenhowardpdx.vscode-gist
 linyang95.php-symbols
 ms-vscode.azure-account
 ms-vscode.sublime-keybindings
