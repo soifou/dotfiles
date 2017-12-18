@@ -59,9 +59,9 @@ composer() {
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --env SSH_AUTH_SOCK=/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/composer:php-7.2 ${@:1}
+        soifou/composer:latest ${@:1}
 }
-composer-7.0() {
+composer-7.1() {
     tty=
     tty -s && tty=--tty
     docker run \
@@ -76,7 +76,7 @@ composer-7.0() {
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --env SSH_AUTH_SOCK=/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/composer:php-7.0 ${@:1}
+        soifou/composer:php-7.1 ${@:1}
 }
 composer-5.6() {
     tty=
