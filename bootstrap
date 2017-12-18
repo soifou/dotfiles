@@ -150,11 +150,13 @@ configure_vscode() {
     else
         VSCODE_HOME="$HOME/.config/Code"
     fi
+
     if [[ ! -L "$VSCODE_HOME/User" && -d "$VSCODE_HOME/User" ]]; then
         echo "Backup current VSCode config"
         mv "$VSCODE_HOME/User" "$VSCODE_HOME/User.dotbackup"
+        print_info "Link VSCode user config"
+        ln -s $HOME/dotfiles/vscode/User "$VSCODE_HOME/User"
     fi
-    ln -s $HOME/dotfiles/vscode/User "$VSCODE_HOME/User"
 
     print_info "Download and install latest VSCode text editor"
     if [ -f /etc/debian_version ]; then
