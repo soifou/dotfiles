@@ -9,13 +9,11 @@ export LESS="-FSRXI"
 if [ -d "$HOME/.bin" ]; then
     export PATH="$HOME/.bin:$PATH"
 fi
-# add PHPBrew
-export PHPBREW_ROOT="$HOME/.phpbrew"
-if [ -d "${PHPBREW_ROOT}" ]; then
-    export PATH="$PHPBREW_ROOT/bin:$PATH"
-    # source $PHPBREW_ROOT/bashrc
-    export PHPBREW_SET_PROMPT=1
-    export PHPBREW_RC_ENABLE=1
+# add PHPenv
+export PHPENV_ROOT="$HOME/.phpenv"
+if [ -d "${PHPENV_ROOT}" ]; then
+    export PATH="$PHPENV_ROOT/bin:$PATH"
+    eval "$(phpenv init -)"
 fi
 # add Composer
 export COMPOSER_ROOT="$HOME/.composer"
