@@ -1,0 +1,10 @@
+{
+    "require": {
+        "squizlabs/php_codesniffer": "*",
+		"friendsofphp/php-cs-fixer": "^2.2",
+        "hirak/prestissimo": "^0.3",
+        "phpmd/phpmd": "^2.6",
+        "kahlan/kahlan": "^3.0",
+        "deployer/deployer": "^6.0"
+    }
+}

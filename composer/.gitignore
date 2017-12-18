@@ -1,0 +1,6 @@
+cache/*
+!cache/.htaccess
+vendor
+
+auth.json
+keys.*.pub

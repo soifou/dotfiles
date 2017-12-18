@@ -137,6 +137,11 @@ configure_vim() {
     vim +PluginInstall +qall > /dev/null 2>&1
 }
 
+configure_composer() {
+    print_info "Configuring composer..."
+    link_directory composer .composer
+}
+
 configure_bundler() {
     mkdir -p $HOME/.bundle
     link_file bundler.conf .bundle/config
@@ -260,17 +265,6 @@ delete_backups() {
     rm -rf $HOME/.zshrc.dotbackup
 }
 
-# update() {
-#     echo "Updating configuration..."
-#     git pull origin master
-#     if [ "$NO_VIM" != 1 ]; then
-#         echo "Updating Vim plugins. Please wait..."
-#         vim +PluginUpdate +qall > /dev/null 2>&1
-#     fi
-#     load_zsh_modules
-#     rm -f $HOME/.zcompdump
-# }
-
 set -e
 
 while :
@@ -283,6 +277,7 @@ do
             print_info "--ack             Ack custom config";
             print_info "--atom            Install and configure preferences, add custom/useful plugins for atom text editor"
             print_info "--bundler         Create config file for Bundler (Ruby dependencies manager)"
+            print_info "--composer        Config global Composer (PHP dependencies manager)"
             print_info "--delete-backups  Remove all dotbackup files";
             print_info "--git             Create config/ignore Git files for the current user";
             print_info "--git-name        Set your Git display name";
@@ -299,6 +294,7 @@ do
         --ack) ACK=1; shift; ;;
         --atom) ATOM=1; shift; ;;
         --bundler) BUNDLER=1; shift; ;;
+        --composer) COMPOSER=1; shift; ;;
         --delete-backups) DELETE_BACKUPS=1; shift; ;;
         --font-scp) FONT_SCP=1; shift; ;;
         --git) GIT=1; shift; ;;
@@ -329,6 +325,9 @@ if [ "$ATOM" == 1 ]; then
 fi
 if [ "$BUNDLER" == 1 ]; then
     configure_bundler
+fi
+if [ "$COMPOSER" == 1 ]; then
+    configure_composer
 fi
 if [ "$GIT" == 1 ]; then
     configure_git
