@@ -55,6 +55,7 @@
     "editor.snippetSuggestions": "top",
     "editor.tabSize": 4,
     "explorer.decorations.badges": false,
+    "explorer.enableDragAndDrop": false,
     "explorer.openEditors.visible": 0,
     "files.exclude": {
         "**/.git": true,
@@ -96,5 +97,6 @@
         "progressBar.background": "#80CBC4",
         "pickerGroup.foreground": "#80CBC4",
         "tab.activeBorder": "#80CBC4"
-    }
+    },
+    "window.menuBarVisibility": "toggle"
 }
