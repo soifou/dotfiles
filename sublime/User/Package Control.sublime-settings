@@ -30,6 +30,7 @@
 		"Rsync SSH",
 		"Smarty",
 		"SublimeLinter",
+		"SublimeLinter-contrib-php-cs-fixer",
 		"SublimeLinter-csslint",
 		"SublimeLinter-jshint",
 		"SublimeLinter-pep8",
