@@ -1,140 +1,23 @@
+// SublimeLinter Settings - User
 {
-	"user":
-	{
-		"debug": false,
-		"delay": 0.25,
-		"error_color": "D02000",
-		"gutter_theme": "Packages/Material Theme/extras/SublimeLinter/Material-Theme.gutter-theme",
-		"gutter_theme_excludes":
-		[
-		],
-		"lint_mode": "background",
-		"linters":
-		{
-			"csslint":
-			{
-				"@disable": true,
-				"args":
-				[
-				],
-				"errors": "",
-				"excludes":
-				[
-				],
-				"ignore": "",
-				"warnings": ""
-			},
-			"jshint":
-			{
-				"@disable": true,
-				"args":
-				[
-				],
-				"excludes":
-				[
-				]
-			},
-			"pep8":
-			{
-				"@disable": true,
-				"args":
-				[
-				],
-				"excludes":
-				[
-				],
-				"ignore": "",
-				"max-line-length": null,
-				"select": ""
-			},
-			"php":
-			{
-				"@disable": false,
-				"args":
-				[
-				],
-				"excludes":
-				[
-				]
-			},
-			"phpcsfixer":
-			{
-				"@disable": false,
-				"args":
-				[
-				],
-				"excludes":
-				[
-				]
-			},
-			"rubocop":
-			{
-				"@disable": false,
-				"args":
-				[
-				],
-				"excludes":
-				[
-				]
-			}
-		},
-		"mark_style": "solid underline",
-		"no_column_highlights_line": false,
-		"passive_warnings": false,
-		"paths":
-		{
-			"linux":
-			[
-				"~/.nvm/versions/node/v8.9.3/bin",
-				"~/.rbenv/shims",
-				"~/.pyenv/shims",
-				"~/.phpenv/shims"
-			],
-			"osx":
-			[
-				"~/.nvm/versions/node/v8.9.3/bin",
-				"~/.rbenv/shims",
-				"~/.pyenv/shims",
-                "~/.phpenv/shims"
-			],
-			"windows":
-			[
-			]
-		},
-		"python_paths":
-		{
-			"linux":
-			[
-			],
-			"osx":
-			[
-			],
-			"windows":
-			[
-			]
-		},
-		"rc_search_limit": 3,
-		"shell_timeout": 10,
-		"show_errors_on_save": false,
-		"show_marks_in_minimap": true,
-		"syntax_map":
-		{
-			"html (django)": "html",
-			"html (rails)": "html",
-			"html 5": "html",
-			"javascript (babel)": "javascript",
-			"magicpython": "python",
-			"php": "html",
-			"python django": "python",
-			"pythonimproved": "python"
-		},
-		"tooltip_fontsize": "1rem",
-		"tooltip_theme": "Packages/SublimeLinter/tooltip-themes/Default/Default.tooltip-theme",
-		"tooltip_theme_excludes":
-		[
-		],
-		"tooltips": false,
-		"warning_color": "DDB700",
-		"wrap_find": true
-	}
+    "debug": true,
+    "paths": {
+        "linux":
+        [
+            "~/.nvm/versions/node/v8.9.3/bin",
+            "~/.rbenv/shims",
+            "~/.pyenv/shims",
+            "~/.phpenv/shims",
+            "~/.composer/vendor/bin"
+        ],
+        "osx":
+        [
+            "~/.nvm/versions/node/v8.9.3/bin",
+            "~/.rbenv/shims",
+            "~/.pyenv/shims",
+            "~/.phpenv/shims",
+            "~/.composer/vendor/bin"
+        ],
+        "windows": []
+    }
 }

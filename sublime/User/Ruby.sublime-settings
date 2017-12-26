@@ -1,7 +1,14 @@
 {
 	"extensions":
 	[
+		"podspec",
+		"thor",
+		"pp",
+		"rb",
+		"jbuilder",
+		"rake",
+		"rabl",
 		"Vagrantfile",
-		"pp"
+		"simplecov"
 	]
 }

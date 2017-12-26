@@ -201,7 +201,7 @@ configure_atom() {
 
 configure_sublime() {
     package_control_url=https://packagecontrol.io/Package%20Control.sublime-package
-    plugins=(soifou)
+    plugins=(soifou sublime-nginx)
     ostype=$(uname);
 
     if [ $ostype == "Darwin" ]; then

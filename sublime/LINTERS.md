@@ -6,14 +6,10 @@ Here is a memo list.
 
 ## CSS
 
-Prerequisite: nodeJS, npm (with nvm)
-Install csslint globally
 > $ npm install -g csslint
 
 ## JS
 
-Prerequisite: nodeJS, npm (with nvm)
-Install jshint globally
 > $ npm install -g jshint
 
 ## PHP
@@ -33,11 +29,12 @@ SublimeLinter-php use `php -l`. Check PHP is in your path.
 
 ## Ruby
 
-Install rubocop globally
-> gem install rubocop
+> $ gem install rubocop
 
 ## Python
 
-Install pep8 globally (via pip3 for better perf)
-> pyenv global 3.5.3
-> pip install pep8
+> $ pip install pycodestyle
+
+## Docker
+
+> $ npm install -g dockerfilelint@">=1.4.0"

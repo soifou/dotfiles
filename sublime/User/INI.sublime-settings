@@ -1,0 +1,12 @@
+{
+	"extensions":
+	[
+		".gitattributes",
+		".npmrc",
+		".gitignore",
+		".gitconfig",
+		"ini.dist",
+        "pip.conf",
+        "ackrc"
+	]
+}

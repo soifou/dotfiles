@@ -3,9 +3,15 @@
 	"in_process_packages":
 	[
 	],
+	"install_prereleases":
+	[
+		"SublimeLinter"
+	],
 	"installed_packages":
 	[
 		"A File Icon",
+		"Ansible",
+		"ApplySyntax",
 		"Bootstrap 3 Snippets",
 		"BracketHighlighter",
 		"CodeFormatter",
@@ -31,11 +37,13 @@
 		"Rsync SSH",
 		"Smarty",
 		"SublimeLinter",
+		"SublimeLinter-contrib-dockerfilelint",
 		"SublimeLinter-contrib-php-cs-fixer",
+		"SublimeLinter-contrib-yamllint",
 		"SublimeLinter-csslint",
 		"SublimeLinter-jshint",
-		"SublimeLinter-pep8",
 		"SublimeLinter-php",
+		"SublimeLinter-pycodestyle",
 		"SublimeLinter-rubocop"
 	]
 }
