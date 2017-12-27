@@ -5,7 +5,8 @@
 		".gemrc",
 		"YAML-tmLanguage",
 		"yml",
-		"yml.dist"
+		"yml.dist",
+        ".yamllintrc"
 	],
 	"tab_size": 4,
 	"translate_tabs_to_spaces": true
