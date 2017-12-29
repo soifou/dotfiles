@@ -33,6 +33,16 @@ if [ -d "${PYENV_ROOT}" ]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+# add pipenv
+# if [ -x "$(command -v pipenv)" ]; then
+#     autoload -U add-zsh-hook
+#     load-pipenvshell() {
+#         if [[ -f Pipfile && -r Pipfile ]]; then
+#             pipenv shell
+#         fi
+#     }
+#     add-zsh-hook chpwd load-pipenvshell
+# fi
 # add Node Version Manager (nvm)
 export NVM_ROOT="$HOME/.nvm"
 if [ -d "${NVM_ROOT}" ]; then
@@ -70,6 +80,8 @@ if [[ `uname` == "Darwin" ]]; then
     fi
 
 elif [[ `uname` == "Linux" ]]; then
+    # Support more than 256 colors
+    export TERM="xterm-256color"
     # SSH
     if [ ! -S $XDG_RUNTIME_DIR/ssh-agent.socket ]; then
         eval `ssh-agent`
