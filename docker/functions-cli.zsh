@@ -8,6 +8,9 @@ getContainerPath() {
     fi
 }
 php() {
+    # @NOTE: we add a custom port in case we want to use the build-in php webserver feature
+    # available in many php framework.
+    # $ php bin/console server:run 0.0.0.0:8080
     tty=
     tty -s && tty=--tty
     docker run \
@@ -17,6 +20,7 @@ php() {
         -v "$PWD":$(getContainerPath) \
         -w $(getContainerPath) \
         -u `id -u`:`id -g` \
+        -p 8080:8080 \
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-7.1 ${@:1}
 }
@@ -57,6 +61,7 @@ composer() {
         -v /etc/group:/etc/group:ro \
         -v $(pwd):/app \
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
+        -u `id -u`:`id -g` \
         --env SSH_AUTH_SOCK=/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
         soifou/composer:latest ${@:1}
@@ -168,15 +173,19 @@ kahlan() {
         soifou/kahlan:latest ${@:1}
 }
 ngrok() {
-    NGROK_CONTAINER_NAME=ngrok_web
-    docker run --rm -it -d \
-        -v $HOME/.ngrok2/ngrok.yml:/home/ngrok/.ngrok2/ngrok.yml \
-        --name $NGROK_CONTAINER_NAME \
-        -p 4040 \
-        --link "$1":http \
-        --net=$DOCKER_NETWORK_NAME \
-        wernight/ngrok ngrok http http:80
-    echo "\e[0;35mngrok address -> http://local.dev:$(docker port $NGROK_CONTAINER_NAME | awk -F: '{ print $2}')\e[0m\n"
+    if [ "$#" -ne 2 ]; then
+        echo "\e[0;35mOops, syntax is:\e[0m\n $ ngrok [web_container] [domain.dev]"
+    else
+        NGROK_CONTAINER_NAME=ngrok_web
+        docker run --rm -it -d \
+            -v $HOME/.ngrok2/ngrok.yml:/home/ngrok/.ngrok2/ngrok.yml \
+            --name $NGROK_CONTAINER_NAME \
+            -p 4040 \
+            --link "$1":http \
+            --net=$DOCKER_NETWORK_NAME \
+            wernight/ngrok ngrok http -host-header=$2 http:80
+        echo "\e[0;35mngrok address -> http://local.dev:$(docker port $NGROK_CONTAINER_NAME | awk -F: '{ print $2}')\e[0m\n"
+    fi
 }
 adb() {
     if [[ $(docker ps | grep adbd | wc -l) == 0 ]]; then
