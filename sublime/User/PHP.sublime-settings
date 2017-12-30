@@ -5,6 +5,7 @@
 		"phtml",
 		"inc",
 		"php5",
-		"php4"
+		"php4",
+        ".phpcs*"
 	]
 }
