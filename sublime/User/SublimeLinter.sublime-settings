@@ -4,7 +4,7 @@
     "paths": {
         "linux":
         [
-            "~/.nvm/versions/node/v8.9.3/bin",
+            "~/.nodenv/shims",
             "~/.rbenv/shims",
             "~/.pyenv/shims",
             "~/.phpenv/shims",
@@ -12,7 +12,7 @@
         ],
         "osx":
         [
-            "~/.nvm/versions/node/v8.9.3/bin",
+            "~/.nodenv/shims",
             "~/.rbenv/shims",
             "~/.pyenv/shims",
             "~/.phpenv/shims",
