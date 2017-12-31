@@ -44,6 +44,7 @@
 		"SublimeLinter-jshint",
 		"SublimeLinter-php",
 		"SublimeLinter-pycodestyle",
-		"SublimeLinter-rubocop"
+		"SublimeLinter-rubocop",
+		"SublimeLinter-shellcheck"
 	]
 }
