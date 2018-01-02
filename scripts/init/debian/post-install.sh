@@ -103,15 +103,22 @@ apt-get install -f
 # PYTHON
 apt-get install -y python-pip libncurses5 libncurses5-dev libncursesw5
 pip install --upgrade pip
-git clone https://github.com/yyuu/pyenv.git ~/.pyenv
-git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+git clone https://github.com/yyuu/pyenv.git $HOME/.pyenv
+git clone https://github.com/yyuu/pyenv-virtualenv.git $HOME/.pyenv/plugins/pyenv-virtualenv
+git clone https://github.com/jawshooah/pyenv-default-packages.git $HOME/.pyenv/plugins/pyenv-default-packages
+cat >$HOME/.pyenv/default-packages <<EOL
+glances
+httpie
+pip
+pycodestyle
+yamllint
+EOL
 # export PYENV_ROOT="$HOME/.pyenv"
 # export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)
 pyenv install 2.7.10
 pyenv global 2.7.10
-# pip install something cool
 
 # FONTS POWERLINE (via PIP)
 # @see: https://levlaz.org/installing-powerline-in-debian/
@@ -124,15 +131,17 @@ mv 10-powerline-symbols.conf /etc/fonts/conf.d/
 
 # RUBY
 apt-get install -y libreadline-dev
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-cd ~/.rbenv && src/configure && make -C src
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+git clone https://github.com/rbenv/rbenv.git $HOME/.rbenv
+cd $HOME/.rbenv && src/configure && make -C src
+git clone https://github.com/rbenv/ruby-build.git $HOME/.rbenv/plugins/ruby-build
+git clone https://github.com/rbenv/rbenv-default-gems.git $HOME/.rbenv/plugins/rbenv-default-gems
 # PATH="$HOME/.rbenv/bin:$PATH" rbenv
+cat >$HOME/.rbenv/default-gems <<EOL
+bundler
+rake
+EOL
 rbenv install 2.2.4
 rbenv global 2.2.4
-apt-get install -y gem
-gem install bundler
-# gem env home
 
 # LINUXBREW
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
@@ -152,7 +161,7 @@ make install
 rm -rf $HOME/vimsrc
 
 
-# NODEJS
+# NVM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 git clone https://github.com/creationix/nvm.git $HOME/.nvm
 # export NVM_DIR="$HOME/.nvm"
@@ -162,6 +171,27 @@ nvm install --lts=carbon
 # you can however use the codename alias in .nvmrc file
 nvm alias default v8.9.3
 
+# NODENV
+git clone https://github.com/nodenv/nodenv $HOME/.nodenv
+git clone https://github.com/nodenv/node-build.git $HOME/.nodenv/plugins/node-build
+git clone https://github.com/nodenv/nodenv-default-packages.git $HOME/.nodenv/plugins/nodenv-default-packages
+cat >$HOME/.nodenv/default-packages <<EOL
+csslint
+diff-so-fancy
+dockerfilelint
+jshint
+markdownlint-cli
+npm
+prettier
+yarn
+EOL
+# export NODENV_ROOT="$HOME/.nodenv"
+# if [ -d "${NODENV_ROOT}" ]; then
+#     export PATH="$NODENV_ROOT/bin:$PATH"
+#     eval "$(nodenv init -)"
+# fi
+nodenv install 8.9.3
+nodenv global 8.9.3
 
 # DOCKER
 apt-get remove --purge lxc-docker* docker.io*
