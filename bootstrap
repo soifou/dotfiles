@@ -201,38 +201,35 @@ configure_atom() {
 
 configure_sublime() {
     package_control_url=https://packagecontrol.io/Package%20Control.sublime-package
-    plugins=(soifou sublime-nginx)
+    folders=(Default User soifou sublime-nginx)
     ostype=$(uname);
 
-    if [ $ostype == "Darwin" ]; then
+    if [ "$ostype" == "Darwin" ]; then
         sublime_dir="$HOME/Library/Application Support/Sublime Text 3"
     else
         sublime_dir="$HOME/.config/sublime-text-3"
     fi
 
     # revert change - testing
-    # rm "$sublime_dir/Packages/User"
     # rm -r "$sublime_dir/Installed Packages"
-    # for plugin in "${plugins[@]}"
+    # for plugin in "${folders[@]}"
     # do
     #     echo "    * removing $plugin plugin"
     #     rm "$sublime_dir/Packages/$plugin"
     # done
 
-    print_info "Configuring preferences for Sublime Text..."
-    if [[ -d "$sublime_dir/Packages/User" ]]; then
-        echo "Backup current customer config"
-        mv "$sublime_dir/Packages/User" "$sublime_dir/Packages/User.dotbackup"
-    fi
-    ln -s $HOME/dotfiles/sublime/User "$sublime_dir/Packages/"
-
 	print_info "Download Sublime Package Control"
     wget -P "$sublime_dir/Installed Packages" $package_control_url
 
-    print_info "Add custom Sublime plugins"
-    for plugin in "${plugins[@]}"
+    print_info "Link our tracked folders"
+    for folder in "${folders[@]}"
     do
-        ln -s $HOME/dotfiles/sublime/$plugin "$sublime_dir/Packages/$plugin"
+        if [[ ! -L "$sublime_dir/Packages/$folder" && -d "$sublime_dir/Packages/$folder" ]]; then
+            echo "Backup existing folder $folder"
+            mv "$sublime_dir/Packages/$folder" "$sublime_dir/Packages/$folder.dotbackup"
+        fi
+        ln -sf "$HOME/dotfiles/sublime/$folder" "$sublime_dir/Packages/$folder"
+        echo "  * $folder is linked."
     done
 	print_info "Done! At the next start Sublime Text will fetch/upgrade packages"
 }
