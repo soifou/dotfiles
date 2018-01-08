@@ -8,6 +8,7 @@
 	"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
 	"copy_with_empty_selection": false,
 	"detect_indentation": false,
+    "dpi_scale": 1.0,
 	"drag_text": false,
 	"draw_minimap_border": true,
 	"enable_tab_scrolling": false,
