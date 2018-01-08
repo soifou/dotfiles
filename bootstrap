@@ -228,7 +228,7 @@ configure_sublime() {
             echo "Backup existing folder $folder"
             mv "$sublime_dir/Packages/$folder" "$sublime_dir/Packages/$folder.dotbackup"
         fi
-        ln -sf "$HOME/dotfiles/sublime/$folder" "$sublime_dir/Packages/$folder"
+        ln -nsf "$HOME/dotfiles/sublime/$folder" "$sublime_dir/Packages/$folder"
         echo "  * $folder is linked."
     done
 	print_info "Done! At the next start Sublime Text will fetch/upgrade packages"

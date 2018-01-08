@@ -14,7 +14,7 @@ tmp_filepath="/tmp/mattermost-latest.tar.gz"
 install_dir="/opt"
 
 # @TODO: cannot get the version from the bin???
-currentVersion=$(find $install_dir -maxdepth 1 -type d | grep mattermost-desktop | awk -F- '{print $3}')
+currentVersion=$(find $install_dir/* -maxdepth 1 -type d -name "mattermost-*" -exec ls -d {} \; | tail -1  | awk -F- '{print $3}')
 if [ "$currentVersion" = "" ]; then
     currentVersion="0.0.0"
 fi
@@ -36,7 +36,22 @@ if [ "$latestVersion" != "$currentVersion" ]; then
         -O $tmp_filepath && \
     sudo tar -zxf $tmp_filepath -C $install_dir && \
     rm $tmp_filepath
+    sudo ln -sf $install_dir/mattermost-desktop-$latestVersion $install_dir/Mattermost
+
+    # create a desktop entry
+    # [Desktop Entry]
+    # Name=Mattermost
+    # Comment=Mattermost Desktop
+    # GenericName=Mattermost Client for Linux
+    # Exec=/opt/Mattermost/mattermost-desktop %U
+    # Icon=/opt/Mattermost/icon.png
+    # Type=Application
+    # StartupNotify=false
+    # Categories=GNOME;GTK;Network;InstantMessaging;
+    # MimeType=x-scheme-handler/mattermost;
+
     print_success "Mattermost Desktop has been upgraded to v$latestVersion"
+    # print_success "See changes: https://github.com/mattermost/desktop/blob/master/CHANGELOG.md#release-v371"
 else
     echo "Already up-to-date."
 fi

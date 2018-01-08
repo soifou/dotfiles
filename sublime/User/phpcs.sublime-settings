@@ -1,5 +1,6 @@
 {
     "show_debug": true,
+    "phpcs_php_prefix_path": "~/.phpenv/shims/php",
     "phpcs_executable_path": "~/.composer/vendor/bin/phpcs",
     "phpcs_show_quick_panel": false,
     "phpcs_show_gutter_marks": true,

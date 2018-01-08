@@ -14,6 +14,7 @@
       panelShadows: true
   core:
     audioBeep: false
+    autoHideMenuBar: true
     disabledPackages: [
       "language-objective-c"
       "language-java"
@@ -42,6 +43,8 @@
     fontFamily: "SauceCodePro Nerd Font"
     fontSize: 18
     invisibles: {}
+    scrollPastEnd: true
+    scrollSensitivity: 200
     showIndentGuide: true
     tabLength: 4
     tabType: "soft"

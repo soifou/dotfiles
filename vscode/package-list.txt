@@ -19,3 +19,4 @@ patbenatar.advanced-new-file
 rebornix.Ruby
 whatwedo.twig
 yahya-gilany.vscode-pomodoro
+timonwong.shellcheck
