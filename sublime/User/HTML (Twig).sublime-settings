@@ -1,0 +1,7 @@
+{
+	"extensions":
+	[
+		"html.twig",
+        "twig"
+	]
+}
