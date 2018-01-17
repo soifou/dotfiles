@@ -1,14 +1,21 @@
 [
     { "keys": ["alt+shift+up"], "command": "select_lines", "args": {"forward": false} },
     { "keys": ["alt+shift+down"], "command": "select_lines", "args": {"forward": true} },
+
     { "keys": ["alt+f"], "command": "js_prettier", "context": [{ "key": "selector", "operator": "equal", "operand": "source.js, source.json, text.html.markdown, source.css, source.sass, source.css.less" }] },
     { "keys": ["alt+f"], "command": "beautify_ruby", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ruby" }] },
-    { "keys": ["ctrl+shift+u"], "command": "find_use" },
-    { "keys": ["ctrl+shift+f"], "command": "expand_fqcn", "args": {"leading_separator": true} },
+
+    { "keys": ["ctrl+shift+f"], "command": "expand_fqcn", "args": {"leading_separator": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+    { "keys": ["ctrl+shift+u"], "command": "find_use", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+    { "keys": ["ctrl+shift+i"], "command": "implement", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+    { "keys": ["ctrl+shift+k"], "command": "insert_php_constructor_property", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+    { "keys": ["ctrl+shift+n"], "command": "import_namespace", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+
     { "keys": ["ctrl+alt+g"], "command": "open_browser", "args": { "url": "http://www.google.fr/#q=%s" }},
     { "keys": ["ctrl+alt+h"], "command": "open_browser", "args": { "url": "http://php.net/manual/en/function.%s.php" }},
     { "keys": ["ctrl+alt+w"], "command": "open_browser", "args": { "url": "https://codex.wordpress.org/Function_Reference/%s" }},
     { "keys": ["ctrl+alt+y"], "command": "open_browser", "args": { "url": "http://docs.python.org/library/%s" }},
+
     { "keys": ["ctrl+shift+s"], "command": "save_all" },
     { "keys": ["ctrl+space"], "command": "auto_complete" },
     { "keys": ["ctrl+alt+i"], "command": "increment_selection" },

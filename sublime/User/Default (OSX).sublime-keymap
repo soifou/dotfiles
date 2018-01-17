@@ -6,9 +6,12 @@
     { "keys": ["alt+f"], "command": "js_prettier", "context": [{ "key": "selector", "operator": "equal", "operand": "source.js, source.json, text.html.markdown, source.css, source.sass, source.css.less" }] },
     { "keys": ["alt+f"], "command": "beautify_ruby", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ruby" }] },
 
-    { "keys": ["super+alt+f"], "command": "expand_fqcn", "args": {"leading_separator": true} },
-    { "keys": ["super+alt+u"], "command": "find_use" },
-    { "keys": ["super+alt+i"], "command": "implement" },
+    { "keys": ["super+alt+f"], "command": "expand_fqcn", "args": {"leading_separator": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+    { "keys": ["super+alt+u"], "command": "find_use", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+    { "keys": ["super+alt+i"], "command": "implement", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+    { "keys": ["super+alt+k"], "command": "insert_php_constructor_property", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+    { "keys": ["super+alt+n"], "command": "import_namespace", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+
     { "keys": ["super+alt+p"], "command": "dev_docs" },
     { "keys": ["super+alt+b"], "command": "build", "args": {"select": true} },
     { "keys": ["super+m"], "command": "goto_definition" },
