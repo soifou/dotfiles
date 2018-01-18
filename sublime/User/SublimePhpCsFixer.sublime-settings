@@ -1,0 +1,10 @@
+{
+    "php_path": "~/.phpenv/shims/php",
+    "config": [
+        "${file_path}/.php_cs",
+        "${file_path}/.php_cs.dist",
+        "${folder}/.php_cs",
+        "${folder}/.php_cs.dist",
+        "~/.php_cs"
+    ]
+}
