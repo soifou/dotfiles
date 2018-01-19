@@ -4,18 +4,18 @@
     "paths": {
         "linux":
         [
-            "~/.nodenv/shims",
-            "~/.rbenv/shims",
-            "~/.pyenv/shims",
-            "~/.phpenv/shims",
+            "~/.anyenv/envs/nodenv/shims",
+            "~/.anyenv/envs/rbenv/shims",
+            "~/.anyenv/envs/pyenv/shims",
+            "~/.anyenv/envs/phpenv/shims",
             "~/.composer/vendor/bin"
         ],
         "osx":
         [
-            "~/.nodenv/shims",
-            "~/.rbenv/shims",
-            "~/.pyenv/shims",
-            "~/.phpenv/shims",
+            "~/.anyenv/envs/nodenv/shims",
+            "~/.anyenv/envs/rbenv/shims",
+            "~/.anyenv/envs/pyenv/shims",
+            "~/.anyenv/envs/phpenv/shims",
             "~/.composer/vendor/bin"
         ],
         "windows": []

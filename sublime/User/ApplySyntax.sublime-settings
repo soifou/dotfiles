@@ -22,13 +22,22 @@
         {
             "syntax": "Ansible/Ansible",
             "rules": [
-                {"file_path": ".*/tasks/.*.yml$"},
-                {"file_path": ".*/handler/.*.yml$"},
-                {"file_path": ".*/*_vars/.*.yml$"},
-                {"file_path": ".*/roles/.*.yml$"},
-                {"file_path": ".*/playbooks/.*.yml$"},
-                {"file_path": ".*/.*ansible.*/.*.yml$"}
-            ],
+                { "file_path": ".*/defaults/.*.ya?ml$" },
+                { "file_path": ".*/handlers/.*.ya?ml$" },
+                { "file_path": ".*/meta/.*.ya?ml$" },
+                { "file_path": ".*/tasks/.*.ya?ml$" },
+                { "file_path": ".*/vars/.*.ya?ml$" },
+                { "file_path": ".*/inventory/group_vars/.*" },
+                { "file_path": ".*/inventory/host_vars/.*" },
+                { "file_path": ".*/inventory/.*" },
+                { "file_path": ".*/playbooks/.*.ya?ml$" }
+            ]
+        },
+        {
+            "syntax": "Jinja2/Syntaxes/Jinja Templates",
+            "rules": [
+                { "file_path": ".*/templates/.*.j2$" }
+            ]
         },
         {
             "syntax": "YAML/YAML",

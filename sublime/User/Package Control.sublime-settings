@@ -36,6 +36,7 @@
 		"Smarty",
 		"SublimeLinter",
 		"SublimeLinter-contrib-dockerfilelint",
+		"SublimeLinter-contrib-htmlhint",
 		"SublimeLinter-contrib-php-cs-fixer",
 		"SublimeLinter-contrib-scss-lint",
 		"SublimeLinter-contrib-yamllint",
