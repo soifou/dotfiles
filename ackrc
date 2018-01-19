@@ -1,8 +1,8 @@
 # Ignore some dirs
 --ignore-dir=cache
 --ignore-dir=logs
---ignore-dir=web/js
---ignore-dir=web/css
+--ignore-dir=public
+--ignore-dir=web
 
 # Add custom type
 --type-set=json=.json
