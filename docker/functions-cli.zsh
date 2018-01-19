@@ -22,15 +22,15 @@ php() {
         -u `id -u`:`id -g` \
         -p 8080:8080 \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-7.1 ${@:1}
+        soifou/php-alpine:cli-7.2 ${@:1}
 }
-php7.2() {
+php7.1() {
     docker run -ti --rm \
         -v "$PWD":$(getContainerPath) \
         -w $(getContainerPath) \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-7.2 ${@:1}
+        soifou/php-alpine:cli-7.1 ${@:1}
 }
 php7.0() {
     docker run -ti --rm \
