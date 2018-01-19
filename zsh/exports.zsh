@@ -9,61 +9,17 @@ export LESS="-FSRXI"
 if [ -d "$HOME/.bin" ]; then
     export PATH="$HOME/.bin:$PATH"
 fi
-# add PHPenv
-export PHPENV_ROOT="$HOME/.phpenv"
-if [ -d "${PHPENV_ROOT}" ]; then
-    export PATH="$PHPENV_ROOT/bin:$PATH"
-    eval "$(phpenv init -)"
-fi
-# add Composer
+
 export COMPOSER_ROOT="$HOME/.composer"
 if [ -d "${COMPOSER_ROOT}" ]; then
     export PATH="$COMPOSER_ROOT/vendor/bin:$PATH"
 fi
-# add Rbenv
-export RBENV_ROOT="$HOME/.rbenv"
-if [ -d "${RBENV_ROOT}" ]; then
-    export PATH="${RBENV_ROOT}/bin:$PATH"
-    eval "$(rbenv init -)"
-fi
-# add Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-# add pipenv
-# if [ -x "$(command -v pipenv)" ]; then
-#     autoload -U add-zsh-hook
-#     load-pipenvshell() {
-#         if [[ -f Pipfile && -r Pipfile ]]; then
-#             pipenv shell
-#         fi
-#     }
-#     add-zsh-hook chpwd load-pipenvshell
-# fi
-export NODENV_ROOT="$HOME/.nodenv"
-if [ -d "${NODENV_ROOT}" ]; then
-    export PATH="$NODENV_ROOT/bin:$PATH"
-    eval "$(nodenv init -)"
-fi
 
-# add Node Version Manager (nvm)
-# export NVM_ROOT="$HOME/.nvm"
-# if [ -d "${NVM_ROOT}" ]; then
-#     # NVM is slow: https://github.com/creationix/nvm/issues/860
-#     source "$NVM_ROOT/nvm.sh" --no-use
-#     export PATH=$NVM_ROOT/versions/node/$(cat $NVM_ROOT/alias/default)/bin:$PATH
-#     # Calling nvm use automatically in a directory with a .nvmrc file
-#     autoload -U add-zsh-hook
-#     load-nvmrc() {
-#         if [[ -f .nvmrc && -r .nvmrc ]]; then
-#             nvm use
-#         fi
-#     }
-#     add-zsh-hook chpwd load-nvmrc
-# fi
+export ANYENV_ROOT="$HOME/.anyenv"
+if [ -d "${ANYENV_ROOT}" ]; then
+    export PATH="$ANYENV_ROOT/bin:$PATH"
+    eval "$(anyenv init -)"
+fi
 
 if [[ `uname` == "Darwin" ]]; then
     # homebrew path

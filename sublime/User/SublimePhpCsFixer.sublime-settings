@@ -1,5 +1,5 @@
 {
-    "php_path": "~/.phpenv/shims/php",
+    "php_path": "~/.anyenv/envs/phpenv/shims/php",
     "config": [
         "${file_path}/.php_cs",
         "${file_path}/.php_cs.dist",
