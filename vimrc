@@ -41,6 +41,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'w0rp/ale'
 
 call vundle#end()
 filetype plugin indent on " required
@@ -77,6 +78,7 @@ colorscheme solarized
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'solarized'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 
 " Prettify JSON files
 autocmd BufRead,BufNewFile *.json set filetype=json
@@ -130,6 +132,12 @@ set backspace=indent,eol,start
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Prettify JSON files making them easier to read
 command PrettyJSON %!python -m json.tool
+
+" ALE (Asynchronous Lint Engine)
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_completion_enabled = 1
 
 " open FuzzyFinder with Ctrl+p
 let g:ctrlp_map = '<c-p>'
