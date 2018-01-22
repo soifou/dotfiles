@@ -2,6 +2,9 @@
     { "keys": ["alt+shift+up"], "command": "select_lines", "args": {"forward": false} },
     { "keys": ["alt+shift+down"], "command": "select_lines", "args": {"forward": true} },
 
+    { "keys": ["ctrl+:"], "command": "toggle_comment", "args": { "block": false } },
+    { "keys": ["ctrl+shift+:"], "command": "toggle_comment", "args": { "block": true } },
+
     { "keys": ["alt+f"], "command": "js_prettier", "context": [{ "key": "selector", "operator": "equal", "operand": "source.js, source.json, text.html.markdown, source.css, source.sass, source.css.less" }] },
     { "keys": ["alt+f"], "command": "beautify_ruby", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ruby" }] },
     { "keys": ["alt+f"], "command": "sublime_php_cs_fix", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
@@ -9,7 +12,7 @@
     { "keys": ["ctrl+shift+f"], "command": "expand_fqcn", "args": {"leading_separator": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["ctrl+shift+u"], "command": "find_use", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["ctrl+shift+i"], "command": "implement", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
-    { "keys": ["ctrl+shift+k"], "command": "insert_php_constructor_property", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+    { "keys": ["ctrl+shift+g"], "command": "insert_php_constructor_property", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["ctrl+shift+n"], "command": "import_namespace", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
 
     { "keys": ["ctrl+alt+g"], "command": "open_browser", "args": { "url": "http://www.google.fr/#q=%s" }},
