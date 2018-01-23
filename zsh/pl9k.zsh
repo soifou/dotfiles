@@ -1,3 +1,4 @@
+# Options: https://github.com/bhilburn/powerlevel9k#prompt-customization
 DEFAULT_USER=$USER # Only print user@hostname when not normal user
 
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
