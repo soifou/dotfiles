@@ -1,14 +1,22 @@
 import os.path
-import sublime, sublime_plugin, sys, re
-import subprocess, tempfile
+import sublime
+import sublime_plugin
+import sys
+import re
+import subprocess
+import tempfile
 
-# Stolen from https://github.com/CraigWilliams/BeautifyRuby and https://github.com/adael/SublimePhpCsFixer
-# Add feature to get the home
+# Credits to:
+# - https://github.com/CraigWilliams/BeautifyRuby
+# - https://github.com/adael/SublimePhpCsFixer
+# - https://github.com/jonlabelle/SublimeJsPrettier
+
+PLUGIN_NAME = 'SublimePhpCsFixer'
+
 
 class SublimePhpCsFixListener(sublime_plugin.EventListener):
-
     def on_pre_save(self, view):
-        self.settings = sublime.load_settings('SublimePhpCsFixer.sublime-settings')
+        self.load_settings()
         if self.settings.get('on_save'):
             view.run_command("sublime_php_cs_fix")
 
@@ -32,6 +40,7 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
 
     def cs_buffer(self, edit):
         # get buffered text
+        file_changed = False
         buffer_region = sublime.Region(0, self.view.size())
         buffer_text = self.view.substr(buffer_region)
         if buffer_text == "":
@@ -39,7 +48,16 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
 
         formatted = self.format_contents(buffer_text)
         if formatted and formatted != buffer_text:
+            file_changed = True
             self.view.replace(edit, buffer_region, formatted)
+
+        if file_changed:
+            sublime.set_timeout(lambda: sublime.status_message(
+                '{0}: File formatted.'.format(PLUGIN_NAME)), 0)
+        else:
+            sublime.set_timeout(lambda: sublime.status_message(
+                '{0}: File already formatted.'.format(PLUGIN_NAME)), 0)
+        return
 
     def format_contents(self, contents):
         fd, tmp_file = tempfile.mkstemp()
@@ -106,7 +124,7 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
         return finalized_output
 
     def load_settings(self):
-        self.settings = sublime.load_settings('SublimePhpCsFixer.sublime-settings')
+        self.settings = sublime.load_settings('%s.sublime-settings' % PLUGIN_NAME)
 
     def save_viewport_state(self):
         self.previous_selection = [(region.a, region.b) for region in self.view.sel()]
@@ -156,7 +174,7 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
         if sublime.platform() == "windows":
             paths = self.locate_in_windows()
         else:
-            paths = self.locate_in_linux()
+            paths = self.locate_in_unix()
 
         for path in paths:
             if self.is_executable_file(path):
@@ -179,7 +197,7 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
 
         return paths
 
-    def locate_in_linux(self):
+    def locate_in_unix(self):
         """return possible paths for php-cs-fixer on Linux and Mac"""
         paths = []
 
@@ -195,7 +213,7 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
         return paths
 
     def log_to_console(self, msg):
-        print("PHP CS Fixer: {0}".format(msg))
+        print("{0}: {1}".format(PLUGIN_NAME, msg))
 
     def get_active_window_variables(self):
         variables = sublime.active_window().extract_variables()
