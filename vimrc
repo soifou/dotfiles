@@ -21,7 +21,7 @@ set nocompatible         " get rid of Vi compatibility mode. SET FIRST!
 set encoding=utf-8
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 02. Vundle : https://github.com/VundleVim/Vundle.Vim                                                                "
+" 02. Vundle : https://github.com/VundleVim/Vundle.Vim                       "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype off  " required
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -34,14 +34,14 @@ Plugin 'VundleVim/Vundle.vim'
 " github repo
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'itchyny/lightline.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'chr4/nginx.vim'
 Plugin 'w0rp/ale'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'sheerun/vim-polyglot'
 
 call vundle#end()
 filetype plugin indent on " required
@@ -65,20 +65,8 @@ set noswapfile            " No swap files, use version control instead
 set t_Co=256              " enable 256-color mode.
 syntax enable             " enable syntax highlighting (previously syntax on).
 
-" Use the Solarized Dark theme
-set background=dark
-let g:solarized_termtrans=1
-" let g:solarized_termcolors=16
-" let g:solarized_contrast="high"
-" let g:solarized_visibility="high"
-colorscheme solarized
-" set guitermcolors
-
-" Airline custom config
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#ale#enabled = 1
+colorscheme nord
+let g:lightline = {'colorscheme': 'nord'}
 
 " Prettify JSON files
 autocmd BufRead,BufNewFile *.json set filetype=json
@@ -115,7 +103,7 @@ set foldlevel=99
 " 06. Text Formatting/Layout                                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set autoindent            " auto-indent
-set tabstop=4             " tab spacing
+set tabstop=4               " tab spacing
 " set softtabstop=4         " unify
 " set shiftwidth=4          " indent/outdent by 2 columns
 " set shiftround            " always indent/outdent to the nearest tabstop
@@ -124,6 +112,7 @@ set tabstop=4             " tab spacing
 " set smarttab              " use tabs at the start of a line, spaces elsewhere
 " set nowrap                " don't wrap text
 " set backspace=2           " fix Delete (backspace) on Mac OS X
+
 " Backspace key should delete chars (mac only)
 set backspace=indent,eol,start
 
