@@ -4,10 +4,12 @@ HvyIndustries.crane
 PeterJausovec.vscode-docker
 Shan.code-settings-sync
 alefragnani.project-manager
+bajdzis.vscode-twig-pack
 bmewburn.vscode-intelephense-client
 caonUlisses.phplt
 christian-kohler.path-intellisense
 cxfksword.goto-documentation
+esbenp.prettier-vscode
 formulahendry.auto-close-tag
 formulahendry.auto-rename-tag
 kenhowardpdx.vscode-gist
@@ -17,6 +19,6 @@ ms-vscode.sublime-keybindings
 neilbrayfield.php-docblocker
 patbenatar.advanced-new-file
 rebornix.Ruby
+timonwong.shellcheck
 whatwedo.twig
 yahya-gilany.vscode-pomodoro
-timonwong.shellcheck
