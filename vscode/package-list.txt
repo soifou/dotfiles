@@ -4,6 +4,7 @@ HvyIndustries.crane
 PeterJausovec.vscode-docker
 Shan.code-settings-sync
 alefragnani.project-manager
+arcticicestudio.nord-visual-studio-code
 bajdzis.vscode-twig-pack
 bmewburn.vscode-intelephense-client
 caonUlisses.phplt
@@ -13,9 +14,11 @@ esbenp.prettier-vscode
 formulahendry.auto-close-tag
 formulahendry.auto-rename-tag
 kenhowardpdx.vscode-gist
+lihui.vs-color-picker
 linyang95.php-symbols
 ms-vscode.azure-account
 ms-vscode.sublime-keybindings
+naumovs.color-highlight
 neilbrayfield.php-docblocker
 patbenatar.advanced-new-file
 rebornix.Ruby

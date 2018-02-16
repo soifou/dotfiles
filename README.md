@@ -1,28 +1,54 @@
 # Dotfiles
 
 ## About
-This repository includes a part of my dotfiles to setup my working environments (MacOSX and Debian8 KDE). **This is WIP indefinitely**
 
-If you're interested, just dig in through the repo. 
+Personal dotfiles to setup my working environments (home and work).
 
-## Usage
-You can even install it on your environment:
-``` bash
-git clone git://github.com/soifou/dotfiles ~/dotfiles
-cd ~/dotfiles
-chmod +x bootstrap
-bash bootstrap -h
+I'm using [GNU stow](https://www.gnu.org/software/stow/) following conventions by [F-dotfiles](https://github.com/Kraymer/F-dotfiles) and it works pretty damn good.
+
+Dig in through the repo you might find some inspiration.
+
+
+## Init
+
+1 - Install stow. 
+
+2 - Clone this repo:
+
+``` sh
+$ git clone https://github.com/soifou/dotfiles ~/
+$ cd ~/dotfiles
 ```
 
+3 - Init stow:
 
-## Credits
-- [Michael Malley's dotfiles](https://github.com/michaeljsmalley/dotfiles)
-- [Alan Christopher Thomas's dotfiles](https://github.com/alanctkc/dotfiles)
-- [mathiasbynens' dotfiles](https://github.com/mathiasbynens/dotfiles)
-- [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
-- [powerlevel9k theme](https://github.com/bhilburn/powerlevel9k)
-- [antigen](https://github.com/zsh-users/antigen)
-- [vundle](https://github.com/VundleVim/Vundle.Vim)
-- [vim-colors-solarized](https://github.com/altercation/vim-colors-solarized)
+```
+$ echo "--target=$(echo $HOME)\n--verbose" > stow/.stowrc
+$ stow stow
+```
 
-and many many others... big thanks to you!
+## Examples
+
+
+- Add/remove config for vim :
+
+```
+$ stow vim
+$ stow -D vim
+```
+
+- Add/remove config for an entire env, ie. @linux:
+
+```
+$ stow @linux
+$ stow -D @linux
+```
+
+- Add/remove config for vscode on linux:
+
+```
+$ stow -d vscode @linux
+$ stow -D -d vscode @linux
+```
+
+Look at the corresponding folder for more details

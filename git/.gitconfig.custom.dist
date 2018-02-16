@@ -1,0 +1,6 @@
+[user]
+    name = Your name
+    email = your@email.com
+
+[core]
+    editor = vim

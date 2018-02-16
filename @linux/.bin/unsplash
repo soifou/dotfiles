@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# fetch random wallpaper from unsplash.it
+DIR=$HOME/Pictures/wallpapers
+BLURME=1
+
+while :
+do
+    case $1 in
+        --save) SAVE=1; shift; ;;
+        *) break; ;;
+    esac
+done
+
+# backup current wallpaper if needed
+if [ "$SAVE" == 1 ]; then
+    mkdir -p "$DIR"
+    mv "$DIR/today" "$DIR/$(date +'%Y-%m-%d-%H%M%S')-today"
+fi
+
+wget -O "$DIR/today" 'https://unsplash.it/1920/1200?random' > /dev/null 2>&1
+
+# kill blurme script if installed
+if [ "$BLURME" == 1 ]; then
+    PID=$(ps -eaf | pgrep blurme)
+    if [[ "" !=  "$PID" ]]; then
+        echo "killing $PID"
+        kill -9 "$PID"
+    fi
+fi
+
+# set wallpaper with feh
+feh --bg-scale "$DIR/today"
+
+# relaunch blurme
+if [ "$BLURME" == 1 ]; then
+    $(which blurme) &
+fi

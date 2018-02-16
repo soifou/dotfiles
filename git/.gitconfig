@@ -1,0 +1,52 @@
+# Local/private config goes in the include
+[include]
+    path = ~/.gitconfig.custom
+
+[alias]
+    hist = log --color --graph --pretty=format:'%C(auto)%h%Creset » %d%s %Cgreen(%cr) %C(bold magenta)<%an>%Creset' --abbrev-commit
+    ignored = !git ls-files -v | grep "^[[:lower:]]"
+    count-commits = shortlog -sn
+    uncommit = reset --soft HEAD~
+    blc = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) - %(color:red)%(objectname:short)%(color:reset) - %(color:yellow)%(refname:short)%(color:reset) - (%(color:green)%(committerdate:relative)%(color:reset)) - %(authorname) - %(contents:subject)'
+
+[color]
+    ui = always
+
+[color "diff"]
+    meta = yellow bold
+    commit = green bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = "red bold 52"
+    newNormal = "green bold"
+    newHighlight = "green bold 22"
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[core]
+    excludesfile = ~/.gitignore_global
+
+[fetch]
+    prune = true
+
+[merge]
+    conflictstyle = diff3
+
+[pager]
+    status = true
+
+[push]
+    default = current

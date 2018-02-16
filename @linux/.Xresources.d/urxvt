@@ -1,0 +1,47 @@
+! General settings
+URxvt.scrollBar: none
+URxvt.internalBorder: 20
+URxvt.tintColor: white
+URxvt.inheritPixmap: false
+
+! Set urxvt as login shell
+URxvt*loginShell: true
+
+! Cursor style
+! To get more, see: http://artisan.karma-lab.net/urxvt-et-styles-curseur
+URxvt*cursorUnderline: true
+URxvt*fadeColor: #000000
+URxvt*cursorBlink: true
+
+! Font settings
+URxvt.font: xft:MesloLGM Nerd Font:size=14:antialias=true:hinting=true:Regular
+URxvt.boldFont: xft:MesloLGM Nerd Font:size=14:antialias=true:Bold
+URxvt*letterSpace: 0
+URxvt.lineSpace: 0
+
+! scrollbar - true (default) or false
+URxvt*scrollBar: false
+! scrollbar position - left=false (default) or right=true
+URxvt*scrollBar_right: false
+! scrollbar style - rxvt (default), plain, next, or xterm
+URxvt*scrollstyle: plain
+
+URxvt*scrollTtyOutput:      false
+URxvt*scrollWithBuffer:     true
+URxvt*scrollTtyKeypress:    true
+
+! move easily
+URxvt.keysym.Control-Left:   \033[1;5D
+URxvt.keysym.Control-Right:  \033[1;5C
+
+! mouse selection copy to clipboard
+URxvt.perl-ext: selection-to-clipboard,font-size
+
+! change font size
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
+URxvt.keysym.C-S-Up:   font-size:incglobal
+URxvt.keysym.C-S-Down: font-size:decglobal
+URxvt.keysym.C-equal:  font-size:reset
+URxvt.keysym.C-slash:  font-size:show
+

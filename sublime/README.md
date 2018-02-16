@@ -1,18 +1,38 @@
-# Sublime Text
+# Sublime Text 3
 
 ## Overview
-This is just my config and packages I use for my working days, so these are very personal choices. Just dig in through the `User` folder to see my settings.
 
-## Installation
-Install [Sublime Text 3] then 
-``` bash
-$ bash bootstrap --sublime
+- File/project/gist managers
+- Linters
+- Formatters
+- Material theme
+
+## Prerequisites
+
+- Install Sublime text.
+- Install Package control.
+
+You can install it with this make command.
+
 ```
-Then start Sublime Text and wait for Package Control fetch plugins. It will warn you when it is ready. You may restart once Sublime Text to load all the settings correctly. 
+$ make
+```
 
-Happy coding! 
+SublimeLinter 4 is imminent but not yet released. My config depend on it.
 
-## Credits
-- [Sublime Text 3](http://www.sublimetext.com/3)
-- [Sublime Package](https://sublime.wbond.net/installation)
-- [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
+```
+$ make linter
+```
+
+## Configuration
+
+Symlink the config for the desired env:
+
+```
+$ stow @linux
+or
+$ stow @osx
+```
+
+Open Sublime and wait it fetchs all packages.
+Look at the console to see what's going on.

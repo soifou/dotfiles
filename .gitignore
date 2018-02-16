@@ -1,6 +1,6 @@
 .directory
 *.zsh.zwc
 private.zsh
-vim/.netrwhist
-vim/bundle
+git/.gitconfig.custom
+stow/.stowrc
 sublime/User/Preferences.sublime-settings

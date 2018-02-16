@@ -1,2 +1,5 @@
-User/Preferences.sublime-settings
-User/JsPrettier.sublime-settings
+_common/Packages/*
+!_common/Packages/User
+!_common/Packages/Default
+!_common/Packages/soifou
+!_common/Packages/sublime-nginx
