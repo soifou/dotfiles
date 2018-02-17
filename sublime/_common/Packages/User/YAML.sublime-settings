@@ -1,10 +1,11 @@
 {
 	"extensions":
 	[
-		"yml",
-		"bundler.conf",
 		".gemrc",
+		"YAML-tmLanguage",
+		"bundler.conf",
+		"yml",
 		"yml.dist",
-		"YAML-tmLanguage"
+		".prettierrc"
 	]
 }

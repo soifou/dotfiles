@@ -60,6 +60,7 @@
 	"YAML":
 	[
 		".gemrc",
+		".prettierrc",
 		"YAML-tmLanguage",
 		"bundler.conf",
 		"yml",

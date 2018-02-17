@@ -41,7 +41,13 @@
         },
         {
             "syntax": "YAML/YAML",
-            "extensions": ["bundler.conf", ".gemrc", "yml", "yml.dist"]
+            "extensions": [
+                "bundler.conf",
+                ".gemrc",
+                "yml",
+                "yml.dist",
+                ".prettierrc"
+            ]
         },
         {
             "syntax": "User/Syntaxes/i3",
