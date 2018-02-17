@@ -21,7 +21,7 @@ bindsym $mod+Shift+q kill
 # start rofi (fix KDE icons with XDG_CURRENT_DESKTOP)
 bindsym $mod+d exec XDG_CURRENT_DESKTOP=kde rofi -show drun
 # Alt+Tab window switching.
-bindsym Mod1+Tab exec --no-startup-id exec rofi -show window -lines 6 -i -separator-style solid
+bindsym Mod1+Tab exec --no-startup-id rofi -show window -lines 6 -i -separator-style solid
 # clipboard manager (https://github.com/erebe/greenclip)
 bindsym $mod+Shift+w exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
 

@@ -70,13 +70,14 @@ contexts:
       captures:
         1: keyword.control.i3
         2: constant.language.i3
-    - match: '(for_window)\s*\[(\w*)=([\"\w\s\:\.\*\~\/\$]*\])\s*'
+    - match: '(for_window)\s*\[(\w*)=\"([\w\s\:\.\*\~\/\$]*)\"\]\s(\w*)*'
       scope: for_window
       captures:
         1: keyword.control.i3
         2: constant.language.i3
-        3: constant.string.i3
-    - match: (set)\s*(\$\w*)\s*(\w*)
+        3: string.regexp.i3
+        4: keyword.assignment.i3
+    - match: (set)\s*(\$[\w*-_]+)\s*([\w\d#-]+)
       scope: set1
       captures:
         1: keyword.control.i3
@@ -107,70 +108,15 @@ contexts:
         1: keyword.control.i3
         2: constant.language.i3
         3: constant.string.i3
-    - match: '(client.focused)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
+    - match: '^(client)\.([\w]+)\s*([\w{6}]|[\$\w*-_]+)\s*([\w{6}]|[\$\w*-_]+)\s*([\w{6}]|[\$\w*-_]+)\s*([\w{6}]|[\$\w*-_]+)$'
       scope: client_focused1
       captures:
         1: keyword.control.i3
-        2: constant.other.i3
-        3: constant.other.i3
-        4: constant.other.i3
-        5: constant.other.i3
-    - match: (client\.focused)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
-      scope: client_focused2
-      captures:
-        1: keyword.control.i3
-        2: variable.other.i3
-        3: variable.other.i3
-        4: variable.other.i3
-        5: variable.other.i3
-    - match: '(client\.focused_inactive)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
-      scope: client_focused_inactive1
-      captures:
-        1: keyword.control.i3
-        2: constant.other.i3
-        3: constant.other.i3
-        4: constant.other.i3
-        5: constant.other.i3
-    - match: (client\.focused_inactive)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
-      scope: client_focused_inactive2
-      captures:
-        1: keyword.control.i3
-        2: variable.other.i3
-        3: variable.other.i3
-        4: variable.other.i3
-        5: variable.other.i3
-    - match: '(client\.unfocused)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
-      scope: client_unfocused1
-      captures:
-        1: keyword.control.i3
-        2: constant.other.i3
-        3: constant.other.i3
-        4: constant.other.i3
-        5: constant.other.i3
-    - match: (client\.unfocused)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
-      scope: client_unfocused2
-      captures:
-        1: keyword.control.i3
-        2: variable.other.i3
-        3: variable.other.i3
-        4: variable.other.i3
-        5: variable.other.i3
-    - match: '(client\.urgent)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
-      scope: client_urgent1
-      captures:
-        1: keyword.control.i3
-        2: constant.other.i3
-        3: constant.other.i3
-        4: constant.other.i3
-        5: constant.other.i3
-    - match: (client\.urgent)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
-      scope: client_urgent2
-      captures:
-        1: keyword.control.i3
-        2: variable.other.i3
-        3: variable.other.i3
-        4: variable.other.i3
-        5: variable.other.i3
+        2: markup.italic.i3
+        3: variable.parameter.i3
+        4: variable.parameter.i3
+        5: variable.parameter.i3
+        6: variable.parameter.i3
     - match: (ipc-socket)\s*(.*)
       scope: ipc_socket
       captures:
@@ -553,3 +499,17 @@ contexts:
         1: keyword.control.i3
         2: constant.language.i3
         3: constant.language.i3
+    # i3-gaps
+    - match: ^(gaps)\s*(inner|outer)\s*(current|all){0,1}\s*(set|plus|minus){0,1}\s*(\d+)$
+      scope: gaps
+      captures:
+        1: keyword.control.i3
+        2: keyword.control.i3
+        3: keyword.control.i3
+        4: keyword.control.i3
+        5: constant.numeric.i3
+    - match: ^(smart_borders|smart_gaps)\s*(on|off)$
+      scope: smart_stuff
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
