@@ -1870,7 +1870,7 @@
 	<key>HotKeyTogglesWindow</key>
 	<false/>
 	<key>Hotkey</key>
-	<true/>
+	<false/>
 	<key>HotkeyChar</key>
 	<integer>60</integer>
 	<key>HotkeyCode</key>
@@ -1882,6 +1882,8 @@
 	<key>IRMemory</key>
 	<integer>4</integer>
 	<key>JobName</key>
+	<true/>
+	<key>KillSessionsOnLogout</key>
 	<true/>
 	<key>LeftCommand</key>
 	<integer>7</integer>
@@ -1944,11 +1946,11 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>918 514 606 469 0 0 1920 1200 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>568 379 1018 447 0 0 1920 1200 </string>
+	<string>568 616 958 451 0 0 1920 1200 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 294 592 584 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>190 199 1540 802 0 0 1920 1200 </string>
+	<string>15 565 870 595 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
 	<string>226 160 688 498 0 0 1920 1200 </string>
 	<key>New Bookmarks</key>
@@ -3493,6 +3495,8 @@
 	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
 	<true/>
+	<key>NoSyncSuppressMissingProfileInArrangementWarning</key>
+	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>471943473.11294198</real>
 	<key>NoSyncTipsDisabled</key>
@@ -3582,17 +3586,19 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/soifou/dotfiles/@macos/iterm2</string>
+	<string>/Users/soifou/.iterm2</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
-	<false/>
+	<true/>
 	<key>RightCommand</key>
 	<integer>8</integer>
 	<key>RightOption</key>
 	<integer>3</integer>
+	<key>RunJobsInServers</key>
+	<false/>
 	<key>SUEnableAutomaticChecks</key>
 	<false/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -3619,6 +3625,8 @@
 	<real>0.33459535852456712</real>
 	<key>StretchTabsToFillBar</key>
 	<false/>
+	<key>SuppressRestartAnnouncement</key>
+	<true/>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
