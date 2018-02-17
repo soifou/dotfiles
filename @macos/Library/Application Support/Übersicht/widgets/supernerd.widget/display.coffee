@@ -24,7 +24,7 @@ commands =
   hdd : "df -hl | awk '{s+=$5} END {print s \"%\"}'"
   date  : "date +\"%d/%m/%y\""
   focus : "/usr/local/bin/chunkc tiling::query --window name"
-  playing: "osascript -e 'tell application \"iTunes\" to if player state is playing then artist of current track & \" - \" & name of current track'"
+  playing: "sh ./supernerd.widget/scripts/cmus-status.sh"
   ismuted : "osascript -e 'output muted of (get volume settings)'"
   ischarging : "sh ./supernerd.widget/scripts/ischarging.sh"
   activedesk : "echo $(/usr/local/bin/chunkc tiling::query -d id)"
@@ -170,7 +170,8 @@ render: ( ) ->
 
     <div class="container" id="center">
         <div class="widg">
-
+            <i class="fab fa-itunes-note"></i>
+            <span class="playing"></span>
         </div>
     </div>
 
