@@ -6,8 +6,6 @@ d=$'\e[33m'
 s=$'\e[32m'
 t=$'\e[0m'
 
-CURPATH=$(pwd)
-
 upgrade_debian() {
     read -p "$d [?] Sync server time?$t" -n 1 -r
     echo    #

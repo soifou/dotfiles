@@ -1,0 +1,166 @@
+#!/bin/bash
+
+d=$'\e[33m'
+s=$'\e[32m'
+t=$'\e[0m'
+
+cleanup_xcode() {
+    archivesPath="/Library/Developer/Xcode/Archives"
+    derivedDataPath="/Library/Developer/Xcode/DerivedData"
+    oldDeviceInfoPath="/Library/Developer/Xcode/iOS DeviceSupport"
+    simulatorApplicationRootPath="/Library/Application Support/iPhone Simulator/"
+
+    paths=( "$archivesPath" "$derivedDataPath" "$oldDeviceInfoPath" )
+    msgs=( "Archives" "DerivedData" "Old device information" )
+    pathsLength=${#paths[@]}
+
+    # Clean up developer folder
+    # loop through predefined paths
+    for (( i=0; i<${pathsLength}; i++ ));
+    do
+      CMD="sudo rm -rf "$HOME${paths[$i]}"/*"
+      $CMD
+      echo ${msgs[$i]}" cleared"
+    done
+
+    # Clean up iOS Simulator
+    ignoreFolders=("Applications" "Containers" "Library" "Root" "User" "tmpspace")
+    versionMarker="."
+
+    rootPathIdx=$((${#HOME} + ${#simulatorApplicationRootPath}))
+    for folderPath in "$HOME$simulatorApplicationRootPath"*
+    do
+        length=${#folderPath}
+        folderName=${folderPath:$rootPathIdx:$((length - rootPathIdx))}
+
+        # Find folder in ~/Library/Application Support/iPhone Simulator/ with "." (assuming it is simulator version) and not in ignored list
+        if [[ "${ignoreFolders[*]}" != *$folderName* && $folderName == *$versionMarker* ]]; then
+
+            # Check if Applications folder exists
+            if [ -d "$folderPath/Applications" ]; then
+                echo 'iOS Simulator version '$folderName' with applications installed, now cleared'
+                tmpFolderPath="${folderPath// /*}"
+                CMD="sudo rm -rf "$tmpFolderPath"/Applications"
+                $CMD
+            fi
+
+            # Check if tmp folder exists
+            if [ -d "$folderPath/tmp" ]; then
+
+                # Check tmp files in folder with special prefixs (say ghostlyIcons.xqwj3qwb2)
+                tmpFolderPath="${folderPath// /*}"
+                hasTmpFiles=false
+                for ext in "ghostlyIcons" "gridImages" "iconImages" "iconLabels_gray"
+                do
+                    fileCheckPath="$tmpFolderPath/tmp/$ext.*"
+                    if (ls $fileCheckPath > /dev/null 2>&1)
+                    then
+                      CMD="sudo rm -rf "$tmpFolderPath"/tmp/$ext.*"
+                      $CMD
+                      hasTmpFiles=true
+                    fi
+                done
+
+                if ($hasTmpFiles); then
+                    echo 'iOS Simulator version '$folderName' tmp files cleared'
+                fi
+            fi
+        fi
+
+    done
+
+    echo "XCode clean!"
+}
+
+
+read -p "$d [?] Upgrade brew?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    brew update && brew upgrade
+fi
+
+read -p "$d [?] Upgrade brew casks?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cask upgrade
+fi
+
+read -p "$d [?] Upgrade mas?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    mas upgrade
+fi
+
+read -p "$d [?] Upgrade dotfiles?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cd "$HOME/dotfiles" && git pull
+fi
+
+read -p "$d [?] Upgrade global composer dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    /usr/local/bin/composer global update
+fi
+
+read -p "$d [?] Upgrade docker images?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    docker images | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull
+    docker system prune -f
+fi
+
+read -p "$d [?] Upgrade anyenv?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    anyenv update
+fi
+
+read -p "$d [?] Upgrade git workspaces?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cd "$DEVELOPMENT_PATH" && git pull
+    repos=(aparticula soifou elparici)
+    for repo in "${repos[@]}"
+    do
+        echo "$s > Upgrade gws repo $repo...$t"
+        cd "$DEVELOPMENT_PATH/$repo" && git pull
+    done
+fi
+
+read -p "$d [?] Cleanup formulas?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    brew cleanup
+    brew cask cleanup
+fi
+
+read -p "$d [?] Cleanup xcode?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cleanup_xcode
+fi
+
+read -p "$d [?] Cleanup trash ($(du -sh ~/.Trash/))?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo rm -rf ~/.Trash/*
+fi
+
+read -p "$d [?] Cleanup .DS_Store?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    find . -type f -name '*.DS_Store' -ls -delete
+fi

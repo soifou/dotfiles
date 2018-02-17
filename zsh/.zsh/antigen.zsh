@@ -1,6 +1,6 @@
 # themes tweaks
 # source $HOME/.zsh/pl9k.zsh
-source $HOME/.zsh/spaceship.zsh
+# source $HOME/.zsh/spaceship.zsh
 
 # Add antigen defaults
 source $HOME/.antigen/antigen.zsh
@@ -41,7 +41,11 @@ fi
 
 # Load the theme.
 # antigen theme bhilburn/powerlevel9k powerlevel9k
-antigen theme denysdovhan/spaceship-prompt spaceship
+# antigen theme denysdovhan/spaceship-prompt spaceship
+
+PURE_PROMPT_SYMBOL=λ
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
 
 # Tell antigen that you're done.
 antigen apply
