@@ -17,6 +17,7 @@
 		".csslintrc",
 		".eslintrc",
 		".jscsrc",
+		".jshintrc",
 		"geojson"
 	],
 	"PHP":

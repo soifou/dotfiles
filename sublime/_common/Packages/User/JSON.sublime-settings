@@ -1,12 +1,11 @@
 {
 	"extensions":
 	[
+		".jscsrc",
+		".jshintrc",
+		".eslintrc",
 		".csslintrc",
 		".bowerrc",
-		"geojson",
-		".eslintrc",
-		".jshintrc",
-		".jscsrc",
-        "symfony.lock"
+		"geojson"
 	]
 }

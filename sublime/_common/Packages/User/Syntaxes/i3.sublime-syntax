@@ -1,0 +1,555 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: i3
+file_extensions:
+  - i3/config
+scope: source.i3
+contexts:
+  main:
+    - match: '\[(.*)\]'
+      scope: criteria
+      captures:
+        1: constant.string.i3
+    - match: (\#)(.*)
+      scope: comment
+      captures:
+        1: comment.line.number-sign.i3
+        2: comment.line.i3
+    - match: '(font\ pango\:)\s*([- ,\w]*)'
+      scope: font_pango
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: '(font)\s*([-\w]*)'
+      scope: font
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (fullscreen)
+      scope: fullscreen
+      captures:
+        1: keyword.control.i3
+        2: constant.string.i3
+    - match: (floating_modifier)\s*(\$?\w*)
+      scope: floating_modifier
+      captures:
+        1: keyword.control.i3
+        2: meta.scope.variable.other.i3
+    - match: (floating_minimum_size)\s*(-?\d*)\s*(x)\s*(-?\d*)
+      scope: floating_minimum_size
+      captures:
+        1: keyword.control.i3
+        2: constant.numeric.i3
+        3: keyword.control.i3
+        4: constant.numeric.i3
+    - match: (floating_maximum_size)\s*(-?\d*)\s*(x)\s*(-?\d*)
+      scope: floating_maximum_size
+      captures:
+        1: keyword.control.i3
+        2: constant.numeric.i3
+        3: keyword.control.i3
+        4: constant.numeric.i3
+    - match: (default_orientation)\s*(vertical|horizontal|v|h|auto|a)
+      scope: default_orientation
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (workspace_layout)\s*(default|stacking|tabbed|d|s|t)
+      scope: workspace_layout
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (new_(?:window|float))\s*(normal|none|(?:\d*pixel\s\d*))
+      scope: new_window_or_float
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (hide_edge_borders)\s*(vertical|horizontal|none|both|v|h|n|b)
+      scope: hide_edge_borders
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: '(for_window)\s*\[(\w*)=([\"\w\s\:\.\*\~\/\$]*\])\s*'
+      scope: for_window
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.string.i3
+    - match: (set)\s*(\$\w*)\s*(\w*)
+      scope: set1
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+        3: constant.language.i3
+    - match: '(set)\s*(\$\w*)\s*(#\w{6})'
+      scope: set2
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+        3: constant.other.i3
+    - match: '(assign)\s*\[(.*)]\s*(→)?\s*([\w\d]*)'
+      scope: assign
+      captures:
+        1: keyword.control.i3
+        2: constant.string.i3
+        3: keyword.operator.i3
+        4: constant.language.i3
+    - match: (exec_always)\s*(\-\-no-startup-id)?\s*(.*)
+      scope: exec_always
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.string.i3
+    - match: (exec)\s*(\-\-no-startup-id)?\s*(.*)
+      scope: exec
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.string.i3
+    - match: '(client.focused)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
+      scope: client_focused1
+      captures:
+        1: keyword.control.i3
+        2: constant.other.i3
+        3: constant.other.i3
+        4: constant.other.i3
+        5: constant.other.i3
+    - match: (client\.focused)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
+      scope: client_focused2
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+        3: variable.other.i3
+        4: variable.other.i3
+        5: variable.other.i3
+    - match: '(client\.focused_inactive)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
+      scope: client_focused_inactive1
+      captures:
+        1: keyword.control.i3
+        2: constant.other.i3
+        3: constant.other.i3
+        4: constant.other.i3
+        5: constant.other.i3
+    - match: (client\.focused_inactive)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
+      scope: client_focused_inactive2
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+        3: variable.other.i3
+        4: variable.other.i3
+        5: variable.other.i3
+    - match: '(client\.unfocused)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
+      scope: client_unfocused1
+      captures:
+        1: keyword.control.i3
+        2: constant.other.i3
+        3: constant.other.i3
+        4: constant.other.i3
+        5: constant.other.i3
+    - match: (client\.unfocused)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
+      scope: client_unfocused2
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+        3: variable.other.i3
+        4: variable.other.i3
+        5: variable.other.i3
+    - match: '(client\.urgent)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
+      scope: client_urgent1
+      captures:
+        1: keyword.control.i3
+        2: constant.other.i3
+        3: constant.other.i3
+        4: constant.other.i3
+        5: constant.other.i3
+    - match: (client\.urgent)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
+      scope: client_urgent2
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+        3: variable.other.i3
+        4: variable.other.i3
+        5: variable.other.i3
+    - match: (ipc-socket)\s*(.*)
+      scope: ipc_socket
+      captures:
+        1: keyword.control.i3
+        2: constant.string.i3
+    - match: (focus_follows_mouse)\s*(yes|no|y|n)
+      scope: focus_follows_mouse
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (popup_during_fullscreen)\s*(smart|ignore|leave_fullscreen)
+      scope: popup_during_fullscreen
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (force_focus_wrapping)\s*(yes|no|y|n)
+      scope: force_focus_wrapping
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (force_xinerama)\s*(no|yes)
+      scope: force_xinerama
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (force_xinerama)\s*(yes|no|y|n)
+      scope: force_xinerama
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (workspace_auto_back_and_forth)\s*(yes|no|y|n)
+      scope: workspace_auto_back_and_forth
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (force_display_urgency_hint)\s*(\d*)\s*ms
+      scope: force_display_urgency_hint
+      captures:
+        1: keyword.control.i3
+        2: constant.numeric.i3
+    - match: (?:^ *|\G *)(bar)
+      scope: bar
+      captures:
+        1: keyword.control.i3
+    - match: (i3bar_command)\s*(.*)
+      scope: i3bar_command
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (status_command)\s*(.*)
+      scope: status_command
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (modifier)\s*(.*)
+      scope: modifier
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (hidden_state)\s*(show|hide)
+      scope: hidden_state
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (mode)\s*(dock|hide|invisible)
+      scope: mode
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (id)\s*(.*)
+      scope: id
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (position)\s*(.*)
+      scope: position
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (output)\s*(\w*)
+      scope: output
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (tray_output)\s*(\w*)
+      scope: tray_output
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (workspace_buttons)\s*(yes|no|y|n)
+      scope: workspace_buttons
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (colors)\s*(.*)
+      scope: colors
+      captures:
+        1: keyword.control.i3
+        2: meta.scope.block.i3
+    - match: '(background)\s*([#$\w]*)'
+      scope: background
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: '(statusline)\s*(#\w{6})'
+      scope: statusline1
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (statusline)\s*(\$\w*)
+      scope: statusline2
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+    - match: '(separator)\s*([#$\w]*)'
+      scope: separator
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: '(focused_workspace)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
+      scope: focused_workspace1
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.language.i3
+        4: constant.language.i3
+        5: constant.language.i3
+    - match: (focused_workspace)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
+      scope: focused_workspace2
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+        3: variable.other.i3
+        4: variable.other.i3
+        5: variable.other.i3
+    - match: '(active_workspace)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
+      scope: active_workspace1
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.language.i3
+        4: constant.language.i3
+        5: constant.language.i3
+    - match: (active_workspace)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
+      scope: active_workspace2
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+        3: variable.other.i3
+        4: variable.other.i3
+        5: variable.other.i3
+    - match: '(inactive_workspace)\s*([#\$\w]*)\s*([#\$\w]*)\s*([#\$\w]*)'
+      scope: inactive_workspace1
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.language.i3
+        4: constant.language.i3
+        5: constant.language.i3
+    - match: (inactive_workspace)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
+      scope: inactive_workspace2
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+        3: variable.other.i3
+        4: variable.other.i3
+        5: variable.other.i3
+    - match: '(urgent_workspace)\s*(#\w{6})\s*(#\w{6})\s*(#\w{6})'
+      scope: urgent_workspace1
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.language.i3
+        4: constant.language.i3
+        5: constant.language.i3
+    - match: (urgent_workspace)\s*(\$\w*)\s*(\$\w*)\s*(\$\w*)
+      scope: urgent_workspace2
+      captures:
+        1: keyword.control.i3
+        2: variable.other.i3
+        3: variable.other.i3
+        4: variable.other.i3
+        5: variable.other.i3
+    - match: (bindcode)\s*(--release)?\s*(\d*)
+      scope: bindcode
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.numeric.i3
+    - match: '(bindsym)\s*(--release)?\s*([$\w\+]*)'
+      scope: bindsym
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: meta.scope.variable.other.i3
+    - match: (split)\s*(vertical|horizontal|v|h)
+      scope: split
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (layout)\s*(default|tabbed|stacking|split v|split h)
+      scope: layout
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (layout toggle)\s*(split|all)?
+      scope: layout_toggle
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (floating toggle)
+      scope: floating_toggle
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (focus)\s*(left|right|down|up|l|r|d|u|parent|child|floating|tiling|mode_toggle)
+      scope: focus
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: '(focus output)\s*(left|right|down|up|l|r|d|u|(?:[-\w]*))'
+      scope: focus_output
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (move)\s*(left|right|down|up|l|r|d|u)(?:\s*(-?\d*)\s*(px)\s*(?:(-?\d*)\s*(px))?)?
+      scope: move
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.numeric.i3
+        4: constant.language.i3
+        5: constant.numeric.i3
+        6: constant.language.i3
+    - match: (move)\s*(absolute)\s*(position)\s*(?:(\d*)\s*(px))?(?:\s*(\d*)\s*(px))?(?:\s*(center)|\s*(?:(\d*) (px))\s*(?:(\d*)\s*(px)))?
+      scope: move_abs
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.language.i3
+        4: constant.numeric.i3
+        5: constant.language.i3
+        6: constant.numeric.i3
+        7: constant.language.i3
+        8: constant.language.i3
+        9: constant.numeric.i3
+        10: constant.language.i3
+        11: constant.numeric.i3
+        12: constant.language.i3
+    - match: (workspace)\s*(next|prev|next_on_output|prev_on_output|back_and_forth|(?:\w)*|(?:\d*\s*\w*))
+      scope: workspace
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: '(rename workspace)\s*([:\s\w]*)\s*(to)\s*([:\s\w]*)'
+      scope: rename_workspace
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: keyword.control.i3
+        4: constant.language.i3
+        5: constant.language.i3
+    - match: '(move)\s*(workspace|container)\s*(to)\s*(output)\s*(left|right|down|up|[\w]*)'
+      scope: move__container_or_workspace
+      captures:
+        1: keyword.control.i3
+        2: keyword.control.i3
+        3: keyword.control.i3
+        4: keyword.control.i3
+        5: constant.language.i3
+    - match: '(move)\s*(workspace)\s*(next|prev|next_on_output|prev_on_output|back_and_forth|(?:\w)*|(?:\d*\s*\w*))(\$\w*){0,1}'
+      scope: move_workspace
+      captures:
+        1: keyword.control.i3
+        2: keyword.control.i3
+        3: constant.language.i3
+        4: variable.other.i3
+    - match: (move)\s*(window|container)\s*(to)?\s*(workspace)?\s*(\$\w*)
+      scope: move__window_or_container1
+      captures:
+        1: keyword.control.i3
+        2: keyword.control.i3
+        3: keyword.control.i3
+        4: keyword.control.i3
+        5: variable.other.i3
+    - match: (move)\s*(window|container)\s*(to)?\s*(workspace)?\s*(\d*)\s*(\$?\w*)?
+      scope: move__window_or_container2
+      captures:
+        1: keyword.control.i3
+        2: keyword.control.i3
+        3: keyword.control.i3
+        4: variable.other.i3
+        5: constant.numeric.i3
+        6: variable.other.i3
+    - match: (move)\s*(window|container)\s*(to)?\s*(workspace)\s*(prev|next|current)
+      scope: move__window_or_container3
+      captures:
+        1: keyword.control.i3
+        2: keyword.control.i3
+        3: keyword.control.i3
+        4: constant.language.i3
+    - match: (mode)\s*\"(resize)\"\s*(.*)
+      scope: resize_mode
+      captures:
+        1: keyword.control.i3
+        2: constant.stirng.i3
+    - match: (resize)\s*(grow|shrink)\s*(width|height)\s*(\d*)\s*(px)\s*(or)\s*(\d*)\s*(ppt)
+      scope: resize
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.language.i3
+        4: constant.numeric.i3
+        5: constant.language.i3
+        6: constant.language.i3
+        7: constant.numeric.i3
+        8: constant.language.i3
+    - match: (mode)\s*\"(default)\"
+      scope: resize_mode_default
+      captures:
+        1: keyword.control.i3
+        2: constant.stirng.i3
+    - match: (focus)
+      scope: focus
+      captures:
+        1: keyword.control.i3
+    - match: (unmark|mark)\s*(.*)
+      scope: mark_identifier
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (border)\s*(normal|none|(?:(\d*)\s*pixel))
+      scope: border
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+    - match: (shmlog)\s*(?:(on|off|toggle)|(\d*))
+      scope: shmlog
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.numeric.i3
+    - match: (debuglog)\s*(on|off|toggle)
+      scope: shmlog
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.numeric.i3
+    - match: (reload)
+      scope: reload
+      captures:
+        1: keyword.control.i3
+    - match: (restart)
+      scope: restart
+      captures:
+        1: keyword.control.i3
+    - match: (exit)
+      scope: exit
+      captures:
+        1: keyword.control.i3
+    - match: (move)\s*(scratchpad)
+      scope: move_scratchpad
+      captures:
+        1: keyword.control.i3
+        2: keyword.control.i3
+    - match: (scratchpad)\s*(show)
+      scope: scratchpad_show
+      captures:
+        1: keyword.control.i3
+        2: keyword.control.i3
+    - match: (bar hidden_state)\s*(show|hide|toggle)\s*(.*)?
+      scope: bar_hidden_state
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.language.i3
+    - match: (mode)\s*(dock|hide|invisible|toggle)\s*(.*)?
+      scope: bar_mode
+      captures:
+        1: keyword.control.i3
+        2: constant.language.i3
+        3: constant.language.i3

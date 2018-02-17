@@ -241,6 +241,7 @@ exec_always --no-startup-id killall polybar; polybar -r elegant
 for_window [class=".*"] border pixel 2
 for_window [class=".*"] title_format "  %title"
 for_window [class="dolphin"] floating enable resize set 1280 768
+for_window [class="VirtualBox"] floating enable resize set 1280 768
 
 gaps inner 10
 gaps outer 2

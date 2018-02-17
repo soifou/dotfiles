@@ -1,13 +1,10 @@
 {
 	"extensions":
 	[
+		"yml",
 		"bundler.conf",
 		".gemrc",
-		"YAML-tmLanguage",
-		"yml",
 		"yml.dist",
-        ".yamllintrc"
-	],
-	"tab_size": 4,
-	"translate_tabs_to_spaces": true
+		"YAML-tmLanguage"
+	]
 }
