@@ -18,18 +18,18 @@ function reset_background
 
     covers="$(find "$album_dir" -type d -exec find {} -maxdepth 1 -type f -iregex ".*/.*\(${album}\|cover\|folder\|artwork\|front\).*[.]\(jpe?g\|png\|gif\|bmp\)" \; )"
     src="$(echo -n "$covers" | head -n1)"
-    rm -f "$COVER" 
+    rm -f "$COVER"
     if [[ -n "$src" ]] ; then
-        #resize the image's height to 300px & extent it to cover the urxvt length
-        convert "$src" -resize 300x -background "#2f343f" -extent 1100x400 "$COVER"
+        # resize the image's height to 300px & extent it to cover the urxvt length
+        convert "$src" -resize 250x -background "#1d1f21" -extent 1100x400 "$COVER"
         if [[ -f "$COVER" ]] ; then
-        
+
            #-- original script --
            #scale down the cover to 30% of the original
            #place it 1% away from left and 50% away from top.
-           #printf "\e]20;${COVER};70x70+0+4:op=keep-aspect\a"
+           #printf "\e]20;${COVER};80x80+0+60:op=keep-aspect\a"
            #---------------------
-           
+
            #no need to scale down, i have extent it
            printf "\e]20;${COVER};100x100+0+0:op=keep-aspect\a"
         else
