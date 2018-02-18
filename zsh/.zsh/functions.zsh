@@ -8,6 +8,14 @@ genpasswd() {
         tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${length} | xargs
     fi
 }
+# List sub dir, sort by size, the biggest at the end, with human presentation
+dsd() {
+    du --max-depth=1 -x -k | sort -n | awk 'function human(x) { s="KMGTEPYZ"; while (x>=1000 && length(s)>1) {x/=1024; s=substr(s,2)} return int(x+0.5) substr(s,1,1)"iB" } {gsub(/^[0-9]+/, human($1)); print}'
+}
+# Recursively find top 20 largest files (> 1MB) sort human readable format
+dsf() {
+    find . -type f -print0 | xargs -0 du -h | sort -hr | head -20
+}
 # List commands from commandlinefu website
 cmdfu() {
     curl "http://www.commandlinefu.com/commands/matching/$(echo "$@" \
