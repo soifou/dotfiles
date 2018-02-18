@@ -41,12 +41,12 @@
         },
         {
             "syntax": "YAML/YAML",
-            "extensions": ["bundler.conf", ".gemrc", "yml", "yml.dist"]
-        },
-        {
-            "syntax": "User/Syntaxes/i3",
-            "rules": [
-                { "file_path": ".*/i3/config$" }
+            "extensions": [
+                "bundler.conf",
+                ".gemrc",
+                "yml",
+                "yml.dist",
+                ".prettierrc"
             ]
         }
     ]
