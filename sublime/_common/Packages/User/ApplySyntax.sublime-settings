@@ -40,6 +40,12 @@
             ]
         },
         {
+            "syntax": "User/Syntaxes/i3",
+            "rules": [
+                { "file_path": ".*/i3/config$" }
+            ]
+        },
+        {
             "syntax": "YAML/YAML",
             "extensions": [
                 "bundler.conf",
