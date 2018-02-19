@@ -84,7 +84,10 @@ read -p "$d [?] Upgrade brew casks?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    cask upgrade
+    # https://github.com/buo/homebrew-cask-upgrade
+    brew cu
+    # homemade script
+    # cask upgrade
 fi
 
 read -p "$d [?] Upgrade mas?$t" -n 1 -r

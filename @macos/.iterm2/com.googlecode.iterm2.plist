@@ -1722,7 +1722,7 @@
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimInactiveSplitPanes</key>
-	<true/>
+	<false/>
 	<key>DimOnlyText</key>
 	<false/>
 	<key>DisableFullscreenTransparency</key>
@@ -1946,11 +1946,11 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>918 514 606 469 0 0 1920 1200 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>568 616 958 451 0 0 1920 1200 </string>
+	<string>568 615 918 452 0 0 1920 1200 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 294 592 584 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>15 565 870 595 0 0 1920 1200 </string>
+	<string>190 200 1540 385 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
 	<string>226 160 688 498 0 0 1920 1200 </string>
 	<key>New Bookmarks</key>
@@ -2153,7 +2153,7 @@
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
-			<real>20.971859271709739</real>
+			<real>1.3547272920143052</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>

@@ -1,5 +1,6 @@
 tap "crisidev/chunkwm"
 tap "blackfireio/blackfire"
+tap "buo/cask-upgrade"
 tap "homebrew/dupes"
 tap "homebrew/apache"
 tap "homebrew/core"
