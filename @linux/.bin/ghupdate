@@ -64,6 +64,12 @@ elif [[ "$1" == 'docker-compose' ]]; then
     BINFILE="$GH_URL$REPO/releases/download/VERSION/$1-$(uname -s)-$(uname -m)"
     BINPATH=/usr/local/bin/docker-compose
     GREPVER="docker-compose -v"
+elif [[ "$1" == 'yakyak' ]]; then
+    REPO=yakyak/yakyak
+    NAME=yakyak
+    BINPATH=/usr/bin/yakyak
+    BINFILE=$GH_URL$REPO/releases/download/vVERSION/$1-VERSION-linux-amd64.deb
+    GREPVER="apt-cache show $1 | grep Version | awk -F: '{print $2}' | egrep -o \"$pattern\""
 fi
 
 lastReleasesUrl="$GH_URL$REPO/releases.atom"
