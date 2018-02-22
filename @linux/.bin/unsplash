@@ -18,12 +18,14 @@ if [ "$SAVE" == 1 ]; then
     mv "$DIR/today" "$DIR/$(date +'%Y-%m-%d-%H%M%S')-today"
 fi
 
-wget -O "$DIR/today" 'https://unsplash.it/1920/1200?random' > /dev/null 2>&1
+# fetch from unsplash (follow redirect)
+curl -o "$DIR/today" -J -L "https://source.unsplash.com/random/1920x1200" > /dev/null 2>&1
 
 # kill blurme script if installed
 if [ "$BLURME" == 1 ]; then
-    PID=$(ps -eaf | pgrep blurme)
-    if [[ "" !=  "$PID" ]]; then
+    PID=$(pgrep blurme || echo 0)
+    if [ "$PID" -ne 0 ]
+    then
         echo "killing $PID"
         kill -9 "$PID"
     fi
@@ -33,6 +35,6 @@ fi
 feh --bg-scale "$DIR/today"
 
 # relaunch blurme
-if [ "$BLURME" == 1 ]; then
+if [[ "$BLURME" == 1 && "$PID" -ne 0 ]]; then
     $(which blurme) &
 fi

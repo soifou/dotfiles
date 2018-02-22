@@ -219,18 +219,6 @@ set $border        #03a9f4
 set $seperator     #444444
 set $statusline    #888A85
 
-# Red	#FF5370	#E53935
-# Pink	#F07178	#FF5370
-# Orange	#F78C6C	#F76D47
-# Yellow	#FFCB6B	#FFB62C
-# Green	#C3E88D	#91B859
-# Pale Blue	#B2CCD6	#8796B0
-# Cyan	#89DDFF	#39ADB5
-# Blue	#82AAFF	#6182B8
-# Purple	#C792EA	#7C4DFF
-# Violet	#BB80B3	#945EB8
-# Brown	#AB7967	#AB7967
-
 #                       border        background   text           indicator
 client.focused          $bg           $bg-urgent   $text          $border
 client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar
@@ -251,21 +239,22 @@ exec --no-startup-id subl
 exec --no-startup-id chromium
 exec --no-startup-id setxkbmap -option caps:none
 exec --no-startup-id greenclip daemon
-exec --no-startup-id blurme &
+exec --no-startup-id ~/.bin/blurme &
 
 exec_always --no-startup-id killall polybar; polybar -r elegant
 
 # =============================================================================
-# i3-gaps
+# Window behaviour
 # =============================================================================
 for_window [class=".*"] border pixel 2
 for_window [class=".*"] title_format "  %title"
-for_window [class="URxvt"] floating enable resize set 1280 768
 for_window [class="dolphin"] floating enable resize set 1280 768
 for_window [class="VirtualBox"] floating enable resize set 1280 768
 
+# =============================================================================
+# i3-gaps
+# =============================================================================
 gaps inner 10
 gaps outer 2
-
 # smart_gaps on
 smart_borders on

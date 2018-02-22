@@ -70,6 +70,12 @@ elif [[ "$1" == 'yakyak' ]]; then
     BINPATH=/usr/bin/yakyak
     BINFILE=$GH_URL$REPO/releases/download/vVERSION/$1-VERSION-linux-amd64.deb
     GREPVER="apt-cache show $1 | grep Version | awk -F: '{print $2}' | egrep -o \"$pattern\""
+elif [[ "$1" == 'lnav' ]]; then
+    REPO=tstack/lnav
+    NAME=lnav
+    BINPATH=/usr/bin/lnav
+    BINFILE=$GH_URL$REPO/releases/download/vVERSION/$1_VERSION_amd64.deb
+    GREPVER="lnav -V | awk -F\  '{print $2}' | tr -d '[:space:]'"
 fi
 
 lastReleasesUrl="$GH_URL$REPO/releases.atom"
