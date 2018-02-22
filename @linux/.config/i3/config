@@ -18,6 +18,11 @@ bindsym $mod+Shift+q kill
 # =============================================================================
 # Launcher
 # =============================================================================
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
 # start rofi (fix KDE icons with XDG_CURRENT_DESKTOP)
 bindsym $mod+d exec XDG_CURRENT_DESKTOP=kde rofi -show drun
 # Alt+Tab window switching.
@@ -31,12 +36,16 @@ bindsym $mod+Shift+w exec --no-startup-id rofi -modi "clipboard:greenclip print"
 bindsym $mod+Escape exec $HOME/.anyenv/envs/pyenv/shims/python3 $HOME/.bin/lockscreen
 # bindsym $mod+Escape exec i3lock
 
+# =============================================================================
+# Screenshot
+# =============================================================================
 bindsym Print exec XDG_CURRENT_DESKTOP=kde spectacle
 
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# =============================================================================
+# Music
+# =============================================================================
+bindsym $mod+Shift+z exec $HOME/.bin/zik
+
 
 # change focus
 bindsym $mod+j focus left
@@ -182,9 +191,20 @@ bindsym $mod+r mode "resize"
 # =============================================================================
 # Volume control
 # =============================================================================
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec amixer sset Master '5%+'
+bindsym XF86AudioLowerVolume exec amixer sset Master '5%-'
+bindsym XF86AudioMute exec amixer set Master toggle
+
+# =============================================================================
+# Music control
+# =============================================================================
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioStop exec mpc stop
 
 # =============================================================================
 # Assign colors
@@ -240,6 +260,7 @@ exec_always --no-startup-id killall polybar; polybar -r elegant
 # =============================================================================
 for_window [class=".*"] border pixel 2
 for_window [class=".*"] title_format "  %title"
+for_window [class="URxvt"] floating enable resize set 1280 768
 for_window [class="dolphin"] floating enable resize set 1280 768
 for_window [class="VirtualBox"] floating enable resize set 1280 768
 
