@@ -54,6 +54,12 @@
                 "yml.dist",
                 ".prettierrc"
             ]
+        },
+        {
+            "syntax": "INI/INI",
+            "rules": [
+                { "file_path": ".*/polybar/config$" }
+            ]
         }
     ]
 }
