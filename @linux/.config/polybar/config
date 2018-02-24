@@ -11,131 +11,119 @@
 ;=====================================================
 
 [colors]
-
-;background = #aa000000
 background = ${xrdb:background}
 background-alt = ${xrdb:color8}
 foreground = ${xrdb:foreground}
 foreground-alt = ${xrdb:foreground}
 primary = ${xrdb:color4}
-;primary = ${xrdb:color4:#FFbf616a}
 secondary = ${xrdb:color12}
 alert = ${xrdb:color1}
-;battery-charging = #00aaff
-;battery-discharging = #ffaa00
-;battery-full = #00ffaa
+color0 = ${xrdb:color0}
+color1 = ${xrdb:color1}
+color2 = ${xrdb:color2}
+color3 = ${xrdb:color3}
+color4 = ${xrdb:color4}
+color5 = ${xrdb:color5}
+color6 = ${xrdb:color6}
+color7 = ${xrdb:color7}
+color8 = ${xrdb:color8}
+color9 = ${xrdb:color9}
+color10 = ${xrdb:color10}
+color11 = ${xrdb:color11}
+color12 = ${xrdb:color12}
+color13 = ${xrdb:color13}
+color14 = ${xrdb:color14}
+color15 = ${xrdb:color15}
 
-[bar/elegant]
-monitor = ${env:MONITOR:DVI-I-1}
+[bar/dark]
+monitor = ${env:MONITOR:}
 bottom = false
 width = 100%
 height = 25
 offset-x = 0
 offset-y = 0
-;radius = 6.0
-;fixed-center = false
-
-;override-redirect = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-;line-size = 2
-;line-color = #f00
+line-size = 1
+line-color = ${colors.color5}
 
 underline-size = 2
 underline-color = ${colors.foreground}
 
-;border-size = 20
 border-size = 0
-border-bottom-size = 1
-;border-color = #f00
+border-bottom-size = 0
+border-color = ${colors.color0}
 
-padding-left = 0
-padding-right = 1
+padding-left = 5
+padding-right = 5
 
-module-margin-left = 0
+module-margin-left = 2
 module-margin-right = 2
 
-font-0 = MesloLGM Nerd Font:pixelsize=12
-font-1 = FontAwesome:pixelsize=12
+font-0 = FontAwesome:size=11;1
+font-1 = MesloLGM Nerd Font:pixelsize=11;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = redshift volume date openweathermap powermenu
+modules-right = redshift volume date powermenu
+
+
+[module/xworkspaces]
+type = internal/xworkspaces
+enable-click = true
+enable-scroll = true
+pin-workspaces = true
+
+icon-default = 
+format = " <label-state> "
+
+label-active = %icon% %{O5}
+label-active-foreground = ${colors.color1}
+label-occupied = %icon% %{O5}
+label-occupied-foreground = ${colors.color11}
+label-urgent = %icon% %{O5}
+label-urgent-foreground = ${colors.color6}
+label-empty = %icon% %{O5}
+label-empty-foreground = ${colors.color8}
 
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:120:...%
-label-padding = 2
-
-[module/bspwm]
-type = internal/bspwm
-
-label-focused = %index%
-label-focused-background = ${colors.foreground-alt}
-label-focused-foreground = ${colors.background-alt}
-label-focused-underline= ${colors.foreground-alt}
-label-focused-padding = 2
-
-label-occupied = %index%
-label-occupied-padding = 2
-
-label-urgent = %index%!
-label-urgent-background = ${colors.background-alt}
-label-urgent-foreground = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
+label-padding = 0
 
 [module/i3]
 type = internal/i3
-
-format = <label-state> <label-mode>
+pin-workspaces = false
 index-sort = true
-wrapping-scroll = false
-strip-wsnumbers = true
-
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
-label-mode-padding = 0
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
-label-focused = %name% %icon%
-;label-focused-background = ${module/bspwm.label-focused-background}
-;label-focused-foreground = ${module/bspwm.label-focused-foreground}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %name% %icon%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-
-; visible = Active workspace on unfocused monitor
-label-visible = %name% %icon%
-;label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %name% %icon%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-foreground = ${module/bspwm.label-urgent-foreground}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 ws-icon-0 = 1;
 ws-icon-1 = 2;
 ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;
-ws-icon-5 = 6;
-ws-icon-6 = 7;
-ws-icon-default = 
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-default = 
+
+format = <label-state> <label-mode>
+format-spacing = 0
+
+label-focused = %icon%
+label-focused-padding = 2
+label-focused-foreground = ${colors.color15}
+
+label-unfocused = %icon%
+label-unfocused-padding = 2
+label-unfocused-foreground = ${colors.color8}
+
+label-urgent = %icon%
+label-urgent-padding = 2
+label-urgent-foreground = ${colors.color1}
+
+label-visible = %icon%
+label-visible-padding = 2
+label-visible-foreground = ${colors.color6}
 
 [module/mpd]
 type = internal/mpd
@@ -226,7 +214,7 @@ bar-volume-fill = ─
 bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-foreground = ${colors.foreground}
 
 [module/battery]
 type = internal/battery
@@ -273,18 +261,32 @@ animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
 
 [module/backlight]
-type = internal/backlight
+type = internal/xbacklight
+output = ${env:MONITOR:VGA-0}
 
-card = intel_backlight
-enable-scroll = true
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format = <label>
 
-;format = <ramp><label>
-format = <ramp>
-label = %percentage%
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+; Only applies if <ramp> is used
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+; Only applies if <bar> is used
+bar-width = 10
+bar-indicator = |
+bar-fill = ─
+bar-empty = ─
+
 
 [module/openweathermap]
 type = custom/script
