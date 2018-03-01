@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+# Startup script for polybar.
+# @NOTE: zsh/fish users have to pass SHELL var to fix "passing env var to custom script not working" issue.
+# see: https://github.com/jaagr/polybar/issues/323#issuecomment-292038260
+
+
 # Terminate already running bar instances
 killall -q polybar
 
@@ -12,8 +17,8 @@ if type "xrandr"; then
     # for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
     # for the last one connected on the list
     for m in $(xrandr --query | grep " connected" | cut -d" " -f1 | tail -n1); do
-        MONITOR=$m polybar --reload dark &
+        SHELL=$(which sh) MONITOR=$m polybar --reload dark &
     done
 else
-    polybar --reload dark &
+    SHELL=$(which sh) polybar --reload dark &
 fi
