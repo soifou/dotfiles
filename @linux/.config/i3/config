@@ -237,11 +237,11 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id urxvtd -q -f -o
 exec --no-startup-id subl
 exec --no-startup-id chromium
-exec --no-startup-id setxkbmap -option caps:none
+exec --no-startup-id numlockx > /dev/null 2>&1
 exec --no-startup-id greenclip daemon
 exec --no-startup-id ~/.bin/blurme &
 
-exec_always --no-startup-id killall polybar; polybar -r elegant
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # =============================================================================
 # Window behaviour
@@ -249,6 +249,7 @@ exec_always --no-startup-id killall polybar; polybar -r elegant
 for_window [class=".*"] border pixel 2
 for_window [class=".*"] title_format "  %title"
 for_window [class="dolphin"] floating enable resize set 1280 768
+for_window [class="transmission"] floating enable resize set 1024 384
 for_window [class="VirtualBox"] floating enable resize set 1280 768
 
 # =============================================================================
