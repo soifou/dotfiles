@@ -137,6 +137,9 @@ workspace 3 output $monitorRight
 workspace 4 output $monitorLeft
 workspace 5 output $monitorLeft
 workspace 6 output $monitorLeft
+workspace 7 output $monitorRight
+workspace 8 output $monitorRight
+workspace 9 output $monitorRight
 
 # =============================================================================
 # Assign some apps to workspace
@@ -209,25 +212,54 @@ bindsym XF86AudioStop exec mpc stop
 # =============================================================================
 # Assign colors
 # =============================================================================
-set $bg            #263238
-set $bg-inactive   #37474f
-set $bg-urgent     #39adb5
-set $text          #eceff6
-set $text-inactive #bdc3c7
-set $bar           #222222
-set $border        #03a9f4
-set $seperator     #444444
-set $statusline    #888A85
+set_from_resource $x_background background
+set_from_resource $x_foreground foreground
+set_from_resource $x_color0     color0
+set_from_resource $x_color1     color1
+set_from_resource $x_color2     color2
+set_from_resource $x_color3     color3
+set_from_resource $x_color4     color4
+set_from_resource $x_color5     color5
+set_from_resource $x_color6     color6
+set_from_resource $x_color7     color7
+set_from_resource $x_color8     color8
+set_from_resource $x_color9     color9
+set_from_resource $x_color10    color10
+set_from_resource $x_color11    color11
+set_from_resource $x_color12    color12
+set_from_resource $x_color13    color13
+set_from_resource $x_color14    color14
+set_from_resource $x_color15    color15
 
-#                       border        background   text           indicator
-client.focused          $bg           $bg-urgent   $text          $border
-client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar
-client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar
-client.urgent           $bg-urgent    $bg-urgent   $text          $bar
+# class                 border     backgr.    text       indicator  child_border
+client.focused          $x_color8  $x_color8  $x_color11 $x_color12 $x_color17
+client.focused_inactive $x_color11  $x_color11  $x_color4  $x_color10 $x_color17
+client.unfocused        $x_color11  $x_color11  $x_color4  $x_color10 $x_color17
+client.urgent           $x_color13 $x_color12 $x_color4  $x_color14 $x_color17
+client.placeholder      $x_color15 $x_color17 $x_color16 $x_color15 $x_color17
+
+client.background       $x_background
+
+# set $bg            #263238
+# set $bg-inactive   #37474f
+# set $bg-urgent     #39adb5
+# set $text          #eceff6
+# set $text-inactive #bdc3c7
+# set $bar           #222222
+# set $border        #03a9f4
+# set $seperator     #444444
+# set $statusline    #888A85
+#
+# #                       border        background   text           indicator
+# client.focused          $bg           $bg-urgent   $text          $border
+# client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar
+# client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar
+# client.urgent           $bg-urgent    $bg-urgent   $text          $bar
 
 # =============================================================================
 # Autostart
 # =============================================================================
+# run once at startup
 exec --no-startup-id xrandr --output $monitorRight --auto --right-of $monitorLeft
 exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/today
 exec --no-startup-id mpd
@@ -237,10 +269,11 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id urxvtd -q -f -o
 exec --no-startup-id subl
 exec --no-startup-id chromium
-exec --no-startup-id numlockx > /dev/null 2>&1
 exec --no-startup-id greenclip daemon
 exec --no-startup-id ~/.bin/blurme &
 
+# re-run with every i3 reload
+exec_always --no-startup-id numlockx on
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # =============================================================================

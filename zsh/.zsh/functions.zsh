@@ -34,6 +34,31 @@ dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d
 chuck() { timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jshon -e value -e joke -u }
 # Validate all XML files in the current directory and below
 xmllint() { find . -type f -name "*.xml" -exec xmllint --noout {} \; }
+# Download all files from a gist
+dlgist() {
+    if [ $# -ne 2 ];
+    then
+        echo 'Failed. Syntax: $> ddl-gist GITHUB_GIST_URL DOWNLOAD_PATH'
+        return
+    fi
+    gist_url=$1
+    download_path=$2
+    echo '[*] Getting all GIST File URLs from '$gist_url
+    gists=`curl -ksL -H 'User-Agent: Mozilla/5.0' $gist_url  | grep '<a\ .*href=".*/raw/' | sed 's/.*a\ .*href="//' | sed 's/".*//'`
+    echo '[*] Downloading all files'
+    for lines in `echo $gists | xargs -L1`;
+    do
+        if [ ! -z $lines ];
+        then
+            echo $lines
+            gistfile=`echo $lines | sed 's/.*\///'`
+            save_as=$download_path"/"$gistfile
+            echo "Downloading URL: https://gist.github.com"$lines
+            echo "to "$save_as"....."
+            wget -c -O $save_as "https://gist.github.com"$lines
+        fi
+    done
+}
 # reveal aliases typed on prompt
 reveal-alias() {
     preexec_functions=()
