@@ -4,8 +4,12 @@
 # reload config
 alt + cmd - r : khd -e "reload"
 
+# take a screenshot (region zone)
+cmd - 0x0A : screencapture -x -s ~/Pictures/screenshots/$(date '+%Y%m%d%H%M%S')-screenshot.png
+
 # open terminal, blazingly fast compared to iTerm/Hyper
-# cmd - return : open -na /Applications/kitty.app/Contents/MacOS/kitty --args zsh
+# cmd - return : open -na /Applications/kitty.app/Contents/MacOS/kitty
+# cmd - return : osascript -e 'tell application "kitty" to activate' -e 'tell application "System Events" to tell process "kitty" to keystroke "t" using command down'
 cmd - return : open -na /Applications/iTerm.app/Contents/MacOS/iTerm2
 
 # send current window to prev/next desktop
@@ -83,11 +87,11 @@ cmd + alt - x   : `id=$(chunkc get _last_active_desktop); khd -p "cmd + alt - $i
 # ctrl + alt - 3  : chunkc tiling::monitor -f 3
 
 # send window to monitor and follow focus
-ctrl + alt - z  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev
-ctrl + alt - c  : chunkc tiling::window --send-to-monitor next; chunkc tiling::monitor -f next
-ctrl + alt - 1  : chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
-ctrl + alt - 2  : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
-ctrl + alt - 3  : chunkc tiling::window --send-to-monitor 3; chunkc tiling::monitor -f 3
+# ctrl + alt - z  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev
+# ctrl + alt - c  : chunkc tiling::window --send-to-monitor next; chunkc tiling::monitor -f next
+# ctrl + alt - 1  : chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
+# ctrl + alt - 2  : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
+# ctrl + alt - 3  : chunkc tiling::window --send-to-monitor 3; chunkc tiling::monitor -f 3
 
 # increase region size
 shift + alt - a : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
@@ -102,7 +106,7 @@ shift + alt - d : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-windo
 # shift + cmd - d : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
 
 # set insertion point for focused container
-ctrl + alt - f : chunkc tiling::window --use-insertion-point cancel
+ctrl + alt - c : chunkc tiling::window --use-insertion-point cancel
 ctrl + alt - h : chunkc tiling::window --use-insertion-point west
 ctrl + alt - j : chunkc tiling::window --use-insertion-point south
 ctrl + alt - k : chunkc tiling::window --use-insertion-point north
@@ -152,10 +156,10 @@ ctrl + alt - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
 
 # remap caps-lock to escape for this config only !!!
 # macos sierra can also perform this remap for a given keyboard
-- capslock : khd -p "- escape"
+# - capslock : khd -p "- escape"
 
 # key remap for norwegian layout \ { }
-alt - 1 : khd -p "cmd + shift - 1"
+# alt - 1 : khd -p "cmd + shift - 1"
 # alt - 2 : khd -p "shift + alt - 2"
 # cmd - 3 : khd -p "shift + alt - 3"
 # cmd - 7 : khd -p "shift + alt - 7"
