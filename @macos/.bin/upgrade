@@ -85,7 +85,7 @@ echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     # https://github.com/buo/homebrew-cask-upgrade
-    brew cu
+    brew cu -a
     # homemade script
     # cask upgrade
 fi
@@ -108,7 +108,7 @@ read -p "$d [?] Upgrade global composer dependencies?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    /usr/local/bin/composer global update
+    $(phpenv which composer) global update -d ~/.composer/
 fi
 
 read -p "$d [?] Upgrade docker images?$t" -n 1 -r
