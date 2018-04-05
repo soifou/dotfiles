@@ -33,6 +33,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 Plugin 'itchyny/lightline.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'rhysd/vim-gfm-syntax'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-polyglot'
@@ -75,10 +76,10 @@ autocmd Syntax json sou ~/.vim/syntax/json.vim
 autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
 
 " Prettify Markdown files
-augroup markdown
-  au!
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
+autocmd BufRead,BufNew,BufNewFile *.md set ft=markdown.gfm
+
+" Prettify Nginx conf
+au BufRead,BufNewFile */nginx/* set ft=nginx
 
 " 05. Vim UI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -140,6 +141,3 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
-" Nginx files syntax custom
-au BufRead,BufNewFile */nginx/* set ft=nginx

@@ -14,21 +14,15 @@
 
 You can install it with this make command.
 
-```
+```sh
 $ make
-```
-
-SublimeLinter 4 is imminent but not yet released. My config depend on it.
-
-```
-$ make linter
 ```
 
 ## Configuration
 
 Symlink the config for the desired env:
 
-```
+```sh
 $ stow @linux
 or
 $ stow @osx

@@ -31,6 +31,9 @@ if [[ `uname` == "Darwin" ]]; then
     fi
     # use brewed bzip2 (needed for phpbrew)
     export PATH="/usr/local/opt/bzip2/bin:$PATH"
+    # use brew version of icu4c
+    export PATH="/usr/local/opt/icu4c/bin:$PATH"
+    export PATH="/usr/local/opt/icu4c/sbin:$PATH"
     # Docker toolbox for my dev environment
     if [[ `docker-machine status $DOCKER_MACHINE_NAME` == "Running" ]]; then
         eval $(docker-machine env $DOCKER_MACHINE_NAME)

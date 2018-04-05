@@ -9,7 +9,6 @@
 		"A File Icon",
 		"Ansible",
 		"ApplySyntax",
-		"BeautifyRuby",
 		"Bootstrap 3 Snippets",
 		"BracketHighlighter",
 		"ComposerPackageInfo",
@@ -23,6 +22,7 @@
 		"Jinja2",
 		"jQuery",
 		"JsPrettier",
+		"MarkdownEditing",
 		"Material Theme",
 		"Package Control",
 		"PHP Companion",
@@ -35,6 +35,7 @@
 		"Rsync SSH",
 		"Sass",
 		"Smarty",
+		"sublime-rufo",
 		"SublimeLinter",
 		"SublimeLinter-contrib-dockerfilelint",
 		"SublimeLinter-contrib-php-cs-fixer",
@@ -47,5 +48,9 @@
 		"SublimeLinter-pycodestyle",
 		"SublimeLinter-rubocop",
 		"SublimeLinter-shellcheck"
+	],
+	"repositories":
+	[
+		"https://github.com/ruby-formatter/sublime-rufo"
 	]
 }
