@@ -70,7 +70,7 @@ autocmd VimEnter,Colorscheme * :hi Search term=bold,reverse ctermfg=6 ctermbg=8 
 
 " Prettify JSON files
 autocmd BufRead,BufNewFile *.json set filetype=json
-autocmd Syntax json sou ~/.vim/syntax/json.vim
+
 
 " Prettify Vagrantfile
 autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
