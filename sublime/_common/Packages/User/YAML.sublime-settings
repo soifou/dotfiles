@@ -2,12 +2,12 @@
 	"extensions":
 	[
 		".gemrc",
-		"YAML-tmLanguage",
-		"bundler.conf",
 		"yml",
+		".prettierrc",
+		"YAML-tmLanguage",
 		"yml.dist",
-		".prettierrc"
+		"bundler.conf"
 	],
 	"tab_size": 4,
-    "translate_tabs_to_spaces": true
+	"translate_tabs_to_spaces": true
 }

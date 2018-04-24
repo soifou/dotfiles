@@ -1,13 +1,13 @@
 {
-    "tab_size": 2,
 	"extensions":
 	[
-		"simplecov",
+		"rake",
+		"podspec",
 		"jbuilder",
 		"rabl",
-		"rb",
-		"rake",
 		"thor",
-		"podspec"
-	]
+		"rb",
+		"simplecov"
+	],
+	"tab_size": 2
 }

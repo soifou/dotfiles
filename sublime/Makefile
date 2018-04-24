@@ -20,12 +20,4 @@ all:
 		echo "Package control has been installed!"
 	fi
 
-linter:
-	if [ -d $(SUBLIME_DIR) ]; then
-		mkdir -p "$(SUBLIME_DIR)/Packages"
-		git clone https://github.com/SublimeLinter/SublimeLinter "$(SUBLIME_DIR)/Packages
-		cd "$(SUBLIME_DIR)/Packages/SublimeLinter"; git checkout 4.0.0-rc.9.4
-		echo "SublimeLinter 4.0.0 has been installed!"
-	fi
-
 .PHONY: all

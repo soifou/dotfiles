@@ -1,11 +1,11 @@
 {
 	"extensions":
 	[
-        ".gitattributes",
-        ".gitconfig",
-        ".gitignore",
-        ".npmrc",
-        "ini.dist",
-        "redshift.conf"
+		".npmrc",
+		".gitattributes",
+		"ini.dist",
+		"redshift.conf",
+		".gitignore",
+		".gitconfig"
 	]
 }
