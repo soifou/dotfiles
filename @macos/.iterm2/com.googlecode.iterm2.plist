@@ -1946,11 +1946,13 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>918 514 606 469 0 0 1920 1200 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>327 620 918 381 0 0 1920 1200 </string>
+	<string>327 662 796 473 0 0 1920 1200 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
-	<string>99 294 592 584 0 0 1440 878 </string>
+	<string>965 605 940 560 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>225 -60 1680 931 0 0 1920 1080 </string>
+	<string>1441 39 462 551 0 0 1920 1200 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>965 608 940 553 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
 	<string>226 160 688 498 0 0 1920 1200 </string>
 	<key>New Bookmarks</key>
@@ -2727,7 +2729,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.08208672337278107</real>
+			<real>0.0</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -3658,7 +3660,7 @@
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1498025600</real>
+	<real>1522820480</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
