@@ -8,7 +8,7 @@ alt + cmd - r : khd -e "reload"
 cmd - 0x0A : screencapture -x -s ~/Pictures/screenshots/$(date '+%Y%m%d%H%M%S')-screenshot.png
 
 # open terminal, blazingly fast compared to iTerm/Hyper
-cmd - return : open -na /Applications/kitty.app/Contents/MacOS/kitty
+cmd - return : LANG=en_US.UTF-8 open -na /Applications/kitty.app/Contents/MacOS/kitty
 # cmd - return : osascript -e 'tell application "kitty" to activate' -e 'tell application "System Events" to tell process "kitty" to keystroke "t" using command down'
 # cmd - return : open -na /Applications/iTerm.app/Contents/MacOS/iTerm2
 
