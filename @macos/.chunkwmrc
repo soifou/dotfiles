@@ -118,6 +118,7 @@ chunkc tiling::rule --owner Kap --state float
 chunkc tiling::rule --owner \"System Preferences\" --state tile
 
 chunkc tiling::rule --owner \"Sublime Text\" --desktop 2
+chunkc tiling::rule --owner Code --desktop 2
 chunkc tiling::rule --owner Firefox --desktop 3
 chunkc tiling::rule --owner Chromium --desktop 3
 chunkc tiling::rule --owner Slack --desktop 4

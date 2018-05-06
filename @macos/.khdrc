@@ -7,15 +7,12 @@ alt + cmd - r : khd -e "reload"
 # take a screenshot (region zone)
 cmd - 0x0A : screencapture -x -s ~/Pictures/screenshots/$(date '+%Y%m%d%H%M%S')-screenshot.png
 
-# open terminal, blazingly fast compared to iTerm/Hyper
-cmd - return : LANG=en_US.UTF-8 open -na /Applications/kitty.app/Contents/MacOS/kitty
-# cmd - return : osascript -e 'tell application "kitty" to activate' -e 'tell application "System Events" to tell process "kitty" to keystroke "t" using command down'
-# cmd - return : open -na /Applications/iTerm.app/Contents/MacOS/iTerm2
+# open terminal
+cmd - return : LANG=en_US.UTF-8 open -na /Applications/kitty.app
 
 # send current window to prev/next desktop
 # cmd + shift - left : chunkc tiling::window --send-to-desktop prev; khd -p "ctrl - left"
 # cmd + shift - right : chunkc tiling::window --send-to-desktop next; khd -p "ctrl - right"
-
 
 # focus window
 alt - h : chunkc tiling::window --focus west

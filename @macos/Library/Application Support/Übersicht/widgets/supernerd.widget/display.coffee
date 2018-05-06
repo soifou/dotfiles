@@ -143,7 +143,7 @@ render: ( ) ->
 
     <div class="container" id="left">
       <div class="widg" id="home">
-        <i class="fas fa-home"></i>
+        <!-- <i class="fas fa-home"></i> -->
       </div>
       <!--
       <div class="widg" id="browser">
