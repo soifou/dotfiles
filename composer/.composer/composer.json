@@ -6,6 +6,7 @@
         "phpmd/phpmd": "^2.6",
         "kahlan/kahlan": "^3.1",
         "deployer/deployer": "^6.0",
-        "phpstan/phpstan-shim": "^0.9.2"
+        "phpstan/phpstan-shim": "^0.9.2",
+        "pyrech/composer-changelogs": "^1.6"
     }
 }
