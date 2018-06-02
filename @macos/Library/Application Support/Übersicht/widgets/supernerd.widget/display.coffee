@@ -45,7 +45,7 @@ colors =
   else if options.theme == 'pro'
     black:   "#101010"
     red:     "#D17D60"
-    green:   "#9ABA77"
+    green:   "#25CCF7"
     yellow:  "#BAB777"
     blue:    "#77ADBA"
     magenta: "#BA77B2"
@@ -99,12 +99,14 @@ render: ( ) ->
         <div class="widg" id="music">
           <!-- <i class="fab fa-itunes-note"></i>
           <span class="playing"></span> -->
-          <i class="fa fa-dot-circle desk" id="desk1"></i>
-          <i class="fa fa-dot-circle desk" id="desk2"></i>
-          <i class="fa fa-dot-circle desk" id="desk3"></i>
-          <i class="fa fa-dot-circle desk" id="desk4"></i>
-          <i class="fa fa-dot-circle desk" id="desk5"></i>
-          <i class="fa fa-dot-circle desk" id="desk6"></i>
+          <i class="fa fa-circle-notch desk" id="desk1"></i>
+          <i class="fa fa-circle-notch desk" id="desk2"></i>
+          <i class="fa fa-circle-notch desk" id="desk3"></i>
+          <i class="fa fa-circle-notch desk" id="desk4"></i>
+          <i class="fa fa-circle-notch desk" id="desk5"></i>
+          <i class="fa fa-circle-notch desk" id="desk6"></i>
+          <i class="fa fa-circle-notch desk" id="desk7"></i>
+          <i class="fa fa-circle-notch desk" id="desk8"></i>
         </div>
       </div>
 

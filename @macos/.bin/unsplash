@@ -24,11 +24,15 @@ curl -o "$DIR/today" -J -L "https://source.unsplash.com/random/1920x1200" > /dev
 /usr/local/bin/chunkc blur::reset
 
 # do the blur stuff myself
+# todo
+
+# set wallpaper on all desktop
+sqlite3 $HOME/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '$DIR/today'"
 
 # set wallpaper with chunkwm (blur plugin)
-/usr/local/bin/chunkc set wallpaper "$DIR/today"
-/usr/local/bin/chunkc blur::wallpaper "$DIR/today"
+# /usr/local/bin/chunkc set wallpaper "$DIR/today"
 
+/usr/local/bin/chunkc blur::wallpaper "$DIR/today"
 
 # convert ~/Pictures/wallpapers/today -blur 0x5 /tmp/chunkwm-blur-global.jpg
 /usr/local/bin/chunkc blur::wallpaper set wallpaper_blur
