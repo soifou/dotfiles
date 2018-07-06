@@ -5,11 +5,10 @@ print_song() {
     if [[ $status == 'stopped' ]]; then
         echo "No playing"
     else
-        remote=$(/usr/local/bin/cmus-remote -Q)
-        song=$(echo "$remote" | grep tag | head -n 3 | sort -r | cut -d ' ' -f 3- )
+        song=$(echo "$(/usr/local/bin/cmus-remote -Q)" | grep tag | head -n 3 | sort -r | cut -d ' ' -f 3- )
         # artist=$(echo "$song" | head -n 2 | tail -n 1)
         # title=$(echo "$song" | head -n 1 )
-        echo "$song"
+        echo "$song"  | cut -c1-50
     fi
 }
 
