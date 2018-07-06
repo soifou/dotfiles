@@ -69,8 +69,7 @@
     },
     "materialTheme.cache.workbench.settings": {
         "themeColours": "Default High Contrast",
-        "accent": "Teal",
-        "accentPrevious": "Cyan"
+        "accentPrevious": "Teal"
     },
     "php.suggest.basic": false,
     "projectManager.showProjectNameInStatusBar": true,
@@ -81,21 +80,12 @@
     "terminal.integrated.fontFamily": "'MesloLGM Nerd Font'",
     "terminal.integrated.shell.linux": "/usr/bin/zsh",
     "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
-    "window.zoomLevel": 0.7,
-    "workbench.colorTheme": "Material Theme",
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Material Theme High Contrast",
     "workbench.editor.labelFormat": "medium",
     "workbench.iconTheme": "eq-material-theme-icons",
     "workbench.startupEditor": "none",
-    "workbench.colorCustomizations": {
-        "activityBarBadge.background": "#80CBC4",
-        "list.activeSelectionForeground": "#80CBC4",
-        "list.inactiveSelectionForeground": "#80CBC4",
-        "list.highlightForeground": "#80CBC4",
-        "scrollbarSlider.activeBackground": "#80CBC450",
-        "editorSuggestWidget.highlightForeground": "#80CBC4",
-        "textLink.foreground": "#80CBC4",
-        "progressBar.background": "#80CBC4",
-        "pickerGroup.foreground": "#80CBC4",
-        "tab.activeBorder": "#80CBC4"
-    }
+    "workbench.colorCustomizations": {},
+    "materialTheme.autoApplyIcons": true,
+    "materialTheme.fixIconsRunning": false
 }
