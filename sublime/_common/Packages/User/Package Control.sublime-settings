@@ -10,15 +10,22 @@
 		"Ansible",
 		"ApplySyntax",
 		"Bootstrap 3 Snippets",
+		"Bootstrap 4 Snippets",
 		"BracketHighlighter",
+		"Color Highlight",
 		"ComposerPackageInfo",
+		"DA CS",
+		"DA UI",
 		"Dockerfile Syntax Highlighting",
 		"Emmet",
 		"ExpandRegion",
+		"fasd",
 		"FileManager",
 		"FindKeyConflicts",
 		"HaoGist",
+		"HyperClick",
 		"INI",
+		"JavaScript & NodeJS Snippets",
 		"Jinja2",
 		"jQuery",
 		"JsPrettier",
@@ -49,7 +56,8 @@
 		"SublimeLinter-phpmd",
 		"SublimeLinter-pycodestyle",
 		"SublimeLinter-rubocop",
-		"SublimeLinter-shellcheck"
+		"SublimeLinter-shellcheck",
+		"TypeScript Syntax"
 	],
 	"repositories":
 	[

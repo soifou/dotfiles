@@ -16,7 +16,7 @@ PLUGIN_NAME = 'SublimePhpCsFixer'
 
 class SublimePhpCsFixListener(sublime_plugin.EventListener):
     def on_pre_save(self, view):
-        self.load_settings()
+        self.settings = sublime.load_settings('%s.sublime-settings' % PLUGIN_NAME)
         if self.settings.get('on_save'):
             view.run_command("sublime_php_cs_fix")
 
