@@ -145,6 +145,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     brew cleanup
     brew cask cleanup
+    brew prune
 fi
 
 read -p "$d [?] Cleanup xcode?$t" -n 1 -r
