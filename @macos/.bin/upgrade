@@ -115,7 +115,7 @@ read -p "$d [?] Upgrade docker images?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    docker images | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull
+    docker image ls | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull
     docker system prune -f
 fi
 
