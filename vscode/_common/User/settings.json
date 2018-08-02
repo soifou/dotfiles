@@ -71,6 +71,8 @@
         "themeColours": "Default High Contrast",
         "accentPrevious": "Teal"
     },
+    "materialTheme.fixIconsRunning": false,
+    "materialTheme.autoApplyIcons": true,
     "php.suggest.basic": false,
     "projectManager.showProjectNameInStatusBar": true,
     "projectManager.sortList": "Recent",
@@ -80,12 +82,12 @@
     "terminal.integrated.fontFamily": "'MesloLGM Nerd Font'",
     "terminal.integrated.shell.linux": "/usr/bin/zsh",
     "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
+    "window.titleBarStyle": "custom",
+    "window.nativeTabs": false,
     "window.zoomLevel": 0,
     "workbench.colorTheme": "Material Theme High Contrast",
     "workbench.editor.labelFormat": "medium",
     "workbench.iconTheme": "eq-material-theme-icons",
     "workbench.startupEditor": "none",
-    "workbench.colorCustomizations": {},
-    "materialTheme.autoApplyIcons": true,
-    "materialTheme.fixIconsRunning": false
+    "workbench.colorCustomizations": {}
 }

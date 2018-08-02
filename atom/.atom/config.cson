@@ -1,6 +1,7 @@
 "*":
   "atom-autocomplete-php":
-    binPhp: "/usr/local/bin/php"
+    binComposer: "~/.anyenv/envs/phpenv/plugins/phpenv-composer/libexec/composer"
+    binPhp: "~/.anyenv/envs/phpenv/versions/7.2.4/bin/php"
     verboseErrors: true
   "atom-material-ui":
     depth: true
@@ -39,9 +40,10 @@
       "atom-material-ui"
       "atom-material-syntax"
     ]
+    titleBar: "hidden"
   editor:
     fontFamily: "SauceCodePro Nerd Font"
-    fontSize: 18
+    fontSize: 14
     invisibles: {}
     scrollPastEnd: true
     scrollSensitivity: 200
@@ -62,6 +64,6 @@
   "tool-bar":
     position: "Left"
   "tree-view":
-    hideVcsIgnoredFiles: true
+    hideVcsIgnoredFiles: false
   welcome:
     showOnStartup: false

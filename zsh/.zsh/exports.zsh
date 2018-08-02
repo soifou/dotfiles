@@ -21,6 +21,21 @@ if [ -d "${ANYENV_ROOT}" ]; then
     eval "$(anyenv init -)"
 fi
 
+# https://golang.org/doc/code.html#GOPATH
+export GOPATH="$HOME/.go"
+if [ -d "$GOPATH" ]; then
+    export PATH="$GOPATH/bin:$PATH"
+fi
+
+
+fasd_cache="$HOME/.fasd-init-zsh"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+    echo "load fasd"
+    fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+
 if [[ `uname` == "Darwin" ]]; then
     # homebrew path
     export PATH="/usr/local/sbin:$PATH"

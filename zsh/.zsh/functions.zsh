@@ -18,7 +18,7 @@ dsf() {
 }
 # List commands from commandlinefu website
 cmdfu() {
-    curl "http://www.commandlinefu.com/commands/matching/$(echo "$@" \
+    curl "https://www.commandlinefu.com/commands/matching/$(echo "$@" \
     | sed 's/ /-/g')/$(echo -n $@ | base64)/plaintext" ;
 }
 # Is website down for everyone or just me ?
@@ -32,6 +32,8 @@ dico() { curl -s dict://dict.org/d:${1}:wn | sed '/^[1-2]/d' | sed '$d'; }
 dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d'; }
 # Print a chuck norris joke
 chuck() { timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jshon -e value -e joke -u }
+# Print a random (french) insult
+insult-me() { timeout 3 wget "https://www.insult.es/api/random" -qO- | jshon -e insult -e value -u }
 # Validate all XML files in the current directory and below
 xmllint() { find . -type f -name "*.xml" -exec xmllint --noout {} \; }
 # Download all files from a gist

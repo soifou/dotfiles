@@ -24,7 +24,6 @@ n98-magerun
 pip
 sublime
 wp-cli
-rupa/z
 zlsun/solarized-man
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
