@@ -4,8 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "625172df58a3ee5f8e2bda2e25135218",
+    "content-hash": "420662e36670005a53b3e3fc79ba9809",
     "packages": [
+        {
+            "name": "bamarni/symfony-console-autocomplete",
+            "version": "v1.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bamarni/symfony-console-autocomplete.git",
+                "reference": "f361cdaa64e186203f61486dcc0d7448c10e2cdf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bamarni/symfony-console-autocomplete/zipball/f361cdaa64e186203f61486dcc0d7448c10e2cdf",
+                "reference": "f361cdaa64e186203f61486dcc0d7448c10e2cdf",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "symfony/console": "^2.5|^3|^4",
+                "symfony/process": "^2.5|^3|^4"
+            },
+            "require-dev": {
+                "symfony/console": "2.8.*"
+            },
+            "bin": [
+                "bin/symfony-autocomplete"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bamarni\\Symfony\\Console\\Autocomplete\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bilal Amarni",
+                    "email": "bilal.amarni@gmail.com",
+                    "role": "Lead developer"
+                },
+                {
+                    "name": "Richard Quadling",
+                    "email": "RQuadling@gmail.com",
+                    "role": "Contributing developer"
+                }
+            ],
+            "description": "Shell completion for Symfony Console based scripts",
+            "time": "2018-04-25T16:31:58+00:00"
+        },
         {
             "name": "composer/semver",
             "version": "1.4.2",

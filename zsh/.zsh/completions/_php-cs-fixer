@@ -1,0 +1,66 @@
+#compdef php-cs-fixer
+
+_php-cs-fixer()
+{
+    local state com cur
+
+    cur=${words[${#words[@]}]}
+
+    # lookup for command
+    for word in ${words[@]:1}; do
+        if [[ $word != -* ]]; then
+            com=$word
+            break
+        fi
+    done
+
+    if [[ ${cur} == --* ]]; then
+        state="option"
+        opts=("--help:Display this help message" "--quiet:Do not output any message" "--verbose:Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug" "--version:Display this application version" "--ansi:Force ANSI output" "--no-ansi:Disable ANSI output" "--no-interaction:Do not ask any interactive question")
+    elif [[ $cur == $com ]]; then
+        state="command"
+        coms=("describe:Describe rule / ruleset." "fix:Fixes a directory or a file." "help:Displays help for a command" "list:Lists commands" "readme:Generates the README content, based on the fix command help." "self-update:Update php-cs-fixer.phar to the latest stable version.")
+    fi
+
+    case $state in
+        command)
+            _describe 'command' coms
+        ;;
+        option)
+            case "$com" in
+
+            describe)
+            opts+=()
+            ;;
+
+            fix)
+            opts+=("--path-mode:Specify path mode \(can be override or intersection\)." "--allow-risky:Are risky fixers allowed \(can be yes or no\)." "--config:The path to a .php_cs file." "--dry-run:Only shows which files would have been modified." "--rules:The rules." "--using-cache:Does cache should be used \(can be yes or no\)." "--cache-file:The path to the cache file." "--diff:Also produce diff for each file." "--diff-format:Specify diff format." "--format:To output results in other formats." "--stop-on-violation:Stop execution on first violation." "--show-progress:Type of progress indicator \(none, run-in, estimating, estimating-max or dots\).")
+            ;;
+
+            help)
+            opts+=("--format:The output format \(txt, xml, json, or md\)" "--raw:To output raw command help")
+            ;;
+
+            list)
+            opts+=("--raw:To output raw command list" "--format:The output format \(txt, xml, json, or md\)")
+            ;;
+
+            readme)
+            opts+=()
+            ;;
+
+            self-update)
+            opts+=("--force:Force update to next major version if available.")
+            ;;
+
+            esac
+
+            _describe 'option' opts
+        ;;
+        *)
+            # fallback to file completion
+            _arguments '*:file:_files'
+    esac
+}
+
+compdef _php-cs-fixer php-cs-fixer

@@ -1,0 +1,74 @@
+#compdef dep
+
+_dep()
+{
+    local state com cur
+
+    cur=${words[${#words[@]}]}
+
+    # lookup for command
+    for word in ${words[@]:1}; do
+        if [[ $word != -* ]]; then
+            com=$word
+            break
+        fi
+    done
+
+    if [[ ${cur} == --* ]]; then
+        state="option"
+        opts=("--help:Display this help message" "--quiet:Do not output any message" "--verbose:Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug" "--version:Display this application version" "--ansi:Force ANSI output" "--no-ansi:Disable ANSI output" "--no-interaction:Do not ask any interactive question" "--file:Specify Deployer file")
+    elif [[ $cur == $com ]]; then
+        state="command"
+        coms=("autocomplete:Install command line autocompletion capabilities" "help:Displays help for a command" "init:Initialize deployer in your project" "list:Lists commands" "run:Run any arbitrary command on hosts" "ssh:Connect to host through ssh" "worker:Deployer uses workers for parallel deployment" "debug\:task:Display the task-tree for a given task")
+    fi
+
+    case $state in
+        command)
+            _describe 'command' coms
+        ;;
+        option)
+            case "$com" in
+
+            autocomplete)
+            opts+=("--install")
+            ;;
+
+            help)
+            opts+=("--format:The output format \(txt, xml, json, or md\)" "--raw:To output raw command help")
+            ;;
+
+            init)
+            opts+=("--template:The template of you project. Available templates: Common, Laravel, Symfony, Yii, Yii2 Basic App, Yii2 Advanced App, Zend Framework, CakePHP, CodeIgniter, Drupal, TYPO3" "--directory:The directory for create "deploy.php" file" "--filename:The file name. Default "deploy.php"")
+            ;;
+
+            list)
+            opts+=("--raw:To output raw command list" "--format:The output format \(txt, xml, json, or md\)")
+            ;;
+
+            run)
+            opts+=("--log:Log to file" "--stage:Stage to deploy" "--roles:Roles to deploy" "--hosts:Host to deploy, comma separated, supports ranges \[:\]")
+            ;;
+
+            ssh)
+            opts+=()
+            ;;
+
+            worker)
+            opts+=("--hostname" "--task" "--config-file" "--log")
+            ;;
+
+            debug:task)
+            opts+=()
+            ;;
+
+            esac
+
+            _describe 'option' opts
+        ;;
+        *)
+            # fallback to file completion
+            _arguments '*:file:_files'
+    esac
+}
+
+compdef _dep dep
