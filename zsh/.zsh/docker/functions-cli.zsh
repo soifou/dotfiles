@@ -21,7 +21,6 @@ php() {
         -w $(getContainerPath) \
         -u `id -u`:`id -g` \
         -p 8080:8080 \
-        # --add-host="domain.test:172.17.0.5" \
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-7.2 ${@:1}
 }
