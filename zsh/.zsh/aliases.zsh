@@ -3,7 +3,7 @@ alias h5ai-selfupdate="cd $DEVELOPMENT_PATH/tools/h5ai && git pull && npm instal
 # stay connected with Free Wifi
 alias freewifi="while true ; do wget --quiet --no-check-certificate --post-data 'login=$FREEWIFI_ID&password=$FREEWIFI_PASS&submit=Valider' 'https://wifi.free.fr/Auth' -O '/dev/null' ; sleep 600; done"
 alias https='http --default-scheme=https'
-alias sf="bin/console"
+alias sf="php bin/console"
 
 # python aliases
 if [ -d "${PYENV_ROOT}" ]; then
