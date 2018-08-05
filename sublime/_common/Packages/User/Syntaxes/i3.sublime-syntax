@@ -5,6 +5,8 @@ name: i3
 file_extensions:
   - i3/config
 scope: source.i3
+variables:
+  xres: '[\w{6}]|[\$\w*-_]+'
 contexts:
   main:
     - match: '\[(.*)\]'
@@ -89,12 +91,12 @@ contexts:
         1: keyword.control.i3
         2: variable.other.i3
         3: constant.other.i3
-    - match: '(assign)\s*\[(.*)]\s*(→)?\s*([\w\d]*)'
+    - match: '(assign)\s*\[(.*)=\"([\w\s\:\.\*\~\/\|$]*)\"]\s(\d)'
       scope: assign
       captures:
         1: keyword.control.i3
-        2: constant.string.i3
-        3: keyword.operator.i3
+        2: constant.language.i3
+        3: string.regexp.i3
         4: constant.language.i3
     - match: (exec_always)\s*(\-\-no-startup-id)?\s*(.*)
       scope: exec_always
@@ -108,7 +110,7 @@ contexts:
         1: keyword.control.i3
         2: constant.language.i3
         3: constant.string.i3
-    - match: '^(client)\.([\w]+)\s*([\w{6}]|[\$\w*-_]+)\s*([\w{6}]|[\$\w*-_]+)\s*([\w{6}]|[\$\w*-_]+)\s*([\w{6}]|[\$\w*-_]+)$'
+    - match: '^(client)\.([\w]+)\s*({{xres}})\s*({{xres}})\s*({{xres}})\s*({{xres}})\s*({{xres}})$'
       scope: client_focused1
       captures:
         1: keyword.control.i3
@@ -117,6 +119,13 @@ contexts:
         4: variable.parameter.i3
         5: variable.parameter.i3
         6: variable.parameter.i3
+        7: variable.parameter.i3
+    - match: '^(set_from_resource)\s*(\$\w*)\s*(\w*)$'
+      scope: set_from_resource
+      captures:
+        1: keyword.control.i3
+        2: constant.string.i3
+        3: variable.parameter.i3
     - match: (ipc-socket)\s*(.*)
       scope: ipc_socket
       captures:
