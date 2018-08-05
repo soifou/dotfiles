@@ -21,7 +21,6 @@ gem
 git
 lukechilds/zsh-better-npm-completion
 n98-magerun
-pip
 sublime
 wp-cli
 zlsun/solarized-man
