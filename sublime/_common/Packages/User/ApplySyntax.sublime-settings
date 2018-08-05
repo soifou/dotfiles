@@ -53,6 +53,9 @@
                 "yml",
                 "yml.dist",
                 ".prettierrc"
+            ],
+            "rules": [
+                { "file_path": ".*/yamllint/config$" }
             ]
         },
         {
