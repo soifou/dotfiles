@@ -52,8 +52,9 @@
     "scroll_speed": 5.0,
     "show_encoding": true,
     "show_full_path": false,
+    "skin": "DA UI/Minimal",
     "tab_size": 4,
-    "theme": "Material-Theme.sublime-theme",
+    "theme": "DA.sublime-theme",
     "translate_tabs_to_spaces": true,
     "trim_trailing_white_space_on_save": true,
     "word_wrap": false
