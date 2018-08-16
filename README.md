@@ -11,18 +11,18 @@ Dig in through the repo you might find some inspiration.
 
 ## Init
 
-1 - Install stow. 
+1 - Install stow.
 
 2 - Clone this repo:
 
-``` sh
+```sh
 $ git clone https://github.com/soifou/dotfiles ~/
 $ cd ~/dotfiles
 ```
 
 3 - Init stow:
 
-```
+```sh
 $ echo "--target=$(echo $HOME)\n--verbose" > stow/.stowrc
 $ stow stow
 ```
@@ -32,21 +32,21 @@ $ stow stow
 
 - Add/remove config for vim :
 
-```
+```sh
 $ stow vim
 $ stow -D vim
 ```
 
 - Add/remove config for an entire env, ie. @linux:
 
-```
+```sh
 $ stow @linux
 $ stow -D @linux
 ```
 
 - Add/remove config for vscode on linux:
 
-```
+```sh
 $ stow -d vscode @linux
 $ stow -D -d vscode @linux
 ```
