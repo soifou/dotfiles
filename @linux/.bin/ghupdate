@@ -19,68 +19,68 @@ do
     esac
 done
 
+FILETYPE="package"
+
 if [ "$1" == 'fd' ]; then
     REPO=sharkdp/fd
     NAME=fd
     BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1_VERSION_amd64.deb"
-    BINPATH=/usr/bin/fd
     GREPVER="fd --version | awk -F\  '{print \$2}' | tr -d '[:space:]'"
 elif [ "$1" == 'rofi' ]; then
     semanticVersionPattern=$pattern
     REPO=DaveDavenport/rofi
     NAME=rofi
+    FILETYPE="archive"
     BINFILE="$GH_URL$REPO/releases/download/VERSION/$1-VERSION.tar.gz"
     BINPATH=/usr/bin/rofi
     GREPVER="rofi -v | awk -F: '{print \$2}' | tr -d '[:space:]'"
 elif [[ "$1" == 'insomnia' ]]; then
     REPO=getinsomnia/insomnia
     NAME=insomnia
-    BINPATH=/usr/local/bin/insomnia
     BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1_VERSION_amd64.deb"
     GREPVER="apt-cache show $1 | grep Version | awk -F: '{print $2}' | egrep -o \"$pattern\""
 elif [[ "$1" == 'vscode' ]]; then
     semanticVersionPattern=$pattern
     REPO=Microsoft/vscode
-    NAME=vscode
+    NAME=code
     BINFILE=https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable
-    BINPATH=/usr/bin/code
     GREPVER="code -v"
 elif [[ "$1" == 'atom' ]]; then
     REPO=atom/atom
     NAME=atom
     BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1-amd64.deb"
-    BINPATH=/usr/bin/atom
     GREPVER="atom --version | grep Atom | awk -F: '{print \$2}' | tr -d '[:space:]'"
 elif [[ "$1" == 'mattermost' ]]; then
     REPO=mattermost/desktop
-    NAME=mattermost
-    BINPATH=/usr/local/bin/mattermost-desktop
+    NAME=mattermost-desktop
     BINFILE=https://releases.mattermost.com/desktop/VERSION/mattermost-desktop-VERSION-linux-amd64.deb
     GREPVER="apt-cache show $1-desktop | grep Version | awk -F: '{print $2}' | egrep -o \"$pattern\""
 elif [[ "$1" == 'docker-compose' ]]; then
     semanticVersionPattern=$pattern
     REPO=docker/compose
     NAME=docker-compose
+    FILETYPE="binary"
     BINFILE="$GH_URL$REPO/releases/download/VERSION/$1-$(uname -s)-$(uname -m)"
     BINPATH=/usr/local/bin/docker-compose
     GREPVER="docker-compose -v"
 elif [[ "$1" == 'yakyak' ]]; then
     REPO=yakyak/yakyak
     NAME=yakyak
-    BINPATH=/usr/bin/yakyak
     BINFILE=$GH_URL$REPO/releases/download/vVERSION/$1-VERSION-linux-amd64.deb
     GREPVER="apt-cache show $1 | grep Version | awk -F: '{print $2}' | egrep -o \"$pattern\""
 elif [[ "$1" == 'lnav' ]]; then
     REPO=tstack/lnav
     NAME=lnav
-    BINPATH=/usr/bin/lnav
     BINFILE=$GH_URL$REPO/releases/download/vVERSION/$1_VERSION_amd64.deb
     GREPVER="lnav -V | awk -F\  '{print $2}' | tr -d '[:space:]'"
 fi
 
 lastReleasesUrl="$GH_URL$REPO/releases.atom"
 lastReleaseCache="/tmp/$NAME-last-release"
-tmp_filepath="/tmp/$NAME.deb"
+
+if [[ -z ${BINPATH+x} ]]; then
+    BINPATH=$(command -v $NAME)
+fi
 
 currentVersion="v0.0.0"
 if [ -z "$GREPVER" ]; then
@@ -110,12 +110,23 @@ URL=$(echo $BINFILE | sed "s/VERSION/$VERSION/g")
 
 if [ "$latestVersion" != "$currentVersion" ]; then
     echo "Updating $NAME from ${currentVersion} to ${latestVersion}"
-
-    if [ "$1" == 'docker-compose' ]; then
+    if [ "$FILETYPE" == 'binary' ]; then
         curl -o $BINPATH -J -L "$URL"
         chmod +x $BINPATH
+    fi
 
-    else
+    if [ "$FILETYPE" == 'archive' ]; then
+        tmp_filepath="/tmp/$NAME.tar.gz"
+        curl -o $tmp_filepath -J -L "$URL"
+        tar -zxvf $tmp_filepath -C /tmp
+        cd /tmp/$NAME-$VERSION
+        ./configure
+        make
+        make install
+    fi
+
+    if [ "$FILETYPE" == 'package' ]; then
+        tmp_filepath="/tmp/$NAME.deb"
         # Download the deb and install it
         curl -o $tmp_filepath -J -L "$URL"
         # wget -q --show-progress --progress=bar:force "$URL" -O $tmp_filepath && \

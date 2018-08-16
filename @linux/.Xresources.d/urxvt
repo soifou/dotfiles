@@ -1,6 +1,6 @@
 ! General settings
 URxvt.scrollBar: none
-URxvt.internalBorder: 20
+URxvt.internalBorder: 40
 URxvt.tintColor: white
 URxvt.inheritPixmap: false
 
@@ -14,8 +14,8 @@ URxvt*fadeColor: #000000
 URxvt*cursorBlink: true
 
 ! Font settings
-URxvt.font: xft:MesloLGM Nerd Font:size=14:antialias=true:hinting=true:Regular
-URxvt.boldFont: xft:MesloLGM Nerd Font:size=14:antialias=true:Bold
+URxvt.font: xft:MesloLGM Nerd Font:size=10:antialias=true:hinting=true:Regular
+URxvt.boldFont: xft:MesloLGM Nerd Font:size=10:antialias=true:Bold
 URxvt*letterSpace: 0
 URxvt.lineSpace: 0
 

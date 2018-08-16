@@ -9,8 +9,9 @@ floating_modifier $mod
 
 # start a terminal
 # https://build.i3wm.org/docs/i3-sensible-terminal.html
-# bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec urxvtc
+# on debian set default term via "update-alternatives --config x-terminal-emulator"
+bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -42,10 +43,14 @@ bindsym $mod+Escape exec $HOME/.anyenv/envs/pyenv/shims/python3 $HOME/.bin/locks
 bindsym Print exec XDG_CURRENT_DESKTOP=kde spectacle
 
 # =============================================================================
-# Music
+# Scratchpad my music
 # =============================================================================
-bindsym $mod+Shift+z exec $HOME/.bin/zik
-
+for_window [instance="zik"] floating enable
+for_window [instance="zik"] resize set 1024 768
+for_window [instance="zik"] move scratchpad
+for_window [instance="zik"] border pixel 5
+exec --no-startup-id kitty --class=zik -e bash -c "ncmpcpp"
+bindsym $mod+Shift+z [instance="zik"] scratchpad show; [instance="zik"] move position center
 
 # change focus
 bindsym $mod+j focus left
@@ -212,49 +217,48 @@ bindsym XF86AudioStop exec mpc stop
 # =============================================================================
 # Assign colors
 # =============================================================================
-set_from_resource $x_background background
-set_from_resource $x_foreground foreground
-set_from_resource $x_color0     color0
-set_from_resource $x_color1     color1
-set_from_resource $x_color2     color2
-set_from_resource $x_color3     color3
-set_from_resource $x_color4     color4
-set_from_resource $x_color5     color5
-set_from_resource $x_color6     color6
-set_from_resource $x_color7     color7
-set_from_resource $x_color8     color8
-set_from_resource $x_color9     color9
-set_from_resource $x_color10    color10
-set_from_resource $x_color11    color11
-set_from_resource $x_color12    color12
-set_from_resource $x_color13    color13
-set_from_resource $x_color14    color14
-set_from_resource $x_color15    color15
-
-# class                 border     backgr.    text       indicator  child_border
-client.focused          $x_color8  $x_color8  $x_color11 $x_color12 $x_color17
-client.focused_inactive $x_color11  $x_color11  $x_color4  $x_color10 $x_color17
-client.unfocused        $x_color11  $x_color11  $x_color4  $x_color10 $x_color17
-client.urgent           $x_color13 $x_color12 $x_color4  $x_color14 $x_color17
-client.placeholder      $x_color15 $x_color17 $x_color16 $x_color15 $x_color17
-
-client.background       $x_background
-
-# set $bg            #263238
-# set $bg-inactive   #37474f
-# set $bg-urgent     #39adb5
-# set $text          #eceff6
-# set $text-inactive #bdc3c7
-# set $bar           #222222
-# set $border        #03a9f4
-# set $seperator     #444444
-# set $statusline    #888A85
+# set_from_resource $x_background background
+# set_from_resource $x_foreground foreground
+# set_from_resource $x_color0     color0
+# set_from_resource $x_color1     color1
+# set_from_resource $x_color2     color2
+# set_from_resource $x_color3     color3
+# set_from_resource $x_color4     color4
+# set_from_resource $x_color5     color5
+# set_from_resource $x_color6     color6
+# set_from_resource $x_color7     color7
+# set_from_resource $x_color8     color8
+# set_from_resource $x_color9     color9
+# set_from_resource $x_color10    color10
+# set_from_resource $x_color11    color11
+# set_from_resource $x_color12    color12
+# set_from_resource $x_color13    color13
+# set_from_resource $x_color14    color14
+# set_from_resource $x_color15    color15
 #
-# #                       border        background   text           indicator
-# client.focused          $bg           $bg-urgent   $text          $border
-# client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar
-# client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar
-# client.urgent           $bg-urgent    $bg-urgent   $text          $bar
+# # class                 border     backgr.    text       indicator  child_border
+# client.focused          $x_color8  $x_color8  $x_color11 $x_color12 $x_color17
+# client.focused_inactive $x_color11  $x_color11  $x_color4  $x_color10 $x_color17
+# client.unfocused        $x_color11  $x_color11  $x_color4  $x_color10 $x_color17
+# client.urgent           $x_color13 $x_color12 $x_color4  $x_color14 $x_color17
+# client.placeholder      $x_color15 $x_color17 $x_color16 $x_color15 $x_color17
+#
+# client.background       $x_background
+
+set $bg            #263238
+set $bg-inactive   #37474f
+set $bg-urgent     #89ddff
+set $text          #eceff6
+set $text-inactive #bdc3c7
+set $bar           #222222
+set $border        #03a9f4
+set $seperator     #444444
+set $statusline    #888A85
+#                       border        background   text           indicator
+client.focused          $bg           $bg-urgent   $text          $border
+client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar
+client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar
+client.urgent           $bg-urgent    $bg-urgent   $text          $bar
 
 # =============================================================================
 # Autostart
@@ -266,7 +270,7 @@ exec --no-startup-id mpd
 exec --no-startup-id compton --daemon --config ~/.config/compton.conf
 exec --no-startup-id redshift -l 45.759723:4.842223 -t 5700:2700 -b 0.8:0.8 -g 1.0 -m randr -v
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
-exec --no-startup-id urxvtd -q -f -o
+# exec --no-startup-id urxvtd -q -f -o
 exec --no-startup-id subl
 exec --no-startup-id chromium
 exec --no-startup-id greenclip daemon
@@ -279,7 +283,8 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 # =============================================================================
 # Window behaviour
 # =============================================================================
-for_window [class=".*"] border pixel 2
+default_border pixel 3
+# for_window [class=".*"] border pixel 2
 for_window [class=".*"] title_format "  %title"
 for_window [class="dolphin"] floating enable resize set 1280 768
 for_window [class="transmission"] floating enable resize set 1024 384
@@ -290,5 +295,4 @@ for_window [class="VirtualBox"] floating enable resize set 1280 768
 # =============================================================================
 gaps inner 10
 gaps outer 2
-# smart_gaps on
 smart_borders on

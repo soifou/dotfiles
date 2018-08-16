@@ -1,3 +1,0 @@
-#!/bin/bash
-
-urxvtc -hold -g 92x10 -e bash -c "ncmpcpp"

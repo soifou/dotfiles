@@ -18,21 +18,21 @@ upgrade_debian() {
     echo    #
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        sudo apt update && sudo apt upgrade -y && sudo apt-get clean && sudo apt-get autoclean
+        sudo apt update && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean && sudo apt autoclean
     fi
 
     read -p "$d [?] Upgrade linuxbrew?$t" -n 1 -r
     echo    #
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        cd "$LINUXBREW_ROOT" && git pull && brew update
+        cd "$LINUXBREW_ROOT" && git pull && brew update && brew upgrade && brew cleanup && brew prune
     fi
 
     read -p "$d [?] Upgrade github releases?$t" -n 1 -r
     echo    #
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        apps=(fd rofi insomnia vscode atom mattermost docker-compose yakyak)
+        apps=(fd vscode atom mattermost insomnia docker-compose yakyak)
         for app in "${apps[@]}"
         do
             echo "$s > Upgrade $app...$t"
@@ -55,6 +55,7 @@ fi
 
 
 # common on all devices
+source "$HOME/.zsh/private.zsh"
 
 read -p "$d [?] Upgrade dotfiles?$t" -n 1 -r
 echo    #
@@ -76,6 +77,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     docker images | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull
     docker system prune -f
+    # docker volume prune -f
 fi
 
 read -p "$d [?] Upgrade anyenv?$t" -n 1 -r
@@ -90,7 +92,7 @@ echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     cd "$DEVELOPMENT_PATH" && git pull
-    repos=(aparticula soifou elparici)
+    repos=($GIT_WORKSPACES)
     for repo in "${repos[@]}"
     do
         echo "$s > Upgrade gws repo $repo...$t"
