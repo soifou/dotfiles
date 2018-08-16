@@ -13,10 +13,11 @@ ifeq ($(UNAME_S),Darwin)
 endif
 
 all:
-	if [ -d $(SUBLIME_DIR) ]; then
-		mkdir -p "$(SUBLIME_DIR)/Installed Packages"
+	mkdir -p $(SUBLIME_DIR)/{Backup,Cache,Index,Installed\ Packages,Local}
+	if [ -f "$(SUBLIME_DIR)/Installed Packages/Package Control.sublime-package" ]; then
+		echo "Package control is already installed!"
+	else
 		curl -o "$(SUBLIME_DIR)/Installed Packages/Package Control.sublime-package" $(PACKAGE_URL)
-		# wget -P "$(SUBLIME_DIR)/Installed Packages" $(PACKAGE_URL)
 		echo "Package control has been installed!"
 	fi
 
