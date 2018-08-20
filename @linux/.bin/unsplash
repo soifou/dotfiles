@@ -12,9 +12,10 @@ do
     esac
 done
 
+mkdir -p "$DIR"
+
 # backup current wallpaper if needed
-if [ "$SAVE" == 1 ]; then
-    mkdir -p "$DIR"
+if [[ "$SAVE" == 1  && -f $DIR/today ]]; then
     mv "$DIR/today" "$DIR/$(date +'%Y-%m-%d-%H%M%S')-today"
 fi
 
