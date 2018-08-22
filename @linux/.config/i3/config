@@ -267,10 +267,11 @@ client.urgent           $bg-urgent    $bg-urgent   $text          $bar
 exec --no-startup-id xrandr --output $monitorRight --auto --right-of $monitorLeft
 exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/today
 exec --no-startup-id mpd
-exec --no-startup-id compton --daemon --config ~/.config/compton.conf
-exec --no-startup-id redshift -l 45.759723:4.842223 -t 5700:2700 -b 0.8:0.8 -g 1.0 -m randr -v
+exec --no-startup-id compton --daemon --config ~/.config/compton/main.conf
+exec --no-startup-id redshift -c ~/.config/redshift.conf
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 # exec --no-startup-id urxvtd -q -f -o
+exec --no-startup-id kitty
 exec --no-startup-id subl
 exec --no-startup-id chromium
 exec --no-startup-id greenclip daemon
@@ -284,7 +285,7 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 # Window behaviour
 # =============================================================================
 default_border pixel 3
-# for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 3
 for_window [class=".*"] title_format "  %title"
 for_window [class="dolphin"] floating enable resize set 1280 768
 for_window [class="transmission"] floating enable resize set 1024 384
