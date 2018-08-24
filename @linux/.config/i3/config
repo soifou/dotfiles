@@ -279,7 +279,7 @@ exec --no-startup-id ~/.bin/blurme &
 
 # re-run with every i3 reload
 exec_always --no-startup-id numlockx on
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id ~/.bin/polybar-run
 
 # =============================================================================
 # Window behaviour

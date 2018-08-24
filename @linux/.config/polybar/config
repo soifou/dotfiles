@@ -292,8 +292,7 @@ exec = ~/.bin/openweathermap -i
 [module/redshift]
 type = custom/script
 interval = 5
-
-exec = ~/.config/polybar/redshift.sh
+exec = ~/.config/polybar/modules/redshift.sh
 ;click-left = ~/.local/bin/red.sh
 
 [module/cmus]
