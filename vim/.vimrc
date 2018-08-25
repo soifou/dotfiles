@@ -30,7 +30,7 @@ endif
 
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
+" Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 Plugin 'itchyny/lightline.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'rhysd/vim-gfm-syntax'
