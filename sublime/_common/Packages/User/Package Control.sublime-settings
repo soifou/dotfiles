@@ -31,6 +31,7 @@
 		"JsPrettier",
 		"MarkdownEditing",
 		"Material Theme",
+		"Okami – Adaptive Color Schemes",
 		"Package Control",
 		"PHP Companion",
 		"PHP Getters and Setters",
@@ -57,7 +58,8 @@
 		"SublimeLinter-pycodestyle",
 		"SublimeLinter-rubocop",
 		"SublimeLinter-shellcheck",
-		"TypeScript Syntax"
+		"TypeScript Syntax",
+		"Unicode Character Highlighter"
 	],
 	"repositories":
 	[

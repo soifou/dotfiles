@@ -71,3 +71,10 @@ then
     rm -rf ~/.Trash/*
     find . -type f -name '*.DS_Store' -ls -delete
 fi
+
+read -p "$d [?] Change wallpaper?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sh $HOME/.bin/unsplash
+fi

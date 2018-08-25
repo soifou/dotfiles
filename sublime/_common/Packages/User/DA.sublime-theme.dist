@@ -1,0 +1,44 @@
+[
+    {
+        "class": "sidebar_heading",
+        "font.size": 11,
+        "font.face": "FONT_NAME:style=Bold",
+        "font.italic": false
+    },
+    {
+        "class": "sidebar_label",
+        "font.size": 12,
+        "font.face": "FONT_NAME",
+        "font.bold": false
+    },
+    {
+        "class": "quick_panel_label",
+        "font.size": 14,
+        "font.face": "FONT_NAME"
+    },
+    {
+        "class": "quick_panel_path_label",
+        "font.size": 12,
+        "font.face": "FONT_NAME"
+    },
+    {
+        "class": "tab_label",
+        "font.size": 12,
+        "font.face": "FONT_NAME"
+    },
+    {
+        "class": "tool_tip_label_control",
+        "font.size": 11,
+        "font.face": "FONT_NAME"
+    },
+    {
+        "class": "label_control",
+        "font.size": 12,
+        "font.face": "FONT_NAME"
+    },
+    {
+        "class": "title_label_control",
+        "font.size": 12,
+        "font.face": "FONT_NAME"
+    }
+]

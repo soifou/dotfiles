@@ -21,4 +21,8 @@ all:
 		echo "Package control has been installed!"
 	fi
 
+fontui:
+	cp -f $(SUBLIME_DIR)/Packages/User/DA.sublime-theme.dist $(SUBLIME_DIR)/Packages/User/DA.sublime-theme
+	sed -i 's/FONT_NAME/$(FONT_NAME)/g' $(SUBLIME_DIR)/Packages/User/DA.sublime-theme
+
 .PHONY: all

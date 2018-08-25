@@ -2,6 +2,7 @@ _common/Packages/*
 
 !_common/Packages/User
 _common/Packages/User/Preferences.sublime-settings
+_common/Packages/User/DA.sublime-theme
 
 !_common/Packages/Default
 !_common/Packages/soifou

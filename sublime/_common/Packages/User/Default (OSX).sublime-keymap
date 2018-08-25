@@ -2,11 +2,24 @@
     { "keys": ["alt+n"], "command": "insert", "args": {"characters": "~"} },
     { "keys": ["ctrl+n"], "command": "fm_create" },
     { "keys": ["alt+shift+f"], "command": "reindent", "args": {"single_line": false} },
-
-    { "keys": ["alt+f"], "command": "js_prettier", "context": [{ "key": "selector", "operator": "equal", "operand": "source.js, source.json, text.html.markdown, source.css, source.sass, source.scss, source.css.less" }] },
-    { "keys": ["alt+f"], "command": "rufo_format", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ruby" }] },
-    { "keys": ["alt+f"], "command": "sublime_php_cs_fix", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
-    { "keys": ["alt+f"], "command": "prettydiff_beautify", "context": [{ "key": "selector", "operator": "equal", "operand": "text.html.twig" }] },
+    {
+        "no_outside_adj": null,
+        "keys": ["ctrl+alt+super+s"],
+        "command": "bh_key",
+        "args":
+        {
+            "lines" : true,
+            "plugin":
+            {
+                "type": ["__all__"],
+                "command": "bh_modules.bracketselect"
+            }
+        }
+    },
+    { "keys": ["ctrl+f"], "command": "js_prettier", "context": [{ "key": "selector", "operator": "equal", "operand": "source.js, source.json, text.html.markdown, source.css, source.sass, source.scss, source.css.less" }] },
+    { "keys": ["ctrl+f"], "command": "rufo_format", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ruby" }] },
+    { "keys": ["ctrl+f"], "command": "sublime_php_cs_fix", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
+    { "keys": ["ctrl+f"], "command": "prettydiff_beautify", "context": [{ "key": "selector", "operator": "equal", "operand": "text.html.twig" }] },
 
     { "keys": ["super+alt+f"], "command": "expand_fqcn", "args": {"leading_separator": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["super+alt+u"], "command": "find_use", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
