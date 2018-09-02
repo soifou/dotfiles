@@ -32,7 +32,7 @@ upgrade_debian() {
     echo    #
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        apps=(fd vscode atom mattermost insomnia docker-compose yakyak)
+        apps=(fd bat vscode atom mattermost insomnia docker-compose yakyak)
         for app in "${apps[@]}"
         do
             echo "$s > Upgrade $app...$t"

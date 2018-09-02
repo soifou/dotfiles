@@ -26,6 +26,11 @@ if [ "$1" == 'fd' ]; then
     NAME=fd
     BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1_VERSION_amd64.deb"
     GREPVER="fd --version | awk -F\  '{print \$2}' | tr -d '[:space:]'"
+elif [ "$1" == 'bat' ]; then
+    REPO=sharkdp/bat
+    NAME=bat
+    BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1-musl_VERSION_amd64.deb"
+    GREPVER="bat --version | awk -F\  '{print \$2}' | tr -d '[:space:]'"
 elif [ "$1" == 'rofi' ]; then
     semanticVersionPattern=$pattern
     REPO=DaveDavenport/rofi
