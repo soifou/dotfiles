@@ -58,8 +58,7 @@
 		"SublimeLinter-pycodestyle",
 		"SublimeLinter-rubocop",
 		"SublimeLinter-shellcheck",
-		"TypeScript Syntax",
-		"Unicode Character Highlighter"
+		"TypeScript Syntax"
 	],
 	"repositories":
 	[
