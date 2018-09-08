@@ -59,6 +59,7 @@ phppm() {
 composer() {
     tty=
     tty -s && tty=--tty
+    # --add-host domain.test:172.17.0.5 \
     docker run \
         $tty \
         --interactive \
@@ -131,13 +132,14 @@ wp() {
         --net=$DOCKER_NETWORK_NAME \
         soifou/wpcli-alpine:latest ${@:1}
 }
-n98-magerun() {
+mr() {
     tty=
     tty -s && tty=--tty
     docker run \
         $tty \
         --interactive \
         --rm \
+        -v $HOME/.n98-magerun:/.n98-magerun \
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
@@ -203,4 +205,13 @@ adb() {
     docker run --rm -ti \
         --net container:adbd \
         sorccu/adb adb ${@:1}
+}
+dip() {
+    if [ "$#" -ne 1 ]; then
+        echo "\e[0;35mOops, syntax is:\e[0m\n $ dip [web_container]"
+        # echo "You want probably get IP adresse of one of theses running containers:"
+        # DC=
+    else
+        docker inspect $1 | grep IPAddress | tail -n1 | awk -F\" '{print $4}'
+    fi
 }
