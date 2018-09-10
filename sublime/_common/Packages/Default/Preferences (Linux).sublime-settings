@@ -20,7 +20,7 @@
         "app/cache",
         "var/cache"
     ],
-    "font_face": "SauceCodePro Nerd Font",
+    "font_face": "FuraCode Nerd Font",
     "font_options":
     [
         "subpixel_antialias"

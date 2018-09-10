@@ -15,6 +15,7 @@
     { "keys": ["ctrl+shift+g"], "command": "insert_php_constructor_property", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["ctrl+shift+n"], "command": "import_namespace", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
 
+    { "keys": ["ctrl+alt+o"], "command": "fasd_jump_to_directory" },
     { "keys": ["ctrl+alt+g"], "command": "open_browser", "args": { "url": "http://www.google.fr/#q=%s" }},
     { "keys": ["ctrl+alt+h"], "command": "open_browser", "args": { "url": "http://php.net/manual/en/function.%s.php" }},
     { "keys": ["ctrl+alt+w"], "command": "open_browser", "args": { "url": "https://codex.wordpress.org/Function_Reference/%s" }},
