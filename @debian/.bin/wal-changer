@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Using feh to tile the wallpaper now.
+# We grab the wallpaper location from wal's cache so
+# that this works even when a directory is passed.
+# feh --bg-tile "$(< "${HOME}/.cache/wal/wal")"
+
+# Reload dunst
+pkill dunst
+dunst -config ~/.cache/wal/colors-dunstrc &
+
+# Display notification
+notify-send "Theme changed!" "$(uname -s)." &
+
+exit 0

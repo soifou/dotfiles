@@ -60,8 +60,6 @@ if [[ `uname` == "Darwin" ]]; then
     fi
 
 elif [[ `uname` == "Linux" ]]; then
-    # Support more than 256 colors
-    export TERM="xterm-256color"
     # SSH
     if [ ! -S $XDG_RUNTIME_DIR/ssh-agent.socket ]; then
         eval `ssh-agent`

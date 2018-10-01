@@ -1,0 +1,8 @@
+#!/bin/sh
+
+xautolock \
+    -detectsleep \
+    -time 3 \
+    -locker "~/.anyenv/envs/pyenv/shims/python3 ~/.bin/lockscreen" \
+    -notify 30 \
+    -notifier "notify-send -u critical -t 5000 -i $HOME/.local/share/icons/Papirus/32x32@2x/status/messagebox_warning.svg 'Locking screen in 30 seconds'"

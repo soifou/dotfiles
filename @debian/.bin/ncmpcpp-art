@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# https://sw.kovidgoyal.net/kitty/remote-control.html
+# https://github.com/kovidgoyal/kitty/issues/598
+
+change_cover() {
+    kitty @ send-text \
+    --match title:cover \
+    'clear && kitty +kitten icat --transfer-mode=stream /tmp/cover.jpg \r'
+}
+
+launch_player() {
+    # cover on top
+    # kitty @ new-window --new-tab --tab-title music --title cover sh
+
+    # cover on the left side
+    kitty @ new-window --tab-title music --title cover sh
+    kitty @ send-text 'export PS1="" \r'
+    change_cover
+    kitty @ new-window --title ncmpcpp ncmpcpp
+
+    # good resize when 1 or 2 terms
+    kitty @ resize-window --axis vertical --increment 15
+    # kitty @ resize-window --increment 93
+
+
+    kitty @ close-window --self
+}
+
+extract_cover() {
+    song_dir=$(mpc --format %artist% current)/$(mpc --format %file% current | awk -F/ '{print $2}')
+    temp_song="/tmp/current-song"
+    cover="$MUSIC_PATH/$song_dir/cover.jpg"
+
+    cp "$cover" "$temp_song"
+
+    ffmpeg \
+    -hide_banner \
+    -loglevel 0 \
+    -y \
+    -i "$temp_song" \
+    -vf scale=200:-1 \
+    "/tmp/cover.jpg" > /dev/null 2>&1
+
+    rm "$temp_song"
+}
+
+if [ "$1" = "extract" ]; then
+    extract_cover
+    change_cover
+else
+    launch_player
+fi

@@ -37,11 +37,11 @@ $ stow vim
 $ stow -D vim
 ```
 
-- Add/remove config for an entire env, ie. @linux:
+- Add/remove config for an entire env, ie. @debian:
 
 ```sh
-$ stow @linux
-$ stow -D @linux
+$ stow @debian
+$ stow -D @debian
 ```
 
 - Add/remove config for vscode on linux:

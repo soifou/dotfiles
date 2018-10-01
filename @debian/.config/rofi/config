@@ -1,0 +1,80 @@
+! GENERAL
+! ----------------------------------------------------------------------------
+
+! Start in case sensitive mode.
+! This option can be changed at run-time using the kb-toggle-case-sensitivity key binding.
+rofi.case-sensitive: false
+
+! Cycle through the results list.
+rofi.cycle: true
+
+! Select the scrolling method. 0: Per page, 1: continuous.
+rofi.scroll-method: 0
+
+! Specify the matching algorithm used. Current the following methods are supported.
+! - normal: Match the int string.
+! - regex: Match a regex input.
+! - glob: Match a glob pattern.
+! - fuzzy: Do a fuzzy match.
+rofi.matching: normal
+
+! Disable history in run/ssh
+rofi.disable-history: false
+
+! Tokenize the input.
+rofi.tokenize: true
+
+! When one entry is left, automatically select it.
+rofi.auto-select: false
+
+! When searching sort the result based on levenshtein distance.
+rofi.levenshtein-sort: false
+
+! Select monitor to display rofi on.
+! As input it accepts: primary (if primary output is set), the xrandr output name or integer number (in order of detection). Negative numbers are handled differently:
+! -1: the currently focused monitor.
+! -2: the currently focused window (i.e. rofi will be displayed on top of the focused window).
+! -3: Position at mouse (overrides the location setting to get normal context menu behaviour.)
+! -4: the monitor with the focused window.
+! -5: the monitor that shows the mouse pointer. (Default)
+rofi.monitor: -5
+
+! DPI
+rofi.dpi: -1
+
+! Make rofi create a pid file and check this on startup avoiding multiple copies running simultaneously.
+! This is useful when running rofi from a keybinding daemon.
+rofi.pid: /run/user/1000/rofi.pid
+
+! Terminal to use (default: rofi-sensible-terminal)
+! rofi.terminal: urxvtc
+
+! THEMING
+! ----------------------------------------------------------------------------
+
+! rofi.theme: .config/rofi/colors-rofi-light.theme
+rofi.theme: .cache/wal/colors-rofi-light.theme
+
+! Whether to load and show icons
+rofi.show-icons: true
+
+
+! LAYOUT
+! ----------------------------------------------------------------------------
+
+! Use the full screen height and width.
+rofi.fullscreen: true
+
+! Open in sidebar-mode.
+! In this mode a list of all enabled modes is shown at the bottom. (See -modi option)
+rofi.sidebar-mode: true
+
+
+! SHORTCUT
+! ----------------------------------------------------------------------------
+
+! Switch to the next mode.
+rofi.kb-mode-next: Control+Right
+
+! Switch to the previous mode.
+rofi.kb-mode-previous: Control+Left

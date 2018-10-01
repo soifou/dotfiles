@@ -1,0 +1,71 @@
+#!/bin/sh
+
+# adjust keyboard
+if command -v xset &> /dev/null; then
+    # delay and rate
+    xset r rate 300 40
+    # turn off beep
+    xset -b
+fi
+
+# enable keyboard numlock
+if command -v numlockx &> /dev/null; then
+    numlockx on
+fi
+
+# today wallpaper
+# if command -v feh &> /dev/null; then
+#     ~/.fehbg
+#     ~/.bin/feh-wall today &
+# fi
+
+# last wallpapers/colorscheme used by pywal
+# blue: kind-of-blue
+# if [ -f ~/.bin/wal-switcher ]; then
+#     ~/.bin/wal-switcher kind-of-blue &
+# fi
+[ -f ~/.anyenv/envs/pyenv/shims/wal ] && ~/.anyenv/envs/pyenv/shims/wal -q -i ~/Pictures/wallpapers/kind-of-blue > /dev/null
+
+# redshift
+if command -v redshift &> /dev/null; then
+    pkill redshift
+    redshift -l "$MY_LATLONG" -t 5700:2700 -b 0.8:0.8 -g 1.0 -m randr &
+fi
+
+# compositor for x11
+if command -v compton &> /dev/null; then
+    compton --daemon --config ~/.config/compton/main.conf
+fi
+
+# rofi clipboard manager
+if command -v greenclip &> /dev/null; then
+    greenclip daemon &
+fi
+
+# music player daemon
+if command -v mpd &> /dev/null; then
+    pgrep mpd > /dev/null || mpd &
+fi
+
+# notifier
+if command -v dunst &> /dev/null; then
+    dunst -config ~/.cache/wal/colors-dunstrc &
+    notify-send "Welcome $USER@$(uname -n)!" "$(uname -s)." --icon="$HOME/.local/share/icons/Papirus/32x32@2x/status/messagebox_info.svg" &
+fi
+
+# locker
+# if command -v xautolock &> /dev/null; then
+#     ~/.bin
+#     xautolock -time 3 -locker "~/.anyenv/envs/pyenv/shims/python3 ~/.bin/lockscreen" &
+# fi
+if [ -f ~/.bin/locker ]; then
+    ~/.bin/locker &
+fi
+
+# blurme
+# if [ -f ~/.bin/blurme ]; then
+#     ~/.bin/blurme &
+# fi
+
+# xrandr --output $monitorRight --auto --right-of $monitorLeft
+# urxvtd -q -f -o

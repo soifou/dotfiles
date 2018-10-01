@@ -1,0 +1,105 @@
+#!/bin/bash
+
+# upgrade some stuff not widely installed
+
+d=$'\e[33m'
+s=$'\e[32m'
+t=$'\e[0m'
+
+upgrade_debian() {
+    read -p "$d [?] Sync server time?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        sudo ntpdate -b pool.ntp.org
+    fi
+
+    read -p "$d [?] Upgrade system?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        sudo apt update && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean && sudo apt autoclean
+    fi
+
+    read -p "$d [?] Upgrade linuxbrew?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        cd "$LINUXBREW_ROOT" && git pull && brew update && brew upgrade && brew cleanup && brew prune
+    fi
+
+    read -p "$d [?] Upgrade github releases?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        apps=($GH_APPS)
+        for app in "${apps[@]}"
+        do
+            echo "$s > Upgrade $app...$t"
+            ghupdate "$app"
+        done
+    fi
+
+    read -p "$d [?] Upgrade papirus icons?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        cd "$HOME/.icons" && git pull && rm -f "$HOME/.cache/icon-cache.kcache"
+    fi
+}
+
+if [ -f "/etc/debian_version" ]
+then
+    upgrade_debian
+fi
+
+
+# common on all devices
+read -p "$d [?] Upgrade dotfiles?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cd "$HOME/dotfiles" && git pull
+fi
+
+read -p "$d [?] Upgrade global composer dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    /usr/local/bin/composer global update
+fi
+
+read -p "$d [?] Upgrade docker images?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    docker images | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull
+    docker system prune -f
+    # docker volume prune -f
+fi
+
+read -p "$d [?] Upgrade anyenv?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    anyenv update
+fi
+
+read -p "$d [?] Upgrade git workspaces?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cd "$DEVELOPMENT_PATH" && git pull
+    repos=($GIT_WORKSPACES)
+    for repo in "${repos[@]}"
+    do
+        echo "$s > Upgrade gws repo $repo...$t"
+        cd "$DEVELOPMENT_PATH/$repo" && git pull
+    done
+fi
+
+# echo "$d [?] Upgrade antigen core and bundle$t"
+# source "$HOME/.antigen/antigen.zsh" && eval antigen
+# antigen selfupdate && antigen update
+
+cd "$HOME" || exit

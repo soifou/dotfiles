@@ -1,0 +1,252 @@
+# =============================================================================
+# Variables
+# =============================================================================
+set $mod Mod4
+set $border_pixels 2
+set $black       #282828
+set $darkblack   #1d2021
+set $transparent #00000000
+set_from_resource $background     background  #000000
+set_from_resource $darkred     color1  #000000
+set_from_resource $red         color9  #000000
+set_from_resource $darkgreen   color2  #000000
+set_from_resource $green       color10 #000000
+set_from_resource $darkyellow  color3  #000000
+set_from_resource $yellow      color11 #000000
+set_from_resource $darkblue    color4  #000000
+set_from_resource $blue        color12 #000000
+set_from_resource $darkmagenta color5  #000000
+set_from_resource $magenta     color13 #000000
+set_from_resource $darkcyan    color6  #000000
+set_from_resource $cyan        color14 #000000
+set_from_resource $darkwhite   color7  #000000
+set_from_resource $white       color15 #000000
+
+
+font pango:Noto Sans 10
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# =============================================================================
+# Terminal
+# =============================================================================
+bindsym $mod+Return exec kitty --single-instance
+bindsym $mod+Shift+Return exec kitty
+
+# =============================================================================
+# Launcher
+# =============================================================================
+bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,themes:~/.bin/wal-switcher' -show drun"
+bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10
+
+# =============================================================================
+# Locker
+# =============================================================================
+bindsym $mod+Escape exec $HOME/.anyenv/envs/pyenv/shims/python3 $HOME/.bin/lockscreen
+
+# =============================================================================
+# Screenshot
+# =============================================================================
+bindsym Print exec spectacle
+
+# =============================================================================
+# Scratchpad for music
+# =============================================================================
+for_window [instance="zik"] floating enable
+for_window [instance="zik"] resize set 1024 1024
+bindsym $mod+Shift+z exec kitty --class=zik --single-instance ~/.bin/ncmpcpp-art
+# for_window [instance="zik"] move scratchpad
+# exec --no-startup-id kitty --class=zik --single-instance ~/.bin/ncmpcpp-art
+# bindsym $mod+Shift+z [instance="zik"] scratchpad show; [instance="zik"] move position center
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+m focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+m move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+q focus parent
+
+# focus the child container
+# bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+ampersand workspace 1
+bindsym $mod+eacute workspace 2
+bindsym $mod+quotedbl workspace 3
+bindsym $mod+apostrophe workspace 4
+bindsym $mod+parenleft workspace 5
+bindsym $mod+minus workspace 6
+bindsym $mod+egrave workspace 7
+bindsym $mod+underscore workspace 8
+bindsym $mod+ccedilla workspace 9
+bindsym $mod+agrave workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+ampersand move container to workspace 1
+bindsym $mod+Shift+eacute move container to workspace 2
+bindsym $mod+Shift+quotedbl move container to workspace 3
+bindsym $mod+Shift+apostrophe move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+minus move container to workspace 6
+bindsym $mod+Shift+egrave move container to workspace 7
+bindsym $mod+Shift+underscore move container to workspace 8
+bindsym $mod+Shift+ccedilla move container to workspace 9
+bindsym $mod+Shift+agrave move container to workspace 10
+
+# =============================================================================
+# Set available monitors
+# =============================================================================
+# list monitor via xrandr --verbose | grep connected
+set $monitorLeft        VGA-0
+set $monitorRight       DVI-I-1
+
+# =============================================================================
+# Assign workspaces to screen
+# =============================================================================
+workspace 1 output $monitorRight
+workspace 2 output $monitorRight
+workspace 3 output $monitorRight
+workspace 4 output $monitorLeft
+workspace 5 output $monitorLeft
+workspace 6 output $monitorLeft
+workspace 7 output $monitorRight
+workspace 8 output $monitorRight
+workspace 9 output $monitorRight
+
+# =============================================================================
+# Assign apps to workspace
+# =============================================================================
+assign [class="Subl|Code|Atom"] 2
+assign [class="Chromium|Firefox|qutebrowser"] 3
+assign [class="Slack|Mattermost|Skype"] 4
+
+# =============================================================================
+# Kill, reload, restart, exit
+# =============================================================================
+# kill focused window
+bindsym $mod+Shift+q kill
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec i3-msg exit
+
+# =============================================================================
+# Resize window (you can also use the mouse for that)
+# =============================================================================
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym m resize grow width 10 px or 10 ppt
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# =============================================================================
+# Volume control
+# =============================================================================
+bindsym XF86AudioRaiseVolume exec amixer sset Master '5%+'
+bindsym XF86AudioLowerVolume exec amixer sset Master '5%-'
+bindsym XF86AudioMute exec amixer set Master toggle
+
+# =============================================================================
+# Music control
+# =============================================================================
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioStop exec mpc stop
+
+# =============================================================================
+# Assign colors
+# =============================================================================
+#                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+client.focused          $black      $black      $darkwhite  $darkblack  $darkgreen
+client.unfocused        $black      $black      $white      $darkblack  $background
+client.focused_inactive $black      $black      $white      $darkblack  $darkblack
+client.urgent           $darkred    $darkred    $black      $darkred    $darkred
+client.background       $black
+
+# =============================================================================
+# Autostart
+# =============================================================================
+# run once at startup
+exec --no-startup-id subl
+exec --no-startup-id chromium
+
+# re-run with every i3 reload
+exec_always --no-startup-id ~/.bin/polybar-run
+
+# =============================================================================
+# Window behaviour
+# =============================================================================
+default_border pixel $border_pixels
+for_window [class=".*"] border pixel $border_pixels
+for_window [instance="zik"] border pixel 5
+for_window [class=".*"] title_format "  %title"
+for_window [class="dolphin"] floating enable resize set 1280 768
+for_window [class="transmission"] floating enable resize set 1024 384
+for_window [class="VirtualBox"] floating enable resize set 1280 768
+
+# =============================================================================
+# i3-gaps
+# =============================================================================
+gaps inner 10
+gaps outer 2
+smart_borders on

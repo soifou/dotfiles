@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case "$1" in
+    randomize)
+        while true; do
+            sleep 30
+            feh --bg-scale --randomize ~/Pictures/wallpapers
+        done
+        ;;
+    today)
+        feh --bg-scale ~/Pictures/wallpapers/today
+        ;;
+    *)
+        echo "Invalid argument. Must be one of randomize, today." >&2
+        exit
+        ;;
+esac

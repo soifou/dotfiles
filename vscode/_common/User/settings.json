@@ -41,7 +41,7 @@
     ],
     "editor.cursorBlinking": "phase",
     "editor.cursorStyle": "line",
-    "editor.fontFamily": "'SauceCodePro Nerd Font'",
+    "editor.fontFamily": "'FuraCode Nerd Font'",
     "editor.fontLigatures": true,
     "editor.fontSize": 14,
     "editor.formatOnPaste": true,
@@ -62,6 +62,11 @@
         "**/.DS_Store": true,
         "**/__pycache__": true,
         "**/**/*.pyc": true
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true
     },
     "files.associations": {
         "Brewfile": "ruby",

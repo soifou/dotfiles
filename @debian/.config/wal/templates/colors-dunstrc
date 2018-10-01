@@ -1,0 +1,63 @@
+#
+#             █
+#             █                         █
+#             █                         █
+#          ██▓█  █   █  █▒██▒  ▒███▒  █████   █▒██▒  ▓██▒
+#         █▓ ▓█  █   █  █▓ ▒█  █▒ ░█    █     ██  █ ▓█  ▓
+#         █   █  █   █  █   █  █▒░      █     █     █░
+#         █   █  █   █  █   █  ░███▒    █     █     █
+#         █   █  █   █  █   █     ▒█    █     █     █░
+#         █▓ ▓█  █▒ ▓█  █   █  █░ ▒█    █░    █     ▓█  ▓
+#          ██▓█  ▒██▒█  █   █  ▒███▒    ▒██   █      ▓██▒
+#
+
+[global]
+    font = "FuraCode Nerd Font 9"
+    markup = yes
+    format = "<b>%s</b>\n%b"
+    sort = yes
+    indicate_hidden = yes
+    alignment = left
+    bounce_freq = 0
+    show_age_threshold = 60
+    word_wrap = yes
+    ignore_newline = no
+    geometry = "300x120-10+30"
+    transparency = 0
+    idle_threshold = 120
+    monitor = 0
+    follow = none
+    sticky_history = yes
+    line_height = 2
+    separator_height = 2
+    padding = 8
+    horizontal_padding = 8
+    icon_position = left
+    icon_path = ~/share/icons/Papirus/16x16/status/:~/share/icons/Papirus/16x16/devices/:~/share/icons/Papirus/16x16/apps/
+    max_icon_size = 64
+    separator_color = "{color7}"
+    startup_notification = false
+    frame_width = 1
+    frame_color = "{color8}"
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+Escape
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "{color7}"
+    foreground = "{background}"
+    timeout = 5
+
+[urgency_normal]
+    background = "{color7}"
+    foreground = "{background}"
+    timeout = 10
+
+[urgency_critical]
+    background = "{color1}"
+    foreground = "{foreground}"
+    frame_color = "{background}"
+    timeout = 0

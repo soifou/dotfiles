@@ -16,13 +16,8 @@ bundler
 capistrano
 command-not-found
 docker
-fabric
 gem
 git
-lukechilds/zsh-better-npm-completion
-n98-magerun
-sublime
-wp-cli
 zlsun/solarized-man
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
