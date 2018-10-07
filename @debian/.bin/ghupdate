@@ -10,7 +10,7 @@ print_success() {
 GH_URL=https://github.com/
 semanticVersionPattern="v[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}"
 pattern="[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}"
-
+shortPattern="[0-9]{1,2}\.[0-9]{1,2}"
 while :
 do
     case $2 in
@@ -31,6 +31,20 @@ elif [ "$1" == 'bat' ]; then
     NAME=bat
     BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1-musl_VERSION_amd64.deb"
     GREPVER="bat --version | awk -F\  '{print \$2}' | tr -d '[:space:]'"
+elif [ "$1" == 'vagrant' ]; then
+    REPO=hashicorp/vagrant
+    NAME=vagrant
+    BINFILE=https://releases.hashicorp.com/vagrant/VERSION/vagrant_VERSION_x86_64.deb
+    BINPATH=/usr/bin/vagrant
+    GREPVER="vagrant -v | awk -F\  '{print \$2}'"
+elif [ "$1" == 'greenclip' ]; then
+    semanticVersionPattern=$shortPattern
+    REPO=erebe/greenclip
+    NAME=greenclip
+    FILETYPE="binary"
+    BINFILE=$GH_URL$REPO/releases/download/VERSION/greenclip
+    BINPATH=/usr/local/bin/greenclip
+    GREPVER="greenclip -v | head -n1 | awk -F\  '{print \$2}' | cut -c 2-"
 elif [ "$1" == 'rofi' ]; then
     semanticVersionPattern=$pattern
     REPO=DaveDavenport/rofi

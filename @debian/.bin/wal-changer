@@ -9,6 +9,9 @@
 pkill dunst
 dunst -config ~/.cache/wal/colors-dunstrc &
 
+# Reload kitty single instances
+kitty @ set-colors --all --configured --reset ~/.cache/wal/colors-kitty-dark.conf &
+
 # Display notification
 notify-send "Theme changed!" "$(uname -s)." &
 

@@ -31,8 +31,8 @@ floating_modifier $mod
 # =============================================================================
 # Terminal
 # =============================================================================
-bindsym $mod+Return exec kitty --single-instance
-bindsym $mod+Shift+Return exec kitty
+bindsym $mod+Return exec kitty
+# bindsym $mod+Shift+Return exec kitty
 
 # =============================================================================
 # Launcher
@@ -48,7 +48,7 @@ bindsym $mod+Escape exec $HOME/.anyenv/envs/pyenv/shims/python3 $HOME/.bin/locks
 # =============================================================================
 # Screenshot
 # =============================================================================
-bindsym Print exec spectacle
+bindsym Print exec $HOME/.bin/screenshot region
 
 # =============================================================================
 # Scratchpad for music
@@ -232,6 +232,8 @@ exec --no-startup-id chromium
 
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run
+exec_always --no-startup-id compton --daemon --config ~/.config/compton/main.conf
+
 
 # =============================================================================
 # Window behaviour
