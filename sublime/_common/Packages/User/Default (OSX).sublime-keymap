@@ -16,7 +16,7 @@
             }
         }
     },
-    { "keys": ["ctrl+f"], "command": "js_prettier", "context": [{ "key": "selector", "operator": "equal", "operand": "source.js, source.json, text.html.markdown, source.css, source.sass, source.scss, source.css.less" }] },
+    { "keys": ["ctrl+f"], "command": "js_prettier", "context": [{ "key": "selector", "operator": "equal", "operand": "source.js, source.json, text.html.markdown, source.css, source.sass, source.scss, source.css.less, source.yaml" }] },
     { "keys": ["ctrl+f"], "command": "rufo_format", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ruby" }] },
     { "keys": ["ctrl+f"], "command": "sublime_php_cs_fix", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["ctrl+f"], "command": "prettydiff_beautify", "context": [{ "key": "selector", "operator": "equal", "operand": "text.html.twig" }] },

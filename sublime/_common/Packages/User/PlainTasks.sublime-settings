@@ -1,5 +1,4 @@
 {
-    "color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
     "open_tasks_bullet": "☐", // options: - | ❍ | ❑ | ■ | □ | ☐ | ▪ | ▫ | – | — ≡ → › | [ ]
     "done_tasks_bullet": "✔", // options: + | ✓ | ✔ | √ | [x]
     "cancelled_tasks_bullet": "✘", // options: x | ✘ | [-]

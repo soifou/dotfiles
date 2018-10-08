@@ -31,8 +31,10 @@
 		"JsPrettier",
 		"MarkdownEditing",
 		"Material Theme",
+		"New Moon Color Scheme",
 		"Okami – Adaptive Color Schemes",
 		"Package Control",
+		"PackageResourceViewer",
 		"PHP Companion",
 		"PHP Getters and Setters",
 		"PHP-Twig",
@@ -58,7 +60,8 @@
 		"SublimeLinter-pycodestyle",
 		"SublimeLinter-rubocop",
 		"SublimeLinter-shellcheck",
-		"TypeScript Syntax"
+		"TypeScript Syntax",
+		"WakaTime"
 	],
 	"repositories":
 	[
