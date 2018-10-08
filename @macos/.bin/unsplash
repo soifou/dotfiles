@@ -20,24 +20,24 @@ fi
 
 curl -o "$DIR/today" -J -L "https://source.unsplash.com/random/1920x1200" > /dev/null 2>&1
 
-# kill blurme script if installed
-/usr/local/bin/chunkc blur::reset
-
-# do the blur stuff myself
-# todo
-
 # set wallpaper on all desktop
 sqlite3 $HOME/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '$DIR/today'"
-
-# set wallpaper with chunkwm (blur plugin)
 # /usr/local/bin/chunkc set wallpaper "$DIR/today"
 
-/usr/local/bin/chunkc blur::wallpaper "$DIR/today"
+rm -rf "$HOME/.cache/wal/"
+wal -i "$DIR/today" -n
 
-# convert ~/Pictures/wallpapers/today -blur 0x5 /tmp/chunkwm-blur-global.jpg
-/usr/local/bin/chunkc blur::wallpaper set wallpaper_blur
+# change chunkwm focus border
+source ~/.cache/wal/colors.sh
+NFOCUS=$(echo $color1 | sed 's/#//')
+/usr/local/bin/chunkc border::color 0xff$NFOCUS
+
+# change nerdbar colors
+osascript $HOME/Library/Application\ Support/Übersicht/widgets/supernerd.widget/scripts/refresh.applescript
+
+# refresh terminal colors
+# @see: https://sw.kovidgoyal.net/kitty/remote-control.html#at-set-colors
+/Applications/kitty.app/Contents/MacOS/kitty @ set-colors -a -c ~/.cache/wal/colors-kitty-dark.conf
+
 # restart the Dock else the wallpaper wouldn't apply
 killall Dock
-
-# relaunch blurme
-/usr/local/bin/chunkc blur::enable

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+source ~/.cache/wal/colors.sh
+NFOCUS=$(echo $color1 | sed 's/#//')
+NPRESE=$(echo $color4 | sed 's/#//')
+
 #
 # NOTE: specify the desired level of logging.
 #
@@ -33,10 +37,10 @@ chunkc set global_desktop_mode           bsp
 # chunkc set 2_desktop_mode                monocle
 # chunkc set 5_desktop_mode                float
 
-chunkc set global_desktop_offset_top     35
-chunkc set global_desktop_offset_bottom  35
-chunkc set global_desktop_offset_left    15
-chunkc set global_desktop_offset_right   15
+chunkc set global_desktop_offset_top     40
+chunkc set global_desktop_offset_bottom  10
+chunkc set global_desktop_offset_left    10
+chunkc set global_desktop_offset_right   10
 chunkc set global_desktop_offset_gap     10
 
 chunkc set 6_desktop_offset_top          190
@@ -73,7 +77,7 @@ chunkc set mouse_modifier                fn
 
 # The preselection border only shows if you do a tiling::window --use-insertion-point command,
 # or utilize the mouse-drag system in a bsp-space.
-chunkc set preselect_border_color        0xffFF355E
+chunkc set preselect_border_color        0xff$NPRESE
 chunkc set preselect_border_width        5
 chunkc set preselect_border_radius       0
 
@@ -82,17 +86,18 @@ chunkc set preselect_border_radius       0
 #       (https://github.com/koekeishiya/chwm-sa)
 #
 
-chunkc set window_float_topmost          0
+chunkc set window_float_topmost          1
 chunkc set window_fade_inactive          0
+# chunkc set window_fade_inactive          1
 chunkc set window_fade_alpha             0.85
 chunkc set window_fade_duration          0.25
-chunkc set window_use_cgs_move           0
+chunkc set window_use_cgs_move           1
 
 #
 # NOTE: the following are config variables for the chunkwm-border plugin.
 #
 
-chunkc set focused_border_color          0xff25CCF7
+chunkc set focused_border_color          0xff$NFOCUS
 chunkc set focused_border_width          5
 chunkc set focused_border_radius         1
 chunkc set focused_border_skip_floating  1
@@ -112,7 +117,7 @@ chunkc set wallpaper_blur                5.0
 chunkc core::load border.so
 chunkc core::load tiling.so
 chunkc core::load ffm.so
-chunkc core::load blur.so
+chunkc core::load purify.so
 
 #
 # NOTE: shell commands require escaped quotes
@@ -122,10 +127,11 @@ chunkc core::load blur.so
 chunkc tiling::rule --owner Finder --name Copy --state float &
 chunkc tiling::rule --owner \"App Store\" --state float &
 chunkc tiling::rule --owner Kap --state float &
+chunkc tiling::rule --owner VirtualBox --state float &
 chunkc tiling::rule --owner \"System Preferences\" --state tile &
 
 chunkc tiling::rule --owner \"Sublime Text\" --desktop 2 &
-chunkc tiling::rule --owner Code --desktop 2 &
+chunkc tiling::rule --owner VSCodium --desktop 2 &
 
 chunkc tiling::rule --owner Firefox --desktop 3 &
 chunkc tiling::rule --owner Chromium --desktop 3 &

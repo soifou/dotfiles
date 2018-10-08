@@ -30,6 +30,16 @@ cmd - k : chunkc tiling::window --focus next
 # equalize size of windows
 shift + alt - 0 : chunkc tiling::desktop --equalize
 
+# switch desktops (chunk-sa plugin needed: https://koekeishiya.github.io/chunkwm/docs/sa.html)
+cmd - 0x12 : chunkc tiling::desktop --focus 1
+cmd - 0x13 : chunkc tiling::desktop --focus 2
+cmd - 0x14 : chunkc tiling::desktop --focus 3
+cmd - 0x15 : chunkc tiling::desktop --focus 4
+cmd - 0x17 : chunkc tiling::desktop --focus 5
+cmd - 0x16 : chunkc tiling::desktop --focus 6
+cmd - 0x1A : chunkc tiling::desktop --focus 7
+cmd - 0x1C : chunkc tiling::desktop --focus 8
+
 # swap window
 #shift + alt - h : chunkc tiling::window --swap west
 #shift + alt - j : chunkc tiling::window --swap south

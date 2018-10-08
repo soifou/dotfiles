@@ -4,6 +4,13 @@ d=$'\e[33m'
 s=$'\e[32m'
 t=$'\e[0m'
 
+read -p "$d [?] Sync server time?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo ntpdate -b time.apple.com
+fi
+
 read -p "$d [?] Upgrade brew?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -36,10 +43,32 @@ then
     $(phpenv which composer) global update -d ~/.composer/
 fi
 
+read -p "$d [?] Upgrade global pip dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    PIP=$(pyenv which pip)
+    $PIP freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 $PIP install -U
+fi
+
+# read -p "$d [?] Upgrade global npm dependencies?$t" -n 1 -r
+# echo    #
+# if [[ $REPLY =~ ^[Yy]$ ]]
+# then
+#     NPM=$(PATH=$HOME/.anyenv/nodenv/shims:$PATH npm)
+#     $(NPM) install npm@latest -g
+#     $(NPM) outdated -g --depth=0
+#     $(NPM) update -g
+# fi
+
 read -p "$d [?] Upgrade docker images?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+    # @HOTFIX: xhyve keeps resetting dns through resolv.conf, cannot pull image
+    # https://forums.docker.com/t/custom-etc-resolv-conf-in-docker-for-mac-or-using-dns-domain/10035/7
+    echo "nameserver 8.8.8.8" | docker-machine ssh $(docker-machine active) "sudo tee /etc/resolv.conf > /dev/null"
+
     docker image ls | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull
     docker system prune -f
 fi
