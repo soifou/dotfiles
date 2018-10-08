@@ -1,0 +1,5 @@
+@linux/.config/Code/*
+!@linux/.config/Code/User
+
+@macos/Library/Application Support/VSCodium/*
+!@macos/Library/Application Support/VSCodium/User

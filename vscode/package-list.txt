@@ -21,8 +21,9 @@ naumovs.color-highlight
 neilbrayfield.php-docblocker
 patbenatar.advanced-new-file
 PeterJausovec.vscode-docker
-rebornix.Ruby
+rebornix.ruby
 Shan.code-settings-sync
+teabyii.ayu
 timonwong.shellcheck
 whatwedo.twig
 yahya-gilany.vscode-pomodoro
