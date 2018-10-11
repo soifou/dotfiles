@@ -18,7 +18,7 @@ fi
 export ANYENV_ROOT="$HOME/.anyenv"
 if [ -d "${ANYENV_ROOT}" ]; then
     export PATH="$ANYENV_ROOT/bin:$PATH"
-    eval "$(anyenv init -)"
+    eval "$(anyenv init - zsh)"
 fi
 
 # https://golang.org/doc/code.html#GOPATH

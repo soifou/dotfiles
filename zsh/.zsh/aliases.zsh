@@ -21,8 +21,9 @@ if [[ `uname` == "Linux" ]]; then
 
 # OSX aliases
 elif [[ `uname` == "Darwin" ]]; then
-    # go faster to my apps settings folder
     alias osx-config="cd $HOME/Library/Application\ Support/"
+    alias bs="brew services"
+    alias ports="sudo lsof -i -P | grep -i listen"
     # Lock the screen (when going AFK)
     alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
     # Recursively delete `.DS_Store` files
