@@ -18,7 +18,7 @@ list: check
 
 check:
 ifndef CODE
-	$(error vscodium is not available, please install VSCodium first.)
+	$(error vscodium is not available in PATH, please install VSCodium first. If VSCodium is installed, select "Shell command: Install 'vscodium' command in PATH" from your command palette)
 endif
 
 .PHONY: all list check
