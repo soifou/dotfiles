@@ -47,8 +47,8 @@ $ stow -D @debian
 - Add/remove config for vscode on linux:
 
 ```sh
-$ stow -d vscode @linux
-$ stow -D -d vscode @linux
+$ stow -d vscodium @linux
+$ stow -D -d vscodium @linux
 ```
 
 Look at the corresponding folder for more details

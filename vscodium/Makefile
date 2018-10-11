@@ -1,24 +1,24 @@
-
+# https://github.com/VSCodium/vscodium
 # https://code.visualstudio.com/docs/editor/command-line
 
-CODE := $(shell command -v code 2> /dev/null)
-PACKAGES := ./package-list.txt
+CODE := $(shell command -v vscodium 2> /dev/null)
+PACKAGES := ./package-list
 
 all: check
 	@while read module; do \
 		echo "Installing module $$module..."; \
-		code --install-extension "$$module" || true; \
+		$(CODE) --install-extension "$$module" || true; \
 	done <$(PACKAGES)
 	@echo "All packages has been installed!"
 
 list: check
 	@echo "Updating list extensions..."
-	code --list-extensions > $(PACKAGES)
+	$(CODE) --list-extensions > $(PACKAGES)
 	@echo "Your list is up to date!"
 
 check:
 ifndef CODE
-	$(error code is not available, please install visual studio code first.)
+	$(error vscodium is not available, please install VSCodium first.)
 endif
 
 .PHONY: all list check
