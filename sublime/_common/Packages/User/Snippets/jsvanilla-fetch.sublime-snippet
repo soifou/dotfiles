@@ -1,0 +1,25 @@
+<snippet>
+    <content><![CDATA[
+fetch($1, {
+    method: '$2',
+    headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+    },
+    credentials: 'include',
+    body: $3
+})
+.then((response) => {
+    if (response.ok) {
+        return response.json()
+    } else {
+        throw "Response is not ok";
+    }
+})
+.then((data) => {
+    $4
+})
+]]></content>
+    <tabTrigger>jfetch</tabTrigger>
+    <scope>source.js, source.jsx, source.ts</scope>
+    <description>Vanilla JS fetch method</description>
+</snippet>
