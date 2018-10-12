@@ -24,7 +24,7 @@ cmdfu() {
 # Is website down for everyone or just me ?
 down4me() { curl -s "http://www.isup.me/$1" | sed '/just you/!d;s/<[^>]*>//g'; }
 # Cool CLI weather display
-weather() { curl wttr.in/$1 }
+weather() { curl "wttr.in/$1" }
 # Get external IP
 whatsmyip() { echo "My external IP :`curl -s httpbin.org/ip | grep origin | awk -F: '{print $2}'`" }
 # Dict protocol
@@ -95,3 +95,26 @@ if [[ $#h -gt 0 ]]; then
     zstyle ':completion::complete:scp:*' hosts $h
     zstyle ':completion::complete:ssh:*' hosts $h
 fi
+# Show how much RAM application uses.
+# @credits: https://github.com/paulmillr/dotfiles/blob/master/home/.zshrc.sh#L282
+# $ ram safari
+# # => safari uses 154.69 MBs of RAM.
+ram() {
+    local sum
+    local items
+    local app="$1"
+    if [ -z "$app" ]; then
+        echo "First argument - pattern to grep from process"
+    else
+        sum=0
+        for i in `ps aux | grep -i "$app" | grep -v "grep" | awk '{print $6}'`; do
+            sum=$(($i + $sum))
+        done
+        sum=$(echo "scale=2; $sum / 1024.0" | bc)
+        if [[ $sum != "0" ]]; then
+            echo "${fg[yellow]}${app}${reset_color} uses ${fg[green]}${sum}${reset_color} MBs of RAM."
+        else
+            echo "There are no processes with pattern '${fg[blue]}${app}${reset_color}' are running."
+        fi
+    fi
+}

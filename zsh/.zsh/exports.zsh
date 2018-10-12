@@ -1,6 +1,8 @@
-# Set EDITOR to /usr/bin/vim if Vim is installed
-if [ -f /usr/bin/vim ]; then
+#!/bin/bash
+
+if [ -z "$EDITOR" ]; then
   export EDITOR=/usr/bin/vim
+  echo "editor has been set!"
 fi
 
 export LESS="-FSRXI"
@@ -32,15 +34,16 @@ if [ -x "$(command -v fasd)" ]; then
     if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
         fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
     fi
-    source "$fasd_cache"
+    . "$fasd_cache"
     unset fasd_cache
 fi
 
-if [[ `uname` == "Darwin" ]]; then
+if [[ $(uname) == "Darwin" ]]; then
     # homebrew path
     export PATH="/usr/local/sbin:$PATH"
     # use brewed coreutils instead of default one
-    export COREUTILS_ROOT="$(brew --prefix coreutils)/libexec"
+    COREUTILS_ROOT="$(brew --prefix coreutils)/libexec"
+    export COREUTILS_ROOT="$COREUTILS_ROOT"
     if [ -d "${COREUTILS_ROOT}" ]; then
         export PATH="${COREUTILS_ROOT}/gnubin:$PATH"
     fi
@@ -50,29 +53,29 @@ if [[ `uname` == "Darwin" ]]; then
     export PATH="/usr/local/opt/icu4c/bin:$PATH"
     export PATH="/usr/local/opt/icu4c/sbin:$PATH"
     # Docker toolbox for my dev environment
-    if [[ `docker-machine status $DOCKER_MACHINE_NAME` == "Running" ]]; then
-        eval $(docker-machine env $DOCKER_MACHINE_NAME)
-        source $HOME/.zsh/docker/functions.zsh
-        source $HOME/.zsh/docker/aliases.zsh
+    if [[ $(docker-machine status "$DOCKER_MACHINE_NAME") == "Running" ]]; then
+        eval "$(docker-machine env $DOCKER_MACHINE_NAME)"
+        . "$HOME/.zsh/docker/functions.zsh"
+        . "$HOME/.zsh/docker/aliases.zsh"
         if [ -e "$HOME/.zsh/docker/private.zsh" ]; then
-            source $HOME/.zsh/docker/private.zsh
+            . "$HOME/.zsh/docker/private.zsh"
         fi
     fi
 
-elif [[ `uname` == "Linux" ]]; then
+elif [[ $(uname) == "Linux" ]]; then
     # SSH
-    if [ ! -S $XDG_RUNTIME_DIR/ssh-agent.socket ]; then
-        eval `ssh-agent`
-        ln -sf "$SSH_AUTH_SOCK" $XDG_RUNTIME_DIR/ssh-agent.socket
+    if [ ! -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
+        eval "$(ssh-agent)"
+        ln -sf "$SSH_AUTH_SOCK" "$XDG_RUNTIME_DIR/ssh-agent.socket"
     fi
     export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
     ssh-add -l > /dev/null || ssh-add
     # add docker
     if [ -f /usr/bin/docker ]; then
-        source $HOME/.zsh/docker/functions.zsh
-        source $HOME/.zsh/docker/aliases.zsh
+        . "$HOME/.zsh/docker/functions.zsh"
+        . "$HOME/.zsh/docker/aliases.zsh"
         if [ -e "$HOME/.zsh/docker/private.zsh" ]; then
-            source $HOME/.zsh/docker/private.zsh
+            . "$HOME/.zsh/docker/private.zsh"
         fi
     fi
     # add LinuxBrew
