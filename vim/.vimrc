@@ -29,6 +29,7 @@ if iCanHazVundle == 0
 endif
 
 Plugin 'arcticicestudio/nord-vim'
+Plugin 'ap/vim-css-color'
 Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 Plugin 'itchyny/lightline.vim'
