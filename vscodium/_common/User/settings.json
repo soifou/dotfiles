@@ -90,9 +90,10 @@
     "window.titleBarStyle": "custom",
     "window.nativeTabs": false,
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Material Theme High Contrast",
+    "workbench.colorTheme": "Material Theme Ocean High Contrast",
     "workbench.editor.labelFormat": "medium",
-    "workbench.iconTheme": "eq-material-theme-icons",
+    "workbench.iconTheme": "eq-material-theme-icons-ocean",
     "workbench.startupEditor": "none",
-    "workbench.colorCustomizations": {}
+    "workbench.colorCustomizations": {},
+    "window.menuBarVisibility": "toggle"
 }

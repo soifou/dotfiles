@@ -8,19 +8,31 @@
 # Cheers!
 # Addy
 
-# Open Weather Map API code, register to http://openweathermap.org to get one ;)
+# Open Weather Map API code, register to https://openweathermap.org to get one ;)
+API_ENDPOINT=https://api.openweathermap.org/data/2.5
 API_KEY=$OPENWEATHERMAP_APIKEY
 
-# Check on http://openweathermap.org/find
-CITY_ID=$OPENWEATHERMAP_CITYID
+# Check on https://openweathermap.org/find
+CITY_LAT=$OPENWEATHERMAP_LAT
+CITY_LONG=$OPENWEATHERMAP_LONG
 
-ICON_SUNNY=" "
-ICON_CLOUDY=" "
-ICON_RAINY=" "
-ICON_STORM=" "
-ICON_SNOW=" "
-ICON_FOG=" "
-ICON_MISC=" "
+if  [[ $2 = "--emoji" ]]; then
+    ICON_SUNNY="☀️ "
+    ICON_CLOUDY="☁️ "
+    ICON_RAINY="🌧️ "
+    ICON_STORM="🌩️ "
+    ICON_SNOW="❄️ "
+    ICON_FOG="🌫️ "
+    ICON_MISC="🐳 "
+else
+    ICON_SUNNY=" "
+    ICON_CLOUDY=" "
+    ICON_RAINY=" "
+    ICON_STORM=" "
+    ICON_SNOW=" "
+    ICON_FOG=" "
+    ICON_MISC=" "
+fi
 
 TEXT_SUNNY="Clear"
 TEXT_CLOUDY="Cloudy"
@@ -31,8 +43,7 @@ TEXT_FOG="Fog"
 
 SYMBOL_CELSIUS="˚C"
 
-WEATHER_URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&appid=${API_KEY}&units=metric"
-
+WEATHER_URL="${API_ENDPOINT}/weather?lat=${CITY_LAT}&lon=${CITY_LONG}&appid=${API_KEY}&units=metric"
 WEATHER_INFO=$(wget -qO- "${WEATHER_URL}")
 WEATHER_MAIN=$(echo "${WEATHER_INFO}" | grep -o -e '\"main\":\"[a-Z]*\"' | awk -F ':' '{print $2}' | tr -d '"')
 WEATHER_TEMP=$(echo "${WEATHER_INFO}" | grep -o -e '\"temp\":\-\?[0-9]*' | awk -F ':' '{print $2}' | tr -d '"')

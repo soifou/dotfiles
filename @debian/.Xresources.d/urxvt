@@ -14,8 +14,9 @@ URxvt*fadeColor: #000000
 URxvt*cursorBlink: true
 
 ! Font settings
-URxvt.font: xft:MesloLGM Nerd Font:size=10:antialias=true:hinting=true:Regular
-URxvt.boldFont: xft:MesloLGM Nerd Font:size=10:antialias=true:Bold
+! URxvt.font: xft:FuraCode Nerd Font:size=14:antialias=true:hinting=true:Regular
+URxvt.font: xft:Iosevka Slab:style=Regular:pixelsize=14:antialias=true
+URxvt.boldFont: xft:Iosevka Slab Semibold:style=Semibold:size=11:antialias=true:Bold
 URxvt*letterSpace: 0
 URxvt.lineSpace: 0
 
@@ -44,4 +45,3 @@ URxvt.keysym.C-S-Up:   font-size:incglobal
 URxvt.keysym.C-S-Down: font-size:decglobal
 URxvt.keysym.C-equal:  font-size:reset
 URxvt.keysym.C-slash:  font-size:show
-

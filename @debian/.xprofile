@@ -28,8 +28,7 @@ fi
 
 # redshift
 if command -v redshift &> /dev/null; then
-    pkill redshift
-    redshift -l "$MY_LATLONG" -t 5700:2700 -b 0.8:0.8 -g 1.0 -m randr &
+    ~/.bin/brightness 1
 fi
 
 # compositor for x11
@@ -47,17 +46,18 @@ if command -v mpd &> /dev/null; then
     pgrep mpd > /dev/null || mpd &
 fi
 
+# hide mouse cursor when inactive
+if command -v unclutter &> /dev/null; then
+    pgrep unclutter > /dev/null || unclutter &
+fi
+
 # notifier
 if command -v dunst &> /dev/null; then
     dunst -config ~/.cache/wal/colors-dunstrc &
-    notify-send "Welcome $USER@$(uname -n)!" "$(uname -s)." --icon="$HOME/.local/share/icons/Papirus/32x32@2x/status/messagebox_info.svg" &
+    notify-send "Welcome $USER@$(uname -n)!" "$(uname -s)." --icon="/usr/share/icons/Papirus/32x32@2x/status/messagebox_info.svg" &
 fi
 
 # locker
-# if command -v xautolock &> /dev/null; then
-#     ~/.bin
-#     xautolock -time 3 -locker "~/.anyenv/envs/pyenv/shims/python3 ~/.bin/lockscreen" &
-# fi
 if [ -f ~/.bin/locker ]; then
     ~/.bin/locker &
 fi

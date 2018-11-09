@@ -14,11 +14,13 @@ upgrade_debian() {
         sudo ntpdate -b pool.ntp.org
     fi
 
+    sudo apt update > /dev/null && sudo apt list --upgradeable
+
     read -p "$d [?] Upgrade system?$t" -n 1 -r
     echo    #
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        sudo apt update && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean && sudo apt autoclean
+        sudo apt upgrade -y && sudo apt autoremove && sudo apt clean && sudo apt autoclean
     fi
 
     read -p "$d [?] Upgrade linuxbrew?$t" -n 1 -r
@@ -40,12 +42,12 @@ upgrade_debian() {
         done
     fi
 
-    read -p "$d [?] Upgrade papirus icons?$t" -n 1 -r
-    echo    #
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-        cd "$HOME/.icons" && git pull && rm -f "$HOME/.cache/icon-cache.kcache"
-    fi
+    # read -p "$d [?] Upgrade papirus icons?$t" -n 1 -r
+    # echo    #
+    # if [[ $REPLY =~ ^[Yy]$ ]]
+    # then
+    #     cd "$HOME/.icons" && git pull && rm -f "$HOME/.cache/icon-cache.kcache"
+    # fi
 }
 
 if [ -f "/etc/debian_version" ]

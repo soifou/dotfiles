@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# manually (no daemon)
+redshift -P -O $(redshift -l "$MY_LATLONG" -p 2>/dev/null | grep temp | cut -d ":" -f 2 | tr -dc "[:digit:]") -g 1.0 -m randr -b $1
+
+# start a daemon
+# pkill redshift
+# redshift -l "$MY_LATLONG" -t 5700:2700 -b 0.8:0.8 -g 1.0 -m randr &

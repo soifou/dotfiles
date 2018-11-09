@@ -1,8 +1,34 @@
 #!/bin/sh
 
-xautolock \
-    -detectsleep \
-    -time 3 \
-    -locker "~/.anyenv/envs/pyenv/shims/python3 ~/.bin/lockscreen" \
-    -notify 30 \
-    -notifier "notify-send -u critical -t 5000 -i $HOME/.local/share/icons/Papirus/32x32@2x/status/messagebox_warning.svg 'Locking screen in 30 seconds'"
+LOCKER="$HOME/.anyenv/envs/pyenv/shims/python3 ~/.bin/lockscreen"
+WARN_ICON_PATH="/usr/share/icons/Papirus/32x32@2x/status/messagebox_warning.svg"
+NOTIF="notify-send -u critical -t 5000 -i $WARN_ICON_PATH"
+
+if command -v xidlehook &> /dev/null; then
+    rm -f /tmp/xidlehook.sock
+
+    pgrep xidlehook > /dev/null || xidlehook \
+      --not-when-fullscreen \
+      --socket /tmp/xidlehook.sock \
+      --timer normal 150 "$NOTIF 'Locking screen in 30 seconds'; $HOME/.bin/brightness .5" "$HOME/.bin/brightness 1" \
+      `# Dim the screen after 60 seconds, undim if user becomes active` \
+      --timer normal 190 \
+        "pkill dunst; $HOME/.bin/brightness .2" \
+        "$HOME/.bin/brightness 1; dunst -config ~/.cache/wal/colors-dunstrc" \
+      `# Undim & lock after 10 more seconds` \
+      --timer primary 10 \
+        "$HOME/.bin/brightness 1; $LOCKER" \
+        ''
+
+elif command -v xautolock &> /dev/null; then
+    pgrep xautolock > /dev/null || xautolock \
+        -detectsleep \
+        -time 3 \
+        -locker "$LOCKER" \
+        -notify 30 \
+        -notifier "$NOTIF 'Locking screen in 30 seconds'"
+
+else
+    echo "Locker error: neither xidlehook nor xautolock were found! Aborting." 1>&2
+    exit 64
+fi

@@ -2,7 +2,7 @@
 # Variables
 # =============================================================================
 set $mod Mod4
-set $border_pixels 2
+set $border_pixels 1
 set $black       #282828
 set $darkblack   #1d2021
 set $transparent #00000000
@@ -37,7 +37,7 @@ bindsym $mod+Return exec kitty
 # =============================================================================
 # Launcher
 # =============================================================================
-bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,themes:~/.bin/wal-switcher' -show drun"
+bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,themes:~/.bin/wal-switcher,emoji' -plugin-path /usr/local/lib/rofi -show drun"
 bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10
 
 # =============================================================================
@@ -157,9 +157,10 @@ workspace 9 output $monitorRight
 # =============================================================================
 # Assign apps to workspace
 # =============================================================================
-assign [class="Subl|Code|Atom"] 2
+assign [class="Subl|VSCodium|Atom"] 2
 assign [class="Chromium|Firefox|qutebrowser"] 3
 assign [class="Slack|Mattermost|Skype"] 4
+assign [class="VirtualBox Machine|Mattermost|Skype"] 5
 
 # =============================================================================
 # Kill, reload, restart, exit
@@ -243,6 +244,7 @@ for_window [class=".*"] border pixel $border_pixels
 for_window [instance="zik"] border pixel 5
 for_window [class=".*"] title_format "  %title"
 for_window [class="dolphin"] floating enable resize set 1280 768
+for_window [class="scummvm"] floating enable resize set 640 480
 for_window [class="transmission"] floating enable resize set 1024 384
 for_window [class="VirtualBox"] floating enable resize set 1280 768
 

@@ -1,4 +1,7 @@
 {
+    "color_scheme": "Packages/User/MarkdownEditing/MarkdownEditor-AyuMirage.tmTheme",
+    "caret_style": "phase",
+    "line_numbers": true,
     "draw_centered": true, // Centers the column in the window
     "draw_indent_guides": false,
     "trim_trailing_white_space_on_save": false,
