@@ -70,7 +70,7 @@ font-2 = Noto Color Emoji:scale=13;1
 
 modules-left = i3
 modules-center = mpd
-modules-right = redshift volume openweathermap date hour
+modules-right = redshift volume openweathermap date
 
 [section/base]
 include-file = ~/.config/polybar/modules.ini
