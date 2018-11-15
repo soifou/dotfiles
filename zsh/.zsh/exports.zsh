@@ -2,7 +2,6 @@
 
 if [ -z "$EDITOR" ]; then
   export EDITOR=/usr/bin/vim
-  echo "editor has been set!"
 fi
 
 export LESS="-FSRXI"
