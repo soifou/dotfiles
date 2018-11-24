@@ -42,6 +42,7 @@ Thumbs.db
 
 # Custom #
 ##########
+*.tmTheme.chback
 *.crt
 *.phpbrewrc
 *.php_cs.cache
