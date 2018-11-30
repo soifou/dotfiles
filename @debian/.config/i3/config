@@ -1,7 +1,22 @@
+#   _ _____
+#  (_)___ /
+#  | | |_ \
+#  | |___) |
+#  |_|____/
+#
+########
+# Custom
+# Lock = caps lock
+# Mod1 = alt (aka meta)
+# Mod2 = number lock
+# Mod4 = super (aka windows)
+# Mod5 = level 3 shift (aka AltGr, Opt)
+########
+set $mod Mod4
+
 # =============================================================================
 # Variables
 # =============================================================================
-set $mod Mod4
 set $border_pixels 1
 set $black       #282828
 set $darkblack   #1d2021
@@ -31,8 +46,8 @@ floating_modifier $mod
 # =============================================================================
 # Terminal
 # =============================================================================
-bindsym $mod+Return exec kitty
-# bindsym $mod+Shift+Return exec kitty
+bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 # =============================================================================
 # Launcher
@@ -43,7 +58,7 @@ bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10
 # =============================================================================
 # Locker
 # =============================================================================
-bindsym $mod+Escape exec $HOME/.anyenv/envs/pyenv/shims/python3 $HOME/.bin/lockscreen
+bindsym $mod+Escape exec $HOME/.bin/lockscreen3
 
 # =============================================================================
 # Screenshot
@@ -56,9 +71,9 @@ bindsym $mod+Print exec $HOME/.bin/screenshot screen
 # =============================================================================
 for_window [instance="zik"] floating enable
 for_window [instance="zik"] resize set 1024 1024
-bindsym $mod+Shift+z exec kitty --class=zik --single-instance ~/.bin/ncmpcpp-art
+bindsym $mod+Shift+z exec i3-sensible-terminal --class=zik --single-instance ~/.bin/ncmpcpp-art
 # for_window [instance="zik"] move scratchpad
-# exec --no-startup-id kitty --class=zik --single-instance ~/.bin/ncmpcpp-art
+# exec --no-startup-id i3-sensible-terminal --class=zik --single-instance ~/.bin/ncmpcpp-art
 # bindsym $mod+Shift+z [instance="zik"] scratchpad show; [instance="zik"] move position center
 
 # change focus
@@ -159,8 +174,8 @@ workspace 9 output $monitorRight
 # =============================================================================
 assign [class="Subl|VSCodium|Atom"] 2
 assign [class="Chromium|Firefox|qutebrowser"] 3
-assign [class="Slack|Mattermost|Skype"] 4
-assign [class="VirtualBox Machine|Mattermost|Skype"] 5
+assign [class="Slack|mattermost-*|Skype"] 4
+assign [class="VirtualBox Machine"] 5
 
 # =============================================================================
 # Kill, reload, restart, exit
@@ -229,11 +244,11 @@ client.background       $black
 # =============================================================================
 # run once at startup
 exec --no-startup-id subl
-exec --no-startup-id chromium
+exec --no-startup-id $BROWSER
 
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run
-exec_always --no-startup-id compton --daemon --config ~/.config/compton/main.conf
+exec_always --no-startup-id killall compton; compton --daemon --config ~/.config/compton/main.conf
 
 
 # =============================================================================
@@ -243,7 +258,6 @@ default_border pixel $border_pixels
 for_window [class=".*"] border pixel $border_pixels
 for_window [instance="zik"] border pixel 5
 for_window [class=".*"] title_format "  %title"
-for_window [class="dolphin"] floating enable resize set 1280 768
 for_window [class="scummvm"] floating enable resize set 640 480
 for_window [class="transmission"] floating enable resize set 1024 384
 for_window [class="VirtualBox"] floating enable resize set 1280 768
