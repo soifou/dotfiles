@@ -1,5 +1,9 @@
 #!/bin/sh
 
+datestring="$(date '+%Y%m%d_%H%M%S')"
+# Log all output to ~/.xinitrc.log
+exec >"/tmp/xinitrc_${USER}@$(hostname)_${datestring}.log" 2>&1
+
 # Merge in defaults and keymaps
 if [ -f /etc/X11/xinit/.Xresources ]; then
     xrdb -merge /etc/X11/xinit/.Xresources
