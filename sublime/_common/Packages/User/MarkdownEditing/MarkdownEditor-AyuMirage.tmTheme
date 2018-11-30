@@ -25,16 +25,8 @@
 				<string>#E0E0E0</string>
 				<key>lineHighlight</key>
 				<string>#707A8c66</string>
-				<key>selection</key>
-				<string>#191e2a</string>
-				<key>selectionBorder</key>
-				<string>#707a8c66</string>
-				<key>shadow</key>
-				<string>#ffffff</string>
-				<key>shadowWidth</key>
-				<string>6</string>
-                <key>popupCss</key>
-                <string>html, body {
+				<key>popupCss</key>
+				<string>html, body {
   background-color: #191e2a;
   color: #cbccc6;
 }
@@ -45,7 +37,14 @@ a {
   color: #313e52;
 }
 </string>
-
+				<key>selection</key>
+				<string>#191e2a</string>
+				<key>selectionBorder</key>
+				<string>#707a8c66</string>
+				<key>shadow</key>
+				<string>#ffffff</string>
+				<key>shadowWidth</key>
+				<string>6</string>
 			</dict>
 		</dict>
 		<dict>
@@ -780,7 +779,7 @@ a {
 				<key>background</key>
 				<string>#191E2A</string>
 				<key>foreground</key>
-				<string>#000000</string>
+				<string>#d5f6ff88</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1194,6 +1193,28 @@ a {
 				<string>#90EE90FF</string>
 				<key>foreground</key>
 				<string>#474747FF</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>col_E06C75FF</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#E06C75FF</string>
+				<key>foreground</key>
+				<string>#0F0F0FFF</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>col_BE5046FF</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#BE5046FF</string>
+				<key>foreground</key>
+				<string>#EFEFEFFF</string>
 			</dict>
 		</dict>
 	</array>
