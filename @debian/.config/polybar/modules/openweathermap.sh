@@ -17,13 +17,13 @@ CITY_LAT=$OPENWEATHERMAP_LAT
 CITY_LONG=$OPENWEATHERMAP_LONG
 
 if  [[ $2 = "--emoji" ]]; then
-    ICON_SUNNY="☀️ "
-    ICON_CLOUDY="☁️ "
-    ICON_RAINY="🌧️ "
-    ICON_STORM="🌩️ "
-    ICON_SNOW="❄️ "
-    ICON_FOG="🌫️ "
-    ICON_MISC="🐳 "
+    ICON_SUNNY=☀️
+    ICON_CLOUDY=☁️
+    ICON_RAINY=🌧️
+    ICON_STORM=🌩️
+    ICON_SNOW=❄️
+    ICON_FOG=🌫️
+    ICON_MISC=🐳
 else
     ICON_SUNNY=" "
     ICON_CLOUDY=" "
