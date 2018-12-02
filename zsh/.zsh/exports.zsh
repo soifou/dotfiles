@@ -82,4 +82,14 @@ elif [[ $(uname) == "Linux" ]]; then
     if [ -d "${LINUXBREW_ROOT}" ]; then
         export PATH="$LINUXBREW_ROOT/bin:$PATH"
     fi
+
+elif [[ $(uname) == "OpenBSD" ]]; then
+    export PATH="/usr/X11R6/bin:$PATH"
+    # SSH
+    if [ ! -S "$HOME/.ssh-agent.socket" ]; then
+        eval "$(ssh-agent)"
+        ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh-agent.socket"
+    fi
+    export SSH_AUTH_SOCK=$HOME/.ssh-agent.socket
+    ssh-add -l > /dev/null || ssh-add
 fi
