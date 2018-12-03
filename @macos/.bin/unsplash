@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# fetch random wallpaper from unsplash.it
 DIR=$HOME/Pictures/wallpapers
-BLURME=1
 
 while :
 do
@@ -12,19 +10,23 @@ do
     esac
 done
 
+mkdir -p "$DIR"
+
 # backup current wallpaper if needed
 if [ "$SAVE" == 1 ]; then
-    mkdir -p "$DIR"
     mv "$DIR/today" "$DIR/$(date +'%Y-%m-%d-%H%M%S')-today"
 fi
 
+# fetch random wallpaper from unsplash
 curl -o "$DIR/today" -J -L "https://source.unsplash.com/random/1920x1200" > /dev/null 2>&1
 
 # set wallpaper on all desktop
 sqlite3 $HOME/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '$DIR/today'"
-# /usr/local/bin/chunkc set wallpaper "$DIR/today"
 
-rm -rf "$HOME/.cache/wal/"
+# remove manually wal cache
+rm -rf "$HOME/.cache/wal"
+
+# generate colors palette, skipping wallpaper
 wal -i "$DIR/today" -n
 
 # change chunkwm focus border
