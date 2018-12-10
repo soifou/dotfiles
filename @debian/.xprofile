@@ -13,6 +13,14 @@ if command -v numlockx &> /dev/null; then
     numlockx on
 fi
 
+# if command -v gnome-keyring-daemon &> /dev/null; then
+#     # gnome-keyring-daemon --start --components=secrets
+#     dbus-update-activation-environment --systemd DISPLAY
+#     eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
+#     # export SSH_AUTH_SOCK
+# fi
+
+
 # today wallpaper
 # if command -v feh &> /dev/null; then
 #     ~/.fehbg

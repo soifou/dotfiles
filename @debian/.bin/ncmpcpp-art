@@ -30,24 +30,40 @@ launch_player() {
 extract_cover() {
     song_dir=$(mpc --format %artist% current)/$(mpc --format %file% current | awk -F/ '{print $2}')
     temp_song="/tmp/current-song"
-    cover="$MUSIC_PATH/$song_dir/cover.jpg"
+    cover=$(find "$MUSIC_PATH/$song_dir" -name "cover.*" | head -n1)
+
+    if [ ! -f "$cover" ]; then
+        cover="$HOME/.config/ncmpcpp/nocover.png"
+    fi
 
     cp "$cover" "$temp_song"
 
     ffmpeg \
-    -hide_banner \
-    -loglevel 0 \
-    -y \
-    -i "$temp_song" \
-    -vf scale=200:-1 \
-    "/tmp/cover.jpg" > /dev/null 2>&1
+        -hide_banner \
+        -loglevel 0 \
+        -y \
+        -i "$temp_song" \
+        -vf scale=400:-1 \
+        "/tmp/cover.jpg" > /dev/null 2>&1
 
-    rm "$temp_song"
+    rm -f "$temp_song"
+
+    notify-send "♫ Now Playing" "$(mpc current)"
+}
+
+get_lyrics() {
+    artist=$(mpc --format %artist% current)
+    title=$(mpc --format %title% current)
+
+    song=`curl -s --get "https://makeitpersonal.co/lyrics" --data-urlencode "artist=$artist" --data-urlencode "title=$title"`
+    echo "$artist - $title\n$song"
 }
 
 if [ "$1" = "extract" ]; then
     extract_cover
-    change_cover
+    # change_cover
+elif [ "$1" = "lyrics" ]; then
+    get_lyrics
 else
     launch_player
 fi

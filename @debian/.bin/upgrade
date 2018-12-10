@@ -14,20 +14,12 @@ upgrade_debian() {
         sudo ntpdate -b pool.ntp.org
     fi
 
-    sudo apt update > /dev/null && sudo apt list --upgradeable
-
     read -p "$d [?] Upgrade system?$t" -n 1 -r
     echo    #
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        sudo apt upgrade -y && sudo apt autoremove && sudo apt clean && sudo apt autoclean
-    fi
-
-    read -p "$d [?] Upgrade linuxbrew?$t" -n 1 -r
-    echo    #
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-        cd "$LINUXBREW_ROOT" && git pull && brew update && brew upgrade && brew cleanup && brew prune
+        sudo apt update > /dev/null && sudo apt list --upgradeable
+        sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
     fi
 
     read -p "$d [?] Upgrade github releases?$t" -n 1 -r
@@ -64,13 +56,6 @@ then
     cd "$HOME/dotfiles" && git pull
 fi
 
-read -p "$d [?] Upgrade global composer dependencies?$t" -n 1 -r
-echo    #
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    /usr/local/bin/composer global update
-fi
-
 read -p "$d [?] Upgrade docker images?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -80,6 +65,13 @@ then
     # docker volume prune -f
 fi
 
+read -p "$d [?] Upgrade linuxbrew?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cd "$LINUXBREW_ROOT" && git pull && brew update && brew upgrade && brew cleanup && brew prune
+fi
+
 read -p "$d [?] Upgrade anyenv?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -87,21 +79,64 @@ then
     anyenv update
 fi
 
-read -p "$d [?] Upgrade git workspaces?$t" -n 1 -r
+read -p "$d [?] Upgrade global node dependencies?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    cd "$DEVELOPMENT_PATH" && git pull
-    repos=($GIT_WORKSPACES)
-    for repo in "${repos[@]}"
-    do
-        echo "$s > Upgrade gws repo $repo...$t"
-        cd "$DEVELOPMENT_PATH/$repo" && git pull
-    done
+    npm -g outdated
+    sleep 3
+    npm -g update
 fi
 
-# echo "$d [?] Upgrade antigen core and bundle$t"
-# source "$HOME/.antigen/antigen.zsh" && eval antigen
-# antigen selfupdate && antigen update
+read -p "$d [?] Upgrade global python dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    pip list --outdated
+    sleep 3
+    pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U | grep "Successfully installed"
+fi
+
+read -p "$d [?] Upgrade global composer dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    composer global outdated
+    sleep 3
+    composer global update
+fi
+
+read -p "$d [?] Upgrade global ruby gems dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    gem outdated
+    sleep 3
+    gem update
+    gem cleanup
+fi
+
+read -p "$d [?] Upgrade vim vundle dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    # The 2 echo's send newline's to any confirmation prompts that might come up,
+    # then i pipe the output to /dev/null - not pretty but it works.
+    # credits: https://github.com/VundleVim/Vundle.vim/issues/511#issuecomment-134251209
+    echo | echo | vim +PluginInstall +qall &>/dev/null
+fi
+
+# read -p "$d [?] Upgrade git workspaces?$t" -n 1 -r
+# echo    #
+# if [[ $REPLY =~ ^[Yy]$ ]]
+# then
+#     cd "$DEVELOPMENT_PATH" && git pull
+#     repos=($GIT_WORKSPACES)
+#     for repo in "${repos[@]}"
+#     do
+#         echo "$s > Upgrade gws repo $repo...$t"
+#         cd "$DEVELOPMENT_PATH/$repo" && git pull
+#     done
+# fi
 
 cd "$HOME" || exit

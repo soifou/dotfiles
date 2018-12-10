@@ -21,7 +21,7 @@ set $border_pixels 1
 set $black       #282828
 set $darkblack   #1d2021
 set $transparent #00000000
-set_from_resource $background     background  #000000
+set_from_resource $background  background  #000000
 set_from_resource $darkred     color1  #000000
 set_from_resource $red         color9  #000000
 set_from_resource $darkgreen   color2  #000000
@@ -52,19 +52,19 @@ bindsym $mod+Return exec i3-sensible-terminal
 # =============================================================================
 # Launcher
 # =============================================================================
-bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,themes:~/.bin/wal-switcher,emoji' -plugin-path /usr/local/lib/rofi -show drun"
+bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,themes:wal-switcher,emoji' -plugin-path /usr/local/lib/rofi -show drun"
 bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10
 
 # =============================================================================
 # Locker
 # =============================================================================
-bindsym $mod+Escape exec $HOME/.bin/lockscreen3
+bindsym $mod+Escape exec ~/.bin/lockscreen3
 
 # =============================================================================
 # Screenshot
 # =============================================================================
-bindsym Print exec $HOME/.bin/screenshot region
-bindsym $mod+Print exec $HOME/.bin/screenshot screen
+bindsym Print exec ~/.bin/screenshot region
+bindsym $mod+Print exec ~/.bin/screenshot screen
 
 # =============================================================================
 # Scratchpad for music
@@ -245,11 +245,11 @@ client.background       $black
 # run once at startup
 exec --no-startup-id subl
 exec --no-startup-id $BROWSER
+exec --no-startup-id ~/.bin/workspace-zik
 
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run
 exec_always --no-startup-id killall compton; compton --daemon --config ~/.config/compton/main.conf
-
 
 # =============================================================================
 # Window behaviour

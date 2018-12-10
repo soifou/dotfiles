@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Load i3 layout on workspace 5 for ncmpcpp player with visualiser and cover art in separate windows
+# Inspiration: https://github.com/ameba23/ncmpcpp_i3_screen_layout
+# https://sw.kovidgoyal.net/kitty/remote-control.html
+
+i3-msg "workspace 5"
+i3-msg "append_layout $HOME/.config/i3/layouts/zik.json"
+
+# music visualizer
+kitty --name cava --title cava cava &
+
+# music player
+kitty --name ncmpcpp --title ncmpcpp ncmpcpp &
+# i3-msg "[title='ncmpcpp'] focus"
+# kitty @ focus-window --match title:ncmpcpp
+
+# cover
+ncmpcpp-art extract
+# kitty --name cover --title cover &
+# kitty @ send-text \
+#     --match title:cover \
+#     'clear && kitty +kitten icat --transfer-mode=stream /tmp/cover.jpg \r' &
+imvr /tmp/cover.jpg &
+
+# window background opacity
+# set correct opacity for created windows above
+# we need to launch it via single instance mode
+# kitty @ set-background-opacity --all .98
+killall compton
+compton --daemon --config "$HOME/.config/compton/main.conf"
