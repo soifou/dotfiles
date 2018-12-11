@@ -63,8 +63,9 @@ bindsym $mod+Escape exec ~/.bin/lockscreen3
 # =============================================================================
 # Screenshot
 # =============================================================================
-bindsym Print exec ~/.bin/screenshot region
-bindsym $mod+Print exec ~/.bin/screenshot screen
+bindsym Print exec ~/.bin/screenshot region-clipboard
+bindsym $mod+Print exec ~/.bin/screenshot region
+bindsym $mod+Shift+Print exec ~/.bin/screenshot screen
 
 # =============================================================================
 # Scratchpad for music

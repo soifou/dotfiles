@@ -1,10 +1,11 @@
 #!/bin/bash
 
+# credits: https://gist.github.com/naelstrof/f9b74b5221cdc324c0911c89a47b8d97
 mkdir -p $SCREENSHOT_PATH
 FILENAME=$(date +%s)-$1.png
+ICON=/usr/share/icons/Papirus/32x32/categories/spectacle.svg
 
 case $1 in
-    # credits: https://gist.github.com/naelstrof/f9b74b5221cdc324c0911c89a47b8d97
     screen)
         monitors=$(xrandr | grep -o '[0-9]*x[0-9]*[+-][0-9]*[+-][0-9]*')
         # Get the location of the mouse
@@ -25,8 +26,8 @@ case $1 in
                         if (( ${ymouse} <= ${mony}+${monh} )); then
                             # We have found our monitor!
                             maim -g "${monw}x${monh}+${monx}+${mony}" $SCREENSHOT_PATH/$FILENAME &&
-                                notify-send -a maim "Screenshot" "Copied to $SCREENSHOT_PATH/$FILENAME" ||
-                                notify-send -a maim "Screenshot" "Failed..."
+                                notify-send -i $ICON "Screenshot" "Copied to $SCREENSHOT_PATH/$FILENAME" ||
+                                notify-send -i $ICON "Screenshot" "Failed..."
                         fi
                     fi
                 fi
@@ -36,14 +37,20 @@ case $1 in
 
     window)
         maim -i $(xdotool getactivewindow) $SCREENSHOT_PATH/$FILENAME &&
-            notify-send -a maim "Screenshot" "Copied to $SCREENSHOT_PATH/$FILENAME" ||
-            notify-send -a maim "Screenshot" "Failed..."
+            notify-send -i $ICON "Screenshot" "Copied to $SCREENSHOT_PATH/$FILENAME" ||
+            notify-send -i $ICON "Screenshot" "Failed..."
         ;;
 
     region)
-        maim -s -b 1 -c 1,0,0,1 -t 0 -u $1 && xclip -selection clip -t image/png $1 &&
-            notify-send -a maim "Screenshot" "Copied to clipboard" ||
-            notify-send -a maim "Screenshot failed..."
+        maim -s -b 1 -c 1,0,0,1 -t 0 -u $SCREENSHOT_PATH/$FILENAME &&
+            notify-send -i $ICON "Copied to $SCREENSHOT_PATH/$FILENAME" ||
+            notify-send -i $ICON "Screenshot" "Failed..."
+        ;;
+
+    region-clipboard)
+        maim -s -b 1 -c 1,0,0,1 -t 0 -u | xclip -sel clip -t image/png &&
+            notify-send -i $ICON "Screenshot" "Copied to clipboard" ||
+            notify-send -i $ICON "Screenshot" "Failed..."
         ;;
 
     *)
