@@ -48,6 +48,7 @@
 		"Smarty",
 		"sublime-rufo",
 		"SublimeLinter",
+		"SublimeLinter-contrib-ansible-lint",
 		"SublimeLinter-contrib-dockerfilelint",
 		"SublimeLinter-contrib-php-cs-fixer",
 		"SublimeLinter-contrib-phpstan",

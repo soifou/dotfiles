@@ -175,7 +175,7 @@ workspace 9 output $monitorRight
 # =============================================================================
 assign [class="Subl|VSCodium|Atom"] 2
 assign [class="Chromium|Firefox|qutebrowser"] 3
-assign [class="Slack|mattermost-*|Skype"] 4
+assign [class="Slack|mattermost-*|Skype|weechat"] 4
 assign [class="VirtualBox Machine"] 5
 
 # =============================================================================
