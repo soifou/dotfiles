@@ -1,31 +1,36 @@
 #!/bin/sh
 
-# Load i3 layout on workspace 5 for ncmpcpp player with visualiser and cover art in separate windows
-# Inspiration: https://github.com/ameba23/ncmpcpp_i3_screen_layout
+# Load i3 layout on specific workspace for ncmpcpp player with visualiser and cover art in separate windows
+# Dependencies: jq, kitty, feh, compton
+# https://github.com/ameba23/ncmpcpp_i3_screen_layout
+# https://sainathadapa.github.io/blog/i3-empty-workspace-workaround/
 # https://sw.kovidgoyal.net/kitty/remote-control.html
 
-i3-msg "workspace 5"
-i3-msg "append_layout $HOME/.config/i3/layouts/zik.json"
+WKNAME=5
 
-# music visualizer
-kitty --name cava --title cava cava &
+# workspace exists?
+if i3-msg -t get_workspaces | jq ".[] | .name" | grep -q -w $WKNAME; then
+    # go to workspace
+    i3-msg "workspace $WKNAME"
+else
+    # create workspace and append layout
+    i3-msg "workspace $WKNAME; append_layout $HOME/.config/i3/layouts/zik.json"
 
-# music player
-kitty --name ncmpcpp --title ncmpcpp ncmpcpp &
-# i3-msg "[title='ncmpcpp'] focus"
-# kitty @ focus-window --match title:ncmpcpp
+    # music visualizer
+    kitty --name cava --title cava cava &
 
-# cover
-ncmpcpp-art extract
-# kitty --name cover --title cover &
-# kitty @ send-text \
-#     --match title:cover \
-#     'clear && kitty +kitten icat --transfer-mode=stream /tmp/cover.jpg \r' &
-imvr /tmp/cover.jpg &
+    # music player
+    kitty --name ncmpcpp --title ncmpcpp ncmpcpp &
+    i3-msg '[class="^ncmpcpp$"] focus'
 
-# window background opacity
-# set correct opacity for created windows above
-# we need to launch it via single instance mode
-# kitty @ set-background-opacity --all .98
-killall compton
-compton --daemon --config "$HOME/.config/compton/main.conf"
+    # cover
+    ncmpcpp-art extract
+    feh -^ cover-art -B black -g 256x256+832+600 -Z -x --reload 5 /tmp/cover.jpg &
+
+    # window background opacity
+    sleep 2
+    killall compton
+    compton --daemon --config "$HOME/.config/compton/main.conf"
+fi
+
+exit 0

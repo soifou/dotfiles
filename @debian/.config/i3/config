@@ -37,7 +37,6 @@ set_from_resource $cyan        color14 #000000
 set_from_resource $darkwhite   color7  #000000
 set_from_resource $white       color15 #000000
 
-
 font pango:Noto Sans 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -47,7 +46,6 @@ floating_modifier $mod
 # Terminal
 # =============================================================================
 bindsym $mod+Return exec i3-sensible-terminal
-# bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 # =============================================================================
 # Launcher
@@ -68,11 +66,12 @@ bindsym $mod+Print exec ~/.bin/screenshot region
 bindsym $mod+Shift+Print exec ~/.bin/screenshot screen
 
 # =============================================================================
-# Scratchpad for music
+# Music
 # =============================================================================
-for_window [instance="zik"] floating enable
-for_window [instance="zik"] resize set 1024 1024
-bindsym $mod+Shift+z exec i3-sensible-terminal --class=zik --single-instance ~/.bin/ncmpcpp-art
+bindsym $mod+Shift+z exec ~/.bin/workspace-zik
+# for_window [instance="zik"] floating enable
+# for_window [instance="zik"] resize set 1024 1024
+# bindsym $mod+Shift+z exec i3-sensible-terminal --class=zik --single-instance ~/.bin/ncmpcpp-art
 # for_window [instance="zik"] move scratchpad
 # exec --no-startup-id i3-sensible-terminal --class=zik --single-instance ~/.bin/ncmpcpp-art
 # bindsym $mod+Shift+z [instance="zik"] scratchpad show; [instance="zik"] move position center
@@ -188,7 +187,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 # bindsym $mod+Shift+e exec i3-msg exit
 
 # =============================================================================
@@ -246,7 +245,6 @@ client.background       $black
 # run once at startup
 exec --no-startup-id subl
 exec --no-startup-id $BROWSER
-exec --no-startup-id ~/.bin/workspace-zik
 
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run

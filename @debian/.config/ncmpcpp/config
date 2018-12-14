@@ -70,3 +70,6 @@ current_item_prefix = "$(yellow)$r"
 current_item_suffix = "$/r$(end)"
 window_border_color = white
 active_window_border = magenta
+
+now_playing_prefix = "$2>> "
+# now_playing_suffix = "$2$/u$2"

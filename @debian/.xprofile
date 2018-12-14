@@ -61,8 +61,8 @@ fi
 
 # notifier
 if command -v dunst &> /dev/null; then
-    dunst -config ~/.cache/wal/colors-dunstrc &
-    notify-send "Welcome $USER@$(uname -n)!" "$(uname -s)." --icon="/usr/share/icons/Papirus/32x32@2x/status/messagebox_info.svg" &
+    dunst -c ~/.cache/wal/colors-dunstrc &
+    notify-send -i dialog-information "Welcome $USER@$(uname -n)!" "$(uname -s)." &
 fi
 
 # locker

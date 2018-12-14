@@ -23,7 +23,6 @@ launch_player() {
     kitty @ resize-window --axis vertical --increment 15
     # kitty @ resize-window --increment 93
 
-
     kitty @ close-window --self
 }
 
@@ -47,14 +46,11 @@ extract_cover() {
         "/tmp/cover.jpg" > /dev/null 2>&1
 
     rm -f "$temp_song"
-
-    notify-send "♫ Now Playing" "$(mpc current)"
 }
 
 get_lyrics() {
     artist=$(mpc --format %artist% current)
     title=$(mpc --format %title% current)
-
     song=`curl -s --get "https://makeitpersonal.co/lyrics" --data-urlencode "artist=$artist" --data-urlencode "title=$title"`
     echo "$artist - $title\n$song"
 }

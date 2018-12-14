@@ -13,6 +13,6 @@ dunst -config ~/.cache/wal/colors-dunstrc &
 kitty @ set-colors --all --configured --reset ~/.cache/wal/colors-kitty-dark.conf &
 
 # Display notification
-notify-send "Theme changed!" "$(uname -s)." &
+notify-send -i preferences-desktop-theme "Theme changed!" "$(uname -s)." &
 
 exit 0

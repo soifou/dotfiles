@@ -12,7 +12,7 @@
 #
 
 [global]
-    font = "FuraCode Nerd Font 9"
+    font = "Iosevka Nerd Font 9"
     markup = yes
     format = "<b>%s</b>\n%b"
     sort = yes
@@ -33,7 +33,7 @@
     padding = 8
     horizontal_padding = 8
     icon_position = left
-    icon_path = /usr/share/icons/Papirus/16x16/status/:/usr/share/icons/Papirus/16x16/devices/:/usr/share/icons/Papirus/16x16/apps/
+    icon_path = /usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/48x48/mimetypes/:/usr/share/icons/Papirus/48x48/devices/:/usr/share/icons/Papirus/48x48/apps/
     max_icon_size = 64
     separator_color = "{color7}"
     startup_notification = false

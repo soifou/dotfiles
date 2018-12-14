@@ -139,4 +139,11 @@ fi
 #     done
 # fi
 
+read -p "$d [?] Cleanup trash?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    rm -rf $HOME/.local/share/Trash/{files,info}/*
+fi
+
 cd "$HOME" || exit

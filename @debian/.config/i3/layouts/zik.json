@@ -66,12 +66,12 @@
                        "x": 1483,
                        "y": 24
                     },
-                    "name": "imvr",
+                    "name": "cover-art",
                     "percent": 1,
                     "swallows": [
                        {
-                        "class": "^imvr$",
-                        "instance": "^imvr$"
+                        "class": "^feh$",
+                        "instance": "^feh$"
                        }
                     ],
                     "type": "con"
