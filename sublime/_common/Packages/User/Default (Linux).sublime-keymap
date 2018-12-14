@@ -21,6 +21,8 @@
     { "keys": ["ctrl+alt+w"], "command": "open_browser", "args": { "url": "https://codex.wordpress.org/Function_Reference/%s" }},
     { "keys": ["ctrl+alt+y"], "command": "open_browser", "args": { "url": "http://docs.python.org/library/%s" }},
 
+    { "keys": ["ctrl+shift+a"], "command": "bh_key", "no_outside_adj": null, "args": { "lines" : true, "plugin": { "type": ["__all__"], "command": "bh_modules.bracketselect" }}},
+
     { "keys": ["ctrl+shift+s"], "command": "save_all" },
     { "keys": ["ctrl+space"], "command": "auto_complete" },
     { "keys": ["ctrl+alt+i"], "command": "increment_selection" },
