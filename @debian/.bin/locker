@@ -1,9 +1,6 @@
 #!/bin/sh
 
-# LOCKER="$HOME/.anyenv/envs/pyenv/shims/python3 ~/.bin/lockscreen"
 LOCKER="$HOME/.bin/lockscreen3"
-WARN_ICON_PATH="/usr/share/icons/Papirus/32x32@2x/status/messagebox_warning.svg"
-NOTIF="notify-send -u critical -t 5000 -i $WARN_ICON_PATH"
 
 if command -v xidlehook &> /dev/null; then
     rm -f /tmp/xidlehook.sock
@@ -16,8 +13,8 @@ if command -v xidlehook &> /dev/null; then
         "$HOME/.bin/brightness 1" \
       `# Dim the screen after 60 seconds, undim if user becomes active` \
       --timer normal 190 \
-        "pkill dunst; $HOME/.bin/brightness .2" \
-        "$HOME/.bin/brightness 1; dunst -config ~/.cache/wal/colors-dunstrc" \
+        "$HOME/.bin/brightness .2" \
+        "$HOME/.bin/brightness 1" \
       `# Undim & lock after 10 more seconds` \
       --timer primary 10 \
         "$HOME/.bin/brightness 1; $LOCKER" \
@@ -29,7 +26,6 @@ elif command -v xautolock &> /dev/null; then
         -time 3 \
         -locker "$LOCKER" \
         -notify 30 \
-        -notifier "$NOTIF 'Locking screen in 30 seconds'"
 
 else
     echo "Locker error: neither xidlehook nor xautolock were found! Aborting." 1>&2
