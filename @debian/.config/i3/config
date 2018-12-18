@@ -258,6 +258,7 @@ for_window [class=".*"] border pixel $border_pixels
 for_window [instance="zik"] border pixel 5
 for_window [class=".*"] title_format "  %title"
 for_window [class="scummvm"] floating enable resize set 640 480
+for_window [class="mpv"] floating enable resize move position center
 for_window [class="transmission"] floating enable resize set 1024 384
 for_window [class="VirtualBox"] floating enable resize set 1280 768
 
