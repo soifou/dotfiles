@@ -12,6 +12,7 @@ WKNAME=5
 if i3-msg -t get_workspaces | jq ".[] | .name" | grep -q -w $WKNAME; then
     # go to workspace
     i3-msg "workspace $WKNAME"
+    i3-msg '[instance="^ncmpcpp$"] focus'
 else
     # create workspace and append layout
     i3-msg "workspace $WKNAME; append_layout $HOME/.config/i3/layouts/zik.json"
@@ -21,7 +22,7 @@ else
 
     # music player
     kitty --name ncmpcpp --title ncmpcpp ncmpcpp &
-    i3-msg '[class="^ncmpcpp$"] focus'
+    i3-msg '[instance="^ncmpcpp$"] focus'
 
     # cover
     ncmpcpp-art extract
