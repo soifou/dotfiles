@@ -27,7 +27,7 @@ launch_player() {
 }
 
 extract_cover() {
-    song_dir=$(mpc --format %artist% current)/$(mpc --format %file% current | awk -F/ '{print $2}')
+    song_dir=$(mpc --format %file% current | awk -F/ '{print $1"/"$2}')
     temp_song="/tmp/current-song"
     cover=$(find "$MUSIC_PATH/$song_dir" -name "cover.*" | head -n1 &> /dev/null)
 
