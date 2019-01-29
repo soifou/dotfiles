@@ -52,7 +52,7 @@
 		"SublimeLinter-contrib-dockerfilelint",
 		"SublimeLinter-contrib-php-cs-fixer",
 		"SublimeLinter-contrib-phpstan",
-		"SublimeLinter-contrib-scss-lint",
+		"SublimeLinter-contrib-sass-lint",
 		"SublimeLinter-contrib-yamllint",
 		"SublimeLinter-csslint",
 		"SublimeLinter-jshint",
