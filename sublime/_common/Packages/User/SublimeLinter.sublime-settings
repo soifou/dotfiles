@@ -1,6 +1,14 @@
 // SublimeLinter Settings - User
 {
     "debug": true,
+    "linters": {
+        "phpstan": {
+            "env": {"PATH":"~/.anyenv/envs/phpenv/shims:$PATH"}
+        },
+        "phpmd": {
+            "env": {"PATH":"~/.anyenv/envs/phpenv/shims/:$PATH"}
+        }
+    },
     "paths": {
         "linux":
         [

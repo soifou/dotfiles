@@ -30,7 +30,9 @@
                 { "file_path": ".*/inventory/group_vars/.*" },
                 { "file_path": ".*/inventory/host_vars/.*" },
                 { "file_path": ".*/inventory/.*" },
-                { "file_path": ".*/playbooks/.*.ya?ml$" }
+                { "file_path": ".*/inventory.ya?ml$*" },
+                { "file_path": ".*/playbooks/.*.ya?ml$" },
+                { "file_path": ".*/playbook_*.ya?ml$" }
             ]
         },
         {

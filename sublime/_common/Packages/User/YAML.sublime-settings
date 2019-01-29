@@ -2,9 +2,9 @@
 	"extensions":
 	[
 		".prettierrc",
-		"YAML-tmLanguage",
 		"yml",
 		"bundler.conf",
+		"YAML-tmLanguage",
 		"yml.dist",
 		".gemrc"
 	],

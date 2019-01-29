@@ -222,7 +222,7 @@ a {
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#fffff</string>
+				<string>#212733</string>
 				<key>fontStyle</key>
 				<string></string>
 				<key>foreground</key>
@@ -473,7 +473,7 @@ a {
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#000</string>
+				<string>#B5D3E5</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1215,6 +1215,17 @@ a {
 				<string>#BE5046FF</string>
 				<key>foreground</key>
 				<string>#EFEFEFFF</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>scope</key>
+			<string>col_FFFF00FF</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#FFFF00FF</string>
+				<key>foreground</key>
+				<string>#616161FF</string>
 			</dict>
 		</dict>
 	</array>
