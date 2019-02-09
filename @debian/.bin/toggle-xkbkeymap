@@ -7,10 +7,10 @@ MAIN_LAYOUT="fr"
 CURRENT="$(setxkbmap -query | grep layout | perl -pe 's/^layout: +([^ ]+)$/$1/')"
 
 if [ "$CURRENT" = "us" ] ; then
-    setxkbmap -layout "$MAIN_LAYOUT" -option ctrl:nocaps
+    setxkbmap -layout "$MAIN_LAYOUT" -option ctrl:nocaps,terminate:ctrl_alt_bksp
     CURRENT="$MAIN_LAYOUT"
 else
-    setxkbmap -layout us -option ctrl:nocaps
+    setxkbmap -layout us -option ctrl:nocaps,terminate:ctrl_alt_bksp
     CURRENT="us"
 fi
 

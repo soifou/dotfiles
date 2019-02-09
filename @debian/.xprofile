@@ -7,10 +7,12 @@ if command -v xset &> /dev/null; then
     # turn off beep
     xset -b
 fi
-
 # enable keyboard numlock
 if command -v numlockx &> /dev/null; then
     numlockx on
+fi
+if command -v setxkbmap &> /dev/null; then
+    setxkbmap -layout fr -variant latin9 -option ctrl:nocaps,terminate:ctrl_alt_bksp
 fi
 
 # if command -v gnome-keyring-daemon &> /dev/null; then
