@@ -4,6 +4,12 @@
     binPhp: "~/.anyenv/envs/phpenv/versions/7.2.4/bin/php"
     verboseErrors: true
   "atom-material-ui":
+    colors:
+      abaseColor: "#ffa726"
+      accentColor: "#9f6918"
+      genAccent: true
+      paintCursor: true
+      predefinedColor: "Orange"
     depth: true
     fontSize: "Big"
     tabs:
@@ -38,12 +44,12 @@
     telemetryConsent: "no"
     themes: [
       "atom-material-ui"
-      "atom-material-syntax"
+      "atom-dark-syntax"
     ]
     titleBar: "hidden"
   editor:
-    fontFamily: "SauceCodePro Nerd Font"
-    fontSize: 14
+    fontFamily: "Iosevka Nerd Font"
+    fontSize: 16
     invisibles: {}
     scrollPastEnd: true
     scrollSensitivity: 200

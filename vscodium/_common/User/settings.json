@@ -41,9 +41,9 @@
     ],
     "editor.cursorBlinking": "phase",
     "editor.cursorStyle": "line",
-    "editor.fontFamily": "FuraCode Nerd Font",
+    "editor.fontFamily": "Iosevka Nerd Font",
     "editor.fontLigatures": true,
-    "editor.fontSize": 14,
+    "editor.fontSize": 16,
     "editor.formatOnPaste": true,
     "editor.lineHeight": 24,
     "editor.minimap.enabled": true,
@@ -95,5 +95,6 @@
     "workbench.iconTheme": "eq-material-theme-icons-ocean",
     "workbench.startupEditor": "none",
     "workbench.colorCustomizations": {},
-    "window.menuBarVisibility": "toggle"
+    "window.menuBarVisibility": "toggle",
+    "window.closeWhenEmpty": false
 }
