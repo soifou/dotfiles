@@ -20,6 +20,11 @@ fi
 #     # export SSH_AUTH_SOCK
 # fi
 
+# When using dunst without a Display Manager, the DISPLAY environment variable might not be correctly set.
+# Fix display notification for nativefier apps and maybe udev rules
+# dbus-update-activation-environment --systemd DISPLAY
+# systemctl --user import-environment DISPLAY
+
 
 # today wallpaper
 # if command -v feh &> /dev/null; then
@@ -41,7 +46,7 @@ fi
 
 # compositor for x11
 if command -v compton &> /dev/null; then
-    compton --daemon --config ~/.config/compton/main.conf
+    compton --daemon
 fi
 
 # rofi clipboard manager
