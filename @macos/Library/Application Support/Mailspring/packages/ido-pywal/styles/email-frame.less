@@ -1,0 +1,168 @@
+@import "variables";
+@import "ui-variables";
+@import "controls";
+
+.ignore-in-parent-frame {
+  body {
+    color: @taiga-dark;
+  }
+  img {
+    color: @taiga-dark;
+  }
+}
+.button-dropdown.bordered{
+  .primary-item{
+    padding-top: @bordered-inner-padding-top;
+  }
+  .secondary-picker{
+    padding-top: @bordered-inner-padding-top;
+  }
+}
+
+.composer-inner-wrap, *{
+  .composer-action-bar-wrap{
+    .composer-action-bar-content{
+      padding: 5px;
+    }
+    .button-dropdown.bordered{
+      .primary-item{
+        height: @send-button-size;
+        line-height: @send-button-line-height;
+        padding-top: @bordered-inner-padding-top;
+        &:extend(.btn.btn-emphasis);
+        img{
+          background-color: @white;
+        }
+      }
+      .secondary-picker{
+        height: @send-button-size;
+        line-height: @send-button-line-height;
+        padding-top: @bordered-inner-padding-top;
+        &:extend(.btn.btn-emphasis);
+        img{
+          background-color: @white;
+        }
+      }
+    }
+    .btn-send{
+      margin-top: 6px;
+    }
+    .btn.btn-toolbar:not(.btn-send){
+      border-radius: @btn-border-radius;
+      height: @composer-btn-height;
+      padding: @composer-btn-padding;
+      margin: @composer-btn-margin;
+      img.content-mask{
+        background-color: @icon-bg-color!important;
+      }
+      &.narrow{
+        padding: @narrow-btn-padding;
+      }
+    }
+  }
+}
+.sheet-toolbar .btn-toolbar {
+  border: none !important;
+}
+.sheet-toolbar .btn-toolbar:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+.window-type-composer, .layout-mode-popout{
+  .item-container{
+    margin-right: -16px;
+  }
+  .sheet-toolbar-container.mode-popout{
+    .toolbar-window-controls{
+      margin: 12px;
+      margin-bottom: 0;
+    }
+    .item-spacer{
+      height: 40px;
+    }
+    .window-title{
+      // margin-top: 6px;
+      line-height: 38px;
+    }
+  }
+  [data-column="0"], .composer-full-window .composer-inner-wrap .composer-action-bar-wrap{
+    background: @white;
+    .composer-action-bar-content{
+      padding-bottom: 0;
+    }
+    .btn.btn-toolbar.narrow{
+      border-radius: @btn-border-radius;
+    }
+    .composer-inner-wrap .composer-action-bar-wrap .btn{
+      border-radius: @btn-border-radius;
+      height: @composer-btn-height;
+      padding: @composer-btn-padding;
+      margin: @composer-btn-margin;
+      &.narrow{
+        padding: @narrow-btn-padding;
+      }
+    }
+    .btn-translate{
+      padding: 5px;
+    }
+    .btn.btn-toolbar.btn-emphasis.btn-text.btn-send{
+      height: @send-button-size;
+      border-radius: 2px;
+      margin-bottom: 8px;
+      margin-top: 6px;
+      margin-left: 6px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+  }
+  background: @white;
+  .sheet-toolbar{
+    background: @sidebar-bg;
+  }
+  .sheet-toolbar .item-container .window-title{
+    color: @white;
+  }
+}
+.message-list {
+  .scrollbar-track {
+    border: 0;
+  }
+}
+#message-list .message-item-wrap .message-item-white-wrap.composer-outer-wrap,
+.window-type-composer [data-column="0"] .composer-inner-wrap .composer-action-bar-wrap,
+#message-list .message-item-wrap .message-item-white-wrap.composer-outer-wrap .composer-action-bar-wrap,
+.layout-mode-popout  .composer-full-window .composer-inner-wrap .composer-action-bar-plugins{
+  background: @white;
+  .btn.btn-toolbar{
+    &:nth-child(3){
+      .content-mask{
+        &:first-child{
+          margin-left: -5px;
+        }
+        &:last-child{
+          margin-left: -2px;
+          margin-right: -4px;
+        }
+      }
+    }
+    &.btn-trash{
+      padding: @composer-btn-padding;
+    }
+    &.btn-attach{
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    &.btn-send-later{
+      padding: @send-later-btn-padding;
+    }
+  }
+}
+
+.composer-inner-wrap .composer-action-bar-wrap .btn-send-reminder, 
+* .composer-action-bar-wrap .btn-send-reminder,
+.composer-inner-wrap .composer-action-bar-wrap .btn-translate, 
+* .composer-action-bar-wrap .btn-translate{
+  width: 42px;
+  padding-left: 5px!important;
+  padding-top: 8px!important;
+}

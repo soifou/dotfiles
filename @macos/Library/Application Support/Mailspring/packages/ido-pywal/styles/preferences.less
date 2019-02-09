@@ -1,0 +1,36 @@
+@import "variables";
+@import "ui-variables";
+
+.sheet-toolbar{
+  .item-back{
+    padding-top: 15px;
+    img.content-mask{
+      background-color: @sidebar-fg-color;
+    }
+    .item-back-title{
+      color: @sidebar-fg-color;
+    }
+  }
+}
+
+.preferences-wrap {
+  .preferences-sidebar, .container-preference-tabs .preferences-tabs {
+    .item {
+      border-bottom: none;
+      &.active {
+        color: @white;
+        background: @sidebar-active-item-bg !important;
+        .name {
+          color: @white !important;
+        }
+      }
+    }
+  }
+}
+
+.nylas-editable-list .items-wrapper .selected.editing{
+  background: @sidebar-bg-hl;
+}
+.nylas-editable-list .items-wrapper .selected, .nylas-editable-list:focus .items-wrapper .selected {
+  background: @sidebar-active-item-bg;
+}

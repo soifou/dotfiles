@@ -1,0 +1,12 @@
+{
+  "displayName": "ido-pywal",
+  "name": "ido-pywal",
+  "theme": "ido-pywal",
+  "version": "0.1.0",
+  "description": "A Polymail-inspired theme for Mailspring",
+  "license": "GPL-3.0",
+  "engines": {
+    "mailspring": "*"
+  },
+  "private": true
+}
