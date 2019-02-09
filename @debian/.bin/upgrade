@@ -69,7 +69,7 @@ read -p "$d [?] Upgrade linuxbrew?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    cd "$LINUXBREW_ROOT" && git pull && brew update && brew upgrade && brew cleanup && brew prune
+    cd "$LINUXBREW_ROOT" && git pull && brew update && brew upgrade && brew cleanup
 fi
 
 read -p "$d [?] Upgrade anyenv?$t" -n 1 -r
@@ -92,6 +92,7 @@ read -p "$d [?] Upgrade global python dependencies?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+    pip install --upgrade pip
     pip list --outdated
     sleep 3
     pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U | grep "Successfully installed"

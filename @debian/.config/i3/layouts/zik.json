@@ -70,8 +70,8 @@
                     "percent": 1,
                     "swallows": [
                        {
-                        "class": "^feh$",
-                        "instance": "^feh$"
+                        "class": "^Sxiv$",
+                        "instance": "^cover-art$"
                        }
                     ],
                     "type": "con"

@@ -163,6 +163,9 @@ drush() {
         -v $(pwd):/var/www/html \
         -v ~/.composer:/home/composer/.composer \
         -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro \
+        -v $(pwd)/aliases.drushrc.php:/root/.drush/aliases.drushrc.php \
+        -v $SSH_AUTH_SOCK:/ssh-auth.sock \
+        --env SSH_AUTH_SOCK=/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
         drupaldocker/drush:8-alpine drush ${@:1}
 }

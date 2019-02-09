@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Load i3 layout on specific workspace for ncmpcpp player with visualiser and cover art in separate windows
-# Dependencies: jq, kitty, feh, compton
+# Dependencies: jq, kitty, sxiv, compton
 # https://github.com/ameba23/ncmpcpp_i3_screen_layout
 # https://sainathadapa.github.io/blog/i3-empty-workspace-workaround/
 # https://sw.kovidgoyal.net/kitty/remote-control.html
@@ -26,12 +26,13 @@ else
 
     # cover
     ncmpcpp-art extract
-    feh -^ cover-art -B black -g 256x256+832+600 -Z -x --reload 5 /tmp/cover.jpg &
+    # feh -^ cover-art -B black -g 256x256+832+600 -Z -x --reload 5 /tmp/cover.jpg &
+    sxiv -b -N cover-art -s f /tmp/cover.jpg &
 
     # window background opacity
     sleep 2
     killall compton
-    compton --daemon --config "$HOME/.config/compton/main.conf"
+    compton --daemon
 fi
 
 exit 0

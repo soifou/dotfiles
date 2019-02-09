@@ -50,7 +50,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # =============================================================================
 # Launcher
 # =============================================================================
-bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,themes:wal-switcher,emoji' -plugin-path /usr/local/lib/rofi -show drun"
+bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,themes:~/.bin/wal-switcher,emoji' -plugin-path /usr/local/lib/rofi -show drun"
 bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10
 
 # =============================================================================
@@ -64,6 +64,13 @@ bindsym $mod+Escape exec ~/.bin/lockscreen3
 bindsym Print exec ~/.bin/screenshot region-clipboard
 bindsym $mod+Print exec ~/.bin/screenshot region
 bindsym $mod+Shift+Print exec ~/.bin/screenshot screen
+
+# =============================================================================
+# Webcam
+# =============================================================================
+for_window [title="video0 - mpv"] floating enable
+for_window [title="video0 - mpv"] sticky enable
+bindsym $mod+w exec --no-startup-id ~/.bin/toggle-webcam
 
 # =============================================================================
 # Music
@@ -174,7 +181,7 @@ workspace 9 output $monitorRight
 # =============================================================================
 assign [class="Subl|VSCodium|Atom"] 2
 assign [class="Chromium|Firefox|qutebrowser"] 3
-assign [class="Slack|mattermost-*|Skype|weechat"] 4
+assign [class="Slack|mattermost-*|Skype|weechat|whats-app-*|messages-for-web-*"] 4
 assign [class="VirtualBox Machine"] 5
 
 # =============================================================================
@@ -194,20 +201,16 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? This will end your 
 # Resize window (you can also use the mouse for that)
 # =============================================================================
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym l resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym m resize grow width 10 px or 10 ppt
-        # same bindings, but for the arrow keys
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym h resize grow width 10 px or 10 ppt
+
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -248,7 +251,7 @@ exec --no-startup-id $BROWSER
 
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run
-exec_always --no-startup-id killall compton; compton --daemon --config ~/.config/compton/main.conf
+exec_always --no-startup-id killall compton; compton --daemon
 
 # =============================================================================
 # Window behaviour
@@ -258,7 +261,7 @@ for_window [class=".*"] border pixel $border_pixels
 for_window [instance="zik"] border pixel 5
 for_window [class=".*"] title_format "  %title"
 for_window [class="scummvm"] floating enable resize set 640 480
-for_window [class="mpv"] floating enable resize move position center
+# for_window [class="mpv"] floating enable resize move position center
 for_window [class="transmission"] floating enable resize set 1024 384
 for_window [class="VirtualBox"] floating enable resize set 1280 768
 
