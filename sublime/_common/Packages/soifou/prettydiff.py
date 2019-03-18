@@ -33,7 +33,7 @@ class PrettydiffBeautifyCommand(sublime_plugin.TextCommand):
         return
 
     def format_contents(self):
-        cmd = 'prettydiff mode:"beautify" readmethod:"filescreen" source:"' + \
+        cmd = 'prettydiff beautify readmethod:"filescreen" source:"' + \
             self.view.file_name() + '" '
 
         output = subprocess.check_output(cmd, shell=True, env=self.get_env())
