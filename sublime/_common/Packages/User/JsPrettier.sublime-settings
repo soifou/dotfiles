@@ -1,4 +1,5 @@
 {
-    "prettier_cli_path": "$HOME/.anyenv/envs/nodenv/versions/8.9.4/bin/prettier",
-    "node_path": "$HOME/.anyenv/envs/nodenv/shims/node"
+    "prettier_cli_path": "~/.anyenv/envs/nodenv/shims/prettier",
+    // hack to skip node path. Prettier "shims" already prefix "node path"
+    "node_path": ""
 }
