@@ -20,7 +20,6 @@ php() {
         -v "$PWD":$(getContainerPath) \
         -w $(getContainerPath) \
         -u `id -u`:`id -g` \
-        -p 8080:8080 \
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-7.3 ${@:1}
 }

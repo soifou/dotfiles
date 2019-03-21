@@ -33,7 +33,7 @@
     padding = 8
     horizontal_padding = 8
     icon_position = left
-    icon_path = /usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/48x48/mimetypes/:/usr/share/icons/Papirus/48x48/devices/:/usr/share/icons/Papirus/48x48/apps/
+    icon_path = /usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/48x48/places/:/usr/share/icons/Papirus/48x48/mimetypes/:/usr/share/icons/Papirus/48x48/devices/:/usr/share/icons/Papirus/48x48/apps/
     max_icon_size = 64
     separator_color = "{color7}"
     startup_notification = false

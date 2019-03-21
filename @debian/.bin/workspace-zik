@@ -18,21 +18,24 @@ else
     i3-msg "workspace $WKNAME; append_layout $HOME/.config/i3/layouts/zik.json"
 
     # music visualizer
-    kitty --name cava --title cava cava &
+    kitty --name zik_cava cava &
 
     # music player
-    kitty --name ncmpcpp --title ncmpcpp ncmpcpp &
-    i3-msg '[instance="^ncmpcpp$"] focus'
+    kitty --name zik_ncmpcpp ncmpcpp &
+    i3-msg '[instance="^zik_ncmpcpp$"] focus'
 
     # cover
-    ncmpcpp-art extract
+    # ncmpcpp-art extract
     # feh -^ cover-art -B black -g 256x256+832+600 -Z -x --reload 5 /tmp/cover.jpg &
-    sxiv -b -N cover-art -s f /tmp/cover.jpg &
+    sxiv -b -N zik_cover -s f /tmp/cover.jpg &
 
     # window background opacity
-    sleep 2
-    killall compton
-    compton --daemon
+    # note: a clever way would be to tweak compton with this rule
+    # "90:class_i %= 'zik_*'"
+    # and thus avoid to kill/restart, but somehow kitty
+    # sleep 2
+    # killall compton
+    # compton --daemon
 fi
 
 exit 0

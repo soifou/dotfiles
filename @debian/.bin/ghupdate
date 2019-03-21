@@ -31,6 +31,12 @@ elif [ "$1" == 'bat' ]; then
     NAME=bat
     BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1-musl_VERSION_amd64.deb"
     GREPVER="bat --version | awk -F\  '{print \$2}' | tr -d '[:space:]'"
+elif [ "$1" == 'lsd' ]; then
+    semanticVersionPattern=$pattern
+    REPO=Peltoche/lsd
+    NAME=lsd
+    BINFILE="$GH_URL$REPO/releases/download/VERSION/$1_VERSION_amd64.deb"
+    GREPVER="lsd --version | awk -F\  '{print \$2}'"
 elif [ "$1" == 'vagrant' ]; then
     REPO=hashicorp/vagrant
     NAME=vagrant
@@ -121,6 +127,7 @@ echo "Current: $currentVersion"
     # echo "Checking latest $NAME version..."
     # @NOTE: we put a double quote of the end of first grep to get only latest stable release
     # echo "wget -qO- $lastReleasesUrl | egrep -m1 -o \"/$REPO/releases/tag/$semanticVersionPattern\" | egrep -o \"$semanticVersionPattern\" > $lastReleaseCache"
+    # exit
     wget -qO- $lastReleasesUrl | \
         egrep -m1 -o "/$REPO/releases/tag/$semanticVersionPattern\"" | \
         egrep -o "$semanticVersionPattern" \

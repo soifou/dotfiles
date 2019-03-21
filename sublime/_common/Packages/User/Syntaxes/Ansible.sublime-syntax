@@ -1,0 +1,47 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: Ansible
+file_extensions: []
+scope: source.ansible
+contexts:
+  main:
+    - match: ^\s*((#).*)
+      captures:
+        1: comment.line.number-sign.ansible
+        2: punctuation.definition.comment.line.ansible
+    - include: scope:source.ansible.jinja
+    - include: strings
+    - match: \b(?:True|False|yes|no|None)\b
+      scope: constant.language.ansible
+    - match: \b(?:not)\b
+      scope: keyword.operator.ansible
+    - match: ^\s*(?:- )?(name|include):\s+(.*)$
+      captures:
+        1: keyword.other.ansible
+        2: entity.name.function.ansible
+    - match: '^\s*(when):\s+([a-zA-z][\w\.]+)\s*(\|)\s*(failed|changed|success|skipped)\b'
+      captures:
+        1: keyword.other.ansible
+        2: variable.other.jinja
+        3: keyword.operator.ansible.jinja
+        4: support.function.ansible.jinja
+    - match: ^\s*(?:- )?(?!name|include)(\w+):\s
+      captures:
+        1: keyword.other.ansible
+    - match: (\w+)=
+      captures:
+        1: entity.other.attribute-name.ansible
+  strings:
+    - match: \"
+      push:
+        - meta_scope: string.quoted.double.ansible
+        - match: \"|$
+          pop: true
+        - include: scope:source.jinja.ansible
+    - match: \'
+      push:
+        - meta_scope: string.quoted.single.ansible
+        - match: \'|$
+          pop: true
+        - include: scope:source.jinja.ansible

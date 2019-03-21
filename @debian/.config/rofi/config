@@ -49,10 +49,11 @@ rofi.pid: /run/user/1000/rofi.pid
 ! Terminal to use (default: rofi-sensible-terminal)
 ! rofi.terminal: urxvtc
 
+
 ! THEMING
 ! ----------------------------------------------------------------------------
 
-! rofi.theme: ~/.config/rofi/colors-rofi-light.theme
+! rofi.theme: ~/.config/rofi/themes/light.theme
 rofi.theme: ~/.cache/wal/colors-rofi-light.theme
 
 ! Whether to load and show icons
@@ -73,8 +74,8 @@ rofi.sidebar-mode: true
 ! SHORTCUT
 ! ----------------------------------------------------------------------------
 
-! Switch to the next mode.
-rofi.kb-mode-next: Control+Right
-
-! Switch to the previous mode.
-rofi.kb-mode-previous: Control+Left
+! Vim-like keybings
+rofi.kb-row-up: Super+k,Up
+rofi.kb-row-down: Super+j,Down
+rofi.kb-mode-next: Super+l
+rofi.kb-mode-previous: Super+h

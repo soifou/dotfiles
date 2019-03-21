@@ -10,5 +10,6 @@ then
 	date --date "$1" "+%s"
 else
 	# Invalid Input
-	echo "Use %Y-%m-%dT%H:%M:%S"
+	echo "Invalid input. Requested format: %Y-%m-%dT%H:%M:%S, ie:"
+    echo "$ epoch 2019-01-01T10:10:10"
 fi

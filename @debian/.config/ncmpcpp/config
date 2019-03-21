@@ -5,7 +5,7 @@ mpd_port = "6600"
 
 ##### song format #####
 song_list_format = {$8(%l)$9 }{%a - }{%t}|{$8%f$9}
-song_library_format = {%n_}{%t}|{%f}
+song_library_format = {%n - }{%t}|{%f}
 
 ##### columns settings #####
 playlist_disable_highlight_delay = 0

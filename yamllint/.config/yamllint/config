@@ -7,5 +7,5 @@ rules:
     level: warning
     max-spaces-inside: 1
   line-length:
-    max: 100
+    max: 140
     level: warning

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LOCKER="$HOME/.bin/lockscreen3"
+LOCKER="$HOME/.bin/lockscreen"
 
 if command -v xidlehook &> /dev/null; then
     rm -f /tmp/xidlehook.sock

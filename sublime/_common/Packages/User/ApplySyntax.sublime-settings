@@ -1,4 +1,3 @@
-
 {
     // If you want exceptions reraised so you can see them in the console, change this to true.
     "reraise_exceptions": false,
@@ -15,30 +14,27 @@
 
     // Control level of logging in the console.
     // (true|false|"verbose")
-    "debug": true,
+    "debug": "verbose",
 
     // Put your custom syntax rules here:
     "syntaxes": [
         {
-            "syntax": "Ansible/Ansible",
+            "syntax": "User/Syntaxes/Ansible",
             "rules": [
-                { "file_path": ".*/defaults/.*.ya?ml$" },
                 { "file_path": ".*/handlers/.*.ya?ml$" },
                 { "file_path": ".*/meta/.*.ya?ml$" },
                 { "file_path": ".*/tasks/.*.ya?ml$" },
-                { "file_path": ".*/vars/.*.ya?ml$" },
                 { "file_path": ".*/inventory/group_vars/.*" },
                 { "file_path": ".*/inventory/host_vars/.*" },
                 { "file_path": ".*/inventory/.*" },
-                { "file_path": ".*/inventory.ya?ml$*" },
                 { "file_path": ".*/playbooks/.*.ya?ml$" },
-                { "file_path": ".*/playbook_*.ya?ml$" }
+                { "file_path": ".*/playbook(.*).ya?ml$" }
             ]
         },
         {
-            "syntax": "Jinja2/Syntaxes/Jinja Templates",
+            "syntax": "User/Syntaxes/JinjaBash",
             "rules": [
-                { "file_path": ".*/templates/.*.j2$" }
+                { "file_path": ".*/.*.sh.j2$" }
             ]
         },
         {
@@ -46,6 +42,16 @@
             "rules": [
                 { "file_path": ".*/i3/config$" }
             ]
+        },
+        {
+            "syntax": "User/Syntaxes/JSON",
+            "extensions": [
+                "ApplySyntax.ext-list",
+                ".sublime-settings"
+            ]
+        },
+        {
+            "syntax": "User/Syntaxes/vim"
         },
         {
             "syntax": "YAML/YAML",
@@ -62,9 +68,15 @@
         },
         {
             "syntax": "INI/INI",
+            "extensions": [
+                ".npmrc",
+                "ini.dist",
+                "redshift.conf",
+                "compton.conf"
+            ],
             "rules": [
-                { "file_path": ".*/polybar/config$" },
-                { "file_path": ".*/.git/config$" }
+                { "file_path": ".*/\\polybar/config$" },
+                { "file_path": ".*/share/applications/.*.desktop$" }
             ]
         }
     ]

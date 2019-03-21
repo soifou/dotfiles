@@ -20,13 +20,12 @@ brightness=$(cat "$tmpfile")
 
 # Adjust redshift manually
 adjustBrightness() {
-    # "$HOME/.bin/brightness" "$brightness"
     redshift -P -O $(getTemp) -g 1.0 -m randr -b $brightness
 }
 
 # -->
 getTemp() {
-    echo $(redshift -l "$MY_LATLONG" -p 2>/dev/null | grep temp | cut -d ":" -f 2 | tr -dc "[:digit:]")
+    echo $(redshift -l "$OPENWEATHERMAP_LAT:$OPENWEATHERMAP_LONG" -p 2>/dev/null | grep temp | cut -d ":" -f 2 | tr -dc "[:digit:]")
 }
 
 brightnessUp() {

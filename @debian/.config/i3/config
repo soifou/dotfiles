@@ -56,7 +56,7 @@ bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10
 # =============================================================================
 # Locker
 # =============================================================================
-bindsym $mod+Escape exec ~/.bin/lockscreen3
+bindsym $mod+Escape exec ~/.bin/lockscreen
 
 # =============================================================================
 # Screenshot
@@ -247,7 +247,7 @@ client.background       $black
 # =============================================================================
 # run once at startup
 exec --no-startup-id subl
-exec --no-startup-id $BROWSER
+#exec --no-startup-id $BROWSER
 
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run

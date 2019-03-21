@@ -9,12 +9,12 @@
        "x": 0,
        "y": 0
     },
-    "name": "ncmpcpp",
+    "name": "player",
     "percent": 0.7,
     "swallows": [
        {
         "class": "^kitty$",
-        "instance": "^ncmpcpp$"
+        "instance": "^zik_ncmpcpp$"
        }
     ],
     "type": "con"
@@ -38,12 +38,12 @@
                "x": 0,
                "y": 0
             },
-            "name": "cava",
+            "name": "visualizer",
             "percent": 0.5,
             "swallows": [
                {
                 "class": "^kitty$",
-                "instance": "^cava$"
+                "instance": "^zik_cava$"
                }
             ],
             "type": "con"
@@ -66,12 +66,12 @@
                        "x": 1483,
                        "y": 24
                     },
-                    "name": "cover-art",
+                    "name": "cover",
                     "percent": 1,
                     "swallows": [
                        {
                         "class": "^Sxiv$",
-                        "instance": "^cover-art$"
+                        "instance": "^zik_cover$"
                        }
                     ],
                     "type": "con"

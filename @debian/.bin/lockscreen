@@ -1,92 +1,59 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# vim:ts=2:sw=2:expandtab
+#!/bin/bash
 
-# Lockscreen script using i3lock.
-# Obscure only actual windows for i3lock (multiscreen support)
-# src https://gist.github.com/Airblader/3a96a407e16dae155744#gistcomment-2255441
-# Dependencies :
-# - python3
-# - imagemagick (import command)
-# - pip install Pillow xcffib
-# Usage: $ python3 lockscreen.py
-
-import os
-import xcffib
-from xcffib.xproto import *
-from PIL import Image
-
-XCB_MAP_STATE_VIEWABLE = 2
+# lock.sh - locks your screen using a pixelated screenshot made with
+# scrot (uses imlib2).
+# Will not show anything when you type in your password.
 
 
-def screenshot():
-    os.system('import -window root /tmp/.i3lock.png')
+### Dependency / Conflicts checks, mark error(s):
+
+e=0
+
+markerror () {
+    e=1
+}
+
+bailout () {
+    exit 1
+}
+
+# Check for dependency programs
+which convert >/dev/null || (echo "Please install imagemagick." && markerror)
+which i3lock >/dev/null || (echo "Please install i3lock." && markerror)
+which scrot >/dev/null || (echo "Please install scrot." && markerror)
+
+# Check for conflicting xscreensaver process
+x="$(ps auxwww | grep -i xscreensaver | grep -vE '(grep|\[defunct\]|xscreensaver-demo)' | wc -l)"
+if [[ "$x" -gt 0 ]]; then echo "xscreensaver detected. Please stop xscreensaver." && markerror; fi
+
+# Bailout on errors
+if [[ "$e" == 1 ]]; then
+    echo "Errors occured. Exiting gracefully."
+    bailout
+fi
 
 
-def xcb_fetch_windows():
-    """ Returns an array of rects of currently visible windows. """
+### Screenshot / OSD
 
-    x = xcffib.connect()
-    root = x.get_setup().roots[0].root
+# get temp filenames
+t="$(mktemp).png"
+tm="${t}.mod"
 
-    rects = []
+# make original screenshot
+scrot -q 50 "$t"
 
-    # iterate through top-level windows
-    for child in x.core.QueryTree(root).reply().children:
-        # make sure we only consider windows that are actually visible
-        attributes = x.core.GetWindowAttributes(child).reply()
-        if attributes.map_state != XCB_MAP_STATE_VIEWABLE:
-            continue
+# make pixelated version of screenshot
+convert -quality 10 -scale 10% -scale 1000% "$t" "$tm"
 
-        rects += [x.core.GetGeometry(child).reply()]
+# remove original screenshot
+rm "$t"
 
-    return rects
+### Locking
+# -e is supported since i3lock 2.6 (will not validate empty passwords against PAM)
+# i3lock -u -e -i "$tm"
+i3lock -u -i "$tm"
 
+# remove pixelated screenshot
+rm "$tm"
 
-def obscure_image(image):
-    """ Obscures the given image. """
-    size = image.size
-    pixel_size = 5
-
-    if size[0] < pixel_size or size[1] < pixel_size:
-        return image
-
-    image = image.resize((int(size[0] / pixel_size), int(size[1] / pixel_size)), Image.NEAREST)
-    image = image.resize((int(size[0]), int(size[1])), Image.NEAREST)
-
-    return image
-
-
-def obscure(rects):
-    """ Takes an array of rects to obscure from the screenshot. """
-    image = Image.open('/tmp/.i3lock.png')
-
-    for rect in rects:
-        area = (
-            rect.x, rect.y,
-            rect.x + rect.width,
-            rect.y + rect.height
-        )
-        cropped = image.crop(area)
-        cropped = obscure_image(cropped)
-        image.paste(cropped, area)
-
-    image.save('/tmp/.i3lock.png')
-
-
-def lock_screen():
-    os.system('i3lock -i /tmp/.i3lock.png')
-
-
-if __name__ == '__main__':
-    # 1: Take a screenshot.
-    screenshot()
-
-    # 2: Get the visible windows.
-    rects = xcb_fetch_windows()
-
-    # 3: Process the screenshot.
-    obscure(rects)
-
-    # 4: Lock the screen
-    lock_screen()
+exit 0

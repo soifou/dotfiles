@@ -1,8 +1,9 @@
 {
 	"extensions":
 	[
-		".npmrc",
+		"compton.conf",
 		"redshift.conf",
+		".npmrc",
 		"ini.dist"
 	]
 }

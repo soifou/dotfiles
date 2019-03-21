@@ -36,6 +36,11 @@ body {
 a {
   color: #313e52;
 }
+div.error {
+    padding: 5px;
+    border-bottom: 1px solid #4444884f;
+    margin-bottom: 8px;
+}
 </string>
 				<key>selection</key>
 				<string>#191e2a</string>
@@ -764,7 +769,7 @@ a {
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#D0D0D0</string>
+				<string>#191E2A</string>
 				<key>foreground</key>
 				<string>#D0D0D0</string>
 			</dict>
@@ -790,7 +795,9 @@ a {
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#dedede</string>
+				<string>#d4bfff77</string>
+                <key>foreground</key>
+                <string>#1d2936</string>
 			</dict>
 		</dict>
 		<dict>

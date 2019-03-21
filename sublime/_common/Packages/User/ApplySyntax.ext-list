@@ -12,9 +12,22 @@
 	"INI":
 	[
 		".npmrc",
-		"ini.dist"
+		"compton.conf",
+		"ini.dist",
+		"redshift.conf"
 	],
 	"JSON":
+	[
+		".bowerrc",
+		".csslintrc",
+		".eslintrc",
+		".jscsrc",
+		".jshintrc",
+		".sublime-settings",
+		"ApplySyntax.ext-list",
+		"geojson"
+	],
+	"JavaScript/JSON":
 	[
 		".bowerrc",
 		".csslintrc",

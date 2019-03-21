@@ -1,0 +1,179 @@
+#!/bin/bash
+
+## Beware! This script is intended to be used by only me, myself and I.
+## It keeps me up to date accross my *nix journey
+
+d=$'\e[33m'
+s=$'\e[32m'
+t=$'\e[0m'
+
+upgrade_debian() {
+    read -p "$d [?] Sync server time?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        sudo ntpdate -b pool.ntp.org
+    fi
+
+    read -p "$d [?] Upgrade system?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        sudo apt update > /dev/null && sudo apt list --upgradeable
+        sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
+        sudo dpkg -l | grep '^rc' | awk '{print $2}' | xargs sudo apt-get purge -y
+    fi
+
+    read -p "$d [?] Upgrade github releases?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        apps=($GH_APPS)
+        for app in "${apps[@]}"
+        do
+            echo "$s > Upgrade $app...$t"
+            ghupdate "$app"
+        done
+    fi
+}
+upgrade_arch() {
+    read -p "$d [?] Upgrade system?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]
+        then
+        sudo pacman -Syu --noconfirm
+
+        # autoremove
+        pacman -Qdtq | xargs sudo pacman --noconfirm -R
+
+        # clean and autoclean
+        sudo pacman -Sc --noconfirm
+        sudo pacman -Scc --noconfirm
+
+        # upgrade AUR packages
+        sudo yay -Syu
+    fi
+}
+upgrade_macos() {
+    read -p "$d [?] Sync server time?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        # sudo ntpdate -b time.apple.com
+        sudo sntp -sS pool.ntp.org
+    fi
+
+    read -p "$d [?] Change wallpaper?$t" -n 1 -r
+    echo    #
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        sh $HOME/.bin/unsplash
+    fi
+}
+
+if [ -f "/etc/debian_version" ]; then
+    upgrade_debian
+elif [[ $(awk -F" " '{print $1}' < /etc/issue) == 'Arch' ]]; then
+    upgrade_arch
+elif [[ $(uname) == "Darwin" ]]; then
+    upgrade_macos
+fi
+
+read -p "$d [?] Upgrade dotfiles?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    cd "$HOME/dotfiles" && git pull
+fi
+
+read -p "$d [?] Upgrade docker images?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [[ $(uname) == 'Darwin' ]]; then
+        # @HOTFIX: xhyve keeps resetting dns through resolv.conf, cannot pull image
+        # https://forums.docker.com/t/custom-etc-resolv-conf-in-docker-for-mac-or-using-dns-domain/10035/7
+        echo "nameserver 8.8.8.8" | docker-machine ssh $(docker-machine active) "sudo tee /etc/resolv.conf > /dev/null"
+
+        docker image ls | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull
+        docker system prune -f
+    else
+        docker images | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull | grep "Status:"
+        docker system prune -f
+        # docker volume prune -f
+    fi
+fi
+
+read -p "$d [?] Upgrade brew?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [[ ! -z $LINUXBREW_ROOT ]]; then
+        cd "$LINUXBREW_ROOT" && git pull && brew update && brew upgrade && brew cleanup
+    elif [[ $(uname) == 'Darwin' ]]; then
+        brew update
+        TERM=xterm-256color brew upgrade
+        # https://github.com/buo/homebrew-cask-upgrade
+        brew cu -ay
+        brew cleanup
+    fi
+fi
+
+read -p "$d [?] Upgrade anyenv?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    anyenv update
+fi
+
+read -p "$d [?] Upgrade global node dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    npm -g outdated
+    sleep 3
+    npm -g update
+fi
+
+read -p "$d [?] Upgrade global python dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # PIP=$(pyenv which pip)
+    pip list --outdated
+    sleep 3
+    pip install --upgrade pip
+    pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U | grep "Successfully installed"
+fi
+
+read -p "$d [?] Upgrade global composer dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    $(phpenv which composer) global outdated -d ~/.composer
+    sleep 3
+    $(phpenv which composer) global update -d ~/.composer
+fi
+
+read -p "$d [?] Upgrade global ruby gems dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    gem outdated
+    sleep 3
+    gem update
+    gem cleanup
+fi
+
+read -p "$d [?] Upgrade vim vundle dependencies?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # The 2 echo's send newline's to any confirmation prompts that might come up,
+    # then i pipe the output to /dev/null - not pretty but it works.
+    # credits: https://github.com/VundleVim/Vundle.vim/issues/511#issuecomment-134251209
+    echo | echo | vim +PluginInstall +qall &>/dev/null
+fi
+
+read -p "$d [?] Cleanup trash?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [[ $(uname) == 'Darwin' ]]; then
+        rm -rf ~/.Trash/*
+        find . -type f -name '*.DS_Store' -ls -delete
+    else
+        rm -rf $HOME/.local/share/Trash/{files,info}/*
+    fi
+fi
+
+cd "$HOME" || exit

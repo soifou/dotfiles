@@ -1,86 +1,46 @@
 #!/bin/sh
 
-# adjust keyboard
-if command -v xset &> /dev/null; then
-    # delay and rate
-    xset r rate 300 40
-    # turn off beep
-    xset -b
-fi
+# adjust keyboard delay/rate, turn of beep
+command -v xset >/dev/null 2>&1 && xset r rate 300 40 && xset -b
+
 # enable keyboard numlock
-if command -v numlockx &> /dev/null; then
-    numlockx on
-fi
-if command -v setxkbmap &> /dev/null; then
-    setxkbmap -layout fr -variant latin9 -option ctrl:nocaps,terminate:ctrl_alt_bksp
-fi
+command -v numlockx >/dev/null 2>&1 && numlockx on
 
-# if command -v gnome-keyring-daemon &> /dev/null; then
-#     # gnome-keyring-daemon --start --components=secrets
-#     dbus-update-activation-environment --systemd DISPLAY
-#     eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
-#     # export SSH_AUTH_SOCK
-# fi
+# set custom keymap
+command -v setxkbmap >/dev/null 2>&1 && setxkbmap -layout fr -variant latin9 -option ctrl:nocaps,terminate:ctrl_alt_bksp
 
-# When using dunst without a Display Manager, the DISPLAY environment variable might not be correctly set.
-# Fix display notification for nativefier apps and maybe udev rules
-# dbus-update-activation-environment --systemd DISPLAY
-# systemctl --user import-environment DISPLAY
+# set wallpaper
+command -v wal >/dev/null 2>&1 && wal -q -i "$WALLPAPER_PATH/today" > /dev/null
 
-
-# today wallpaper
-# if command -v feh &> /dev/null; then
-#     ~/.fehbg
-#     ~/.bin/feh-wall today &
-# fi
-
-# last wallpapers/colorscheme used by pywal
-# blue: kind-of-blue
-# if [ -f ~/.bin/wal-switcher ]; then
-#     ~/.bin/wal-switcher kind-of-blue &
-# fi
-[ -f ~/.anyenv/envs/pyenv/shims/wal ] && ~/.anyenv/envs/pyenv/shims/wal -q -i ~/Pictures/wallpapers/kind-of-blue > /dev/null
-
-# redshift
-if command -v redshift &> /dev/null; then
-    ~/.bin/brightness 1
-fi
+# adjust temp/brightness
+command -v redshift >/dev/null 2>&1 && ~/.bin/brightness 1
 
 # compositor for x11
-if command -v compton &> /dev/null; then
-    compton --daemon
-fi
+command -v compton >/dev/null 2>&1 && compton --daemon
 
 # rofi clipboard manager
-if command -v greenclip &> /dev/null; then
-    greenclip daemon &
-fi
+command -v greenclip >/dev/null 2>&1 && greenclip daemon &
 
 # music player daemon
-if command -v mpd &> /dev/null; then
+if command -v mpd >/dev/null; then
+    # [ ! -s ~/.config/mpd/mdp.pid ] && mpd &
     pgrep mpd > /dev/null || mpd &
 fi
 
 # hide mouse cursor when inactive
-if command -v unclutter &> /dev/null; then
+if command -v unclutter >/dev/null; then
     pgrep unclutter > /dev/null || unclutter &
 fi
 
 # notifier
-if command -v dunst &> /dev/null; then
-    dunst -c ~/.cache/wal/colors-dunstrc &
-    notify-send -i dialog-information "Welcome $USER@$(uname -n)!" "$(uname -s)." &
-fi
+command -v dunst >/dev/null 2>&1 && dunst -c ~/.cache/wal/colors-dunstrc &
 
-# locker
-if [ -f ~/.bin/locker ]; then
-    ~/.bin/locker &
-fi
+# screen locker
+command -v locker >/dev/null 2>&1 && locker &
 
-# blurme
-# if [ -f ~/.bin/blurme ]; then
-#     ~/.bin/blurme &
+# if command -v blurwal &> /dev/null; then
+#     pgrep blurwal > /dev/null || blurwal -s 20 -b 5 -m 1 &
 # fi
 
 # xrandr --output $monitorRight --auto --right-of $monitorLeft
-# urxvtd -q -f -o
+# urxvtd -q -F -o
