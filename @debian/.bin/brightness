@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# manually (no daemon)
-TEMP=$(redshift -l "$OPENWEATHERMAP_LAT:$OPENWEATHERMAP_LONG" -p 2>/dev/null | grep temp | cut -d ":" -f 2 | tr -dc "[:digit:]")
-redshift -P -O $TEMP -g 1.0 -m randr -b $1
-
-# start a daemon
-# pkill redshift
-# redshift -l "$OPENWEATHERMAP_LAT:$OPENWEATHERMAP_LONG" -t 5700:2700 -b 0.8:0.8 -g 1.0 -m randr &

@@ -1,46 +1,31 @@
 #!/bin/sh
 
-# adjust keyboard delay/rate, turn of beep
+# keyboard delay/rate, turn off beep
 command -v xset >/dev/null 2>&1 && xset r rate 300 40 && xset -b
-
-# enable keyboard numlock
+# keyboard numlock
 command -v numlockx >/dev/null 2>&1 && numlockx on
-
-# set custom keymap
+# custom keymap
 command -v setxkbmap >/dev/null 2>&1 && setxkbmap -layout fr -variant latin9 -option ctrl:nocaps,terminate:ctrl_alt_bksp
-
-# set wallpaper
-command -v wal >/dev/null 2>&1 && wal -q -i "$WALLPAPER_PATH/today" > /dev/null
-
-# adjust temp/brightness
-command -v redshift >/dev/null 2>&1 && ~/.bin/brightness 1
-
+# wallpaper
+command -v wal >/dev/null 2>&1 && wal -q -i "$WALLPAPER_PATH/today" >/dev/null
+# screen temp/brightness
+command -v redshift >/dev/null 2>&1 && ~/.config/polybar/modules/redshift.sh --temp >/dev/null
 # compositor for x11
 command -v compton >/dev/null 2>&1 && compton --daemon
-
-# rofi clipboard manager
+# clipboard manager for rofi
 command -v greenclip >/dev/null 2>&1 && greenclip daemon &
-
+# notifier
+command -v dunst >/dev/null 2>&1 && dunst -c ~/.cache/wal/colors-dunstrc &
+# screen locker
+command -v locker >/dev/null 2>&1 && locker &
 # music player daemon
 if command -v mpd >/dev/null; then
     # [ ! -s ~/.config/mpd/mdp.pid ] && mpd &
     pgrep mpd > /dev/null || mpd &
 fi
-
-# hide mouse cursor when inactive
+# no mouse cursor
 if command -v unclutter >/dev/null; then
     pgrep unclutter > /dev/null || unclutter &
 fi
-
-# notifier
-command -v dunst >/dev/null 2>&1 && dunst -c ~/.cache/wal/colors-dunstrc &
-
-# screen locker
-command -v locker >/dev/null 2>&1 && locker &
-
-# if command -v blurwal &> /dev/null; then
-#     pgrep blurwal > /dev/null || blurwal -s 20 -b 5 -m 1 &
-# fi
-
 # xrandr --output $monitorRight --auto --right-of $monitorLeft
 # urxvtd -q -F -o

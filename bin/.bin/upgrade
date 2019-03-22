@@ -51,7 +51,7 @@ upgrade_arch() {
         sudo pacman -Scc --noconfirm
 
         # upgrade AUR packages
-        sudo yay -Syu
+        yay -Syu
     fi
 }
 upgrade_macos() {
