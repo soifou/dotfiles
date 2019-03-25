@@ -72,9 +72,9 @@ upgrade_macos() {
 
 if [ -f "/etc/debian_version" ]; then
     upgrade_debian
-elif [[ $(awk -F" " '{print $1}' < /etc/issue) == 'Arch' ]]; then
+elif [[ -f /etc/issue && $(awk -F" " '{print $1}' < /etc/issue) == 'Arch' ]]; then
     upgrade_arch
-elif [[ $(uname) == "Darwin" ]]; then
+elif [ "$(uname)" == "Darwin" ]; then
     upgrade_macos
 fi
 
@@ -91,14 +91,11 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         # @HOTFIX: xhyve keeps resetting dns through resolv.conf, cannot pull image
         # https://forums.docker.com/t/custom-etc-resolv-conf-in-docker-for-mac-or-using-dns-domain/10035/7
         echo "nameserver 8.8.8.8" | docker-machine ssh $(docker-machine active) "sudo tee /etc/resolv.conf > /dev/null"
-
-        docker image ls | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull
-        docker system prune -f
-    else
-        docker images | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull | grep "Status:"
-        docker system prune -f
-        # docker volume prune -f
     fi
+
+    docker images | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull | grep "Status:"
+    docker system prune -f
+    # docker volume prune -f
 fi
 
 read -p "$d [?] Upgrade brew?$t" -n 1 -r
