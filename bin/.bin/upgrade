@@ -105,7 +105,7 @@ read -p "$d [?] Upgrade brew?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     if [[ ! -z $LINUXBREW_ROOT ]]; then
-        cd "$LINUXBREW_ROOT" && git pull && brew update && brew upgrade && brew cleanup
+        cd "$LINUXBREW_ROOT/Homebrew" && git pull && brew update && brew upgrade && brew cleanup
     elif [[ $(uname) == 'Darwin' ]]; then
         brew update
         TERM=xterm-256color brew upgrade
