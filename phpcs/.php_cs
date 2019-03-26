@@ -9,6 +9,7 @@ return PhpCsFixer\Config::create()
         'linebreak_after_opening_tag' => true,
         'mb_str_functions' => true,
         'no_php4_constructor' => true,
+        'no_short_echo_tag' => true,
         'no_unreachable_default_argument_value' => true,
         'no_useless_else' => true,
         'no_useless_return' => true,
@@ -21,4 +22,3 @@ return PhpCsFixer\Config::create()
     ])
     ->setCacheFile(__DIR__.'.cache/.php_cs.cache')
 ;
-
