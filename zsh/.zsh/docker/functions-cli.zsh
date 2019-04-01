@@ -71,13 +71,14 @@ composer() {
         $tty \
         --interactive \
         --rm \
-        -v ~/.composer:/composer \
+        --env SSH_AUTH_SOCK=/ssh-auth.sock \
+        -u `id -u`:`id -g` \
+        -v $XDG_CONFIG_HOME/composer:/composer \
+        -v $XDG_CACHE_HOME/composer:/composer/cache \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
         -v $(pwd):/app \
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
-        -u `id -u`:`id -g` \
-        --env SSH_AUTH_SOCK=/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
         soifou/composer:latest ${@:1}
 }
@@ -88,13 +89,14 @@ composer-7.1() {
         $tty \
         --interactive \
         --rm \
-        -u $(id -u):$(id -g) \
-        -v ~/.composer:/composer \
+        --env SSH_AUTH_SOCK=/ssh-auth.sock \
+        -u `id -u`:`id -g` \
+        -v $XDG_CONFIG_HOME/composer:/composer \
+        -v $XDG_CACHE_HOME/composer:/composer/cache \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
         -v $(pwd):/app \
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
-        --env SSH_AUTH_SOCK=/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
         soifou/composer:php-7.1 ${@:1}
 }
@@ -105,13 +107,14 @@ composer-5.6() {
         $tty \
         --interactive \
         --rm \
-        -u $(id -u):$(id -g) \
-        -v ~/.composer:/composer \
+        --env SSH_AUTH_SOCK=/ssh-auth.sock \
+        -u `id -u`:`id -g` \
+        -v $XDG_CONFIG_HOME/composer:/composer \
+        -v $XDG_CACHE_HOME/composer:/composer/cache \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
         -v $(pwd):/app \
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
-        --env SSH_AUTH_SOCK=/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
         soifou/composer:php-5.6 ${@:1}
 }
