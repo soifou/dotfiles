@@ -73,8 +73,8 @@ composer() {
         --rm \
         --env SSH_AUTH_SOCK=/ssh-auth.sock \
         -u `id -u`:`id -g` \
-        -v $XDG_CONFIG_HOME/composer:/composer \
-        -v $XDG_CACHE_HOME/composer:/composer/cache \
+        -v $COMPOSER_HOME:/composer \
+        -v $COMPOSER_CACHE_DIR:/composer/cache \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
         -v $(pwd):/app \
@@ -91,8 +91,8 @@ composer-7.1() {
         --rm \
         --env SSH_AUTH_SOCK=/ssh-auth.sock \
         -u `id -u`:`id -g` \
-        -v $XDG_CONFIG_HOME/composer:/composer \
-        -v $XDG_CACHE_HOME/composer:/composer/cache \
+        -v $COMPOSER_HOME:/composer \
+        -v $COMPOSER_CACHE_DIR:/composer/cache \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
         -v $(pwd):/app \
@@ -109,8 +109,8 @@ composer-5.6() {
         --rm \
         --env SSH_AUTH_SOCK=/ssh-auth.sock \
         -u `id -u`:`id -g` \
-        -v $XDG_CONFIG_HOME/composer:/composer \
-        -v $XDG_CACHE_HOME/composer:/composer/cache \
+        -v $COMPOSER_HOME:/composer \
+        -v $COMPOSER_CACHE_DIR:/composer/cache \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
         -v $(pwd):/app \

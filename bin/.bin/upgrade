@@ -139,9 +139,9 @@ fi
 read -p "$d [?] Upgrade global composer dependencies?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    $(phpenv which composer) global outdated -d $XDG_CONFIG_HOME/composer
+    $(phpenv which composer) global outdated
     sleep 3
-    $(phpenv which composer) global update -d $XDG_CONFIG_HOME/composer
+    $(phpenv which composer) global update
 fi
 
 read -p "$d [?] Upgrade global ruby gems dependencies?$t" -n 1 -r

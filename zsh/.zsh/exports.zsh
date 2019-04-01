@@ -11,9 +11,8 @@ if [ -d "$HOME/.bin" ]; then
     export PATH="$HOME/.bin:$PATH"
 fi
 
-export COMPOSER_ROOT="$HOME/.composer"
-if [ -d "${COMPOSER_ROOT}" ]; then
-    export PATH="$COMPOSER_ROOT/vendor/bin:$PATH"
+if [ -d "${COMPOSER_HOME}" ]; then
+    export PATH="$COMPOSER_HOME/vendor/bin:$PATH"
 fi
 
 export ANYENV_ROOT="$HOME/.anyenv"

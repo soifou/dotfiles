@@ -1,6 +1,5 @@
-cache/*
-!cache/.htaccess
+cache
+composer.phar
 vendor
-
 auth.json
 keys.*.pub
