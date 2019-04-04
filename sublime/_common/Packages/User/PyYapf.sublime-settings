@@ -1,0 +1,3 @@
+{
+    "yapf_command": "~/.anyenv/envs/pyenv/shims/yapf"
+}

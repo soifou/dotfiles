@@ -76,6 +76,7 @@
             ],
             "rules": [
                 { "file_path": ".*/\\polybar/config$" },
+                { "file_path": ".*/\\git/config(.*)?$" },
                 { "file_path": ".*/share/applications/.*.desktop$" }
             ]
         }

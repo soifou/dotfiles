@@ -12,11 +12,11 @@ contexts:
         2: punctuation.definition.comment.line.ansible
     - include: scope:source.ansible.jinja
     - include: strings
-    - match: \b(?:True|False|yes|no|None)\b
+    - match: \b(?:True|False|true|false|yes|no|None)\b
       scope: constant.language.ansible
-    - match: \b(?:not)\b
+    - match: \b(?:not|and|or)\b
       scope: keyword.operator.ansible
-    - match: ^\s*(?:- )?(name|include):\s+(.*)$
+    - match: ^\s*(?:- )?(name):\s+(.*)$
       captures:
         1: keyword.other.ansible
         2: entity.name.function.ansible

@@ -4,12 +4,25 @@
 
     { "keys": ["ctrl+:"], "command": "toggle_comment", "args": { "block": false } },
     { "keys": ["ctrl+shift+:"], "command": "toggle_comment", "args": { "block": true } },
+    { "keys": ["ctrl+shift+m"], "command": "toggle_menu"},
 
+    { "keys": ["f12"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
+
+    // git
+    { "keys": ["ctrl+j"], "command": "next_modification" },
+    { "keys": ["ctrl+k"], "command": "prev_modification" },
+    { "keys": ["ctrl+k", "ctrl+z"], "command": "revert_modification" },
+    { "keys": ["ctrl+k", "ctrl+/"], "command": "toggle_inline_diff" },
+    { "keys": ["ctrl+k", "ctrl+;"], "command": "toggle_inline_diff", "args": { "prefer_hide": true } },
+
+    // formatters
     { "keys": ["alt+f"], "command": "js_prettier", "context": [{ "key": "selector", "operator": "equal", "operand": "source.js, source.json, text.html.markdown, source.css, source.sass, source.css.less, source.yaml" }] },
+    { "keys": ["alt+f"], "command": "prettydiff_beautify", "context": [{ "key": "selector", "operator": "equal", "operand": "text.html.twig" }] },
     { "keys": ["alt+f"], "command": "rufo_format", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ruby" }] },
     { "keys": ["alt+f"], "command": "sublime_php_cs_fix", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
-    { "keys": ["alt+f"], "command": "prettydiff_beautify", "context": [{ "key": "selector", "operator": "equal", "operand": "text.html.twig" }] },
+    { "keys": ["alt+f"], "command": "yapf_selection", "context": [{ "key": "selector", "operator": "equal", "operand": "source.python" }] },
 
+    // php toolkit
     { "keys": ["ctrl+shift+f"], "command": "expand_fqcn", "args": {"leading_separator": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["ctrl+shift+u"], "command": "find_use", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["ctrl+shift+i"], "command": "implement", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
@@ -17,6 +30,7 @@
     { "keys": ["ctrl+shift+n"], "command": "import_namespace", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
 
     { "keys": ["ctrl+alt+o"], "command": "fasd_jump_to_directory" },
+
     { "keys": ["ctrl+alt+g"], "command": "open_browser", "args": { "url": "http://www.google.fr/#q=%s" }},
     { "keys": ["ctrl+alt+h"], "command": "open_browser", "args": { "url": "http://php.net/manual/en/function.%s.php" }},
     { "keys": ["ctrl+alt+w"], "command": "open_browser", "args": { "url": "https://codex.wordpress.org/Function_Reference/%s" }},
