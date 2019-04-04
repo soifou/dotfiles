@@ -1,6 +1,4 @@
 .directory
 *.zsh.zwc
 private.zsh
-git/.gitconfig.custom
 stow/.stowrc
-sublime/User/Preferences.sublime-settings
