@@ -1,0 +1,11 @@
+{
+    "paths": {
+        "linux": "~/.go/bin",
+        "osx": "~/.go/bin",
+        "windows": ""
+    },
+    "config": {
+        "indent": 4,
+        "switch_case_indent": true
+    }
+}
