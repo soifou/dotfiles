@@ -12,7 +12,7 @@ lat="$OPENWEATHERMAP_LAT"
 long="$OPENWEATHERMAP_LONG"
 
 # For storing current brightness
-tmpfile='/tmp/polybar-modules-redshift.tmp'
+tmpfile='/tmp/redshift-cli.tmp'
 if [ ! -f $tmpfile ]; then
     touch $tmpfile
     echo "1.0" > $tmpfile
