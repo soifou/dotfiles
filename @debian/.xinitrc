@@ -1,36 +1,9 @@
 #!/bin/sh
 
-datestring="$(date '+%Y%m%d_%H%M%S')"
-# Log all output to ~/.xinitrc.log
-exec >"/tmp/xinitrc_${USER}@$(hostname)_${datestring}.log" 2>&1
+# ~/.xinitrc for Debian
+# https://manpages.debian.org/current/x11-common/Xsession.5.en.html
+# https://www.sitepoint.com/understanding-nix-login-scripts
 
-# Merge in defaults and keymaps
-if [ -f /etc/X11/xinit/.Xresources ]; then
-    xrdb -merge /etc/X11/xinit/.Xresources
-fi
-if [ -f /etc/X11/xinit/.Xmodmap ]; then
-    xmodmap /etc/X11/xinit/.Xmodmap
-fi
-if [ -f "$HOME/.Xresources" ]; then
-    xrdb -merge "$HOME/.Xresources"
-fi
-if [ -f "$HOME/.Xmodmap" ]; then
-    xmodmap "$HOME/.Xmodmap"
-fi
+cat /dev/null > "$HOME/.xsession-errors"
 
-# Launch dbus
-if [ -d /etc/X11/xinit/xinitrc.d ]; then
-  for f in /etc/X11/xinit/xinitrc.d/?*; do
-    [ -x "$f" ] && . "$f"
-  done
-  unset f
-fi
-
-# Source xprofile
-#[ -f $HOME/.xprofile ] && . $HOME/.xprofile
-[ -f $HOME/.xsessionrc ] && . $HOME/.xsessionrc
-
-# Start i3
-if [ -f /usr/bin/i3 ]; then
-    exec i3
-fi
+[ -f /etc/X11/xinit/xinitrc ] && . /etc/X11/xinit/xinitrc

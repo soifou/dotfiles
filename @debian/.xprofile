@@ -9,7 +9,7 @@ command -v setxkbmap >/dev/null 2>&1 && setxkbmap -layout fr -variant latin9 -op
 # wallpaper
 command -v wal >/dev/null 2>&1 && wal -q -i "$WALLPAPER_PATH/today" >/dev/null
 # screen temp/brightness
-command -v redshift >/dev/null 2>&1 && ~/.config/polybar/modules/redshift.sh --temp >/dev/null
+command -v redshift >/dev/null 2>&1 && ~/.bin/redshift-cli --temp >/dev/null
 # compositor for x11
 command -v compton >/dev/null 2>&1 && compton --daemon
 # clipboard manager for rofi
@@ -21,11 +21,11 @@ command -v locker >/dev/null 2>&1 && locker &
 # music player daemon
 if command -v mpd >/dev/null; then
     # [ ! -s ~/.config/mpd/mdp.pid ] && mpd &
-    pgrep mpd > /dev/null || mpd &
+    pgrep mpd >/dev/null || mpd &
 fi
 # no mouse cursor
 if command -v unclutter >/dev/null; then
-    pgrep unclutter > /dev/null || unclutter &
+    pgrep unclutter >/dev/null || unclutter &
 fi
 # xrandr --output $monitorRight --auto --right-of $monitorLeft
 # urxvtd -q -F -o
