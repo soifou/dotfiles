@@ -1,0 +1,29 @@
+# https://github.com/BurntSushi/ripgrep/
+# Using RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/rc
+
+# Search hidden files and directories.
+--hidden
+
+# Follow symbolic links.
+--follow
+
+# Exclude directories.
+--glob=!{.git,.svn,.tldr,node_modules,Trash,vendor}
+
+# Exclude file types.
+--glob=!*.{lock}
+
+# Don't print lines longer than this limit.
+--max-columns=10000
+
+# Searches case insensitively.
+--smart-case
+
+# SilverSearcher style
+--colors=line:fg:yellow
+--colors=line:style:bold
+--colors=path:fg:green
+--colors=path:style:bold
+--colors=match:fg:black
+--colors=match:bg:yellow
+--colors=match:style:nobold

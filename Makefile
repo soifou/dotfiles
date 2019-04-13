@@ -7,7 +7,6 @@ init:
 
 install: init
 	stow @linux
-	stow ack
 	stow atom
 	stow bin
 	stow bundler
@@ -15,6 +14,7 @@ install: init
 	stow git
 	stow phpcs
 	stow pip
+	stow ripgrep
 	stow vim
 	stow yamllint
 	stow zsh
@@ -23,13 +23,13 @@ install: init
 
 uninstall:
 	stow -D @linux
-	stow -D ack
 	stow -D atom
 	stow -D bin
 	stow -D bundler
 	stow -D composer
 	stow -D phpcs
 	stow -D pip
+	stow -D ripgrep
 	stow -D vim
 	stow -D yamllint
 	stow -D zsh
