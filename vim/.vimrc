@@ -105,6 +105,9 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 
+" Split bar
+set fillchars=vert:│
+
 " 06. Text Formatting/Layout
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tabstop=4               " tab spacing
@@ -135,6 +138,8 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Open NERDtree with Ctrl+n
+let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden = 1
 map <C-n> :NERDTreeToggle<CR>
 " Open NERDTree automatically when vim starts up on opening a directory
 autocmd StdinReadPre * let s:std_in=1
