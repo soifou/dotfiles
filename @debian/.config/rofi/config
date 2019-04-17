@@ -56,6 +56,8 @@ rofi.pid: /run/user/1000/rofi.pid
 ! rofi.theme: ~/.config/rofi/themes/light.theme
 rofi.theme: ~/.cache/wal/colors-rofi-light.theme
 
+rofi.font: monospace 10
+
 ! Whether to load and show icons
 rofi.show-icons: true
 

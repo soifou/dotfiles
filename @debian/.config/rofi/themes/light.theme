@@ -1,6 +1,4 @@
 * {
-    font: "Iosevka Nerd Font 10";
-
     active-background: @background;
     active-foreground: @foreground;
     normal-background: @background;
@@ -68,7 +66,6 @@
     border: 0px 0px 1px solid;
     border-color: @separator-color;
     padding: 6 4;
-
 }
 
 #element.normal.normal {
@@ -128,14 +125,12 @@
 #sidebar {
     border: 0;
     border-color: @separator-color;
-
 }
 
 #button {
-    spacing: 10;
-    padding: 10;
-    border: 10;
-    margin: 0;
+    spacing: 0;
+    padding: 5;
+    border: 0;
     text-color: @normal-foreground;
     background-color: @background;
 }

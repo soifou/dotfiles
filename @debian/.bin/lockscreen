@@ -29,9 +29,9 @@ scrot -q 50 "$t"
 
 case $EFFECT in
     # make pixelated version of screenshot
-    'pixelated') convert -quality 10 -scale 10% -scale 1000% "$t" "$tm" ;;
+    'pixelated') convert -quality 1 -scale 10% -scale 1000% "$t" "$tm" ;;
     # corrupted version of screenshot
-    'corrupted') corrupter -mag 3 -boffset 5 "$t" "$tm" ;;
+    'corrupted') corrupter -mag 2 -boffset -5 -seed -1 -stride 1.5 -lag 0.02 -stdabber 15 -stdoffset 15 "$t" "$tm" ;;
 esac
 
 # remove original screenshot

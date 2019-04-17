@@ -1,23 +1,23 @@
 #!/bin/sh
 
-LOCKER="$HOME/.bin/lockscreen"
+LOCKER="$HOME/.bin/lockscreen --corrupted"
 
-if command -v xidlehook &> /dev/null; then
+if command -v xidlehook >/dev/null; then
     rm -f /tmp/xidlehook.sock
 
-    pgrep xidlehook > /dev/null || xidlehook \
-      --not-when-fullscreen \
-      --socket /tmp/xidlehook.sock \
-      --timer primary 180 \
+    pgrep xidlehook >/dev/null || xidlehook \
+        --not-when-fullscreen \
+        --socket /tmp/xidlehook.sock \
+        --timer primary 180 \
         "$LOCKER" \
         ''
 
-elif command -v xautolock &> /dev/null; then
-    pgrep xautolock > /dev/null || xautolock \
+elif command -v xautolock >/dev/null; then
+    pgrep xautolock >/dev/null || xautolock \
         -detectsleep \
         -time 3 \
         -locker "$LOCKER" \
-        -notify 30 \
+        -notify 30
 
 else
     echo "Locker error: neither xidlehook nor xautolock were found! Aborting." 1>&2

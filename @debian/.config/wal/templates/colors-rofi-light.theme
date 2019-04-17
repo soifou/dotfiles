@@ -1,6 +1,4 @@
 * {{
-    font: "Iosevka Nerd Font 10";
-
     active-background: @background;
     active-foreground: @foreground;
     normal-background: @background;

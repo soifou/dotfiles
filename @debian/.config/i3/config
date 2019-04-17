@@ -56,7 +56,7 @@ bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10
 # =============================================================================
 # Locker
 # =============================================================================
-bindsym $mod+Escape exec ~/.bin/lockscreen
+bindsym $mod+Escape exec ~/.bin/lockscreen --corrupted
 
 # =============================================================================
 # Screenshot
@@ -181,7 +181,7 @@ workspace 9 output $monitorRight
 # =============================================================================
 assign [class="Subl|VSCodium|Atom"] 2
 assign [class="Chromium|Firefox|qutebrowser"] 3
-assign [class="Slack|mattermost-*|Skype|weechat|whats-app-*|messages-for-web-*"] 4
+assign [class="Slack|mattermost-*|skype-*|weechat|whats-app-*|messages-for-web-*"] 4
 assign [class="VirtualBox Machine"] 5
 
 # =============================================================================
@@ -251,6 +251,7 @@ exec --no-startup-id subl
 
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run
+#exec_always --no-startup-id ~/.config/lemonbar/run
 exec_always --no-startup-id killall compton; compton --daemon
 
 # =============================================================================
