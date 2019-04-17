@@ -3,10 +3,14 @@
 # https://sw.kovidgoyal.net/kitty/remote-control.html
 # https://github.com/kovidgoyal/kitty/issues/598
 
+MUSIC_PATH=${MUSIC_PATH:-$HOME/Music}
+NOCOVER_PATH="$HOME/.config/ncmpcpp/nocover.png"
+COVER_PATH="${XDG_CACHE_HOME:-/tmp}/cover.jpg"
+
 change_cover() {
     kitty @ send-text \
     --match title:cover \
-    'clear && kitty +kitten icat --transfer-mode=stream /tmp/cover.jpg \r'
+    "clear && kitty +kitten icat --transfer-mode=stream $COVER_PATH \r"
 }
 
 launch_player() {
@@ -32,7 +36,7 @@ extract_cover() {
     cover=$(find "$MUSIC_PATH/$song_dir" -name "cover.*" | head -n1 &> /dev/null)
 
     if [ ! -f "$cover" ]; then
-        cover="$HOME/.config/ncmpcpp/nocover.png"
+        cover="$NOCOVER_PATH"
     fi
 
     cp "$cover" "$temp_song"
@@ -43,7 +47,7 @@ extract_cover() {
         -y \
         -i "$temp_song" \
         -vf scale=400:-1 \
-        "/tmp/cover.jpg" > /dev/null 2>&1
+        "$COVER_PATH" > /dev/null 2>&1
 
     rm -f "$temp_song"
 }

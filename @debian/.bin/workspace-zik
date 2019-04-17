@@ -1,11 +1,12 @@
 #!/bin/sh
 
 # Load i3 layout on specific workspace for ncmpcpp player with visualiser and cover art in separate windows
-# Dependencies: jq, kitty, sxiv, compton
+# Dependencies: jq, kitty, sxiv (or feh), compton
 # https://github.com/ameba23/ncmpcpp_i3_screen_layout
 # https://sainathadapa.github.io/blog/i3-empty-workspace-workaround/
 # https://sw.kovidgoyal.net/kitty/remote-control.html
 
+COVER_PATH="${XDG_CACHE_HOME:-/tmp}/cover.jpg"
 WKNAME=5
 
 # workspace exists?
@@ -25,17 +26,18 @@ else
 
     # cover
     ncmpcpp-art extract
-    # feh -^ cover-art -B black -g 256x256+832+600 -Z -x --reload 5 /tmp/cover.jpg &
-    sxiv -b -N zik_cover -s f /tmp/cover.jpg &
+    # feh -^ zik_cover -B black -g 256x256+832+600 -Z -x --reload 5 $COVER_PATH &
+    sxiv -b -N zik_cover -s f $COVER_PATH &
 
-    # window background opacity
-    # note: a clever way would be to tweak compton with this rule
-    # "90:class_i %= 'zik_*'"
-    # and thus avoid to kill/restart
+    # Extra 1: Custom window background opacity
+    # Add the following opacity rule to compton config:
+    # opacity-rule = [
+    #     "80:class_i ~= '^zik_*'",
+    # ]
 
-    # sleep 2
-    # killall compton
-    # compton --daemon
+    # Extra 2: Custom window border
+    # Add the following rule to i3 config:
+    # for_window [instance="zik"] border pixel 5
 fi
 
 exit 0
