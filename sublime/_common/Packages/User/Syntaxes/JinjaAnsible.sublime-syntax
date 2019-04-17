@@ -9,9 +9,9 @@ contexts:
     - match: '(\{\{)\s*([a-zA-z][\w\.]+)\s*(\}\})'
       scope: meta.scope.expression.jinja
       captures:
-        1: entity.other.jinja.delimiter.variable
-        2: variable.other.jinja
-        3: entity.other.jinja.delimiter.variable
+        1: entity.other.jinja.delimiter.variable markup.bold
+        2: variable.other.jinja markup.italic
+        3: entity.other.jinja.delimiter.variable markup.bold
     - match: '(\{\{)\s*(?:([a-zA-z][\w\.]+)\s*(\|))?'
       captures:
         1: entity.other.jinja.delimiter.variable

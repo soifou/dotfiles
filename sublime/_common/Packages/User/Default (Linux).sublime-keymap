@@ -16,9 +16,8 @@
     { "keys": ["ctrl+k", "ctrl+;"], "command": "toggle_inline_diff", "args": { "prefer_hide": true } },
 
     // formatters
-    { "keys": ["alt+f"], "command": "js_prettier", "context": [{ "key": "selector", "operator": "equal", "operand": "source.js, source.json, text.html.markdown, source.css, source.sass, source.css.less, source.yaml" }] },
+    { "keys": ["alt+f"], "command": "js_prettier", "context": [{ "key": "selector", "operator": "equal", "operand": "source.js, source.json, text.html.markdown, source.css, source.sass, source.scss, source.css.less, source.yaml" }] },
     { "keys": ["alt+f"], "command": "prettydiff_beautify", "context": [{ "key": "selector", "operator": "equal", "operand": "text.html.twig" }] },
-    { "keys": ["alt+f"], "command": "sh_fmt", "context": [{ "key": "selector", "operator": "equal", "operand": "source.shell" }] },
     { "keys": ["alt+f"], "command": "rufo_format", "context": [{ "key": "selector", "operator": "equal", "operand": "source.ruby" }] },
     { "keys": ["alt+f"], "command": "sublime_php_cs_fix", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["alt+f"], "command": "yapf_selection", "context": [{ "key": "selector", "operator": "equal", "operand": "source.python" }] },
