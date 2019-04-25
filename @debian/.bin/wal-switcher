@@ -5,33 +5,31 @@
 
 XRANDR_BIN="$(whereis -b xrandr | awk '{print $2}')"
 if [ -z "$XRANDR_BIN" ]; then
-  echo missing xrandr, please install dependencies
-  exit 1
+    echo missing xrandr, please install dependencies
+    exit 1
 fi
 
 WALLPAPER_PATH=${WALLPAPER_PATH:-~/Pictures/wallpapers}
 mkdir -p "$WALLPAPER_PATH"
 
-if [ -z "$@" ]
-then
-    get_themes()
-    {
+if [ -z "$@" ]; then
+    get_themes() {
         ls "$WALLPAPER_PATH"
     }
-    echo random; get_themes
+    echo random
+    get_themes
 else
     THEMES="$@"
 
     # fetch random wallpaper from unsplash
-    if [ x"random" = x"${THEMES}" ]
-    then
+    if [ x"random" = x"${THEMES}" ]; then
         SCREEN_RES=$($XRANDR_BIN | awk '/ primary/{print $4}' | sed -e 's/+.*//g')
-        curl -o "$WALLPAPER_PATH/today" -J -L "https://source.unsplash.com/random/$SCREEN_RES" > /dev/null 2>&1
-        wal -o ~/.bin/wal-changer -n -i "$WALLPAPER_PATH/today" > /dev/null
+        THEMES="today"
+        curl -o "$WALLPAPER_PATH/${THEMES}" -J -L "https://source.unsplash.com/random/$SCREEN_RES" >/dev/null 2>&1
+    fi
 
     # generate schemes based on selected wallpaper
-    elif [ -n "${THEMES}" ]
-    then
-        wal -o ~/.bin/wal-changer -n -i "$WALLPAPER_PATH/${THEMES}" > /dev/null
+    if [ -n "${THEMES}" ]; then
+        wal -o ~/.bin/wal-changer -n -i "$WALLPAPER_PATH/${THEMES}" >/dev/null
     fi
 fi

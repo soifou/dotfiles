@@ -1,17 +1,17 @@
 #!/bin/bash
 
 WALL="$(<"${HOME}/.cache/wal/wal")"
-MIMETYPE=$(file --mime-type "$WALL" | tr -d ' ' | awk -F: '{print $2}')
+MIMETYPE=$(file --mime-type -L "$WALL" | tr -d ' ' | awk -F: '{print $2}')
 
 # Set wallpaper
 # based on what is set as my wallpaper, this could either be a still picture
 # or a cinemagraph. Find out what it is, and launch with the appropriate program.
 case "$MIMETYPE" in
-    *png* | *jpg* | *jpeg*)
-        pkill -9 xwinwrap
-        feh --bg-fill "$WALL" &
-        ;;
-    *gif* | *webm* | *mp4* | *mkv*) mpvbg "$WALL" &;;
+*png* | *jpg* | *jpeg*)
+    pkill -9 xwinwrap
+    feh --bg-fill "$WALL" &
+    ;;
+*gif* | *webm* | *mp4* | *mkv*) mpvbg "$WALL" &;;
 esac
 
 # Reload dunst
@@ -25,9 +25,7 @@ if pgrep -x lemonbar >/dev/null; then
 fi
 
 # Reload kitty single instances
-kitty @ set-colors --all --configured --reset ~/.cache/wal/colors-kitty-dark.conf &
+kitty @ set-colors --all --configured --reset ~/.cache/wal/colors-kitty-dark.conf
 
 # Display notification
 notify-send -i preferences-desktop-theme "Appearance" "Theme successfully changed" &
-
-exit 0
