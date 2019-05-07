@@ -4,23 +4,21 @@
 #  | |___) |
 #  |_|____/
 #
-########
-# Custom
-# Lock = caps lock
-# Mod1 = alt (aka meta)
-# Mod2 = number lock
-# Mod4 = super (aka windows)
-# Mod5 = level 3 shift (aka AltGr, Opt)
-########
-set $mod Mod4
 
 # =============================================================================
 # Variables
 # =============================================================================
+# Lock = caps lock
+# Mod1 = alt (aka meta)
+# Control = ctrl
+# Mod2 = number lock
+# Mod4 = super (aka windows)
+# Mod5 = level 3 shift (aka AltGr, Opt)
+set $mod Mod4
+# set $monitorLeft VGA-0
+set $monitorRight $MONITOR
 set $border_pixels 2
-set $black       #282828
-set $darkblack   #1d2021
-set $transparent #00000000
+set $bktransparent "#120f0daa"
 set_from_resource $background  background  #000000
 set_from_resource $darkred     color1  #000000
 set_from_resource $red         color9  #000000
@@ -37,7 +35,7 @@ set_from_resource $cyan        color14 #000000
 set_from_resource $darkwhite   color7  #000000
 set_from_resource $white       color15 #000000
 
-font pango:Noto Sans 10
+font pango:monospace 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -157,24 +155,18 @@ bindsym $mod+Shift+ccedilla move container to workspace 9
 bindsym $mod+Shift+agrave move container to workspace 10
 
 # =============================================================================
-# Set available monitors
-# =============================================================================
-# list monitor via xrandr --verbose | grep connected
-set $monitorLeft        VGA-0
-set $monitorRight       DVI-I-1
-
-# =============================================================================
 # Assign workspaces to screen
 # =============================================================================
 workspace 1 output $monitorRight
 workspace 2 output $monitorRight
 workspace 3 output $monitorRight
-workspace 4 output $monitorLeft
-workspace 5 output $monitorLeft
-workspace 6 output $monitorLeft
+workspace 4 output $monitorRight
+workspace 5 output $monitorRight
+workspace 6 output $monitorRight
 workspace 7 output $monitorRight
 workspace 8 output $monitorRight
 workspace 9 output $monitorRight
+workspace 0 output $monitorRight
 
 # =============================================================================
 # Assign apps to workspace
@@ -235,36 +227,35 @@ bindsym XF86AudioStop exec mpc stop
 # =============================================================================
 # Assign colors
 # =============================================================================
-#                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
-client.focused          $black      $black      $darkwhite  $darkblack  $darkgreen
-client.unfocused        $black      $black      $white      $darkblack  $background
-client.focused_inactive $black      $black      $white      $darkblack  $darkblack
-client.urgent           $darkred    $darkred    $black      $darkred    $darkred
-client.background       $black
+#                       BORDER       BACKGROUND     TEXT        INDICATOR    CHILD_BORDER
+client.focused          $background  $darkblue      $white      $background  $darkred
+client.unfocused        $background  $bktransparent $white      $background  $background
+client.focused_inactive $background  $background    $white      $background  $background
+client.urgent           $darkred     $darkred       $background $darkred     $darkred
+client.background       $background
 
 # =============================================================================
 # Autostart
 # =============================================================================
 # run once at startup
 exec --no-startup-id subl
-#exec --no-startup-id $BROWSER
 
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run
-#exec_always --no-startup-id ~/.config/lemonbar/run
-exec_always --no-startup-id killall compton; compton --daemon
+# exec_always --no-startup-id ~/.config/lemonbar/run
+# exec_always --no-startup-id killall compton; compton -b
 
 # =============================================================================
-# Window behaviour
+# Window/Workspace behaviour
 # =============================================================================
 default_border pixel $border_pixels
 for_window [class=".*"] border pixel $border_pixels
+for_window [class=".*"] title_format "<span weight='bold' foreground='$darkred'>%title</span> :: <small>%class</small>"
+for_window [urgent=latest] focus
+for_window [workspace=4] layout tabbed
 for_window [instance="zik"] border pixel 5
-for_window [class=".*"] title_format "  %title"
 for_window [class="scummvm"] floating enable resize set 640 480
 # for_window [class="mpv"] floating enable resize move position center
-for_window [class="transmission"] floating enable resize set 1024 384
-for_window [class="VirtualBox"] floating enable resize set 1280 768
 
 # =============================================================================
 # i3-gaps
