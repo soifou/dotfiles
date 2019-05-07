@@ -49,9 +49,9 @@ filetype plugin indent on " required
 " In Makefiles DO NOT use spaces instead of tabs
 autocmd FileType make setlocal noexpandtab
 
-" In Ruby/JavaScript files, use 2 spaces instead of 4 for tabs
+" In Ruby files, use 2 spaces instead of 4 for tabs
 autocmd FileType ruby setlocal sw=2 ts=2 sts=2
-autocmd FileType javascript setlocal sw=2 ts=2 sts=2
+" autocmd FileType javascript setlocal sw=2 ts=2 sts=2
 
 " Enable omnicompletion (to use, hold Ctrl+X then Ctrl+O while in Insert mode)
 set ofu=syntaxcomplete#Complete
@@ -65,21 +65,15 @@ set t_Co=256              " enable 256-color mode.
 syntax enable             " enable syntax highlighting (previously syntax on).
 
 colorscheme nord
-let g:lightline = {'colorscheme': 'nord'}
 
 " custom highlight terms style (:hi to get colors depending on your scheme)
 autocmd VimEnter,Colorscheme * :hi Search term=bold,reverse ctermfg=6 ctermbg=8 guifg=#88C0D0 guibg=#4C566A
-
 " Prettify JSON files
 autocmd BufRead,BufNewFile *.json set filetype=json
-
-
 " Prettify Vagrantfile
 autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
-
 " Prettify Markdown files
 autocmd BufRead,BufNew,BufNewFile *.md set ft=markdown.gfm
-
 " Prettify Nginx conf
 au BufRead,BufNewFile */nginx/* set ft=nginx
 
@@ -101,10 +95,10 @@ set foldmethod=indent
 set foldlevel=99
 
 " Enable indent line
-let g:indent_guides_auto_colors = 1
-let g:indent_guides_guide_size = 1
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
+" let g:indent_guides_auto_colors = 1
+" let g:indent_guides_guide_size = 1
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_start_level = 2
 
 " Split bar
 set fillchars=vert:│
@@ -127,6 +121,10 @@ set backspace=indent,eol,start
 
 " 07. Custom
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" lightline
+let g:lightline = {
+    \ 'colorscheme': 'nord',
+\ }
 
 " ALE (Asynchronous Lint Engine)
 let g:ale_echo_msg_error_str = 'E'
@@ -141,38 +139,54 @@ let g:ctrlp_cmd = 'CtrlP'
 " Devicons
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
-"let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
-" Set custom icons.
+" Find glyph at http://nerdfonts.com/#cheat-sheet
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
     \ 'html': '',
     \ 'css': '',
-    \ 'md': ''
+    \ 'cson': "\ue60b",
+    \ 'less': "\ue758",
+    \ 'md': "\ue73e"
 \ }
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
+    \ '.gitignore': "\ue702",
+    \ '.php_cs': "\ue608"
+\ }
+
+" NERDTree syntax highlight plugin (vim-nerdtree-syntax-highlight)
+let s:git_orange = 'F54D27'
+let s:purple = "834F79"
+" let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
+" let g:NERDTreeExtensionHighlightColor['css'] = s:blue " sets the color of css files to blue
+let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange
+let g:NERDTreeExactMatchHighlightColor['.php_cs'] = s:purple
+" let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
+" let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
 
 " NERDTree
 let g:NERDTreeMinimalUI = v:true
+" this will enable icon specific colors set " " instead to use only one color
+let g:NERDTreeDirArrowExpandable = "\u00a0"
+let g:NERDTreeDirArrowCollapsible = "\u00a0"
 let g:NERDTreeShowHidden = v:true
-let g:NERDTreeDirArrowExpandable = " "
-let g:NERDTreeDirArrowCollapsible = " "
-" Make colors of directory icons with the same as directory names.
-highlight! link NERDTreeFlags NERDTreeDir
-" Keep the tree sync on file deletion or rename.
-let g:NERDTreeAutoDeleteBuffer = v:true
-" Hide some files and folders.
 let g:NERDTreeIgnore = [
     \ '^\.DS_Store$[[file]]',
+    \ 'zsh.zwc$[[file]]',
     \ '^\.git$[[dir]]',
     \ '^node_modules$[[dir]]'
 \ ]
+
+" Make colors of directory icons with the same as directory names.
+highlight! link NERDTreeFlags NERDTreeDir
 " Remove trailing slash for dirs
 augroup nerdtreehidecwd
     autocmd!
     autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
 augroup end
-" Open NERDtree with Ctrl+n
+" Open with Ctrl+n
 map <C-n> :NERDTreeToggle<CR>
-" Open NERDTree automatically when vim starts up on opening a directory
+" Open automatically when vim starts up on opening a directory
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " Close vim if the only window left open is a NERDTree
@@ -183,3 +197,5 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap H gT " Go to prev tab
+nnoremap L gt " Go to next tab
