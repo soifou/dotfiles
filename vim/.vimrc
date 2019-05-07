@@ -28,17 +28,18 @@ if iCanHazVundle == 0
   :PluginInstall
 endif
 
-Plugin 'arcticicestudio/nord-vim'
 Plugin 'ap/vim-css-color'
+Plugin 'arcticicestudio/nord-vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-" Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 Plugin 'itchyny/lightline.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'rhysd/vim-gfm-syntax'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'w0rp/ale'
+" Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
+" Plugin 'nathanaelkane/vim-indent-guides'
 
 call vundle#end()
 filetype plugin indent on " required
@@ -137,9 +138,39 @@ let g:ale_completion_enabled = 1
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
+" Devicons
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+"let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
+" Set custom icons.
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
+    \ 'html': '',
+    \ 'css': '',
+    \ 'md': ''
+\ }
+
+" NERDTree
+let g:NERDTreeMinimalUI = v:true
+let g:NERDTreeShowHidden = v:true
+let g:NERDTreeDirArrowExpandable = " "
+let g:NERDTreeDirArrowCollapsible = " "
+" Make colors of directory icons with the same as directory names.
+highlight! link NERDTreeFlags NERDTreeDir
+" Keep the tree sync on file deletion or rename.
+let g:NERDTreeAutoDeleteBuffer = v:true
+" Hide some files and folders.
+let g:NERDTreeIgnore = [
+    \ '^\.DS_Store$[[file]]',
+    \ '^\.git$[[dir]]',
+    \ '^node_modules$[[dir]]'
+\ ]
+" Remove trailing slash for dirs
+augroup nerdtreehidecwd
+    autocmd!
+    autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
+augroup end
 " Open NERDtree with Ctrl+n
-let NERDTreeMinimalUI = 1
-let NERDTreeShowHidden = 1
 map <C-n> :NERDTreeToggle<CR>
 " Open NERDTree automatically when vim starts up on opening a directory
 autocmd StdinReadPre * let s:std_in=1
