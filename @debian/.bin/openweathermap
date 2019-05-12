@@ -15,7 +15,7 @@ WEATHER_URL="${API_ENDPOINT}/weather?lat=${CITY_LAT}&lon=${CITY_LONG}&appid=${AP
 case "$1" in
     --icon|--icon-fa5) OWM_SUNNY= OWM_CLOUDY= OWM_RAINY= OWM_STORM= OWM_SNOW= OWM_FOG= OWM_MISC= ;;
     --icon-fa4) OWM_SUNNY= OWM_CLOUDY= OWM_RAINY= OWM_STORM= OWM_SNOW= OWM_FOG= OWM_MISC= ;;
-    --emoji) OWM_SUNNY=☀️ OWM_CLOUDY=☁️ OWM_RAINY=🌧️ OWM_STORM=🌩️ OWM_SNOW=❄️ OWM_FOG=🌫️ OWM_MISC=🐳 ;;
+    --emoji) OWM_SUNNY=☀ OWM_CLOUDY=☁ OWM_RAINY=🌧 OWM_STORM=🌩 OWM_SNOW=❄ OWM_FOG=🌫 OWM_MISC=🐳 ;;
     --text) OWM_SUNNY="Clear" OWM_CLOUDY="Cloudy" OWM_RAINY="Rainy" OWM_STORM="Storm" OWM_SNOW="Snow" OWM_FOG="Fog" OWM_MISC="?" ;;
     *)
         echo "Show current weather by fetching openweathermap API."

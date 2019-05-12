@@ -23,7 +23,7 @@ underline-size = 0
 underline-color = ${colors.foreground}
 
 border-size = 0
-border-bottom-size = 1
+border-bottom-size = 2
 border-color = ${colors.color5}
 
 padding-left = 2
@@ -32,7 +32,7 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = monospace:style=Semibold:pixelsize=9:antialias=true;2
+font-0 = monospace:style=bold:pixelsize=9:antialias=false;2
 font-1 = Font Awesome 5 Free Solid:style=Solid:pixelsize=8;1
 font-2 = Noto Color Emoji:scale=13;1
 
