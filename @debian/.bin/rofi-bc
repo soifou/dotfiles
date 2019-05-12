@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# Simple calculator script for Rofi using bc
+# ex: rofi -show calc run -modi calc:~/.bin/rofi-bc
+# Credits: https://github.com/michix/rofi/blob/next/Examples/rofi-calculator.sh
+
+XDG_DATA_HOME=${XDG_DATA_HOME:-~/local/share}
+ROFI_CALC_HISTORY_FILE=$XDG_DATA_HOME/rofi/calc.history
+ROFI_CALC_HISTORY_MAXCOUNT=15 # maximum number of history entries
+ROFI_CALC_HISTORY_TRASH_ICON=""
+
+print_output() {
+    cat ${ROFI_CALC_HISTORY_FILE}
+    echo -e "$ROFI_CALC_HISTORY_TRASH_ICON Erase history"
+}
+
+# Create the directory for the files of the script
+if [ ! -d $(dirname "${ROFI_CALC_HISTORY_FILE}") ]; then
+    mkdir -p "$(dirname "${ROFI_CALC_HISTORY_FILE}")"
+    touch $ROFI_CALC_HISTORY_FILE
+fi
+
+if [ -z "$@" ]; then
+    print_output
+else
+    FORMULA=$@
+
+    if [ x"$ROFI_CALC_HISTORY_TRASH_ICON Erase history" = x"${FORMULA}" ]; then
+        rm -f ${ROFI_CALC_HISTORY_FILE}
+        touch ${ROFI_CALC_HISTORY_FILE}
+        print_output
+    elif [ -n "${FORMULA}" ]; then
+        if [[ "${FORMULA}" =~ "=" ]]; then
+            OUTPUT=${FORMULA}
+        else
+            RESULT=$(echo "${FORMULA}" | bc -l)
+            OUTPUT="${FORMULA} = ${RESULT}"
+        fi
+        echo -e "${OUTPUT}\n$(cat ${ROFI_CALC_HISTORY_FILE})" >${ROFI_CALC_HISTORY_FILE}
+        if [ $(wc -l <"${ROFI_CALC_HISTORY_FILE}") -gt ${ROFI_CALC_HISTORY_MAXCOUNT} ]; then
+            echo "$(head -n ${ROFI_CALC_HISTORY_MAXCOUNT} ${ROFI_CALC_HISTORY_FILE})" >${ROFI_CALC_HISTORY_FILE}
+        fi
+        print_output
+    fi
+fi

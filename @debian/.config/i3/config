@@ -48,7 +48,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # =============================================================================
 # Launcher
 # =============================================================================
-bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,themes:~/.bin/wal-switcher,emoji' -plugin-path /usr/local/lib/rofi -show drun"
+bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,calc:~/.bin/rofi-bc,themes:~/.bin/wal-switcher,emoji' -plugin-path /usr/local/lib/rofi -show drun"
 bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10
 
 # =============================================================================
@@ -173,7 +173,7 @@ workspace 0 output $monitorRight
 # =============================================================================
 assign [class="Subl|VSCodium|Atom"] 2
 assign [class="Chromium|Firefox|qutebrowser"] 3
-assign [class="Slack|mattermost-*|skype-*|weechat|whats-app-*|messages-for-web-*"] 4
+assign [class="Slack|neomutt|weechat|mattermost-*|skype-*|whats-app-*|messages-for-web-*"] 4
 assign [class="VirtualBox Machine"] 5
 
 # =============================================================================
