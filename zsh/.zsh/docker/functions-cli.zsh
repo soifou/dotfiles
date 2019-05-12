@@ -194,6 +194,13 @@ htop() {
         --name htop \
         jess/htop
 }
+cloc() {
+    docker run -it --rm \
+        -v $(pwd):/mnt/code \
+        -u $(id -u $(whoami)) \
+        -w /mnt/code \
+        oopschen/docker-cloc:alpine ${@:1}
+}
 ngrok() {
     if [ "$#" -ne 2 ]; then
         echo "\e[0;35mOops, syntax is:\e[0m\n $ ngrok [web_container] [domain.dev]"

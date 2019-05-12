@@ -1,12 +1,8 @@
 # Generate a random secure password
 genpasswd() {
-    length=$1
-    if [ -z $length ]; then length=20; fi
-    if [[ `uname` == "Darwin" ]]; then
-        LC_ALL=C tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${length} | xargs
-    elif [[ `uname` == "Linux" ]]; then
-        tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${length} | xargs
-    fi
+    length=${1:-20}
+    [ `uname` == "Darwin" ] && LC_ALL=C
+    tr -dc A-Za-z0-9 </dev/urandom | head -c ${length} | xargs
 }
 # List sub dir, sort by size, the biggest at the end, with human presentation
 dsd() {
@@ -22,7 +18,7 @@ cmdfu() {
     | sed 's/ /-/g')/$(echo -n $@ | base64)/plaintext" ;
 }
 # Is website down for everyone or just me ?
-down4me() { curl -s "http://www.isup.me/$1" | sed '/just you/!d;s/<[^>]*>//g'; }
+down4me() { timeout 3 curl -s https://api.downfor.cloud/httpcheck/$1 | jshon }
 # Cool CLI weather display
 weather() { curl "wttr.in/$1" }
 # Get external IP
@@ -30,6 +26,8 @@ whatsmyip() { echo "My external IP :`curl -s httpbin.org/ip | grep origin | awk 
 # Dict protocol
 dico() { curl -s dict://dict.org/d:${1}:wn | sed '/^[1-2]/d' | sed '$d'; }
 dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d'; }
+# https://github.com/soimort/translate-shell
+translate-shell() { gawk -f <(curl -Ls git.io/translate) -- -shell }
 # Print a chuck norris joke
 chuck() { timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jshon -e value -e joke -u }
 # Print a random (french) insult
