@@ -25,7 +25,10 @@ else
     if [ x"random" = x"${THEMES}" ]; then
         SCREEN_RES=$($XRANDR_BIN | awk '/ primary/{print $4}' | sed -e 's/+.*//g')
         THEMES="today"
+        rm -f "$WALLPAPER_PATH/today"
         curl -o "$WALLPAPER_PATH/${THEMES}" -J -L "https://source.unsplash.com/random/$SCREEN_RES" >/dev/null 2>&1
+    else
+        ln -sf "$WALLPAPER_PATH/${THEMES}" "$WALLPAPER_PATH/today"
     fi
 
     # generate schemes based on selected wallpaper
