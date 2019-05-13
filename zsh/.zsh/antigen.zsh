@@ -1,6 +1,6 @@
 # themes tweaks
-# source $HOME/.zsh/pl9k.zsh
-# source $HOME/.zsh/spaceship.zsh
+# source $HOME/.zsh/themes/pl9k.zsh
+# source $HOME/.zsh/themes/spaceship.zsh
 
 # Add antigen defaults
 source $HOME/.antigen/antigen.zsh

@@ -1,7 +1,7 @@
 # Generate a random secure password
 genpasswd() {
     length=${1:-20}
-    [ `uname` == "Darwin" ] && LC_ALL=C
+    [ $(uname) = "Darwin" ] && LC_ALL=C
     tr -dc A-Za-z0-9 </dev/urandom | head -c ${length} | xargs
 }
 # List sub dir, sort by size, the biggest at the end, with human presentation

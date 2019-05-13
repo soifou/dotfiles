@@ -1,34 +1,7 @@
 #!/bin/bash
 
-if [ -z "$EDITOR" ]; then
-  export EDITOR=/usr/bin/vim
-fi
-
-export LESS="-FSRXI"
-
-# add my custom scripts
-if [ -d "$HOME/.bin" ]; then
-    export PATH="$HOME/.bin:$PATH"
-fi
-
-if [ -d "${COMPOSER_HOME}" ]; then
-    export PATH="$COMPOSER_HOME/vendor/bin:$PATH"
-fi
-
-export ANYENV_ROOT="$HOME/.anyenv"
-if [ -d "${ANYENV_ROOT}" ]; then
-    export PATH="$ANYENV_ROOT/bin:$PATH"
-    eval "$(anyenv init - zsh)"
-fi
-
-# https://golang.org/doc/code.html#GOPATH
-export GOPATH="$HOME/.go"
-if [ -d "$GOPATH" ]; then
-    export PATH="$GOPATH/bin:$PATH"
-fi
-
 if [ -x "$(command -v fasd)" ]; then
-    fasd_cache="$HOME/.fasd-init-zsh"
+    fasd_cache="${XDG_CACHE_HOME:-/tmp}/fasd-init-zsh"
     if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
         fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
     fi
@@ -75,11 +48,6 @@ elif [[ $(uname) == "Linux" ]]; then
         if [ -e "$HOME/.zsh/docker/private.zsh" ]; then
             . "$HOME/.zsh/docker/private.zsh"
         fi
-    fi
-    # add LinuxBrew
-    export LINUXBREW_ROOT="$HOME/.linuxbrew"
-    if [ -d "${LINUXBREW_ROOT}" ]; then
-        export PATH="$LINUXBREW_ROOT/bin:$PATH"
     fi
 
 elif [[ $(uname) == "OpenBSD" ]]; then

@@ -6,7 +6,6 @@
 # zmodload zsh/zprof
 # date "+%s.%N"
 
-source $HOME/.zsh/preload.zsh
 source $HOME/.zsh/antigen.zsh
 source $HOME/.zsh/history.zsh
 source $HOME/.zsh/exports.zsh

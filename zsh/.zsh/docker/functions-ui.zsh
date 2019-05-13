@@ -48,3 +48,19 @@ snes9x() {
         -e DISPLAY=unix$DISPLAY \
         soifou/snes9x
 }
+
+libreoffice-calc() {
+    docker run --rm -it \
+        --name docker_libreoffice --hostname libreoffice \
+        -e PGID=1000 -e PUID=1000 \
+        -m 2048m \
+        -e DISPLAY=unix$DISPLAY \
+        -v /usr/share/fonts:/usr/share/fonts:ro \
+        -v ~/.config/libreoffice:/home/alpine/.config/libreoffice \
+        -v ~/.recently-used:/home/alpine/.recently-used \
+        -v ~/.cache/fontconfig:/home/alpine/.cache/fontconfig \
+        -v $(pwd):/home/alpine \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+        woahbase/alpine-libreoffice:x86_64 \
+        --calc ${@:1}
+}
