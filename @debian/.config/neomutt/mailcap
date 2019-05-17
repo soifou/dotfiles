@@ -1,0 +1,6 @@
+text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput
+# text/html; w3m -I %{charset} -T text/html; copiousoutput;
+image/*; sxiv '%s'; test=test -n "$DISPLAY";
+application/pdf; zathura '%s'; test=test -n "$DISPLAY"; needsterminal;
+# application/pdf; cp '%s' /tmp/doc.pdf && setsid zathura /tmp/doc.pdf &; copiousoutput;
+
