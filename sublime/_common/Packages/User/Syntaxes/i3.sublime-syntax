@@ -73,7 +73,7 @@ contexts:
       captures:
         1: keyword.control.i3
         2: constant.language.i3
-    - match: '(for_window)\s*\[(\w*)=\"([\w\s\:\.\*\~\/\$]*)\"\]\s(\w*)*'
+    - match: '(for_window)\s*\[(\w*)=\"?([\w\s\:\.\*\|\-\~\/\$]*)\"?\]\s(\w*)*'
       scope: for_window
       captures:
         1: keyword.control.i3

@@ -12,6 +12,12 @@ dsd() {
 dsf() {
     find . -type f -print0 | xargs -0 du -h | sort -hr | head -20
 }
+# fasd combined with fzf
+unalias zz # fasd primarly set the following alias zz='fasd_cd -d -i'
+zz() {
+    fasdlist=$(fasd -d -l -r $1 | fzf --query="$1 " --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)
+    cd "$fasdlist"
+}
 # List commands from commandlinefu website
 cmdfu() {
     curl "https://www.commandlinefu.com/commands/matching/$(echo "$@" \
