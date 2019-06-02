@@ -7,7 +7,7 @@ command -v numlockx >/dev/null 2>&1 && numlockx on
 # custom keymap
 command -v setxkbmap >/dev/null 2>&1 && setxkbmap -layout fr -variant latin9 -option ctrl:nocaps,terminate:ctrl_alt_bksp
 # wallpaper
-command -v wal >/dev/null 2>&1 && wal -q -i "$WALLPAPER_PATH/today" >/dev/null
+command -v wal >/dev/null 2>&1 && rm -rf ~/.cache/wal && wal -q -i "$WALLPAPER_PATH/today" >/dev/null
 # screen temp/brightness
 command -v redshift >/dev/null 2>&1 && ~/.bin/redshift-cli --temp >/dev/null
 # compositor for x11
@@ -19,12 +19,12 @@ command -v dunst >/dev/null 2>&1 && dunst -c ~/.cache/wal/colors-dunstrc &
 # screen locker
 command -v locker >/dev/null 2>&1 && locker &
 # music player daemon
-if command -v mpd >/dev/null; then
+if command -v mpd >/dev/null 2>&1; then
     # [ ! -s ~/.config/mpd/mdp.pid ] && mpd &
     pgrep mpd >/dev/null || mpd &
 fi
 # no mouse cursor
-if command -v unclutter >/dev/null; then
+if command -v unclutter >/dev/null 2>&1; then
     pgrep unclutter >/dev/null || unclutter &
 fi
 # xrandr --output $monitorRight --auto --right-of $monitorLeft

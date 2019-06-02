@@ -1,12 +1,16 @@
-if [ -z "$HISTFILE" ]; then
-    HISTFILE=$HOME/.zsh_history
-fi
+#!/usr/bin/env zsh
 
-HISTSIZE=10000
-SAVEHIST=10000
+# Load custom autocompletions
+fpath=(~/.zsh/completions $fpath)
 
-alias history='fc -li 1'
+autoload -U compinit && compinit
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
 
+# Emacs keybindings
+bindkey -e
+
+# History
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
@@ -21,12 +25,21 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-if [[ `uname` == "Darwin" ]]; then
-    zmodload zsh/terminfo
-    bindkey "$terminfo[cuu1]" history-substring-search-up
-    bindkey "$terminfo[cud1]" history-substring-search-down
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
 
-elif [[ `uname` == "Linux" ]]; then
-    bindkey '^[[A' history-substring-search-up
-    bindkey '^[[B' history-substring-search-down
-fi
+bindkey "$terminfo[kcuu1]" up-line-or-beginning-search
+bindkey "$terminfo[kcud1]" down-line-or-beginning-search
+bindkey "$terminfo[cuu1]" up-line-or-beginning-search
+bindkey "$terminfo[cud1]" down-line-or-beginning-search
+
+# forces zsh to realize new commands
+zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _approximate
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+# rehash if command not found (possibly recently installed)
+zstyle ':completion:*' rehash true
+# menu if nb items > 2
+zstyle ':completion:*' menu select=2

@@ -12,6 +12,11 @@ dsd() {
 dsf() {
     find . -type f -print0 | xargs -0 du -h | sort -hr | head -20
 }
+# git show particular commit in difftool
+unalias gsd
+gsd() {
+    git difftool --no-symlinks --dir-diff $1~1 $1
+}
 # fasd combined with fzf
 unalias zz # fasd primarly set the following alias zz='fasd_cd -d -i'
 zz() {
@@ -78,12 +83,15 @@ reveal-alias() {
     }
     preexec_functions+=expand_aliases
 }
-# Python function
+# Python functions
 if [ -d "${PYENV_ROOT}" ]; then
     # uninstall package with dependencies
     pip-uninstall() {
         for dep in $(pip show $1 | grep Requires | sed 's/Requires: //g; s/,//g') ; do pip uninstall -y $dep ; done
         pip uninstall -y $1
+    }
+    pip-upgrade() {
+        pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
     }
 fi
 # Override default behaviour for ssh/scp hosts completion.

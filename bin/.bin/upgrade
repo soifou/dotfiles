@@ -44,7 +44,7 @@ upgrade_arch() {
         sudo pacman -Syu --noconfirm
 
         # autoremove
-        pacman -Qdtq | xargs sudo pacman --noconfirm -R
+        [ "$(pacman -Qdtq >/dev/null)" ] && pacman -Qdtq | xargs sudo pacman --noconfirm -R
 
         # clean and autoclean
         sudo pacman -Sc --noconfirm
@@ -101,11 +101,11 @@ fi
 read -p "$d [?] Upgrade brew?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    if [[ ! -z $LINUXBREW_ROOT ]]; then
-        cd "$LINUXBREW_ROOT/Homebrew" && git pull && brew update && brew upgrade && brew cleanup
-    elif [[ $(uname) == 'Darwin' ]]; then
+    if [ -d "$HOME/.linuxbrew" ]; then
+        cd "$HOME/.linuxbrew/Homebrew" && git pull && brew update && brew upgrade && brew cleanup
+    elif [ "$(uname)" == 'Darwin' ]; then
         brew update
-        TERM=xterm-256color brew upgrade
+        brew upgrade
         # https://github.com/buo/homebrew-cask-upgrade
         brew cu -ay
         brew cleanup
@@ -116,6 +116,12 @@ read -p "$d [?] Upgrade anyenv?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     anyenv update
+fi
+
+read -p "$d [?] Upgrade antibody?$t" -n 1 -r
+echo    #
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    antibody update
 fi
 
 read -p "$d [?] Upgrade global node dependencies?$t" -n 1 -r
@@ -129,7 +135,6 @@ fi
 read -p "$d [?] Upgrade global python dependencies?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    # PIP=$(pyenv which pip)
     pip list --outdated
     sleep 3
     pip install --upgrade pip

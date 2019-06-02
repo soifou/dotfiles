@@ -212,17 +212,17 @@ bindsym $mod+r mode "resize"
 # =============================================================================
 # Volume control
 # =============================================================================
-bindsym XF86AudioRaiseVolume exec amixer sset Master '5%+'
-bindsym XF86AudioLowerVolume exec amixer sset Master '5%-'
-bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioRaiseVolume exec amixer sset Master '5%+' >/dev/null
+bindsym XF86AudioLowerVolume exec amixer sset Master '5%-' >/dev/null
+bindsym XF86AudioMute exec amixer set Master toggle >/dev/null
 
 # =============================================================================
 # Music control
 # =============================================================================
-bindsym XF86AudioNext exec mpc next
-bindsym XF86AudioPrev exec mpc prev
-bindsym XF86AudioPlay exec mpc toggle
-bindsym XF86AudioStop exec mpc stop
+bindsym XF86AudioNext exec mpc next >/dev/null
+bindsym XF86AudioPrev exec mpc prev >/dev/null
+bindsym XF86AudioPlay exec mpc toggle >/dev/null
+bindsym XF86AudioStop exec mpc stop >/dev/null
 
 # =============================================================================
 # Assign colors

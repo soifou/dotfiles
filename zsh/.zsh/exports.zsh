@@ -39,15 +39,13 @@ elif [[ $(uname) == "Linux" ]]; then
         eval "$(ssh-agent)"
         ln -sf "$SSH_AUTH_SOCK" "$XDG_RUNTIME_DIR/ssh-agent.socket"
     fi
-    export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
     ssh-add -l > /dev/null || ssh-add
-    # add docker
+
+    # Docker
     if [ -f /usr/bin/docker ]; then
         . "$HOME/.zsh/docker/functions.zsh"
         . "$HOME/.zsh/docker/aliases.zsh"
-        if [ -e "$HOME/.zsh/docker/private.zsh" ]; then
-            . "$HOME/.zsh/docker/private.zsh"
-        fi
+        [ -e "$HOME/.zsh/docker/private.zsh" ] && . "$HOME/.zsh/docker/private.zsh"
     fi
 
 elif [[ $(uname) == "OpenBSD" ]]; then

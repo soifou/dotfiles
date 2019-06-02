@@ -4,3 +4,14 @@
 
 [core]
     editor = vim
+    pager = diff-so-fancy | less --tabs=4 -RFX
+
+[diff]
+    tool = kitty
+
+[difftool]
+    prompt = false
+    trustExitCode = true
+
+[difftool "kitty"]
+    cmd = kitty +kitten diff $LOCAL $REMOTE

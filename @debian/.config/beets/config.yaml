@@ -1,0 +1,80 @@
+---
+# Credit to: https://gist.github.com/DjSlash/3313266de1b696667725
+
+## Global options
+directory: ~/Music/library
+library: ~/Music/beets.db
+
+import:
+    move: yes
+    write: yes
+
+plugins:
+    - fetchart
+    - inline
+    - lyrics
+    - mpdstats
+    - mpdupdate
+    - the
+
+# We can include password file too
+# include:
+    # - mbpasswd.yaml
+
+# I don't want underscores as per the default, just remove it.
+# http://beets.readthedocs.io/en/latest/reference/config.html#replace
+replace:
+    '[\\/]': ''
+    '^\.': ''
+    '[\x00-\x1f]': ''
+    '[<>:"\?\*\|]': ''
+    '\s+$': ''
+
+per_disc_numbering: yes
+
+## Autotagger options
+match:
+    preferred:
+        original_year: yes
+
+## Path Format configuration
+# I like my album-directories to be verbose on the information
+# 1. if original_year is known, use it; otherwise, use year
+# 2. album name
+# 3. if there are more discs, put each disc in it's own directory
+# 3a. if the disc has an title on its own, name it
+# 4. if this album, is not an album, then tell what it is (i.e. live, soundtrack, etc)
+# 5. if I have this album multiple times from the original_year, add disambiguation
+# Example: Police, The/1995 - Live! (disc01 - Orpheum WBCN_Boston Broadcast) [live]
+paths:
+    # default: albums/%the{$albumartist}/%if{$original_year,$original_year - ,$year - }$album%if{$multidisc, (disc$disc$cdtitle)}%if{$notalbum, $cdtype}%aunique{original_year albumartist album}/$track - $artist - $title
+    # comp: albums/000 Various Artists/%if{$original_year,$original_year - ,$year - }$album%if{$multidisc, (disc$disc$cdtitle)}%if{$notalbum, $cdtype}%aunique{original_year albumartist album}/$track - $artist - $title
+    # singleton: singles/$initial/$artist - $title
+    default: "%the{$albumartist}/%if{$original_year,$original_year - ,$year - }$album%aunique{original_year albumartist album}/%if{$multidisc,Disc $disc/}$track - $title"
+    comp: 000 Various Artists/%if{$original_year,$original_year - ,$year - }$album%if{$multidisc, (disc$disc$cdtitle)}%if{$notalbum, $cdtype}%aunique{original_year albumartist album}/$track - $title
+    singleton: _singles/$initial/$artist - $title
+
+### Plugin settings
+
+# inline
+# https://beets.readthedocs.io/en/latest/plugins/inline.html
+# Settings below are used in the paths above
+item_fields:
+    cdtitle: u' - %s' % (disctitle) if disctitle else u''
+    multidisc: 1 if disctotal > 1 else 0
+    initial: artist.lower().lstrip('[]*')[0]
+
+album_fields:
+    cdtype: u'[%s]' % (albumtype.lower()) if albumtype else u''
+    notalbum: 0 if albumtype and albumtype.lower() == 'album' else 1
+
+# the
+# https://beets.readthedocs.io/en/latest/plugins/the.html
+# I use this one because $albumartist_sort is not what I want in my paths.
+the:
+    a: no
+
+# Needs extra lib "python-mpd2" lib if using python 3.6
+mpd:
+    host: localhost
+    port: 6600

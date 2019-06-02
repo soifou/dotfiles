@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # https://htr3n.github.io/2018/07/faster-zsh/
 # https://coderwall.com/p/9fksra/speed-up-your-zsh-completions
 # https://200ok.ch/posts/2018-04-10_Make_zsh_recognise_Projects_you_are_working_on.html
@@ -6,14 +8,12 @@
 # zmodload zsh/zprof
 # date "+%s.%N"
 
-source $HOME/.zsh/antigen.zsh
-source $HOME/.zsh/history.zsh
-source $HOME/.zsh/exports.zsh
-source $HOME/.zsh/functions.zsh
-source $HOME/.zsh/aliases.zsh
-if [ -e "$HOME/.zsh/private.zsh" ]; then
-    source $HOME/.zsh/private.zsh
-fi
+. $HOME/.zsh/config.zsh
+. $HOME/.zsh/antibody.zsh
+. $HOME/.zsh/exports.zsh
+. $HOME/.zsh/functions.zsh
+. $HOME/.zsh/aliases.zsh
+[ -e "$HOME/.zsh/private.zsh" ] && . $HOME/.zsh/private.zsh
 
 # uncomment to finish profiling
 # zprof

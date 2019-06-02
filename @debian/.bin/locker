@@ -1,6 +1,8 @@
 #!/bin/sh
 
 LOCKER="$HOME/.bin/lockscreen --corrupted"
+LOCKER_IDLE_TIME_MIN=${LOCKER_IDLE_TIME_MIN:-5}
+LOCKER_IDLE_TIME_SEC=${LOCKER_IDLE_TIME_SEC:-300}
 
 if command -v xidlehook >/dev/null; then
     rm -f /tmp/xidlehook.sock
@@ -8,14 +10,14 @@ if command -v xidlehook >/dev/null; then
     pgrep xidlehook >/dev/null || xidlehook \
         --not-when-fullscreen \
         --socket /tmp/xidlehook.sock \
-        --timer primary 180 \
+        --timer primary $LOCKER_IDLE_TIME_SEC \
         "$LOCKER" \
         ''
 
 elif command -v xautolock >/dev/null; then
     pgrep xautolock >/dev/null || xautolock \
         -detectsleep \
-        -time 3 \
+        -time $LOCKER_IDLE_TIME_MIN \
         -locker "$LOCKER" \
         -notify 30
 

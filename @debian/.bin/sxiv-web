@@ -5,4 +5,4 @@
 
 TMPFILE=$(mktemp)
 curl -sL "$1" >"$TMPFILE"
-nohup sxiv "$TMPFILE" &
+nohup sxiv "$TMPFILE" 2>&1 &

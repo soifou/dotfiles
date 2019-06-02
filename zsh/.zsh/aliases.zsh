@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Global aliases
 alias h5ai-selfupdate="cd $DEVELOPMENT_PATH/tools/h5ai && git pull && npm install && npm run build && mv build/h5ai-*.zip ../.. && cd $DEVELOPMENT_PATH && rm -rf _h5ai && unzip h5ai-*.zip && rm h5ai-*.zip"
 # stay connected with Free Wifi
@@ -6,21 +8,19 @@ alias https='http --default-scheme=https'
 alias sf="php bin/console"
 # find big files in git
 alias gfb="git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | sed -n 's/^blob //p' | sort --numeric-sort --key=2 | cut -c 1-12,41- | numfmt --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest"
+alias gdd="git difftool --no-symlinks --dir-diff"
 
-# python aliases
-if [ -d "${PYENV_ROOT}" ]; then
-    # Watch Arte TV
-    alias arte="python2 $DEVELOPMENT_PATH/tools/arteVIDEOS/arteVIDEOS.py -d ~/Videos/tv/arte"
-    # Automatically update all the installed python packages
-    alias pip-upgrade="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+if [ "$TERM" = 'xterm-kitty' ]; then
+    alias diff='kitty +kitten diff'
+    alias icat='kitty +kitten icat'
 fi
 
 # Linux aliases
-if [[ `uname` == "Linux" ]]; then
+if [ "$(uname)" = "Linux" ]; then
     alias homebackup="luckybackup -c --no-questions default.profile"
 
 # OSX aliases
-elif [[ `uname` == "Darwin" ]]; then
+elif [ "$(uname)" = "Darwin" ]; then
     alias osx-config="cd $HOME/Library/Application\ Support/"
     alias bs="brew services"
     alias ports="sudo lsof -i -P | grep -i listen"

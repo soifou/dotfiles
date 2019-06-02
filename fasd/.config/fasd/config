@@ -1,0 +1,7 @@
+# Config for fasd (using fork: https://github.com/infokiller/fasd)
+
+_FASD_DATA="$XDG_DATA_HOME"/fasd
+# _FASD_SINK="$XDG_CACHE_HOME"/fasd.log
+_FASD_BACKENDS="native current recently-used viminfo"
+_FASD_RESOLVE_SYMLINKS=1
+_FASD_NOCASE=1

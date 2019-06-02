@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Already sourced by .zshenv
+# [ -f "$HOME/.environment" ] && . "$HOME/.environment"
+
+[ -f "$HOME/.xprofile" ] && . "$HOME/.xprofile"

@@ -4,13 +4,14 @@
 # https://github.com/kovidgoyal/kitty/issues/598
 
 MUSIC_PATH=${MUSIC_PATH:-$HOME/Music}
-NOCOVER_PATH="$HOME/.config/ncmpcpp/nocover.png"
+NOCOVER_PATH="$XDG_CONFIG_HOME/ncmpcpp/vinyl.png"
+STREAMING_PATH="$XDG_CONFIG_HOME/ncmpcpp/streaming.png"
 COVER_PATH="${XDG_CACHE_HOME:-/tmp}/cover.jpg"
 
 change_cover() {
     kitty @ send-text \
-    --match title:cover \
-    "clear && kitty +kitten icat --transfer-mode=stream $COVER_PATH \r"
+        --match title:cover \
+        "clear && kitty +kitten icat --transfer-mode=stream $COVER_PATH \r"
 }
 
 launch_player() {
@@ -31,15 +32,22 @@ launch_player() {
 }
 
 extract_cover() {
-    song_dir=$(mpc --format %file% current | awk -F/ '{print $1"/"$2}')
+    song_dir=$(dirname "$(mpc --format %file% current)")
     temp_song="/tmp/current-song"
-    cover=$(find "$MUSIC_PATH/$song_dir" -name "cover.*" | head -n1 &> /dev/null)
 
-    if [ ! -f "$cover" ]; then
-        cover="$NOCOVER_PATH"
+    # Current song is a HTTP stream?
+    case "$song_dir" in
+        http://*|https://*) cover="$STREAMING_PATH" ;;
+    esac
+
+    if [ -z "$cover" ]; then
+        # Find the cover if available
+        cover=$(find "$MUSIC_PATH/$song_dir" -name "cover.*" | head -n1)
+        # Not found? Set default
+        [ ! -f "$cover" ] && cover="$NOCOVER_PATH"
     fi
 
-    cp "$cover" "$temp_song"
+    cp -f "$cover" "$temp_song"
 
     ffmpeg \
         -hide_banner \
@@ -47,7 +55,7 @@ extract_cover() {
         -y \
         -i "$temp_song" \
         -vf scale=400:-1 \
-        "$COVER_PATH" > /dev/null 2>&1
+        "$COVER_PATH" >/dev/null 2>&1
 
     rm -f "$temp_song"
 }
@@ -55,7 +63,7 @@ extract_cover() {
 get_lyrics() {
     artist=$(mpc --format %artist% current)
     title=$(mpc --format %title% current)
-    song=`curl -s --get "https://makeitpersonal.co/lyrics" --data-urlencode "artist=$artist" --data-urlencode "title=$title"`
+    song=$(curl -s --get "https://makeitpersonal.co/lyrics" --data-urlencode "artist=$artist" --data-urlencode "title=$title")
     echo "$artist - $title\n$song"
 }
 

@@ -1,0 +1,31 @@
+## Receive options.
+set imap_user = "$GOOGLE_USERNAME"
+set imap_pass = `pass account.google.com/$GOOGLE_USERNAME`
+set folder = imaps://$imap_user@imap.gmail.com/
+set spoolfile = +INBOX
+set postponed = "+[Gmail]/Drafts"
+
+#set smtp_url = "smtps://$imap_user:imap_pass@smtp.gmail.com:465/"
+#set smtp_pass = `pass account.google.com/$GOOGLE_USERNAME`
+#set smtp_authenticators = "gssapi:login"
+
+# Gmail's SMTP server stores the message automatically
+set record = "+[Gmail]/Sent Mail"
+# Set $copy to no disable mutt's storing of all sent mail
+set copy = no
+
+## Send options.
+set smtp_url = "smtps://$imap_user:$imap_pass@smtp.gmail.com:465/"
+set realname = "$GOOGLE_NAME"
+set from = "$imap_user"
+set hostname = "gmail.com"
+
+# Connection options
+set ssl_force_tls = yes
+unset ssl_starttls
+
+# You can use any gmail imap mailboxes
+# mailboxes =INBOX =[Gmail]/Sent\ Mail =[Gmail]/Drafts =[Gmail]/Spam =[Gmail]/Trash
+
+## Hook -- IMPORTANT!
+account-hook $folder "set imap_user=$imap_user imap_pass=$imap_pass"
