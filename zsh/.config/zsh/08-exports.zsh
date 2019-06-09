@@ -1,14 +1,5 @@
 #!/bin/bash
 
-if [ -x "$(command -v fasd)" ]; then
-    fasd_cache="${XDG_CACHE_HOME:-/tmp}/fasd-init-zsh"
-    if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-        fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
-    fi
-    . "$fasd_cache"
-    unset fasd_cache
-fi
-
 if [[ $(uname) == "Darwin" ]]; then
     # homebrew path
     export PATH="/usr/local/sbin:$PATH"
@@ -26,10 +17,10 @@ if [[ $(uname) == "Darwin" ]]; then
     # Docker toolbox for my dev environment
     if [[ $(docker-machine status "$DOCKER_MACHINE_NAME") == "Running" ]]; then
         eval "$(docker-machine env $DOCKER_MACHINE_NAME)"
-        . "$HOME/.zsh/docker/functions.zsh"
-        . "$HOME/.zsh/docker/aliases.zsh"
-        if [ -e "$HOME/.zsh/docker/private.zsh" ]; then
-            . "$HOME/.zsh/docker/private.zsh"
+        . "$ZDOTDIR/docker/functions.zsh"
+        . "$ZDOTDIR/docker/aliases.zsh"
+        if [ -e "$ZDOTDIR/docker/private.zsh" ]; then
+            . "$ZDOTDIR/docker/private.zsh"
         fi
     fi
 
@@ -42,10 +33,10 @@ elif [[ $(uname) == "Linux" ]]; then
     ssh-add -l > /dev/null || ssh-add
 
     # Docker
-    if [ -f /usr/bin/docker ]; then
-        . "$HOME/.zsh/docker/functions.zsh"
-        . "$HOME/.zsh/docker/aliases.zsh"
-        [ -e "$HOME/.zsh/docker/private.zsh" ] && . "$HOME/.zsh/docker/private.zsh"
+    if command -v docker >/dev/null; then
+        . "$ZDOTDIR/docker/functions.zsh"
+        . "$ZDOTDIR/docker/aliases.zsh"
+        [ -e "$ZDOTDIR/docker/private.zsh" ] && . "$ZDOTDIR/docker/private.zsh"
     fi
 
 elif [[ $(uname) == "OpenBSD" ]]; then

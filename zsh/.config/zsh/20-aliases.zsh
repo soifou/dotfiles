@@ -1,6 +1,14 @@
 #!/bin/sh
 
 # Global aliases
+alias ls="exa"
+alias l="exa -la --group-directories-first --time-style=long-iso"
+alias lt="exa -l -T"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias grep="grep --color=auto"
+
 alias h5ai-selfupdate="cd $DEVELOPMENT_PATH/tools/h5ai && git pull && npm install && npm run build && mv build/h5ai-*.zip ../.. && cd $DEVELOPMENT_PATH && rm -rf _h5ai && unzip h5ai-*.zip && rm h5ai-*.zip"
 # stay connected with Free Wifi
 alias freewifi="while true ; do wget --quiet --no-check-certificate --post-data 'login=$FREEWIFI_ID&password=$FREEWIFI_PASS&submit=Valider' 'https://wifi.free.fr/Auth' -O '/dev/null' ; sleep 600; done"
