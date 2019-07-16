@@ -3,6 +3,7 @@
 
 PACKAGE_URL=https://packagecontrol.io/Package%20Control.sublime-package
 UNAME_S := $(shell uname -s)
+FONT_NAME ?= monospace
 
 ifeq ($(UNAME_S),Linux)
 	SUBLIME_DIR="$$HOME/.config/sublime-text-3"

@@ -48,11 +48,40 @@
 				<key>misspelling</key>
 				<string>#f07076</string>
 				<key>phantomCss</key>
-				<string>html { background-color: transparent; color: var(--foreground); --redish: #f07076; --orangish: #ffae57; --background: #202631; --bluish: #5ccfe6; --yellowish: #ffd480; --greenish: #bbe77e; --purplish: #d3bdff; --foreground: #d9d7ce; } a { color: var(--bluish); } #inline-error .error { background-color: color(var(--redish) blend(var(--background) 30%)); } #inline-error .error a { background-color: color(var(--redish) blend(var(--background) 30%)); font-size: 1.1rem; color: var(--foreground); font-weight: normal; } #inline-error .error-arrow { border-left-color: color(var(--redish) blend(var(--background) 30%)); }</string>
+				<string>
+                    html {
+                        font-family: monospace;
+                        font-size: 1rem;
+                        background-color: transparent;
+                        color: var(--foreground);
+                        --redish: #f07076;
+                        --orangish: #ffae57;
+                        --background: #202631;
+                        --bluish: #5ccfe6;
+                        --yellowish: #ffd480;
+                        --greenish: #bbe77e;
+                        --purplish: #d3bdff;
+                        --foreground: #d9d7ce;
+                    }
+                    a { color: var(--bluish); }
+                    #inline-error .error {
+                        background-color: color(var(--redish) blend(var(--background) 30%));
+                    }
+                    #inline-error .error a {
+                        background-color: color(var(--redish) blend(var(--background) 30%));
+                        color: var(--foreground);
+                        font-weight: normal;
+                    }
+                    #inline-error .error-arrow {
+                        border-left-color: color(var(--redish) blend(var(--background) 30%));
+                    }
+                </string>
 				<key>popupCss</key>
 				<string>
                     html {
                         background-color: #191e2a;
+                        font-family: monospace;
+                        font-size: 1rem;
                         color: var(--foreground);
                         --redish: #f07076;
                         --orangish: #ffae57;

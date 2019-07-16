@@ -42,7 +42,7 @@
         "app/cache",
         "var/cache"
     ],
-    "font_face": "Liga Iosevka Term",
+
     "font_size": 12,
     "font_options":
     [

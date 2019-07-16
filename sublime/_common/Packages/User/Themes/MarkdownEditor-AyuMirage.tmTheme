@@ -26,22 +26,24 @@
 				<key>lineHighlight</key>
 				<string>#707A8c66</string>
 				<key>popupCss</key>
-				<string>html, body {
-  background-color: #191e2a;
-  color: #cbccc6;
-}
-body {
-  padding: 10px;
-}
-a {
-  color: #313e52;
-}
-div.error {
-    padding: 5px;
-    border-bottom: 1px solid #4444884f;
-    margin-bottom: 8px;
-}
-</string>
+				<string>
+                    html, body {
+                        font-family: monospace;
+                        font-size: 1rem;
+                        height: 120px;
+                        background-color: #191e2a;
+                        color: #cbccc6;
+                    }
+                    body { padding: 10px; }
+                    a {
+                        color: #313e52;
+                    }
+                    div.error {
+                        padding: 5px;
+                        border-bottom: 1px solid #4444884f;
+                        margin-bottom: 8px;
+                    }
+                </string>
 				<key>selection</key>
 				<string>#191e2a</string>
 				<key>selectionBorder</key>
