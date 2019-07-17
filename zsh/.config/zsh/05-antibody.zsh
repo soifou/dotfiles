@@ -7,7 +7,6 @@ antibody bundle <<EOBUNDLES
 mafredri/zsh-async
 robbyrussell/oh-my-zsh path:plugins/docker/_docker
 robbyrussell/oh-my-zsh path:plugins/git/git.plugin.zsh
-zdharma/fast-syntax-highlighting
 zlsun/solarized-man
 zsh-users/zsh-autosuggestions
 # these should be at last!
@@ -15,3 +14,11 @@ sindresorhus/pure
 zdharma/fast-syntax-highlighting
 zsh-users/zsh-history-substring-search
 EOBUNDLES
+
+# zsh-users/zsh-autosuggestions
+# Ctrl+space to accept and execute current suggestion
+bindkey '^ ' autosuggest-execute
+
+# zdharma/fast-syntax-highlighting
+# Set specific theme
+fast-theme -q XDG:soifou

@@ -1,3 +1,5 @@
+# Doc: https://github.com/arybczak/ncmpcpp/blob/master/doc/bindings
+
 # the t key isn't used and it's easier to press than /, so lets use it
 def_key "t"
     find
@@ -16,10 +18,14 @@ def_key "k"
 
 def_key "ctrl-u"
     page_up
-#push_characters "kkkkkkkkkkkkkkk"
 def_key "ctrl-d"
     page_down
-#push_characters "jjjjjjjjjjjjjjj"
+
+# Scrobble
+def_key "L"
+    run_external_command "~/.bin/scrobbler --love"
+def_key ","
+    run_external_command "~/.bin/scrobbler --toggle"
 
 def_key "h"
     previous_column
@@ -42,6 +48,5 @@ def_key "K"
 
 def_key "g"
   move_home
-
 def_key "G"
   move_end

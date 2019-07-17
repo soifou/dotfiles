@@ -33,10 +33,9 @@ export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
-export ZDATADIR="$XDG_DATA_HOME/zsh"
-
+export HISTFILE="$XDG_DATA_HOME"/zsh/history
+export ANYENV_ROOT="$HOME"/.anyenv
 # History
-export HISTFILE="$ZDATADIR"/history
 export HISTSIZE=10000
 export SAVEHIST=10000
 # Grep

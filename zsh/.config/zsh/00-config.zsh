@@ -18,9 +18,6 @@ _zpcompinit_custom() {
 }
 _zpcompinit_custom
 
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-
 # Emacs keybindings
 bindkey -e
 bindkey "^[[1;5C" forward-word
@@ -28,6 +25,7 @@ bindkey "^[[1;5D" backward-word
 
 # Options
 setopt auto_cd                   # cd when just a path is entered
+
 # History
 setopt bang_hist                 # Treat the '!' character specially during expansion.
 setopt extended_history          # Write the history file in the ":start:elapsed;command" format.
@@ -43,13 +41,16 @@ setopt hist_reduce_blanks        # Remove superfluous blanks before recording en
 setopt hist_verify               # Don't execute immediately upon history expansion.
 setopt hist_beep                 # Beep when accessing nonexistent history.
 
+# Disable higlighted paste
+zle_highlight=('paste:none')
+
+# Autosuggestion based from history
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
-
-bindkey "$terminfo[kcuu1]" up-line-or-beginning-search
-bindkey "$terminfo[kcud1]" down-line-or-beginning-search
-bindkey "$terminfo[cuu1]" up-line-or-beginning-search
-bindkey "$terminfo[cud1]" down-line-or-beginning-search
+zmodload zsh/terminfo
+bindkey $terminfo[kcuu1] up-line-or-beginning-search
+bindkey $terminfo[kcud1] down-line-or-beginning-search
 
 # forces zsh to realize new commands
 zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _approximate

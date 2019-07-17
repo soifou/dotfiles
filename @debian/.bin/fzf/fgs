@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Fuzzy git show - Quickly open a Git commit in difftool for the current branch
+
+fzf_cmd() {
+    fzf -d 35% --multi --exit-0 --cycle --reverse --bind='ctrl-r:toggle-all' --bind='ctrl-s:toggle-sort' --no-preview
+}
+
+git log --pretty=format:'%C(auto)%h%Creset » %d%s %Cgreen(%cr) %C(bold magenta)<%an>%Creset' --abbrev-commit |
+    fzf_cmd |
+    awk '{print $1}' |
+    xargs -n1 -I {} git difftool --no-symlinks --dir-diff {}~1 {} >/dev/null ||
+    true

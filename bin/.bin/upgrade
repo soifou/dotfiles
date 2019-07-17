@@ -102,7 +102,7 @@ read -p "$d [?] Upgrade brew?$t" -n 1 -r
 echo    #
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     if [ -d "$HOME/.linuxbrew" ]; then
-        cd "$HOME/.linuxbrew/Homebrew" && git pull && brew update && brew upgrade && brew cleanup
+        brew update && brew upgrade && brew cleanup
     elif [ "$(uname)" == 'Darwin' ]; then
         brew update
         brew upgrade

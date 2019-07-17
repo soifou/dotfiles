@@ -53,7 +53,7 @@ elif [ "$1" == 'greenclip' ]; then
     GREPVER="greenclip -v | head -n1 | awk -F\  '{print \$2}' | cut -c 2-"
 elif [ "$1" == 'rofi' ]; then
     semanticVersionPattern=$pattern
-    REPO=DaveDavenport/rofi
+    REPO=davatorium/rofi
     NAME=rofi
     FILETYPE="archive"
     BINFILE="$GH_URL$REPO/releases/download/VERSION/$1-VERSION.tar.gz"

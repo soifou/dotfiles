@@ -1,7 +1,15 @@
+
+##### paths ######
+# Log file keeps creating in home dir
+# see: https://github.com/arybczak/ncmpcpp/issues/110
+ncmpcpp_directory = ~/.config/ncmpcpp
+lyrics_directory = ~/.local/share/lyrics
+
 ##### connection settings ######
 mpd_host = "127.0.0.1"
 mpd_port = "6600"
-# mpd_music_dir = /mnt/data/music
+# No need to set, mpd config file has already
+# mpd_music_dir = ~/Music
 
 ##### song format #####
 song_list_format = {$8(%l)$9 }{%a - }{%t}|{$8%f$9}

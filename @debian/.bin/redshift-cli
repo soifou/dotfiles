@@ -61,13 +61,13 @@ displayTemp() {
     temp=$(getTemp)
     getColors
     if [ -z "$temp" ]; then
-        echo "%{F$color15}$icon ${temp}K" # Greyed out (not running)
+        echo "%{F$color15}%{T2}$icon%{T-} ${temp}K" # Greyed out (not running)
     elif [ "$temp" -ge 6000 ]; then
-        echo "%{F$color4}$icon ${temp}K" # Blue
+        echo "%{F$color4}%{T2}$icon%{T-} ${temp}K" # Blue
     elif [ "$temp" -ge 4000 ]; then
-        echo "%{F$color3}$icon ${temp}K" # Yellow
+        echo "%{F$color3}%{T2}$icon%{T-} ${temp}K" # Yellow
     else
-        echo "%{F$color1}$icon ${temp}K" # Red
+        echo "%{F$color1}%{T2}$icon%{T-} ${temp}K" # Red
     fi
 }
 toggleReset() {

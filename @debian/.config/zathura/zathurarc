@@ -1,0 +1,27 @@
+## Options
+set smooth-scroll true
+set pages-per-row 1
+set scroll-step 50
+set adjust-open width
+set selection-clipboard clipboard
+set incremental-search true
+# Center PDF horizontally when zooming:
+# set zoom-center true
+# Begin with first page on the right in dual view:
+# set first-page-column 2
+
+## Keybindings
+# Make ^n open a new document (like atril/evince):
+# map <C-n> feedkeys ":exec zathura $FILE<Return>"
+map <C-s> toggle_statusbar
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+map u scroll half-up
+map d scroll half-down
+map r reload
+map R rotate
+map K zoom in
+map J zoom out
+map i recolor
+map p print
+map P toggle_page_mode
