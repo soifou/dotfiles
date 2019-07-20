@@ -18,10 +18,31 @@ _zpcompinit_custom() {
 }
 _zpcompinit_custom
 
-# Emacs keybindings
-bindkey -e
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
+# Make sure that the terminal is in application mode when zle is active, since
+# only then values from $terminfo are valid
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    zle-line-init() {
+        echoti smkx
+    }
+    zle-line-finish() {
+        echoti rmkx
+    }
+    zle -N zle-line-init
+    zle -N zle-line-finish
+fi
+
+bindkey -e                       # emacs keybindings
+bindkey "^[[1;5C" forward-word   # ctrl+right navigate to next word
+bindkey "^[[1;5D" backward-word  # ctrl+left navigate to previous word
+bindkey '\ew' kill-region        # esc+w clear all before cursor
+
+zsh-backward-delete-word () {
+    local WORDCHARS="${WORDCHARS:s#/#}"
+    zle backward-delete-word
+}
+zle -N zsh-backward-delete-word
+bindkey '^W' zsh-backward-delete-word # ctrl+w delete a word, stop at word char (see $WORDCHARS)
+bindkey '^H' backward-kill-word       # ctrl+backspace delete entirely previous word
 
 # Options
 setopt auto_cd                   # cd when just a path is entered
@@ -45,12 +66,18 @@ setopt hist_beep                 # Beep when accessing nonexistent history.
 zle_highlight=('paste:none')
 
 # Autosuggestion based from history
-autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-zmodload zsh/terminfo
-bindkey $terminfo[kcuu1] up-line-or-beginning-search
-bindkey $terminfo[kcud1] down-line-or-beginning-search
+# start typing + [Up-Arrow] - fuzzy find history forward
+if [[ "${terminfo[kcuu1]}" != "" ]]; then
+  autoload -U up-line-or-beginning-search
+  zle -N up-line-or-beginning-search
+  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+# start typing + [Down-Arrow] - fuzzy find history backward
+if [[ "${terminfo[kcud1]}" != "" ]]; then
+  autoload -U down-line-or-beginning-search
+  zle -N down-line-or-beginning-search
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
 
 # forces zsh to realize new commands
 zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _approximate
