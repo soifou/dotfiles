@@ -2,11 +2,20 @@
 {
     "debug": true,
     "linters": {
-        "phpstan": {
-            "env": {"PATH":"~/.anyenv/envs/phpenv/shims:$PATH"}
+        "eslint": {
+            "disable": false,
+            "args": [],
+            "excludes": [],
+            "selector": "text.html.vue, source.js"
+        },
+        "jshint": {
+            "selector": "source.js"
         },
         "phpmd": {
             "env": {"PATH":"~/.anyenv/envs/phpenv/shims/:$PATH"}
+        },
+        "phpstan": {
+            "env": {"PATH":"~/.anyenv/envs/phpenv/shims:$PATH"}
         }
     },
     "paths": {

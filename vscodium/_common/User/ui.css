@@ -3,7 +3,7 @@
  *
  * This cannot be done natively yet, see https://github.com/microsoft/vscode/issues/519
  * Please install required extension: Custom CSS (https://github.com/be5invis/vscode-custom-css)
- * Add user permission: sudo chown -R $(whoami) /usr/share/vscodium
+ * Add user permission: sudo chown -R $(whoami) /usr/share/codium
  * Command Palette: Reload Custom CSS and JS
  */
 

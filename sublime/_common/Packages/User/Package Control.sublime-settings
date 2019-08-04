@@ -53,6 +53,7 @@
 		"SublimeLinter-contrib-sass-lint",
 		"SublimeLinter-contrib-yamllint",
 		"SublimeLinter-csslint",
+		"SublimeLinter-eslint",
 		"SublimeLinter-jshint",
 		"SublimeLinter-json",
 		"SublimeLinter-php",
@@ -61,6 +62,8 @@
 		"SublimeLinter-rubocop",
 		"SublimeLinter-shellcheck",
 		"TypeScript Syntax",
+		"Vue Syntax Highlight",
+		"Vuejs Snippets",
 		"WakaTime"
 	],
 	"repositories":
