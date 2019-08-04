@@ -244,7 +244,7 @@ exec --no-startup-id subl
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run
 # exec_always --no-startup-id ~/.config/lemonbar/run
-# exec_always --no-startup-id killall compton; compton -b
+exec_always --no-startup-id killall compton; compton -b
 
 # =============================================================================
 # Window/Workspace behaviour
