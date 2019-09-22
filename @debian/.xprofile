@@ -11,7 +11,7 @@ command -v wal >/dev/null 2>&1 && rm -rf ~/.cache/wal && wal -q -i "$WALLPAPER_P
 # screen temp/brightness
 command -v redshift >/dev/null 2>&1 && ~/.bin/redshift-cli --temp >/dev/null
 # compositor for x11
-command -v compton >/dev/null 2>&1 && compton -b
+command -v compton >/dev/null 2>&1 && killall compton && compton -b
 # clipboard manager for rofi
 command -v greenclip >/dev/null 2>&1 && greenclip daemon &
 # notifier
@@ -29,5 +29,5 @@ if command -v unclutter >/dev/null 2>&1; then
 fi
 # xrandr --output $monitorRight --auto --right-of $monitorLeft
 # urxvtd -q -F -o
-xset +fp ~/.local/share/fonts
-xset fp rehash
+# xset +fp ~/.local/share/fonts
+# xset fp rehash

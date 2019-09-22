@@ -26,23 +26,42 @@
 				<key>lineHighlight</key>
 				<string>#707A8c66</string>
 				<key>popupCss</key>
-				<string>
-                    html, body {
+                <string>
+                    html {
+                        background-color: #191e2a;
                         font-family: monospace;
                         font-size: 1rem;
-                        height: 120px;
-                        background-color: #191e2a;
-                        color: #cbccc6;
-                    }
-                    body { padding: 10px; }
-                    a {
-                        color: #313e52;
-                    }
-                    div.error {
+                        color: var(--foreground);
+                        --redish: #f07076;
+                        --orangish: #ffae57;
+                        --background: #202631;
+                        --bluish: #5ccfe6;
+                        --yellowish: #ffd480;
+                        --greenish: #bbe77e;
+                        --purplish: #d3bdff;
+                        --foreground: #d9d7ce;
                         padding: 5px;
+                    }
+                    h1 {
+                        font-family: monospace;
+                    }
+                    div.error, div.warning {
                         border-bottom: 1px solid #4444884f;
                         margin-bottom: 8px;
+                        padding-bottom: 5px;
                     }
+                    a {
+                        font-family: monospace;
+                        color: var(--bluish);
+                    }
+                    a:hover {
+                        color: var(--purplish);
+                    }
+                    html.light {
+                        background-color: color(var(--background) blend(#000 95%));
+                    }
+                    #show-scope a { font-size: 1rem; }
+                    #show-scope { padding: 0.5rem; }
                 </string>
 				<key>selection</key>
 				<string>#191e2a</string>

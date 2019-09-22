@@ -41,4 +41,4 @@ export SAVEHIST=10000
 # Grep
 export GREP_COLORS="mt=30;43"
 
-[ -f "$HOME/.env" ] && . "$HOME/.env"
+[ -f "$HOME/.environment.local" ] && . "$HOME/.environment.local"

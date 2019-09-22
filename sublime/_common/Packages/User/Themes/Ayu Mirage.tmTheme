@@ -93,12 +93,21 @@
                         --foreground: #d9d7ce;
                         padding: 5px;
                     }
+                    h1 {
+                        font-family: monospace;
+                    }
                     div.error, div.warning {
                         border-bottom: 1px solid #4444884f;
                         margin-bottom: 8px;
                         padding-bottom: 5px;
                     }
-                    a { color: var(--bluish); }
+                    a {
+                        font-family: monospace;
+                        color: var(--bluish);
+                    }
+                    a:hover {
+                        color: var(--purplish);
+                    }
                     html.light {
                         background-color: color(var(--background) blend(#000 95%));
                     }

@@ -1,13 +1,13 @@
 ## Receive options.
-set imap_user = "$GOOGLE_USERNAME"
-set imap_pass = `pass account.google.com/$GOOGLE_USERNAME`
+set imap_user = `pass google.com/username`
+set imap_pass = `pass google.com/password`
 set folder = imaps://$imap_user@imap.gmail.com/
 set spoolfile = +INBOX
 set postponed = "+[Gmail]/Drafts"
 
-#set smtp_url = "smtps://$imap_user:imap_pass@smtp.gmail.com:465/"
-#set smtp_pass = `pass account.google.com/$GOOGLE_USERNAME`
-#set smtp_authenticators = "gssapi:login"
+# set smtp_url = "smtps://$imap_user:imap_pass@smtp.gmail.com:465/"
+# set smtp_pass = `pass google.com/password`
+# set smtp_authenticators = "gssapi:login"
 
 # Gmail's SMTP server stores the message automatically
 set record = "+[Gmail]/Sent Mail"
@@ -16,7 +16,7 @@ set copy = no
 
 ## Send options.
 set smtp_url = "smtps://$imap_user:$imap_pass@smtp.gmail.com:465/"
-set realname = "$GOOGLE_NAME"
+set realname = "`pass google.com/realname`"
 set from = "$imap_user"
 set hostname = "gmail.com"
 
