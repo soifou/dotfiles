@@ -21,6 +21,8 @@ if [ -z "$@" ]; then
 else
     THEMES="$@"
 
+    # rm -rf ${XDG_CACHE_HOME:-~/.cache}/wal
+
     # fetch random wallpaper from unsplash
     if [ x"random" = x"${THEMES}" ]; then
         SCREEN_RES=$($XRANDR_BIN | awk '/ primary/{print $4}' | sed -e 's/+.*//g')
@@ -33,7 +35,6 @@ else
 
     # generate schemes based on selected wallpaper
     if [ -n "${THEMES}" ]; then
-        rm -rf ~/.cache/wal
         wal -o ~/.bin/wal-changer -n -i "$WALLPAPER_PATH/${THEMES}" >/dev/null
     fi
 fi
