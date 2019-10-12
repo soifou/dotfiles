@@ -35,6 +35,7 @@ else
 
     # generate schemes based on selected wallpaper
     if [ -n "${THEMES}" ]; then
-        wal -o ~/.bin/wal-changer -n -i "$WALLPAPER_PATH/${THEMES}" >/dev/null
+        rm -rf "$XDG_CACHE_HOME/wal"
+        wal -o ~/.bin/wal-changer -q -n -i "$WALLPAPER_PATH/${THEMES}" >/dev/null
     fi
 fi

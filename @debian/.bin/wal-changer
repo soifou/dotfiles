@@ -25,8 +25,8 @@ if pgrep -x lemonbar >/dev/null; then
 fi
 
 # Reload kitty instances and +kitten diff
-ruby $XDG_CONFIG_HOME/wal/generator/kitty.rb
-kitty @ set-colors -a -c $XDG_CACHE_HOME/wal/colors-kitty-dark.conf
+ruby "$XDG_CONFIG_HOME/wal/generator/kitty.rb"
+kitty @ set-colors -a -c "$XDG_CACHE_HOME/wal/colors-kitty-dark.conf"
 
 # Display notification
 notify-send -i preferences-desktop-theme "Appearance" "Theme successfully changed" &
