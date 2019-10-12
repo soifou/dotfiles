@@ -1,25 +1,58 @@
 #!/usr/bin/env zsh
 
+# allow to customize menu select
+zstyle ':completion:*' menu select
+# forces zsh to realize new commands
+zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _approximate
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+# rehash if command not found (possibly recently installed)
+zstyle ':completion:*' rehash true
+# menu if nb items > 2
+zstyle ':completion:*' menu select=2
+# speedup completions
+zstyle ':completion:*' accept-exact '*(N)'
+# Override default behaviour for ssh/scp hosts completion.
+# list only entries in ~/.ssh/config.d/* (OpenSSH >= 7.3) or ~/.ssh/config (prior to 7.3), not in /etc/hosts
+# @see: https://serverfault.com/questions/170346/how-to-edit-command-completion-for-ssh-on-zsh
+h=()
+if [[ -r ~/.ssh/config.d ]]; then
+    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config.d/*)"}:#Host *}#Host }:#*[*?]*})
+elif [[ -r ~/.ssh/config ]]; then
+    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+fi
+if [[ $#h -gt 0 ]]; then
+    zstyle ':completion::complete:scp:*' hosts $h
+    zstyle ':completion::complete:ssh:*' hosts $h
+fi
+# set cache file for completions
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompletions-$ZSH_VERSION
+# load complist module to make "menuselect" widget available to zle
+zmodload zsh/complist
+
 # autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zcompdump-$ZSH_VERSION
 _zpcompinit_custom() {
-  setopt extendedglob local_options
-  autoload -Uz compinit
-  local zcd="$XDG_CACHE_HOME/zcompdump-$ZSH_VERSION"
-  local zcdc="$zcd.zwc"
-  # Compile the completion dump to increase startup speed, if dump is newer or doesn't exist,
-  # in the background as this is doesn't affect the current session
-  if [[ -f "$zcd"(#qN.m+1) ]]; then
+    setopt extendedglob local_options
+    autoload -Uz compinit
+    local zcd="$XDG_CACHE_HOME/zcompdump-$ZSH_VERSION"
+    local zcdc="$zcd.zwc"
+    # Compile the completion dump to increase startup speed, if dump is newer or doesn't exist,
+    # in the background as this is doesn't affect the current session
+    if [[ -f "$zcd"(#qN.m+1) ]]; then
         compinit -i -d "$zcd"
         { rm -f "$zcdc" && zcompile "$zcd" } &!
-  else
+    else
         compinit -C -d "$zcd"
         { [[ ! -f "$zcdc" || "$zcd" -nt "$zcdc" ]] && rm -f "$zcdc" && zcompile "$zcd" } &!
-  fi
+    fi
 }
 _zpcompinit_custom
 
-# Make sure that the terminal is in application mode when zle is active, since
-# only then values from $terminfo are valid
+# Make sure the terminal is in application mode when zle is active,
+# since only then values from $terminfo are valid
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle-line-init() {
         echoti smkx
@@ -36,16 +69,24 @@ bindkey "^[[1;5C" forward-word   # ctrl+right navigate to next word
 bindkey "^[[1;5D" backward-word  # ctrl+left navigate to previous word
 bindkey '\ew' kill-region        # esc+w clear all before cursor
 
-zsh-backward-delete-word () {
-    local WORDCHARS="${WORDCHARS:s#/#}"
-    zle backward-delete-word
-}
-zle -N zsh-backward-delete-word
-bindkey '^W' zsh-backward-delete-word # ctrl+w delete a word, stop at word char (see $WORDCHARS)
-bindkey '^H' backward-kill-word       # ctrl+backspace delete entirely previous word
+# zsh-backward-delete-word () {
+#     local WORDCHARS="${WORDCHARS:s#/#}"
+#     zle backward-delete-word
+# }
+# zle -N zsh-backward-delete-word
+# bindkey '^W' zsh-backward-delete-word
+bindkey '^W' vi-backward-kill-word # ctrl+w delete a word, stop at word char (see $WORDCHARS)
+bindkey '^H' backward-kill-word    # ctrl+backspace delete entirely previous word
+
+# Use vim keys in complete tab menu
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Options
 setopt auto_cd                   # cd when just a path is entered
+setopt globdots                  # lets files beginning with a . be matched without explicitly specifying the dot.
 
 # History
 setopt bang_hist                 # Treat the '!' character specially during expansion.
@@ -78,21 +119,6 @@ if [[ "${terminfo[kcud1]}" != "" ]]; then
   zle -N down-line-or-beginning-search
   bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
-
-# forces zsh to realize new commands
-zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _approximate
-# matches case insensitive for lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-# pasting with tabs doesn't perform completion
-zstyle ':completion:*' insert-tab pending
-# rehash if command not found (possibly recently installed)
-zstyle ':completion:*' rehash true
-# menu if nb items > 2
-zstyle ':completion:*' menu select=2
-# speedup completions
-zstyle ':completion:*' accept-exact '*(N)'
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompletions-$ZSH_VERSION
 
 # Completion for kitty
 # command -v kitty >/dev/null && kitty + complete setup zsh | source /dev/stdin

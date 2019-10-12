@@ -14,7 +14,6 @@ alias h5ai-selfupdate="cd $DEVELOPMENT_PATH/tools/h5ai && git pull && npm instal
 alias freewifi="while true ; do wget --quiet --no-check-certificate --post-data 'login=$FREEWIFI_ID&password=$FREEWIFI_PASS&submit=Valider' 'https://wifi.free.fr/Auth' -O '/dev/null' ; sleep 600; done"
 alias https='http --default-scheme=https'
 alias sf="php bin/console"
-alias capit="bundle exec cap"
 
 # find big files in git
 alias gfb="git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | sed -n 's/^blob //p' | sort --numeric-sort --key=2 | cut -c 1-12,41- | numfmt --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest"

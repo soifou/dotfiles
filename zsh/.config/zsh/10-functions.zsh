@@ -14,9 +14,9 @@ dsf() {
 }
 # git show particular commit in difftool
 unalias gsd
-gsd() {
-    git difftool --no-symlinks --dir-diff $1~1 $1
-}
+gsd() { git difftool --no-symlinks --dir-diff $1~1 $1 }
+# capistrano alias turned into function (custom completions/_capit won't work with simple alias)
+capit() { [ -f Gemfile ] && bundle exec cap $* }
 # fasd combined with fzf
 unalias zz # fasd primarly set the following alias zz='fasd_cd -d -i'
 zz() {
@@ -93,19 +93,6 @@ if [ -d "${PYENV_ROOT}" ]; then
     pip-upgrade() {
         pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
     }
-fi
-# Override default behaviour for ssh/scp hosts completion.
-# list only entries in ~/.ssh/config.d/* (OpenSSH >= 7.3) or ~/.ssh/config (prior to 7.3), not in /etc/hosts
-# @see: https://serverfault.com/questions/170346/how-to-edit-command-completion-for-ssh-on-zsh
-h=()
-if [[ -r ~/.ssh/config.d ]]; then
-    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config.d/*)"}:#Host *}#Host }:#*[*?]*})
-elif [[ -r ~/.ssh/config ]]; then
-    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
-fi
-if [[ $#h -gt 0 ]]; then
-    zstyle ':completion::complete:scp:*' hosts $h
-    zstyle ':completion::complete:ssh:*' hosts $h
 fi
 # Show how much RAM application uses.
 # @credits: https://github.com/paulmillr/dotfiles/blob/master/home/.zshrc.sh#L282
