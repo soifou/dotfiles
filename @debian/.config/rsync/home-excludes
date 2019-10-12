@@ -49,6 +49,7 @@
 .config/Code
 .config/Insomnia/responses/*
 .config/session
+.config/skypeforlinux
 .config/sublime-text-3
 
 ###############################################
@@ -121,6 +122,7 @@
 ###############################################
 .ansible
 .ansible_galaxy
+.anyenv
 .bundler
 .composer/cache
 .composer/vendor
@@ -134,8 +136,7 @@
 .pdepend
 .pip
 .pulse
-.pyenv
-.rbenv
+.vscode-oss
 .wp-cli/cache
 
 ###############################################
