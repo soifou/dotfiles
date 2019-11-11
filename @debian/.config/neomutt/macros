@@ -9,6 +9,9 @@ macro attach W "<save-entry><bol>~/Downloads/<eol>" "Save to downloads folder"
 
 # macro index s '<sync-mailbox>y'
 
+# A: Attach files with Ranger file manager (press Space to select file(s) then Enter)
+macro compose A "<shell-escape>neomutt-picker<enter><enter-command>source /tmp/neomutt-attachments<enter>" "Attach with Ranger"
+
 # Gmail keyboard shortcuts
 macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 # macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"

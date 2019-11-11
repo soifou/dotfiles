@@ -10,6 +10,9 @@ set message_cachedir = $XDG_CACHE_HOME/mutt/messages
 set mailcap_path = $XDG_CONFIG_HOME/neomutt/mailcap
 set signature = $XDG_CONFIG_HOME/neomutt/signature
 
+# set mbox_type=Maildir
+# set folder=$XDG_DATA_HOME/mail
+# set spoolfile=+/
 set trash='+Trash'
 
 set rfc2047_parameters = yes
@@ -17,7 +20,8 @@ set sleep_time = 0      # Pause 0 seconds for informational messages
 set markers = no        # Disables the `+` displayed at line wraps
 set mark_old = no       # Unread mail stay unread until read
 set mime_forward = yes  # attachments are forwarded with mail
-set wait_key = no       # mutt won't ask "press key to continue"
+set wait_key = no       # won't ask "press key to continue"
+set recall = no         # won't ask "recall postponed" when composing
 set fast_reply          # skip to compose when replying
 set fcc_attach          # save attachments with the body
 set forward_format = "Fwd: %s"  # format of subject when forwarding
@@ -44,6 +48,10 @@ set send_charset="utf-8"
 # https://www.neomutt.org/guide/reference search sleep_time for additional info
 set sleep_time=0 # be faster
 set beep=no # no beep sound
+
+# Print
+set print_command="lp"
+set print=ask-yes
 
 # View/Edit
 set editor=`echo \$EDITOR`
