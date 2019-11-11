@@ -1,6 +1,10 @@
 #!/bin/sh
 
 # Augmented PATH
+## games
+[ -d "/usr/games" ] && export PATH="/usr/games:$PATH"
+## firefox latest
+[ -d "/opt/firefox" ] && export PATH="/opt/firefox:$PATH"
 ## anyenv
 if [ -d "$HOME/.anyenv" ]; then
     export PATH="$HOME/.anyenv/bin:$PATH"
@@ -11,7 +15,7 @@ fi
 export GOPATH=$HOME/.go
 export PATH="$GOPATH/bin:$PATH"
 ## composer
-[ -d "$HOME/.config/composer" ] && export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+[ -d "$XDG_CONFIG_HOME/composer" ] && export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"
 ## linuxbrew
 [ -d "$HOME/.linuxbrew" ] && export PATH="$HOME/.linuxbrew/bin:$PATH"
 ## custom ~/.bin and all subdirectories

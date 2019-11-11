@@ -14,6 +14,17 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' menu select=2
 # speedup completions
 zstyle ':completion:*' accept-exact '*(N)'
+# kill processus
+zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;36=0=01'
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:*:kill:*' force-list always
+zstyle ':completion:*:*:kill:*' insert-ids single
+# man
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:manuals.(^1*)' insert-sections true
+# no users completion
+zstyle ':completion:*:*:*:users' ignored-patterns '*' '_*'
 # Override default behaviour for ssh/scp hosts completion.
 # list only entries in ~/.ssh/config.d/* (OpenSSH >= 7.3) or ~/.ssh/config (prior to 7.3), not in /etc/hosts
 # @see: https://serverfault.com/questions/170346/how-to-edit-command-completion-for-ssh-on-zsh
@@ -27,6 +38,8 @@ if [[ $#h -gt 0 ]]; then
     zstyle ':completion::complete:scp:*' hosts $h
     zstyle ':completion::complete:ssh:*' hosts $h
 fi
+unset h
+
 # set cache file for completions
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompletions-$ZSH_VERSION
