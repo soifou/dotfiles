@@ -1,5 +1,5 @@
 {
-    "color_scheme": "Packages/PlainTasks/tasks-gray.hidden-tmTheme",
+    "color_scheme": "Packages/User/Themes/tasks-ayu.hidden-tmTheme",
     "open_tasks_bullet": "☐", // options: - | ❍ | ❑ | ■ | □ | ☐ | ▪ | ▫ | – | — ≡ → › | [ ]
     "done_tasks_bullet": "✔", // options: + | ✓ | ✔ | √ | [x]
     "cancelled_tasks_bullet": "✘", // options: x | ✘ | [-]
