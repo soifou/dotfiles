@@ -58,6 +58,7 @@
             "extensions": [
                 "bundler.conf",
                 ".gemrc",
+                "neon",
                 "yml",
                 "yml.dist",
                 ".prettierrc"

@@ -12,7 +12,8 @@
             "selector": "source.js"
         },
         "phpmd": {
-            "env": {"PATH":"~/.anyenv/envs/phpenv/shims/:$PATH"}
+            "env": {"PATH":"~/.anyenv/envs/phpenv/shims/:$PATH"},
+            "rulesets": "${project}/phpmd.xml"
         },
         "phpstan": {
             "env": {"PATH":"~/.anyenv/envs/phpenv/shims:$PATH"}

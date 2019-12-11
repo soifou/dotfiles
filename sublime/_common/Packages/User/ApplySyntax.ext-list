@@ -79,6 +79,7 @@
 		".prettierrc",
 		"YAML-tmLanguage",
 		"bundler.conf",
+		"neon",
 		"yml",
 		"yml.dist"
 	]
