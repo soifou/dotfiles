@@ -28,5 +28,5 @@ set window-title-home-tilde true
 set statusbar-basename true
 set selection-clipboard clipboard
 
-map K zoom in
-map J zoom out
+map J zoom in
+map K zoom out
