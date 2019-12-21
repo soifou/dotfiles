@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# Sync repositories and display all upgradable packages with bumped version
+# Meant to be triggered by cron
+
+ping -q -c 1 1.1.1.1 >/dev/null || exit
+
+sudo apt update >/dev/null 2>&1 || notify-send -i dialog-error "Error downloading updates."
+
+REGEX="s|\([\d\w-]*\)/[a-z,]*\s\([a-z+0-9.:-]*\)\s[a-z0-9]*\s\[upgradable\sfrom:\s\([a-z+0-9.:-]*\)[\w\d-]*\]$|\1 \3 => \2|"
+PACKAGES=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX")
+
+if [ "$PACKAGES" ]; then
+    COUNT=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX" | wc -l)
+    notify-send -i debian-logo "$COUNT update(s) available" "$PACKAGES"
+fi

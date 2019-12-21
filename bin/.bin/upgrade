@@ -3,13 +3,8 @@
 ## Beware! This script is intended to be used by only me, myself and I.
 ## It keeps me up to date accross my *nix journey
 
-d=$'\e[33m'
-s=$'\e[32m'
-t=$'\e[0m'
-
 yn() {
-    # clear
-    printf ":: $d%s$t [y/n]: " "$1"
+    printf "$(tput bold):: $(tput setaf 2)%s$(tput sgr0) [y/n]: " "$1"
     stty -icanon
     answer=$(dd ibs=1 count=1 2>/dev/null)
     stty icanon
@@ -17,25 +12,22 @@ yn() {
     [[ "$answer" =~ ^[Yy]$ ]]
 }
 
-upgrade_debian() {
+debian() {
     yn "Sync server time?" && sudo ntpdate -b pool.ntp.org
 
     if yn "Update system?"; then
-        sudo apt update > /dev/null && sudo apt list --upgradeable
-        sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
+        sudo apt upgrade -y 2>/dev/null && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
         sudo dpkg -l | grep '^rc' | awk '{print $2}' | xargs sudo apt-get purge -y
     fi
 
     if yn "Update GitHub releases?"; then
-        apps=($GH_APPS)
-        for app in "${apps[@]}"
-        do
-            echo "$s > Upgrade $app...$t"
+        for app in $GH_APPS; do
+            echo "$(tput bold)==> $(tput setaf 2)Upgrade $app...$(tput sgr0)"
             ghupdate "$app"
         done
     fi
 }
-upgrade_arch() {
+arch() {
     if yn "Update system?"; then
         sudo pacman -Syu --noconfirm
 
@@ -50,18 +42,20 @@ upgrade_arch() {
         yay -Syu
     fi
 }
-upgrade_macos() {
+macos() {
     yn "Sync server time?" && sudo sntp -sS pool.ntp.org
     yn "Change wallpaper?" && sh "$HOME/.bin/unsplash"
 }
 
-if [ -f "/etc/debian_version" ]; then
-    upgrade_debian
-elif [[ -f /etc/issue && $(awk -F" " '{print $1}' < /etc/issue) == 'Arch' ]]; then
-    upgrade_arch
-elif [ "$(uname)" == "Darwin" ]; then
-    upgrade_macos
-fi
+while IFS='=' read -r key val; do
+    case $key in
+        ID) distro=$val ;;
+    esac
+done < /etc/os-release
+
+[ "$distro" = 'debian' ] && debian
+[ "$distro" = 'arch' ] && arch
+[ -f /System/Library/CoreServices/SystemVersion.plist ] && macos
 
 if [ -d "$HOME/dotfiles" ]; then
     if yn "Update dots?"; then

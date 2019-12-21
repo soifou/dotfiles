@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+if ! command -v ffmpeg >/dev/null 2>&1; then
+    echo Missing ffmpeg, please install first.
+    exit 1
+fi
+
+SCREEN_RES=$(xrandr -q --current | grep '*' | awk '{print$1}')
+DATE=$(date '+%Y-%m-%d-%H:%M:%S')
+VIDEO_PATH="$HOME/Videos"
+FILENAME="recording_$DATE.mkv"
+
+echo "Recording to $VIDEO_PATH/$FILENAME"
+echo "Ctrl-C to exit"
+
+ffmpeg \
+    -loglevel panic \
+    -f x11grab \
+    -s "$SCREEN_RES" \
+    -i :0.0 \
+    -r 25 \
+    -vcodec libx264 "$VIDEO_PATH/$FILENAME"
+
+exit 0

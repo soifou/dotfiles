@@ -16,13 +16,16 @@ esac
 
 # Reload dunst
 pkill dunst
-dunst -config ~/.cache/wal/colors-dunstrc &
+dunst -config "$XDG_CACHE_HOME/wal/colors-dunstrc" &
 
 # Reload lemonbar if any instance is detected
 if pgrep -x lemonbar >/dev/null; then
     pkill lemonbar
     sh ~/.config/lemonbar/run &
 fi
+
+# Reload sublime adaptive theme
+python "$XDG_CONFIG_HOME/wal/generator/sublime.py"
 
 # Reload kitty instances and +kitten diff
 ruby "$XDG_CONFIG_HOME/wal/generator/kitty.rb"
