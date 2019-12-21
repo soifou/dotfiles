@@ -1,0 +1,26 @@
+
+sanitize tridactyllocal tridactylsync
+
+colorscheme dark
+
+" Set DuckDuckGo as default search engine
+set searchengine duckduckgo
+bindurl ^https://duckduckgo.com f hint -Jc [class=result__a]
+bindurl ^https://duckduckgo.com F hint -Jbc [class=result__a]
+
+" Use blank page on new tabs
+set newtab about:blank
+
+" Do not focus URL bar on new tab
+set newtabfocus false
+
+" Use slash or questionmark to find in page
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind <Space>/ nohlsearch
+set findcase smart
+
+" Allow Ctrl-c to copy in the commandline
+unbind --mode=ex <C-c>
