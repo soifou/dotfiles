@@ -25,12 +25,21 @@ if [[ $(uname) == "Darwin" ]]; then
     fi
 
 elif [[ $(uname) == "Linux" ]]; then
-    # SSH
-    if [ ! -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
-        eval "$(ssh-agent)"
-        ln -sf "$SSH_AUTH_SOCK" "$XDG_RUNTIME_DIR/ssh-agent.socket"
+    # SSH key managed by gpg-agent
+    unset SSH_AGENT_PID
+    if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+        export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
     fi
-    ssh-add -l > /dev/null || ssh-add
+    ssh-add -l >/dev/null || ssh-add
+    # Configure pinentry to use the correct TTY
+    export GPG_TTY=$TTY
+    gpg-connect-agent updatestartuptty /bye >/dev/null
+    # SSH key managed by ssh-agent
+    # if [ ! -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
+    #     eval "$(ssh-agent)"
+    #     ln -sf "$SSH_AUTH_SOCK" "$XDG_RUNTIME_DIR/ssh-agent.socket"
+    # fi
+    # ssh-add -l > /dev/null || ssh-add
 
     # Docker
     if command -v docker >/dev/null; then
