@@ -145,6 +145,12 @@ if command -v gem >/dev/null 2>&1; then
     fi
 fi
 
+if command -v go >/dev/null 2>&1; then
+    if yn "Update global go dependencies?"; then
+        go get -u -v all
+    fi
+fi
+
 if [ -d "$HOME/.vim/bundle/Vundle.vim" ]; then
     if yn "Update vim vundle dependencies?"; then
         # The 2 echo's send newline's to any confirmation prompts that might come up,

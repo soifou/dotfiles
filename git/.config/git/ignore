@@ -47,5 +47,7 @@ Thumbs.db
 *.phpbrewrc
 *.php_cs.cache
 *.nvmrc
+*.composer
+bin/.phpunit-*
 composer.phar
 node_modules

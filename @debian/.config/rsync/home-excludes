@@ -34,6 +34,7 @@
 .config/*/networkcache
 .config/*/ShaderCache
 
+.config/*-nativefier-*
 .config/akonadi
 .config/Atom
 .config/Atom-Shell
@@ -47,7 +48,7 @@
 .config/chromium-backup/*/Service Worker/CacheStorage
 .config/chromium-backup/*/Session Storage
 .config/Code
-.config/Insomnia/responses/*
+.config/Insomnia
 .config/session
 .config/skypeforlinux
 .config/sublime-text-3
@@ -82,12 +83,14 @@
 ###############################################
 # LOCAL                                       #
 ###############################################
+.local/kitty.app
 .local/share/akonadi
 .local/share/icons
 .local/share/keybase/kbfs_block_cache
 .local/share/keybase/kbfs_sync_cache
 .local/share/org.kde.gwenview/recentfolders
 .local/share/Trash
+.local/share/vagrant/gems
 .local/share/RecentDocuments
 
 ###############################################
@@ -127,6 +130,7 @@
 .composer/cache
 .composer/vendor
 .gem
+.go
 .linuxbrew
 .node-gyp
 .novaclient

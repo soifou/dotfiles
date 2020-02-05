@@ -37,6 +37,7 @@
     "folder_exclude_patterns":
     [
         ".capistrano",
+        ".composer",
         ".git",
         ".rsync_cache",
         "app/cache",

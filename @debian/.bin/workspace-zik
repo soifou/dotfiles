@@ -13,7 +13,7 @@ WKNAME=5
 goto_workspace() {
     i3-msg "workspace $WKNAME" >/dev/null
     sleep .5
-    i3-msg '[instance="^zik_ncmpcpp$"] focus'
+    i3-msg '[instance="^zik_ncmpcpp$"] focus' >/dev/null
 }
 create_workspace() {
     # create workspace and append layout

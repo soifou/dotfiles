@@ -54,6 +54,7 @@ bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10
 # =============================================================================
 # Locker
 # =============================================================================
+# bindsym $mod+Escape exec xidlehook-client --socket "$XDG_RUNTIME_DIR/xidlehook/socket" control --action trigger --timer 0 >/dev/null
 bindsym $mod+Escape exec ~/.bin/lockscreen --corrupted
 
 # =============================================================================
@@ -239,12 +240,12 @@ client.background       $background
 # Autostart
 # =============================================================================
 # run once at startup
-exec --no-startup-id subl
+# exec --no-startup-id subl
 
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run
 # exec_always --no-startup-id ~/.config/lemonbar/run
-exec_always --no-startup-id killall compton; compton -b
+exec_always --no-startup-id killall compton; compton -b --experimental-backends
 
 # =============================================================================
 # Window/Workspace behaviour
