@@ -1,3 +1,7 @@
+# Generates a zathura colorscheme based on the current wal colors
+# Credits: https://github.com/GideonWolfe/Zathura-Pywal
+# alias zathura="zathura --config-dir $XDG_CACHE_HOME/wal"
+
 set recolor "true"
 set completion-bg "{background}"
 set completion-fg "{foreground}"
@@ -24,9 +28,39 @@ set index-active-bg "{foreground}"
 set index-active-fg "{background}"
 set render-loading-bg "{background}"
 set render-loading-fg "{foreground}"
-set window-title-home-tilde true
-set statusbar-basename true
+
+## Options
+set incremental-search true
 set selection-clipboard clipboard
+set statusbar-basename true
+set window-title-home-tilde true
+
+## Keybindings
+# Make ^n open a new document (like atril/evince):
+# map <C-n> feedkeys ":exec zathura $FILE<Return>"
+
+map <C-s> toggle_statusbar
+map [fullscreen] <C-s> toggle_statusbar
+
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+
+map u scroll half-up
+map d scroll half-down
+
+map r rotate
+map R reload
 
 map J zoom in
+map [fullscreen] J zoom in
 map K zoom out
+map [fullscreen] K zoom out
+
+unmap i
+map i recolor
+map [fullscreen] i recolor
+
+map p print
+map P toggle_page_mode
+map [fullscreen] P toggle_page_mode
