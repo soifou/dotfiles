@@ -26,6 +26,16 @@ debian() {
             ghupdate "$app"
         done
     fi
+
+    if command -v keybase >/dev/null 2>&1; then
+        if yn "Upgrade Keybase CLI?"; then
+            curl -O https://prerelease.keybase.io/keybase_amd64.deb
+            sudo dpkg -i keybase_amd64.deb
+            sudo apt-get install -f
+            run_keybase
+            rm -f keybase_amd64.deb
+        fi
+    fi
 }
 arch() {
     if yn "Update system?"; then
@@ -129,6 +139,7 @@ fi
 if command -v phpenv >/dev/null 2>&1; then
     if yn "Update global composer dependencies?"; then
         composer=$(phpenv which composer)
+        $composer selfupdate
         $composer global outdated
         sleep 3
         $composer global update
