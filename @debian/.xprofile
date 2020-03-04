@@ -11,7 +11,7 @@ command -v wal >/dev/null 2>&1 && rm -rf "$XDG_CACHE_HOME/wal" && wal -q -i "$WA
 # screen temp/brightness
 command -v redshift >/dev/null 2>&1 && ~/.bin/redshift-cli --temp >/dev/null
 # compositor for x11
-command -v compton >/dev/null 2>&1 && compton -b --experimental-backends
+command -v picom >/dev/null 2>&1 && picom -b --experimental-backends
 # clipboard manager for rofi
 command -v greenclip >/dev/null 2>&1 && greenclip daemon &
 # notifier

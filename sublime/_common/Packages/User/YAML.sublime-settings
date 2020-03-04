@@ -1,12 +1,12 @@
 {
 	"extensions":
 	[
-		"yml",
-		".prettierrc",
 		"yml.dist",
+		"bundler.conf",
+		"yml",
 		"YAML-tmLanguage",
 		".gemrc",
-		"bundler.conf",
+		".prettierrc",
 		"neon"
 	],
 	"tab_size": 4,

@@ -4,6 +4,7 @@
 #  | |___) |
 #  |_|____/
 #
+# Docs: https://i3wm.org/docs/userguide.html
 
 # =============================================================================
 # Variables
@@ -43,7 +44,7 @@ floating_modifier $mod
 # =============================================================================
 # Terminal
 # =============================================================================
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal --single-instance --listen-on unix:/tmp/mykitty
 
 # =============================================================================
 # Launcher
@@ -245,7 +246,7 @@ client.background       $background
 # re-run with every i3 reload
 exec_always --no-startup-id ~/.bin/polybar-run
 # exec_always --no-startup-id ~/.config/lemonbar/run
-exec_always --no-startup-id killall compton; compton -b --experimental-backends
+exec_always --no-startup-id killall picom; picom -b --experimental-backends
 
 # =============================================================================
 # Window/Workspace behaviour
@@ -260,6 +261,10 @@ for_window [class="scummvm"] floating enable resize set 640 480
 for_window [class="Virt-manager|Qemu-system-x86_64"] floating enable resize move position center
 # for_window [class="mpv"] floating enable resize move position center
 
+# Using Rofi, last focused window is lost, and focus window at the mouse position
+focus_follows_mouse no
+# No more deadlock until you go out of fullscreen
+popup_during_fullscreen leave_fullscreen
 # =============================================================================
 # i3-gaps
 # =============================================================================
