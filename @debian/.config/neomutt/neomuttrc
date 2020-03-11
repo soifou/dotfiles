@@ -1,5 +1,14 @@
 # vim: filetype=neomuttrc
 
+#  _   _                            _   _
+# | \ | |                          | | | |
+# |  \| | ___  ___  _ __ ___  _   _| |_| |_
+# | . ` |/ _ \/ _ \| '_ ` _ \| | | | __| __|
+# | |\  |  __/ (_) | | | | | | |_| | |_| |_
+# |_| \_|\___|\___/|_| |_| |_|\__,_|\__|\__|
+# https://neomutt.org/guide/configuration.html
+# https://neomutt.org/code/config_vars.html
+
 source $XDG_CONFIG_HOME/neomutt/account
 source $XDG_CONFIG_HOME/neomutt/colors
 source $XDG_CONFIG_HOME/neomutt/keybindings
@@ -9,6 +18,7 @@ set header_cache = $XDG_CACHE_HOME/mutt
 set message_cachedir = $XDG_CACHE_HOME/mutt/messages
 set mailcap_path = $XDG_CONFIG_HOME/neomutt/mailcap
 set signature = $XDG_CONFIG_HOME/neomutt/signature
+set attach_save_dir = $HOME/Downloads
 
 # set mbox_type=Maildir
 # set folder=$XDG_DATA_HOME/mail

@@ -1,13 +1,11 @@
 # Macros
 set mark_macro_prefix = ","
 
-# U: Open URLs with urlview
-macro index,pager U "<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>""view URLs"
+# U: Open URLs with urlview (https://github.com/sigpipe/urlview)
+macro index,pager U '<enter-command>set pipe_decode = yes<enter><pipe-message>urlview<enter><enter-command>set pipe_decode = no<enter>'
 
-# W: Save selected attachment to folder
-macro attach W "<save-entry><bol>~/Downloads/<eol>" "Save to downloads folder"
-
-# macro index s '<sync-mailbox>y'
+# W: Save selected attachment (set $attach_save_dir var to specify which dir)
+macro attach W "<save-entry><bol><eol>" "Save to downloads folder"
 
 # A: Attach files with Ranger file manager (press Space to select file(s) then Enter)
 macro compose A "<shell-escape>neomutt-picker<enter><enter-command>source /tmp/neomutt-attachments<enter>" "Attach with Ranger"
@@ -20,3 +18,5 @@ macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 # macro index gt "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
 # macro index,pager d "<save-message>=[Gmail]/Trash<enter><enter>" "Trash"
 # macro index,pager y "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
+
+# macro index s '<sync-mailbox>y'
