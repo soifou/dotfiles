@@ -23,6 +23,7 @@ all:
 	fi
 
 fontui:
+	cp -f $(SUBLIME_DIR)/Packages/User/DA\ Theme.sublime-settings.dist $(SUBLIME_DIR)/Packages/User/DA\ Theme.sublime-settings
 	cp -f $(SUBLIME_DIR)/Packages/User/DA.sublime-theme.dist $(SUBLIME_DIR)/Packages/User/DA.sublime-theme
 	sed -i 's/FONT_NAME/$(FONT_NAME)/g' $(SUBLIME_DIR)/Packages/User/DA.sublime-theme
 

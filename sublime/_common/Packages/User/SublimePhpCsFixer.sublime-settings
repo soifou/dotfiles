@@ -5,6 +5,6 @@
         "${file_path}/.php_cs.dist",
         "${folder}/.php_cs",
         "${folder}/.php_cs.dist",
-        "~/.php_cs"
+        "~/.config/php_cs"
     ]
 }
