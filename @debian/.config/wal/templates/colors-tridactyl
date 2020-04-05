@@ -1,0 +1,69 @@
+:root.TridactylThemeWal {{
+    --tridactyl-fg: {foreground};
+    --tridactyl-bg: {background};
+    --tridactyl-cmdl-fg: var(--tridactyl-fg);
+    --tridactyl-cmdl-bg: var(--tridactyl-bg);
+
+    --tridactyl-header-first-bg: {color15};
+    --tridactyl-header-second-bg: {color4};
+    --tridactyl-header-third-bg: var(--tridactyl-bg);
+
+    --tridactyl-cmplt-fg: var(--tridactyl-cmdl-fg);
+    --tridactyl-cmplt-bg: var(--tridactyl-bg);
+    --tridactyl-cmplt-border-top: 1px solid var(--tridactyl-cmdl-bg);
+
+    --tridactyl-url-fg: var(--tridactyl-cmdl-fg);
+    --tridactyl-url-bg: none;
+
+    --tridactyl-cmplt-border-top: {color4};
+
+    --tridactyl-of-fg: var(--tridactyl-fg);
+    --tridactyl-of-bg: var(--tridactyl-bg);
+
+    --tridactyl-highlight-box-bg: {color1};
+    --tridactyl-highlight-box-fg: var(--tridactyl-fg);
+}}
+
+:root.TridactylThemeWal #completions {{
+    border-top: none!important;
+    border-bottom: 2px solid {color4};
+}}
+:root.TridactylThemeWal #completions .sectionHeader {{
+    background: var(--tridactyl-bg)!important;
+    color: {color4};
+    padding: 0 5px 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+}}
+
+:root.TridactylThemeWal #completions .focused {{
+    background: {color2}!important;
+    color: var(--tridactyl-bg)!important;
+    font-weight: 600;
+}}
+:root.TridactylThemeWal #completions .focused .prefix {{
+
+}}
+:root.TridactylThemeWal #completions .focused .url {{
+    background: var(--tridactyl-url-bg)!important;
+    color: var(--tridactyl-bg)!important;
+}}
+:root.TridactylThemeWal.TridactylOwnNamespace table {{
+    border-collapse: collapse;
+}}
+:root.TridactylThemeWal.TridactylOwnNamespace #completions table tr.focused {{
+    border-left: 10px solid {color4}
+}}
+
+:root.TridactylThemeWal #tridactyl-colon::before {{
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0 5px;
+    color: {color4}!important;
+    font-weight: 800;
+    content: "λ";
+}}
+:root.TridactylThemeWal #tridactyl-input {{
+    font-size: 1rem;
+    line-height: 1.5;
+}}

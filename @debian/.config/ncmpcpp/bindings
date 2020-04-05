@@ -23,9 +23,9 @@ def_key "ctrl-d"
 
 # Scrobble
 def_key "L"
-    run_external_command "~/.bin/scrobbler --love"
+    run_external_command "~/.local/bin/scrobbler --love"
 def_key ","
-    run_external_command "~/.bin/scrobbler --toggle"
+    run_external_command "~/.local/bin/scrobbler --toggle"
 
 def_key "h"
     previous_column

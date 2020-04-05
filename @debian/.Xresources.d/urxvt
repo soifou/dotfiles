@@ -14,9 +14,8 @@ URxvt*fadeColor: #000000
 URxvt*cursorBlink: true
 
 ! Font settings
-! URxvt.font: xft:FuraCode Nerd Font:size=14:antialias=true:hinting=true:Regular
-URxvt.font: xft:Iosevka Slab:style=Regular:pixelsize=14:antialias=true
-URxvt.boldFont: xft:Iosevka Slab Semibold:style=Semibold:size=11:antialias=true:Bold
+URxvt.font: xft:monospace:pixelsize=16:antialias=true
+URxvt.boldFont: xft:monospace:style=Semibold:pixelsize=16:antialias=true:Bold
 URxvt*letterSpace: 0
 URxvt.lineSpace: 0
 

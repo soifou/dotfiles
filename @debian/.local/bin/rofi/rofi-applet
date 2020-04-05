@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+## Credits: Aditya Shakya
+
+# Icons are from Feather
+shutdown=""
+reboot=""
+lock=""
+suspend=""
+logout=""
+
+rofi_powermenu_classic() {
+    MENU="$(rofi -sep "|" -dmenu -i -p 'System' -width 12 -hide-scrollbar -line-padding 4 -padding 20 -lines 4 <<<"$lock Lock|$suspend Suspend|$logout Logout|$reboot Reboot|$shutdown Shutdown")"
+    case "$MENU" in
+    *Lock) lockscreen --corrupted ;;
+    *Suspend)
+        mpc -q pause
+        amixer set Master mute
+        systemctl suspend
+        ;;
+    *Logout) i3-logout ;;
+    *Reboot) systemctl reboot ;;
+    *Shutdown) systemctl -i poweroff ;;
+    esac
+}
+
+rofi_powermenu() {
+    rofi_command="rofi -config ~/.config/rofi/applet.rasi -theme applets/powermenu.rasi"
+    uptime=$(uptime -p | sed -e 's/up //g')
+
+    # Variable passed to rofi
+    options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+
+    chosen="$(echo -e "$options" | $rofi_command -p "Uptime :: $uptime" -dmenu -selected-row 2)"
+    case $chosen in
+        $shutdown) systemctl -i poweroff ;;
+        $reboot) systemctl reboot ;;
+        $lock) lockscreen --corrupted ;;
+        $suspend)
+            mpc -q pause
+            amixer set Master mute
+            systemctl suspend
+            ;;
+        $logout) i3-logout ;;
+    esac
+}
+
+
+case "$1" in
+    --powermenu-classic) rofi_powermenu_classic ;;
+    --powermenu) rofi_powermenu ;;
+    *)
+        echo "Adjust both brightness and temperature screen from redshift (no daemon required)." >&2
+        exit
+    ;;
+esac

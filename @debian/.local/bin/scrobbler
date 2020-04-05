@@ -1,0 +1,52 @@
+#!/usr/bin/env sh
+
+# Wrapper script to handle scrobbling mode in MPD using mdpscribble
+# Links: https://github.com/MusicPlayerDaemon/mpdscribble
+# Requirements: mpd, mpc, mpdscribble, notify-send
+
+SCROBBLER_CONF_PATH=${XDG_CONFIG_HOME:-~/.config}/mpd/scrobbler.conf
+
+if ! command -v mpdscribble >/dev/null 2>&1; then
+    echo Missing mpdscribble, please install first.
+    exit 1
+fi
+
+love() {
+    mpc sendmessage mpdscribble love
+    notify-send -i last-fm Last.fm "Masterpiece 🤟😍🤟"
+}
+
+status() {
+    SCROBBLER_ICON="%{T4}%{T-}"
+    color2=$(xrdb -query | grep -e '*color2' | awk -F: '{print $2}' | xargs)
+    if pgrep -x mpdscribble >/dev/null 2>&1; then
+        echo "%{F$color2} $SCROBBLER_ICON"
+    else
+        echo $SCROBBLER_ICON
+    fi
+}
+
+toggle() {
+    if pgrep -x mpdscribble >/dev/null 2>&1; then
+        pgrep mpdscribble | xargs kill
+        notify-send -i last-fm Last.fm "Scrobbler is now disabled"
+    else
+        mpdscribble --conf "$SCROBBLER_CONF_PATH" &
+        notify-send -i last-fm Last.fm "Scrobbler is now enabled"
+    fi
+}
+
+case "$1" in
+    --love|-l) love ;;
+    --status|-s) status ;;
+    --toggle|-t) toggle ;;
+    *)
+        echo "Wrapper script to handle scrobbling mode in MPD using mdpscribble" >&2
+        echo "" >&2
+        echo "--love     Show some love to current track" >&2
+        echo "--status   Display status of the scrobbler" >&2
+        echo "--toggle   Toggle scrobbling" >&2
+        echo ""
+        exit
+    ;;
+esac

@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+echo "=================" >>/home/soifou/.cache/pinentry-rofi.log
+echo "Pinentry: $PINENTRY_USER_DATA" >>/home/soifou/.cache/pinentry-rofi.log
+
+case $PINENTRY_USER_DATA in
+tty)
+    echo "want to exec curses" >> /home/soifou/.cache/pinentry-rofi.log
+    echo "=================" >>/home/soifou/.cache/pinentry-rofi.log
+    exec /usr/bin/pinentry-curses "$@"
+    ;;
+rofi)
+    echo "want to exec rofi" >> /home/soifou/.cache/pinentry-rofi.log
+    echo "=================" >>/home/soifou/.cache/pinentry-rofi.log
+    exec "$HOME"/.local/bin/rofi/pinentry-rofi "$@"
+    ;;
+esac
+

@@ -1,0 +1,21 @@
+kitty_mod alt
+
+# map kitty_mod+equal    increase_font_size
+# map kitty_mod+minus    decrease_font_size
+# map kitty_mod+backspace restore_font_size
+
+map kitty_mod+v paste_from_clipboard
+map kitty_mod+j scroll_line_down
+map kitty_mod+k scroll_line_up
+
+# list in a new tab all urls found in scrollback
+# kitty can list visible urls with kitty_mod+e
+map kitty_mod+u launch --stdin-source=@screen_scrollback --stdin-add-formatting --type=tab urlscan -dc -r 'linkhandler {}'
+# open scrollback with bat in new tab
+map kitty_mod+g launch --stdin-source=@screen_scrollback --stdin-add-formatting --type=tab bat --plain
+
+# tab config
+map kitty_mod+t launch --cwd=current --type=tab
+map kitty_mod+q close_tab
+map kitty_mod+l next_tab
+map kitty_mod+h previous_tab

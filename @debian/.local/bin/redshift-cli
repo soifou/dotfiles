@@ -1,0 +1,126 @@
+#!/bin/sh
+
+# Adjust temperature screen from redshift without a daemon according to your geolocation.
+# Additionally you can control brigthness screen if you have a monitor without backlight interface (ie. desktop monitor).
+
+# Requirements: redshift (obviously), awk, bc, xrdb
+
+# Configuration
+icon=""
+temp_range="6500:2700"
+lat="$OPENWEATHERMAP_LAT"
+long="$OPENWEATHERMAP_LONG"
+
+# For storing current brightness
+tmpfile='/tmp/redshift-cli.tmp'
+if [ ! -f $tmpfile ]; then
+    touch $tmpfile
+    echo "1.0" > $tmpfile
+fi
+brightness=$(cat "$tmpfile")
+
+# Adjust temp and brightness manually
+setTempAndBrightness() {
+    redshift -P -O "$(getTemp)" -g 1.0 -m randr -b "$brightness"
+}
+
+# Get current temperature according to geocode
+getTemp() {
+    echo $(redshift -t $temp_range -l "$lat:$long" -p 2>/dev/null | grep temp | cut -d ":" -f 2 | tr -dc "[:digit:]")
+}
+
+# Import colors from available location
+getColors() {
+    # Pywal
+    if [ -f "$HOME/.cache/wal/colors.sh" ]; then
+        # shellcheck source=/dev/null
+        . "$HOME/.cache/wal/colors.sh"
+    # Xressources
+    else
+        color15=$(xrdb -query | grep -e '*color15' | awk -F: '{print $2}' | xargs)
+        color4=$(xrdb -query | grep '*color4' | awk -F: '{print $2}' | xargs)
+        color3=$(xrdb -query | grep '*color3' | awk -F: '{print $2}' | xargs)
+        color1=$(xrdb -query | grep '*color1' | awk -F: '{print $2}' | xargs)
+    fi
+}
+brightnessUp() {
+    brightness=$(echo "$brightness+.1" | bc -l)
+    result=$(echo "$brightness <= 1.0" | bc -l)
+    [ "$result" = '1' ] && \
+        echo "$brightness" > $tmpfile && \
+        setTempAndBrightness
+}
+brightnessDown() {
+    brightness=$(echo "$brightness-.1" | bc -l)
+    result=$(echo "$brightness > 0.0" | bc -l)
+    [ "$result" = '1' ] && \
+        echo "$brightness" > $tmpfile && \
+        setTempAndBrightness
+}
+displayTemp() {
+    temp=$(getTemp)
+    getColors
+    if [ -z "$temp" ]; then
+        echo "%{T3}$icon%{T-}%{F$color4} ${temp}%{F-}" # Greyed out (not running)
+    elif [ "$temp" -ge 6000 ]; then
+        echo "%{T3}$icon%{T-}%{F$color15} ${temp}%{F-}" # Blue
+    elif [ "$temp" -ge 4000 ]; then
+        echo "%{T3}$icon%{T-}%{F$color3} ${temp}%{F-}" # Yellow
+    else
+        echo "%{T3}$icon%{T-}%{F$color1} ${temp}%{F-}" # Red
+    fi
+}
+toggleReset() {
+    if [ -f $tmpfile.lock ]; then
+        rm -f $tmpfile.lock
+        setTempAndBrightness
+    else
+        redshift -x
+        touch $tmpfile.lock
+    fi
+}
+
+case "$1" in
+    --up)
+        [ -f $tmpfile.lock ] && exit 0
+        brightnessUp
+    ;;
+    --down)
+        [ -f $tmpfile.lock ] && exit 0
+        brightnessDown
+    ;;
+    --temp)
+        if [ -f $tmpfile.lock ]; then
+            getColors
+            echo "%{T3}$icon%{T-}%{F$color15} ----%{F-}"
+            exit 0
+        else
+            setTempAndBrightness
+            if [ "$#" -eq  "2" ] && [ "$2" = '--print' ]; then
+                displayTemp
+            fi
+        fi
+    ;;
+    --toggle)
+        toggleReset >/dev/null
+    ;;
+    *)
+        echo "Adjust both brightness and temperature screen from redshift (no daemon required)." >&2
+        echo "" >&2
+        echo "--up             Set screen brightness up to .1" >&2
+        echo "--down           Set screen brightness lower to .1" >&2
+        echo "--temp [--print] Adjust current temperature according to your geocode [and print to stdout]" >&2
+        echo "--toggle         Enable/disable the script" >&2
+        echo ""
+        echo "Example using as a polybar module:"
+        echo ""
+        echo "[module/redshift]"
+        echo "type = custom/script"
+        echo "interval = 5"
+        echo "exec = ~/.bin/redshift-cli --temp --print"
+        echo "scroll-up = ~/.bin/redshift-cli --up"
+        echo "scroll-down = ~/.bin/redshift-cli --down"
+        echo "click-left = ~/.bin/redshift-cli --toggle"
+        exit
+    ;;
+esac

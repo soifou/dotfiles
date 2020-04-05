@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# Exit desktop session by cleaning up
+
+# Remove kitty socket
+rm -f "$KITTY_SOCK"
+# Remove queue list in task-spooler
+tsp -K
+# Kill all instances of pywalfox
+pkill -f pywalfox
+# Finally exit i3
+i3-msg exit

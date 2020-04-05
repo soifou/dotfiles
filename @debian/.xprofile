@@ -1,4 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env sh
+
+start_daemon() {
+    if command -v $1 >/dev/null 2>&1; then
+        pgrep $1 >/dev/null || $1 &
+    fi
+}
 
 # keyboard delay/rate, turn off beep
 command -v xset >/dev/null 2>&1 && xset r rate 350 45 && xset -b
@@ -6,28 +12,21 @@ command -v xset >/dev/null 2>&1 && xset r rate 350 45 && xset -b
 command -v numlockx >/dev/null 2>&1 && numlockx on
 # custom keymap
 command -v setxkbmap >/dev/null 2>&1 && setxkbmap -layout fr -variant latin9 -option ctrl:nocaps,terminate:ctrl_alt_bksp
-# wallpaper
-command -v wal >/dev/null 2>&1 && rm -rf "$XDG_CACHE_HOME/wal" && wal -q -i "$WALLPAPER_PATH/today" >/dev/null
+# apply current wallpaper/colorscheme
+command -v wal >/dev/null 2>&1 && wal -R >/dev/null
 # screen temp/brightness
-command -v redshift >/dev/null 2>&1 && ~/.bin/redshift-cli --temp >/dev/null
+command -v redshift >/dev/null 2>&1 && ~/.local/bin/redshift-cli --temp >/dev/null
 # compositor for x11
 command -v picom >/dev/null 2>&1 && picom -b --experimental-backends
 # clipboard manager for rofi
-command -v greenclip >/dev/null 2>&1 && greenclip daemon &
+if command -v greenclip >/dev/null 2>&1; then
+    pgrep greenclip >/dev/null || greenclip daemon &
+fi
 # notifier
-command -v dunst >/dev/null 2>&1 && dunst -c "$XDG_CACHE_HOME/wal/colors-dunstrc" &
+command -v dunst >/dev/null 2>&1 && dunst -c "$XDG_CACHE_HOME"/wal/colors-dunstrc &
 # screen locker
-command -v locker >/dev/null 2>&1 && locker &
-# reload font database
-command -v xset >/dev/null 2>&1 && xset +fp "$XDG_DATA_HOME/fonts" && xset fp rehash
+command -v ~/.local/bin/locker >/dev/null 2>&1 && ~/.local/bin/locker &
 # music player daemon
-if command -v mpd >/dev/null 2>&1; then
-    # [ ! -s ~/.config/mpd/mdp.pid ] && mpd &
-    pgrep mpd >/dev/null || mpd &
-fi
+start_daemon mpd
 # no mouse cursor
-if command -v unclutter >/dev/null 2>&1; then
-    pgrep unclutter >/dev/null || unclutter &
-fi
-# xrandr --output $monitorRight --auto --right-of $monitorLeft
-# urxvtd -q -F -o
+start_daemon xbanish

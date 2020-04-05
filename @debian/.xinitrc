@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # ~/.xinitrc for Debian
-# https://manpages.debian.org/current/x11-common/Xsession.5.en.html
+# man Xsession
 # https://www.sitepoint.com/understanding-nix-login-scripts
 
 cat /dev/null > "$HOME/.xsession-errors"

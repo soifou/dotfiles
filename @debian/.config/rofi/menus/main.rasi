@@ -1,0 +1,145 @@
+@import "~/.cache/wal/colors-rofi.rasi"
+
+window {
+    padding: 400;
+    background-color: @shadow;
+}
+
+mainbox {
+    border: 2;
+    padding: 10;
+    background-color: @background;
+}
+
+textbox {
+    /*text-color: red;*/
+}
+
+listview {
+    /* enable the scrollbar */
+    scrollbar: true;
+    background-color: @background;
+}
+
+element {
+    padding: 6 4;
+}
+
+element-text {
+    highlight: bold underline;
+}
+
+element.normal.normal,
+element.normal.active,
+element.normal.urgent {
+    background-color: @background;
+    text-color: @foreground;
+}
+
+element.selected.normal {
+    background-color: @selected-background-faded;
+    text-color: @background;
+    border-color: @separator-color;
+    border: 1px solid;
+    border-radius: 2px;
+}
+
+element.selected.urgent,
+element.selected.active,
+element.alternate.normal,
+element.alternate.urgent,
+element.alternate.active {
+    background-color: @background;
+    text-color: @foreground;
+}
+
+scrollbar {
+    border: 0;
+    handle-color: @border-color;
+    handle-width: 3px;
+    padding: 0 5 0 13;
+    background-color: @background;
+}
+
+button {
+    spacing: 0;
+    padding: 5;
+    border: 0;
+    text-color: @foreground;
+    background-color: @background;
+}
+
+button.selected {
+    text-color: @background;
+    background-color: @selected-background-faded;
+    border: 1px solid;
+    border-radius: 2px;
+    border-color: @separator-color;
+}
+
+inputbar {
+    spacing: 0;
+    text-color: @foreground;
+    background-color: @background;
+    padding: 10px 0;
+    children: [ wrapper ];
+}
+
+wrapper {
+    orientation: horizontal;
+    text-color: @background;
+    padding: 4px;
+    children: [ icon-search, entry, tb-wrap ];
+    spacing: 0.5em;
+    background-color: @background;
+}
+
+icon-search {
+    expand: false;
+    /* icon name depending on your current icon theme (ie. /usr/share/icons/Papirus/24x24/actions/find.svg) */
+    filename: "find";
+    size: 24;
+    background-color: @background;
+    vertical-align: 0.5;
+}
+
+tb-wrap {
+    orientation: horizontal;
+    expand: false;
+    children: [ num-filtered-rows, textbox-sep, num-rows];
+}
+
+num-filtered-rows,
+textbox-sep,
+num-rows {
+    background-color: @background;
+    text-color: @foreground;
+    expand: false;
+    str: "/";
+    vertical-align: 0.5;
+}
+
+case-indicator {
+    padding: 6px 10px;
+    spacing: 0;
+    text-color: @background;
+    background-color: @background;
+}
+
+entry,
+prompt {
+    spacing: 0;
+    padding: 3;
+    text-color: @foreground;
+    background-color: @background;
+}
+
+mode-switcher {
+    border: 0;
+    background-color: @background;
+}
+
+error-message {
+    background-color: @foreground;
+    padding: 0.2em;
+}

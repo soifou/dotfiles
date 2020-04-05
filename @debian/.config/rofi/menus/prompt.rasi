@@ -1,0 +1,32 @@
+@import "~/.cache/wal/colors-rofi.rasi"
+
+window {
+    padding: 560;
+    background-color: @shadow;
+}
+
+mainbox {
+    border: 2;
+    padding: 14;
+    background-color: @background;
+}
+
+inputbar {
+    spacing: 0;
+    text-color: @foreground;
+    background-color: @background;
+    padding: 10px 0;
+}
+
+entry,
+prompt {
+    spacing: 0;
+    padding: 3;
+    text-color: @foreground;
+    background-color: @background;
+}
+case-indicator,
+listview {
+    background-color: @background;
+    padding: 0;
+}

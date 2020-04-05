@@ -1,8 +1,0 @@
-#!/bin/sh
-#
-# Open images with sxiv from the web
-# Dependencies: sxiv, curl, nohup
-
-TMPFILE=$(mktemp)
-curl -sL "$1" >"$TMPFILE"
-nohup sxiv "$TMPFILE" 2>&1 &

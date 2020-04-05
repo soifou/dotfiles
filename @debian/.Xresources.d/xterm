@@ -1,4 +1,4 @@
-XTerm.VT100.faceName: MesloLGM Nerd Font:size=13:antialias=true
+XTerm.VT100.faceName: monospace:size=13:antialias=true
 XTerm.internalBorder: 30
 XTerm*SaveLines: 9000
 XTerm*visualbell: true

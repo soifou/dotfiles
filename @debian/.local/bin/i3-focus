@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+# i3 wrapper script to force some apps (ie. neomutt, newsboat, rtv) to launch only one instance.
+# If the program is already running, just focus with i3-msg.
+# i3-sensible-terminal reads your env var $TERMINAL, mine is set to kitty.
+#
+# Usage: $ i3-focus neomutt
+#
+# You can use it with desktop files too:
+# [Desktop Entry]
+# Name=Neomutt
+# GenericName=A command line mail reader (MUA)
+# Exec=i3-focus neomutt
+# Terminal=false
+# Type=Application
+# Icon=mail-client
+# Categories=Mail;
+
+i3-msg "[class=\"^$1$\"] focus" >/dev/null || \
+    i3-sensible-terminal -1 --listen-on unix:"$KITTY_SOCK" --class=$1 $1

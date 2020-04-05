@@ -27,7 +27,7 @@ user_interface = alternative
 display_bitrate = yes
 media_library_primary_tag = album_artist
 mouse_support = no
-execute_on_song_change = "~/.bin/ncmpcpp-art extract"
+execute_on_song_change = "~/.local/bin/ncmpcpp-art extract"
 
 # progressbar_look = "─╼ "
 # progressbar_look = "-▒█"
@@ -71,7 +71,7 @@ main_window_color = blue
 color1 = blue
 color2 = cyan
 # active_column_color = magenta
-# current_item_inactive_column_prefix = magenta
+current_item_inactive_column_prefix = magenta
 # current_item_inactive_column_suffix = magenta
 # current_item_prefix = "$(magenta)$r"
 current_item_prefix = "$(yellow)$r"

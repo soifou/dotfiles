@@ -1,4 +1,3 @@
-.directory
 *.zsh.zwc
 private.zsh
-stow/.stowrc
+.stowrc

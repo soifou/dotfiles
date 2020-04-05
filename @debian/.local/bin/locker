@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+LOCKER="$HOME/.local/bin/lockscreen --corrupted"
+LOCKER_IDLE_TIME_MIN=${LOCKER_IDLE_TIME_MIN:-5}
+LOCKER_IDLE_TIME_SEC=${LOCKER_IDLE_TIME_SEC:-300}
+
+if command -v xidlehook >/dev/null; then
+    mkdir -p "${XDG_RUNTIME_DIR:-/tmp}"/xidlehook
+    SOCKET="${XDG_RUNTIME_DIR:-/tmp}"/xidlehook/socket
+    rm -f "$SOCKET"
+
+    pgrep xidlehook >/dev/null || xidlehook \
+        --not-when-fullscreen \
+        --socket "$SOCKET" \
+        --timer "$LOCKER_IDLE_TIME_SEC" "$LOCKER" ""
+
+elif command -v xautolock >/dev/null; then
+    pgrep xautolock >/dev/null || xautolock \
+        -detectsleep \
+        -time "$LOCKER_IDLE_TIME_MIN" \
+        -locker "$LOCKER" \
+        -notify 30
+
+else
+    echo "Locker error: neither xidlehook nor xautolock were found! Aborting." 1>&2
+    exit 64
+fi

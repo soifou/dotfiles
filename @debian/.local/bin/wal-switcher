@@ -1,0 +1,75 @@
+#!/usr/bin/env sh
+
+# Fetch/change wallpaper and generate a colorscheme
+# Requirements: xrandr, curl,
+# Credits to ilsenatorov for the idea
+# https://github.com/ilsenatorov/dotfiles/blob/big/rofi/themeswitch.sh
+
+PYWAL_BACKEND=${PYWAL_BACKEND:-wal}
+PYWAL_SCRIPT=~/.local/bin/wal-changer
+WALLPAPER_PATH=${WALLPAPER_PATH:-~/Pictures/wallpapers}
+mkdir -p "$WALLPAPER_PATH"
+
+if [ -z "$@" ]; then
+    get_options() {
+        options="
+            random
+            theme-light
+            theme-dark
+        "
+        for o in $options; do echo "$o"; done
+    }
+    get_themes() {
+        ls "$WALLPAPER_PATH"
+    }
+    get_options
+    get_themes
+else
+    THEMES="$@"
+
+    case "$THEMES" in
+    random)
+        # fetch random wallpaper from unsplash
+        XRANDR_BIN="$(whereis -b xrandr | awk '{print $2}')"
+        if [ -z "$XRANDR_BIN" ]; then
+            echo missing xrandr, please install dependencies
+            exit 1
+        fi
+        SCREEN_RES=$($XRANDR_BIN | awk '/ primary/{print $4}' | sed -e 's/+.*//g')
+        THEMES="today"
+        rm -f "$WALLPAPER_PATH/today"
+        curl -o "$WALLPAPER_PATH/${THEMES}" -J -L "https://source.unsplash.com/random/$SCREEN_RES" >/dev/null 2>&1
+        ;;
+    theme-light | theme-dark) ;; # nothing to do
+    *) ln -sf "$WALLPAPER_PATH/${THEMES}" "$WALLPAPER_PATH/today" ;;
+    esac
+
+    # generate schemes based on selected wallpaper
+    if [ -n "${THEMES}" ]; then
+        # Argument -c (Delete all cached colorschemes) does not work for me
+        rm -rf "$XDG_CACHE_HOME/wal"
+
+        # Sometimes process hangs while writing one of /dev/pts/{0,2,5}
+        # filtering the culprit fix the issue, but I don't know why this occurs.
+        # See: https://github.com/dylanaraps/pywal/issues/40
+        # Hotfix: pywal/sequences.py
+        # Writing to "/dev/pts/[0-9] lets you send data to open terminals.
+        # if to_send:
+        #     for term in glob.glob(tty_pattern):
+        #         if term != '/dev/pts/5':
+        #             util.save_file(sequences, term)
+
+        # reload current theme with light colors
+        if [ x"theme-light" = x"${THEMES}" ]; then
+            wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
+                -q -n -i "$WALLPAPER_PATH/today" -l >/dev/null
+        # reload current theme with dark colors
+        elif [ x"theme-dark" = x"${THEMES}" ]; then
+            wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
+                -q -n -i "$WALLPAPER_PATH/today" >/dev/null
+        else
+            wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
+                -q -n -i "$WALLPAPER_PATH/${THEMES}" >/dev/null
+        fi
+    fi
+fi

@@ -1,0 +1,16 @@
+* {{
+    selected-background: {color2};
+    selected-background-faded: {color4}af;
+
+    /* background around menu */
+    shadow:{background}ef;
+
+    background: {background};
+    foreground: {foreground};
+    border-color: {color4};
+
+    accent: {color4};
+    background-light: {background}ac;
+    on: {color2};
+    off: {color6};
+}}

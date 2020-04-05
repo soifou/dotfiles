@@ -4,16 +4,13 @@
 # `   '`---'`-'-'`---'`---'`---'`---^`---'
 #
 
-#auto-reload yes
-confirm-exit no
+confirm-exit yes
 show-title-bar no
 
 # By default and if exists, cache.db is created in ~/.local/share/newsboat
 # https://newsboat.org/releases/2.18/docs/newsboat.html#_xdg_base_directory_support
 # However you can specify cache dir like so (or with flag --cache-file)
 cache-file "~/.cache/newsboat/cache.db"
-# This does not work (anymore)
-# cache-file "$XDG_CACHE_HOME/newsboat/cache.db"
 
 bind-key j down
 bind-key k up
@@ -34,13 +31,13 @@ bind-key D pb-download
 bind-key x pb-delete
 bind-key ^t next-unread
 
-color background         default   default
-color listnormal         default   default
-color listnormal_unread  default   default
-color listfocus          black     yellow
-color listfocus_unread   black     yellow bold
-color info               yellow  black   bold
-color article default default
+color background          white   default
+color listnormal          blue    default   dim
+color listfocus           blue    default   bold
+color listnormal_unread   white   default   dim
+color listfocus_unread    white   default   bold
+color info                black   green
+color article             white   default
 
 highlight article "^(Title):.*$" blue default
 highlight article "\\[image\\ [0-9]+\\]" green default
@@ -58,7 +55,7 @@ highlight article "https?://[^ ]+" blue default
 #highlight article ":.*\\(embedded flash\\)$" color74 default
 
 bind-key U show-urls
-external-url-viewer urlview
+external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 browser linkhandler
 
 macro , open-in-browser

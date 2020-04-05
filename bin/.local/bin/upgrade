@@ -1,0 +1,183 @@
+#!/usr/bin/env bash
+
+## Beware! This script is intended to be used by only me, myself and I.
+## It keeps me up to date accross my *nix journey
+
+yn() {
+    printf "$(tput bold):: $(tput setaf 2)%s$(tput sgr0) [y/n]: " "$1"
+    stty -icanon
+    answer=$(dd ibs=1 count=1 2>/dev/null)
+    stty icanon
+    printf '\n'
+    [[ "$answer" =~ ^[Yy]$ ]]
+}
+
+debian() {
+    yn "Sync server time?" && sudo ntpdate -b pool.ntp.org
+
+    if yn "Update system?"; then
+        sudo apt upgrade -y 2>/dev/null && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
+        sudo dpkg -l | grep '^rc' | awk '{print $2}' | xargs sudo apt-get purge -y
+    fi
+
+    if yn "Update GitHub releases?"; then
+        for app in $GH_APPS; do
+            echo "$(tput bold)==> $(tput setaf 2)Upgrade $app...$(tput sgr0)"
+            ghupdate "$app"
+        done
+    fi
+
+    if command -v keybase >/dev/null 2>&1; then
+        if yn "Upgrade Keybase CLI?"; then
+            curl -O https://prerelease.keybase.io/keybase_amd64.deb
+            sudo dpkg -i keybase_amd64.deb
+            sudo apt-get install -f
+            run_keybase
+            rm -f keybase_amd64.deb
+        fi
+    fi
+}
+arch() {
+    if yn "Update system?"; then
+        sudo pacman -Syu --noconfirm
+
+        # autoremove
+        [ "$(pacman -Qdtq >/dev/null)" ] && pacman -Qdtq | xargs sudo pacman --noconfirm -R
+
+        # clean and autoclean
+        sudo pacman -Sc --noconfirm
+        sudo pacman -Scc --noconfirm
+
+        # upgrade AUR packages
+        yay -Syu
+    fi
+}
+macos() {
+    yn "Sync server time?" && sudo sntp -sS pool.ntp.org
+    yn "Change wallpaper?" && sh "$XDG_DATA_HOME/bin/unsplash"
+}
+
+while IFS='=' read -r key val; do
+    case $key in
+        ID) distro=$val ;;
+    esac
+done < /etc/os-release
+
+[ "$distro" = 'debian' ] && debian
+[ "$distro" = 'arch' ] && arch
+[ -f /System/Library/CoreServices/SystemVersion.plist ] && macos
+
+if [ -d "$HOME/dotfiles" ]; then
+    if yn "Update dots?"; then
+        cd "$HOME/dotfiles" && git pull
+    fi
+fi
+
+if command -v pass >/dev/null 2>&1; then
+    yn "Update pass?" && pass git pull
+fi
+
+if command -v mr >/dev/null 2>&1; then
+    if yn "Upgrade myrepos synced repo?"; then
+        cd "$XDG_DATA_HOME/myrepos" && git pull
+    fi
+fi
+
+if command -v docker >/dev/null 2>&1; then
+    if yn "Update docker images?"; then
+        if [[ $(uname) == 'Darwin' ]]; then
+            # @HOTFIX: xhyve keeps resetting dns through resolv.conf, cannot pull image
+            # https://forums.docker.com/t/custom-etc-resolv-conf-in-docker-for-mac-or-using-dns-domain/10035/7
+            echo "nameserver 8.8.8.8" | docker-machine ssh $(docker-machine active) "sudo tee /etc/resolv.conf > /dev/null"
+        fi
+
+        docker images | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull | grep "Status:"
+        docker system prune -f
+        # docker volume prune -f
+    fi
+fi
+
+if command -v brew >/dev/null 2>&1; then
+    if yn "Update brew?"; then
+        if [ -d "$HOME/.linuxbrew" ]; then
+            brew update && brew upgrade && brew cleanup
+        elif [ "$(uname)" == 'Darwin' ]; then
+            brew update
+            brew upgrade
+            # https://github.com/buo/homebrew-cask-upgrade
+            brew cu -ay
+            brew cleanup
+        fi
+    fi
+fi
+
+if command -v anyenv >/dev/null 2>&1; then
+    yn "Upgrade anyenv?" && anyenv update
+fi
+
+if command -v antibody >/dev/null 2>&1; then
+    yn "Update antibody?" && antibody update | grep "antibody: updated:"
+fi
+
+if command -v npm >/dev/null 2>&1; then
+    if yn "Update global node dependencies?"; then
+        npm -g outdated
+        sleep 3
+        npm -g update
+    fi
+fi
+
+if command -v pip >/dev/null 2>&1; then
+    if yn "Update global python dependencies?"; then
+        pip list --outdated
+        sleep 3
+        pip install --upgrade pip
+        pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U | grep "Successfully installed"
+    fi
+fi
+
+if command -v phpenv >/dev/null 2>&1; then
+    if yn "Update global composer dependencies?"; then
+        composer=$(phpenv which composer)
+        $composer selfupdate
+        $composer global outdated
+        sleep 3
+        $composer global update
+    fi
+fi
+
+if command -v gem >/dev/null 2>&1; then
+    if yn "Update global ruby gems dependencies?"; then
+        gem outdated
+        sleep 3
+        gem update --system
+        gem update
+        gem cleanup
+    fi
+fi
+
+if command -v go >/dev/null 2>&1; then
+    if yn "Update global go dependencies?"; then
+        go get -u -v all
+    fi
+fi
+
+if [ -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+    if yn "Update vim vundle dependencies?"; then
+        # The 2 echo's send newline's to any confirmation prompts that might come up,
+        # then i pipe the output to /dev/null - not pretty but it works.
+        # credits: https://github.com/VundleVim/Vundle.vim/issues/511#issuecomment-134251209
+        echo | echo | vim +PluginInstall +qall &>/dev/null
+    fi
+fi
+
+if yn "Cleanup trash?"; then
+    if [[ $(uname) == 'Darwin' ]]; then
+        rm -rf "$HOME/.Trash/*"
+        find . -type f -name '*.DS_Store' -ls -delete
+    else
+        rm -rf "$HOME/.local/share/Trash/{files,info}/*"
+    fi
+fi
+
+cd "$HOME" || exit

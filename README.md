@@ -11,7 +11,7 @@ Dig in through the repo you might find some inspiration.
 
 ## Init
 
-1 - Install stow.
+1 - Install [GNU stow](https://www.gnu.org/software/stow/).
 
 2 - Clone this repo:
 
@@ -23,8 +23,7 @@ $ cd ~/dotfiles
 3 - Init stow:
 
 ```sh
-$ echo "--target=$(echo $HOME)\n--verbose" > stow/.stowrc
-$ stow stow
+$ echo "--target=$(echo $HOME)\n--verbose" > .stowrc
 ```
 
 ## Examples

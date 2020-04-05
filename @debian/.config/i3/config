@@ -16,25 +16,27 @@
 # Mod4 = super (aka windows)
 # Mod5 = level 3 shift (aka AltGr, Opt)
 set $mod Mod4
+
 # set $monitorLeft VGA-0
 set $monitorRight $MONITOR
 set $border_pixels 2
-set $bktransparent "#120f0daa"
-set_from_resource $background  background  #000000
-set_from_resource $darkred     color1  #000000
-set_from_resource $red         color9  #000000
-set_from_resource $darkgreen   color2  #000000
-set_from_resource $green       color10 #000000
-set_from_resource $darkyellow  color3  #000000
-set_from_resource $yellow      color11 #000000
-set_from_resource $darkblue    color4  #000000
-set_from_resource $blue        color12 #000000
-set_from_resource $darkmagenta color5  #000000
-set_from_resource $magenta     color13 #000000
-set_from_resource $darkcyan    color6  #000000
-set_from_resource $cyan        color14 #000000
-set_from_resource $darkwhite   color7  #000000
-set_from_resource $white       color15 #000000
+
+set_from_resource $background  background   #000000
+set_from_resource $foreground  foreground   #000000
+set_from_resource $darkred     color1       #000000
+set_from_resource $red         color9       #000000
+set_from_resource $darkgreen   color2       #000000
+set_from_resource $green       color10      #000000
+set_from_resource $darkyellow  color3       #000000
+set_from_resource $yellow      color11      #000000
+set_from_resource $darkblue    color4       #000000
+set_from_resource $blue        color12      #000000
+set_from_resource $darkmagenta color5       #000000
+set_from_resource $magenta     color13      #000000
+set_from_resource $darkcyan    color6       #000000
+set_from_resource $cyan        color14      #000000
+set_from_resource $darkwhite   color7       #000000
+set_from_resource $white       color15      #000000
 
 font pango:monospace 10
 
@@ -44,43 +46,49 @@ floating_modifier $mod
 # =============================================================================
 # Terminal
 # =============================================================================
-bindsym $mod+Return exec i3-sensible-terminal --single-instance --listen-on unix:/tmp/mykitty
+bindsym $mod+Return exec kitty -1 --listen-on unix:"$KITTY_SOCK"
 
 # =============================================================================
 # Launcher
 # =============================================================================
-bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,calc:~/.bin/rofi-bc,themes:~/.bin/wal-switcher,emoji' -plugin-path /usr/local/lib/rofi -show drun"
-bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10
+# Default - need to quote entire command, we use commas in modi
+bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,calc:~/.local/bin/rofi/rofi-bc' -show drun"
+# Classic Alt+Tab to list opened apps
+bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10 -no-sidebar-mode
+# List pass entries using pass-clip (password-store extension): https://github.com/ibizaman/pass-clip
+bindsym $mod+p exec --no-startup-id pass clip --rofi
+# Manage wallpapers/themes, copy emojis to clipboard (https://github.com/Mange/rofi-emoji)
+bindsym $mod+t exec --no-startup-id "rofi -modi 'themes:~/.local/bin/wal-switcher,emoji' -plugin-path /usr/local/lib/rofi -show themes"
 
 # =============================================================================
 # Locker
 # =============================================================================
 # bindsym $mod+Escape exec xidlehook-client --socket "$XDG_RUNTIME_DIR/xidlehook/socket" control --action trigger --timer 0 >/dev/null
-bindsym $mod+Escape exec ~/.bin/lockscreen --corrupted
+bindsym $mod+Escape exec ~/.local/bin/lockscreen --corrupted
 
 # =============================================================================
 # Screenshot
 # =============================================================================
-bindsym Print exec ~/.bin/screenshot region-clipboard
-bindsym $mod+Print exec ~/.bin/screenshot region
-bindsym $mod+Shift+Print exec ~/.bin/screenshot screen
+bindsym Print exec ~/.local/bin/screenshot region-clipboard
+bindsym $mod+Print exec ~/.local/bin/screenshot region
+bindsym $mod+Shift+Print exec ~/.local/bin/screenshot screen
 
 # =============================================================================
 # Webcam
 # =============================================================================
 for_window [title="video0 - mpv"] floating enable
 for_window [title="video0 - mpv"] sticky enable
-bindsym $mod+w exec --no-startup-id ~/.bin/toggle-webcam
+bindsym $mod+w exec --no-startup-id ~/.local/bin/toggle-webcam
 
 # =============================================================================
 # Music
 # =============================================================================
-bindsym $mod+Shift+z exec ~/.bin/workspace-zik
+bindsym $mod+Shift+z exec ~/.local/bin/workspace-zik
 # for_window [instance="zik"] floating enable
 # for_window [instance="zik"] resize set 1024 1024
-# bindsym $mod+Shift+z exec i3-sensible-terminal --class=zik --single-instance ~/.bin/ncmpcpp-art
+# bindsym $mod+Shift+z exec i3-sensible-terminal --class=zik --single-instance ~/.local/bin/ncmpcpp-art
 # for_window [instance="zik"] move scratchpad
-# exec --no-startup-id i3-sensible-terminal --class=zik --single-instance ~/.bin/ncmpcpp-art
+# exec --no-startup-id i3-sensible-terminal --class=zik --single-instance ~/.local/bin/ncmpcpp-art
 # bindsym $mod+Shift+z [instance="zik"] scratchpad show; [instance="zik"] move position center
 
 # change focus
@@ -189,8 +197,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-# bindsym $mod+Shift+e exec i3-msg exit
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id ~/.local/bin/rofi/rofi-applet --powermenu-classic
 
 # =============================================================================
 # Resize window (you can also use the mouse for that)
@@ -231,8 +239,8 @@ bindsym XF86AudioStop exec mpc stop >/dev/null
 # Assign colors
 # =============================================================================
 #                       BORDER       BACKGROUND     TEXT        INDICATOR    CHILD_BORDER
-client.focused          $background  $darkblue      $white      $background  $darkred
-client.unfocused        $background  $bktransparent $white      $background  $background
+client.focused          $darkblue    $darkblue      $background $darkred    $darkblue
+client.unfocused        $background  $background    $foreground $background  $background
 client.focused_inactive $background  $background    $white      $background  $background
 client.urgent           $darkred     $darkred       $background $darkred     $darkred
 client.background       $background
@@ -244,7 +252,7 @@ client.background       $background
 # exec --no-startup-id subl
 
 # re-run with every i3 reload
-exec_always --no-startup-id ~/.bin/polybar-run
+exec_always --no-startup-id ~/.local/bin/polybar-run
 # exec_always --no-startup-id ~/.config/lemonbar/run
 exec_always --no-startup-id killall picom; picom -b --experimental-backends
 
@@ -253,21 +261,25 @@ exec_always --no-startup-id killall picom; picom -b --experimental-backends
 # =============================================================================
 default_border pixel $border_pixels
 for_window [class=".*"] border pixel $border_pixels
-for_window [class=".*"] title_format "<span weight='bold' foreground='$darkred'>%title</span> :: <small>%class</small>"
+# for_window [class=".*"] title_format "<span weight='bold' foreground='$darkred'>%title</span> :: <small>%class</small>"
 for_window [urgent=latest] focus
+for_window [workspace=2] layout tabbed
 for_window [workspace=4] layout tabbed
 for_window [instance="zik"] border pixel 5
 for_window [class="scummvm"] floating enable resize set 640 480
 for_window [class="Virt-manager|Qemu-system-x86_64"] floating enable resize move position center
 # for_window [class="mpv"] floating enable resize move position center
 
+focus_on_window_activation focus
 # Using Rofi, last focused window is lost, and focus window at the mouse position
 focus_follows_mouse no
 # No more deadlock until you go out of fullscreen
 popup_during_fullscreen leave_fullscreen
+#
+workspace_auto_back_and_forth yes
 # =============================================================================
 # i3-gaps
 # =============================================================================
 gaps inner 10
 gaps outer 2
-smart_borders on
+# smart_borders on

@@ -1,0 +1,17 @@
+configuration {
+    font: "monospace 11";
+    show-icons: true;
+    disable-history: false;
+    case-sensitive: false;
+    sidebar-mode: true;
+    auto-select: false;
+    tokenize: true;
+    fullscreen: true;
+    scroll-method: 1;
+    theme: "menus/main.rasi";
+    pid: "/run/user/1000/rofi.pid";
+    kb-mode-next: "Super+l";
+    kb-mode-previous: "Super+h";
+    kb-row-up: "Super+k,Up";
+    kb-row-down: "Super+j,Down";
+}

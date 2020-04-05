@@ -1,0 +1,64 @@
+#!/usr/bin/env sh
+
+# Sync repositories and display/notify user of all upgradable packages with bumped version
+#
+# foo 1.0 => 1.1
+# bar 1.2.12-1 => 1.2.13-1
+#
+# Cron example (every 3hrs): 0 */3 * * * $XDG_DATA_HOME/bin/apt/apt-check --refresh
+
+BAR_ICON=""
+PKG_REG="a-z+0-9.:\~-"
+REGEX="s|\([$PKG_REG]*\)/[a-z,]*\s\([$PKG_REG]*\)\s[a-z0-9]*\s\[upgradable\sfrom:\s\([$PKG_REG]*\)[\w\d-]*\]$|\1 \3 => \2|"
+
+refresh() {
+    ping -q -c 1 1.1.1.1 >/dev/null || exit
+    sudo apt update >/dev/null 2>&1 || notify-send -i dialog-error "Error downloading updates."
+}
+
+status() {
+    COUNT=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX" | wc -l)
+    if [ "$COUNT" -gt "50" ]; then
+        getColors
+        echo "$BAR_ICON %{F$color1}${COUNT}%{F-}"
+    else
+        echo "$BAR_ICON $COUNT"
+    fi
+}
+
+list() {
+    COUNT=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX" | wc -l)
+    if [ "$COUNT" = '0' ]; then
+        notify-send -i debian-logo "Packages" "Already up to date!"
+    else
+        PACKAGES=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX")
+        notify-send -i debian-logo "$COUNT update(s) available" "$PACKAGES"
+    fi
+}
+
+# Import colors from available location
+getColors() {
+    # Pywal
+    if [ -f "$HOME/.cache/wal/colors.sh" ]; then
+        # shellcheck source=/dev/null
+        . "$HOME/.cache/wal/colors.sh"
+    # Xressources
+    else
+        color1=$(xrdb -query | grep '*color1' | awk -F: '{print $2}' | xargs)
+    fi
+}
+
+case "$1" in
+    --refresh|-r) refresh ;;
+    --status|-s) status ;;
+    --list|-l) list ;;
+    *)
+        echo "Wrapper script to handle package distribution" >&2
+        echo "" >&2
+        echo "--refresh, -r Refresh packages list" >&2
+        echo "--status,  -s Display how many packages are upgradable" >&2
+        echo "--list,    -l List upgradable packages via notify-send" >&2
+        echo ""
+        exit
+    ;;
+esac

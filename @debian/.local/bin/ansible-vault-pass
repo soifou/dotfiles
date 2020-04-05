@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# Retrieve ansible-vault password from pass store manager
+#
+# For a better experience, export these vars below:
+# export ANSIBLE_VAULT_PASSWORD_FILE="$XDG_DATA_HOME/bin/ansible-vault-pass"
+# export ANSIBLE_VAULT_IDENTITY_LIST="my_vault@$ANSIBLE_VAULT_PASSWORD_FILE"
+#
+# Example:
+# $ ansible-vault encrypt --encrypt-vault-id=my_vault /path/to/file
+# $ ansible-vault decrypt /path/to/file
+# $ ansible-vault view /path/to/file
+
+command -v pass >/dev/null 2>&1 && pass localhost/ansible-vault

@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# Locks your screen using either a pixelated or corrupted screenshot.
+# Will not show anything when you type in your password.
+
+# Exit immediately if a command exits with a non-zero status.
+set -e
+
+# Check for arguments
+case "$1" in
+    --pixelated) EFFECT=pixelated;;
+    --corrupted) EFFECT=corrupted;;
+    *) EFFECT=pixelated;;
+esac
+
+# Check for dependency programs
+command -v i3lock >/dev/null || (echo "Please install i3lock." && exit 1)
+command -v scrot >/dev/null || (echo "Please install scrot." && exit 1)
+if [ $EFFECT = 'pixelated' ]; then command -v convert >/dev/null || (echo "Please install imagemagick." && exit 1)
+elif [ $EFFECT = 'corrupted' ]; then command -v corrupter >/dev/null || (echo "Please install corrupter (https://github.com/r00tman/corrupter)." && exit 1); fi
+# Check for conflicting xscreensaver process
+pgrep -x "xscreensaver" >/dev/null && (echo "xscreensaver detected. Please stop xscreensaver." && exit 1)
+
+# get temp filenames
+t="$(mktemp).png"
+tm="${t}.mod"
+# make original screenshot
+scrot -q 50 "$t"
+
+case $EFFECT in
+    # make pixelated version of screenshot
+    'pixelated') convert -quality 1 -scale 10% -scale 1000% "$t" "$tm" ;;
+    # corrupted version of screenshot
+    'corrupted') corrupter -add 0 -mag -1 -bheight 10 -lr 0 -stride 2 -meanabber 0 -boffset -75 "$t" "$tm" ;;
+esac
+
+# remove original screenshot
+rm "$t"
+# Locking
+# -e is supported since i3lock 2.6 (will not validate empty passwords against PAM)
+# i3lock -u -e -i "$tm"
+i3lock -u -i "$tm"
+
+# remove pixelated screenshot
+rm "$tm"
+
+exit 0

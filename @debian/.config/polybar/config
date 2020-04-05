@@ -1,4 +1,4 @@
-[section/base]
-include-file = ~/.config/polybar/colors.ini
-include-file = ~/.config/polybar/modules.ini
-include-file = ~/.config/polybar/bars/default.ini
+include-file = $XDG_CONFIG_HOME/polybar/modules/core.ini
+include-file = $XDG_CONFIG_HOME/polybar/modules/user.ini
+include-file = $XDG_CONFIG_HOME/polybar/colors.ini
+include-file = $XDG_CONFIG_HOME/polybar/bars.ini
