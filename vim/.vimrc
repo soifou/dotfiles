@@ -28,6 +28,10 @@ if iCanHazVundle == 0
   :PluginInstall
 endif
 
+" Local
+Plugin 'wal.vim'
+
+" Github
 Plugin 'ap/vim-css-color'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -38,8 +42,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'w0rp/ale'
-" Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
-" Plugin 'nathanaelkane/vim-indent-guides'
 
 call vundle#end()
 filetype plugin indent on " required
@@ -61,13 +63,11 @@ set noswapfile
 
 " 04. Theme/Colors
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme wal
 set t_Co=256              " enable 256-color mode.
+" set termguicolors         " enable true colors support (nord/ayu need this enabled).
 syntax enable             " enable syntax highlighting (previously syntax on).
 
-colorscheme nord
-
-" custom highlight terms style (:hi to get colors depending on your scheme)
-autocmd VimEnter,Colorscheme * :hi Search term=bold,reverse ctermfg=6 ctermbg=8 guifg=#88C0D0 guibg=#4C566A
 " Prettify JSON files
 autocmd BufRead,BufNewFile *.json set filetype=json
 " Prettify Vagrantfile
@@ -79,7 +79,8 @@ au BufRead,BufNewFile */nginx/* set ft=nginx
 
 " 05. Vim UI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set number                " show line numbers
+" set number                " show line numbers
+set rnu                   " show relative numbers
 set numberwidth=6         " make the number gutter 6 characters wide
 set cul                   " highlight current line
 set laststatus=2          " last window always has a statusline
@@ -112,7 +113,7 @@ set shiftwidth=4            " indent/outdent by 4 columns
 " set autoindent            " auto-indent
 " set softtabstop=4         " unify
 " set shiftround            " always indent/outdent to the nearest tabstop
-" set expandtab             " use spaces instead of tabs
+set expandtab               " use spaces instead of tabs
 " set smartindent           " automatically insert one extra level of indentation
 " set smarttab              " use tabs at the start of a line, spaces elsewhere
 
@@ -122,9 +123,7 @@ set backspace=indent,eol,start
 " 07. Custom
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " lightline
-let g:lightline = {
-    \ 'colorscheme': 'nord',
-\ }
+let g:lightline = { 'colorscheme': 'wal' }
 
 " ALE (Asynchronous Lint Engine)
 let g:ale_echo_msg_error_str = 'E'
@@ -139,7 +138,7 @@ let g:ctrlp_cmd = 'CtrlP'
 " Devicons
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
-let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 " Find glyph at http://nerdfonts.com/#cheat-sheet
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
     \ 'html': '',
@@ -154,28 +153,41 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
 \ }
 
 " NERDTree syntax highlight plugin (vim-nerdtree-syntax-highlight)
-let s:git_orange = 'F54D27'
-let s:purple = "834F79"
+" let s:git_orange = 'F54D27'
+" let s:purple = "834F79"
 " let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
 " let g:NERDTreeExtensionHighlightColor['css'] = s:blue " sets the color of css files to blue
-let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
-let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange
-let g:NERDTreeExactMatchHighlightColor['.php_cs'] = s:purple
+" let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
+" let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange
+" let g:NERDTreeExactMatchHighlightColor['.php_cs'] = s:purple
 " let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
 " let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
 
+" let g:NERDTreeSyntaxDisableDefaultExtensions = 1
+" let g:NERDTreeFileExtensionHighlightFullName = 1
+" let g:NERDTreeExactMatchHighlightFullName = 1
+" let g:NERDTreePatternMatchHighlightFullName = 1
+
+"   ~on vimrc source, refresh the devicons
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
+
 " NERDTree
-let g:NERDTreeMinimalUI = v:true
+let g:NERDTreeMinimalUI = 1
+let NERDTreeCascadeSingleChildDir=0
+" let g:NERDTreeHighlightCursorline = 0
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
 " this will enable icon specific colors set " " instead to use only one color
-let g:NERDTreeDirArrowExpandable = "\u00a0"
-let g:NERDTreeDirArrowCollapsible = "\u00a0"
-let g:NERDTreeShowHidden = v:true
+let g:NERDTreeShowHidden = 1
 let g:NERDTreeIgnore = [
     \ '^\.DS_Store$[[file]]',
     \ 'zsh.zwc$[[file]]',
     \ '^\.git$[[dir]]',
     \ '^node_modules$[[dir]]'
 \ ]
+
 
 " Make colors of directory icons with the same as directory names.
 highlight! link NERDTreeFlags NERDTreeDir
@@ -191,6 +203,24 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " Close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+" mutt: insert attachment with ranger
+" fun! RangerMuttAttach()
+"     if filereadable('/tmp/chosendir')
+"         silent !ranger --choosefiles=/tmp/chosenfiles --choosedir=/tmp/chosendir "$(cat /tmp/chosendir)"
+"     else
+"         silent !ranger --choosefiles=/tmp/chosenfiles --choosedir=/tmp/chosendir
+"     endif
+"     if filereadable('/tmp/chosenfiles')
+"         call append('.', map(readfile('/tmp/chosenfiles'), '"Attach: ".substitute(v:val," ",''\\ '',"g")'))
+"         call system('rm /tmp/chosenfiles')
+"     endif
+"     redraw!
+" endfun
+" map <C-a> magg/Reply-To<CR><ESC>:call RangerMuttAttach()<CR>`a
+" imap <C-a> <ESC>magg/Reply-To<CR><ESC>:call RangerMuttAttach()<CR>`aa
+
 
 " Split navigations
 nnoremap <C-J> <C-W><C-J>
