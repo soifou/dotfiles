@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Global aliases
 alias ls="exa"
@@ -8,18 +8,32 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias grep="grep --color=auto"
+
 alias zathura="zathura --config-dir $XDG_CACHE_HOME/wal"
+alias feh="feh --no-fehbg -B background"
+alias bat="bat --theme=ansi-dark"
+alias yafc="yafc -W $XDG_CONFIG_HOME/yafc"
+#alias freewifi="while true ; do wget --quiet --no-check-certificate --post-data 'login=$FREEWIFI_ID&password=$FREEWIFI_PASS&submit=Valider' 'https://wifi.free.fr/Auth' -O '/dev/null' ; sleep 600; done"
 
-alias h5ai-selfupdate="cd $DEVELOPMENT_PATH/tools/h5ai && git pull && npm install && npm run build && mv build/h5ai-*.zip ../.. && cd $DEVELOPMENT_PATH && rm -rf _h5ai && unzip h5ai-*.zip && rm h5ai-*.zip"
-# stay connected with Free Wifi
-alias freewifi="while true ; do wget --quiet --no-check-certificate --post-data 'login=$FREEWIFI_ID&password=$FREEWIFI_PASS&submit=Valider' 'https://wifi.free.fr/Auth' -O '/dev/null' ; sleep 600; done"
+# access clipboard history (greenclip+fzf)
+alias clip="greenclip print | sed '/^$/d' | fzf -e | xargs -r -d'\n' -I '{}' greenclip print '{}'"
+
+# dev
+# httpie
+alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/yarnrc"
 alias https='http --default-scheme=https'
+alias w3m="w3m "
 alias sf="php bin/console"
-
+alias phpunit="php bin/phpunit"
 # find big files in git
 alias gfb="git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | sed -n 's/^blob //p' | sort --numeric-sort --key=2 | cut -c 1-12,41- | numfmt --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest"
 alias gdd="git difftool --no-symlinks --dir-diff"
 
+# games
+alias scummvm="scummvm -c $XDG_CONFIG_HOME"/scummvm/scummvmrc
+alias residualvm="residualvm -c $XDG_CONFIG_HOME"/residualvm/residualvmrc
+
+# kitty terminal specifics
 if [ "$TERM" = 'xterm-kitty' ]; then
     alias diff='kitty +kitten diff'
     alias icat='kitty +kitten icat'

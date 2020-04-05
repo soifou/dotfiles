@@ -40,6 +40,10 @@ if [[ $#h -gt 0 ]]; then
 fi
 unset h
 
+# use same colors as the ls command for file/dir completion
+eval "$(dircolors)"
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
 # set cache file for completions
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompletions-$ZSH_VERSION
@@ -90,6 +94,9 @@ bindkey '\ew' kill-region        # esc+w clear all before cursor
 # bindkey '^W' zsh-backward-delete-word
 bindkey '^W' vi-backward-kill-word # ctrl+w delete a word, stop at word char (see $WORDCHARS)
 bindkey '^H' backward-kill-word    # ctrl+backspace delete entirely previous word
+
+# Execute custom script with keybind
+# bindkey -s '^u' "furl^M" # ctrl+u fuzzy find URLs in current terminal window
 
 # Use vim keys in complete tab menu
 bindkey -M menuselect 'h' vi-backward-char

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -x "$(command -v fasd)" ]; then
     fasd_cache="${XDG_CACHE_HOME:-/tmp}/fasd-init-zsh"

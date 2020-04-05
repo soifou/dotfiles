@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
-[ -f "$HOME/.environment" ] && . "$HOME/.environment"
+[ -f "$HOME/.local/env" ] && . "$HOME/.local/env"

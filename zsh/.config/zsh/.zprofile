@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Augmented PATH
 ## games
@@ -15,9 +15,9 @@ fi
 export GOPATH=$HOME/.go
 export PATH="$GOPATH/bin:$PATH"
 ## composer
-[ -d "$XDG_CONFIG_HOME/composer" ] && export PATH="$XDG_CONFIG_HOME/composer/vendor/bin:$PATH"
+[ -d "$COMPOSER_HOME" ] && export PATH="$COMPOSER_HOME/vendor/bin:$PATH"
 ## linuxbrew
 [ -d "$HOME/.linuxbrew" ] && export PATH="$HOME/.linuxbrew/bin:$PATH"
-## custom ~/.bin and all subdirectories
-LOCAL_BINS="$(du -L "$HOME/.bin" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+## personal scripts
+LOCAL_BINS="$(du -L "$HOME"/.local/bin | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export PATH="$LOCAL_BINS:$PATH"

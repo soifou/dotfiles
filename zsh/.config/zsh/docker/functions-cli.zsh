@@ -8,9 +8,10 @@ getContainerPath() {
     fi
 }
 php() {
-    # @NOTE: we add a custom port in case we want to use the build-in php webserver feature
-    # available in many php framework.
+    # @NOTE: add custom port in case we want to use the build-in php webserver feature
+    # available in many php framework. (-p 8080:8080)
     # $ php bin/console server:run 0.0.0.0:8080
+    # --add-host domain.test:172.17.0.5 \
     tty=
     tty -s && tty=--tty
     docker run \
@@ -20,8 +21,14 @@ php() {
         -v "$PWD":$(getContainerPath) \
         -w $(getContainerPath) \
         -u `id -u`:`id -g` \
+		--env SSH_AUTH_SOCK=/ssh-auth.sock \
+        --env COMPOSER_HOME=$(getContainerPath)/.composer \
+        --env COMPOSER_CACHE_DIR=$(getContainerPath)/.composer/cache \
+        -v /etc/passwd:/etc/passwd:ro \
+        -v /etc/group:/etc/group:ro \
+        -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-7.3 ${@:1}
+        soifou/php-alpine:cli-7.4 ${@:1}
 }
 php7.2() {
     docker run -ti --rm \
@@ -31,31 +38,7 @@ php7.2() {
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-7.2 ${@:1}
 }
-php7.1() {
-    docker run -ti --rm \
-        -v "$PWD":$(getContainerPath) \
-        -w $(getContainerPath) \
-        -u `id -u`:`id -g` \
-        --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-7.1 ${@:1}
-}
-php7.0() {
-    docker run -ti --rm \
-        -v "$PWD":$(getContainerPath) \
-        -w $(getContainerPath) \
-        -u `id -u`:`id -g` \
-        --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-7.0 ${@:1}
-}
-php5.6() {
-    docker run -ti --rm \
-        -v "$PWD":$(getContainerPath) \
-        -v $HOME/.ssh:/ssh \
-        -w $(getContainerPath) \
-        -u `id -u`:`id -g` \
-        --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-5.6 ${@:1}
-}
+
 phppm() {
     docker run --rm \
         -v "$PWD":/var/www \
@@ -66,7 +49,6 @@ phppm() {
 composer() {
     tty=
     tty -s && tty=--tty
-    # --add-host domain.test:172.17.0.5 \
     docker run \
         $tty \
         --interactive \
@@ -124,12 +106,6 @@ php7cc() {
         --net=$DOCKER_NETWORK_NAME \
         ypereirareis/php7cc:latest php7cc $1
 }
-phpunit() {
-    docker run --rm -it \
-        -v $(pwd):/app \
-        --net=$DOCKER_NETWORK_NAME \
-        soifou/phpunit-alpine:latest ${@:1}
-}
 wp() {
     tty=
     tty -s && tty=--tty
@@ -149,7 +125,7 @@ magerun() {
         $tty \
         --interactive \
         --rm \
-        -v $HOME/.n98-magerun:/.n98-magerun \
+        -v $XDG_CONFIG_HOME/magerun:/.n98-magerun \
         -v $(pwd):/mnt \
         -u `id -u`:`id -g` \
         --net=$DOCKER_NETWORK_NAME \
@@ -180,13 +156,6 @@ drupal() {
         --net=$DOCKER_NETWORK_NAME \
         drupalconsole/console:alpine ${@:1}
 }
-mutt() {
-    docker run -it --rm \
-        -v /etc/localtime:/etc/localtime \
-        -e GMAIL -e GMAIL_NAME \
-        -e GMAIL_PASS -e GMAIL_FROM \
-        jess/mutt
-}
 htop() {
     docker run --rm -it \
         --pid host \
@@ -207,7 +176,7 @@ ngrok() {
     else
         NGROK_CONTAINER_NAME=ngrok_web
         docker run --rm -it -d \
-            -v $HOME/.ngrok2/ngrok.yml:/home/ngrok/.ngrok2/ngrok.yml \
+            -v $XDG_CONFIG_HOME/ngrok2/ngrok.yml:/home/ngrok/.ngrok2/ngrok.yml \
             --name $NGROK_CONTAINER_NAME \
             -p 4040 \
             --link "$1":http \
@@ -223,14 +192,14 @@ adb() {
         docker run -d --privileged -v /dev/bus/usb:/dev/bus/usb --name adbd sorccu/adb
     fi
     docker run --rm -ti \
+        -v "$PWD":/home \
+        -u $(id -u $(whoami)) \
         --net container:adbd \
         sorccu/adb adb ${@:1}
 }
 dip() {
     if [ "$#" -ne 1 ]; then
         echo "\e[0;35mOops, syntax is:\e[0m\n $ dip [web_container]"
-        # echo "You want probably get IP adresse of one of theses running containers:"
-        # DC=
     else
         docker inspect $1 | grep IPAddress | tail -n1 | awk -F\" '{print $4}'
     fi
