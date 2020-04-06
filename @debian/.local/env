@@ -48,6 +48,7 @@ export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export NOVACLIENT_UUID_CACHE_DIR="$XDG_CACHE_HOME"/novaclient
 export PACKER_CACHE_DIR="$XDG_CACHE_HOME"/packer
+export RANDFILE="$XDG_CACHE_HOME"/rnd
 export YARN_CACHE_FOLDER="$XDG_CACHE_HOME"/yarn
 ## Data
 export ANYENV_ROOT="$HOME"/.anyenv

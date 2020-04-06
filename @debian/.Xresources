@@ -1,17 +1,17 @@
 ! Colors
 ! http://www.xcolors.net/
-!#include ".Xresources.d/colors-base16-ocean"
-!#include ".Xresources.d/colors-palendrome"
-!#include ".Xresources.d/colors-one-dark"
-!#include ".Xresources.d/colors-breeze-dark"
-!#include ".Xresources.d/colors-eighties"
-!#include ".Xresources.d/colors-tomorrow-night"
-#include ".Xresources.d/colors-custom"
-!#include ".Xresources.d/colors-nord"
+!#include ".config/Xresources/colors-base16-ocean"
+!#include ".config/Xresources/colors-palendrome"
+!#include ".config/Xresources/colors-one-dark"
+!#include ".config/Xresources/colors-breeze-dark"
+!#include ".config/Xresources/colors-eighties"
+!#include ".config/Xresources/colors-tomorrow-night"
+#include ".config/Xresources/colors-custom"
+!#include ".config/Xresources/colors-nord"
 
 ! Font Settings
-#include ".Xresources.d/fonts"
+#include ".config/Xresources/fonts"
 
 ! Terminals
-#include ".Xresources.d/urxvt"
-#include ".Xresources.d/xterm"
+#include ".config/Xresources/urxvt"
+#include ".config/Xresources/xterm"

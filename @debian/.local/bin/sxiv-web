@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Open images with sxiv from the web
 # Dependencies: sxiv, curl, nohup
