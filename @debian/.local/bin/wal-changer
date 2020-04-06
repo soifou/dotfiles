@@ -51,6 +51,8 @@ reload_kitty() {
 reload_mpv() {
     echo "mpv start"
     # Reload custom progress bar (https://github.com/torque/mpv-progressbar)
+    PB_PATH="$XDG_CONFIG_HOME"/mpv/script-opts/torque-progressbar
+    mkdir -p "$PB_PATH"
     . "$XDG_CACHE_HOME"/wal/colors.sh
 
     echo "default-style=\\\fnmonospace\\\b1\\\bord0\\\shad0\\\fs20\\\c&H$(rgb_to_brg $color2)&\\\3c&H$(rgb_to_brg $color4)&
@@ -61,7 +63,7 @@ bar-foreground-style=
 bar-cache-style=\\\c&H$(rgb_to_brg $color2)&
 bar-background-style=\\\c&H$(rgb_to_brg $color2)&\\\alpha&HFF&
 pause-indicator-foreground-style=\\\c&H$(rgb_to_brg $foreground)&
-pause-indicator-background-style=\\\c&H$(rgb_to_brg $background)&" > "$XDG_CONFIG_HOME"/mpv/script-opts/torque-progressbar/main.conf
+pause-indicator-background-style=\\\c&H$(rgb_to_brg $background)&" > "$PB_PATH"
     echo "mpv end"
 }
 rgb_to_brg() {
@@ -78,7 +80,7 @@ reload_pywalfox() {
     echo "pywalfox end"
 }
 
-reload_wal
+reload_wallpaper
 reload_sublime
 reload_kitty
 reload_pywalfox

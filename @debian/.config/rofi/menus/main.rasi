@@ -1,7 +1,7 @@
 @import "~/.cache/wal/colors-rofi.rasi"
 
 window {
-    padding: 400;
+    padding: 33% 20%;
     background-color: @shadow;
 }
 
@@ -104,6 +104,7 @@ icon-search {
 }
 
 tb-wrap {
+    background-color: @background;
     orientation: horizontal;
     expand: false;
     children: [ num-filtered-rows, textbox-sep, num-rows];
