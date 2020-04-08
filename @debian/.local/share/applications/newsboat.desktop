@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Newsboat
+Comment=Newsboat
+GenericName=An RSS/Atom feed reader for text terminals
+Exec=i3-focus newsboat
+Terminal=false
+Type=Application
+Icon=RSS_feeds
+Categories=RSSReader;

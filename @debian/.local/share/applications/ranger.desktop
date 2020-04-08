@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Ranger
+Comment=Ranger
+GenericName=File manager
+Exec=i3-focus ranger
+Terminal=false
+Type=Application
+Icon=system-file-manager
+Categories=System;

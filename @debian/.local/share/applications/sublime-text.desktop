@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Sublime Text
+Actions=Window;Document;
+Categories=TextEditor;Development;
+Comment=Sophisticated text editor for code, markup and prose
+Exec=/opt/sublime_text/sublime_text %F
+GenericName=Text Editor
+Icon=/opt/sublime_text/Icon/32x32/sublime-text.png

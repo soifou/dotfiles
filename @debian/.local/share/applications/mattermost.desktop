@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Mattermost
+Comment=Mattermost
+GenericName=Instant messaging
+Exec=/opt/mattermost-linux-x64/mattermost %U
+Terminal=false
+Type=Application
+Icon=mattermost-desktop
+Categories=InstantMessaging;

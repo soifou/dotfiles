@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Neomutt
+Exec=i3-sensible-terminal -1 --listen-on unix:"$KITTY_SOCK" --class=neomutt_mailto neomutt %u
+Terminal=false
+MimeType=x-scheme-handler/mailto
+Categories=Email
+Icon=mail-client

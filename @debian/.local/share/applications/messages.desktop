@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Android SMS
+Comment=Android SMS
+GenericName=Instant messaging
+Exec="/opt/messages-linux-x64/messages" %U
+Terminal=false
+Type=Application
+Icon=hexchat
+Categories=InstantMessaging;

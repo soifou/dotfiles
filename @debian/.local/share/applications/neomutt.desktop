@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Neomutt
+Comment=Neomutt
+GenericName=A command line mail reader (MUA)
+Exec=i3-focus neomutt
+Terminal=false
+Type=Application
+Icon=mail-client
+Categories=Mail;

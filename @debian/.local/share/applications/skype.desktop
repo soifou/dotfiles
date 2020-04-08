@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Skype
+Comment=Skype
+GenericName=Instant messaging
+Exec=/opt/skype-linux-x64/skype %U
+Terminal=false
+Type=Application
+Icon=skype
+Categories=InstantMessaging;
+StartupWMClass=

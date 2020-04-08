@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=WhatsApp
+Comment=WhatsApp
+GenericName=Instant messaging
+Exec="/opt/whats-app-linux-x64/whats-app" %U
+Terminal=false
+Type=Application
+Icon=whatsapp-desktop
+Categories=InstantMessaging;

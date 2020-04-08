@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Tuir
+Comment=Browse Reddit from your terminal
+GenericName=Reddit client
+Exec=i3-focus tuir
+Terminal=false
+Type=Application
+Icon=reddit
+Categories=Reddit;

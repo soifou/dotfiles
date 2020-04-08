@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Torrent
+Exec=/usr/bin/env tmr-add %U
+Icon=transmission
+Categories=Download;
