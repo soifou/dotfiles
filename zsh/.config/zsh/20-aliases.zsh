@@ -13,6 +13,8 @@ alias zathura="zathura --config-dir $XDG_CACHE_HOME/wal"
 alias feh="feh --no-fehbg -B background"
 alias bat="bat --theme=ansi-dark"
 alias yafc="yafc -W $XDG_CONFIG_HOME/yafc"
+alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
+
 #alias freewifi="while true ; do wget --quiet --no-check-certificate --post-data 'login=$FREEWIFI_ID&password=$FREEWIFI_PASS&submit=Valider' 'https://wifi.free.fr/Auth' -O '/dev/null' ; sleep 600; done"
 
 # access clipboard history (greenclip+fzf)

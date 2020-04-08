@@ -6,12 +6,29 @@ reload_wallpaper() {
     # or a cinemagraph. Find out what it is, and launch with the appropriate program.
     WALL="$(cat "$XDG_CACHE_HOME/wal/wal")"
     MIMETYPE=$(file --mime-type -L "$WALL" | tr -d ' ' | awk -F: '{print $2}')
+    pkill -9 xwinwrap
     case "$MIMETYPE" in
     *png* | *jpg* | *jpeg*)
-        pkill -9 xwinwrap
+        # Set wallpaper with feh
         feh --no-fehbg --bg-fill "$WALL" &
         ;;
-    *gif* | *webm* | *mp4* | *mkv*) mpvbg "$WALL" &;;
+    *gif* | *webm* | *mp4* | *mkv*)
+        # Play a video on the root window with xwinwrap/mpv
+        # Credits: http://github.com/mitchweaver/bin
+        # @TODO: Apparently we don't need anymore xwinwrap (https://github.com/mitchweaver/bin/commit/39eee9759525a702198ef783916454198e1e3e18)
+        # @see: https://github.com/joshua-sterner/mpvbg/blob/master/mpvbg.sh
+        command -v xwinwrap >/dev/null 2>&1 || {
+            echo >&2 "Please install first xwinwrap (https://github.com/ujjwal96/xwinwrap). Aborting."; exit 1;
+        }
+        xwinwrap -ni -b -ov -ni -s -nf -fs -- \
+            mpv --keepaspect=no --on-all-workspaces --no-config \
+                --no-input-default-bindings --no-stop-screensaver --loop-file \
+                --vd-lavc-fast --x11-bypass-compositor=no \
+                -x11-name=mpvbg \
+                --no-audio --no-osc --no-osd-bar -wid WID \
+                "$WALL"> /dev/null 2>&1 &
+
+        ;;
     esac
     echo "wal end..."
 }
@@ -63,7 +80,7 @@ bar-foreground-style=
 bar-cache-style=\\\c&H$(rgb_to_brg $color2)&
 bar-background-style=\\\c&H$(rgb_to_brg $color2)&\\\alpha&HFF&
 pause-indicator-foreground-style=\\\c&H$(rgb_to_brg $foreground)&
-pause-indicator-background-style=\\\c&H$(rgb_to_brg $background)&" > "$PB_PATH"
+pause-indicator-background-style=\\\c&H$(rgb_to_brg $background)&" > "$PB_PATH/main.conf"
     echo "mpv end"
 }
 rgb_to_brg() {

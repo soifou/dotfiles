@@ -24,7 +24,7 @@ audacity() {
     docker run --rm -it \
         -v /etc/localtime:/etc/localtime:ro \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
-        -v $MUSIC_PATH:/home/music \
+        -v $XDG_MUSIC_DIR:/home/music \
         -e DISPLAY=unix$DISPLAY \
         --device /dev/snd:/dev/snd \
         --device /dev/dri:/dev/dri \

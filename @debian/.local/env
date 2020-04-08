@@ -1,25 +1,16 @@
 #!/usr/bin/env sh
 
+# XDG official
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
-
-[ -f "$XDG_CONFIG_HOME"/user-dirs.dirs ] &&
-  . "$XDG_CONFIG_HOME"/user-dirs.dirs &&
-  export \
-    XDG_DESKTOP_DIR \
-    XDG_DOWNLOAD_DIR \
-    XDG_TEMPLATES_DIR \
-    XDG_PUBLICSHARE_DIR \
-    XDG_DOCUMENTS_DIR \
-    XDG_MUSIC_DIR \
-    XDG_PICTURES_DIR \
-    XDG_VIDEOS_DIR
-
-# Partial XDG support
+# XDG non-official
+export XDG_LOCAL_HOME="$HOME/.local"
+[ -f "$XDG_CONFIG_HOME"/user-dirs.dirs ] && \
+  eval "$(sed 's/^[^#].*/export &/g;t;d' "$XDG_CONFIG_HOME"/user-dirs.dirs)"
 
 ## Runtime
 export KITTY_SOCK="$XDG_RUNTIME_DIR"/kitty.sock
@@ -36,6 +27,8 @@ export MEDNAFEN_HOME="$XDG_CONFIG_HOME"/mednafen
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PACKER_CONFIG_DIR="$XDG_CONFIG_HOME"/packer
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/rc
+export VIMDOTDIR="$XDG_CONFIG_HOME"/vim
+export VIMINIT='set rtp^=$VIMDOTDIR | let $MYVIMRC="$VIMDOTDIR/vimrc" | so $MYVIMRC'
 export WAKATIME_HOME="$XDG_CONFIG_HOME"/wakatime
 export WEECHAT_HOME="$XDG_CONFIG_HOME"/weechat
 export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
@@ -68,4 +61,4 @@ export GREP_COLORS="mt=30;43"
 # less/bat (keep output when quitting)
 export LESS="-Xr"
 
-[ -f "$HOME/.local/env.local" ] && . "$HOME/.local/env.local"
+[ -f "$XDG_LOCAL_HOME"/env.local ] && . "$XDG_LOCAL_HOME"/env.local

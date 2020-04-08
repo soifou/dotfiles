@@ -3,7 +3,7 @@
 # https://sw.kovidgoyal.net/kitty/remote-control.html
 # https://github.com/kovidgoyal/kitty/issues/598
 
-MUSIC_PATH=${MUSIC_PATH:-$HOME/Music}
+MUSIC_PATH=${XDG_MUSIC_DIR:-$HOME/Music}
 NOCOVER_PATH="$XDG_CONFIG_HOME/ncmpcpp/vinyl.png"
 STREAMING_PATH="$XDG_CONFIG_HOME/ncmpcpp/streaming.png"
 COVER_PATH="${XDG_CACHE_HOME:-/tmp}/cover"

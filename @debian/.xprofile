@@ -8,6 +8,8 @@ start_daemon() {
 
 # keyboard delay/rate, turn off beep
 command -v xset >/dev/null 2>&1 && xset r rate 350 45 && xset -b
+# xset +fp ~/.local/share/fonts
+# xset fp rehash
 # keyboard numlock
 command -v numlockx >/dev/null 2>&1 && numlockx on
 # custom keymap

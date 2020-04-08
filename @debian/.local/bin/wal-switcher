@@ -20,7 +20,8 @@ if [ -z "$@" ]; then
         for o in $options; do echo "$o"; done
     }
     get_themes() {
-        ls "$WALLPAPER_PATH"
+        find "$WALLPAPER_PATH" -type f -printf '%P\n' | sort
+        # ls "$WALLPAPER_PATH"
     }
     get_options
     get_themes

@@ -1,59 +1,42 @@
+" 00. Environment
+let g:netrw_home='$XDG_CACHE_HOME'
+set directory=$XDG_CACHE_HOME/vim,~/,/tmp
+set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+
 " 01. General
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible         " get rid of Vi compatibility mode. SET FIRST!
 set encoding=utf-8
 
-" 02. Vundle : https://github.com/VundleVim/Vundle.Vim
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-
-if !filereadable(vundle_readme)
-  echo "Installing Vundle.."
-  echo ""
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-  let iCanHazVundle=0
+" 02. Plugins
+if empty(glob('~/.config/vim/autoload/plug.vim'))
+  silent !curl -fLo $XDG_CONFIG_HOME/vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+call plug#begin('~/.config/vim/bundle')
+Plug '~/.config/vim/local/wal.vim'
+Plug 'ap/vim-css-color'
+Plug 'arcticicestudio/nord-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'rhysd/vim-gfm-syntax'
+Plug 'ryanoasis/vim-devicons'
+Plug 'scrooloose/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'w0rp/ale'
+call plug#end()
 
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-if iCanHazVundle == 0
-  echo "Installing Bundles, please ignore key map error messages"
-  echo ""
-  :PluginInstall
-endif
-
-" Local
-Plugin 'wal.vim'
-
-" Github
-Plugin 'ap/vim-css-color'
-Plugin 'arcticicestudio/nord-vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'rhysd/vim-gfm-syntax'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'scrooloose/nerdtree'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'w0rp/ale'
-
-call vundle#end()
-filetype plugin indent on " required
 
 " 03. Events
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " In Makefiles DO NOT use spaces instead of tabs
 autocmd FileType make setlocal noexpandtab
 
 " In Ruby files, use 2 spaces instead of 4 for tabs
 autocmd FileType ruby setlocal sw=2 ts=2 sts=2
-" autocmd FileType javascript setlocal sw=2 ts=2 sts=2
 
 " Enable omnicompletion (to use, hold Ctrl+X then Ctrl+O while in Insert mode)
 set ofu=syntaxcomplete#Complete
@@ -62,7 +45,6 @@ set ofu=syntaxcomplete#Complete
 set noswapfile
 
 " 04. Theme/Colors
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme wal
 set t_Co=256              " enable 256-color mode.
 " set termguicolors         " enable true colors support (nord/ayu need this enabled).
@@ -78,9 +60,8 @@ autocmd BufRead,BufNew,BufNewFile *.md set ft=markdown.gfm
 au BufRead,BufNewFile */nginx/* set ft=nginx
 
 " 05. Vim UI
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set number                " show line numbers
-set rnu                   " show relative numbers
+set number                " show line numbers
+" set rnu                   " show relative numbers
 set numberwidth=6         " make the number gutter 6 characters wide
 set cul                   " highlight current line
 set laststatus=2          " last window always has a statusline
@@ -105,7 +86,6 @@ set foldlevel=99
 set fillchars=vert:│
 
 " 06. Text Formatting/Layout
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tabstop=4               " tab spacing
 set nowrap                  " don't wrap text
 set shiftwidth=4            " indent/outdent by 4 columns
@@ -120,8 +100,8 @@ set expandtab               " use spaces instead of tabs
 " Backspace key should delete chars (mac only)
 set backspace=indent,eol,start
 
+
 " 07. Custom
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " lightline
 let g:lightline = { 'colorscheme': 'wal' }
 
@@ -162,7 +142,6 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
 " let g:NERDTreeExactMatchHighlightColor['.php_cs'] = s:purple
 " let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
 " let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
-
 " let g:NERDTreeSyntaxDisableDefaultExtensions = 1
 " let g:NERDTreeFileExtensionHighlightFullName = 1
 " let g:NERDTreeExactMatchHighlightFullName = 1
@@ -187,8 +166,6 @@ let g:NERDTreeIgnore = [
     \ '^\.git$[[dir]]',
     \ '^node_modules$[[dir]]'
 \ ]
-
-
 " Make colors of directory icons with the same as directory names.
 highlight! link NERDTreeFlags NERDTreeDir
 " Remove trailing slash for dirs
