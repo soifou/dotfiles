@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-# Already sourced by .zshenv
-# [ -f "$HOME/.local/env" ] && . "$HOME/.local/env"
-
-[ -f "$HOME/.xprofile" ] && . "$HOME/.xprofile"
