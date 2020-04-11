@@ -162,12 +162,9 @@ if command -v go >/dev/null 2>&1; then
     fi
 fi
 
-if [ -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+if [ -d "$XDG_CONFIG_HOME"/vim/autoload/plug.vim ]; then
     if yn "Update vim vundle dependencies?"; then
-        # The 2 echo's send newline's to any confirmation prompts that might come up,
-        # then i pipe the output to /dev/null - not pretty but it works.
-        # credits: https://github.com/VundleVim/Vundle.vim/issues/511#issuecomment-134251209
-        echo | echo | vim +PluginInstall +qall &>/dev/null
+        vim -es -u "$XDG_CONFIG_HOME"/vim/vimrc -i NONE -c "PlugInstall" -c "qa"
     fi
 fi
 
@@ -176,7 +173,8 @@ if yn "Cleanup trash?"; then
         rm -rf "$HOME/.Trash/*"
         find . -type f -name '*.DS_Store' -ls -delete
     else
-        rm -rf "$HOME/.local/share/Trash/{files,info}/*"
+        rm -rf "$XDG_DATA_HOME/Trash/{files,info}/*"
+        find "$XDG_CACHE_HOME"/ranger -type f -mtime +14 -delete
     fi
 fi
 

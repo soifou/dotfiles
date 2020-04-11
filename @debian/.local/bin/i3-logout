@@ -1,12 +1,17 @@
 #!/usr/bin/env sh
 
-# Exit desktop session by cleaning up
+# Exit desktop session gracefully
 
 # Remove kitty socket
 rm -f "$KITTY_SOCK"
 # Remove queue list in task-spooler
 tsp -K
+# Kill X compositor
+pkill picom
 # Kill all instances of pywalfox
 pkill -f pywalfox
+# Cleanup ranger cache
+find "$XDG_CACHE_HOME"/ranger -type f -mtime +14 -delete
+
 # Finally exit i3
 i3-msg exit

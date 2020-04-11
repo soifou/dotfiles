@@ -17,7 +17,7 @@ command -v setxkbmap >/dev/null 2>&1 && setxkbmap -layout fr -variant latin9 -op
 # apply current wallpaper/colorscheme
 command -v wal >/dev/null 2>&1 && wal -R >/dev/null
 # screen temp/brightness
-command -v redshift >/dev/null 2>&1 && ~/.local/bin/redshift-cli --temp >/dev/null
+command -v redshift >/dev/null 2>&1 && "$XDG_LOCAL_HOME"/bin/redshift-cli --temp >/dev/null
 # compositor for x11
 command -v picom >/dev/null 2>&1 && picom -b --experimental-backends
 # clipboard manager for rofi
@@ -27,7 +27,7 @@ fi
 # notifier
 command -v dunst >/dev/null 2>&1 && dunst -c "$XDG_CACHE_HOME"/wal/colors-dunstrc &
 # screen locker
-command -v ~/.local/bin/locker >/dev/null 2>&1 && ~/.local/bin/locker &
+command -v locker >/dev/null 2>&1 && "$XDG_LOCAL_HOME"/bin/locker &
 # music player daemon
 start_daemon mpd
 # no mouse cursor

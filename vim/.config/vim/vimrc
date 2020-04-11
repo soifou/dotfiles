@@ -2,13 +2,13 @@
 let g:netrw_home='$XDG_CACHE_HOME'
 set directory=$XDG_CACHE_HOME/vim,~/,/tmp
 set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
-set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
 
 " 01. General
 set nocompatible         " get rid of Vi compatibility mode. SET FIRST!
 set encoding=utf-8
+set fileencoding=utf-8
 
 " 02. Plugins
 if empty(glob('~/.config/vim/autoload/plug.vim'))
@@ -23,13 +23,12 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'rhysd/vim-gfm-syntax'
-Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'w0rp/ale'
+Plug 'scrooloose/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
-
 
 " 03. Events
 " In Makefiles DO NOT use spaces instead of tabs
@@ -40,9 +39,10 @@ autocmd FileType ruby setlocal sw=2 ts=2 sts=2
 
 " Enable omnicompletion (to use, hold Ctrl+X then Ctrl+O while in Insert mode)
 set ofu=syntaxcomplete#Complete
-
 " No swap files, use version control instead
 set noswapfile
+" Move viminfo to cache folder
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 
 " 04. Theme/Colors
 colorscheme wal
@@ -70,7 +70,6 @@ set incsearch             " Highlight as you type your search.
 set ignorecase            " Make searches case-insensitive.
 set ruler                 " Always show info along bottom.
 set showmatch
-set visualbell
 
 " Enable folding
 set foldmethod=indent
@@ -116,9 +115,9 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Devicons
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+" let g:DevIconsEnableFoldersOpenClose = 1
+"let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 " Find glyph at http://nerdfonts.com/#cheat-sheet
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
     \ 'html': '',
@@ -148,16 +147,16 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
 " let g:NERDTreePatternMatchHighlightFullName = 1
 
 "   ~on vimrc source, refresh the devicons
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif
+" if exists('g:loaded_webdevicons')
+"   call webdevicons#refresh()
+" endif
 
 " NERDTree
 let g:NERDTreeMinimalUI = 1
 let NERDTreeCascadeSingleChildDir=0
 " let g:NERDTreeHighlightCursorline = 0
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
+" let g:NERDTreeDirArrowExpandable = ''
+" let g:NERDTreeDirArrowCollapsible = ''
 " this will enable icon specific colors set " " instead to use only one color
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeIgnore = [
@@ -173,14 +172,17 @@ augroup nerdtreehidecwd
     autocmd!
     autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
 augroup end
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+    exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+    exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
 " Open with Ctrl+n
 map <C-n> :NERDTreeToggle<CR>
 " Open automatically when vim starts up on opening a directory
-autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " Close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 
 " mutt: insert attachment with ranger
 " fun! RangerMuttAttach()
