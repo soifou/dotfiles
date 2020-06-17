@@ -13,8 +13,14 @@ ifeq ($(UNAME_S),Darwin)
 	SUBLIME_DIR="$$HOME/Library/Application Support/Sublime Text 3"
 endif
 
-all:
-	mkdir -p $(SUBLIME_DIR)/{Backup,Cache,Index,Installed\ Packages,Local}
+init:
+	mkdir -p $(SUBLIME_DIR)/Backup
+	mkdir -p $(SUBLIME_DIR)/Cache
+	mkdir -p $(SUBLIME_DIR)/Index
+	mkdir -p $(SUBLIME_DIR)/Installed\ Packages
+	mkdir -p $(SUBLIME_DIR)/Local
+
+package: init
 	if [ -f "$(SUBLIME_DIR)/Installed Packages/Package Control.sublime-package" ]; then
 		echo "Package control is already installed!"
 	else
@@ -22,9 +28,9 @@ all:
 		echo "Package control has been installed!"
 	fi
 
-fontui:
+theme: init
 	cp -f $(SUBLIME_DIR)/Packages/User/DA\ Theme.sublime-settings.dist $(SUBLIME_DIR)/Packages/User/DA\ Theme.sublime-settings
 	cp -f $(SUBLIME_DIR)/Packages/User/DA.sublime-theme.dist $(SUBLIME_DIR)/Packages/User/DA.sublime-theme
 	sed -i 's/FONT_NAME/$(FONT_NAME)/g' $(SUBLIME_DIR)/Packages/User/DA.sublime-theme
 
-.PHONY: all
+.PHONY: init package theme

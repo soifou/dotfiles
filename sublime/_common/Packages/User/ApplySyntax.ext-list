@@ -3,6 +3,7 @@
 	[
 		"bash",
 		"sh",
+		"user-dirs.dirs",
 		"zsh"
 	],
 	"HTML (Rails)":
@@ -12,9 +13,9 @@
 	"INI":
 	[
 		".npmrc",
-		"compton.conf",
 		"ini.dist",
-		"redshift.conf"
+		"mimeapps.list",
+		"picom.conf"
 	],
 	"JSON":
 	[
@@ -67,6 +68,7 @@
 	[
 		"bash",
 		"sh",
+		"user-dirs.dirs",
 		"zsh"
 	],
 	"XML":

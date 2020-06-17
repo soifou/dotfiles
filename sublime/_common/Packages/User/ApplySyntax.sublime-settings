@@ -19,6 +19,15 @@
     // Put your custom syntax rules here:
     "syntaxes": [
         {
+            "syntax": "ShellScript/Bash",
+            "extensions": [
+                "bash",
+                "sh",
+                "user-dirs.dirs",
+                "zsh"
+            ]
+        },
+        {
             "syntax": "User/Syntaxes/Ansible",
             "rules": [
                 { "file_path": ".*/handlers/.*.ya?ml$" },
@@ -51,6 +60,12 @@
             ]
         },
         {
+            "syntax": "XML/XML",
+            "rules": [
+                { "file_path": ".*/fontconfig/.*.conf$" }
+            ]
+        },
+        {
             "syntax": "User/Syntaxes/vim"
         },
         {
@@ -72,8 +87,8 @@
             "extensions": [
                 ".npmrc",
                 "ini.dist",
-                "redshift.conf",
-                "compton.conf"
+                "picom.conf",
+                "mimeapps.list"
             ],
             "rules": [
                 { "file_path": ".*/\\polybar/config$" },

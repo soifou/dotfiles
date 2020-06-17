@@ -4,7 +4,6 @@
 name: nginx
 file_extensions:
   - conf.erb
-  - conf
   - nginx.conf
   - mime.types
   - fastcgi_params

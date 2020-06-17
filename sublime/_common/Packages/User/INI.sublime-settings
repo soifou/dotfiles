@@ -1,9 +1,10 @@
 {
 	"extensions":
 	[
-		"compton.conf",
-		"redshift.conf",
 		".npmrc",
-		"ini.dist"
+		"ini.dist",
+		"mimeapps.list",
+		"picom.conf",
+		"redshift.conf"
 	]
 }
