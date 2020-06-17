@@ -4,8 +4,8 @@ audacity() {
     docker run --rm -it \
         -v /etc/localtime:/etc/localtime:ro \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
-        -v $XDG_MUSIC_DIR:/home/music \
-        -v $XDG_CONFIG_HOME/audacity:/home/.audacity-data
+        -v "$XDG_MUSIC_DIR":/home/music \
+        -v "$XDG_CONFIG_HOME"/audacity:/home/.audacity-data
         -e DISPLAY=unix$DISPLAY \
         --device /dev/snd:/dev/snd \
         --device /dev/dri:/dev/dri \
@@ -37,9 +37,9 @@ libreoffice-calc() {
         -m 2048m \
         -e DISPLAY=unix$DISPLAY \
         -v /usr/share/fonts:/usr/share/fonts:ro \
-        -v ~/.config/libreoffice:/home/alpine/.config/libreoffice \
+        -v "$XDG_CACHE_HOME"/fontconfig:/home/alpine/.cache/fontconfig \
+        -v "$XDG_CONFIG_HOME"/libreoffice:/home/alpine/.config/libreoffice \
         -v /tmp/recently-used:/home/alpine/.recently-used \
-        -v ~/.cache/fontconfig:/home/alpine/.cache/fontconfig \
         -v $(pwd):/home/alpine \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         woahbase/alpine-libreoffice:x86_64 \

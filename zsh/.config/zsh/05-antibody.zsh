@@ -24,3 +24,6 @@ EOBUNDLES
 # zdharma/fast-syntax-highlighting
 # Fix long git commit message highlight
 export 'FAST_HIGHLIGHT[git-cmsg-len]=120'
+
+# zsh-users/zsh-autosuggestions
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'

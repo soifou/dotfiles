@@ -1,7 +1,7 @@
 # guess project path inside the web container
 getContainerPath() {
     if [[ $DOCKER_WEBROOT_PATH == '/app' ]]; then
-        PROJECT=$(pwd -P | sed -e "s@$DEVELOPMENT_PATH/@@g")
+        PROJECT=$(pwd -P | sed -e "s@$XDG_DEVELOP_DIR/@@g")
         echo "$DOCKER_WEBROOT_PATH/$PROJECT"
     else
         echo "$DOCKER_WEBROOT_PATH"

@@ -5,7 +5,7 @@ docker-start() {
 
     elif [[ $1 == 'mac' ]]; then
         if [[ `docker-machine status $DOCKER_MACHINE_NAME` == "Running" ]]; then
-            cd $DEVELOPMENT_PATH/docker
+            cd $XDG_DEVELOP_DIR/docker
             make down
             for DOCKER_ENV_VAR in `env | grep DOCKER_ | awk -F= '{print $1}'`
             do
@@ -19,7 +19,7 @@ docker-start() {
         # @TODO: shutdown docker mac stuff if possible
         docker-machine start $DOCKER_MACHINE_NAME
         eval $(docker-machine env $DOCKER_MACHINE_NAME)
-        cd $DEVELOPMENT_PATH/docker
+        cd $XDG_DEVELOP_DIR/docker
         make start
         . $ZDOTDIR/docker/aliases.zsh
     fi

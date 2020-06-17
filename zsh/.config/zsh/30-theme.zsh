@@ -8,10 +8,11 @@ case "$(tty)" in
     ;;
 esac
 
-# zdharma/fast-syntax-highlighting
-# Apply custom colorscheme
-[ -f "$XDG_CONFIG_HOME/fsh/soifou.ini" ] && fast-theme -q XDG:soifou
+# fzf colorscheme (FZF_DEFAULT_OPTS)
+[ -f "$XDG_CACHE_HOME"/wal/colors.sh ] && . "$XDG_CACHE_HOME"/wal/colors.sh
 
+# zdharma/fast-syntax-highlighting colorscheme
+[ -f "$XDG_CONFIG_HOME/fsh/soifou.ini" ] && fast-theme -q XDG:soifou
 
 # Apply prompt theme
 case "${ZSH_PROMPT_THEME:-p10k}" in
@@ -22,7 +23,7 @@ pure)
     ;;
 p10k)
     antibody bundle romkatv/powerlevel10k
-    [ -f "$XDG_CONFIG_HOME/zsh/themes/p10k.zsh" ] && . "$XDG_CONFIG_HOME/zsh/themes/p10k.zsh"
+    [ -f "$XDG_CONFIG_HOME"/zsh/themes/p10k.zsh ] && . "$XDG_CONFIG_HOME"/zsh/themes/p10k.zsh
     ;;
 spaceship)
     antibody bundle denysdovhan/spaceship-prompt
