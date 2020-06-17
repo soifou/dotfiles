@@ -10,7 +10,7 @@ export XDG_CONFIG_DIRS="/etc/xdg"
 # XDG non-official
 export XDG_LOCAL_HOME="$HOME/.local"
 [ -f "$XDG_CONFIG_HOME"/user-dirs.dirs ] && \
-  eval "$(sed 's/^[^#].*/export &/g;t;d' "$XDG_CONFIG_HOME"/user-dirs.dirs)"
+    eval "$(sed 's/^[^#].*/export &/g;t;d' "$XDG_CONFIG_HOME"/user-dirs.dirs)"
 
 ## Runtime
 export KITTY_SOCK="$XDG_RUNTIME_DIR"/kitty.sock
@@ -34,6 +34,9 @@ export WEECHAT_HOME="$XDG_CONFIG_HOME"/weechat
 export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 ## Cache
+export ANSIBLE_CACHE_PLUGINS="$XDG_CACHE_HOME"/ansible/plugins
+export ANSIBLE_LOCAL_TEMP="$XDG_CACHE_HOME"/ansible/tmp
+export ANSIBLE_SSH_CONTROL_PATH_DIR="$XDG_CACHE_HOME"/ansible/cp
 export ANTIGEN_COMPDUMP="$XDG_CACHE_HOME"/zcompdump
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export COMPOSER_CACHE_DIR="$XDG_CACHE_HOME"/composer
@@ -44,6 +47,25 @@ export PACKER_CACHE_DIR="$XDG_CACHE_HOME"/packer
 export RANDFILE="$XDG_CACHE_HOME"/rnd
 export YARN_CACHE_FOLDER="$XDG_CACHE_HOME"/yarn
 ## Data
+# export ANSIBLE_ACTION_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/actions
+# export ANSIBLE_BECOME_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/become
+# export ANSIBLE_CALLBACK_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/callback
+# export ANSIBLE_CLICONF_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/cliconf
+# export ANSIBLE_COLLECTIONS_PATHS="$XDG_DATA_HOME"/ansible/collections
+# export ANSIBLE_CONNECTION_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/connection
+# export ANSIBLE_DOC_FRAGMENT_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/doc_fragments
+# export ANSIBLE_FILTER_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/filter
+# export ANSIBLE_GALAXY_TOKEN_PATH="$XDG_DATA_HOME"/ansible/galaxy_token
+# export ANSIBLE_HTTPAPI_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/httpapi
+# export ANSIBLE_INVENTORY_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/inventory
+# export ANSIBLE_LIBRARY="$XDG_DATA_HOME"/ansible/plugins/modules
+# export ANSIBLE_LOOKUP_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/lookup
+# export ANSIBLE_MODULE_UTILS="$XDG_DATA_HOME"/ansible/plugins/module_utils
+# export ANSIBLE_NETCONF_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/netconf
+# export ANSIBLE_ROLES_PATH="$XDG_DATA_HOME"/ansible/roles
+# export ANSIBLE_STRATEGY_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/strategy
+# export ANSIBLE_TEST_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/test
+# export ANSIBLE_VARS_PLUGINS="$XDG_DATA_HOME"/ansible/plugins/vars
 export ANYENV_ROOT="$HOME"/.anyenv
 export ATOM_HOME="$XDG_DATA_HOME"/atom
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle

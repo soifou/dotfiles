@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+# Additional external keyboard commands can be defined using a handler program located in $XDG_CONFIG_HOME/sxiv/exec/key-handler.
+# The handler is invoked by pressing Ctrl-x
+
+# Rofi one liner prompt
+prompt_me() {
+    rofi -theme "$XDG_CONFIG_HOME"/rofi/menus/prompt.rasi -dmenu -p "$1 :" -input /dev/null -lines 0
+}
+
+while read file; do
+    case "$1" in
+    "C-r")
+        name="$(prompt_me "Rename")"
+        [ "$name" != "" ] && mv "$file" "$(dirname $file)/$name"
+        ;;
+    "C-d")
+        name="$(prompt_me "Confirm deletion (y)")"
+        [ "$name" = "y" ] && rm -f "$file"
+        ;;
+    "C-w")
+        cp -f "$file" "$WALLPAPER_PATH"/current && wal-switcher current
+        ;;
+    esac
+done

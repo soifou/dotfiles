@@ -13,19 +13,21 @@ command -v xset >/dev/null 2>&1 && xset r rate 350 45 && xset -b
 # keyboard numlock
 command -v numlockx >/dev/null 2>&1 && numlockx on
 # custom keymap
-command -v setxkbmap >/dev/null 2>&1 && setxkbmap -layout fr -variant latin9 -option ctrl:nocaps,terminate:ctrl_alt_bksp
+command -v toggle-xkbkeymap >/dev/null 2>&1 && toggle-xkbkeymap us
 # apply current wallpaper/colorscheme
 command -v wal >/dev/null 2>&1 && wal -R >/dev/null
 # screen temp/brightness
 command -v redshift >/dev/null 2>&1 && "$XDG_LOCAL_HOME"/bin/redshift-cli --temp >/dev/null
 # compositor for x11
-command -v picom >/dev/null 2>&1 && picom -b --experimental-backends
+# command -v picom >/dev/null 2>&1 && picom -b --experimental-backends
 # clipboard manager for rofi
 if command -v greenclip >/dev/null 2>&1; then
     pgrep greenclip >/dev/null || greenclip daemon &
 fi
 # notifier
 command -v dunst >/dev/null 2>&1 && dunst -c "$XDG_CACHE_HOME"/wal/colors-dunstrc &
+# bar
+# command -v polybar-run >/dev/null 2>&1 && polybar-run
 # screen locker
 command -v locker >/dev/null 2>&1 && "$XDG_LOCAL_HOME"/bin/locker &
 # music player daemon

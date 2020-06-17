@@ -27,11 +27,15 @@ status() {
 }
 
 list() {
-    COUNT=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX" | wc -l)
+    apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX"
+}
+
+notify() {
+    PACKAGES=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX")
+    COUNT=$(echo "$PACKAGES" | wc -l)
     if [ "$COUNT" = '0' ]; then
         notify-send -i debian-logo "Packages" "Already up to date!"
     else
-        PACKAGES=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX")
         notify-send -i debian-logo "$COUNT update(s) available" "$PACKAGES"
     fi
 }
@@ -39,9 +43,9 @@ list() {
 # Import colors from available location
 getColors() {
     # Pywal
-    if [ -f "$HOME/.cache/wal/colors.sh" ]; then
+    if [ -f "$XDG_CACHE_HOME"/wal/colors.sh ]; then
         # shellcheck source=/dev/null
-        . "$HOME/.cache/wal/colors.sh"
+        . "$XDG_CACHE_HOME"/wal/colors.sh
     # Xressources
     else
         color1=$(xrdb -query | grep '*color1' | awk -F: '{print $2}' | xargs)
@@ -51,13 +55,15 @@ getColors() {
 case "$1" in
     --refresh|-r) refresh ;;
     --status|-s) status ;;
+    --notify|-n) notify ;;
     --list|-l) list ;;
     *)
         echo "Wrapper script to handle package distribution" >&2
         echo "" >&2
         echo "--refresh, -r Refresh packages list" >&2
         echo "--status,  -s Display how many packages are upgradable" >&2
-        echo "--list,    -l List upgradable packages via notify-send" >&2
+        echo "--notify,  -n List upgradable packages via notify-send" >&2
+        echo "--list,    -l List upgradable packages" >&2
         echo ""
         exit
     ;;

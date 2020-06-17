@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Fetch/change wallpaper and generate a colorscheme
-# Requirements: xrandr, curl,
+# Requirements: xrandr, curl, wal
 # Credits to ilsenatorov for the idea
 # https://github.com/ilsenatorov/dotfiles/blob/big/rofi/themeswitch.sh
 
@@ -47,30 +47,32 @@ else
 
     # generate schemes based on selected wallpaper
     if [ -n "${THEMES}" ]; then
-        # Argument -c (Delete all cached colorschemes) does not work for me
-        rm -rf "$XDG_CACHE_HOME/wal"
-
-        # Sometimes process hangs while writing one of /dev/pts/{0,2,5}
-        # filtering the culprit fix the issue, but I don't know why this occurs.
-        # See: https://github.com/dylanaraps/pywal/issues/40
-        # Hotfix: pywal/sequences.py
-        # Writing to "/dev/pts/[0-9] lets you send data to open terminals.
-        # if to_send:
-        #     for term in glob.glob(tty_pattern):
-        #         if term != '/dev/pts/5':
-        #             util.save_file(sequences, term)
-
-        # reload current theme with light colors
+        # reload with light colors
         if [ x"theme-light" = x"${THEMES}" ]; then
             wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
                 -q -n -i "$WALLPAPER_PATH/today" -l >/dev/null
-        # reload current theme with dark colors
+        # reload with dark colors
         elif [ x"theme-dark" = x"${THEMES}" ]; then
             wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
                 -q -n -i "$WALLPAPER_PATH/today" >/dev/null
-        else
+        # apply selected theme with dark colors
+        elif [ -f "$WALLPAPER_PATH/${THEMES}" ]; then
+            # Need to clear cache of previous colorschemes here
+            # Argument -c (Delete all cached colorschemes) does not work for me
+            rm -rf "$XDG_CACHE_HOME"/wal
+            # Sometimes process hangs while writing one of /dev/pts/{0,2,5}
+            # filtering the culprit fix the issue, but I don't know why this occurs.
+            # See: https://github.com/dylanaraps/pywal/issues/40
+            # Hotfix: pywal/sequences.py
+            # Writing to "/dev/pts/[0-9] lets you send data to open terminals.
+            # if to_send:
+            #     for term in glob.glob(tty_pattern):
+            #         if term != '/dev/pts/5':
+            #             util.save_file(sequences, term)
             wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
                 -q -n -i "$WALLPAPER_PATH/${THEMES}" >/dev/null
+        else
+            echo "[WARNING] Requested wall '$THEMES' does not exist in $WALLPAPER_PATH"
         fi
     fi
 fi

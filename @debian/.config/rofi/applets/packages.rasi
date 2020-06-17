@@ -1,53 +1,34 @@
-/*
- *
- * Author : Aditya Shakya (adi1090x)
- * Mail : adi1090x@gmail.com
- * Github : @adi1090x
- * Reddit : @adi1090x
- *
- */
-
 @import "~/.cache/wal/colors-rofi.rasi"
 
 * {
-    icon-font: "icomoon\-feather 28";
-
-    listview-spacing: 10px;
-
+    listview-spacing: 5px;
     menu-window-padding: 5px 15px;
     menu-inputbar-margin: 10px 0px;
     menu-prompt-padding: 10px 20px 10px 20px;
     menu-prompt-margin: 0px 0px 0px -2px;
-    menu-element-border: 10px;
-    menu-element-padding: 13px 20px 3px -40px;
+    menu-element-border: 5px;
+    menu-element-padding: 3px 2px 3px 0px;
 }
-
-/* ########### */
 
 window {
     width: 28.2%;
-    height: 14%;
     border: 2px solid;
     border-color: @accent;
     border-top: 0;
 }
 
-/* ########### */
-
 * {
     background-color: @background;
     text-color: @foreground;
-    font: @icon-font;
 }
 
 horibox {
     children: [ listview ];
 }
 listview {
-    layout: horizontal;
+    layout: vertical;
 }
 element {
-    padding: @option-element-padding;
     background-color: @background-light;
 }
 element.selected {
@@ -65,8 +46,11 @@ window {
     children: [ inputbar, horibox ];
 }
 inputbar {
-    children: [ textbox-prompt-colon, prompt ];
+    children: [ textbox-prompt-colon, prompt, entry ];
     margin: @menu-inputbar-margin;
+}
+entry {
+    padding: @menu-prompt-padding;
 }
 prompt,
 textbox-prompt-colon {
@@ -81,19 +65,17 @@ prompt {
 }
 textbox-prompt-colon {
     expand: false;
-    str: "System";
+    str: "Packages";
     background-color: @accent;
     text-color: @background;
 }
 horibox {
-    padding: 0px;
+    padding: 0px 0px 8px 0px;
 }
 listview {
     spacing: @listview-spacing;
-    lines: 5;
 }
 element {
-    font: @icon-font;
     border: @menu-element-border;
     padding: @menu-element-padding;
     border-color: @background-light;

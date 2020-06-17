@@ -6,6 +6,9 @@
 rm -f "$KITTY_SOCK"
 # Remove queue list in task-spooler
 tsp -K
+# Remove all orphaned cache files from the thumbnail cache directory
+sxiv -c
+find "$XDG_CACHE_HOME"/sxiv -depth -type d -empty ! -name "." -exec rmdir {} \;
 # Kill X compositor
 pkill picom
 # Kill all instances of pywalfox

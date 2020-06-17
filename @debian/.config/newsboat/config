@@ -33,9 +33,9 @@ bind-key ^t next-unread
 
 color background          white   default
 color listnormal          blue    default   dim
-color listfocus           blue    default   bold
-color listnormal_unread   white   default   dim
-color listfocus_unread    white   default   bold
+color listfocus           black   green     bold
+color listnormal_unread   white   default   bold
+color listfocus_unread    black   green     bold
 color info                black   green
 color article             white   default
 

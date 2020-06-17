@@ -1,7 +1,6 @@
 [Desktop Entry]
-Name=Firefox
+Name=Firefox Stable
 Comment=Web Browser
-GenericName=Web Browser
 Exec=/opt/firefox/firefox %u
 Terminal=false
 Type=Application

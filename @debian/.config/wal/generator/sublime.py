@@ -197,8 +197,6 @@ if __name__ == '__main__':
 
 
     ## DA UI (obsolete theme but still using it)
-
-    # Change colors from DA Theme.sublime-settings
     da_scheme_path = os.path.join(
         os.environ['HOME'],
         ".config/sublime-text-3/Packages/User/DA Theme.sublime-settings"
@@ -211,24 +209,39 @@ if __name__ == '__main__':
         with open(da_scheme_path, 'w') as file:
             json.dump(da_scheme, file, indent=4)
 
-    # Change colors for A File Icon plugin
+    ## Meetio theme (https://github.com/meetio-theme/sublime-meetio-theme)
+    # meetio_scheme_path = os.path.join(
+    #     os.environ['HOME'],
+    #     ".config/sublime-text-3/Packages/User/Meetio-Theme.sublime-theme"
+    # )
+    # if os.path.isfile(meetio_scheme_path):
+    #     with open(meetio_scheme_path) as f:
+    #         print(f)
+    #         meetio_scheme = json.load(f)
+
+    #     meetio_scheme['variables']['colorAccent'] = variables['color4']
+    #     meetio_scheme['variables']['colorDark'] = variables['background']
+    #     meetio_scheme['variables']['statusbarLabelColor'] = variables['foreground']
+    #     meetio_scheme['variables']['sidebarBackground'] = "color("+ variables['background'] +" blend(#000 95%))"
+    #     with open(meetio_scheme_path, 'w') as file:
+    #         json.dump(meetio_scheme, file, indent=4)
+
+    ## A File Icon (https://packagecontrol.io/packages/A%20File%20Icon)
     afileicon_path = os.path.join(
         os.environ['HOME'],
         ".config/sublime-text-3/Packages/User/A File Icon.sublime-settings"
     )
 
-    ## A File Icon (https://packagecontrol.io/packages/A%20File%20Icon)
-
     # We need to remove the config file !
-    try:
-        os.remove(afileicon_path)
-    except OSError:
-        pass
+    # try:
+    #     os.remove(afileicon_path)
+    # except OSError:
+    #     pass
 
     afileicon = {}
     afileicon['color'] = wal_colors[1]
     afileicon['color_on_hover'] = wal_colors[4]
     afileicon['color_on_select'] = wal_colors[4]
-    afileicon['size'] = 9
+    afileicon['size'] = 10
     with open(afileicon_path, 'w') as file:
         json.dump(afileicon, file, indent=4)

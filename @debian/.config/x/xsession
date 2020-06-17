@@ -1,4 +1,23 @@
 #!/usr/bin/env sh
 
-# exec x-session-manager
-exec i3
+# update-alternatives --install /usr/bin/x-window-manager x-window-manager /usr/bin/i3 1000
+# update-alternatives --install /usr/bin/x-window-manager x-window-manager /usr/bin/spectrwm 1100
+# update-alternatives --set x-window-manager /usr/bin/i3
+# exec x-window-manager
+
+session=${1:-i3}
+case $session in
+    i3|i3wm)
+        echo 'exec i3!' >> $XDG_CACHE_HOME/xsession-errors
+        exec i3
+    ;;
+    spectrwm)
+        echo 'exec spectrwm!' >> $XDG_CACHE_HOME/xsession-errors
+        exec spectrwm
+    ;;
+    # default back to i3
+    * )
+        echo 'exec default i3' >> $XDG_CACHE_HOME/xsession-errors
+        exec i3
+    ;;
+esac

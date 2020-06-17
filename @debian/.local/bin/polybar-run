@@ -14,7 +14,7 @@ killall -q polybar
 while pgrep -u $(id -u) -x polybar >/dev/null; do sleep 1; done
 
 # Launch bar "$POLYBAR_BAR" on all monitors (if any)
-if command -v xrandr &> /dev/null; then
+if command -v xrandr >/dev/null 2>&1; then
     # for all connected monitors
     # for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
     # for the last one connected on the list

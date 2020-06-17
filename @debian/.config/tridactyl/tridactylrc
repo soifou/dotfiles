@@ -8,11 +8,13 @@ set searchengine duckduckgo
 bindurl ^https://duckduckgo.com f hint -Jc [class=result__a]
 bindurl ^https://duckduckgo.com F hint -Jbc [class=result__a]
 
-" Use blank page on new tabs
-set newtab about:blank
+" Use my startpage on new tabs
+" set newtab file:///home/user/startpage/index.html
+set newtabfocus page
 
-" Do not focus URL bar on new tab
-set newtabfocus false
+" Use go<key>/gn<key>/gw<key> to open quickmark for <key> in
+" current/new tab/new window
+quickmark g https://github.com/
 
 " Make 'd' switch to previous active tab after close
 bind d composite tabclose | buffer #

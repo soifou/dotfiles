@@ -25,6 +25,7 @@ selected_item_suffix = $9
 ##### various settings #####
 user_interface = alternative
 display_bitrate = yes
+# connected_message_on_startup = no
 media_library_primary_tag = album_artist
 mouse_support = no
 execute_on_song_change = "~/.local/bin/ncmpcpp-art extract"
