@@ -28,7 +28,7 @@ debian() {
     fi
 
     if command -v keybase >/dev/null 2>&1; then
-        if yn "Upgrade Keybase CLI?"; then
+        if yn "Update Keybase CLI?"; then
             curl -O https://prerelease.keybase.io/keybase_amd64.deb
             sudo dpkg -i keybase_amd64.deb
             sudo apt-get install -f
@@ -41,8 +41,8 @@ arch() {
     if yn "Update system?"; then
         sudo pacman -Syu --noconfirm
 
-        # autoremove
-        [ "$(pacman -Qdtq >/dev/null)" ] && pacman -Qdtq | xargs sudo pacman --noconfirm -R
+        # autoremove unused dependencies
+        pacman -Qdtq >/dev/null && pacman -Qdtq | xargs sudo pacman --noconfirm -R || echo "No unused dependencies"
 
         # clean and autoclean
         sudo pacman -Sc --noconfirm
@@ -78,7 +78,7 @@ if command -v pass >/dev/null 2>&1; then
 fi
 
 if command -v mr >/dev/null 2>&1; then
-    if yn "Upgrade myrepos synced repo?"; then
+    if yn "Update myrepos?"; then
         cd "$XDG_DATA_HOME/myrepos" && git pull
     fi
 fi
@@ -112,7 +112,7 @@ if command -v brew >/dev/null 2>&1; then
 fi
 
 if command -v anyenv >/dev/null 2>&1; then
-    yn "Upgrade anyenv?" && anyenv update
+    yn "Update anyenv?" && anyenv update
 fi
 
 if command -v antibody >/dev/null 2>&1; then
