@@ -10,9 +10,11 @@ suspend=""
 logout=""
 
 rofi_packages() {
-    rofi_command="rofi -config $XDG_CONFIG_HOME/rofi/applet.rasi -theme applets/packages.rasi"
     packages=$(apt-check -l)
-    chosen="$(echo -e "$packages" | $rofi_command -p $(echo "$packages" | wc -l) -dmenu)"
+    if [ "$packages" ]; then
+        rofi_command="rofi -config $XDG_CONFIG_HOME/rofi/applet.rasi -theme applets/packages.rasi"
+        chosen="$(echo -e "$packages" | $rofi_command -p $(echo "$packages" | wc -l) -dmenu)"
+    fi
 }
 
 rofi_powermenu_classic() {

@@ -27,7 +27,8 @@ status() {
 }
 
 list() {
-    apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX"
+    PACKAGES=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX")
+    [ "$PACKAGES" ] && echo "$PACKAGES" || notify-send -i debian-logo "Packages" "Already up to date!"
 }
 
 notify() {
