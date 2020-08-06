@@ -43,7 +43,7 @@
 		"Sass",
 		"sublime-shfmt",
 		"SublimeLinter",
-		"SublimeLinter-contrib-dockerfilelint",
+		"SublimeLinter-contrib-ansible-lint",
 		"SublimeLinter-contrib-markdownlint",
 		"SublimeLinter-contrib-php-cs-fixer",
 		"SublimeLinter-contrib-phpstan",

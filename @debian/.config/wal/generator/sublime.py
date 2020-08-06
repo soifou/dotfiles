@@ -47,6 +47,7 @@ if __name__ == '__main__':
         "color13": wal_scheme['colors']["color13"],
         "color14": wal_scheme['colors']["color14"],
         "color15": wal_scheme['colors']["color15"],
+        "white":   "#ffffff",
         "blue":    "#268bd2",
         "cyan":    "#2aa198",
         "green":   "#859900",
@@ -159,8 +160,8 @@ if __name__ == '__main__':
     settings.append(add_rule('Library class/type', 'support.class, support.type', foreground=wal_colors[6], font_style='italic'))
     settings.append(add_rule('Library variable', 'support.other.variable', font_style=''))
     # Invalid
-    settings.append(add_rule('Invalid', 'invalid', foreground='var(--foreground)', background=wal_colors[5]))
-    settings.append(add_rule('Invalid deprecated', 'invalid.deprecated', foreground='var(--foreground)', background=wal_colors[4]))
+    settings.append(add_rule('Invalid', 'invalid', foreground='var(foreground)', background=wal_colors[5]))
+    settings.append(add_rule('Invalid deprecated', 'invalid.deprecated', foreground='var(foreground)', background=wal_colors[4]))
     # Warnings/Errors bullets in the gutter
     settings.append(add_rule('Warning', 'markup.warning', foreground='color(var(color11) blend(yellow 90%))'))
     settings.append(add_rule('Error', 'markup.error', foreground='color(var(color9) blend(magenta 90%))'))
@@ -171,9 +172,9 @@ if __name__ == '__main__':
     settings.append(add_rule('GitGutter ignored', 'markup.ignored.git_gutter', foreground='color(var(background) blend(magenta 50%))'))
     settings.append(add_rule('GitGutter untracked', 'markup.untracked.git_gutter', foreground='color(var(background) blend(grey 50%))'))
     # Twig
-    settings.append(add_rule('Twig Tagbraces', "meta.tag.template.value.twig, meta.tag.template.block.twig", foreground="var(pink)"))
+    settings.append(add_rule('Twig Tagbraces', "meta.tag.template.value.twig, meta.tag.template.block.twig", foreground="var(magenta)"))
     settings.append(add_rule('Twig Keywords', "keyword.control.twig", foreground="var(red)"))
-    settings.append(add_rule('Twig Objects', "variable.other.twig", foreground="var(pink)"))
+    settings.append(add_rule('Twig Objects', "variable.other.twig", foreground="var(magenta)"))
     settings.append(add_rule('Twig Object Properties', "variable.other.property.twig", foreground="var(foreground)"))
     settings.append(add_rule('Twig Language Constants', "constant.language.twig", foreground="var(orange)"))
     settings.append(add_rule('Twig Numerical Constants', "constant.numeric.twig", foreground="var(white)"))

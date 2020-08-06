@@ -33,4 +33,8 @@ theme: init
 	cp -f $(SUBLIME_DIR)/Packages/User/DA.sublime-theme.dist $(SUBLIME_DIR)/Packages/User/DA.sublime-theme
 	sed -i 's/FONT_NAME/$(FONT_NAME)/g' $(SUBLIME_DIR)/Packages/User/DA.sublime-theme
 
-.PHONY: init package theme
+bundles:
+	rm -rf $(SUBLIME_DIR)/Packages/SublimeLinter-contrib-dockerfilelint
+	git clone --single-branch --branch fix/deprecation-warnings https://github.com/rgant/SublimeLinter-contrib-dockerfilelint $(SUBLIME_DIR)/Packages/SublimeLinter-contrib-dockerfilelint
+
+.PHONY: init package theme bundles

@@ -1,6 +1,6 @@
-// SublimeLinter Settings - User
 {
     "debug": true,
+    "show_marks_in_minimap": true,
     "linters": {
         "eslint": {
             "disable": false,
@@ -11,14 +11,12 @@
         "jshint": {
             "selector": "source.js"
         },
+        "yamllint": {
+            "selector": "source.yaml, source.ansible"
+        },
         "phpmd": {
-            "rulesets": "${project}/phpmd.xml"
+            "rulesets": "${folder}/phpmd.xml"
         },
         "phpstan": {}
     },
-    "paths": {
-        "linux": [],
-        "osx": [],
-        "windows": []
-    }
 }
