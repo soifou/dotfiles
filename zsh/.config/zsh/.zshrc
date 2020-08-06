@@ -8,7 +8,9 @@
 # date "+%s.%N"
 
 fpath=(
-    $ZDOTDIR/completions
+    "$ZDOTDIR"/completions
+    "$ASDF_DATA_DIR"/completions
+    "$HOMEBREW_PREFIX"/Homebrew/completions/zsh
     $fpath
 )
 

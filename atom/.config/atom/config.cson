@@ -1,7 +1,5 @@
 "*":
   "atom-autocomplete-php":
-    binComposer: "~/.anyenv/envs/phpenv/plugins/phpenv-composer/libexec/composer"
-    binPhp: "~/.anyenv/envs/phpenv/versions/7.2.4/bin/php"
     verboseErrors: true
   "atom-material-ui":
     colors:

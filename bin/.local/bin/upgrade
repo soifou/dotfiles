@@ -99,13 +99,10 @@ fi
 
 if command -v brew >/dev/null 2>&1; then
     if yn "Update brew?"; then
-        if [ -d "$HOME/.linuxbrew" ]; then
-            brew update && brew upgrade && brew cleanup
-        elif [ "$(uname)" == 'Darwin' ]; then
             brew update
             brew upgrade
             # https://github.com/buo/homebrew-cask-upgrade
-            brew cu -ay
+            [ "$(uname)" == 'Darwin' ] && brew cu -ay
             brew cleanup
         fi
     fi
@@ -113,6 +110,10 @@ fi
 
 if command -v anyenv >/dev/null 2>&1; then
     yn "Update anyenv?" && anyenv update
+fi
+
+if command -v asdf >/dev/null 2>&1; then
+    yn "Update asdf?" && asdf update --head
 fi
 
 if command -v antibody >/dev/null 2>&1; then

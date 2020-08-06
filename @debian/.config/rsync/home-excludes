@@ -126,6 +126,7 @@
 .ansible
 .ansible_galaxy
 .anyenv
+.asdf
 .bundler
 .composer/cache
 .composer/vendor
@@ -191,7 +192,7 @@ Videos
 .loki/ut/Logs
 .luckybackup-snaphots/default.profile/logs/
 .luckyBackup/logs
-.pulse-cookir
+.pulse-cookie
 .recently-used
 .v8flags.*.json
 .vscode
