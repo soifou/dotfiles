@@ -12,30 +12,13 @@
             "selector": "source.js"
         },
         "phpmd": {
-            "env": {"PATH":"~/.anyenv/envs/phpenv/shims/:$PATH"},
             "rulesets": "${project}/phpmd.xml"
         },
-        "phpstan": {
-            "env": {"PATH":"~/.anyenv/envs/phpenv/shims:$PATH"}
-        }
+        "phpstan": {}
     },
     "paths": {
-        "linux":
-        [
-            "~/.anyenv/envs/nodenv/shims",
-            "~/.anyenv/envs/rbenv/shims",
-            "~/.anyenv/envs/pyenv/shims",
-            "~/.anyenv/envs/phpenv/shims",
-            "~/.composer/vendor/bin"
-        ],
-        "osx":
-        [
-            "~/.anyenv/envs/nodenv/shims",
-            "~/.anyenv/envs/rbenv/shims",
-            "~/.anyenv/envs/pyenv/shims",
-            "~/.anyenv/envs/phpenv/shims",
-            "~/.composer/vendor/bin"
-        ],
+        "linux": [],
+        "osx": [],
         "windows": []
     }
 }

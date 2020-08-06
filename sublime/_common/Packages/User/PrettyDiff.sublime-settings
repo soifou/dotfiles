@@ -1,7 +1,0 @@
-{
-    "paths": {
-        "linux": "~/.anyenv/envs/nodenv/shims",
-        "osx": "~/.anyenv/envs/nodenv/shims",
-        "windows": ""
-    }
-}

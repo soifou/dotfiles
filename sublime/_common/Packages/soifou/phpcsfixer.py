@@ -11,12 +11,13 @@ import tempfile
 # - https://github.com/adael/SublimePhpCsFixer
 # - https://github.com/jonlabelle/SublimeJsPrettier
 
-PLUGIN_NAME = 'SublimePhpCsFixer'
+PLUGIN_NAME = 'PhpCsFixer'
 
 
 class SublimePhpCsFixListener(sublime_plugin.EventListener):
     def on_pre_save(self, view):
-        self.settings = sublime.load_settings('%s.sublime-settings' % PLUGIN_NAME)
+        self.settings = sublime.load_settings('%s.sublime-settings' %
+                                              PLUGIN_NAME)
         if self.settings.get('on_save'):
             view.run_command("sublime_php_cs_fix")
 
@@ -52,11 +53,13 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
             self.view.replace(edit, buffer_region, formatted)
 
         if file_changed:
-            sublime.set_timeout(lambda: sublime.status_message(
-                '{0}: File formatted.'.format(PLUGIN_NAME)), 0)
+            sublime.set_timeout(
+                lambda: sublime.status_message('{0}: File formatted.'.format(
+                    PLUGIN_NAME)), 0)
         else:
-            sublime.set_timeout(lambda: sublime.status_message(
-                '{0}: File already formatted.'.format(PLUGIN_NAME)), 0)
+            sublime.set_timeout(
+                lambda: sublime.status_message('{0}: File already formatted.'.
+                                               format(PLUGIN_NAME)), 0)
         return
 
     def format_contents(self, contents):
@@ -76,7 +79,8 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
         return content
 
     def cmd(self, path="-"):
-        php_interpreter = self.settings.get('php_path') or self.which('php.exe') or self.which('php')
+        php_interpreter = self.settings.get('php_path') or self.which(
+            'php.exe') or self.which('php')
         phpcsfixer = self.settings.get('path') or self.locate_php_cs_fixer()
 
         if php_interpreter is None:
@@ -115,8 +119,10 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
                 args.append("--rules=" + rules)
                 self.log_to_console("Using rules: " + rules)
 
-        self.log_to_console(php_interpreter + " '" + phpcsfixer + "' fix " + path + " " + ' '.join(args))
-        return php_interpreter + " '" + phpcsfixer + "' fix " + path + " " + ' '.join(args)
+        self.log_to_console(php_interpreter + " '" + phpcsfixer + "' fix " +
+                            path + " " + ' '.join(args))
+        return php_interpreter + " '" + phpcsfixer + "' fix " + path + " " + ' '.join(
+            args)
 
     def finalize_output(self, text):
         lines = text.splitlines()
@@ -124,21 +130,28 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
         return finalized_output
 
     def load_settings(self):
-        self.settings = sublime.load_settings('%s.sublime-settings' % PLUGIN_NAME)
+        self.settings = sublime.load_settings('%s.sublime-settings' %
+                                              PLUGIN_NAME)
 
     def save_viewport_state(self):
-        self.previous_selection = [(region.a, region.b) for region in self.view.sel()]
+        self.previous_selection = [(region.a, region.b)
+                                   for region in self.view.sel()]
         self.previous_position = self.view.viewport_position()
 
     def reset_viewport_state(self):
-        self.view.set_viewport_position((0, 0,), False)
+        self.view.set_viewport_position((
+            0,
+            0,
+        ), False)
         self.view.set_viewport_position(self.previous_position, False)
         self.view.sel().clear()
         for a, b in self.previous_selection:
             self.view.sel().add(sublime.Region(a, b))
 
     def is_php_file(self):
-        file_patterns = self.settings.get('file_patterns') or ['\.php', '\.php5']
+        file_patterns = self.settings.get('file_patterns') or [
+            '\.php', '\.php5'
+        ]
         return self.match_pattern(file_patterns)
 
     def match_pattern(self, file_patterns):
@@ -147,7 +160,10 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
 
     def pipe(self, cmd, tmp_file):
         cwd = os.path.dirname(tmp_file)
-        beautifier = subprocess.Popen(cmd, shell=True, cwd=cwd, stdout=subprocess.PIPE)
+        beautifier = subprocess.Popen(cmd,
+                                      shell=True,
+                                      cwd=cwd,
+                                      stdout=subprocess.PIPE)
         return beautifier.communicate()
 
     # http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python/377028#377028
@@ -188,10 +204,12 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
         paths = []
 
         if "COMPOSER_HOME" in os.environ:
-            paths.append(os.environ["COMPOSER_HOME"] + "\\vendor\\bin\\php-cs-fixer.bat")
+            paths.append(os.environ["COMPOSER_HOME"] +
+                         "\\vendor\\bin\\php-cs-fixer.bat")
 
         if "APPDATA" in os.environ:
-            paths.append(os.environ["APPDATA"] + "\\composer\\vendor\\bin\\php-cs-fixer.bat")
+            paths.append(os.environ["APPDATA"] +
+                         "\\composer\\vendor\\bin\\php-cs-fixer.bat")
 
         paths.append(which("php-cs-fixer.bat"))
 
@@ -202,11 +220,14 @@ class SublimePhpCsFixCommand(sublime_plugin.TextCommand):
         paths = []
 
         if "COMPOSER_HOME" in os.environ:
-            paths.append(os.environ["COMPOSER_HOME"] + "/vendor/bin/php-cs-fixer")
+            paths.append(os.environ["COMPOSER_HOME"] +
+                         "/vendor/bin/php-cs-fixer")
 
         if "HOME" in os.environ:
-            paths.append(os.environ["HOME"] + "/.composer/vendor/bin/php-cs-fixer")
-            paths.append(os.environ["HOME"] + "/.config/composer/vendor/bin/php-cs-fixer")
+            paths.append(os.environ["HOME"] +
+                         "/.composer/vendor/bin/php-cs-fixer")
+            paths.append(os.environ["HOME"] +
+                         "/.config/composer/vendor/bin/php-cs-fixer")
 
         paths.append(self.which("php-cs-fixer"))
 

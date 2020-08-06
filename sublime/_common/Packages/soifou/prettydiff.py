@@ -43,9 +43,7 @@ class PrettydiffBeautifyCommand(sublime_plugin.TextCommand):
     def get_env(self):
         env = {}
         env.update(os.environ)
-        self.load_settings()
-        paths = self.settings.get('paths')
-        env['PATH'] = paths[sublime.platform()] + os.pathsep + env['PATH']
+        env['PATH'] = os.pathsep + env['PATH']
         return env
 
     def log_to_console(self, msg):

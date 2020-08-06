@@ -1,14 +1,16 @@
-# -*- coding: utf-8 -*-
-
 import sublime
 import sublime_plugin
 import subprocess
 import re
+from pprint import pprint
+
+PLUGIN_NAME = 'Zoxide'
 
 
 class Settings:
     def get(setting):
-        return sublime.load_settings('zoxide.sublime-settings').get(setting)
+        return sublime.load_settings('%s.sublime-settings' %
+                                     PLUGIN_NAME).get(setting)
 
 
 class ZoxideCommand:
@@ -31,50 +33,36 @@ class ZoxideCommand:
         except Exception as e:
             raise
 
-    def getBestMatch(self):
-        output = self.run(['query'])
+    def query(self):
+        output = self.run(['query', '-l'])
         if not output:
             return None
 
-        return output.rstrip()
+        return output.rstrip().split('\n')
 
 
 class ZoxideJumpCommand(sublime_plugin.WindowCommand):
     def run(self, menu=None, action=None):
-        self.mode = Settings.get('mode')
-        if self.mode == 'list_all':
-            self.mode_list(ZoxideCommand(''))
-        else:
-            self.window.show_input_panel("zoxide: Directory regex", "",
-                                         self.on_show_input_panel_done, None,
-                                         None)
+        self.window.show_input_panel("zoxide: Directory regex", "",
+                                     self.on_show_input_panel_done, None, None)
 
     def on_show_input_panel_done(self, directory_regex):
         zoxide = ZoxideCommand(directory_regex)
-        self.mode_best_match(zoxide)
-
-    def mode_best_match(self, zoxide):
-        try:
-            directory = zoxide.getBestMatch()
-            if directory:
-                self.open_directory(directory)
-            else:
-                sublime.message_dialog('No match for {}'.format(
-                    zoxide.directory_regex))
-        except Exception as e:
-            sublime.error_message(str(e))
+        self.mode_list(zoxide)
 
     def mode_list(self, zoxide):
         try:
-            directory_list = zoxide.getList()
+            directory_list = zoxide.query()
+            # print("{0}: {1}".format("zoxide", pprint(directory_list)))
+            # print("{0}: {1}".format("zoxide", len(directory_list)))
             if directory_list:
                 if len(directory_list) == 1:
                     self.open_directory(directory_list[0])
                 else:
                     self.show_directories(directory_list)
             else:
-                sublime.message_dialog('No matches for {}'.format(
-                    zoxide.directory_regex))
+                sublime.message_dialog('{0}: No matches for {1}'.format(
+                    PLUGIN_NAME, zoxide.directory_regex))
         except Exception as e:
             sublime.error_message(str(e))
 
@@ -83,15 +71,14 @@ class ZoxideJumpCommand(sublime_plugin.WindowCommand):
             self.open_directory(directory)
 
     def open_directory(self, directory):
-        # print("{0}: {1}".format("zoxide", directory))
         if self.window.project_data():
             sublime.run_command('new_window')
-        sublime.active_window().set_project_data({
-            'folders': [{
+
+        sublime.active_window().set_project_data(
+            {'folders': [{
                 'path': directory,
                 'follow_symlinks': True
-            }]
-        })
+            }]})
 
     def show_directories(self, directory_list):
         def selectedCallback(index):

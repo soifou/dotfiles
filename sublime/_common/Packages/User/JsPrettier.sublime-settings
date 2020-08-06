@@ -1,5 +1,4 @@
 {
-    "prettier_cli_path": "~/.anyenv/envs/nodenv/shims/prettier",
     // hack to skip node path. Prettier "shims" already prefix "node path"
     "node_path": ""
 }

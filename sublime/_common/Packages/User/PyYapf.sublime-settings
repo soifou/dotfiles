@@ -1,3 +1,12 @@
 {
-    "yapf_command": "~/.anyenv/envs/pyenv/shims/yapf"
+	"debug": false,
+	"default_encoding": "UTF-8",
+	"on_save": false,
+	"onsave_ignore_fn_glob":
+	[
+		"*.pyx"
+	],
+	"popup_errors": false,
+	"use_entire_file_if_no_selection": true,
+	"use_stdin": true
 }
