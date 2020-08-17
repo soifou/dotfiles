@@ -1,13 +1,7 @@
 {
 	"extensions":
 	[
-		"ApplySyntax.ext-list",
-		".jshintrc",
 		".sublime-settings",
-		".bowerrc",
-		".eslintrc",
-		".csslintrc",
-		"geojson",
-		".jscsrc"
-	]
+		"ApplySyntax.ext-list",
+	],
 }

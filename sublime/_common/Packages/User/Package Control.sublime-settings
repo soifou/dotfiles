@@ -1,9 +1,6 @@
 {
 	"bootstrapped": true,
 	"ignore_vcs_packages": true,
-	"in_process_packages":
-	[
-	],
 	"installed_packages":
 	[
 		"A File Icon",
@@ -12,9 +9,9 @@
 		"Bootstrap 4 Snippets",
 		"BracketHighlighter",
 		"ComposerPackageInfo",
-		"DA UI",
+        "DA UI",
 		"Dockerfile Syntax Highlighting",
-		"Emmet",
+		"Emmet2",
 		"ExpandRegion",
 		"FileManager",
 		"FindKeyConflicts",
@@ -29,6 +26,7 @@
 		"Meetio Theme",
 		"New Moon Color Scheme",
 		"Okami – Adaptive Color Schemes",
+		"OpenUri",
 		"Package Control",
 		"PackageResourceViewer",
 		"PHP Companion",
@@ -43,6 +41,7 @@
 		"Sass",
 		"sublime-shfmt",
 		"SublimeLinter",
+		"SublimeLinter-addon-filter",
 		"SublimeLinter-contrib-ansible-lint",
 		"SublimeLinter-contrib-markdownlint",
 		"SublimeLinter-contrib-php-cs-fixer",
@@ -61,10 +60,14 @@
 		"TypeScript Syntax",
 		"Vue Syntax Highlight",
 		"Vuejs Snippets",
-		"WakaTime"
+		"WakaTime",
 	],
 	"repositories":
 	[
-		"https://github.com/soifou/sublime-shfmt"
-	]
+		"https://github.com/soifou/sublime-shfmt",
+		"https://github.com/emmetio/sublime-text-plugin/releases/latest/download/registry.json",
+	],
+	"in_process_packages":
+	[
+	],
 }

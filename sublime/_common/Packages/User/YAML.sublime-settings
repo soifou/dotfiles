@@ -1,14 +1,14 @@
 {
 	"extensions":
 	[
-		"yml.dist",
-		"bundler.conf",
-		"yml",
-		"YAML-tmLanguage",
-		".gemrc",
+		"neon",
 		".prettierrc",
-		"neon"
+		"yml",
+		"bundler.conf",
+		"yml.dist",
+		".gemrc",
+		"YAML-tmLanguage",
 	],
 	"tab_size": 4,
-	"translate_tabs_to_spaces": true
+	"translate_tabs_to_spaces": true,
 }

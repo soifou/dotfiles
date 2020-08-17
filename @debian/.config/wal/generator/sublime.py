@@ -47,16 +47,16 @@ if __name__ == '__main__':
         "color13": wal_scheme['colors']["color13"],
         "color14": wal_scheme['colors']["color14"],
         "color15": wal_scheme['colors']["color15"],
-        "white":   "#ffffff",
-        "blue":    "#268bd2",
-        "cyan":    "#2aa198",
-        "green":   "#859900",
-        "grey":    "#95a5a6",
-        "magenta": "#d33682",
-        "orange":  "#cb4b16",
-        "red":     "#dc322f",
+        "white":   wal_scheme['colors']["color7"],
+        "blue":    wal_scheme['colors']["color4"],
+        "cyan":    wal_scheme['colors']["color6"],
+        "green":   wal_scheme['colors']["color2"],
+        "grey":    wal_scheme['colors']["color8"],
+        "magenta": wal_scheme['colors']["color5"],
+        "orange":  wal_scheme['colors']["color13"],
+        "red":     wal_scheme['colors']["color1"],
         "violet":  "#6c71c4",
-        "yellow":  "#b58900",
+        "yellow":  wal_scheme['colors']["color3"],
     }
     result_scheme['variables'] = variables
 
@@ -83,9 +83,7 @@ if __name__ == '__main__':
             font-family: monospace;
             color: """ + variables['foreground'] + """;
         }
-        body#show-definitions {
-            font-size: 2rem;
-        }
+        body#show-definitions {}
         html {
             border-radius: 1px;
             border:1px solid """ + variables['color4'] + """;
@@ -172,7 +170,7 @@ if __name__ == '__main__':
     settings.append(add_rule('GitGutter ignored', 'markup.ignored.git_gutter', foreground='color(var(background) blend(magenta 50%))'))
     settings.append(add_rule('GitGutter untracked', 'markup.untracked.git_gutter', foreground='color(var(background) blend(grey 50%))'))
     # Twig
-    settings.append(add_rule('Twig Tagbraces', "meta.tag.template.value.twig, meta.tag.template.block.twig", foreground="var(magenta)"))
+    settings.append(add_rule('Twig Tagbraces', "meta.tag.template.value.twig, meta.tag.template.block.twig", foreground="var(green)"))
     settings.append(add_rule('Twig Keywords', "keyword.control.twig", foreground="var(red)"))
     settings.append(add_rule('Twig Objects', "variable.other.twig", foreground="var(magenta)"))
     settings.append(add_rule('Twig Object Properties', "variable.other.property.twig", foreground="var(foreground)"))
@@ -186,8 +184,7 @@ if __name__ == '__main__':
     result_scheme['rules'] = settings
     result_scheme['semanticClass'] = 'theme.dark.pywal'
 
-    ## Create sublime-color-scheme
-
+    # Create sublime-color-scheme
     theme_path = os.path.join(
         os.environ['HOME'],
         '.config/sublime-text-3/Packages/User/Themes/Pywal.sublime-color-scheme'
@@ -197,7 +194,7 @@ if __name__ == '__main__':
         json.dump(result_scheme, file, indent=4)
 
 
-    ## DA UI (obsolete theme but still using it)
+    # DA UI (obsolete theme but still using it)
     da_scheme_path = os.path.join(
         os.environ['HOME'],
         ".config/sublime-text-3/Packages/User/DA Theme.sublime-settings"
@@ -210,7 +207,7 @@ if __name__ == '__main__':
         with open(da_scheme_path, 'w') as file:
             json.dump(da_scheme, file, indent=4)
 
-    ## Meetio theme (https://github.com/meetio-theme/sublime-meetio-theme)
+    # Meetio theme (https://github.com/meetio-theme/sublime-meetio-theme)
     # meetio_scheme_path = os.path.join(
     #     os.environ['HOME'],
     #     ".config/sublime-text-3/Packages/User/Meetio-Theme.sublime-theme"
@@ -227,7 +224,7 @@ if __name__ == '__main__':
     #     with open(meetio_scheme_path, 'w') as file:
     #         json.dump(meetio_scheme, file, indent=4)
 
-    ## A File Icon (https://packagecontrol.io/packages/A%20File%20Icon)
+    # A File Icon (https://packagecontrol.io/packages/A%20File%20Icon)
     afileicon_path = os.path.join(
         os.environ['HOME'],
         ".config/sublime-text-3/Packages/User/A File Icon.sublime-settings"
@@ -246,3 +243,22 @@ if __name__ == '__main__':
     afileicon['size'] = 10
     with open(afileicon_path, 'w') as file:
         json.dump(afileicon, file, indent=4)
+
+    # OpenUri (https://github.com/jfcherng-sublime/ST-OpenUri)
+    openuri_path = os.path.realpath(os.path.join(
+        os.environ['HOME'],
+        ".config/sublime-text-3/Packages/User/OpenUri.sublime-settings"
+    ))
+    # if os.path.isfile(openuri_path):
+    #     with open(openuri_path) as conf:
+    #         openuri_config = json.load(conf)
+
+    openuri_config = {}
+    openuri_config['image_files'] = {}
+    openuri_config['image_files']['phantom'] = "Packages/${package_name}/images/FontAwesome/link.png"
+    openuri_config['image_files']['popup'] = "Packages/${package_name}/images/FontAwesome/link.png"
+    openuri_config['image_colors'] = {}
+    openuri_config['image_colors']['phantom'] = wal_colors[4]
+    openuri_config['image_colors']['popup'] = wal_colors[4]
+    with open(openuri_path, 'w') as file:
+        json.dump(openuri_config, file, indent=4)
