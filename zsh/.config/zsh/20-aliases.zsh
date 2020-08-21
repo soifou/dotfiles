@@ -9,7 +9,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias grep="grep --color=auto"
 
-alias zathura="zathura --config-dir $XDG_CACHE_HOME/wal"
 alias feh="feh --no-fehbg -B background"
 alias bat="bat --theme=ansi-dark"
 alias yafc="yafc -W $XDG_CONFIG_HOME/yafc"

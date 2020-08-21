@@ -1,35 +1,7 @@
-# Generates a zathura colorscheme based on the current wal colors
-# Credits: https://github.com/GideonWolfe/Zathura-Pywal
-# alias zathura="zathura --config-dir $XDG_CACHE_HOME/wal"
-
-set recolor "true"
-set completion-bg "{background}"
-set completion-fg "{foreground}"
-set completion-group-bg "{background}"
-set completion-group-fg "{color2}"
-set completion-highlight-bg "{foreground}"
-set completion-highlight-fg "{background}"
-set recolor-lightcolor "{background}"
-set recolor-darkcolor "{foreground}"
-set default-bg "{background}"
-set inputbar-bg "{background}"
-set inputbar-fg "{foreground}"
-set notification-bg "{background}"
-set notification-fg "{foreground}"
-set notification-error-bg "{color1}"
-set notification-error-fg "{foreground}"
-set notification-warning-bg "{color1}"
-set notification-warning-fg "{foreground}"
-set statusbar-bg "{background}"
-set statusbar-fg "{foreground}"
-set index-bg "{background}"
-set index-fg "{foreground}"
-set index-active-bg "{foreground}"
-set index-active-fg "{background}"
-set render-loading-bg "{background}"
-set render-loading-fg "{foreground}"
-
 ## Options
+set pages-per-row 1
+set scroll-step 50
+set adjust-open width
 set incremental-search true
 set selection-clipboard clipboard
 set statusbar-basename true
@@ -64,3 +36,35 @@ map [fullscreen] i recolor
 map p print
 map P toggle_page_mode
 map [fullscreen] P toggle_page_mode
+
+## Colors
+# Generates a zathura colorscheme based on the current wal colors
+# Credits: https://github.com/GideonWolfe/Zathura-Pywal
+# alias zathura="zathura --config-dir $XDG_CACHE_HOME/wal"
+
+set recolor "true"
+set completion-bg "{background}"
+set completion-fg "{foreground}"
+set completion-group-bg "{background}"
+set completion-group-fg "{color2}"
+set completion-highlight-bg "{foreground}"
+set completion-highlight-fg "{background}"
+set recolor-lightcolor "{background}"
+set recolor-darkcolor "{foreground}"
+set default-bg "{background}"
+set inputbar-bg "{background}"
+set inputbar-fg "{foreground}"
+set notification-bg "{background}"
+set notification-fg "{foreground}"
+set notification-error-bg "{color1}"
+set notification-error-fg "{foreground}"
+set notification-warning-bg "{color1}"
+set notification-warning-fg "{foreground}"
+set statusbar-bg "{background}"
+set statusbar-fg "{foreground}"
+set index-bg "{background}"
+set index-fg "{foreground}"
+set index-active-bg "{foreground}"
+set index-active-fg "{background}"
+set render-loading-bg "{background}"
+set render-loading-fg "{foreground}"
