@@ -11,7 +11,6 @@
 		"ComposerPackageInfo",
         "DA UI",
 		"Dockerfile Syntax Highlighting",
-		"Emmet2",
 		"ExpandRegion",
 		"FileManager",
 		"FindKeyConflicts",
@@ -43,6 +42,7 @@
 		"SublimeLinter",
 		"SublimeLinter-addon-filter",
 		"SublimeLinter-contrib-ansible-lint",
+		"SublimeLinter-contrib-dockerfilelint",
 		"SublimeLinter-contrib-markdownlint",
 		"SublimeLinter-contrib-php-cs-fixer",
 		"SublimeLinter-contrib-phpstan",
@@ -57,6 +57,7 @@
 		"SublimeLinter-pycodestyle",
 		"SublimeLinter-rubocop",
 		"SublimeLinter-shellcheck",
+		"TOML",
 		"TypeScript Syntax",
 		"Vue Syntax Highlight",
 		"Vuejs Snippets",
@@ -66,6 +67,8 @@
 	[
 		"https://github.com/soifou/sublime-shfmt",
 		"https://github.com/emmetio/sublime-text-plugin/releases/latest/download/registry.json",
+		"https://github.com/gerardroche/SublimeLinter-contrib-php-cs-fixer",
+		"https://github.com/karmicdude/SublimeLinter-contrib-dockerfilelint",
 	],
 	"in_process_packages":
 	[

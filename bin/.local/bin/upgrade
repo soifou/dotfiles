@@ -99,12 +99,11 @@ fi
 
 if command -v brew >/dev/null 2>&1; then
     if yn "Update brew?"; then
-            brew update
-            brew upgrade
-            # https://github.com/buo/homebrew-cask-upgrade
-            [ "$(uname)" == 'Darwin' ] && brew cu -ay
-            brew cleanup
-        fi
+        brew update
+        brew upgrade
+        # https://github.com/buo/homebrew-cask-upgrade
+        [ "$(uname)" == 'Darwin' ] && brew cu -ay
+        brew cleanup
     fi
 fi
 
@@ -117,7 +116,7 @@ if command -v asdf >/dev/null 2>&1; then
 fi
 
 if command -v antibody >/dev/null 2>&1; then
-    yn "Update antibody?" && antibody update | grep "antibody: updated:"
+    yn "Update antibody?" && antibody update
 fi
 
 if command -v npm >/dev/null 2>&1; then

@@ -10,6 +10,9 @@
 [ -z "$1" ] && { exit; }
 
 case "$1" in
+*mailto:*)
+    kitty --class=mailto neomutt $1
+    ;;
 *mkv | *webm | *mp4 | *youtube.com* | *youtu.be* | *gfycat.com* | *v.redd.it*)
     setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1 &
     ;;

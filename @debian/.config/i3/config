@@ -271,9 +271,13 @@ for_window [workspace=2] layout tabbed
 for_window [workspace=4] layout tabbed
 for_window [instance="zik"] border pixel 2
 for_window [class="scummvm"] floating enable resize set 640 480
-for_window [class="neomutt_mailto"] floating enable resize set 800 600
-for_window [class="Virt-manager|Qemu-system-x86_64"] floating enable resize move position center
-# for_window [class="mpv"] floating enable resize move position center
+for_window [class="Virt-manager|Qemu-system-x86_64"] floating enable resize set 800 600
+
+for_window [class="mailto"] floating enable resize set 800 600
+for_window [floating class="mailto"] move position center
+
+for_window [title="mpv-newsboat"] floating enable resize set 800 600
+for_window [floating title="mpv-newsboat"] move position center
 
 focus_on_window_activation focus
 # Using Rofi, last focused window is lost, and focus window at the mouse position

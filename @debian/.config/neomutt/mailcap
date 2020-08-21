@@ -1,5 +1,5 @@
-# text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput
-application/pdf; zathura '%s'; test=test -n "$DISPLAY"; needsterminal;
-image/*; sxiv '%s'; test=test -n "$DISPLAY";
+application/pdf; swallow zathura '%s'; test=test -n "$DISPLAY"; needsterminal;
+image/*; swallow  sxiv '%s'; test=test -n "$DISPLAY";
 text/html; w3m -config ~/.config/w3m/config -I %{charset} -T text/html; copiousoutput;
-video/*; mpv '%s' --autofit=640x480 --loop=inf; test=test -n "$DISPLAY"
+video/*; swallow mpv '%s' --autofit=640x480 --loop=inf; test=test -n "$DISPLAY"
+text/csv; subl '%s'; test=test -n "$DISPLAY";

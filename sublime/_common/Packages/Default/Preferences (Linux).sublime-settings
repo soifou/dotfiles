@@ -2,6 +2,7 @@
     "always_show_minimap_viewport": true,
     "auto_complete_commit_on_tab": true,
     "caret_style": "phase",
+    "close_windows_when_empty": false,
     "color_scheme": "Packages/User/Themes/Ayu Mirage.tmTheme",
     "copy_with_empty_selection": false,
     "detect_indentation": false,
@@ -9,6 +10,7 @@
     "drag_text": false,
     "draw_minimap_border": true,
     "enable_tab_scrolling": false,
+    "ensure_newline_at_eof_on_save": true,
     "file_exclude_patterns": [
         "*.a",
         "*.class",
@@ -50,6 +52,7 @@
         "subpixel_antialias"
     ],
     "highlight_line": true,
+    "hide_pointer_while_typing": false,
     "ignored_packages":
     [
         "Vintage"
@@ -59,17 +62,20 @@
         "draw_normal",
         "draw_active"
     ],
+    "index_exclude_gitignore": false,
     "line_padding_bottom": 2,
     "line_padding_top": 2,
     "match_brackets_content": false,
     "open_files_in_new_window": false,
     "overlay_scroll_bars": "enabled",
-    "scroll_speed": 5.0,
+    "scroll_speed": 0,
+    "show_tab_close_buttons": false,
     "show_encoding": true,
     "show_full_path": false,
     "skin": "DA UI/Minimal",
     "theme": "DA.sublime-theme",
     "translate_tabs_to_spaces": true,
     "trim_trailing_white_space_on_save": true,
+    "update_check": false,
     "word_wrap": false
 }

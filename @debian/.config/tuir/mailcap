@@ -1,0 +1,4 @@
+image/x-imgur-album; swallow feh --no-fehbg -B black -g 640x480 %s; test=test -n "$DISPLAY"
+image/*; swallow sxiv-web '%s'
+video/x-youtube; swallow mpv --ytdl-format=bestvideo+bestaudio/best '%s' --autofit=640x480; test=test -n "$DISPLAY"
+video/*; swallow mpv '%s' --autofit=640x480 --loop=inf; test=test -n "$DISPLAY"
