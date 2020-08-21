@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 
 # Generate sublime color scheme based on pywal colors
 # Credits: https://github.com/Brychlikov/pywal_sublime
@@ -55,7 +55,6 @@ if __name__ == '__main__':
         "magenta": wal_scheme['colors']["color5"],
         "orange":  wal_scheme['colors']["color13"],
         "red":     wal_scheme['colors']["color1"],
-        "violet":  "#6c71c4",
         "yellow":  wal_scheme['colors']["color3"],
     }
     result_scheme['variables'] = variables
@@ -68,22 +67,53 @@ if __name__ == '__main__':
     global_settings['foreground'] = "var(foreground)"
     global_settings['caret'] = "var(foreground)"
     global_settings['invisibles'] = "var(color1)"
+
     # global_settings['selection'] = "color(var(color6) l(+50%))"
     global_settings['selection'] = "color(var(color6) a(0.3))"
+    # global_settings['selection_border'] = "#3392FF44"
+    # global_settings['selection_corner_radius'] = "cut"
+    # global_settings['selection_corner_style'] = "cut"
+
+    # "scroll_highlight": "var(yellow)",
+    # "scroll_selected_highlight": "var(green)"
+
     global_settings['gutter_foreground'] = "color(var(background) blend(var(grey) 60%))"
+    global_settings['minimap_border'] = "var(color2)"
+
     # global_settings['line_highlight'] = wal_colors[2] + '2f'
     global_settings['line_highlight'] = "color(var(color2) a(0.2))"
     global_settings['line_diff_width'] = "2"
     global_settings['line_diff_added'] = "#a6cc70"
     global_settings['line_diff_modified'] = "#77a8d9"
     global_settings['line_diff_deleted'] = "#f27983"
-    # global_settings['minimap_border'] = "var(color2)"
+
+    global_settings['active_guide'] = "color(var(color4) alpha(0.8))"
+    global_settings['stack_guide'] = "color(var(color4) alpha(0.1))"
+
+    global_settings['brackets_options'] = "underline"
+    global_settings['brackets_foreground'] = "var(color3)"
+    global_settings['bracket_contents_options'] = "underline"
+    global_settings['bracket_contents_foreground'] = "var(color4)"
+
+    # "brackets_options":            "foreground underline",
+    # "brackets_foreground":         "var(active)",
+    # "bracket_contents_options":    "foreground underline",
+    # "bracket_contents_foreground": "var(active)",
+
+    global_settings["shadow"] = "color(var(color3) blend(#000 75%))"
+    global_settings["shadow_width"] = "4"
+
+    global_settings['tags_options'] = "stippled_underline"
+    global_settings['tags_foreground'] = "var(color13)"
+
     global_settings['popup_css'] = """
         html, body {
             font-family: monospace;
             color: """ + variables['foreground'] + """;
         }
-        body#show-definitions {}
+        body#show-definitions {
+            font-size: 2rem;
+        }
         html {
             border-radius: 1px;
             border:1px solid """ + variables['color4'] + """;
@@ -106,19 +136,11 @@ if __name__ == '__main__':
         }
     """
 
-    # "brackets_options":            "foreground underline",
-    # "brackets_foreground":         "var(active)",
-    # "bracket_contents_options":    "foreground underline",
-    # "bracket_contents_foreground": "var(active)",
-
-    global_settings["shadow"] = "color(var(color3) blend(#000 75%))"
-    global_settings["shadow_width"] = "4"
-
     # Rules
     # See a list for example: https://github.com/xi-editor/syntect-resources/blob/e644db906727fce15ec5509d966aeaf95cfaeec0/Packages/PHP/syntax_test_php.php
 
     settings = []
-    settings.append(add_rule('Comment', 'comment, meta.documentation', foreground='var(grey)', font_style='italic'))
+    settings.append(add_rule('Comment', 'comment, meta.documentation', foreground='color(var(background) blend(grey 33%))', font_style='italic'))
     settings.append(add_rule('String', 'string, constant.other.symbol', foreground=wal_colors[4]))
     settings.append(add_rule('Number', 'constant.numeric', foreground=wal_colors[5]))
     settings.append(add_rule('Language variable', 'variable.language', foreground=wal_colors[5], font_style='italic'))
@@ -129,11 +151,12 @@ if __name__ == '__main__':
     settings.append(add_rule('Storage', 'storage', foreground=wal_colors[3], font_style=''))
     settings.append(add_rule('Storage type', 'storage.type', foreground=wal_colors[6], font_style='italic'))
     settings.append(add_rule('Class name', 'entity.name.class', foreground=wal_colors[1], font_style='italic'))
-    settings.append(add_rule('Inherited class', 'entity.other.inherited-class', foreground=wal_colors[1], font_style='italic'))
+    settings.append(add_rule('Inherited class', 'entity.other.inherited-class', foreground=wal_colors[1], font_style='italic underline'))
     settings.append(add_rule('Imports and packages', 'entity.name.import, entity.name.package', foreground=wal_colors[13], font_style=''))
     settings.append(add_rule('Namespaces', 'support.other.namespace, entity.name.type.namespace', foreground='color(var(color1))', font_style="bold"))
     settings.append(add_rule('Constructors', 'support.function.construct', foreground='color(var(color6))'))
     settings.append(add_rule('Constructors', 'keyword.other.new', foreground='color(var(color9))', font_style="bold"))
+    settings.append(add_rule('Arrow functions', 'storage.type.function.arrow', foreground='color(var(color9))', font_style="bold"))
 
     # parenthese, virgule de fonction et ce qui englobe
     settings.append(add_rule('Function parameter type', 'meta.function.parameters', foreground=wal_colors[9]))
@@ -145,8 +168,15 @@ if __name__ == '__main__':
     settings.append(add_rule('PHP Namespace Alias', 'support.other.namespace.use-as.php', foreground='color(var(background) blend(red 25%) alpha(1))'))
     settings.append(add_rule('PHP Namespaces Keyword', 'variable.language.namespace.php', foreground='color(var(background) blend(red 25%) alpha(1))'))
     settings.append(add_rule('PHP Namespaces Separator', 'punctuation.separator.inheritance.php', foreground='color(var(background) blend(red 25%) alpha(1))'))
+    # HTML
+    settings.append(add_rule('HTML Attribute', 'entity.other.attribute-name.class.html, entity.other.attribute-name.html', font_style='italic'))
+    # YAML
+    settings.append(add_rule('YAML Key', 'entity.name.tag.yaml', foreground='var(color1)'))
+    settings.append(add_rule('YAML Value', 'source.yaml string.unquoted', foreground='var(color7)'))
+    settings.append(add_rule('YAML Value', 'source.yaml string.quoted', foreground='var(color8)'))
     # Function
-    settings.append(add_rule('Function name', 'entity.name.function', foreground=wal_colors[1], font_style='italic'))
+    settings.append(add_rule('Function name', 'entity.name.function', foreground=wal_colors[1]))
+    settings.append(add_rule('Function name', 'entity.name - (entity.name.section | entity.name.tag | entity.name.label)', foreground=wal_colors[4], font_style='italic'))
     settings.append(add_rule('Function argument', 'variable.parameter', foreground=wal_colors[6], font_style=''))
     settings.append(add_rule('Function call', 'variable.function, variable.annotation, meta.function-call.generic, support.function.go', foreground=wal_colors[6], font_style=''))
     # Tag
@@ -179,12 +209,15 @@ if __name__ == '__main__':
     settings.append(add_rule('Twig Filters', "support.function.twig", foreground="var(blue)"))
     settings.append(add_rule('Twig User-Defined Filters', "meta.function-call.other.twig", foreground="var(orange)"))
     settings.append(add_rule('Twig Macros', "meta.function-call.twig", foreground="var(orange)"))
+    # CSS
+    settings.append(add_rule('CSS Properties', "support.type.property-name", foreground="var(foreground)"))
 
     result_scheme['globals'] = global_settings
     result_scheme['rules'] = settings
     result_scheme['semanticClass'] = 'theme.dark.pywal'
 
     # Create sublime-color-scheme
+
     theme_path = os.path.join(
         os.environ['HOME'],
         '.config/sublime-text-3/Packages/User/Themes/Pywal.sublime-color-scheme'
@@ -240,7 +273,7 @@ if __name__ == '__main__':
     afileicon['color'] = wal_colors[1]
     afileicon['color_on_hover'] = wal_colors[4]
     afileicon['color_on_select'] = wal_colors[4]
-    afileicon['size'] = 10
+    afileicon['size'] = 9
     with open(afileicon_path, 'w') as file:
         json.dump(afileicon, file, indent=4)
 
