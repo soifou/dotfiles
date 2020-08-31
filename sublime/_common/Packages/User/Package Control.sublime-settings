@@ -37,6 +37,7 @@
 		"PyYapf Python Formatter",
 		"requirementstxt",
 		"Rsync SSH",
+		"RustFmt",
 		"Sass",
 		"sublime-shfmt",
 		"SublimeLinter",

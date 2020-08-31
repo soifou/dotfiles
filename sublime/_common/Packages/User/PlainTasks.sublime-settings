@@ -1,5 +1,5 @@
 {
-    "color_scheme": "Packages/User/Themes/tasks-ayu.hidden-tmTheme",
+    "color_scheme": "Packages/User/Themes/Pywal.sublime-color-scheme",
     "open_tasks_bullet": "☐", // options: - | ❍ | ❑ | ■ | □ | ☐ | ▪ | ▫ | – | — ≡ → › | [ ]
     "done_tasks_bullet": "✔", // options: + | ✓ | ✔ | √ | [x]
     "cancelled_tasks_bullet": "✘", // options: x | ✘ | [-]

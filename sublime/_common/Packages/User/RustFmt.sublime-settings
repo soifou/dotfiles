@@ -1,0 +1,5 @@
+// RustFmt Settings - User
+{
+    "format_on_save": false,
+    "error_messages": false
+}
