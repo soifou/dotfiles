@@ -8,7 +8,7 @@
 ## asdf
 if [ -d "$ASDF_DATA_DIR" ]; then
     . "$ASDF_DATA_DIR"/asdf.sh
-    export GOROOT="$ASDF_DATA_DIR"/installs/golang/$(asdf current golang | grep "set by" | awk -F" " '{print $1}')/go
+    export GOROOT="$ASDF_DATA_DIR"/installs/golang/$(asdf current golang | awk -F" " '{print $2}')/go
 fi
 ## go
 [ -d "$GOPATH" ] && export PATH="$GOPATH/bin:$PATH"

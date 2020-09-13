@@ -74,8 +74,8 @@ reload_kitty() {
     # Reload +kitten diff
     ruby "$XDG_CONFIG_HOME"/wal/generator/kitty.rb
     # Reload running instances
-    for i in $(kitty @ --to=unix:"$KITTY_SOCK" ls | jq ".[].id"); do
-        kitty @ --to=unix:"$KITTY_SOCK" set-colors -a -c --match id:$i "$XDG_CACHE_HOME"/wal/colors-kitty.conf
+    for i in $(kitty @ --to="$KITTY_LISTEN_ON" ls | jq ".[].id"); do
+        kitty @ --to="$KITTY_LISTEN_ON" set-colors -a -c --match id:$i "$XDG_CACHE_HOME"/wal/colors-kitty.conf
     done
     echo "kitty end"
 }

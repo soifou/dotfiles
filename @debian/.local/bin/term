@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# Launches kitty in single-instance mode if available.  Otherwise,
+# launches a URxvt client, starting the URxvt server if necessary.
+# Credits: https://github.com/sunaku/home/blob/master/bin/terminal
+
+command -v kitty >/dev/null &&
+    exec kitty --single-instance --listen-on "$KITTY_LISTEN_ON" "$@"
+
+urxvtc "$@"
+status=$?
+test $status -eq 2 && urxvtd -q -o -f && {
+    sleep 1
+    exec "$0" "$@"
+}
+exit $status

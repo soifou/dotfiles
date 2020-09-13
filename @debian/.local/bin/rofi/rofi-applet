@@ -26,7 +26,7 @@ rofi_powermenu_classic() {
         amixer set Master mute
         systemctl suspend
         ;;
-    *Logout) i3-logout ;;
+    *Logout) wm-logout ;;
     *Reboot) systemctl reboot ;;
     *Shutdown) systemctl -i poweroff ;;
     esac
@@ -49,7 +49,7 @@ rofi_powermenu() {
             amixer set Master mute
             systemctl suspend
             ;;
-        $logout) i3-logout ;;
+        $logout) wm-logout ;;
     esac
 }
 

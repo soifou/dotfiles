@@ -211,6 +211,27 @@ if __name__ == '__main__':
     settings.append(add_rule('Twig Macros', "meta.function-call.twig", foreground="var(orange)"))
     # CSS
     settings.append(add_rule('CSS Properties', "support.type.property-name", foreground="var(foreground)"))
+    # PlainTasks
+    settings.append(add_rule('TODO Tags', "meta.tag.todo", foreground='color(var(color4))'))
+    settings.append(add_rule('TODO Tags Cancelled', "meta.tag.todo.cancelled", foreground='color(var(color3))'))
+    settings.append(add_rule('TODO Tags Completed', "meta.tag.todo.completed", foreground="color(var(color2))"))
+    settings.append(add_rule('TODO Notes', "notes.todo", foreground="var(background)"))
+    settings.append(add_rule('TODO Tags Today', 'string.other.tag.todo.today', foreground="var(foreground)"))
+    settings.append(add_rule('TODO Tags High', 'string.other.tag.todo.high', foreground="var(color1)"))
+    settings.append(add_rule('TODO Tags Low', 'string.other.tag.todo.low', foreground="var(color4)"))
+    settings.append(add_rule('TODO Tags Critical', 'string.other.tag.todo.critical', foreground="var(color13)"))
+
+    # settings.append(add_rule('TODO Notes', "punctuation.definition.bullet.completed", foreground='color(var(color9))', font_style='bold'))
+    # punctuation.definition.bullet.pending
+    # punctuation.definition.bullet.cancelled
+    # meta.item.todo.cancelled
+    # meta.tag.todo.completed
+    # meta.tag.todo.cancelled
+    # meta.punctuation.archive.todo
+    # meta.punctuation.separator.todo
+    # todo.italic
+    # todo.bold
+    # todo.url
 
     result_scheme['globals'] = global_settings
     result_scheme['rules'] = settings

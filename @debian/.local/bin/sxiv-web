@@ -7,11 +7,7 @@ TMPFILE=$(mktemp)
 curl -sL "$1" >"$TMPFILE"
 
 case $(file --mime-type "$TMPFILE" -bL) in
-    image/gif)
-        sxiv -a "$TMPFILE"
-        ;;
-    image/*)
-        sxiv "$TMPFILE"
-        ;;
+    image/gif) sxiv -ab "$TMPFILE" ;;
+    image/*) sxiv -b "$TMPFILE" ;;
     *) exit 1 ;;
 esac

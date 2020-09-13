@@ -11,7 +11,7 @@
 
 case "$1" in
 *mailto:*)
-    kitty --class=mailto neomutt $1
+    term --class=mailto neomutt $1
     ;;
 *mkv | *webm | *mp4 | *youtube.com* | *youtu.be* | *gfycat.com* | *v.redd.it*)
     setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1 &
@@ -28,10 +28,7 @@ case "$1" in
         "$TERMINAL" -e "$EDITOR $1"
     else
         setsid "$BROWSER" "$1" >/dev/null &
-
-        # i3 marks assigned workspace as urgent and switch to it only the first time (?!).
-        # Force i3 to focus everytime we open a new link tab.
-        command -v i3-msg >/dev/null 2>&1 && i3-msg "[class=\"^(?i)$BROWSER$\"] focus" >/dev/null
+        wm-focus "$(echo "$BROWSER" | sed 's/.*/\u&/')"
     fi
     ;;
 esac

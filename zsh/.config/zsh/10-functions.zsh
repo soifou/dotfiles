@@ -9,12 +9,12 @@ dsd() {
     du --max-depth=1 -x -k | sort -n | awk 'function human(x) { s="KMGTEPYZ"; while (x>=1000 && length(s)>1) {x/=1024; s=substr(s,2)} return int(x+0.5) substr(s,1,1)"iB" } {gsub(/^[0-9]+/, human($1)); print}'
 }
 # Recursively find top 20 largest files (> 1MB) sort human readable format
-dsf() {
-    find . -type f -print0 | xargs -0 du -h | sort -hr | head -20
-}
+dsf() { find . -type f -print0 | xargs -0 du -h | sort -hr | head -20 }
 # git show particular commit in difftool
 unalias gsd
 gsd() { git difftool --no-symlinks --dir-diff $1~1 $1 }
+# open remote origin in your browser
+gor() { git config -l | grep remote.origin.url | awk -F= '{print $2}' | xargs setsid $BROWSER }
 # capistrano alias turned into function (custom completions/_capit won't work with simple alias)
 capit() { [ -f Gemfile ] && bundle exec cap $* }
 # List commands from commandlinefu website

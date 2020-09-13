@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+
+# Take a screenshot from current window/screen or select a region.
+# Dependencies: shotgun, hacksaw, xdotool, notify-send, xclip and pywal (only for hacksaw color)
+# https://github.com/neXromancers/shotgun
+# https://github.com/neXromancers/hacksaw
+
+mkdir -p "$SCREENSHOT_PATH"
+FILENAME=$(date +%s)-$1.png
+SP="$SCREENSHOT_PATH/$FILENAME"
+
+notify() {
+    notify-send -i camera-photo "Screenshot :: $1" "$2"
+}
+
+hacksaw_cmd() {
+    . "$XDG_CACHE_HOME"/wal/colors.sh
+    hacksaw -c "$color4" -g 2 -s 2 -f "-i %i -g %g"
+}
+
+case $1 in
+    screen)
+        shotgun "$SP" && notify "$1" "Copied to $SP"
+        ;;
+    window)
+        shotgun -i $(xdotool getactivewindow) "$SP" && notify "$1" "Copied to $SP"
+        ;;
+    region)
+        shotgun $(hacksaw_cmd) "$SP" && notify "$1" "Copied to $SP"
+        ;;
+    *)
+        shotgun $(hacksaw_cmd) - | xclip -sel clip -t image/png && notify region "Copied to clipboard"
+        ;;
+esac

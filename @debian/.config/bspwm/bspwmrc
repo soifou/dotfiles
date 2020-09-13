@@ -1,0 +1,47 @@
+#!/usr/bin/env sh
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc monitor -d 1 2 3 4 5 6
+
+bspc config border_width         2
+bspc config window_gap          10
+
+bspc config split_ratio          0.50
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+. "$XDG_CACHE_HOME"/wal/colors.sh
+bspc config normal_border_color "$background"
+bspc config active_border_color "$color1"
+bspc config focused_border_color "$color4"
+bspc config presel_feedback_color "$color1"
+
+# allow the mouse to manipulate windows when the super (mod4) key is pressed
+# tiling/floating windows can be resized with left click
+# floating windows can be moved with right click
+bspc config pointer_modifier mod4
+bspc config pointer_action1 resize_side
+bspc config pointer_action1 resize_corner
+bspc config pointer_action3 move
+
+# desktop default layouts
+bspc desktop ^2 --layout monocle
+
+# nuke the previous rules so reloading the config works as intended
+bspc rule -r "*"
+
+# window behaviour (with class name)
+bspc rule -a Sublime_text desktop='^2'
+bspc rule -a Firefox desktop='^3'
+bspc rule -a neomutt desktop='^4'
+bspc rule -a weechat desktop='^4'
+bspc rule -a skype-nativefier desktop='^4'
+bspc rule -a mailto state=floating follow=on
+bspc rule -a mpv state=floating
+bspc rule -a Zathura state=tiled
+# with newer version of bspwm you can target the title of a window
+bspc rule -a '*:*:mpv-webcam' state=floating sticky=on layer=above manage=on border=off
+
+# Add bar
+POLYBAR_BAR=bspwm polybar-run

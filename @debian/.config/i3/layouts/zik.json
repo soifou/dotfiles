@@ -1,31 +1,10 @@
 // vim:ts=4:sw=4:et
 {
-    "border": "pixel",
-    "current_border_width": 2,
-    "floating": "auto_off",
-    "geometry": {
-       "height": 364,
-       "width": 724,
-       "x": 0,
-       "y": 0
-    },
-    "name": "player",
-    "percent": 0.7,
-    "swallows": [
-       {
-        "class": "^kitty$",
-        "instance": "^zik_ncmpcpp$"
-       }
-    ],
-    "type": "con"
-}
-
-{
-    // splitv split container with 2 children
+    // splith split container with 2 children
     "border": "pixel",
     "floating": "auto_off",
-    "layout": "splitv",
-    "percent": 0.3,
+    "layout": "splith",
+    "percent": null,
     "type": "con",
     "nodes": [
         {
@@ -33,27 +12,26 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
-               "height": 364,
-               "width": 724,
+               "height": 400,
+               "width": 640,
                "x": 0,
                "y": 0
             },
-            "name": "visualizer",
-            "percent": 0.5,
+            "name": "zsh",
+            "percent": 0.7,
             "swallows": [
                {
-                "class": "^kitty$",
-                "instance": "^zik_cava$"
+               "class": "^kitty$", "instance": "^zik_ncmpcpp$"
                }
             ],
             "type": "con"
         },
         {
-            // splith split container with 1 children
+            // splitv split container with 2 children
             "border": "pixel",
             "floating": "auto_off",
-            "layout": "splith",
-            "percent": 0.5,
+            "layout": "splitv",
+            "percent": 0.3,
             "type": "con",
             "nodes": [
                 {
@@ -61,22 +39,51 @@
                     "current_border_width": 2,
                     "floating": "auto_off",
                     "geometry": {
-                       "height": 720,
-                       "width": 1280,
-                       "x": 1483,
-                       "y": 24
+                       "height": 400,
+                       "width": 640,
+                       "x": 0,
+                       "y": 0
                     },
-                    "name": "cover",
-                    "percent": 1,
+                    "name": "zsh",
+                    "percent": 0.5,
                     "swallows": [
                        {
-                        "class": "^Sxiv$",
-                        "instance": "^zik_cover$"
+                       "class": "^kitty$", "instance": "^zik_cava$"
                        }
                     ],
                     "type": "con"
+                },
+                {
+                    // splith split container with 1 children
+                    "border": "pixel",
+                    "floating": "auto_off",
+                    "layout": "splith",
+                    "percent": 0.5,
+                    "type": "con",
+                    "nodes": [
+                        {
+                            "border": "pixel",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 400,
+                               "width": 640,
+                               "x": 0,
+                               "y": 0
+                            },
+                            "name": "zsh",
+                            "percent": null,
+                            "swallows": [
+                               {
+                               "class": "^Sxiv$", "instance": "^zik_cover$"
+                               }
+                            ],
+                            "type": "con"
+                        }
+                    ]
                 }
             ]
         }
     ]
 }
+

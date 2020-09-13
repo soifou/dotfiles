@@ -2,7 +2,7 @@
 Name=Weechat
 Comment=Weechat
 GenericName=IRC client
-Exec=i3-sensible-terminal -1 --listen-on unix:"$KITTY_SOCK" --class=weechat weechat
+Exec=wm-focus weechat
 Terminal=false
 Type=Application
 Icon=weechat

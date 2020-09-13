@@ -5,19 +5,17 @@
 # update-alternatives --set x-window-manager /usr/bin/i3
 # exec x-window-manager
 
-session=${1:-i3}
+# Start WM
+session=${WM:-i3}
+unset WM
 case $session in
-    i3|i3wm)
-        echo 'exec i3!' >> $XDG_CACHE_HOME/xsession-errors
-        exec i3
-    ;;
-    spectrwm)
-        echo 'exec spectrwm!' >> $XDG_CACHE_HOME/xsession-errors
-        exec spectrwm
-    ;;
-    # default back to i3
-    * )
-        echo 'exec default i3' >> $XDG_CACHE_HOME/xsession-errors
-        exec i3
-    ;;
+    i3|i3wm ) exec i3 2> /tmp/i3.log;;
+    bsp|bspwm ) exec bspwm 2> /tmp/bspwm.log;;
+    herbsluft|herbstluftwm ) exec herbstluftwm --locked;;
+    spectr|spectrwm ) exec spectrwm 2> /tmp/spectrwm.log;;
+    subtle|subtlewm ) exec subtle 2> /tmp/subtle.log;;
+    awesome|awesomewm ) exec awesome ;;
+    * ) exec $session;;
 esac
+
+pkill X

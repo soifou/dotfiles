@@ -16,7 +16,7 @@ URxvt*cursorBlink: true
 ! Font settings
 URxvt.font: xft:monospace:pixelsize=16:antialias=true
 URxvt.boldFont: xft:monospace:style=Semibold:pixelsize=16:antialias=true:Bold
-URxvt*letterSpace: 0
+URxvt*letterSpace: -2
 URxvt.lineSpace: 0
 
 ! scrollbar - true (default) or false

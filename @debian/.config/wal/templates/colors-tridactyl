@@ -15,13 +15,23 @@
     --tridactyl-url-fg: var(--tridactyl-cmdl-fg);
     --tridactyl-url-bg: none;
 
-    --tridactyl-cmplt-border-top: {color4};
-
     --tridactyl-of-fg: var(--tridactyl-fg);
     --tridactyl-of-bg: var(--tridactyl-bg);
 
+    --tridactyl-vs-bg: {color4};
+    --tridactyl-vs-fg: var(--tridactyl-fg);
+
+    --tridactyl-search-highlight-color: {color4};
     --tridactyl-highlight-box-bg: {color1};
     --tridactyl-highlight-box-fg: var(--tridactyl-fg);
+
+    --tridactyl-hintspan-fg: var(--tridactyl-bg);
+    --tridactyl-hintspan-bg: var(--tridactyl-header-second-bg);
+    --tridactyl-hintspan-border-width: 0px;
+
+    --tridactyl-hint-active-fg: var(--tridactyl-fg);
+    --tridactyl-hint-active-bg: var(--tridactyl-header-first-bg)
+    --tridactyl-hint-active-outline: 1px solid #cc0000;
 }}
 
 :root.TridactylThemeWal #completions {{

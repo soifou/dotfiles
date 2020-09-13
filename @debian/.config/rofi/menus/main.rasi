@@ -25,6 +25,11 @@ element {
     padding: 6 4;
 }
 
+element-icon {
+    size: 16;
+    padding: 0 15 0 0;
+}
+
 element-text {
     highlight: bold underline;
 }
@@ -96,7 +101,7 @@ wrapper {
 
 icon-search {
     expand: false;
-    /* icon name depending on your current icon theme (ie. /usr/share/icons/Papirus/24x24/actions/find.svg) */
+    /* icon name depends on your current icon theme (ie. /usr/share/icons/Papirus/24x24/actions/find.svg) */
     filename: "find";
     size: 24;
     background-color: @background;
@@ -125,6 +130,11 @@ case-indicator {
     spacing: 0;
     text-color: @background;
     background-color: @background;
+}
+
+entry {
+    placeholder-color: @off;
+    placeholder: "Type to filter...";
 }
 
 entry,

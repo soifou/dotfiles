@@ -46,7 +46,7 @@ floating_modifier $mod
 # =============================================================================
 # Terminal
 # =============================================================================
-bindsym $mod+Return exec kitty -1 --listen-on unix:"$KITTY_SOCK"
+bindsym $mod+Return exec term
 
 # =============================================================================
 # Launcher
@@ -55,10 +55,10 @@ bindsym $mod+Return exec kitty -1 --listen-on unix:"$KITTY_SOCK"
 bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,calc:~/.local/bin/rofi/rofi-bc' -show drun"
 # Classic Alt+Tab to list opened apps
 bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10 -no-sidebar-mode
+# Manage wallpapers/themes, copy emojis to clipboard (https://github.com/Mange/rofi-emoji)
+bindsym Mod1+Shift+t exec --no-startup-id rofi -modi themes:~/.local/bin/wal-switcher#emoji -plugin-path /usr/local/lib/rofi -show themes
 # List pass entries using pass-clip (password-store extension): https://github.com/ibizaman/pass-clip
 bindsym $mod+p exec --no-startup-id pass clip --rofi
-# Manage wallpapers/themes, copy emojis to clipboard (https://github.com/Mange/rofi-emoji)
-bindsym $mod+t exec --no-startup-id rofi -modi themes:~/.local/bin/wal-switcher#emoji -plugin-path /usr/local/lib/rofi -show themes
 
 # =============================================================================
 # Locker
@@ -69,15 +69,13 @@ bindsym $mod+Escape exec ~/.local/bin/lockscreen --corrupted
 # =============================================================================
 # Screenshot
 # =============================================================================
-bindsym Print exec ~/.local/bin/screenshot region-clipboard
-bindsym $mod+Print exec ~/.local/bin/screenshot region
-bindsym $mod+Shift+Print exec ~/.local/bin/screenshot screen
+bindsym Print exec ~/.local/bin/gunshot
+bindsym $mod+Print exec ~/.local/bin/gunshot window
+bindsym $mod+Shift+Print exec ~/.local/bin/gunshot screen
 
 # =============================================================================
 # Webcam
 # =============================================================================
-for_window [title="video0 - mpv"] floating enable
-for_window [title="video0 - mpv"] sticky enable
 bindsym $mod+w exec --no-startup-id ~/.local/bin/toggle-webcam
 
 # =============================================================================
@@ -135,7 +133,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+q focus parent
+# bindsym $mod+q focus parent
 
 # focus the child container
 # bindsym $mod+d focus child
@@ -197,7 +195,7 @@ assign [class="Insomnia"] 6
 # Kill, reload, restart, exit
 # =============================================================================
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q split toggle kill
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -265,7 +263,11 @@ exec_always --no-startup-id ~/.local/bin/polybar-run
 # =============================================================================
 default_border pixel $border_pixels
 for_window [class=".*"] border pixel $border_pixels
-# for_window [class=".*"] title_format "<span weight='bold' foreground='$darkred'>%title</span> :: <small>%class</small>"
+
+# toggles split at each new window
+default_orientation vertical
+for_window [class=".*"] split toggle
+
 for_window [urgent=latest] focus
 for_window [workspace=2] layout tabbed
 for_window [workspace=4] layout tabbed
@@ -279,11 +281,15 @@ for_window [floating class="mailto"] move position center
 for_window [title="mpv-newsboat"] floating enable resize set 800 600
 for_window [floating title="mpv-newsboat"] move position center
 
+for_window [title="mpv-webcam"] floating enable
+for_window [title="mpv-webcam"] sticky enable
+
 focus_on_window_activation focus
 # Using Rofi, last focused window is lost, and focus window at the mouse position
 focus_follows_mouse no
 # No more deadlock until you go out of fullscreen
 popup_during_fullscreen leave_fullscreen
+
 # =============================================================================
 # i3-gaps
 # =============================================================================

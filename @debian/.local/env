@@ -13,7 +13,7 @@ export XDG_LOCAL_HOME="$HOME/.local"
     eval "$(sed 's/^[^#].*/export &/g;t;d' "$XDG_CONFIG_HOME"/user-dirs.dirs)"
 
 ## Runtime
-export KITTY_SOCK="$XDG_RUNTIME_DIR"/kitty.sock
+export KITTY_LISTEN_ON=unix:@kitty
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR"/ssh-agent.socket
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority

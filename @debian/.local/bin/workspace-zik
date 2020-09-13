@@ -19,9 +19,9 @@ create_workspace() {
     # create workspace and append layout
     i3-msg "workspace $WKNAME; append_layout $LAYOUT_PATH" >/dev/null
     # music visualizer
-    kitty -1 --listen-on unix:"$KITTY_SOCK" --name zik_cava cava &
+    term --name zik_cava cava &
     # music player
-    kitty -1 --listen-on unix:"$KITTY_SOCK" --name zik_ncmpcpp ncmpcpp &
+    term --name zik_ncmpcpp ncmpcpp &
     # cover
     # ncmpcpp-art extract
     # feh -^ zik_cover -B black -g 256x256+832+600 -Z -x --reload 5 $COVER_PATH &

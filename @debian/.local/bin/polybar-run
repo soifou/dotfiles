@@ -5,13 +5,13 @@
 # see: https://github.com/jaagr/polybar/issues/323#issuecomment-292038260
 
 # Choose the bar to display
-POLYBAR_BAR=${POLYBAR_BAR:-main}
+POLYBAR_BAR=${POLYBAR_BAR:-i3}
 
 # Terminate already running bar instances
 killall -q polybar
 
 # Wait until the processes have been shut down
-while pgrep -u $(id -u) -x polybar >/dev/null; do sleep 1; done
+while pgrep -u "$(id -u)" -x polybar >/dev/null; do sleep 1; done
 
 # Launch bar "$POLYBAR_BAR" on all monitors (if any)
 if command -v xrandr >/dev/null 2>&1; then
@@ -19,8 +19,8 @@ if command -v xrandr >/dev/null 2>&1; then
     # for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
     # for the last one connected on the list
     for m in $(xrandr --query | grep " connected" | cut -d" " -f1 | tail -n1); do
-        SHELL=$(command -v sh) MONITOR=$m polybar --config=$XDG_CONFIG_HOME/polybar/config --reload $POLYBAR_BAR &
+        SHELL=$(command -v sh) MONITOR=$m polybar --config="$XDG_CONFIG_HOME"/polybar/config --reload "$POLYBAR_BAR" &
     done
 else
-    SHELL=$(command -v sh) polybar --config=$XDG_CONFIG_HOME/polybar/config --reload $POLYBAR_BAR &
+    SHELL=$(command -v sh) polybar --config="$XDG_CONFIG_HOME"/polybar/config --reload "$POLYBAR_BAR" &
 fi

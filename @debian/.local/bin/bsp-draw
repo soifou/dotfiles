@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+# Spawn a floating term with hacksaw on bspwm
+# Credits: https://github.com/turquoise-hexagon/dots/blob/896422dd12a/wm/.local/bin/draw
+
+b=$(bspc config border_width)
+c=$(bspc config focused_border_color)
+
+hacksaw -s "$b" -g "$b" -c "$c" | {
+    IFS=+x read -r w h x y
+
+    # make the newly spawned window floating & with the right geometry
+    bspc rule -a \* -o state=floating \
+        rectangle="$((w - 2 * b))x$((h - 2 * b))+$x+$y"
+}
+
+term &

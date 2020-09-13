@@ -1,34 +1,29 @@
 #!/usr/bin/env sh
 
-start_daemon() {
-    if command -v $1 >/dev/null 2>&1; then
-        pgrep $1 >/dev/null || $1 &
+_c() {
+    command -v "$1" >/dev/null && "$@"
+}
+# keyboard delay/rate
+_c xset r rate 350 45
+# keyboard numlock
+_c numlockx on
+# keymap
+_c toggle-xkbkeymap us
+# current wallpaper/colorscheme
+_c wal-switcher theme-dark >/dev/null
+# default cursor (needs xorg-xsetroot)
+_c xsetroot -cursor_name left_ptr
+
+_d() {
+    if command -v "$1" >/dev/null 2>&1; then
+        pgrep -x "$1" >/dev/null || { "$@" & }
     fi
 }
-
-# keyboard delay/rate, turn off beep
-command -v xset >/dev/null 2>&1 && xset r rate 350 45 && xset -b
-# xset +fp ~/.local/share/fonts
-# xset fp rehash
-# keyboard numlock
-command -v numlockx >/dev/null 2>&1 && numlockx on
-# custom keymap
-command -v toggle-xkbkeymap >/dev/null 2>&1 && toggle-xkbkeymap us
-# apply current wallpaper/colorscheme
-command -v wal-switcher >/dev/null 2>&1 && wal-switcher theme-dark >/dev/null
-# screen temp/brightness
-command -v redshift >/dev/null 2>&1 && "$XDG_LOCAL_HOME"/bin/redshift-cli --temp >/dev/null
-# compositor for x11
-# command -v picom >/dev/null 2>&1 && picom -b --experimental-backends
 # clipboard manager for rofi
-if command -v greenclip >/dev/null 2>&1; then
-    pgrep greenclip >/dev/null || greenclip daemon &
-fi
-# bar
-# command -v polybar-run >/dev/null 2>&1 && polybar-run
+_d greenclip daemon
 # screen locker
-command -v locker >/dev/null 2>&1 && "$XDG_LOCAL_HOME"/bin/locker &
+_d locker
 # music player daemon
-start_daemon mpd
+_d mpd
 # no mouse cursor
-start_daemon xbanish
+_d xbanish
