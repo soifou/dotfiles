@@ -73,14 +73,8 @@ if [ -d "$HOME/dotfiles" ]; then
     fi
 fi
 
-if command -v pass >/dev/null 2>&1; then
-    yn "Update pass?" && pass git pull
-fi
-
 if command -v mr >/dev/null 2>&1; then
-    if yn "Update myrepos?"; then
-        cd "$XDG_DATA_HOME/myrepos" && git pull
-    fi
+    yn "Update local share?" && mr -d "$XDG_DATA_HOME" update
 fi
 
 if command -v docker >/dev/null 2>&1; then
@@ -117,6 +111,12 @@ fi
 
 if command -v antibody >/dev/null 2>&1; then
     yn "Update antibody?" && antibody update
+fi
+
+if command -v cargo >/dev/null 2>&1; then
+    if yn "Update global rust binaries?"; then
+        cargo install-update -a
+    fi
 fi
 
 if command -v npm >/dev/null 2>&1; then
