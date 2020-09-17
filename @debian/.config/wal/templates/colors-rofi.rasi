@@ -3,7 +3,7 @@
     selected-background-faded: {color4}af;
 
     /* background around menu */
-    shadow:{background}ef;
+    shadow:{background}cf;
 
     background: {background};
     foreground: {foreground};

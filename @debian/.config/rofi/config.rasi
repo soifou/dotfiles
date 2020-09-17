@@ -3,6 +3,7 @@ configuration {
     show-icons: true;
     disable-history: false;
     case-sensitive: false;
+    fake-transparency: true;
     sidebar-mode: true;
     auto-select: false;
     tokenize: true;
