@@ -78,14 +78,11 @@ reveal-alias() {
     preexec_functions+=expand_aliases
 }
 # Python functions
-if [ -d "${PYENV_ROOT}" ]; then
+if command -v pip >/dev/null 2>&1; then
     # uninstall package with dependencies
     pip-uninstall() {
         for dep in $(pip show $1 | grep Requires | sed 's/Requires: //g; s/,//g') ; do pip uninstall -y $dep ; done
         pip uninstall -y $1
-    }
-    pip-upgrade() {
-        pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
     }
 fi
 # Show how much RAM application uses.
