@@ -60,4 +60,4 @@ browser linkhandler
 
 macro , open-in-browser
 # add video or audio to play queue using mpv (requires: task-spooler, mpv, youtube-dl)
-macro p set browser "tsp mpv --title=mpv-newsboat --ontop --no-border --force-window --autofit=1024x768 %u"; open-in-browser ; set browser "$BROWSER %u"
+macro p set browser "tsp mpv %u"; open-in-browser ; set browser "$BROWSER %u"
