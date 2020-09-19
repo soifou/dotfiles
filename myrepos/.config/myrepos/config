@@ -1,0 +1,7 @@
+[DEFAULT]
+# Teach mr how to `mr gc` in git repos.
+git_gc = git gc "$@"
+# Run the specified number of jobs in parallel
+jobs = 3
+
+include = cat $XDG_DATA_HOME/myrepos/*.enabled
