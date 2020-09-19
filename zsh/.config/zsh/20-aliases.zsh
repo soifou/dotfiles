@@ -1,27 +1,32 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 
 # Global aliases
 alias ls="exa"
 alias l="exa -la --group-directories-first --time-style=long-iso"
-alias lt="exa -l -T"
+alias lt="exa -T"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias grep="grep --color=auto"
 
+# Suffix
+alias -s {mp4,MP4,mkv,MKV,mp3,MP3,mov,MOV,mpg,MPG,m4v,M4V,ogg,OGG,wav,WAV,webm,WEBM}='mpv'
+alias -s {jpg,JPG,png,PNG,tif,TIF,tiff,TIFF}='sxiv -b'
+alias -s {gif,GIF}='sxiv -ab'
+alias -s {pdf,PDF,ps,PS}='zathura'
+
+# Defaults
+alias grep="grep --color=auto"
+alias mkdir="mkdir -p"
+alias rm="rm -i"
 alias feh="feh --no-fehbg -B background"
 alias bat="bat --theme=ansi-dark"
+alias mr="mr -c $XDG_CONFIG_HOME/myrepos/config -t"
 alias yafc="yafc -W $XDG_CONFIG_HOME/yafc"
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 alias w3m="w3m -config $XDG_CONFIG_HOME/w3m/config"
 alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/yarnrc"
 alias scummvm="scummvm -c $XDG_CONFIG_HOME"/scummvm/scummvmrc
 alias residualvm="residualvm -c $XDG_CONFIG_HOME"/residualvm/residualvmrc
-
-#alias freewifi="while true ; do wget --quiet --no-check-certificate --post-data 'login=$FREEWIFI_ID&password=$FREEWIFI_PASS&submit=Valider' 'https://wifi.free.fr/Auth' -O '/dev/null' ; sleep 600; done"
-
-# access clipboard history (greenclip+fzf)
-alias clip="greenclip print | sed '/^$/d' | fzf -e | xargs -r -d'\n' -I '{}' greenclip print '{}'"
 
 # dev
 alias https='http --default-scheme=https'
