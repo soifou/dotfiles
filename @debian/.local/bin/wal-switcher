@@ -7,8 +7,13 @@
 
 PYWAL_BACKEND=${PYWAL_BACKEND:-wal}
 PYWAL_SCRIPT=~/.local/bin/wal-changer
-WALLPAPER_PATH=${WALLPAPER_PATH:-~/Pictures/wallpapers}
+WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
 mkdir -p "$WALLPAPER_PATH"
+
+_wal() {
+    wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
+        -e -q -n -i "$@" >/dev/null
+}
 
 if [ -z "$@" ]; then
     get_options() {
@@ -48,15 +53,11 @@ else
     # generate schemes based on selected wallpaper
     if [ -n "${THEMES}" ]; then
         # reload with light colors
-        if [ x"theme-light" = x"${THEMES}" ]; then
-            wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
-                -q -n -i "$WALLPAPER_PATH/today" -l >/dev/null
+        [ x"theme-light" = x"${THEMES}" ] && _wal "$WALLPAPER_PATH/today" -l
         # reload with dark colors
-        elif [ x"theme-dark" = x"${THEMES}" ]; then
-            wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
-                -q -n -i "$WALLPAPER_PATH/today" >/dev/null
+        [ x"theme-dark" = x"${THEMES}" ] && _wal "$WALLPAPER_PATH/today"
         # apply selected theme with dark colors
-        elif [ -f "$WALLPAPER_PATH/${THEMES}" ]; then
+        if [ -f "$WALLPAPER_PATH/${THEMES}" ]; then
             # Need to clear cache of previous colorschemes here
             # Argument -c (Delete all cached colorschemes) does not work for me
             rm -rf "$XDG_CACHE_HOME"/wal
@@ -69,10 +70,9 @@ else
             #     for term in glob.glob(tty_pattern):
             #         if term != '/dev/pts/5':
             #             util.save_file(sequences, term)
-            wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
-                -q -n -i "$WALLPAPER_PATH/${THEMES}" >/dev/null
-        else
-            echo "[WARNING] Requested wall '$THEMES' does not exist in $WALLPAPER_PATH"
+            _wal "$WALLPAPER_PATH/${THEMES}"
+        # else
+        #     echo "[WARNING] Requested wall '$THEMES' does not exist in $WALLPAPER_PATH"
         fi
     fi
 fi

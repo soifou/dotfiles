@@ -48,6 +48,15 @@ reload_wallpaper() {
     echo "wal end..."
 }
 
+reload_wm() {
+    pgrep -x i3 >/dev/null && i3-msg reload
+    pgrep -x bspwm >/dev/null && bspc wm -r
+}
+
+reload_xrdb() {
+    xrdb -merge -quiet "$XDG_CACHE_HOME"/wal/colors.Xresources
+}
+
 reload_dunst() {
     echo "dunst start"
     pkill dunst
@@ -118,6 +127,8 @@ reload_zathura() {
 }
 
 reload_wallpaper
+reload_wm
+reload_xrdb
 reload_sublime
 reload_kitty
 reload_pywalfox
