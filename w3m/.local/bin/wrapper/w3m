@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# Set configuration files location
+set -- -config "${XDG_CONFIG_HOME}"/w3m/config \
+    -no-mouse \
+    "${@}"
+
+# Run w3m
+command -v w3m >/dev/null && \
+    # Fake home folder to avoid w3m keeps creating an empty dir
+    HOME="${XDG_DATA_HOME}"/w3m \
+    /usr/bin/w3m "$@"
