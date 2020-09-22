@@ -138,7 +138,6 @@ if __name__ == '__main__':
 
     # Rules
     # See a list for example: https://github.com/xi-editor/syntect-resources/blob/e644db906727fce15ec5509d966aeaf95cfaeec0/Packages/PHP/syntax_test_php.php
-
     settings = []
     settings.append(add_rule('Comment', 'comment, meta.documentation', foreground='color(var(background) blend(grey 33%))', font_style='italic'))
     settings.append(add_rule('String', 'string, constant.other.symbol', foreground=wal_colors[4]))
@@ -157,10 +156,7 @@ if __name__ == '__main__':
     settings.append(add_rule('Constructors', 'support.function.construct', foreground='color(var(color6))'))
     settings.append(add_rule('Constructors', 'keyword.other.new', foreground='color(var(color9))', font_style="bold"))
     settings.append(add_rule('Arrow functions', 'storage.type.function.arrow', foreground='color(var(color9))', font_style="bold"))
-
-    # parenthese, virgule de fonction et ce qui englobe
     settings.append(add_rule('Function parameter type', 'meta.function.parameters', foreground=wal_colors[9]))
-
     # PHP
     settings.append(add_rule('PHP Storage Nullable', 'storage.type.nullable.php', foreground=wal_colors[8]))
     settings.append(add_rule('PHP Punctuation Dollar', 'punctuation.definition.variable.php', foreground=wal_colors[6]))
@@ -211,34 +207,31 @@ if __name__ == '__main__':
     settings.append(add_rule('Twig Macros', "meta.function-call.twig", foreground="var(orange)"))
     # CSS
     settings.append(add_rule('CSS Properties', "support.type.property-name", foreground="var(foreground)"))
-    # PlainTasks
-    settings.append(add_rule('TODO Tags', "meta.tag.todo", foreground='color(var(color4))'))
-    settings.append(add_rule('TODO Tags Cancelled', "meta.tag.todo.cancelled", foreground='color(var(color3))'))
-    settings.append(add_rule('TODO Tags Completed', "meta.tag.todo.completed", foreground="color(var(color2))"))
-    settings.append(add_rule('TODO Notes', "notes.todo", foreground="var(background)"))
-    settings.append(add_rule('TODO Tags Today', 'string.other.tag.todo.today', foreground="var(foreground)"))
-    settings.append(add_rule('TODO Tags High', 'string.other.tag.todo.high', foreground="var(color1)"))
-    settings.append(add_rule('TODO Tags Low', 'string.other.tag.todo.low', foreground="var(color4)"))
-    settings.append(add_rule('TODO Tags Critical', 'string.other.tag.todo.critical', foreground="var(color13)"))
-
-    # settings.append(add_rule('TODO Notes', "punctuation.definition.bullet.completed", foreground='color(var(color9))', font_style='bold'))
-    # punctuation.definition.bullet.pending
-    # punctuation.definition.bullet.cancelled
-    # meta.item.todo.cancelled
-    # meta.tag.todo.completed
-    # meta.tag.todo.cancelled
-    # meta.punctuation.archive.todo
-    # meta.punctuation.separator.todo
-    # todo.italic
-    # todo.bold
-    # todo.url
+    # INI (https://github.com/jwortmann/ini-syntax#color-schemes)
+    settings.append(add_rule('INI Key', "meta.mapping.key.ini string", foreground="var(red)"))
+    settings.append(add_rule('INI Value', "meta.mapping.value.ini string", foreground="var(blue)"))
+    # PlainTasks (https://github.com/aziz/PlainTasks/blob/master/PlainTasks.sublime-syntax)
+    settings.append(add_rule('PlainTasks Header Title', "keyword.control.header.todo", foreground='color(var(color4))', font_style="bold underline"))
+    settings.append(add_rule('PlainTasks Pending Icon', "punctuation.definition.bullet.pending.todo", foreground='color(var(color4))'))
+    settings.append(add_rule('PlainTasks URL', "todo.url", foreground='color(var(color4))'))
+    settings.append(add_rule('PlainTasks Separator', "meta.punctuation.separator.todo", foreground='color(var(color4))', font_style="bold"))
+    settings.append(add_rule('PlainTasks Completed Icon', "punctuation.definition.bullet.completed.todo", foreground='var(green)'))
+    settings.append(add_rule('PlainTasks Notes', "notes.todo", foreground="var(background)"))
+    settings.append(add_rule('PlainTasks Tags', "meta.tag.todo", foreground='color(var(color4))', font_style="bold"))
+    settings.append(add_rule('PlainTasks Tags Cancelled', "meta.tag.todo.cancelled", foreground='color(var(color3))', font_style="bold"))
+    settings.append(add_rule('PlainTasks Tags Completed', "meta.tag.todo.completed", foreground="color(var(color2))", font_style="bold"))
+    settings.append(add_rule('PlainTasks Tags Today', 'string.other.tag.todo.today', foreground="var(red)", font_style="bold"))
+    settings.append(add_rule('PlainTasks Tags High', 'string.other.tag.todo.high', foreground="var(red)", font_style="bold"))
+    settings.append(add_rule('PlainTasks Tags Low', 'string.other.tag.todo.low', foreground="var(color4)", font_style="bold"))
+    settings.append(add_rule('PlainTasks Tags Critical', 'string.other.tag.todo.critical', foreground="var(color13)", font_style="bold"))
+    # MarkdownEditing (https://github.com/SublimeText-Markdown/MarkdownEditing/blob/master/Markdown.sublime-syntax)
+    settings.append(add_rule('MarkdownEditing', 'markup.heading.markdown', foreground="var(color4)", font_style="bold"))
 
     result_scheme['globals'] = global_settings
     result_scheme['rules'] = settings
-    result_scheme['semanticClass'] = 'theme.dark.pywal'
+    result_scheme['semanticClass'] = 'theme.pywal'
 
     # Create sublime-color-scheme
-
     theme_path = os.path.join(
         os.environ['HOME'],
         '.config/sublime-text-3/Packages/User/Themes/Pywal.sublime-color-scheme'
