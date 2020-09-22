@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-rm -rf "$HOME"/.{ansible,pki,pdepend,gnupg,dbus,w3m}
+#!/usr/bin/env sh
 
 # Remove queue list in task-spooler
 tsp -K
