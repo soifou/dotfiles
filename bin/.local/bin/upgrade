@@ -74,7 +74,7 @@ if [ -d "$HOME/dotfiles" ]; then
 fi
 
 if command -v mr >/dev/null 2>&1; then
-    yn "Update local share?" && mr -d "$XDG_DATA_HOME" update
+    yn "Update local share?" && mr -c "$XDG_CONFIG_HOME"/myrepos/config -t -d "$XDG_DATA_HOME" update
 fi
 
 if command -v docker >/dev/null 2>&1; then
