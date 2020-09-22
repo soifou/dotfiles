@@ -23,8 +23,6 @@ alias bat="bat --theme=ansi-dark"
 alias mr="mr -c $XDG_CONFIG_HOME/myrepos/config -t"
 alias yafc="yafc -W $XDG_CONFIG_HOME/yafc"
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
-alias w3m="w3m -config $XDG_CONFIG_HOME/w3m/config"
-alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/yarnrc"
 alias scummvm="scummvm -c $XDG_CONFIG_HOME"/scummvm/scummvmrc
 alias residualvm="residualvm -c $XDG_CONFIG_HOME"/residualvm/residualvmrc
 
