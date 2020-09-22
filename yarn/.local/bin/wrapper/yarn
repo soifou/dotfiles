@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+# yarn keep creating .yarnrc in home folder
+# Set in "$XDG_CONFIG_HOME"/yarn/yarnrc
+#   disable-self-update-check true
+# See:
+# https://github.com/yarnpkg/yarn/issues/2334
+# https://github.com/yarnpkg/yarn/issues/6721
+# https://github.com/yarnpkg/yarn/pull/2954
+# https://github.com/yarnpkg/yarn/issues/4134
+
+set -- "${@}" --use-yarnrc "$XDG_CONFIG_HOME"/yarn/yarnrc
+exec "$ASDF_DATA_DIR"/shims/yarn "$@"
