@@ -10,6 +10,12 @@ macro attach W "<save-entry><bol><eol>" "Save to downloads folder"
 # A: Attach files with Ranger file manager (press Space to select file(s) then Enter)
 macro compose A "<shell-escape>neomutt-picker<enter><enter-command>source /tmp/neomutt-attachments<enter>" "Attach with Ranger"
 
+# K: Compiles written markdown email to HTML/plain text alternatives
+# see: https://neomutt.org/guide/mimesupport#5-2-%C2%A0composing-multipart-alternative-emails
+# https://github.com/neomutt/neomutt/issues/587
+# https://to.mw/posts/neomutt-markdown-email
+macro compose K "<enter-command>set pipe_decode<enter><pipe-message>pandoc -f gfm -t plain -o /tmp/msg.txt<enter><pipe-message>pandoc -s -f gfm --self-contained -o /tmp/msg.html --metadata title=' ' --template $XDG_CONFIG_HOME/neomutt/templates/email<enter><enter-command>unset pipe_decode<enter><attach-file>/tmp/msg.txt<enter><attach-file>/tmp/msg.html<enter><tag-entry><previous-entry><tag-entry><group-alternatives>" "Convert markdown to HTML5 and plaintext alternative content types"
+
 # Gmail keyboard shortcuts
 macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 # macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
