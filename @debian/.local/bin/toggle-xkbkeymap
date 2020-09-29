@@ -3,21 +3,23 @@
 # Quickly switch between a given keyboard layout and the US Qwerty one
 # Credits: https://github.com/fmarier/user-scripts/blob/master/toggle-xkbmap
 
+# to see all options with their description
+# $ sed '/^! option$/,/^ *$/!d;//d' /usr/share/X11/xkb/rules/base.lst
 KB_OPTIONS="ctrl:nocaps,terminate:ctrl_alt_bksp"
 
 # if layout is not specified, invert layout
-if [ -z $1 ]; then
+if [ -z "$1" ]; then
     CURRENT="$(setxkbmap -query | grep layout | perl -pe 's/^layout: +([^ ]+)$/$1/')"
-    [ $CURRENT = "us" ] && CURRENT=fr  || CURRENT=us
+    [ "$CURRENT" = "us" ] && CURRENT=fr || CURRENT=us
 # layout is specified, switch to it
 else
     CURRENT=$1
 fi
 
-[ $CURRENT = "us" ] && VARIANT=intl || VARIANT=latin9
+[ "$CURRENT" = "us" ] && VARIANT=intl || VARIANT=latin9
 
 # note we want to replace all previously specified options
 # by using the -option flag with an empty argument first.
-setxkbmap -layout $CURRENT -variant $VARIANT -option "" -option $KB_OPTIONS
+setxkbmap -layout "$CURRENT" -variant $VARIANT -option "" -option $KB_OPTIONS
 
 notify-send -i input-keyboard "Keyboard" "Switched to $CURRENT layout"
