@@ -1,0 +1,20 @@
+[general]
+status_path = "~/.local/share/vdirsyncer/status/"
+
+[pair gmail_contact]
+a = "gmail_local"
+b = "gmail_remote"
+; sync from both side
+collections = [ "from b", "from a" ]
+
+[storage gmail_local]
+type = "filesystem"
+path = "~/.local/share/contacts/gmail/"
+fileext = ".vcf"
+
+[storage gmail_remote]
+type = "carddav"
+url = "https://apidata.googleusercontent.com/caldav/v2/"
+username.fetch = ["command", "pass", "google.com/username"]
+password.fetch = ["command", "pass", "google.com/password"]
+; read_only = true

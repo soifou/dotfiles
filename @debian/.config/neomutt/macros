@@ -10,6 +10,11 @@ macro attach W "<save-entry><bol><eol>" "Save to downloads folder"
 # A: Attach files with Ranger file manager (press Space to select file(s) then Enter)
 macro compose A "<shell-escape>neomutt-picker<enter><enter-command>source /tmp/neomutt-attachments<enter>" "Attach with Ranger"
 
+# A: Add sender to khard addressbook
+macro index,pager A \
+    "<pipe-message>khard add-email<return>" \
+    "Add the sender email address to khard"
+
 # K: Compiles written markdown email to HTML/plain text alternatives
 # see: https://neomutt.org/guide/mimesupport#5-2-%C2%A0composing-multipart-alternative-emails
 # https://github.com/neomutt/neomutt/issues/587
