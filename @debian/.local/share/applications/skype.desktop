@@ -2,9 +2,9 @@
 Name=Skype
 Comment=Skype
 GenericName=Instant messaging
-Exec=/opt/skype-linux-x64/skype %U
+Exec=nativew skype
 Terminal=false
 Type=Application
 Icon=skype
-Categories=InstantMessaging;
+Categories=Nativefier;InstantMessaging;
 StartupWMClass=

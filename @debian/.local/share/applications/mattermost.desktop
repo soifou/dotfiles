@@ -2,8 +2,8 @@
 Name=Mattermost
 Comment=Mattermost
 GenericName=Instant messaging
-Exec=/opt/mattermost-linux-x64/mattermost %U
+Exec=nativew mattermost
 Terminal=false
 Type=Application
 Icon=mattermost-desktop
-Categories=InstantMessaging;
+Categories=Nativefier;InstantMessaging;
