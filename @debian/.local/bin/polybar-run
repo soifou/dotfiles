@@ -1,26 +1,30 @@
 #!/usr/bin/env sh
 
-# Startup script for polybar.
-# @NOTE: zsh/fish users have to pass SHELL var to fix "passing env var to custom script not working" issue.
+# Start/restart polybar.
+# Polybar needs to have IPC enabled: https://github.com/polybar/polybar/wiki/Inter-process-messaging
+# NOTE: zsh/fish users have to pass SHELL var to fix "passing env var to custom script not working" issue.
 # see: https://github.com/jaagr/polybar/issues/323#issuecomment-292038260
 
-# Choose the bar to display
-POLYBAR_BAR=${POLYBAR_BAR:-i3}
+restart() {
+    polybar-msg cmd restart >/dev/null
+}
 
-# Terminate already running bar instances
-pkill -USR1 polybar
+start() {
+    # Choose the bar to display depending on current running WM
+    pgrep -x bspwm >/dev/null && POLYBAR_BAR=bspwm
+    POLYBAR_BAR=${POLYBAR_BAR:-i3}
 
-# Wait until the processes have been shut down
-while pgrep -u "$(id -u)" -x polybar >/dev/null; do sleep 1; done
+    # Launch bar "$POLYBAR_BAR" on all monitors (if any)
+    if command -v xrandr >/dev/null 2>&1; then
+        # for all connected monitors
+        # for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+        # for the last one connected on the list
+        for m in $(xrandr --query | grep " connected" | cut -d" " -f1 | tail -n1); do
+            SHELL=$(command -v sh) MONITOR=$m polybar --config="$XDG_CONFIG_HOME"/polybar/config --reload "$POLYBAR_BAR" &
+        done
+    else
+        SHELL=$(command -v sh) polybar --config="$XDG_CONFIG_HOME"/polybar/config --reload "$POLYBAR_BAR" &
+    fi
+}
 
-# Launch bar "$POLYBAR_BAR" on all monitors (if any)
-if command -v xrandr >/dev/null 2>&1; then
-    # for all connected monitors
-    # for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    # for the last one connected on the list
-    for m in $(xrandr --query | grep " connected" | cut -d" " -f1 | tail -n1); do
-        SHELL=$(command -v sh) MONITOR=$m polybar --config="$XDG_CONFIG_HOME"/polybar/config --reload "$POLYBAR_BAR" &
-    done
-else
-    SHELL=$(command -v sh) polybar --config="$XDG_CONFIG_HOME"/polybar/config --reload "$POLYBAR_BAR" &
-fi
+pgrep -x polybar && restart || start
