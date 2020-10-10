@@ -126,7 +126,7 @@ mod1 + Tab
     rofi -show window -lines 10
 
 # pass manager (https://github.com/ibizaman/pass-clip)
-super + p
+super + shift + p
     pass clip
 
 # quit launcher
@@ -147,9 +147,7 @@ XF86AudioMute
 
 # music player
 super + z
-    xdotool search --classname music-player >/dev/null &&\
-        xdotool search --all --limit 1 --class music-player windowactivate ||\
-        $TERMINAL --class=music-player ncmpcpp-ueberzug
+    bsp-scratchpad music-player ncmpcpp-ueberzug
 
 # screenshot
 Print + {_,super,super + shift, super + alt}
