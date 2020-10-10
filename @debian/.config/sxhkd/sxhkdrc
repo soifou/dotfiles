@@ -1,37 +1,8 @@
 #
-# wm independent hotkeys
-#
-
-# spawn a terminal
-super {_,shift} + Return
-    {term,bsp-draw}
-
-# main launcher
-super + d
-    rofi -modi 'drun,clipboard:greenclip print,calc:~/.local/bin/rofi/rofi-bc,emoji' -show drun
-
-# theme switcher
-super + shift + Tab
-    rofi -modi 'themes:~/.local/bin/wal-switcher' -show themes -columns 2 -no-sidebar-mode
-
-# alt-tab like
-mod1 + Tab
-    rofi -show window -lines 10
-
-# pass manager (https://github.com/ibizaman/pass-clip)
-super + p
-    pass clip
-
-# quit launcher
-super + shift + e
-    ~/.local/bin/rofi/rofi-applet --powermenu-classic
-
-#
 # bspwm hotkeys
 #
 
-# make sxhkd reload its configuration files
-# and restart bspwm
+# make sxhkd reload its configuration files and restart bspwm
 super + shift + r
     pkill -USR1 -x sxhkd && bspc wm -r
 
@@ -133,36 +104,68 @@ super + ctrl + shift + space
 # super + {Left,Down,Up,Right}
 #    bspc node -v {-20 0,0 20,0 -20,20 0}
 
+
 #
-# media keys
+# wm independent hotkeys
 #
+
+# spawn a (tiling/floating) terminal
+super {_,shift} + Return
+    {term,bsp-draw}
+
+# launcher
+super + d
+    rofi -modi 'drun,clipboard:greenclip print,calc:~/.local/bin/rofi/rofi-bc,emoji' -show drun
+
+# theme switcher
+super + shift + Tab
+    rofi -modi 'themes:~/.local/bin/wal-switcher' -show themes -columns 2 -no-sidebar-mode
+
+# alt-tab like
+mod1 + Tab
+    rofi -show window -lines 10
+
+# pass manager (https://github.com/ibizaman/pass-clip)
+super + p
+    pass clip
+
+# quit launcher
+super + shift + e
+    ~/.local/bin/rofi/rofi-applet --powermenu-classic
+
+# music control
 XF86Audio{Next,Prev,Play,Stop}
     mpc {next,prev,toggle,stop} >/dev/null
+
+# audio control
 XF86Audio{Raise,Lower}Volume
     amixer sset Master '5%{+,-}' >/dev/null
+
+# mute audio
 XF86AudioMute
     amixer set Master toggle >/dev/null
 
-#
+# music player
+super + z
+    xdotool search --classname music-player >/dev/null &&\
+        xdotool search --all --limit 1 --class music-player windowactivate ||\
+        $TERMINAL --class=music-player ncmpcpp-ueberzug
+
 # screenshot
-#
 Print + {_,super,super + shift, super + alt}
     ~/.local/bin/gunshot {_, region, window, screen}
 
-#
-# webcam
-#
-super + w
-    ~/.local/bin/toggle-webcam
-
-#
 # locker
-#
 super + Escape
     ~/.local/bin/lockscreen --corrupted
 
-#
-# apps
-#
+# webcam
+super + w
+    ~/.local/bin/toggle-webcam
+
+# launch apps
 super + x ; {1-3}
     wm-focus {newsboat,tuir,weechat}
+
+super + F1
+    sxhkd-help

@@ -36,17 +36,20 @@ toggle() {
     fi
 }
 
+__usage="
+Usage: $(basename "$0") [OPTIONS]
+Handle scrobbling mode in MPD using mdpscribble.
+Options:
+  -l, --love             Show some love to current track.
+  -s, --status           Display status of the scrobbler.
+  -t, --toggle           Toggle scrobbling.
+  -h, help               Show this help.
+"
+_help(){ echo "$__usage"; exit; }
+
 case "$1" in
     --love|-l) love ;;
     --status|-s) status ;;
     --toggle|-t) toggle ;;
-    *)
-        echo "Wrapper script to handle scrobbling mode in MPD using mdpscribble" >&2
-        echo "" >&2
-        echo "--love     Show some love to current track" >&2
-        echo "--status   Display status of the scrobbler" >&2
-        echo "--toggle   Toggle scrobbling" >&2
-        echo ""
-        exit
-    ;;
+    --help|-h|*) _help ;;
 esac
