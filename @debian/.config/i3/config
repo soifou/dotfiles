@@ -56,7 +56,7 @@ bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,
 # Classic Alt+Tab to list opened apps
 bindsym Mod1+Tab exec --no-startup-id rofi -modi window -show window -lines 10 -no-sidebar-mode
 # Manage wallpapers/themes, copy emojis to clipboard (https://github.com/Mange/rofi-emoji)
-bindsym Mod1+Shift+t exec --no-startup-id rofi -modi themes:~/.local/bin/wal-switcher#emoji -plugin-path /usr/local/lib/rofi -show themes
+bindsym $mod+Shift+Tab exec --no-startup-id rofi -modi 'themes:~/.local/bin/wal-switcher' -show themes -columns 2 -no-sidebar-mode
 # List pass entries using pass-clip (password-store extension): https://github.com/ibizaman/pass-clip
 bindsym $mod+p exec --no-startup-id pass clip --rofi
 
@@ -82,12 +82,11 @@ bindsym $mod+w exec --no-startup-id ~/.local/bin/toggle-webcam
 # Music
 # =============================================================================
 bindsym $mod+Shift+z exec ~/.local/bin/workspace-zik
-# for_window [instance="zik"] floating enable
-# for_window [instance="zik"] resize set 1024 1024
-# bindsym $mod+Shift+z exec i3-sensible-terminal --class=zik --single-instance ~/.local/bin/ncmpcpp-art
-# for_window [instance="zik"] move scratchpad
-# exec --no-startup-id i3-sensible-terminal --class=zik --single-instance ~/.local/bin/ncmpcpp-art
-# bindsym $mod+Shift+z [instance="zik"] scratchpad show; [instance="zik"] move position center
+for_window [class="music-player"] floating enable
+for_window [class="music-player"] resize set 930 400
+for_window [class="music-player"] move scratchpad
+exec --no-startup-id i3-sensible-terminal --class=music-player ncmpcpp-ueberzug
+bindsym $mod+z [class="music-player"] scratchpad show; [class="music-player"] move position center
 
 # change focus
 bindsym $mod+h focus left
@@ -123,7 +122,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+z layout tabbed
+bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -278,9 +277,7 @@ for_window [class="Virt-manager|Qemu-system-x86_64"] floating enable resize set 
 for_window [class="mailto"] floating enable resize set 800 600
 for_window [floating class="mailto"] move position center
 
-for_window [title="mpv-newsboat"] floating enable resize set 800 600
-for_window [floating title="mpv-newsboat"] move position center
-
+for_window [title="mpv"] floating enable
 for_window [title="mpv-webcam"] floating enable
 for_window [title="mpv-webcam"] sticky enable
 

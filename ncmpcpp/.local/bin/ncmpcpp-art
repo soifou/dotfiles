@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+MUSIC_PATH=${XDG_MUSIC_DIR:-$HOME/Music}
+NOCOVER_PATH="$XDG_CONFIG_HOME/ncmpcpp/vinyl.jpg"
+STREAMING_PATH="$XDG_CONFIG_HOME/ncmpcpp/radio.jpg"
+COVER_PATH="${XDG_CACHE_HOME:-/tmp}/cover"
+
+extract_cover() {
+    song_dir=$(dirname "$(mpc --format %file% current)")
+
+    # Current song is a HTTP stream?
+    case "$song_dir" in
+    http://* | https://*) cover="$STREAMING_PATH" ;;
+    esac
+
+    if [ -z "$cover" ]; then
+        # Find the cover if available
+        cover=$(find "$MUSIC_PATH/$song_dir" -name "cover.*" | head -n1)
+        # Not found? Set default
+        [ ! -f "$cover" ] && cover="$NOCOVER_PATH"
+    fi
+    cp -f "$cover" "$COVER_PATH"
+}
+
+extract_cover

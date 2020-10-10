@@ -40,6 +40,7 @@ bspc rule -a weechat desktop='^4'
 bspc rule -a skype-nativefier desktop='^4'
 bspc rule -a Zathura state=tiled
 
+bspc rule -a "*:music-player" state=floating center=true rectangle=930x400+0+0
 bspc rule -a "*:floating" state=floating
 bspc rule -a mailto state=floating follow=on
 bspc rule -a mpv state=floating
