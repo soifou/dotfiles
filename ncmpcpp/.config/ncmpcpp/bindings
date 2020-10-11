@@ -1,11 +1,5 @@
 # Doc: https://github.com/arybczak/ncmpcpp/blob/master/doc/bindings
 
-# the t key isn't used and it's easier to press than /, so lets use it
-def_key "t"
-    find
-def_key "t"
-    find_item_forward
-
 def_key "+"
     show_clock
 def_key "="
@@ -16,16 +10,21 @@ def_key "j"
 def_key "k"
     scroll_up
 
+def_key "L"
+  seek_forward
+def_key "H"
+  seek_backward
+
 def_key "ctrl-u"
     page_up
 def_key "ctrl-d"
     page_down
 
 # Scrobble
-def_key "L"
-    run_external_command "~/.local/bin/scrobbler --love"
-def_key ","
+def_key ";"
     run_external_command "~/.local/bin/scrobbler --toggle"
+def_key ":"
+    run_external_command "~/.local/bin/scrobbler --love"
 
 def_key "h"
     previous_column
@@ -40,13 +39,12 @@ def_key "n"
 def_key "N"
     previous_found_item
 
-# not used but bound
 def_key "J"
-    move_sort_order_down
+    move_selected_items_down
 def_key "K"
-    move_sort_order_up
+    move_selected_items_up
 
 def_key "g"
-  move_home
+    move_home
 def_key "G"
-  move_end
+    move_end

@@ -7,7 +7,10 @@ mpd_host = "127.0.0.1"
 mpd_port = "6600"
 
 ##### song format #####
-song_list_format = $6{%a »$4 %t $R%l}|{%f}
+song_list_format = " $5{%a  %t $R%l}|{%f}"
+song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b "
+now_playing_prefix = " $b$5"
+now_playing_suffix = "$/b$9"
 
 ##### UI positions (for cover art) #####
 playlist_display_mode = classic
@@ -19,7 +22,7 @@ locked_screen_width_part = 30
 
 ##### columns settings #####
 playlist_disable_highlight_delay = 0
-song_columns_list_format = (22)[blue]{a} (7)[green]{n} (30)[white]{t} (29)[cyan]{b} (5)[blue]{y} (7)[white]{l}
+song_columns_list_format = "(30)[]{} (20)[blue]{a} (26)[white]{t|f} (5f)[magenta]{l}"
 
 ##### various settings #####
 data_fetching_delay = no
@@ -35,22 +38,14 @@ display_bitrate = yes
 media_library_primary_tag = album_artist
 mouse_support = no
 execute_on_song_change = ncmpcpp-cover
-
 progressbar_look = "─╼ "
-progressbar_elapsed_color = yellow
-progressbar_color = blue
 
 ##### colors definitions #####
+progressbar_elapsed_color = blue
 empty_tag_color = white
 header_window_color = white
-volume_color = red
+volume_color = blue
 state_line_color = blue
 state_flags_color = blue
 main_window_color = blue
-color1 = blue
-#color2 = cyan
-current_item_prefix = "$(yellow)$r"
-#current_item_suffix = "$/r$(end)"
-
-now_playing_prefix = " ==> "
-now_playing_suffix = "$2$/u$2"
+main_window_highlight_color = blue
