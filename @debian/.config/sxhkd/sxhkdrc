@@ -123,7 +123,7 @@ super + shift + Tab
 
 # alt-tab like
 mod1 + Tab
-    rofi -show window -lines 10
+    rofi -show window -mode window -config $XDG_CONFIG_HOME/rofi/alttab.rasi -theme menus/alttab.rasi
 
 # pass manager (https://github.com/ibizaman/pass-clip)
 super + shift + p

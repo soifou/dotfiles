@@ -1,0 +1,41 @@
+@import "~/.cache/wal/colors-rofi.rasi"
+
+window {
+    border-color: @separator-color;
+    border: 2px solid;
+    border-radius: 2px;
+    children: [ listview ];
+}
+
+inputbar {
+    enabled: false;
+}
+message {
+    enabled: false;
+}
+textbox {
+    enabled: false;
+}
+listview {
+    background-color: @background;
+    columns: 7;
+    fixed-height: true;
+    lines: 1;
+}
+element {
+    background-color: @background;
+    width: 12em;
+    orientation: vertical;
+}
+element-text {
+    enabled: false;
+}
+element-icon {
+    padding: 10px;
+    size: 10em;
+}
+
+element.selected.normal {
+    background-color: @selected-background-faded;
+    text-color: @background;
+}
