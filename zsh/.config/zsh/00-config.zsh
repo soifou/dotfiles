@@ -29,10 +29,8 @@ zstyle ':completion:*:*:*:users' ignored-patterns '*' '_*'
 # list only entries in ~/.ssh/config.d/* (OpenSSH >= 7.3) or ~/.ssh/config (prior to 7.3), not in /etc/hosts
 # @see: https://serverfault.com/questions/170346/how-to-edit-command-completion-for-ssh-on-zsh
 h=()
-if [[ -r ~/.ssh/config.d ]]; then
-    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config.d/*)"}:#Host *}#Host }:#*[*?]*})
-elif [[ -r ~/.ssh/config ]]; then
-    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+if [[ -r "$XDG_CONFIG_HOME"/ssh/config.d ]]; then
+    h=($h ${${${(@M)${(f)"$(cat "$XDG_CONFIG_HOME"/ssh/config.d/*)"}:#Host *}#Host }:#*[*?]*})
 fi
 if [[ $#h -gt 0 ]]; then
     zstyle ':completion::complete:scp:*' hosts $h

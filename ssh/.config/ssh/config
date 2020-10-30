@@ -1,0 +1,10 @@
+Host *
+    GlobalKnownHostsFile ~/.config/ssh/known_hosts
+    IdentityFile ~/.config/ssh/id_rsa.pub
+    # speed up multiple identical connects with multiplexing:
+    # https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing
+    ControlPath ~/.cache/ssh-%r@%h:%p
+    ControlMaster auto
+    ControlPersist 60m
+
+Include ~/.config/ssh/config.d/*
