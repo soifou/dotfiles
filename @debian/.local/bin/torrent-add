@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+# Mimeapp script for adding torrent to transmission-daemon
+# Handle magnets/torrent links (local or distant).
+# Start the daemon first if not running.
+
+# No argument? Exit
+[ -z "$1" ] && { echo "No argument provided. Specify torrent/magnet path (URL or filepath)"; exit; }
+
+_n() {
+    notify-send -i transmission Transmission "$1"
+}
+
+# convert torrent file to magnet link
+_t2m() {
+    case $(file --mime-type "$1" -bL) in
+        application/x-bittorrent) MAGNET=$(transmission-show -m "$1" | sed -e 's/&tr.*//g') ;;
+        *) _n "Not a torrent file..." && exit ;;
+    esac
+    rm -f "$1"
+}
+
+case "$1" in
+    *magnet:*) MAGNET=$1 ;;
+    *.torrent) _t2m "$1" ;;
+    *http*) TMPFILE=$(mktemp); curl -sL "$1" >"$TMPFILE"; _t2m "$TMPFILE" ;;
+    *) _n "Don't know how to handle \"$1\""; exit ;;
+esac
+
+# transmission-daemon sometimes fails to take remote requests in its first moments.
+pgrep -x transmission-da || (transmission-daemon && _n "Starting daemon..." && sleep 3)
+transmission-remote -a "$MAGNET" && _n "Torrent added."
