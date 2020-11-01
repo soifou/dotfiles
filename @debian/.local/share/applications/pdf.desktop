@@ -2,4 +2,4 @@
 Type=Application
 Name=PDF reader
 Exec=/usr/bin/zathura %u
-
+NoDisplay=true

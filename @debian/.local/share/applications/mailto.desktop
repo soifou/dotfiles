@@ -4,5 +4,4 @@ Name=Mailto
 Exec=term --class=mailto neomutt %u
 Terminal=false
 MimeType=x-scheme-handler/mailto
-Categories=Email
-Icon=mail-client
+NoDisplay=true
