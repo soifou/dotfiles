@@ -1,3 +1,7 @@
+Host bitbucket.org
+    # Bitbucket.org has intentionally disabled ssh multiplexing
+    ControlMaster no
+
 Host *
     GlobalKnownHostsFile ~/.config/ssh/known_hosts
     IdentityFile ~/.config/ssh/id_rsa.pub
