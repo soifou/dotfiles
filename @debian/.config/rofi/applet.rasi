@@ -1,7 +1,6 @@
 configuration {
-    font: "monospace 9";
+    font: "monospace 10";
     show-icons: true;
-    fake-transparency: true;
     location: 3;
     yoffset: 28;
     xoffset: -12;

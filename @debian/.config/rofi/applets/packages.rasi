@@ -8,42 +8,26 @@
     menu-prompt-margin: 0px 0px 0px -2px;
     menu-element-border: 5px;
     menu-element-padding: 3px 2px 3px 0px;
-}
-
-window {
-    width: 28.2%;
-    border: 2px solid;
-    border-color: @accent;
-    border-top: 0;
-}
-
-* {
     background-color: @background;
     text-color: @foreground;
 }
 
+window {
+    width: 24.2%;
+    border: 2px solid;
+    border-color: @accent;
+    border-top: 0;
+    padding: @menu-window-padding;
+    children: [ inputbar, horibox ];
+}
+
 horibox {
     children: [ listview ];
+    padding: 0px 0px 8px 0px;
 }
 listview {
     layout: vertical;
-}
-element {
-    background-color: @background-light;
-}
-element.selected {
-    background-color: @accent;
-    text-color: @background;
-}
-
-/* ########### */
-
-* {
-    font: @text-font;
-}
-window {
-    padding: @menu-window-padding;
-    children: [ inputbar, horibox ];
+    spacing: @listview-spacing;
 }
 inputbar {
     children: [ textbox-prompt-colon, prompt, entry ];
@@ -69,17 +53,14 @@ textbox-prompt-colon {
     background-color: @accent;
     text-color: @background;
 }
-horibox {
-    padding: 0px 0px 8px 0px;
-}
-listview {
-    spacing: @listview-spacing;
-}
 element {
+    background-color: @background-light;
     border: @menu-element-border;
     padding: @menu-element-padding;
     border-color: @background-light;
 }
 element.selected {
     border-color: @accent;
+    background-color: @accent;
+    text-color: @background;
 }

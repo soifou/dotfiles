@@ -1,43 +1,24 @@
-/*
- *
- * Author : Aditya Shakya (adi1090x)
- * Mail : adi1090x@gmail.com
- * Github : @adi1090x
- * Reddit : @adi1090x
- *
- */
-
 @import "~/.cache/wal/colors-rofi.rasi"
 
 * {
-    icon-font: "icomoon\-feather 28";
-
-    listview-spacing: 10px;
-
+    listview-spacing: 20px;
     menu-window-padding: 5px 15px;
     menu-inputbar-margin: 10px 0px;
     menu-prompt-padding: 10px 20px 10px 20px;
     menu-prompt-margin: 0px 0px 0px -2px;
-    menu-element-border: 10px;
-    menu-element-padding: 13px 20px 3px -40px;
+    menu-element-border: 6px;
+    menu-element-padding: 13px 28px 10px -30px;
+    background-color: @background;
+    text-color: @foreground;
 }
 
-/* ########### */
-
 window {
-    width: 28.2%;
-    height: 14%;
+    width: 26%;
     border: 2px solid;
     border-color: @accent;
     border-top: 0;
-}
-
-/* ########### */
-
-* {
-    background-color: @background;
-    text-color: @foreground;
-    font: @icon-font;
+    padding: @menu-window-padding;
+    children: [ inputbar, horibox ];
 }
 
 horibox {
@@ -45,24 +26,8 @@ horibox {
 }
 listview {
     layout: horizontal;
-}
-element {
-    padding: @option-element-padding;
-    background-color: @background-light;
-}
-element.selected {
-    background-color: @accent;
-    text-color: @background;
-}
-
-/* ########### */
-
-* {
-    font: @text-font;
-}
-window {
-    padding: @menu-window-padding;
-    children: [ inputbar, horibox ];
+    lines: 5;
+    spacing: @listview-spacing;
 }
 inputbar {
     children: [ textbox-prompt-colon, prompt ];
@@ -70,9 +35,9 @@ inputbar {
 }
 prompt,
 textbox-prompt-colon {
-    padding: @menu-prompt-padding;
     border: 2px;
     border-color: @accent;
+    padding: @menu-prompt-padding;
 }
 prompt {
     margin: @menu-prompt-margin;
@@ -85,19 +50,19 @@ textbox-prompt-colon {
     background-color: @accent;
     text-color: @background;
 }
-horibox {
-    padding: 0px;
-}
-listview {
-    spacing: @listview-spacing;
-    lines: 5;
-}
 element {
-    font: @icon-font;
     border: @menu-element-border;
-    padding: @menu-element-padding;
     border-color: @background-light;
+    background-color: @background-light;
+    margin: 0 0 10px 0;
+    padding: @menu-element-padding;
+}
+element-icon {
+    size: 16;
+    padding: 0 30 0 0;
 }
 element.selected {
+    background-color: @accent;
+    text-color: @background;
     border-color: @accent;
 }
