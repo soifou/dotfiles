@@ -12,7 +12,7 @@ map kitty_mod+k scroll_line_up
 # kitty can list visible urls with kitty_mod+e
 map kitty_mod+u launch --stdin-source=@screen_scrollback --stdin-add-formatting --type=tab urlscan -dc -r 'linkhandler {}'
 # open scrollback with bat in new tab
-map kitty_mod+g launch --stdin-source=@screen_scrollback --stdin-add-formatting --type=tab bat --plain
+map kitty_mod+g launch --stdin-source=@screen_scrollback --stdin-add-formatting --type=tab bat
 
 # tab config
 map kitty_mod+t launch --cwd=current --type=tab
