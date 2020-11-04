@@ -5,6 +5,10 @@
 # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
 # absolute path. No other format is supported.
 #
+
+# Firefox keeps creating ~/Desktop even when this is not desired
+# If XDG_DESKTOP_DIR is not set, it will fallback to ~/Desktop
+XDG_DESKTOP_DIR="$HOME/Downloads"
 XDG_DEVELOP_DIR="$HOME/Development"
 XDG_DOWNLOAD_DIR="$HOME/Downloads"
 XDG_DOCUMENTS_DIR="$HOME/Documents"
