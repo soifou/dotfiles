@@ -2,8 +2,9 @@
 Name=Ranger
 Comment=Ranger
 GenericName=File manager
-Exec=wm-focus ranger
-Terminal=false
+Exec=term --class=ranger ranger
+Terminal=true
 Type=Application
 Icon=system-file-manager
 Categories=System;
+MimeType=inode/directory;
