@@ -32,7 +32,7 @@ snes9x() {
 
 libreoffice-calc() {
     docker run --rm -it \
-        --name docker_libreoffice --hostname libreoffice \
+        --hostname libreoffice \
         -e PGID=1000 -e PUID=1000 \
         -m 2048m \
         -e DISPLAY=unix$DISPLAY \

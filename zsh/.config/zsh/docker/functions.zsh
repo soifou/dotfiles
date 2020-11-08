@@ -25,12 +25,6 @@ docker-start() {
     fi
 }
 
-docker-clean() {
-    docker run --rm \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        zzrot/docker-clean ${@:1}
-}
-
 # Run commands inside docker containers to keep your OS untouched using alias
 docker_alias() {
     docker run -it --rm \
@@ -42,4 +36,4 @@ docker_alias() {
 # Load my docker CLI commands
 . $ZDOTDIR/docker/functions-cli.zsh
 # Load my docker UI commands
-. $ZDOTDIR/docker/functions-ui.zsh
+# . $ZDOTDIR/docker/functions-ui.zsh

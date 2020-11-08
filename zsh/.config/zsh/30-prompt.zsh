@@ -1,18 +1,4 @@
-# tty colors with current colorscheme
-case "$(tty)" in
-    /dev/tty*)
-    if [ -d "$XDG_CACHE_HOME"/wal ]; then
-        (cat "$XDG_CACHE_HOME"/wal/sequences &)
-        . "$XDG_CACHE_HOME"/wal/colors-tty.sh
-    fi
-    ;;
-esac
-
-# fzf colorscheme (FZF_DEFAULT_OPTS)
-[ -f "$XDG_CACHE_HOME"/wal/colors.sh ] && . "$XDG_CACHE_HOME"/wal/colors.sh
-
-# zdharma/fast-syntax-highlighting colorscheme
-# [ -f "$XDG_CONFIG_HOME/fsh/soifou.ini" ] && fast-theme -q XDG:soifou
+#!/usr/bin/env zsh
 
 # Apply prompt theme
 case "${ZSH_PROMPT_THEME:-p10k}" in
@@ -41,3 +27,16 @@ random)
     echo ":: Loading random OMZ theme => $OMZ_THEME"
     ;;
 esac
+
+# # tty colors with current colorscheme
+# case "$(tty)" in
+#     /dev/tty*)
+#     if [ -d "$XDG_CACHE_HOME"/wal ]; then
+#         (cat "$XDG_CACHE_HOME"/wal/sequences &)
+#         . "$XDG_CACHE_HOME"/wal/colors-tty.sh
+#     fi
+#     ;;
+# esac
+
+# zdharma/fast-syntax-highlighting colorscheme
+# [ -f "$XDG_CONFIG_HOME/fsh/soifou.ini" ] && fast-theme -q XDG:soifou
