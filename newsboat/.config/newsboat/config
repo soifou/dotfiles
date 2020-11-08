@@ -1,0 +1,28 @@
+#                     |              |
+# ,---.,---.. . .,---.|---.,---.,---.|---
+# |   ||---'| | |`---.|   ||   |,---||
+# `   '`---'`-'-'`---'`---'`---'`---^`---'
+#
+
+# By default and if exists, cache.db is created in ~/.local/share/newsboat
+# https://newsboat.org/releases/2.18/docs/newsboat.html#_xdg_base_directory_support
+# However you can specify cache dir like so (or with flag --cache-file)
+cache-file "~/.cache/newsboat/cache.db"
+cookie-cache ~/.cache/newsboat/cookies.txt
+error-log "~/.cache/newsboat/error.log"
+
+include "~/.config/newsboat/colors"
+include "~/.config/newsboat/keybindings"
+
+browser linkhandler
+display-article-progress yes
+goto-next-feed no
+keep-articles-days 180
+show-title-bar no
+
+bind-key U show-urls
+external-url-viewer "urlscan -dc -r 'linkhandler {}'"
+
+macro , open-in-browser
+# add video or audio to play queue using mpv (requires: task-spooler, mpv, youtube-dl)
+macro p set browser "tsp mpv %u"; open-in-browser ; set browser "$BROWSER %u"
