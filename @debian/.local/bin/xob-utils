@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+VOLUME_PIPE=/tmp/xob-vol.fifo
+
+_clean() {
+    [ -p "$1" ] && {
+        fuser -TERM -s -k "$1"
+        rm -f "$1"
+    }
+}
+
+_start() {
+    _clean "$1"
+    mkfifo "$1"
+    tail -f "$1" | xob -q &
+    echo "" >"$1"
+}
+
+_update() {
+    pgrep -x xob >/dev/null && {
+        VOL=$(pacmd list-sinks | grep -A 15 '* index' | awk '/volume: front/{ print $5 }' | sed 's/[%|,]//g')
+        [ "$(pacmd list-sinks | grep -A 15 '* index' | awk '/muted:/{ print $2 }')" = "yes" ] && VOL="$VOL!"
+        echo "$VOL" >>$VOLUME_PIPE
+    }
+}
+
+case "$1" in
+    -u) _update ;;
+    *) _start "$VOLUME_PIPE" ;;
+esac
