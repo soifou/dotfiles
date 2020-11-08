@@ -8,7 +8,7 @@ mpd_port = "6600"
 
 ##### song format #####
 song_list_format = " $5{%a  %t $R%l}|{%f}"
-song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b "
+song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%b (%y) $4⟫$3⟫ $5%t"
 now_playing_prefix = " $b$5"
 now_playing_suffix = "$/b$9"
 
@@ -34,7 +34,7 @@ statusbar_visibility = yes
 follow_now_playing_lyrics = yes
 header_text_scrolling = yes
 ignore_leading_the = yes
-display_bitrate = yes
+display_bitrate = no
 media_library_primary_tag = album_artist
 mouse_support = no
 execute_on_song_change = ncmpcpp-cover
