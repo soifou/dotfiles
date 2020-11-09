@@ -48,14 +48,13 @@ zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompletions-$ZSH_VERSION
 # load complist module to make "menuselect" widget available to zle
 zmodload zsh/complist
 
-# autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zcompdump-$ZSH_VERSION
+# Compile the completion dump to increase startup speed, if dump is newer or doesn't exist,
+# in the background as this is doesn't affect the current session
 _zpcompinit_custom() {
     setopt extendedglob local_options
     autoload -Uz compinit
     local zcd="$XDG_CACHE_HOME/zcompdump-$ZSH_VERSION"
     local zcdc="$zcd.zwc"
-    # Compile the completion dump to increase startup speed, if dump is newer or doesn't exist,
-    # in the background as this is doesn't affect the current session
     if [[ -f "$zcd"(#qN.m+1) ]]; then
         compinit -i -d "$zcd"
         { rm -f "$zcdc" && zcompile "$zcd" } &!
@@ -78,53 +77,6 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-init
     zle -N zle-line-finish
 fi
-
-bindkey -e                       # emacs keybindings
-bindkey "^[[1;5C" forward-word   # ctrl+right navigate to next word
-bindkey "^[[1;5D" backward-word  # ctrl+left navigate to previous word
-bindkey '\ew' kill-region        # esc+w clear all before cursor
-
-# zsh-backward-delete-word () {
-#     local WORDCHARS="${WORDCHARS:s#/#}"
-#     zle backward-delete-word
-# }
-# zle -N zsh-backward-delete-word
-# bindkey '^W' zsh-backward-delete-word
-bindkey '^W' vi-backward-kill-word # ctrl+w delete a word, stop at word char (see $WORDCHARS)
-bindkey '^H' backward-kill-word    # ctrl+backspace delete entirely previous word
-
-# Execute custom script with keybind
-# bindkey -s '^u' "furl^M" # ctrl+u fuzzy find URLs in current terminal window
-
-# Navigate through history/zsh-autosuggestions with ctrl+j/k
-bindkey '^K' history-beginning-search-backward
-bindkey '^J' history-beginning-search-forward
-
-# Use vim keys in complete tab menu
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-
-# Options
-setopt auto_cd                   # cd when just a path is entered
-setopt globdots                  # lets files beginning with a . be matched without explicitly specifying the dot.
-setopt no_flow_control           # Disable start (C-s) and stop (C-q)
-
-# History
-setopt bang_hist                 # Treat the '!' character specially during expansion.
-setopt extended_history          # Write the history file in the ":start:elapsed;command" format.
-setopt inc_append_history        # Write to the history file immediately, not when the shell exits.
-setopt share_history             # Share history between all sessions.
-setopt hist_expire_dups_first    # Expire duplicate entries first when trimming history.
-setopt hist_ignore_dups          # Don't record an entry that was just recorded again.
-setopt hist_ignore_all_dups      # Delete old recorded entry if new entry is a duplicate.
-setopt hist_find_no_dups         # Do not display a line previously found.
-setopt hist_ignore_space         # Don't record an entry starting with a space.
-setopt hist_save_no_dups         # Don't write duplicate entries in the history file.
-setopt hist_reduce_blanks        # Remove superfluous blanks before recording entry.
-setopt hist_verify               # Don't execute immediately upon history expansion.
-setopt hist_beep                 # Beep when accessing nonexistent history.
 
 # Disable higlighted paste
 zle_highlight=('paste:none')

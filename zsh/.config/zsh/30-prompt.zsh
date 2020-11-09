@@ -37,6 +37,3 @@ esac
 #     fi
 #     ;;
 # esac
-
-# zdharma/fast-syntax-highlighting colorscheme
-# [ -f "$XDG_CONFIG_HOME/fsh/soifou.ini" ] && fast-theme -q XDG:soifou
