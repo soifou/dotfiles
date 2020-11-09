@@ -43,8 +43,8 @@ super + {_,shift + }{h,j,k,l}
     bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
-super + {p,b,comma,period}
-    bspc node -f @{parent,brother,first,second}
+# super + {p,b,comma,period}
+#     bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous window in the current desktop
 super + {_,shift + }c
@@ -126,11 +126,11 @@ mod1 + Tab
     rofi -show window -mode window -config $XDG_CONFIG_HOME/rofi/alttab.rasi -theme menus/alttab.rasi
 
 # pass manager (https://github.com/ibizaman/pass-clip)
-super + shift + p
+super + p
     pass clip
 
 # quit launcher
-super + shift + e
+super + e
     ~/.local/bin/rofi/rofi-applet --powermenu-classic
 
 # music control
@@ -139,11 +139,11 @@ XF86Audio{Next,Prev,Play,Stop}
 
 # audio control
 XF86Audio{Raise,Lower}Volume
-    amixer sset Master '5%{+,-}' >/dev/null
+    amixer sset Master '5%{+,-}' >/dev/null; xob-utils -u
 
 # mute audio
 XF86AudioMute
-    amixer set Master toggle >/dev/null
+    amixer set Master toggle >/dev/null; xob-utils -u
 
 # music player
 super + z
