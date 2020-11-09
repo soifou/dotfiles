@@ -38,6 +38,13 @@ debian() {
     fi
 }
 arch() {
+    if yn "Update mirrorlist"; then
+        curl -s "https://www.archlinux.org/mirrorlist/?country=FR&country=GB&protocol=https&use_mirror_status=on" |\
+        sed -e 's/^#Server/Server/' -e '/^#/d' |\
+        rankmirrors -n 5 - |\
+        sudo tee /etc/pacman.d/mirrorlist
+    fi
+
     if yn "Update system?"; then
         sudo pacman -Syu --noconfirm
 
@@ -67,9 +74,9 @@ done < /etc/os-release
 [ "$distro" = 'arch' ] && arch
 [ -f /System/Library/CoreServices/SystemVersion.plist ] && macos
 
-if [ -d "$HOME/dotfiles" ]; then
+if [ -d "$XDG_DEVELOP_DIR/dotfiles/$(whoami)" ]; then
     if yn "Update dots?"; then
-        cd "$HOME/dotfiles" && git pull
+        cd "$XDG_DEVELOP_DIR/dotfiles/$(whoami)" && git pull
     fi
 fi
 
@@ -85,7 +92,7 @@ if command -v docker >/dev/null 2>&1; then
             echo "nameserver 8.8.8.8" | docker-machine ssh $(docker-machine active) "sudo tee /etc/resolv.conf > /dev/null"
         fi
 
-        docker images | grep -v REPOSITORY | awk '{printf("%s:%s\n", $1, $2)}' | xargs -L1 docker pull | grep "Status:"
+        docker images --format "{{.Repository}}:{{.Tag}}" | xargs -L1 docker pull | grep "Status:"
         docker system prune -f
         # docker volume prune -f
     fi
@@ -163,8 +170,8 @@ if command -v go >/dev/null 2>&1; then
 fi
 
 if [ -d "$XDG_CONFIG_HOME"/vim/autoload/plug.vim ]; then
-    if yn "Update vim vundle dependencies?"; then
-        vim -es -u "$XDG_CONFIG_HOME"/vim/vimrc -i NONE -c "PlugInstall" -c "qa"
+    if yn "Update vim-plug dependencies?"; then
+        vim -es -u "$XDG_CONFIG_HOME"/vim/vimrc -i NONE -c "PlugUpdate" -c "qa"
     fi
 fi
 
