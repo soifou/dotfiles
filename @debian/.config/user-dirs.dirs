@@ -1,17 +1,18 @@
 # This file is written by xdg-user-dirs-update
-# If you want to change or add directories, just edit the line you're
-# interested in. All local changes will be retained on the next run
-# Format is XDG_xxx_DIR="$HOME/yyy", where yyy is a shell-escaped
-# homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
-# absolute path. No other format is supported.
-#
+# and executed on every boot unless user-dirs.conf
+# has a parameter "enabled=false".
+# Directories with no specific name are ignored.
+# It is recommanded to not delete those env vars.
+# Ie. Firefox use XDG_DESKTOP_DIR.
 
-# Firefox keeps creating ~/Desktop even when this is not desired
-# If XDG_DESKTOP_DIR is not set, it will fallback to ~/Desktop
-XDG_DESKTOP_DIR="$HOME/Downloads"
-XDG_DEVELOP_DIR="$HOME/Development"
+XDG_DESKTOP_DIR="$HOME/"
 XDG_DOWNLOAD_DIR="$HOME/Downloads"
 XDG_DOCUMENTS_DIR="$HOME/Documents"
 XDG_MUSIC_DIR="$HOME/Music"
 XDG_PICTURES_DIR="$HOME/Pictures"
 XDG_VIDEOS_DIR="$HOME/Videos"
+XDG_TEMPLATES_DIR="$HOME/"
+XDG_PUBLICSHARE_DIR="$HOME/"
+
+# Custom
+XDG_DEVELOP_DIR="$HOME/Development"
