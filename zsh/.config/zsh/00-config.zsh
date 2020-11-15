@@ -9,7 +9,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 # rehash if command not found (possibly recently installed)
-zstyle ':completion:*' rehash true
+zstyle ':completion:*' rehash false
 # menu if nb items > 2
 zstyle ':completion:*' menu select=2
 # speedup completions
@@ -25,6 +25,8 @@ zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
 # no users completion
 zstyle ':completion:*:*:*:users' ignored-patterns '*' '_*'
+# case insensitive tab completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # Override default behaviour for ssh/scp hosts completion.
 # list only entries in ~/.ssh/config.d/* (OpenSSH >= 7.3) or ~/.ssh/config (prior to 7.3), not in /etc/hosts
 # @see: https://serverfault.com/questions/170346/how-to-edit-command-completion-for-ssh-on-zsh
@@ -39,7 +41,7 @@ fi
 unset h
 
 # use same colors as the ls command for file/dir completion
-eval "$(dircolors)"
+# LS_COLORS env variable need to bet set. Either with eval "$(dircolors)"
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # set cache file for completions
@@ -64,19 +66,6 @@ _zpcompinit_custom() {
     fi
 }
 _zpcompinit_custom
-
-# Make sure the terminal is in application mode when zle is active,
-# since only then values from $terminfo are valid
-if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-    zle-line-init() {
-        echoti smkx
-    }
-    zle-line-finish() {
-        echoti rmkx
-    }
-    zle -N zle-line-init
-    zle -N zle-line-finish
-fi
 
 # Disable higlighted paste
 zle_highlight=('paste:none')

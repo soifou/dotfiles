@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env zsh
 
 # https://htr3n.github.io/2018/07/faster-zsh/
 # https://200ok.ch/posts/2018-04-10_Make_zsh_recognise_Projects_you_are_working_on.html

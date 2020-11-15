@@ -12,11 +12,6 @@ dsd() {
 }
 # Recursively find top 20 largest files (> 1MB) sort human readable format
 dsf() { find . -type f -print0 | xargs -0 du -h | sort -hr | head -20 }
-# git show particular commit in difftool
-unalias gsd
-gsd() { git difftool --no-symlinks --dir-diff $1~1 $1 }
-# open remote origin in your browser
-gor() { git config -l | grep remote.origin.url | awk -F= '{print $2}' | grep -oE '(ssh://)?git@\S*' | sed 's/:/\//g' | sed 's/^\(ssh\/\/\/\)\{0,1\}git@\(.*\)$/https:\/\/\2/' | xargs setsid $BROWSER }
 # capistrano alias turned into function (custom completions/_capit won't work with simple alias)
 capit() { [ -f Gemfile ] && bundle exec cap $* }
 # List commands from commandlinefu website
