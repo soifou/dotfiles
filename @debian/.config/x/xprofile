@@ -27,3 +27,5 @@ _d locker
 _d mpd
 # no mouse cursor
 _d xbanish
+# reminder
+# _d remind -z1 -k'notify-send -i alarm-clock -u critical REM:\ %s &' "$XDG_DATA_HOME"/remind

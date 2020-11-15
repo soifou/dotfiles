@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# xinit script for ly, a TUI display manager (https://github.com/Eklektisk/ly)
+# This script must have executable permissions and invoked only when selecting a DE/WM option.
+
+# zsh is my running shell
+[ -z "$ZSH_NAME" ] && exec $SHELL $0 "$@"
+ZHOME=${ZDOTDIR:-$HOME}
+# zshenv is always sourced automatically.
+[ -f "$ZHOME"/.zprofile ] && . "$ZHOME"/.zprofile
+[ -f "$ZHOME"/.zlogin ] && . "$ZHOME"/.zlogin
+emulate -R sh
+
+. "$XINITRC"

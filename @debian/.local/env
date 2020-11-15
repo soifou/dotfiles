@@ -38,7 +38,6 @@ export WEECHAT_HOME="$XDG_CONFIG_HOME"/weechat
 export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
 export XINITRC="$XDG_CONFIG_HOME"/x/xinitrc
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
-
 ## Cache
 export ANSIBLE_CACHE_PLUGINS="$XDG_CACHE_HOME"/ansible/plugins
 export ANSIBLE_LOCAL_TEMP="$XDG_CACHE_HOME"/ansible/tmp
@@ -57,6 +56,7 @@ export YARN_CACHE_FOLDER="$XDG_CACHE_HOME"/yarn
 export ASDF_DATA_DIR="$XDG_DATA_HOME"/asdf
 export ATOM_HOME="$XDG_DATA_HOME"/atom
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
+export GEM_HOME="$XDG_DATA_HOME"/gem
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export GOPATH="$XDG_DATA_HOME"/go
 export HOMEBREW_PREFIX="$XDG_DATA_HOME"/brew
@@ -65,13 +65,5 @@ export KODI_DATA="$XDG_DATA_HOME"/kodi
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
 export XCURSOR_PATH=${XCURSOR_PATH}:$XDG_DATA_HOME/icons
-
-# shell history
-export HISTSIZE=10000
-export SAVEHIST=10000
-# grep
-export GREP_COLORS="mt=30;43"
-# less/bat (keep output when quitting)
-export LESS="-Xr"
 
 [ -f "$XDG_LOCAL_HOME"/env.local ] && . "$XDG_LOCAL_HOME"/env.local

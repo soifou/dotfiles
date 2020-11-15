@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Vim
+Exec=term --class=floating vim %u
+Terminal=false
+MimeType=text/plain;application/x-sh;text/x-sh
+NoDisplay=true

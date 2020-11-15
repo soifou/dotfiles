@@ -13,11 +13,10 @@ case "$1" in
 *mailto:*)
     term --class=mailto neomutt $1
     ;;
-*mkv | *webm | *mp4 | *youtube.com* | *youtu.be* | *gfycat.com* | *v.redd.it*)
+*mkv | *webm | *mp4 | *youtube.com* | *youtu.be* | *gfycat.com* | *v.redd.it* | *dailymotion.com*)
     setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1 &
     ;;
 *png | *jpg | *jpe | *jpeg | *gif)
-    # curl -sL "$1" > "/tmp/$(echo "$1" | sed "s/.*\///")" && sxiv -a "/tmp/$(echo "$1" | sed "s/.*\///")"  >/dev/null 2>&1 & ;;
     sxiv-web $1
     ;;
 *mp3 | *flac | *opus | *mp3?source*)
@@ -25,6 +24,7 @@ case "$1" in
     ;;
 *)
     if [ -f "$1" ]; then
+        # xdg-open "$1"
         "$TERMINAL" -e "$EDITOR $1"
     else
         setsid "$BROWSER" "$1" >/dev/null &

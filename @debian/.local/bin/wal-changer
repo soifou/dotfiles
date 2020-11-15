@@ -117,11 +117,13 @@ _pywalfox() {
 }
 
 _zathura() {
+    echo ":: zathura reload"
     mkdir -p "$XDG_CONFIG_HOME"/zathura
     cat "$XDG_CACHE_HOME"/wal/zathurarc > "$XDG_CONFIG_HOME"/zathura/zathurarc
 }
 
 _xob() {
+    echo ":: xob reload"
     mkdir -p "$XDG_CONFIG_HOME"/xob
     cat "$XDG_CACHE_HOME"/wal/colors-xob > "$XDG_CONFIG_HOME"/xob/styles.cfg
     xob-utils

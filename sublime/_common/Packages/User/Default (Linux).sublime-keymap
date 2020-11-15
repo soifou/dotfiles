@@ -8,6 +8,10 @@
 
     { "keys": ["f12"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
 
+    // urls
+    // { "keys": ["alt+o"], "command": "noop","context": [{ "key": "selector", "operator": "equal", "operand": "text.todo" }] },
+    // { "keys": ["alt+o", "alt+u"], "command": "open_uri_from_cursors", "args": {"browser": "linkhandler"} },
+
     // git
     { "keys": ["ctrl+j"], "command": "next_modification" },
     { "keys": ["ctrl+k"], "command": "prev_modification" },

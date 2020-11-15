@@ -301,6 +301,7 @@ if __name__ == '__main__':
     #         openuri_config = json.load(conf)
 
     openuri_config = {}
+    openuri_config['show_open_button'] = "hover"
     openuri_config['image_files'] = {}
     openuri_config['image_files']['phantom'] = "Packages/${package_name}/images/FontAwesome/link.png"
     openuri_config['image_files']['popup'] = "Packages/${package_name}/images/FontAwesome/link.png"

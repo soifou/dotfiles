@@ -8,3 +8,4 @@ x-scheme-handler/magnet=torrent.desktop
 application/x-bittorrent=torrent.desktop
 application/pdf=pdf.desktop
 inode/directory=ranger.desktop
+text/plain=vim.desktop

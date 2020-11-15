@@ -1,10 +1,9 @@
 {
 	"extensions":
 	[
-		".npmrc",
-		"ini.dist",
 		"mimeapps.list",
+		"ini.dist",
+		".npmrc",
 		"picom.conf",
-		"redshift.conf"
-	]
+	],
 }

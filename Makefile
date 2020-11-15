@@ -1,42 +1,48 @@
 .SILENT:
 .PHONY: init install uninstall
 
-init:
-	echo "--target=$$(echo $$HOME)\n--verbose" > .stowrc
-	stow stow
+OS := $(shell cat /etc/issue | awk -F" " '{print $$1}' | sed 's/./\L&/g')
+
+init: .stowrc
+	echo "--target=$$(echo $$HOME)" > .stowrc
+	echo "--verbose" >> .stowrc
 
 install: init
-	stow @debian
-	stow atom
+	stow @$(OS)
 	stow bin
 	stow bundler
 	stow composer
-	stow fasd
 	stow git
+	stow myrepos
+	stow ncmpcpp
+	stow newsboat
 	stow phpcs
 	stow pip
 	stow ripgrep
-	stow vim
+	stow ssh
+	stow -d sublime @linux
+	stow w3m
 	stow wget
 	stow yamllint
+	stow yarn
 	stow zsh
-	stow -d vscode @linux
-	stow -d sublime @linux
 
 uninstall:
-	stow -D @debian
-	stow -D atom
+	stow -D @$(OS)
 	stow -D bin
 	stow -D bundler
 	stow -D composer
-	stow -D fasd
 	stow -D git
+	stow -D myrepos
+	stow -D ncmpcpp
+	stow -D newsboat
 	stow -D phpcs
 	stow -D pip
 	stow -D ripgrep
-	stow -D vim
+	stow -D ssh
+	stow -D -d sublime @linux
+	stow -D w3m
 	stow -D wget
 	stow -D yamllint
+	stow -D yarn
 	stow -D zsh
-	stow -D -d vscode @linux
-	stow -D -d sublime @linux
