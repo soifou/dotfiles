@@ -77,10 +77,31 @@
     # show commits history
     h = "!f() {\
         command -v fzf >/dev/null && {\
-            PAGER= git hist --color=always |\
+            GIT_PAGER= git hist --color=always |\
             fzf --ansi --prompt=' commits history > ' \
             --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\";\
         } || {\
             git hist;\
         }\
+    };f"
+
+    # find big files stored in repository
+    fb = "!f() {\
+        git rev-list --objects --all |\
+        git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' |\
+        sed -n 's/^blob //p' |\
+        sort --numeric-sort --key=2 |\
+        cut -c 1-12,41- |\
+        numfmt --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest | tail -n30;\
+    };f"
+
+    # open remote origin in your browser
+    or = "!f() {\
+        git config -l |\
+        grep remote.origin.url |\
+        awk -F= '{print $2}' |\
+        grep -oE '(ssh://)?git@\\S*' |\
+        sed 's/:/\\//g' |\
+        sed 's/^\\(ssh\\/\\/\\/\\)\\{0,1\\}git@\\(.*\\)$/https:\\/\\/\\2/' |\
+        xargs setsid "$BROWSER";\
     };f"
