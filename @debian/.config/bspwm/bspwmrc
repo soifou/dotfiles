@@ -35,16 +35,19 @@ bspc rule -r "*"
 # window behaviour (with class name)
 bspc rule -a Sublime_text desktop='^2'
 bspc rule -a Firefox desktop='^3'
-bspc rule -a neomutt desktop='^4'
-bspc rule -a weechat desktop='^4'
-bspc rule -a skype-nativefier desktop='^4'
-bspc rule -a Zathura state=tiled
+for app in neomutt weechat skype-nativefier; do
+    bspc rule -a $app desktop='^4'
+done
 
-bspc rule -a "*:music-player" state=floating center=true sticky=on rectangle=930x400+0+0
-bspc rule -a "*:floating" state=floating
-bspc rule -a mailto state=floating follow=on
+bspc rule -a Zathura state=tiled
 bspc rule -a mpv state=floating
+bspc rule -a mailto state=floating follow=on center=true rectangle=930x400+0+0
+for app in music-player tremc; do
+    bspc rule -a "*:$app" state=floating center=true sticky=true rectangle=930x400+0+0
+done
+bspc rule -a "*:floating" state=floating center=true rectangle=930x400+0+0
 bspc rule -a '*:*:mpv-webcam' state=floating sticky=on layer=above manage=off border=off
+bspc rule -a ranger center=true rectangle=1200x600+0+0
 
 # autostart
 polybar-run

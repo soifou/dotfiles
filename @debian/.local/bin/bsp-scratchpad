@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 
+[ -z "$2" ] && PROGRAM=$1 || PROGRAM=$2
+
 # Emulate i3 scratchpad with xdotool
 xdotool search --onlyvisible --classname "$1" windowunmap \
     || ( xdotool search --classname "$1" windowmap; xdotool search --classname "$1" windowraise; ) \
-    || ( $TERMINAL --class="$1" "$2"; xdotool search --classname "$1" windowraise; )
+    || ( $TERMINAL --class="$1" "$PROGRAM"; xdotool search --classname "$1" windowraise; )
