@@ -34,33 +34,55 @@
     --tridactyl-hint-active-outline: 1px solid #cc0000;
 }}
 
-:root.TridactylThemeWal #completions {{
-    border-top: none!important;
-    border-bottom: 2px solid {color4};
+:root.TridactylThemeWal .TridactylModevisual {{
+    background-color: {color4}!important;
 }}
+
+:root.TridactylThemeWal .TridactylModeinput {{
+    background-color: {color1}!important;
+}}
+
 :root.TridactylThemeWal #completions .sectionHeader {{
     background: var(--tridactyl-bg)!important;
+    border-bottom-color: {color4};
+    border-style: solid none solid none;
+    border-top-color: {color4};
+    border-width: 1px;
     color: {color4};
-    padding: 0 5px 10px;
     font-size: 1rem;
     line-height: 1.5;
+    padding: 2px 5px;
 }}
 
 :root.TridactylThemeWal #completions .focused {{
-    background: {color2}!important;
     color: var(--tridactyl-bg)!important;
+    background: {color2}!important;
     font-weight: 600;
 }}
-:root.TridactylThemeWal #completions .focused .prefix {{
 
+:root.TridactylThemeWal #command-line-holder {{
+    border-top: 1px solid {color4};
 }}
+
+:root.TridactylThemeWal .ExcmdCompletionOption td.excmd {{
+    font-weight: 600;
+    width: 10%;
+}}
+
+:root.TridactylThemeWal .ExcmdCompletionOption td.documentation {{
+    white-space: normal;
+    word-wrap: break-word;
+}}
+
 :root.TridactylThemeWal #completions .focused .url {{
     background: var(--tridactyl-url-bg)!important;
     color: var(--tridactyl-bg)!important;
 }}
+
 :root.TridactylThemeWal.TridactylOwnNamespace table {{
     border-collapse: collapse;
 }}
+
 :root.TridactylThemeWal.TridactylOwnNamespace #completions table tr.focused {{
     border-left: 10px solid {color4}
 }}
@@ -73,6 +95,7 @@
     font-weight: 800;
     content: "λ";
 }}
+
 :root.TridactylThemeWal #tridactyl-input {{
     font-size: 1rem;
     line-height: 1.5;

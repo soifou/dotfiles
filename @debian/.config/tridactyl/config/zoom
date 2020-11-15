@@ -1,0 +1,16 @@
+" Increase automatically zoom level for some websites
+" Note this can be annoying when restoring a Firefox session
+" with numerous pinned tabs, causing back and forth zoom level
+" on the current one.
+" Adding theses Firefox prefs disable reload of previous tabs:
+"   browser.sessionstore.restore_on_demand => true
+"   browser.sessionstore.restore_pinned_tabs_on_demand => true
+
+autocmd DocStart .* zoom 100
+
+autocmd DocStart .*archlinux\.org.* zoom 120
+autocmd DocStart .*duckduckgo\.com.* zoom 120
+autocmd DocStart .*github\.com.* zoom 120
+autocmd DocStart .*gitlab\.com.* zoom 120
+autocmd DocStart .*wikipedia\.org.* zoom 120
+autocmd DocStart .stackoverflow\.com.* zoom 120
