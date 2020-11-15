@@ -26,6 +26,28 @@ alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 alias scummvm="scummvm -c $XDG_CONFIG_HOME"/scummvm/scummvmrc
 alias residualvm="residualvm -c $XDG_CONFIG_HOME"/residualvm/residualvmrc
 
+## Git
+alias gaa='git add --all'
+alias gba='git branch -a'
+alias gcam='git commit -a -m'
+alias gcb='git checkout -b'
+alias gcd='git checkout develop'
+alias gcm='git checkout master'
+alias gcmsg='git commit -m'
+alias gd='git diff'
+alias gdd="git difftool --no-symlinks --dir-diff"
+alias gl='git pull'
+alias gp='git push'
+alias grh='git reset --hard'
+alias gst='git status'
+## below are those from git aliases
+alias ga='git af'
+alias gbd='git bd'
+alias gco='git co'
+alias gcp='git cp'
+alias gh='git h'
+alias gm='git bm'
+
 # PHP
 alias sf="php bin/console"
 alias phpunit="php bin/phpunit"
