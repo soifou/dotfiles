@@ -1,0 +1,8 @@
+--theme="ansi-dark"
+--style="plain"
+--italic-text=always
+--map-syntax '.*ignore:Git Ignore'
+--map-syntax '.gitconfig.local:Git Config'
+--map-syntax '**/completions/_*:Bourne Again Shell (bash)'
+--map-syntax '.zsh*:Bourne Again Shell (bash)'
+--map-syntax 'vimrc:VimL'

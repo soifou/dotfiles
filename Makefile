@@ -9,6 +9,7 @@ init: .stowrc
 
 install: init
 	stow @$(OS)
+	stow bat
 	stow bin
 	stow bundler
 	stow composer
@@ -29,6 +30,7 @@ install: init
 
 uninstall:
 	stow -D @$(OS)
+	stow -D bat
 	stow -D bin
 	stow -D bundler
 	stow -D composer
