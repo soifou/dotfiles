@@ -5,6 +5,8 @@ Host bitbucket.org
 Host *
     GlobalKnownHostsFile ~/.config/ssh/known_hosts
     IdentityFile ~/.config/ssh/id_rsa.pub
+    PasswordAuthentication no
+    ChallengeResponseAuthentication no
     Compression yes
     # speed up multiple identical connects with multiplexing:
     # https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing
