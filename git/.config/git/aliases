@@ -7,79 +7,80 @@
     # list last commit for each branches
     blc = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) - %(color:red)%(objectname:short)%(color:reset) - %(color:yellow)%(refname:short)%(color:reset) - (%(color:green)%(committerdate:relative)%(color:reset)) - %(authorname) - %(contents:subject)'
 
-    # add one or more files to repository
+    # add file(s) to repository
     af = "!f() {\
-        command -v fzf >/dev/null && {\
-            git ls-files -o --exclude-standard | fzf -m --height 40% --prompt=' add file(s) > ' \
-            --preview 'bat -n --color=always --line-range :500 {1}' |\
-            tr '\\\n' ' ' | xargs -r git add --verbose;\
-        } || {\
-            [ $# -ge 1 ] && git add --verbose ${@};\
+        [ $# -ge 1 ] && git add --verbose ${@} || {\
+            command -v fzf >/dev/null && {\
+                git ls-files -o --exclude-standard | fzf -m --prompt=' add file(s) > ' \
+                --preview 'bat -n --color=always --line-range :500 {1}' |\
+                tr '\\\n' ' ' | xargs -r git add --verbose;\
+            }\
         }\
     };f"
 
     # delete branch(es) except develop, master and current
     bd = "!f() {\
-        command -v fzf >/dev/null && {\
-            git branch --sort=authordate | grep -v '*\\|master\\|develop' |\
-            fzf -m --height 20% --prompt=' delete branch(es) > ' | tr -d ' \\*' | xargs -r git branch -d;\
-        } || {\
-            [ $# -ge 1 ] && git branch | grep -v '*\\|master\\|develop' | grep ${@} | xargs git branch -d;\
+        [ $# -ge 1 ] && git branch | grep -v '*\\|master\\|develop' | grep ${@} | xargs git branch -d || {\
+            command -v fzf >/dev/null && {\
+                git branch --sort=authordate | grep -v '*\\|master\\|develop' |\
+                fzf -m --prompt=' delete branch(es) > ' | tr -d ' \\*' | xargs -r git branch -d;\
+            }\
         }\
     };f"
     
     # checkout branch
     co = "!f() {\
-        command -v fzf >/dev/null && {\
-            git branch --sort=authordate |\
-            fzf --height 20% --prompt=' checkout > ' | tr -d ' \\*' | xargs -n 1 git checkout;\
-        } || {\
-            [ $# -ge 1 ] && git checkout ${@};\
+        [ $# -ge 1 ] && git checkout ${@} || {\
+            command -v fzf >/dev/null && {\
+                git branch --sort=authordate | grep -v '*' |\
+                fzf --prompt=' checkout > ' | xargs -n 1 git checkout;\
+            }\
         }\
     };f"
     
-    # merge branch
+    # merge branch to current
     bm = "!f() {\
-        command -v fzf >/dev/null && {\
-            git branch -a --color=never | grep -v '*' | sed -e 's/remotes\\///g' |\
-            fzf --height 20% --prompt=' merge > ' --query=${@} | tr -d ' \\*' | xargs -r -n 1 git merge;\
-        } || {\
-            [ $# -ge 1 ] && git merge ${@};\
+        [ $# -ge 1 ] && git merge ${@} || {\
+            command -v fzf >/dev/null && {\
+                git branch -a --color=never | grep -v '*' | sed -e 's/remotes\\///g' |\
+                fzf --prompt=' merge > ' --query=${@} | xargs -r -n 1 git merge;\
+            }\
         }\
     };f"
     
     # cherry-pick
     cp = "!f() {\
-        command -v fzf >/dev/null && {\
-            git log --branches --oneline |\
-            fzf -m --ansi --prompt=' cherry-pick > ' \
-            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\" |\
-            awk '{print $1}' | xargs -r git cherry-pick;\
-        } || {\
-            [ $# -ge 1 ] && git cherry-pick ${@};\
+        [ $# -ge 1 ] && git cherry-pick ${@} || {\
+            command -v fzf >/dev/null && {\
+                git log --branches --oneline |\
+                fzf -m --ansi --no-height --prompt=' cherry-pick > ' \
+                --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\" |\
+                awk '{print $1}' | xargs -r git cherry-pick;\
+            }\
         }\
     };f"
     
     # show merged branch except master/develop and current branch
-    mg = "!f() {\
-        git branch --merged | grep -v '*\\|master\\|develop';\
-    };f"
+    mg = !git branch --merged | grep -v '*\\|master\\|develop';\
     
     # delete merged branch(es)
     mgd = "!f() {\
-        command -v fzf >/dev/null && {\
-            git mg | fzf -m --height 20% --layout=reverse --header='merged branches' --prompt=' delete branch(es) > ' | tr -d ' \\*' | xargs -r git branch -d;\
-        } || {\
-            [ $# -ge 1 ] && git mg | grep ${@} | xargs git branch -d;\
+        [ $# -ge 1 ] && git mg | grep ${@} | xargs git branch -d || {\
+            command -v fzf >/dev/null && {\
+                git mg |\
+                fzf -m --prompt=' delete merged branch(es) > ' |\
+                xargs -r git branch -d;\
+            }\
         }\
     };f"
     
     # show commits history
     h = "!f() {\
         command -v fzf >/dev/null && {\
-            GIT_PAGER= git hist --color=always |\
-            fzf --ansi --prompt=' commits history > ' \
-            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\";\
+            git hist --color=always |\
+            fzf -m --ansi --no-height --prompt=' commits history > ' \
+            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\" |\
+            xargs ;\
         } || {\
             git hist;\
         }\
