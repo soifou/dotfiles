@@ -22,7 +22,7 @@ command -v fzf >/dev/null && {
     export FZF_DEFAULT_OPTS="
         --prompt 'λ '
         --layout=reverse
-        --margin=1,1
+        --height 20%
         --bind K:preview-up,J:preview-down
         --bind A:select-all,Z:deselect-all
         --color fg:8,bg:0,hl:1,fg+:7,bg+:0,hl+:1
@@ -35,7 +35,7 @@ command -v delta >/dev/null && {
     export GIT_PAGER="delta -n -s --syntax-theme=ansi-dark \
         --hunk-header-style='syntax bold' \
         --hunk-header-decoration-style='black box' \
-        --file-style='yellow italic' \
+        --file-style='yellow bold' \
         --file-decoration-style='yellow ul' \
         --minus-style='syntax #450a15' \
         --minus-emph-style='syntax #600818' \
