@@ -16,7 +16,7 @@
 # Categories=Mail;
 
 # start the program if needed
-xdotool search --classname "$1" >/dev/null || term --class="$1" "$1"
+xdotool search --classname "$1" >/dev/null || term --class="$1" "$@"
 # and focus
 xdotool search --all --limit 1 --class "$1" windowactivate
 # pgrep -x i3 >/dev/null && i3-msg "[class=\"^$1$\"] focus" >/dev/null
