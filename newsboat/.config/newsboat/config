@@ -21,7 +21,7 @@ keep-articles-days 180
 show-title-bar no
 
 bind-key U show-urls
-external-url-viewer "urlscan -dc -r 'linkhandler {}'"
+external-url-viewer "urlscan --single -Hcd -r 'linkhandler {}'"
 
 macro , open-in-browser
 # add video or audio to play queue using mpv (requires: task-spooler, mpv, youtube-dl)

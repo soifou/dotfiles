@@ -13,7 +13,7 @@ map kitty_mod+v paste_from_clipboard
 
 # list in a new window all urls found in scrollback
 # can natively list visible urls on screen with kitty_mod+e (kitten hints)
-map kitty_mod+u launch --stdin-source=@screen_scrollback urlscan --single -dc -r 'linkhandler {}'
+map kitty_mod+u launch --stdin-source=@screen_scrollback urlscan --single -Hcd -r 'linkhandler {}'
 
 # open scrollback with bat in new window
 map kitty_mod+s launch --stdin-source=@screen_scrollback --stdin-add-formatting bat
