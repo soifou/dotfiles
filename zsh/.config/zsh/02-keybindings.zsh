@@ -41,6 +41,16 @@ zle-keymap-select () {
 }
 zle -N zle-keymap-select
 
+# In case last command was aborted, restore beam cursor shape on new line
+zle-line-init() {
+    if [ -n $ZLE_LINE_ABORTED ]; then
+        if [ "$TERM" = "xterm-256color" ] || [ "$TERM" = "xterm-kitty" ] || [ "$TERM" = "screen-256color" ]; then
+            [ $KEYMAP != vicmd ] && echo -ne '\e[5 q'
+        fi
+    fi
+}
+zle -N zle-line-init
+
 # 'v' in visual mode opens vim to edit the command in a full editor.
 # autoload -U edit-command-line
 # zle -N edit-command-line
@@ -53,22 +63,6 @@ zle -N zle-keymap-select
 # }
 # zle -N zsh-backward-delete-word
 # bindkey '^W' zsh-backward-delete-word
-
-# Restore cursor shape in case we abort command in normal mode
-# zle-line-init () {
-#   if [ -n $ZLE_LINE_ABORTED ]; then
-#     # echo $CURSOR
-#     if [ "$TERM" = "xterm-256color" ] || [ "$TERM" = "xterm-kitty" ] || [ "$TERM" = "screen-256color" ]; then
-#         [ $KEYMAP != vicmd ] && echo -ne '\e[5 q'
-#     fi
-#     # local savebuf="$BUFFER" savecur="$CURSOR"
-#     # BUFFER="$ZLE_LINE_ABORTED"
-#     # CURSOR="$#BUFFER"
-#     # zle split-undo
-#     # BUFFER="$savebuf" CURSOR="$savecur"
-#   fi
-# }
-# zle -N zle-line-init
 
 # Execute custom script with keybind
 # bindkey -s '^u' "furl^M" # ctrl+u fuzzy find URLs in current terminal window

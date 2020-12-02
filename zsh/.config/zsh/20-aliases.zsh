@@ -41,12 +41,18 @@ alias gp='git push'
 alias grh='git reset --hard'
 alias gst='git status'
 ## below are those from git aliases
-alias ga='git af'
-alias gbd='git bd'
-alias gco='git co'
-alias gcp='git cp'
-alias gh='git h'
-alias gm='git bm'
+alias ga='git af'       # add file(s) to repository
+alias gbd='git bd'      # delete branch(es)
+alias gco='git co'      # checkout branch
+alias gcp='git cp'      # cherry-pick
+alias gh='git h'        # show commits history
+alias gm='git bm'       # merge branch to current
+alias gmg='git mg'      # list merged branch(es)
+alias gmgd='git mgd'    # delete merged branch(es)
+
+## Docker
+alias dps='docker container ls --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}"'
+alias dsp='docker system prune -f && docker volume prune -f'
 
 # PHP
 alias sf="php bin/console"

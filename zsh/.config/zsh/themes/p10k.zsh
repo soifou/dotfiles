@@ -11,9 +11,6 @@
     # Unset all configuration options.
     unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
 
-    # Zsh >= 5.1 is required.
-    autoload -Uz is-at-least && is-at-least 5.1 || return
-
     # Prompt colors.
     local red=1
     local green=2
@@ -166,7 +163,7 @@
 
         # Display the current Git commit if there is no branch or tag.
         # Tip: To always display the current Git commit, remove `[[ -z $where ]] &&` from the next line.
-        [[ -z $where ]] && res+="${meta}@${grey}${VCS_STATUS_COMMIT[1,8]}"
+        # [[ -z $where ]] && res+="${meta}@${grey}${VCS_STATUS_COMMIT[1,8]}"
 
         # Show tracking branch name if it differs from local branch.
         if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then

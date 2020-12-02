@@ -52,6 +52,5 @@ command -v delta >/dev/null && {
 # Docker
 command -v docker >/dev/null && {
     . "$ZDOTDIR"/docker/functions.zsh
-    . "$ZDOTDIR"/docker/aliases.zsh
     [ -e "$ZDOTDIR"/docker/private.zsh ] && . "$ZDOTDIR"/docker/private.zsh
 }

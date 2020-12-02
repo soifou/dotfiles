@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 
-# allow to customize menu select
-zstyle ':completion:*' menu select
+# load complist module to make "menuselect" widget available to zle
+zmodload zsh/complist
+# display menu if nb items >= 2
+zstyle ':completion:*' menu select=2
 # forces zsh to realize new commands
 zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _approximate
 # matches case insensitive for lowercase
@@ -10,8 +12,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' insert-tab pending
 # rehash if command not found (possibly recently installed)
 zstyle ':completion:*' rehash false
-# menu if nb items > 2
-zstyle ':completion:*' menu select=2
 # speedup completions
 zstyle ':completion:*' accept-exact '*(N)'
 # kill processus
@@ -27,6 +27,7 @@ zstyle ':completion:*:manuals.(^1*)' insert-sections true
 zstyle ':completion:*:*:*:users' ignored-patterns '*' '_*'
 # case insensitive tab completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 # Override default behaviour for ssh/scp hosts completion.
 # list only entries in ~/.ssh/config.d/* (OpenSSH >= 7.3) or ~/.ssh/config (prior to 7.3), not in /etc/hosts
 # @see: https://serverfault.com/questions/170346/how-to-edit-command-completion-for-ssh-on-zsh
@@ -41,14 +42,12 @@ fi
 unset h
 
 # use same colors as the ls command for file/dir completion
-# LS_COLORS env variable need to bet set. Either with eval "$(dircolors)"
+# LS_COLORS env variable need to be set. Either with eval "$(dircolors)"
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # set cache file for completions
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompletions-$ZSH_VERSION
-# load complist module to make "menuselect" widget available to zle
-zmodload zsh/complist
 
 # Compile the completion dump to increase startup speed, if dump is newer or doesn't exist,
 # in the background as this is doesn't affect the current session

@@ -8,7 +8,9 @@ genpasswd() {
 }
 # List sub dir, sort by size, the biggest at the end, with human presentation
 dsd() {
-    du --max-depth=1 -x -k | sort -n | awk 'function human(x) { s="KMGTEPYZ"; while (x>=1000 && length(s)>1) {x/=1024; s=substr(s,2)} return int(x+0.5) substr(s,1,1)"iB" } {gsub(/^[0-9]+/, human($1)); print}'
+    du --max-depth=1 -x -k |\
+    sort -n |\
+    awk 'function human(x) { s="KMGTEPYZ"; while (x>=1000 && length(s)>1) {x/=1024; s=substr(s,2)} return int(x+0.5) substr(s,1,1)"iB" } {gsub(/^[0-9]+/, human($1)); print}'
 }
 # Recursively find top 20 largest files (> 1MB) sort human readable format
 dsf() { find . -type f -print0 | xargs -0 du -h | sort -hr | head -20 }
@@ -19,8 +21,6 @@ cmdfu() {
     curl "https://www.commandlinefu.com/commands/matching/$(echo "$@" \
     | sed 's/ /-/g')/$(echo -n $@ | base64)/plaintext" ;
 }
-# Is website down for everyone or just me ?
-down4me() { timeout 3 curl -s https://api.downfor.cloud/httpcheck/$1 | jshon }
 # Cool CLI weather display
 weather() { curl "wttr.in/$1" }
 # Get external IP
@@ -31,34 +31,34 @@ dicofr() { curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d
 # https://github.com/soimort/translate-shell
 translate-shell() { gawk -f <(curl -Ls git.io/translate) -- -shell }
 # Print a chuck norris joke
-chuck() { timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jshon -e value -e joke -u }
+chuck() { timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jq ".value | .joke" | tr -d '"' }
 # Print a random (french) insult
-insult-me() { timeout 3 wget "https://www.insult.es/api/random" -qO- | jshon -e insult -e value -u }
+insult-me() { timeout 3 wget "https://www.insult.es/api/random" -qO- | jq ".[] | .value" | tr -d '"#' }
 # Validate all XML files in the current directory and below
 xmllint() { find . -type f -name "*.xml" -exec xmllint --noout {} \; }
 # Download all files from a gist
 dlgist() {
-    if [ $# -ne 2 ];
-    then
-        echo 'Failed. Syntax: $> ddl-gist GITHUB_GIST_URL DOWNLOAD_PATH'
+    [ $# -ne 2 ] && {
+        echo 'Missing arguments. Syntax: $ dlgist GIST_URL DOWNLOAD_PATH'
         return
-    fi
+    }
+
     gist_url=$1
     download_path=$2
+    mkdir -p $download_path
     echo '[*] Getting all GIST File URLs from '$gist_url
-    gists=`curl -ksL -H 'User-Agent: Mozilla/5.0' $gist_url  | grep '<a\ .*href=".*/raw/' | sed 's/.*a\ .*href="//' | sed 's/".*//'`
+    gists=$(curl -ksL -H 'User-Agent: Mozilla/5.0' $gist_url | grep '<a\ .*href=".*/raw/' | sed 's/.*a\ .*href="//' | sed 's/".*//')
     echo '[*] Downloading all files'
-    for lines in `echo $gists | xargs -L1`;
+    for lines in $(echo $gists | xargs -L1);
     do
-        if [ ! -z $lines ];
-        then
+        [ ! -z $lines ] && {
             echo $lines
             gistfile=`echo $lines | sed 's/.*\///'`
             save_as=$download_path"/"$gistfile
             echo "Downloading URL: https://gist.github.com"$lines
             echo "to "$save_as"....."
             wget -c -O $save_as "https://gist.github.com"$lines
-        fi
+        }
     done
 }
 # reveal aliases typed on prompt
@@ -83,7 +83,7 @@ if command -v pip >/dev/null 2>&1; then
     }
 fi
 # Show how much RAM application uses.
-# @credits: https://github.com/paulmillr/dotfiles/blob/master/home/.zshrc.sh#L282
+# Credits: https://github.com/paulmillr/dotfiles/blob/master/home/.zshrc.sh#L282
 # $ ram safari
 # # => safari uses 154.69 MBs of RAM.
 ram() {
@@ -104,4 +104,17 @@ ram() {
             echo "There are no processes with pattern '${fg[blue]}${app}${reset_color}' are running."
         fi
     fi
+}
+# colorful man-pages
+man() {
+    export LESS_TERMCAP_md=$(tput bold; tput setaf 2) \
+        LESS_TERMCAP_mb=$(tput bold; tput setaf 7) \
+        LESS_TERMCAP_me=$(tput sgr0) \
+        LESS_TERMCAP_so=$(tput setab 3; tput setaf 0) \
+        LESS_TERMCAP_se=$(tput rmso; tput sgr0) \
+        LESS_TERMCAP_us=$(tput smul; tput setaf 1) \
+        LESS_TERMCAP_ue=$(tput rmul; tput sgr0) \
+        LESS_TERMCAP_mr=$(tput rev) \
+        LESS_TERMCAP_mh=$(tput dim)
+    command man "$@"
 }
