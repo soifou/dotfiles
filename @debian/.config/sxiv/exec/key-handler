@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
-# Additional external keyboard commands can be defined using a handler program located in $XDG_CONFIG_HOME/sxiv/exec/key-handler.
+# Additional external keyboard commands can be defined 
+# using a handler program located in $XDG_CONFIG_HOME/sxiv/exec/key-handler.
 # The handler is invoked by pressing Ctrl-x
 
 # Rofi one liner prompt
@@ -18,8 +19,8 @@ while read file; do
         name="$(prompt_me "Confirm deletion (y)")"
         [ "$name" = "y" ] && rm -f "$file"
         ;;
-    "C-w")
-        cp -f "$file" "$WALLPAPER_PATH"/current && wal-switcher current
-        ;;
+    "C-x") rm -f "$file" ;;
+    "C-w") cp -f "$file" "$WALLPAPER_PATH"/current && wal-switcher current ;;
+    "C-m") convert -rotate 90 "$file" "$file" ;;
     esac
 done
