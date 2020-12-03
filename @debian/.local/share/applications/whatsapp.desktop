@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=WhatsApp
-Comment=WhatsApp
-GenericName=Instant messaging
-Exec=nativew whats-app
-Terminal=false
-Type=Application
-Icon=whatsapp-desktop
-Categories=Nativefier;InstantMessaging;

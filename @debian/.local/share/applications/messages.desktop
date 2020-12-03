@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Android SMS
-Comment=Android SMS
-GenericName=Instant messaging
-Exec=nativew messages
-Terminal=false
-Type=Application
-Icon=hexchat
-Categories=Nativefier;InstantMessaging;

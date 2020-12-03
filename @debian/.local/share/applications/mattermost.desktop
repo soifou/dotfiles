@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Mattermost
-Comment=Mattermost
-GenericName=Instant messaging
-Exec=nativew mattermost
-Terminal=false
-Type=Application
-Icon=mattermost-desktop
-Categories=Nativefier;InstantMessaging;
