@@ -14,11 +14,11 @@ source $XDG_CONFIG_HOME/neomutt/colors
 source $XDG_CONFIG_HOME/neomutt/keybindings
 source $XDG_CONFIG_HOME/neomutt/macros
 
-set header_cache = $XDG_CACHE_HOME/mutt
-set message_cachedir = $XDG_CACHE_HOME/mutt/messages
+set header_cache = $XDG_CACHE_HOME/neomutt
+set message_cachedir = $XDG_CACHE_HOME/neomutt/messages
 set mailcap_path = $XDG_CONFIG_HOME/neomutt/mailcap
-set signature = $XDG_CONFIG_HOME/neomutt/signature
-set attach_save_dir = $HOME/Downloads
+set attach_save_dir = $XDG_DOWNLOAD_DIR
+unset signature
 
 # set mbox_type=Maildir
 # set folder=$XDG_DATA_HOME/mail
@@ -40,6 +40,7 @@ set reverse_name        # reply as whomever it was to
 set include             # include message in replies
 set delete = ask-yes    # ask me first when deleting email
 set pager_stop = yes    # don't go to next message if we are at bottom
+set tilde               # show tildes
 unset help              # No help bar
 
 # Allow Mutt to open a new IMAP connection automatically.
