@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Tuir
+Name=RTV
 Comment=Browse Reddit from your terminal
 GenericName=Reddit client
-Exec=wm-focus tuir
+Exec=wm-focus rtv
 Terminal=false
 Type=Application
 Icon=reddit

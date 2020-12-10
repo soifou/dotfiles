@@ -20,6 +20,7 @@ install: init
 	stow phpcs
 	stow pip
 	stow ripgrep
+	stow rtv
 	stow ssh
 	stow -d sublime @linux
 	stow w3m
@@ -41,6 +42,7 @@ uninstall:
 	stow -D phpcs
 	stow -D pip
 	stow -D ripgrep
+	stow -D rtv
 	stow -D ssh
 	stow -D -d sublime @linux
 	stow -D w3m
