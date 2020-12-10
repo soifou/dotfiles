@@ -32,22 +32,28 @@ bspc desktop ^2 --layout monocle
 # nuke the previous rules so reloading the config works as intended
 bspc rule -r "*"
 
-# window behaviour (with class name)
+# window behaviour
 bspc rule -a Sublime_text desktop='^2'
 bspc rule -a Firefox desktop='^3'
-for app in neomutt weechat skype-nativefier; do
+for app in neomutt weechat skype whatsapp mattermost; do
     bspc rule -a $app desktop='^4'
 done
 
-bspc rule -a Zathura state=tiled
-bspc rule -a mpv state=floating
-bspc rule -a mailto state=floating follow=on center=true rectangle=930x400+0+0
-for app in music-player tremc; do
+# floating
+for app in mpv Firefox:Places Firefox:Browser; do bspc rule -a $app state=floating; done
+# center floating, sticky and with a custom size
+for app in mailto music-player tremc; do
     bspc rule -a "*:$app" state=floating center=true sticky=true rectangle=930x400+0+0
 done
+# bottom floating and sticky
+for app in '*:*:mpv-webcam' Firefox:Toolkit; do
+    bspc rule -a "$app" state=floating sticky=true layer=above manage=off border=off
+done
+
+bspc rule -a Zathura state=tiled
 bspc rule -a "*:floating" state=floating center=true rectangle=930x400+0+0
-bspc rule -a '*:*:mpv-webcam' state=floating sticky=on layer=above manage=off border=off
-bspc rule -a ranger center=true rectangle=1200x600+0+0
+bspc rule -a ranger state=floating center=true rectangle=1200x600+0+0
+# bspc rule -a Alacritty --one-shot state=floating rectangle=900x500+500+200 focus=on sticky=on && alacritty --class Alacritty --command ranger --selectfile ~/Downloads/$filename
 
 # autostart
 polybar-run
