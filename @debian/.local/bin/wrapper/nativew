@@ -1,7 +1,16 @@
 #!/usr/bin/env sh
 
 # Wrapper script to launch a nativefier app.
+
+# Temporary fix for permissions of suid sandbox helper
+# See issue: https://github.com/electron/electron/issues/17972
+[ "$(sysctl kernel.unprivileged_userns_clone | awk -F= '{print $2}' | xargs)" -eq 0 ] && {
+    sudo sysctl kernel.unprivileged_userns_clone=1
+    # To persist accross boot:
+    # echo 'kernel.unprivileged_userns_clone=1' | sudo tee --append /etc/sysctl.d/local.conf
+}
+
 # Electron creates a .pki/nss folder in home.
 # Unless to fake our home folder, don't know yet how to resolve this...
-
-HOME="${XDG_DATA_HOME:-~/.local/share}" exec /opt/"$1"-linux-x64/"$1"
+HOME="${XDG_DATA_HOME:-~/.local/share}" \
+    exec /opt/"$1"-linux-x64/"$1"
