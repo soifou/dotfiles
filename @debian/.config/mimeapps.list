@@ -3,9 +3,11 @@
 # Check filelist: env XDG_UTILS_DEBUG_LEVEL=2 xdg-mime query default inode/directory
 
 [Default Applications]
-x-scheme-handler/mailto=mailto.desktop
-x-scheme-handler/magnet=torrent.desktop
-application/x-bittorrent=torrent.desktop
 application/pdf=pdf.desktop
+application/x-bittorrent=torrent.desktop
 inode/directory=ranger.desktop
 text/plain=vim.desktop
+x-scheme-handler/irc=weechat.desktop
+x-scheme-handler/ircs=weechat.desktop
+x-scheme-handler/magnet=torrent.desktop
+x-scheme-handler/mailto=mailto.desktop
