@@ -10,11 +10,12 @@ source_quiet $XDG_CONFIG_HOME/tridactyl/config/zoom
 " set newtab file:///home/user/startpage/index.html
 
 " Prevent website from stealing focus
-set allowautofocus false
-" autocmd TabEnter .* unfocus
+" set allowautofocus false
+autocmd TabEnter .* unfocus
 
 " Skip 'home' page for youtube channel and go straight to 'video'
 autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
+autocmd UriChange .*youtube\.com js window.location.href.match(".*youtube\.com/(c|channel|user)/[^/]*/?$") && tri.excmds.urlmodify("-g", "2", "videos")
 
 " Always use smile.amazon.com
 " autocmd DocStart www.amazon.com js tri.excmds.urlmodify("-t", "www", "smile")
@@ -28,6 +29,13 @@ bindurl youtube.com t hint -J
 bindurl ^https://duckduckgo.com f hint -Jc [class=result__a]
 bindurl ^https://duckduckgo.com F hint -Jbc [class=result__a]
 bindurl giphy.com f hint -Jci a > img
+
+
+" Containers
+autocontain -s google\.(fr|com) google
+autocontain -s youtube\.com google
+autocontain -s amazon\.(fr|com) amazon
+
 
 " Use go<key>/gn<key>/gw<key> to open quickmark for <key>
 " in (o) current / (n) new / (w) window

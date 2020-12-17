@@ -8,14 +8,17 @@ unbind J
 unbind K
 unbind L
 
-bind [ tabprev
-bind ] tabnext
-
 bind h back
 bind l forward
 
 bind H scrollpx -45
 bind L scrollpx +45
+
+bind J zoom 0.1 true
+bind K zoom -0.1 true
+
+bind [ tabprev
+bind ] tabnext
 
 bind { followpage prev
 bind } followpage next
@@ -56,7 +59,7 @@ bind ,r composite rssexec
 " Focus an input field, then <C-i> will start vim with content of the input (or blank)
 " Quit with <ESCAPE> or <ENTER>, this will feed the selected input with your entry
 set editorcmd kitty --class floating vim -c "set noshowmode | set noruler | set laststatus=0 | set noshowcmd | set cmdheight=1 | nnoremap <ESC><ESC> :q!<ENTER> | nnoremap <ENTER> :x<ENTER> | inoremap <ENTER> <ESC>:x!<ENTER>" %f
-bind --mode=normal gi composite focusinput -l | editor
+" bind --mode=normal gi composite focusinput -l | editor
 
 
 " Toggle pinned tab
@@ -70,6 +73,8 @@ bind <C-l> current_url open
 " Allow to copy in the commandline
 unbind --mode=ex <C-c>
 
+" Git{Hub,Lab} git clone via SSH yank
+bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
 
 " Create an alias named get_password. This alias will grab the url of the current page and pipe it to an arbitrary js command in the background (webextensions have multiple processes, one that lives in the background that can't access pages and others that live in pages and can't run software on your computer).
 " The background process will run pass -c $URL_OF_THE_CURRENT_WEBSITE on your computer, which I believe will output the password for the current website.
