@@ -61,19 +61,6 @@ dlgist() {
         }
     done
 }
-# reveal aliases typed on prompt
-reveal-alias() {
-    preexec_functions=()
-    function expand_aliases {
-      input_command=$1
-      expanded_command=$2
-      if [ $input_command != $expanded_command ]; then
-        print -nP $PROMPT
-        echo $expanded_command
-      fi
-    }
-    preexec_functions+=expand_aliases
-}
 # Python functions
 if command -v pip >/dev/null 2>&1; then
     # uninstall package with dependencies

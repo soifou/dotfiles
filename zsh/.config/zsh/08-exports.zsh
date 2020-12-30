@@ -8,47 +8,6 @@ command -v zoxide >/dev/null && {
     . "$XDG_CACHE_HOME"/zoxide.zsh
 }
 
-# fzf: https://github.com/junegunn/fzf
-command -v fzf >/dev/null && {
-    # FZF_SHELL_PATH="$GOPATH"/src/github.com/junegunn/fzf/shell
-    # shellcheck source=/dev/null
-    # . "$FZF_SHELL_PATH"/completion.zsh
-    # shellcheck source=/dev/null
-    #. "$FZF_SHELL_PATH"/key-bindings.zsh
-    # export FZF_DEFAULT_COMMAND='rg --files --hidden --no-require-git'
-    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --color=always'
-    # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    # FZF_BAT_COMMAND="bat --color=always --style=numbers --line-range :300 {}"
-    export FZF_DEFAULT_OPTS="
-        --prompt 'λ '
-        --layout=reverse
-        --height 20%
-        --bind K:preview-up,J:preview-down
-        --bind A:select-all,Z:deselect-all
-        --color fg:8,bg:0,hl:1,fg+:7,bg+:0,hl+:1
-        --color info:8,prompt:7,spinner:1,pointer:1,marker:1
-    "
-}
-
-# git-delta: https://github.com/dandavison/delta/
-command -v delta >/dev/null && {
-    export GIT_PAGER="delta -n -s --syntax-theme=ansi-dark \
-        --hunk-header-style='syntax bold' \
-        --hunk-header-decoration-style='black box' \
-        --file-style='yellow bold' \
-        --file-decoration-style='yellow ul' \
-        --minus-style='syntax #450a15' \
-        --minus-emph-style='syntax #600818' \
-        --plus-style='syntax #0b4820' \
-        --plus-emph-style='syntax #175c2e' \
-        --line-numbers-zero-style='#4b5263' \
-        --line-numbers-minus-style='syntax #600818' \
-        --line-numbers-plus-style='syntax #0b4820' \
-        --line-numbers-left-format='{nm:^4} ' \
-        --line-numbers-right-format='{np:^4}  '
-    "
-}
-
 # Docker
 command -v docker >/dev/null && {
     . "$ZDOTDIR"/docker/functions.zsh
