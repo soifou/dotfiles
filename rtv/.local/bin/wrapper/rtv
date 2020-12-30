@@ -2,12 +2,14 @@
 
 # Wrapper script for RTV (https://github.com/michael-lazar/rtv)
 # Current fork: https://github.com/tildeclub/ttrv
-# If no argument is specified, list a selection subreddits with fzf
+# If no argument specified, list a selection of subreddits with fzf
 
 # File containing a list of subs, one per line.
 SUBS="$XDG_LOCAL_HOME"/share/ttrv/subreddits
-# Urlviewer
+# Set custom urlviewer
 export TTRV_URLVIEWER="urlscan -dc -r 'linkhandler {}'"
+# Set custom mailcap
+export MAILCAPS="$XDG_CONFIG_HOME/ttrv/mailcap"
 
 [ -z "$1" ] && {
     [ -f "$SUBS" ] && {
