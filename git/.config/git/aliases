@@ -54,7 +54,7 @@
             command -v fzf >/dev/null && {\
                 git log --branches --oneline |\
                 fzf -m --ansi --no-height --prompt=' cherry-pick > ' \
-                --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\" |\
+                --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | DELTA_FEATURES= delta -n\" |\
                 awk '{print $1}' | xargs -r git cherry-pick;\
             }\
         }\
@@ -79,7 +79,7 @@
         command -v fzf >/dev/null && {\
             git hist --color=always |\
             fzf -m --ansi --no-height --prompt=' commits history > ' \
-            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\" |\
+            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | DELTA_FEATURES= delta -n\" |\
             xargs ;\
         } || {\
             git hist;\
