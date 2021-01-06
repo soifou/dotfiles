@@ -5,9 +5,12 @@
 
 TMPFILE=$(mktemp)
 curl -sL "$1" >"$TMPFILE"
-
 case $(file --mime-type "$TMPFILE" -bL) in
-    image/gif) sxiv -ab "$TMPFILE" ;;
+    image/gif) 
+        # need to set gif extension in order to be read
+        mv "$TMPFILE" "$TMPFILE".gif
+        sxiv -ab "$TMPFILE".gif
+    ;;
     image/*) sxiv -b "$TMPFILE" ;;
     *) exit 1 ;;
 esac
