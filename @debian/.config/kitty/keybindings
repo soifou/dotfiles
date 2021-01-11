@@ -2,8 +2,11 @@
 
 kitty_mod alt
 
-clear_all_shortcuts no
+# unbindings
+clear_all_shortcuts yes
+# map kitty_mod+n no_op # no new window (i can spawn them with my WM)
 
+# navigation
 map kitty_mod+j scroll_line_down
 map kitty_mod+k scroll_line_up
 map kitty_mod+g scroll_end
@@ -11,12 +14,11 @@ map kitty_mod+shift+g scroll_home
 
 map kitty_mod+v paste_from_clipboard
 
-# list in a new window all urls found in scrollback
-# can natively list visible urls on screen with kitty_mod+e (kitten hints)
+# list all urls found in scrollback in a subwindow with urlscan
 map kitty_mod+u launch --stdin-source=@screen_scrollback urlscan --single -Hcd -r 'linkhandler {}'
 
-# open scrollback with bat in new window
-map kitty_mod+s launch --stdin-source=@screen_scrollback --stdin-add-formatting bat
+# open scrollback with bat in new tab
+map kitty_mod+s launch --type=tab --stdin-source=@screen_scrollback --stdin-add-formatting bat
 
 # window config
 map kitty_mod+shift+t next_layout
