@@ -1,7 +1,10 @@
 #!/usr/bin/env sh
 
+# Cleanup the log file before running anything.
+cat /dev/null > "$XDG_CACHE_HOME"/xsession-errors
+
 # Init shell if coming from a DM
-[ "$XDG_SESSION_TYPE" = 'x11' ] && {
+[ "${XDG_SESSION_TYPE:-tty}" = 'x11' ] && {
     # zsh is my running shell
     [ -z "$ZSH_NAME" ] && exec $SHELL $0 "$@"
     ZHOME=${ZDOTDIR:-$HOME}
@@ -10,9 +13,6 @@
     [ -f "$ZHOME"/.zlogin ] && . "$ZHOME"/.zlogin
     emulate -R sh
 }
-
-# Cleanup the log file before running anything.
-cat /dev/null > "$XDG_CACHE_HOME"/xsession-errors
 
 # Store my WM of choice since,
 # it will be used in xsession to start selected WM later

@@ -166,8 +166,8 @@ super + w
     ~/.local/bin/toggle-webcam
 
 # launch apps
-super + x ; {1-3}
-    wm-focus {newsboat,tuir,weechat}
+super + x ; {1-4}
+    wm-focus {neomutt,newsboat,rtv,weechat}
 
 # polybar toggle
 super + shift + i

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-# wrapper script to force some apps (ie. neomutt, newsboat, tuir) to launch only one instance.
+# wrapper script to force some apps (ie. neomutt, newsboat, ...) to launch only one instance.
 # If the program is already running, just focus with the current WM.
 #
 # Usage: $ wm-focus neomutt

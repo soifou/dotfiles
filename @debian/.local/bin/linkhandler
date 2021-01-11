@@ -16,7 +16,7 @@ case "$1" in
 *mkv | *webm | *mp4 | *youtube.com* | *youtu.be* | *gfycat.com* | *v.redd.it* | *dailymotion.com*)
     setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1 &
     ;;
-*png | *jpg | *jpe | *jpeg | *gif)
+*png|*jpg|*jpe|*jpeg|*gif)
     sxiv-web $1
     ;;
 *mp3 | *flac | *opus | *mp3?source*)
@@ -27,8 +27,8 @@ case "$1" in
         # xdg-open "$1"
         "$TERMINAL" -e "$EDITOR $1"
     else
-        setsid "$BROWSER" "$1" >/dev/null &
-        wm-focus "$(echo "$BROWSER" | sed 's/.*/\u&/')"
+        "$BROWSER" "$1"
+        # wm-focus "$(echo "$BROWSER" | sed 's/.*/\u&/')"
     fi
     ;;
 esac
