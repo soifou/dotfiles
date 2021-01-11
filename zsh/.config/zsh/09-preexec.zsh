@@ -2,6 +2,13 @@
 
 preexec_functions=()
 
+# Updates the GPG-Agent TTY before every command
+# https://www.gnupg.org/documentation/manuals/gnupg/Agent-Options.html
+__preexec_gpg_agent_update_tty() {
+    gpg-connect-agent UPDATESTARTUPTTY /bye >/dev/null
+}
+preexec_functions=(__preexec_gpg_agent_update_tty ${preexec_functions[@]})
+
 # Dynamically set delta "side-by-side" feature if screen is wide enough
 # see: https://github.com/dandavison/delta/issues/359#issuecomment-751447860
 # Note in case we use delta inside an fzf preview pane on wide screen

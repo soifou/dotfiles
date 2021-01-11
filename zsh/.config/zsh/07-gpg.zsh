@@ -15,9 +15,3 @@ case "$(tty)" in
     /dev/tty*) export PINENTRY_USER_DATA="tty" ;;
     /dev/pts*) export PINENTRY_USER_DATA="rofi" ;;
 esac
-
-# Updates the GPG-Agent TTY before every command
-function _gpg-agent-update-tty {
-    gpg-connect-agent UPDATESTARTUPTTY /bye >/dev/null
-}
-add-zsh-hook preexec _gpg-agent-update-tty
