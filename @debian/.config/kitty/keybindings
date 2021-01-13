@@ -15,7 +15,7 @@ map kitty_mod+shift+g scroll_home
 map kitty_mod+v paste_from_clipboard
 
 # list all urls found in scrollback in a subwindow with urlscan
-map kitty_mod+u launch --stdin-source=@screen_scrollback urlscan --single -Hcd -r 'linkhandler {}'
+map kitty_mod+u launch --stdin-source=@screen_scrollback urlscan --single -Hcd -r 'linkhandler "{}"'
 
 # open scrollback with bat in new tab
 map kitty_mod+s launch --type=tab --stdin-source=@screen_scrollback --stdin-add-formatting bat
