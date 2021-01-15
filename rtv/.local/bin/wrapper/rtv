@@ -7,7 +7,7 @@
 # File containing a list of subs, one per line.
 SUBS="$XDG_LOCAL_HOME"/share/ttrv/subreddits
 # Set custom urlviewer
-export TTRV_URLVIEWER="urlscan -dc -r 'linkhandler {}'"
+export TTRV_URLVIEWER="urlscan --single -Hcd -r 'linkhandler {}'"
 # Set custom mailcap
 export MAILCAPS="$XDG_CONFIG_HOME/ttrv/mailcap"
 

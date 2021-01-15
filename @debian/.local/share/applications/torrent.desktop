@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
 Name=Torrent
-Exec=/usr/bin/env torrent-add %U
+Exec=/usr/bin/env linkhandler %U
 NoDisplay=true
