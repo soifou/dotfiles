@@ -62,3 +62,7 @@
     foreground = "{background}"
     frame_color = "{color1}"
     timeout = 0
+
+[urgent_hints]
+    summary = "*"
+    script = ~/.local/bin/x-urgent-hint
