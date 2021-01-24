@@ -38,14 +38,18 @@ display_bitrate = no
 media_library_primary_tag = album_artist
 mouse_support = no
 execute_on_song_change = ncmpcpp-cover
-progressbar_look = "─╼ "
 
 ##### colors definitions #####
-progressbar_elapsed_color = blue
 empty_tag_color = white
 header_window_color = white
 volume_color = blue
 state_line_color = blue
 state_flags_color = blue
 main_window_color = blue
-main_window_highlight_color = blue
+current_item_prefix = "$(blue)$r"
+current_item_suffix = "$/r$(end)"
+progressbar_color = white
+progressbar_elapsed_color = blue
+progressbar_look = "─┅─"
+statusbar_color = white
+#active_column_color = "red"

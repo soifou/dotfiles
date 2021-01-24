@@ -46,6 +46,7 @@ progressbar_look = "─╼ "
 # progressbar_look = "▁▁▁"
 # progressbar_look = "‒‒‒"
 # progressbar_look = "■◣ "
+# progressbar_look = "▃▃▃"
 # progressbar_look = "◈◆◇"
 # progressbar_elapsed_color = white
 # progressbar_color = blue

@@ -1,9 +1,17 @@
-# Doc: https://github.com/arybczak/ncmpcpp/blob/master/doc/bindings
+# Reference: https://github.com/arybczak/ncmpcpp/blob/master/doc/bindings
 
 def_key "+"
     show_clock
 def_key "="
     volume_up
+
+def_key "d"
+    delete_playlist_items
+
+def_key "]"
+    next
+def_key "["
+    previous
 
 def_key "j"
     scroll_down
