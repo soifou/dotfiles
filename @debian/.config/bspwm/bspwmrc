@@ -56,7 +56,7 @@ done
 _r Zathura state=tiled
 # floating with custom size
 _r "*:floating" state=floating center=true rectangle=930x400+0+0
-_r ranger state=floating center=true rectangle=1200x600+0+0
+_r lf state=floating center=true rectangle=1200x600+0+0
 
 # autostart
 polybar-run

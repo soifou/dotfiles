@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+set -e
+
+export OPENER="$XDG_CONFIG_HOME"/lf/open
+
+[ -f "$XDG_CONFIG_HOME"/lf/icons ] && . "$XDG_CONFIG_HOME"/lf/icons
+
+if [ -n "$DISPLAY" ]; then
+    export FIFO_UEBERZUG="${TMPDIR:-/tmp}/lf-ueberzug-$$"
+
+    cleanup() {
+        exec 3>&-
+        rm "$FIFO_UEBERZUG"
+    }
+
+    mkfifo "$FIFO_UEBERZUG"
+    ueberzug layer -s <"$FIFO_UEBERZUG" &
+    exec 3>"$FIFO_UEBERZUG"
+    trap cleanup EXIT
+
+    mkdir -p "$XDG_CACHE_HOME/lf"
+
+    "$GOPATH"/bin/lf "$@" 3>&-
+else
+    exec "$GOPATH"/bin/lf "$@"
+fi

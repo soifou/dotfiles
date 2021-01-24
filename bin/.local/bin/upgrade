@@ -181,7 +181,7 @@ if yn "Cleanup trash?"; then
         find . -type f -name '*.DS_Store' -ls -delete
     else
         rm -rf "$XDG_DATA_HOME/Trash/{files,info}/*"
-        find "$XDG_CACHE_HOME"/ranger -type f -mtime +14 -delete
+        find "$XDG_CACHE_HOME"/lf -type f -mtime +14 -delete
     fi
 fi
 

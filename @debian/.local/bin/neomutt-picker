@@ -1,13 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
-# Use ranger filemanager (https://github.com/ranger/ranger) in neomutt to add file as attachment
-# In ranger, select file(s) with <space> then <enter> to valid selection(s)
+# Use lf filemanager (https://github.com/gokcehan/lf) in neomutt to add file as attachment
+# In lf, select file(s) with <space> then press <o> to valid selection(s)
 # Credits: https://www.reddit.com/r/commandline/comments/cbxvdf/combine_neomutt_with_ranger/eu8xdip/
 
 tmpfile=/tmp/neomutt-attachments
 
 if [ -z "$1" ]; then
-    ranger --choosefiles $tmpfile &&
+    lf -selection-path $tmpfile &&
         sed -i 's/^/<attach-file>/' $tmpfile &&
         sed -i 's/$/<enter>/' $tmpfile &&
         sed -i ':a;N;$!ba;s/\\n//g' $tmpfile &&

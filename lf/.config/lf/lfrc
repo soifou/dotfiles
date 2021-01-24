@@ -1,0 +1,30 @@
+# __   ____
+# | |  |  _\
+# | |__| _\
+# |___/|/
+#
+
+# Settings
+set hidden false
+set drawbox true
+set ratios 1:2:3
+# set icons
+# set hiddenfiles "lost+found:.*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
+
+# Preview
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/clear
+
+# Opener
+cmd open $$OPENER $fx
+cmd open-choose $OPENER_CHOOSE="true" $OPENER $fx
+map o open
+map O open-choose
+
+# Quickly jump dirs with zoxide
+cmd az %lf -remote "send $id cd '$(zoxide query $@)'"
+map a push :az<space>
+
+# Keybindings
+map D delete
+map . set hidden!

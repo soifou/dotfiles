@@ -5,7 +5,7 @@
 [Default Applications]
 application/pdf=pdf.desktop
 application/x-bittorrent=torrent.desktop
-inode/directory=ranger.desktop
+inode/directory=fm.desktop
 text/plain=vim.desktop
 x-scheme-handler/irc=weechat.desktop
 x-scheme-handler/ircs=weechat.desktop

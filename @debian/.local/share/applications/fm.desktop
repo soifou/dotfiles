@@ -1,9 +1,8 @@
 [Desktop Entry]
-Name=Ranger
-Comment=Ranger
+Name=Lf
 GenericName=File manager
-Exec=term --class=ranger ranger
-Terminal=true
+Exec=term --class=lf lf
+Terminal=false
 Type=Application
 Icon=system-file-manager
 Categories=System;

@@ -9,8 +9,8 @@ find "$XDG_CACHE_HOME"/sxiv -depth -type d -empty ! -name "." -exec rmdir {} \;
 pkill picom
 # Kill all instances of pywalfox
 pkill -f pywalfox
-# Cleanup ranger cache
-find "$XDG_CACHE_HOME"/ranger -type f -mtime +14 -delete
+# Cleanup lf cache
+find "$XDG_CACHE_HOME"/lf -type f -mtime +14 -delete
 
 # Finally exit wm
 pgrep -x i3 >/dev/null && i3-msg exit
