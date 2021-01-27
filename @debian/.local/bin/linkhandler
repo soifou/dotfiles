@@ -41,7 +41,7 @@ case "$1" in
     # Torrent
     magnet:*|*.torrent) _torrent "$1" ;;
     # Video
-    *mkv|*webm|*mp4|*youtube.com*|*youtu.be*|*gfycat.com*|*v.redd.it*|*dailymotion.com*)
+    *mkv|*webm|*mp4|*youtube.com*|*youtu.be*|*gfycat.com*|*v.redd.it*|*dailymotion.com*|*peertube*)
         setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1 &
     ;;
     # Images
@@ -50,12 +50,16 @@ case "$1" in
     *.pdf|*.ps|*.epub) _dlo $1 ;;
     # Music
     *mp3|*flac|*opus|*mp3?source*) _dlo $1 ;;
+    # pastebins
+    *pastebin.com*) _dlo "https://pastebin.com/raw/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
+    *paste.debian.net*) _dlo "https://paste.debian.net/plain/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
+    *termbin.com*) _dlo $1 ;;
     # HTTP links
     http[s]://*)
         case $(curl -s -o /dev/null -w '%{content_type}' $1) in
             application/pdf) _dlo "$1" ;;
             image/*) _dlo "$1" ;;
-            text/plain*) _dlo "$1" ;;
+            # text/plain*) _dlo "$1" ;;
             *)
                 "$BROWSER" "$1"
                 # force to focus the browser when opening the new tab

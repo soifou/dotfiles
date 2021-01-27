@@ -1,34 +1,24 @@
 #!/usr/bin/env sh
 
 # Take a screenshot from current window/screen or select a region.
-# Dependencies: shotgun, hacksaw, xdotool, notify-send, xclip and pywal (only for hacksaw color)
-# https://github.com/neXromancers/shotgun
-# https://github.com/neXromancers/hacksaw
 
-mkdir -p "$SCREENSHOT_PATH"
+for i in shotgun hacksaw xdotool notify-send xrdb xclip; do
+    [ ! "$(command -v $i)" ] && { echo "Error: prerequisite $i not found in PATH" >&2 ; exit 1 ; }
+done
+
+SCREENSHOT_PATH=${XDG_PICTURES_DIR:-~/Pictures}/screenshots
 FILENAME=$(date +%s)-$1.png
 SP="$SCREENSHOT_PATH/$FILENAME"
 
-notify() {
-    notify-send -i camera-photo "Screenshot :: $1" "$2"
-}
+_notify() { notify-send -i camera-photo "Screenshot :: $1" "Copied to $2"; }
+_color() { xrdb -q | grep -m1 -i "$1" | cut -f2; }
+_hacksaw() { hacksaw -c "$(_color color4)" -g 2 -s 2 -f "-i %i -g %g" || exit 1 ; }
 
-hacksaw_cmd() {
-    . "$XDG_CACHE_HOME"/wal/colors.sh
-    hacksaw -c "$color4" -g 2 -s 2 -f "-i %i -g %g"
-}
+mkdir -p "$SCREENSHOT_PATH"
 
 case $1 in
-    screen)
-        shotgun "$SP" && notify "$1" "Copied to $SP"
-        ;;
-    window)
-        shotgun -i $(xdotool getactivewindow) "$SP" && notify "$1" "Copied to $SP"
-        ;;
-    region)
-        shotgun $(hacksaw_cmd) "$SP" && notify "$1" "Copied to $SP"
-        ;;
-    *)
-        shotgun $(hacksaw_cmd) - | xclip -sel clip -t image/png && notify region "Copied to clipboard"
-        ;;
+    screen) shotgun "$SP" && _notify "$1" "$SP" ;;
+    window) shotgun -i "$(xdotool getactivewindow)" "$SP" && _notify "$1" "$SP" ;;
+    region) shotgun "$(_hacksaw)" "$SP" && _notify "$1" "$SP" ;;
+    *) shotgun "$(_hacksaw)" - | xclip -sel clip -t image/png && _notify region "clipboard" ;;
 esac

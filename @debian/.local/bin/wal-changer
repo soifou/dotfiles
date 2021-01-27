@@ -91,22 +91,22 @@ _mpv() {
     # Reload custom progress bar (https://github.com/torque/mpv-progressbar)
     PB_PATH="$XDG_CONFIG_HOME"/mpv/script-opts/torque-progressbar
     mkdir -p "$PB_PATH"
-    . "$XDG_CACHE_HOME"/wal/colors.sh
 
-    echo "default-style=\\\fnserif\\\bord0\\\shad0\\\fs20\\\c&H$(rgb_to_brg $color2)&\\\3c&H$(rgb_to_brg $color4)&
+    echo "default-style=\\\fnserif\\\bord0\\\shad0\\\fs20\\\c&H$(rgb_to_brg color2)&\\\3c&H$(rgb_to_brg color4)&
 bar-height-inactive=3
 bar-height-active=10
 bar-default-style=\\\bord0\\\shad0
 bar-foreground-style=
-bar-cache-style=\\\c&H$(rgb_to_brg $color2)&
-bar-background-style=\\\c&H$(rgb_to_brg $color2)&\\\alpha&HFF&
-pause-indicator-foreground-style=\\\c&H$(rgb_to_brg $foreground)&
-pause-indicator-background-style=\\\c&H$(rgb_to_brg $background)&" > "$PB_PATH"/main.conf
+bar-cache-style=\\\c&H$(rgb_to_brg color2)&
+bar-background-style=\\\c&H$(rgb_to_brg color2)&\\\alpha&HFF&
+pause-indicator-foreground-style=\\\c&H$(rgb_to_brg foreground)&
+pause-indicator-background-style=\\\c&H$(rgb_to_brg background)&" > "$PB_PATH"/main.conf
 }
 rgb_to_brg() {
-    r="$(echo $1 | cut -c 2-3)"
-    g="$(echo $1 | cut -c 4-5)"
-    b="$(echo $1 | cut -c 6-7)"
+    color=$(xrdb -q | grep -m1 -i "$1" | cut -f2)
+    r="$(echo "$color" | cut -c 2-3)"
+    g="$(echo "$color" | cut -c 4-5)"
+    b="$(echo "$color" | cut -c 6-7)"
     echo "$b$g$r"
 }
 

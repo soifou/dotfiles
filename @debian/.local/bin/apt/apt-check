@@ -11,6 +11,8 @@ BAR_ICON=""
 PKG_REG="a-z+0-9.:\~-"
 REGEX="s|\([$PKG_REG]*\)/[a-z,]*\s\([$PKG_REG]*\)\s[a-z0-9]*\s\[upgradable\sfrom:\s\([$PKG_REG]*\)[\w\d-]*\]$|\1 \3 => \2|"
 
+_color() { xrdb -q | grep -m1 -i "$1" | cut -f2 ; }
+
 refresh() {
     ping -q -c 1 1.1.1.1 >/dev/null || exit
     sudo apt update >/dev/null 2>&1 || notify-send -i dialog-error "Error downloading updates."
@@ -19,8 +21,7 @@ refresh() {
 status() {
     COUNT=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX" | wc -l)
     if [ "$COUNT" -gt "50" ]; then
-        getColors
-        echo "$BAR_ICON %{F$color1}${COUNT}%{F-}"
+        echo "$BAR_ICON %{F$(_color color1)}${COUNT}%{F-}"
     else
         echo "$BAR_ICON $COUNT"
     fi
@@ -38,18 +39,6 @@ notify() {
         notify-send -i debian-logo "Packages" "Already up to date!"
     else
         notify-send -i debian-logo "$COUNT update(s) available" "$PACKAGES"
-    fi
-}
-
-# Import colors from available location
-getColors() {
-    # Pywal
-    if [ -f "$XDG_CACHE_HOME"/wal/colors.sh ]; then
-        # shellcheck source=/dev/null
-        . "$XDG_CACHE_HOME"/wal/colors.sh
-    # Xressources
-    else
-        color1=$(xrdb -query | grep '*color1' | awk -F: '{print $2}' | xargs)
     fi
 }
 
