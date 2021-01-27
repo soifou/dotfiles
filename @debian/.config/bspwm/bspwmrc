@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
-_c() { bspc config "$@" &  }
+_c() { bspc config "$@" & }
 _r() { bspc rule -a "$@" & }
+_color() { xrdb -q | grep -m1 -i "$1" | cut -f2 ; }
 
 bspc monitor -d $(seq -s " " 9)
 
@@ -11,14 +12,10 @@ _c top_padding         30
 _c split_ratio          0.50
 _c borderless_monocle   true
 _c gapless_monocle      true
-
-[ -f "$XDG_CACHE_HOME"/wal/colors.sh ] && {
-    . "$XDG_CACHE_HOME"/wal/colors.sh
-    _c normal_border_color "$background"
-    _c active_border_color "$color1"
-    _c focused_border_color "$color4"
-    _c presel_feedback_color "$color1"
-}
+_c normal_border_color   "$(_color "background")"
+_c active_border_color   "$(_color "color1")"
+_c focused_border_color  "$(_color "color4")"
+_c presel_feedback_color "$(_color "color1")"
 
 # allow the mouse to manipulate windows when the super (mod4) key is pressed
 # tiling/floating windows can be resized with left click
