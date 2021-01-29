@@ -7,8 +7,7 @@ for i in shotgun hacksaw xdotool notify-send xrdb xclip; do
 done
 
 SCREENSHOT_PATH=${XDG_PICTURES_DIR:-~/Pictures}/screenshots
-FILENAME=$(date +%s)-$1.png
-SP="$SCREENSHOT_PATH/$FILENAME"
+SP="$SCREENSHOT_PATH/$(date +%s)-$1.png"
 
 _notify() { notify-send -i camera-photo "Screenshot :: $1" "Copied to $2"; }
 _color() { xrdb -q | grep -m1 -i "$1" | cut -f2; }
@@ -20,5 +19,6 @@ case $1 in
     screen) shotgun "$SP" && _notify "$1" "$SP" ;;
     window) shotgun -i "$(xdotool getactivewindow)" "$SP" && _notify "$1" "$SP" ;;
     region) shotgun "$(_hacksaw)" "$SP" && _notify "$1" "$SP" ;;
-    *) shotgun "$(_hacksaw)" - | xclip -sel clip -t image/png && _notify region "clipboard" ;;
+    # note $(_hacksaw) need to be unquoted to pass to clipboard
+    *) shotgun $(_hacksaw) - | xclip -sel clip -t image/png && _notify region "clipboard" ;;
 esac
