@@ -28,17 +28,8 @@ php() {
         -v /etc/group:/etc/group:ro \
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-7.4 ${@:1}
+        soifou/php-alpine:cli-${PHP_VERSION:-8.0} ${@:1}
 }
-php7.2() {
-    docker run -ti --rm \
-        -v "$PWD":$(getContainerPath) \
-        -w $(getContainerPath) \
-        -u `id -u`:`id -g` \
-        --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-7.2 ${@:1}
-}
-
 phppm() {
     docker run --rm \
         -v "$PWD":/var/www \
@@ -62,43 +53,7 @@ composer() {
         -v $(pwd):/app \
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/composer:latest ${@:1}
-}
-composer-7.1() {
-    tty=
-    tty -s && tty=--tty
-    docker run \
-        $tty \
-        --interactive \
-        --rm \
-        --env SSH_AUTH_SOCK=/ssh-auth.sock \
-        -u `id -u`:`id -g` \
-        -v $COMPOSER_HOME:/composer \
-        -v $COMPOSER_CACHE_DIR:/composer/cache \
-        -v /etc/passwd:/etc/passwd:ro \
-        -v /etc/group:/etc/group:ro \
-        -v $(pwd):/app \
-        -v $SSH_AUTH_SOCK:/ssh-auth.sock \
-        --net=$DOCKER_NETWORK_NAME \
-        soifou/composer:php-7.1 ${@:1}
-}
-composer-5.6() {
-    tty=
-    tty -s && tty=--tty
-    docker run \
-        $tty \
-        --interactive \
-        --rm \
-        --env SSH_AUTH_SOCK=/ssh-auth.sock \
-        -u `id -u`:`id -g` \
-        -v $COMPOSER_HOME:/composer \
-        -v $COMPOSER_CACHE_DIR:/composer/cache \
-        -v /etc/passwd:/etc/passwd:ro \
-        -v /etc/group:/etc/group:ro \
-        -v $(pwd):/app \
-        -v $SSH_AUTH_SOCK:/ssh-auth.sock \
-        --net=$DOCKER_NETWORK_NAME \
-        soifou/composer:php-5.6 ${@:1}
+        soifou/composer:php-${PHP_VERSION:-8.0} ${@:1}
 }
 php7cc() {
     docker run -it --rm \

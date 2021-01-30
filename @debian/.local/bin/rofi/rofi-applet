@@ -9,6 +9,12 @@ lock=""
 suspend=""
 logout=""
 
+_suspend() {
+    mpc -q pause
+    pactl set-sink-mute @DEFAULT_SINK@ 1
+    systemctl suspend
+}
+
 rofi_packages() {
     packages=$(apt-check -l)
     if [ "$packages" ]; then
@@ -21,11 +27,7 @@ rofi_powermenu_classic() {
     MENU="$(rofi -sep "|" -dmenu -i -p 'System' -width 12 -hide-scrollbar -line-padding 4 -padding 20 -lines 4 <<<"$lock Lock|$suspend Suspend|$logout Logout|$reboot Reboot|$shutdown Shutdown")"
     case "$MENU" in
     *Lock) lockscreen --corrupted ;;
-    *Suspend)
-        mpc -q pause
-        amixer set Master mute
-        systemctl suspend
-        ;;
+    *Suspend) _suspend ;;
     *Logout) wm-logout ;;
     *Reboot) systemctl reboot ;;
     *Shutdown) systemctl -i poweroff ;;
@@ -44,11 +46,7 @@ rofi_powermenu() {
         $shutdown) systemctl -i poweroff ;;
         $reboot) systemctl reboot ;;
         $lock) lockscreen --corrupted ;;
-        $suspend)
-            mpc -q pause
-            amixer set Master mute
-            systemctl suspend
-            ;;
+        $suspend) _suspend ;;
         $logout) wm-logout ;;
     esac
 }

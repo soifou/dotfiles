@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Lf
 GenericName=File manager
-Exec=term --class=lf lf
+Exec=kitty --class=lf lf
 Terminal=false
 Type=Application
 Icon=system-file-manager

@@ -34,7 +34,7 @@ bspc rule -r "*"
 # specific desktop
 _r Sublime_text desktop='^2'
 _r Firefox desktop='^3'
-for app in neomutt weechat skype whatsapp mattermost; do
+for app in neomutt weechat skype Signal whatsapp mattermost; do
     _r $app desktop='^4'
 done
 # floating
@@ -45,6 +45,7 @@ done
 for app in mailto music-player tremc; do
     _r "*:$app" state=floating center=true sticky=true rectangle=930x400+0+0
 done
+_r lf state=floating center=true sticky=true rectangle=1200x600+0+0
 # bottom floating and sticky
 for app in '*:*:mpv-webcam' Firefox:Toolkit; do
     _r "$app" state=floating sticky=true layer=above manage=off border=off
@@ -53,7 +54,6 @@ done
 _r Zathura state=tiled
 # floating with custom size
 _r "*:floating" state=floating center=true rectangle=930x400+0+0
-_r lf state=floating center=true rectangle=1200x600+0+0
 
 # autostart
 polybar-run

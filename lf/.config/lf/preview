@@ -97,7 +97,7 @@ case "$1" in
 esac
 
 case "$(file -Lb --mime-type -- "$1")" in
-text/* | application/csv)
+text/* | application/csv | application/json)
     bat --color=always --style=changes "$1"
     exit 0
     ;;

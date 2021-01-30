@@ -139,15 +139,19 @@ XF86Audio{Next,Prev,Play,Stop}
 
 # audio control
 XF86Audio{Raise,Lower}Volume
-    amixer sset Master '5%{+,-}' >/dev/null; xob-utils -u
+    pactl set-sink-volume @DEFAULT_SINK@ {+,-}5%; xob-utils -u
 
-# mute audio
+# audio mute toggle
 XF86AudioMute
-    amixer set Master toggle >/dev/null; xob-utils -u
+    pactl set-sink-mute @DEFAULT_SINK@ toggle; xob-utils -u
 
 # music player
 super + z
     bsp-scratchpad music-player ncmpcpp-ueberzug
+
+# filemanager
+super + shift + f
+    bsp-scratchpad lf
 
 # torrent
 super + x ; 0
@@ -169,9 +173,17 @@ super + w
 super + x ; {1-4}
     wm-focus {neomutt,newsboat,rtv,weechat}
 
-# gaps
+# manage window gaps
 super + {underscore,plus,minus,equal}
     bsp-gaps {toggle,plus,minus,equal}
+
+
+# Toggle border of the focused window
+super + shift + comma
+    if [ "$(bspc config -n focused border_width)" = 0 ]; \
+        then bspc config -n focused border_width "$(bspc config border_width)"; \
+        else bspc config -n focused border_width 0; \
+    fi
 
 # polybar toggle
 super + shift + i

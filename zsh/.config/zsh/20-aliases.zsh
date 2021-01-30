@@ -54,6 +54,9 @@ alias gmgd='git mgd'    # delete merged branch(es)
 alias dps='docker container ls --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}"'
 alias dsp='docker system prune -f && docker volume prune -f'
 
+# pastebin
+alias ix="curl -F 'f:1=<-' ix.io"
+
 # PHP
 alias sf="php bin/console"
 alias phpunit="php bin/phpunit"

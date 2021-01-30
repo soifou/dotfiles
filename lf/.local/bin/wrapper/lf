@@ -21,6 +21,9 @@ if [ -n "$DISPLAY" ]; then
 
     mkdir -p "$XDG_CACHE_HOME/lf"
 
+    # Ueberzug does not work with daemonized terminal.
+    # https://github.com/seebye/ueberzug/issues/103
+    # kitty should be run without --single-instance
     "$GOPATH"/bin/lf "$@" 3>&-
 else
     exec "$GOPATH"/bin/lf "$@"

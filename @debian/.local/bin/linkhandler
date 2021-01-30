@@ -46,6 +46,12 @@ case "$1" in
     ;;
     # Images
     *png|*jpg|*jpe|*jpeg|*gif) _dlo $1 ;;
+    *imgur.com*|*reddit.com/gallery*)
+        curl -s "$1" | sed 's/http/\nhttp/g;s/\\u0026/\&/g' | awk -F \" '
+            !/favicon/&&/png|jpg|jpeg|PNG|JPG|JPEG/&&/preview\.redd\.it|i\.imgur\.com/{
+                gsub(/.*crop.*/,"",$0);gsub(/.*award_images.*/,"",$0);print $1
+            } ' | xargs linkhandler
+    ;;
     # Documents
     *.pdf|*.ps|*.epub) _dlo $1 ;;
     # Music
@@ -53,9 +59,9 @@ case "$1" in
     # pastebins
     *pastebin.com*) _dlo "https://pastebin.com/raw/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
     *paste.debian.net*) _dlo "https://paste.debian.net/plain/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
-    *termbin.com*) _dlo $1 ;;
+    *termbin.com*|*0x0.st*|*ix.io*) _dlo $1 ;;
     # HTTP links
-    http[s]://*)
+    http*)
         case $(curl -s -o /dev/null -w '%{content_type}' $1) in
             application/pdf) _dlo "$1" ;;
             image/*) _dlo "$1" ;;
