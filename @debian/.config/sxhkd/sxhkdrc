@@ -127,7 +127,7 @@ mod1 + Tab
 
 # pass manager (https://github.com/ibizaman/pass-clip)
 super + p
-    pass clip
+    pass clip --rofi
 
 # quit launcher
 super + e
