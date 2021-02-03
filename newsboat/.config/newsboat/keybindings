@@ -15,3 +15,5 @@ bind-key a toggle-article-read
 bind-key n next-unread
 bind-key N prev-unread
 bind-key ^t next-unread
+bind-key s sort
+bind-key o open-in-browser-and-mark-read

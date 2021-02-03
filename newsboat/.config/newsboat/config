@@ -14,15 +14,21 @@ error-log "~/.cache/newsboat/error.log"
 include "~/.config/newsboat/colors"
 include "~/.config/newsboat/keybindings"
 
-browser linkhandler
 display-article-progress yes
 goto-next-feed no
 keep-articles-days 180
+show-keymap-hint no
+# show-read-feeds no
 show-title-bar no
 
-bind-key U show-urls
-external-url-viewer "urlscan --single -Hcd -r 'linkhandler {}'"
+# Better to have already a GUI browser running
+# see: https://github.com/newsboat/newsboat/issues/800#issuecomment-600869425
+browser linkhandler
 
-macro , open-in-browser
-# add video or audio to play queue using mpv (requires: task-spooler, mpv, youtube-dl)
-macro p set browser "tsp mpv %u"; open-in-browser ; set browser "$BROWSER %u"
+external-url-viewer "urlscan --single -Hcd -r 'linkhandler {}'"
+bind-key U show-urls
+
+# Macro trigger is by default ","
+
+# Add video or audio to play queue using mpv (requires: task-spooler, mpv, youtube-dl)
+macro p set browser "tsp mpv %u"; open-in-browser-and-mark-read ; set browser "$BROWSER %u"
