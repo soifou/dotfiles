@@ -4,7 +4,11 @@ kitty_mod alt
 
 # unbindings
 clear_all_shortcuts yes
-# map kitty_mod+n no_op # no new window (i can spawn them with my WM)
+
+# font size
+map kitty_mod+shift+equal change_font_size all +1.0
+map kitty_mod+shift+minus change_font_size all -1.0
+map kitty_mod+shift+backspace change_font_size all 0
 
 # navigation
 map kitty_mod+j scroll_line_down
@@ -12,6 +16,7 @@ map kitty_mod+k scroll_line_up
 map kitty_mod+g scroll_end
 map kitty_mod+shift+g scroll_home
 
+# clipboard
 map kitty_mod+v paste_from_clipboard
 
 # list all urls found in scrollback in a subwindow with urlscan
