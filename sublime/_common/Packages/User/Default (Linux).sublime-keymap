@@ -9,8 +9,8 @@
     { "keys": ["f12"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
 
     // urls
-    // { "keys": ["alt+o"], "command": "noop","context": [{ "key": "selector", "operator": "equal", "operand": "text.todo" }] },
-    // { "keys": ["alt+o", "alt+u"], "command": "open_uri_from_cursors", "args": {"browser": "linkhandler"} },
+    { "keys": ["alt+o", "alt+u"], "command": "open_url_under_cursor"},
+    { "keys": ["alt+o", "alt+i"], "command": "open_all_urls"},
 
     // git
     { "keys": ["ctrl+j"], "command": "next_modification" },

@@ -1,9 +1,9 @@
 {
 	"extensions":
 	[
+		"picom.conf",
 		"mimeapps.list",
 		"ini.dist",
 		".npmrc",
-		"picom.conf",
 	],
 }
