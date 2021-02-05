@@ -1,5 +1,13 @@
-// Your settings for FileManager. See the default file to see the different options.
 {
-    "reveal_in_sidebar": true,
-    "explicitly_refresh_sidebar": true
+    "terminals": [{"name": "term","cmd": ["term", "--class=floating"],"platform": "linux"}],
+    "explicitly_refresh_sidebar": true,
+    "log_in_status_bar": "user",
+    "show_edit_to_the_left_command": false,
+    "show_edit_to_the_right_command": false,
+    "show_find_in_files_command": false,
+    "show_open_in_explorer_command": false,
+    "show_open_in_browser_command": false,
+    "show_rename_path_command": false,
+    "show_create_from_selection_command": false,
+    "show_open_all_command": false
 }
