@@ -103,9 +103,9 @@ image/*)
                 }
                 count="$(listfiles "$1" | grep -m 1 -ZznF -- "$1" | cut -d: -f1)"
                 redirect
-                listfiles "$1" | fork xargs -0 sxiv -a -n "$count" --
+                listfiles "$1" | fork xargs -0 sxiv -ba -n "$count" --
             else
-                spawn sxiv -a -- "$@"
+                spawn sxiv -ba -- "$@"
             fi
             ;;
         gimp) spawn gimp -- "$@" ;;

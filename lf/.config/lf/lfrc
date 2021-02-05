@@ -8,7 +8,7 @@
 set hidden false
 set drawbox true
 set ratios 1:2:3
-# set icons
+set icons
 # set hiddenfiles "lost+found:.*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 
 # Preview
