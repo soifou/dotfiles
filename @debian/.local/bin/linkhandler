@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-# Opens files with the default app.
-# This could be a HTTP link as well as a local file.
+# Opens with default app.
+# This could be a HTTP link as well as a local file or a directory.
 
 # If no argument given. Exit.
 [ -z "$1" ] && { exit; }
@@ -16,11 +16,12 @@ _o() {
     echo "mime-type: $(file --mime-type "$1" -bL)"
 
     case $(file --mime-type "$1" -bL) in
+        application/pdf) zathura "$1" ;;
+        application/x-bittorrent) _torrent "$1" ;;
         audio/*) mpv "$1" ;;
         image/gif) mv "$1" "$1".gif && sxiv -ab "$1".gif ;;
         image/*) sxiv -b "$1" ;;
-        application/pdf) zathura "$1" ;;
-        application/x-bittorrent) _torrent "$1" ;;
+        inode/directory) term --class=floating lf "$1" ;;
         text/html) "$BROWSER" "$1" ;;
         text/*) term --class=floating $EDITOR "$1" ;;
         *) xdg-open "$1" ;;
@@ -28,16 +29,19 @@ _o() {
 }
 
 _dlo() {
-    [ -f "$1" ] && _o "$1" || {
-        TMPFILE=$(mktemp)
-        curl -sL "$1" >"$TMPFILE"
-        _o "$TMPFILE"
-    }
+    TMPFILE=$(mktemp)
+    curl -sL "$1" >"$TMPFILE"
+    _o "$TMPFILE"
 }
+
+# Files/Directories
+if [ -d "$1" ] || [ -f "$1" ]; then
+    _o "$1"; exit 0;
+fi
 
 case "$1" in
     # Email
-    mailto:*) term --class=mailto neomutt $1;;
+    mailto:*) term --class=mailto neomutt "$1";;
     # Torrent
     magnet:*|*.torrent) _torrent "$1" ;;
     # Video
@@ -45,7 +49,7 @@ case "$1" in
         setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1 &
     ;;
     # Images
-    *png|*jpg|*jpe|*jpeg|*gif) _dlo $1 ;;
+    *png|*jpg|*jpe|*jpeg|*gif) _dlo "$1" ;;
     *imgur.com*|*reddit.com/gallery*)
         curl -s "$1" | sed 's/http/\nhttp/g;s/\\u0026/\&/g' | awk -F \" '
             !/favicon/&&/png|jpg|jpeg|PNG|JPG|JPEG/&&/preview\.redd\.it|i\.imgur\.com/{
@@ -53,25 +57,23 @@ case "$1" in
             } ' | xargs linkhandler
     ;;
     # Documents
-    *.pdf|*.ps|*.epub) _dlo $1 ;;
+    *.pdf|*.ps|*.epub) _dlo "$1" ;;
     # Music
-    *mp3|*flac|*opus|*mp3?source*) _dlo $1 ;;
+    *mp3|*flac|*opus|*mp3?source*) _dlo "$1" ;;
     # pastebins
+    *0paste.com*) _dlo "$1".txt ;;
     *pastebin.com*) _dlo "https://pastebin.com/raw/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
     *paste.debian.net*) _dlo "https://paste.debian.net/plain/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
-    *termbin.com*|*0x0.st*|*ix.io*) _dlo $1 ;;
+    *termbin.com*|*0x0.st*|*ix.io*) _dlo "$1" ;;
     # HTTP links
     http*)
         case $(curl -s -o /dev/null -w '%{content_type}' $1) in
             application/pdf) _dlo "$1" ;;
             image/*) _dlo "$1" ;;
             # text/plain*) _dlo "$1" ;;
-            *)
-                "$BROWSER" "$1"
-                # force to focus the browser when opening the new tab
-                wm-focus "$(echo "$BROWSER" | sed 's/.*/\u&/')"
-            ;;
+            *) "$BROWSER" "$1" ;;
         esac
     ;;
     *) _dlo "$1" ;;
 esac
+
