@@ -18,7 +18,6 @@ mkdir -p "$SCREENSHOT_PATH"
 case $1 in
     screen) shotgun "$SP" && _notify "$1" "$SP" ;;
     window) shotgun -i "$(xdotool getactivewindow)" "$SP" && _notify "$1" "$SP" ;;
-    region) shotgun "$(_hacksaw)" "$SP" && _notify "$1" "$SP" ;;
-    # note $(_hacksaw) need to be unquoted to pass to clipboard
+    region) shotgun $(_hacksaw) "$SP" && _notify "$1" "$SP" ;;
     *) shotgun $(_hacksaw) - | xclip -sel clip -t image/png && _notify region "clipboard" ;;
 esac
