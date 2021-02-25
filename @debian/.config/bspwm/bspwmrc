@@ -26,7 +26,7 @@ _c pointer_action1 resize_corner
 _c pointer_action3 move
 
 # desktop default layouts
-bspc desktop ^2 --layout monocle
+for i in 2 4; do bspc desktop ^$i --layout monocle; done
 
 # nuke the previous rules so reloading the config works as intended
 bspc rule -r "*"
