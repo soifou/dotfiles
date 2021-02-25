@@ -18,7 +18,6 @@ fi
 if [ -d "$HOMEBREW_PREFIX" ]; then
     export HOMEBREW_NO_ANALYTICS=1
     export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin${PATH+:$PATH}"
-    export MANPATH="${HOMEBREW_PREFIX}/share/man${MANPATH+:$MANPATH}:"
 fi
 ## personal scripts
 LOCAL_BINS="$(du -L "$HOME"/.local/bin | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
