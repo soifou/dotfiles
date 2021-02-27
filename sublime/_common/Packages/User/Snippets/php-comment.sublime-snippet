@@ -1,0 +1,9 @@
+<snippet>
+    <content><![CDATA[
+/**
+ * ${1:Comment}
+ */
+]]></content>
+    <tabTrigger>com</tabTrigger>
+    <scope>source.php</scope>
+</snippet>

@@ -1,0 +1,12 @@
+<snippet>
+    <content><![CDATA[
+\$str = '$1';
+if (strpos(\$str, '$2') !== false) {
+    // string contains specific word!
+    $3
+}
+]]></content>
+    <tabTrigger>contains</tabTrigger>
+    <scope>source.php</scope>
+    <description>String contains word?</description>
+</snippet>

@@ -1,0 +1,10 @@
+<snippet>
+    <content><![CDATA[
+\$beginTime = microtime(true);
+$1
+var_dump("It takes " . number_format(microtime(true) - \$beginTime, 2) . " seconds to execute");
+]]></content>
+    <tabTrigger>timer</tabTrigger>
+    <scope>source.php</scope>
+    <description>Execution Time</description>
+</snippet>

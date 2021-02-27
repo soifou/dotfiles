@@ -1,0 +1,11 @@
+<snippet>
+    <content><![CDATA[
+var_dump('<pre>');
+var_dump($1);
+var_dump('</pre>');
+die();
+]]></content>
+    <tabTrigger>deb</tabTrigger>
+    <scope>source.php</scope>
+    <description>Ugly php debug</description>
+</snippet>
