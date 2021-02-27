@@ -1,16 +1,20 @@
 [
-    { "keys": ["alt+shift+up"], "command": "select_lines", "args": {"forward": false} },
     { "keys": ["alt+shift+down"], "command": "select_lines", "args": {"forward": true} },
+    { "keys": ["alt+shift+up"], "command": "select_lines", "args": {"forward": false} },
 
     { "keys": ["ctrl+:"], "command": "toggle_comment", "args": { "block": false } },
     { "keys": ["ctrl+shift+:"], "command": "toggle_comment", "args": { "block": true } },
     { "keys": ["ctrl+shift+m"], "command": "toggle_menu"},
 
-    { "keys": ["f12"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
-
-    // urls
+    // toggle sublime console
+    { "keys": ["f12"], "command": "show_panel", "args": {"panel": "console", "toggle": true } },
+    // spawn terminal in current folder
+    { "keys": ["alt+enter"], "command": "fm_open_terminal" },
+    // open urls
     { "keys": ["alt+o", "alt+u"], "command": "open_url_under_cursor"},
     { "keys": ["alt+o", "alt+i"], "command": "open_all_urls"},
+    // quicky jump between folders
+    { "keys": ["ctrl+alt+o"], "command": "zoxide_jump" },
 
     // git
     { "keys": ["ctrl+j"], "command": "next_modification" },
@@ -33,8 +37,6 @@
     { "keys": ["ctrl+shift+i"], "command": "implement", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["ctrl+shift+g"], "command": "insert_php_constructor_property", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
     { "keys": ["ctrl+shift+n"], "command": "import_namespace", "context": [{ "key": "selector", "operator": "equal", "operand": "source.php" }] },
-
-    { "keys": ["ctrl+alt+o"], "command": "zoxide_jump" },
 
     { "keys": ["ctrl+alt+g"], "command": "open_browser", "args": { "url": "http://www.google.fr/#q=%s" }},
     { "keys": ["ctrl+alt+h"], "command": "open_browser", "args": { "url": "http://php.net/manual/en/function.%s.php" }},
