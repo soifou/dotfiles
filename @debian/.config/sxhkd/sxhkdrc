@@ -186,7 +186,7 @@ super + shift + comma
     fi
 
 # polybar toggle
-super + shift + i
+super + b
     polybar-msg cmd toggle; [ $(bspc config top_padding) = '0' ] && bspc config top_padding 30 || bspc config top_padding 0
 
 super + F1
