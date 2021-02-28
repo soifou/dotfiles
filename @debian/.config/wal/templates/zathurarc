@@ -6,6 +6,7 @@ set incremental-search true
 set selection-clipboard clipboard
 set statusbar-basename true
 set window-title-home-tilde true
+set font monospace
 
 ## Keybindings
 # Make ^n open a new document (like atril/evince):
@@ -13,6 +14,12 @@ set window-title-home-tilde true
 
 map <C-s> toggle_statusbar
 map [fullscreen] <C-s> toggle_statusbar
+
+# Follow links in document. To set a custom browser:
+# xdg-mime default firefox.desktop x-scheme-handler/http
+unmap F
+map F follow
+map [fullscreen] F follow
 
 unmap f
 map f toggle_fullscreen
@@ -29,6 +36,9 @@ map [fullscreen] J zoom in
 map K zoom out
 map [fullscreen] K zoom out
 
+map m toggle_page_mode
+map [fullscreen] m toggle_page_mode
+
 unmap i
 map i recolor
 map [fullscreen] i recolor
@@ -36,6 +46,9 @@ map [fullscreen] i recolor
 map p print
 map P toggle_page_mode
 map [fullscreen] P toggle_page_mode
+
+map w adjust_window width
+map [fullscreen] w adjust_window width
 
 ## Colors
 # Generates a zathura colorscheme based on the current wal colors
