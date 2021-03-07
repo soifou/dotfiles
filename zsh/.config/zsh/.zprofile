@@ -20,5 +20,4 @@ if [ -d "$HOMEBREW_PREFIX" ]; then
     export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin${PATH+:$PATH}"
 fi
 ## personal scripts
-LOCAL_BINS="$(du -L "$HOME"/.local/bin | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
-export PATH="$LOCAL_BINS:$PATH"
+[ -d "$HOME"/.local/bin ] && export PATH="${$(find -L "$HOME"/.local/bin -type d -printf %p:)%%:}:$PATH"
