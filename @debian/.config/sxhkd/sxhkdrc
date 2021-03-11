@@ -1,5 +1,6 @@
 #
 # bspwm hotkeys
+# see: https://github.com/baskerville/sxhkd/blob/master/src/parse.c
 #
 
 # make sxhkd reload its configuration files and restart bspwm
@@ -55,7 +56,7 @@ super + bracket{left,right}
     bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
-super + {grave,Tab}
+super + {dead_grave,Tab}
     bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
