@@ -1,8 +1,10 @@
---theme="ansi"
---style="plain"
+--theme=ansi
+--style=plain
 --italic-text=always
+
+# List of supported syntax: bat --list-languages
 --map-syntax '.*ignore:Git Ignore'
 --map-syntax '.gitconfig.local:Git Config'
 --map-syntax '**/completions/_*:Bourne Again Shell (bash)'
 --map-syntax '.zsh*:Bourne Again Shell (bash)'
---map-syntax 'vimrc:VimL'
+--map-syntax '**/vim/vimrc:VimL'
