@@ -8,11 +8,10 @@
 
 [core]
     editor = vim
-    ; pager = delta -n --syntax-theme=ansi-dark
 
 [diff]
-    ; tool = kitty
     tool = delta
+    colorMoved = default
 
 [difftool]
     prompt = false
@@ -22,4 +21,4 @@
     cmd = kitty +kitten diff $LOCAL $REMOTE
 
 [difftool "delta"]
-    cmd = delta -n -s --syntax-theme=ansi-dark $LOCAL $REMOTE
+    cmd = delta $LOCAL $REMOTE
