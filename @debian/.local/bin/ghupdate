@@ -25,24 +25,24 @@ if [ "$1" == 'fd' ]; then
     REPO=sharkdp/fd
     NAME=fd
     BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1_VERSION_amd64.deb"
-    GREPVER="fd --version | awk -F\  '{print \$2}' | tr -d '[:space:]'"
+    GREPVER="fd --version | awk '{print \$2}'"
 elif [ "$1" == 'bat' ]; then
     REPO=sharkdp/bat
     NAME=bat
     BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1-musl_VERSION_amd64.deb"
-    GREPVER="bat --version | awk -F\  '{print \$2}' | tr -d '[:space:]'"
+    GREPVER="bat --version | awk '{print \$2}'"
 elif [ "$1" == 'lsd' ]; then
     semanticVersionPattern=$pattern
     REPO=Peltoche/lsd
     NAME=lsd
     BINFILE="$GH_URL$REPO/releases/download/VERSION/$1_VERSION_amd64.deb"
-    GREPVER="lsd --version | awk -F\  '{print \$2}'"
+    GREPVER="lsd --version | awk '{print \$2}'"
 elif [ "$1" == 'vagrant' ]; then
     REPO=hashicorp/vagrant
     NAME=vagrant
     BINFILE=https://releases.hashicorp.com/vagrant/VERSION/vagrant_VERSION_x86_64.deb
     BINPATH=/usr/bin/vagrant
-    GREPVER="vagrant -v | awk -F\  '{print \$2}'"
+    GREPVER="vagrant -v | awk '{print \$2}'"
 elif [ "$1" == 'greenclip' ]; then
     semanticVersionPattern=$shortPattern
     REPO=erebe/greenclip
@@ -50,7 +50,7 @@ elif [ "$1" == 'greenclip' ]; then
     FILETYPE="binary"
     BINFILE=$GH_URL$REPO/releases/download/VERSION/greenclip
     BINPATH=/usr/local/bin/greenclip
-    GREPVER="greenclip -v | head -n1 | awk -F\  '{print \$2}' | cut -c 2-"
+    GREPVER="greenclip -v | head -n1 | awk '{print \$2}' | cut -c 2-"
 elif [ "$1" == 'rofi' ]; then
     semanticVersionPattern=$pattern
     REPO=davatorium/rofi
@@ -58,7 +58,7 @@ elif [ "$1" == 'rofi' ]; then
     FILETYPE="archive"
     BINFILE="$GH_URL$REPO/releases/download/VERSION/$1-VERSION.tar.gz"
     BINPATH=/usr/bin/rofi
-    GREPVER="rofi -v | awk -F: '{print \$2}' | tr -d '[:space:]'"
+    GREPVER="rofi -v | awk -F: '{print \$2}' | xargs"
 elif [[ "$1" == 'vscodium' ]]; then
     semanticVersionPattern=$pattern
     REPO=VSCodium/vscodium
@@ -82,7 +82,7 @@ elif [[ "$1" == 'docker-compose' ]]; then
     FILETYPE="binary"
     BINFILE="$GH_URL$REPO/releases/download/VERSION/$1-$(uname -s)-$(uname -m)"
     BINPATH=/usr/local/bin/docker-compose
-    GREPVER="docker-compose -v"
+    GREPVER="docker-compose -v | awk '{print \$3}' | sed 's|,||g'"
 elif [[ "$1" == 'mailspring' ]]; then
     semanticVersionPattern=$pattern
     REPO=Foundry376/Mailspring
@@ -98,7 +98,7 @@ elif [[ "$1" == 'lnav' ]]; then
     REPO=tstack/lnav
     NAME=lnav
     BINFILE=$GH_URL$REPO/releases/download/vVERSION/$1_VERSION_amd64.deb
-    GREPVER="lnav -V | awk -F\  '{print $2}' | tr -d '[:space:]'"
+    GREPVER="lnav -V | awk '{print $2}' | tr -d '[:space:]'"
 fi
 
 lastReleasesUrl="$GH_URL$REPO/releases.atom"
