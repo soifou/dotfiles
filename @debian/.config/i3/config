@@ -98,12 +98,28 @@ bindsym $mod+w exec --no-startup-id ~/.local/bin/toggle-webcam
 # =============================================================================
 # Music
 # =============================================================================
+set $m ncmpcpp-ueberzug
+for_window [class="$m"] floating enable resize set 930 400; move scratchpad
+exec --no-startup-id $TERMINAL --class=$m $m
+bindsym $mod+z [class="$m"] scratchpad show; [class="$m"] move position center
 bindsym $mod+Shift+z exec ~/.local/bin/workspace-zik
-for_window [class="music-player"] floating enable
-for_window [class="music-player"] resize set 930 400
-for_window [class="music-player"] move scratchpad
-exec --no-startup-id term --class=music-player ncmpcpp-ueberzug
-bindsym $mod+z [class="music-player"] scratchpad show; [class="music-player"] move position center
+
+# =============================================================================
+# Filemanager
+# =============================================================================
+set $f lf
+for_window [class="$f"] floating enable resize set 1024 600; move scratchpad
+exec --no-startup-id $TERMINAL --class=$f $f
+bindsym $mod+Shift+f [class="$f"] scratchpad show; [class="$f"] move position center
+
+# =============================================================================
+# Torrent
+# =============================================================================
+# set $t tremc
+# for_window [class="$t"] floating enable resize set 1024 600; move scratchpad
+# exec --no-startup-id $TERMINAL --class=$t $t
+# bindsym $mod+Shift+t [class="$t"] scratchpad show; [class="$t"] move position center
+
 
 # change focus
 bindsym $mod+$left focus left
