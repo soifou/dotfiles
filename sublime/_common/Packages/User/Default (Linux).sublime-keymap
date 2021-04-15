@@ -10,6 +10,8 @@
     { "keys": ["f12"], "command": "show_panel", "args": {"panel": "console", "toggle": true } },
     // spawn terminal in current folder
     { "keys": ["alt+enter"], "command": "fm_open_terminal" },
+    // open gists from server
+    { "keys": ["alt+g"], "command": "choose_gist", "args": {"read_cache": false, "callback_command": "open_gist" } },
     // open urls
     { "keys": ["alt+o", "alt+u"], "command": "open_url_under_cursor"},
     { "keys": ["alt+o", "alt+i"], "command": "open_all_urls"},

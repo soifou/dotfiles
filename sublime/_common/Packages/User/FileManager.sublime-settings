@@ -8,6 +8,7 @@
     "show_open_in_explorer_command": false,
     "show_open_in_browser_command": false,
     "show_rename_path_command": false,
+    "show_create_command": true,
     "show_create_from_selection_command": false,
     "show_open_all_command": false
 }
