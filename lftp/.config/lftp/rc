@@ -1,0 +1,19 @@
+## settings
+set bmk:save-passwords yes
+set cache:enable no
+set cmd:csh-history no
+set cmd:default-protocol ftp
+set cmd:long-running 1
+set cmd:ls-default "ls -lh"
+set cmd:queue-parallel 1
+set cmd:remote-completion yes
+set prompt "\n\[\e[0;32m\][lftp] \[\e[0;36m\]\u\e[0;33m\]\@\[\e[0;36m\]\h \[\e[1;33m\]\w\n\[\e[0;32m\]λ\[\e[0m\] "
+
+## aliases
+# default ls is overly verbose
+alias ls cls -F
+alias l ls -lah
+# when downloading directories, get 4 files at a time, each in 4 segments
+alias m mirror --parallel=4 --use-pget-n=4
+# when downloading single files, download it in 8 segments
+alias p pget -n 8

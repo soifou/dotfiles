@@ -15,6 +15,7 @@ install: init
 	stow composer
 	stow git
 	stow lf
+	stow lftp
 	stow myrepos
 	stow ncmpcpp
 	stow newsboat
@@ -38,6 +39,7 @@ uninstall:
 	stow -D composer
 	stow -D git
 	stow -D lf
+	stow -D lftp
 	stow -D myrepos
 	stow -D ncmpcpp
 	stow -D newsboat
