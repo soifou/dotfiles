@@ -1,4 +1,4 @@
---theme=ansi
+--theme=base16
 --style=plain
 --italic-text=always
 
