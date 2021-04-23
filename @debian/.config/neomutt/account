@@ -1,31 +1,15 @@
-## Receive options.
-set imap_user = `pass google.com/username`
-set imap_pass = `pass google.com/password`
-set folder = imaps://$imap_user@imap.gmail.com/
-set spoolfile = +INBOX
-set postponed = "+[Gmail]/Drafts"
+set my_mbox = $XDG_CONFIG_HOME/neomutt/mailboxes
+set realname = "François Fleur"
+set mbox_type = Maildir
 
-# set smtp_url = "smtps://$imap_user:imap_pass@smtp.gmail.com:465/"
-# set smtp_pass = `pass google.com/password`
-# set smtp_authenticators = "gssapi:login"
+# Default account
+source $my_mbox/gmail-perso/account
 
-# Gmail's SMTP server stores the message automatically
-set record = "+[Gmail]/Sent Mail"
-# Set $copy to no disable mutt's storing of all sent mail
-set copy = no
+# Folder hooks, source in account configuration each time the mailbox
+# subdirectory changes.
+folder-hook perso/* source $my_mbox/gmail-perso/account
+folder-hook pro/* source $my_mbox/gmail-pro/account
 
-## Send options.
-set smtp_url = "smtps://$imap_user:$imap_pass@smtp.gmail.com:465/"
-set realname = "`pass google.com/realname`"
-set from = "$imap_user"
-set hostname = "gmail.com"
-
-# Connection options
-set ssl_force_tls = yes
-unset ssl_starttls
-
-# You can use any gmail imap mailboxes
-# mailboxes =INBOX =[Gmail]/Sent\ Mail =[Gmail]/Drafts =[Gmail]/Spam =[Gmail]/Trash
-
-## Hook -- IMPORTANT!
-account-hook $folder "set imap_user=$imap_user imap_pass=$imap_pass"
+# Use F-keys to change between accounts:
+macro index <f2> '<enter-command>source $my_mbox/gmail-perso/account<enter><change-folder>!<enter>'
+macro index <f3> '<enter-command>source $my_mbox/gmail-pro/account<enter><change-folder>!<enter>'

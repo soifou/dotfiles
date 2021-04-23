@@ -1,0 +1,21 @@
+set spoolfile = +inbox
+set postponed = +draft
+# Gmail's SMTP server stores the message automatically
+# set record = "+[Gmail]/Sent Mail"
+unset record
+# Set $copy to no disable mutt's storing of all sent mail
+set copy = no
+
+## Mailboxes
+unmailboxes *
+named-mailboxes "⇣ Inbox" +inbox
+named-mailboxes "∗ Drafts" +draft
+named-mailboxes "⇡ Sent" +sent
+named-mailboxes "x Spam" +spam
+named-mailboxes "∇ Trash" +trash
+
+macro index 1 "<change-folder>+inbox<enter>"
+macro index 2 "<change-folder>+draft<enter>"
+macro index 3 "<change-folder>+sent<enter>"
+macro index 4 "<change-folder>+spam<enter>"
+macro index 5 "<change-folder>+trash<enter>"

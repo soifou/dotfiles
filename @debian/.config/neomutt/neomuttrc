@@ -1,33 +1,28 @@
-# vim: filetype=neomuttrc
-
 #  _   _                            _   _
 # | \ | |                          | | | |
 # |  \| | ___  ___  _ __ ___  _   _| |_| |_
 # | . ` |/ _ \/ _ \| '_ ` _ \| | | | __| __|
 # | |\  |  __/ (_) | | | | | | |_| | |_| |_
 # |_| \_|\___|\___/|_| |_| |_|\__,_|\__|\__|
-# https://neomutt.org/guide/configuration.html
 # https://neomutt.org/code/config_vars.html
+# https://neomutt.org/guide/configuration.html
+# https://neomutt.org/guide/reference
 
-source $XDG_CONFIG_HOME/neomutt/account
-source $XDG_CONFIG_HOME/neomutt/colors
-source $XDG_CONFIG_HOME/neomutt/keybindings
-source $XDG_CONFIG_HOME/neomutt/macros
+set my_mutt = $XDG_CONFIG_HOME/neomutt
+set my_mutt_cache = $XDG_CACHE_HOME/neomutt
 
-set header_cache = $XDG_CACHE_HOME/neomutt
-set message_cachedir = $XDG_CACHE_HOME/neomutt/messages
-set mailcap_path = $XDG_CONFIG_HOME/neomutt/mailcap
+source $my_mutt/colors
+source $my_mutt/keybindings
+source $my_mutt/macros
+source $my_mutt/account
+
+set mailcap_path = $my_mutt/mailcap
+set header_cache = $my_mutt_cache
+set message_cachedir = $my_mutt_cache/messages
 set attach_save_dir = $XDG_DOWNLOAD_DIR
-unset signature
-
-# set mbox_type=Maildir
-# set folder=$XDG_DATA_HOME/mail
-# set spoolfile=+/
-set trash='+Trash'
 
 set rfc2047_parameters = yes
 set sleep_time = 0      # Pause 0 seconds for informational messages
-set markers = no        # Disables the `+` displayed at line wraps
 set mark_old = no       # Unread mail stay unread until read
 set mime_forward = yes  # attachments are forwarded with mail
 set wait_key = no       # won't ask "press key to continue"
@@ -37,58 +32,78 @@ set fcc_attach          # save attachments with the body
 set forward_format = "Fwd: %s"  # format of subject when forwarding
 set forward_quote       # include message in forwards
 set reverse_name        # reply as whomever it was to
-set include             # include message in replies
 set delete = ask-yes    # ask me first when deleting email
 set pager_stop = yes    # don't go to next message if we are at bottom
 set tilde               # show tildes
+set beep = no           # no beep sound
+unset markers           # Disables the `+` displayed at line wraps
 unset help              # No help bar
-
-# Allow Mutt to open a new IMAP connection automatically.
-unset imap_passive
-# Keep the IMAP connection alive by polling intermittently (time in seconds).
-set imap_keepalive = 300
-# How often to check for new mail (time in seconds).
-set mail_check = 120
-# sync imap folder to sidebar
-set imap_check_subscribed
+set use_from = yes
+set envelope_from = yes
 
 # Encoding
-set charset="utf-8"
-set send_charset="utf-8"
+set charset = "utf-8"
+set send_charset = "utf-8"
 
-# https://www.neomutt.org/guide/reference search sleep_time for additional info
-set sleep_time=0 # be faster
-set beep=no # no beep sound
+# Speedup
+set mail_check = 120    # How often to check for new mail (time in seconds).
+set sleep_time = 0      # be faster
+set read_inc = 1000     # update progress every n messages read
+set time_inc = 500      # update display every n miliseconds
+set net_inc = 100       # update diplay every n kilobytes for net ops
+set write_inc = 100     # update progress every n messages written
 
 # Print
-set print_command="lp"
-set print=ask-yes
+set print_command = "lp"
+set print = ask-yes
+
+# Signature
+set signature = $my_mutt/sig/default
+set sig_dashes = yes
+set sig_on_top = yes
 
 # View/Edit
-set editor=`echo \$EDITOR`
+# It defaults to the value of $VISUAL, or $EDITOR, environment variable,
+# or to the string "vi" if neither of those are set.
+# set editor = $EDITOR
+
 auto_view text/html
 # default to text when available else use w3m/lynx when no text version
 alternative_order text/plain text/html
 
-set sort = threads
-# When sorting by threads, this variable controls how threads are sorted
-# in relation to other threads, and how the branches of the thread trees are sorted.
-set sort_aux = reverse-last-date-received
+# Sort (by threads in reverse chronological order, new on top)
+set sort = reverse-threads
+set sort_aux = last-date-received
+set narrow_tree = yes
 
-# Index page format. Default "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+# Index page format
 set index_format="%4C %Z %{%b %d %R} %-15.15L (%?l?%4l&%4c?) %s"
 
+# Quote (previous messages in replies)
+set include
+set indent_str='> '
+set attribution="\n$indent_str%f wrote, on %d:"
+
 # Sidebar
-set sidebar_visible = yes
-set sidebar_width = 25
-set sidebar_short_path = yes
-set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
 set sidebar_divider_char = ' │ '
 set sidebar_folder_indent = yes
-set mail_check_stats
+set sidebar_format = '%D%?F? [%F]?%* %?N?%N/?%S'
+set sidebar_short_path = yes
+set sidebar_visible = yes
+set sidebar_width = 25
+
+# Status bar
+set status_on_top = yes
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
 # Events
-set new_mail_command="notify-send -i mail-client 'New Email' '%n new messages, %u unread.' &"
+set mail_check_stats = yes
+set mail_check_stats_interval = 60
+set new_mail_command = "notify-send -i mail-client 'New Email in %f' '%n new messages, %u unread.' &"
 
 # Use khard as addressbook manager
 set query_command = "khard email --parsable %s"
+
+# Alert before sending if body contains words regarding attachments and none has been attached
+set abort_noattach = 'ask-yes'
+set attach_keyword = "\\<[Cc]i-joint\\>|\\<[Ff]ichier joint\\>"

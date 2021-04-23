@@ -1,6 +1,8 @@
-application/pdf; swallow zathura '%s'; test=test -n "$DISPLAY"; needsterminal;
-image/*; swallow  sxiv '%s'; test=test -n "$DISPLAY";
+application/x-php; term --class=floating $EDITOR '%s';
+application/*; swallow linkhandler '%s'; test=test -n "$DISPLAY"; needsterminal;
+image/*; swallow linkhandler '%s'; test=test -n "$DISPLAY";
 text/csv; subl '%s'; test=test -n "$DISPLAY";
 text/html; w3m -dump -I %{charset} -T text/html; copiousoutput;
-text/plain; less '%s'; needsterminal
+text/*; less '%s'; needsterminal
 video/*; mpv '%s' --loop=inf; test=test -n "$DISPLAY"
+audio/*; mpv '%s';

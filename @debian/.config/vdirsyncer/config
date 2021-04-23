@@ -15,6 +15,6 @@ fileext = ".vcf"
 [storage gmail_remote]
 type = "carddav"
 url = "https://apidata.googleusercontent.com/caldav/v2/"
-username.fetch = ["command", "pass", "google.com/username"]
-password.fetch = ["command", "pass", "google.com/password"]
+username = "fleur.fr"
+password.fetch = ["command", "pass", "google.com/fleur.fr"]
 ; read_only = true

@@ -1,4 +1,6 @@
 # Macros
+
+# Prefix for macros created using mark-message
 set mark_macro_prefix = ","
 
 # U: Open URLs with urlscan (https://github.com/firecat53/urlscan)
@@ -7,8 +9,8 @@ macro index,pager U '<enter-command>set pipe_decode = yes<enter><pipe-message>ur
 # W: Save selected attachment (set $attach_save_dir var to specify which dir)
 macro attach W "<save-entry><bol><eol>" "Save to downloads folder"
 
-# A: Attach files with Ranger file manager (press Space to select file(s) then Enter)
-macro compose A "<shell-escape>neomutt-picker<enter><enter-command>source /tmp/neomutt-attachments<enter>" "Attach with Ranger"
+# A: Attach files with lf file manager (press Space to select file(s) then o)
+macro compose A "<shell-escape>neomutt-picker<enter><enter-command>source /tmp/neomutt-attachments<enter>" "Attach with lf"
 
 # A: Add sender to khard addressbook
 macro index,pager A \
@@ -16,18 +18,17 @@ macro index,pager A \
     "Add the sender email address to khard"
 
 # K: Compiles written markdown email to HTML/plain text alternatives
+# Need to delete manually the markdown message
 # see: https://neomutt.org/guide/mimesupport#5-2-%C2%A0composing-multipart-alternative-emails
 # https://github.com/neomutt/neomutt/issues/587
 # https://to.mw/posts/neomutt-markdown-email
+# Alternative: https://jonathanh.co.uk/blog/mutt-setup.html
 macro compose K "<enter-command>set pipe_decode<enter><pipe-message>pandoc -f gfm -t plain -o /tmp/msg.txt<enter><pipe-message>pandoc -s -f gfm --self-contained -o /tmp/msg.html --metadata title=' ' --template $XDG_CONFIG_HOME/neomutt/templates/email<enter><enter-command>unset pipe_decode<enter><attach-file>/tmp/msg.txt<enter><attach-file>/tmp/msg.html<enter><tag-entry><previous-entry><tag-entry><group-alternatives>" "Convert markdown to HTML5 and plaintext alternative content types"
 
-# Gmail keyboard shortcuts
-macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
-# macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
-# macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
-# macro index gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
-# macro index gt "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
-# macro index,pager d "<save-message>=[Gmail]/Trash<enter><enter>" "Trash"
-# macro index,pager y "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
+# C: Threads collapse toggle
+macro index C <collapse-thread> "collapse-thread"
+
+# macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 # macro index s '<sync-mailbox>y'

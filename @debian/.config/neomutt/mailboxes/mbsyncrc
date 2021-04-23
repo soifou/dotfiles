@@ -1,0 +1,100 @@
+Create Both
+Remove Both
+Expunge None
+SyncState *
+Sync All
+
+##########################
+# Gmail perso            #
+##########################
+IMAPAccount fleur.fr
+    Host imap.gmail.com
+    User fleur.fr
+    PassCmd "pass google.com/fleur.fr"
+    SSLType IMAPS
+    # Throttle mbsync so we don't go over gmail's quota.
+    # OVERQUOTA error would eventually be returned otherwise.
+    # See: https://sourceforge.net/p/isync/mailman/message/35458365/
+    PipelineDepth 50
+
+IMAPStore gmail-perso-remote
+    Account fleur.fr
+
+MaildirStore gmail-perso-local
+    Path ~/.local/share/mailbox/perso/
+    Inbox ~/.local/share/mailbox/perso/inbox
+    Subfolders Verbatim
+
+Channel gmail-perso-inbox
+    Master :gmail-perso-remote:
+    Slave :gmail-perso-local:
+    Patterns "INBOX"
+
+Channel gmail-perso-sent
+    Master :gmail-perso-remote:"[Gmail]/Sent Mail"
+    Slave :gmail-perso-local:sent
+
+Channel gmail-perso-draft
+    Master :gmail-perso-remote:"[Gmail]/Drafts"
+    Slave :gmail-perso-local:draft
+
+Channel gmail-perso-spam
+    Master :gmail-perso-remote:"[Gmail]/Spam"
+    Slave :gmail-perso-local:spam
+
+Channel gmail-perso-trash
+    Master :gmail-perso-remote:"[Gmail]/Trash"
+    Slave :gmail-perso-local:trash
+
+Group gmail-perso
+    Channel gmail-perso-inbox
+    Channel gmail-perso-sent
+    Channel gmail-perso-draft
+    Channel gmail-perso-spam
+    Channel gmail-perso-trash
+
+##########################
+# Gmail pro              #
+##########################
+IMAPAccount francois.fleur
+    Host imap.gmail.com
+    User francois.fleur
+    PassCmd "pass google.com/francois.fleur"
+    SSLType IMAPS
+    PipelineDepth 50
+
+IMAPStore gmail-pro-remote
+    Account francois.fleur
+
+MaildirStore gmail-pro-local
+    Path ~/.local/share/mailbox/pro/
+    Inbox ~/.local/share/mailbox/pro/inbox
+    Subfolders Verbatim
+
+Channel gmail-pro-inbox
+    Master :gmail-pro-remote:
+    Slave :gmail-pro-local:
+    Patterns "INBOX"
+
+Channel gmail-pro-sent
+    Master :gmail-pro-remote:"[Gmail]/Sent Mail"
+    Slave :gmail-pro-local:sent
+
+Channel gmail-pro-draft
+    Master :gmail-pro-remote:"[Gmail]/Drafts"
+    Slave :gmail-pro-local:draft
+
+Channel gmail-pro-spam
+    Master :gmail-pro-remote:"[Gmail]/Spam"
+    Slave :gmail-pro-local:spam
+
+Channel gmail-pro-trash
+    Master :gmail-pro-remote:"[Gmail]/Trash"
+    Slave :gmail-pro-local:trash
+
+Group gmail-pro
+    Channel gmail-pro-inbox
+    Channel gmail-pro-sent
+    Channel gmail-pro-draft
+    Channel gmail-pro-spam
+    Channel gmail-pro-trash

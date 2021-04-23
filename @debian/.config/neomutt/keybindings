@@ -1,43 +1,49 @@
-# Custom
-bind index u imap-fetch-mail
+# Disable
 bind index,pager i noop
 bind index,pager g noop
 bind index \Cf noop
+bind index \Cb noop
+bind index h noop
+bind index u noop
+bind editor <space> noop
+bind pager \Cb noop
+bind pager \Ce noop
+bind pager <return> noop
 
 # General
 bind attach <return> view-mailcap
 bind attach l view-mailcap
-bind editor <space> noop
 bind index G last-entry
 bind index gg first-entry
 bind pager,attach h exit
 bind pager j next-line
 bind pager k previous-line
 bind pager l view-attachments
-bind index D delete-message
-bind index U undelete-message
+bind index d delete-message
+bind index u undelete-message
 bind index L limit
-bind index h noop
 bind index l display-message
 bind browser h goto-parent
 bind browser l select-entry
 bind pager,browser gg top-page
 bind pager,browser G bottom-page
-bind index,pager,browser d half-down
-bind index,pager,browser u half-up
+# bind compose \Cp postpone-message
+# bind index \Cp recall-message
 bind index,pager S sync-mailbox
 bind index,pager R group-reply
-bind index \031 previous-undeleted  # Mouse wheel
-bind index \005 next-undeleted      # Mouse wheel
-bind pager \031 previous-line       # Mouse wheel
-bind pager \005 next-line       # Mouse wheel
+bind index,pager @ compose-to-sender
 bind editor <Tab> complete-query
+
+# Mouse wheel
+bind index \031 previous-undeleted
+bind index \005 next-undeleted
+bind pager \031 previous-line
+bind pager \005 next-line
 
 # Sidebar
 bind index,pager \Ck sidebar-prev
 bind index,pager \Cj sidebar-next
-bind index,pager \Co sidebar-open
+bind index,pager \Cl sidebar-open
+bind index,pager \Ch sidebar-toggle-visible
 bind index,pager \Cp sidebar-prev-new
 bind index,pager \Cn sidebar-next-new
-bind index,pager B sidebar-toggle-visible
-
