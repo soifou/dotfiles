@@ -38,11 +38,11 @@ WEATHER_MAIN=$(echo "${WEATHER_INFO}" | grep -o -e '\"main\":\"[a-Z]*\"' | awk -
 WEATHER_TEMP=$(echo "${WEATHER_INFO}" | grep -o -e '\"temp\":\-\?[0-9]*' | awk -F ':' '{print $2}' | tr -d '"')
 
 case "${WEATHER_MAIN}" in
-    *Snow*) echo "%{T4}${OWM_SNOW}%{T-} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
-    *Rain*|*Drizzle*) echo "%{T4}${OWM_RAINY}%{T-} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
-    *Cloud*) echo "%{T4}${OWM_CLOUDY}%{T-} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
-    *Clear*) echo "%{T4}${OWM_SUNNY}%{T-} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
-    *Fog*|*Mist*) echo "%{T4}${OWM_FOG}%{T-} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
-    *Thunder*) echo "%{T4}${OWM_STORM}%{T-} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
-    *) echo "%{T4}${OWM_MISC}%{T-} ${WEATHER_MAIN} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
+    *Snow*) echo "${OWM_SNOW} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
+    *Rain*|*Drizzle*) echo "${OWM_RAINY} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
+    *Cloud*) echo "${OWM_CLOUDY} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
+    *Clear*) echo "${OWM_SUNNY} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
+    *Fog*|*Mist*) echo "${OWM_FOG} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
+    *Thunder*) echo "${OWM_STORM} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
+    *) echo "${OWM_MISC} ${WEATHER_MAIN} ${WEATHER_TEMP}${SYMBOL_CELSIUS}" ;;
 esac

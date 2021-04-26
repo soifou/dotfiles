@@ -8,15 +8,14 @@ URxvt.inheritPixmap: false
 URxvt*loginShell: true
 
 ! Cursor style
-! To get more, see: http://artisan.karma-lab.net/urxvt-et-styles-curseur
+! To get more, see: https://artisan.karma-lab.net/urxvt-et-styles-curseur
 URxvt*cursorUnderline: true
 URxvt*fadeColor: #000000
 URxvt*cursorBlink: true
 
 ! Font settings
-URxvt.font: xft:monospace:pixelsize=16:antialias=true
-URxvt.boldFont: xft:monospace:style=Semibold:pixelsize=16:antialias=true:Bold
-URxvt*letterSpace: -2
+URxvt.font: xft:monospace:size=13
+URxvt*letterSpace: 0
 URxvt.lineSpace: 0
 
 ! scrollbar - true (default) or false

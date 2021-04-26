@@ -64,7 +64,8 @@ case "$1" in
     *0paste.com*) _dlo "$1".txt ;;
     *pastebin.com*) _dlo "https://pastebin.com/raw/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
     *paste.debian.net*) _dlo "https://paste.debian.net/plain/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
-    *termbin.com*|*0x0.st*|*ix.io*) _dlo "$1" ;;
+    *termbin.com*|*0x0.st*|*ix.io*|*.txt) _dlo "$1" ;;
+    *reddit.com*) rtv "$1" ;;
     # HTTP links
     http*)
         case $(curl -s -o /dev/null -w '%{content_type}' $1) in

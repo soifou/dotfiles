@@ -26,7 +26,7 @@ click-left = redshift-cli --toggle
 "
 
 # Configuration
-icon=""
+icon=
 temp_range="6500:2700"
 lat="$OPENWEATHERMAP_LAT"
 long="$OPENWEATHERMAP_LONG"
@@ -74,13 +74,13 @@ displayTemp() {
     temp=$(getTemp)
     getColors
     if [ -z "$temp" ]; then
-        echo "%{T3}$icon%{T-}%{F$color4} ${temp}%{F-}" # Greyed out (not running)
+        echo "$icon%{F$color4} ${temp}%{F-}" # Greyed out (not running)
     elif [ "$temp" -ge 6000 ]; then
-        echo "%{T3}$icon%{T-}%{F$color15} ${temp}%{F-}" # Blue
+        echo "$icon%{F$color15} ${temp}%{F-}" # Blue
     elif [ "$temp" -ge 4000 ]; then
-        echo "%{T3}$icon%{T-}%{F$color3} ${temp}%{F-}" # Yellow
+        echo "$icon%{F$color3} ${temp}%{F-}" # Yellow
     else
-        echo "%{T3}$icon%{T-}%{F$color1} ${temp}%{F-}" # Red
+        echo "$icon%{F$color1} ${temp}%{F-}" # Red
     fi
 }
 toggleReset() {
@@ -104,7 +104,7 @@ case "$1" in
 --temp)
     if [ -f $tmpfile.lock ]; then
         getColors
-        echo "%{T3}$icon%{T-}%{F$color15} ----%{F-}"
+        echo "$icon%{F$color15} ----%{F-}"
         exit 0
     else
         setTempAndBrightness
