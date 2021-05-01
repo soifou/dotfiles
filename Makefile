@@ -25,6 +25,7 @@ install: init
 	stow rtv
 	stow ssh
 	stow -d sublime @linux
+	stow tremc
 	stow w3m
 	stow wget
 	stow yamllint
@@ -49,6 +50,7 @@ uninstall:
 	stow -D rtv
 	stow -D ssh
 	stow -D -d sublime @linux
+	stow -D tremc
 	stow -D w3m
 	stow -D wget
 	stow -D yamllint
