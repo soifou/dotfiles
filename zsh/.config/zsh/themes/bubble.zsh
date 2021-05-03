@@ -17,7 +17,7 @@ user_machine_symbol='@' machine_symbol='%M'
 
 filepath_symbol='%~'
 
-git_branch_symbol=''
+git_branch_symbol=''
 git_new_symbol=''
 git_deleted_symbol=''
 git_modified_symbol='•'
@@ -27,7 +27,7 @@ git_untracked_symbol='裸'
 # COLOR CONSTANTS
 # NOTE: Possible values include zsh-color-strings like 'red', 'black', 'magenta' etc.
 # TODO: Add support for zsh-color-codes like '000' to '255' for 256 color support (use command 'spectrum_ls' for all color codes)
-bubble_color='grey'
+bubble_color='green'
 
 prompt_symbol_color='blue'
 prompt_symbol_error_color='red'

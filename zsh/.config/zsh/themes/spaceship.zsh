@@ -1,4 +1,6 @@
 # Options: https://denysdovhan.com/spaceship-prompt/docs/Options.html
+SPACESHIP_CHAR_SYMBOL=λ
+SPACESHIP_CHAR_SUFFIX=" "
 SPACESHIP_DIR_TRUNC=2
 SPACESHIP_DIR_TRUNC_REPO=false
 SPACESHIP_TIME_SHOW=true
