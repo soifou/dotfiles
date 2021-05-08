@@ -13,26 +13,39 @@ map kitty_mod+backspace change_font_size all 0
 # navigation
 map kitty_mod+j scroll_line_down
 map kitty_mod+k scroll_line_up
-map kitty_mod+g scroll_end
-map kitty_mod+shift+g scroll_home
+map kitty_mod+g scroll_home
+map kitty_mod+shift+g scroll_end
 
 # clipboard
 map kitty_mod+v paste_from_clipboard
 
+# scrollback
+scrollback_lines 10000
+scrollback_pager nvim -c 'set ft=man' -
+map kitty_mod+space show_scrollback
+
 # list all urls found in scrollback in a subwindow with urlscan
 map kitty_mod+u launch --stdin-source=@screen_scrollback urlscan --single -Hcd -r 'linkhandler "{}"'
 
-# open scrollback with bat in new tab
-map kitty_mod+s launch --type=tab --stdin-source=@screen_scrollback --stdin-add-formatting bat
-
 # window config
-map kitty_mod+shift+t next_layout
 map kitty_mod+enter launch --cwd=current --type=window
-map kitty_mod+shift+h neighboring_window left
-map kitty_mod+shift+l neighboring_window right
-map kitty_mod+shift+k neighboring_window up
-map kitty_mod+shift+j neighboring_window down
+map kitty_mod+shift+t next_layout
 map kitty_mod+shift+q close_window
+
+map kitty_mod+w>h neighboring_window left
+map kitty_mod+w>j neighboring_window down
+map kitty_mod+w>k neighboring_window up
+map kitty_mod+w>l neighboring_window right
+
+map kitty_mod+shift+w>h move_window left
+map kitty_mod+shift+w>j move_window down
+map kitty_mod+shift+w>k move_window up
+map kitty_mod+shift+w>l move_window right
+
+map kitty_mod+r>h resize_window wider 3
+map kitty_mod+r>j resize_window shorter 3
+map kitty_mod+r>k resize_window taller 3
+map kitty_mod+r>l resize_window narrower 3
 
 # tab config
 map kitty_mod+t launch --cwd=current --type=tab
