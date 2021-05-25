@@ -6,17 +6,15 @@ UNAME_S := $(shell uname -s)
 FONT_NAME ?= monospace
 
 ifeq ($(UNAME_S),Linux)
-	SUBLIME_DIR="$$HOME/.config/sublime-text-3"
+	SUBLIME_DIR="$$HOME/.config/sublime-text"
 endif
 
 ifeq ($(UNAME_S),Darwin)
-	SUBLIME_DIR="$$HOME/Library/Application Support/Sublime Text 3"
+	SUBLIME_DIR="$$HOME/Library/Application Support/Sublime Text"
 endif
 
 init:
 	mkdir -p $(SUBLIME_DIR)/Backup
-	mkdir -p $(SUBLIME_DIR)/Cache
-	mkdir -p $(SUBLIME_DIR)/Index
 	mkdir -p $(SUBLIME_DIR)/Installed\ Packages
 	mkdir -p $(SUBLIME_DIR)/Local
 

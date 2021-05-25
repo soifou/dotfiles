@@ -234,7 +234,7 @@ if __name__ == '__main__':
     # Create sublime-color-scheme
     theme_path = os.path.join(
         os.environ['HOME'],
-        '.config/sublime-text-3/Packages/User/Themes/Pywal.sublime-color-scheme'
+        '.config/sublime-text/Packages/User/Themes/Pywal.sublime-color-scheme'
     )
 
     with open(theme_path, 'w') as file:
@@ -244,7 +244,7 @@ if __name__ == '__main__':
     # DA UI (obsolete theme but still using it)
     da_scheme_path = os.path.join(
         os.environ['HOME'],
-        ".config/sublime-text-3/Packages/User/DA Theme.sublime-settings"
+        ".config/sublime-text/Packages/User/DA Theme.sublime-settings"
     )
     if os.path.isfile(da_scheme_path):
         with open(da_scheme_path) as f:
@@ -257,7 +257,7 @@ if __name__ == '__main__':
     # Meetio theme (https://github.com/meetio-theme/sublime-meetio-theme)
     # meetio_scheme_path = os.path.join(
     #     os.environ['HOME'],
-    #     ".config/sublime-text-3/Packages/User/Meetio-Theme.sublime-theme"
+    #     ".config/sublime-text/Packages/User/Meetio-Theme.sublime-theme"
     # )
     # if os.path.isfile(meetio_scheme_path):
     #     with open(meetio_scheme_path) as f:
@@ -274,7 +274,7 @@ if __name__ == '__main__':
     # A File Icon (https://packagecontrol.io/packages/A%20File%20Icon)
     afileicon_path = os.path.join(
         os.environ['HOME'],
-        ".config/sublime-text-3/Packages/User/A File Icon.sublime-settings"
+        ".config/sublime-text/Packages/User/A File Icon.sublime-settings"
     )
 
     # We need to remove the config file !
@@ -292,21 +292,21 @@ if __name__ == '__main__':
         json.dump(afileicon, file, indent=4)
 
     # OpenUri (https://github.com/jfcherng-sublime/ST-OpenUri)
-    openuri_path = os.path.realpath(os.path.join(
-        os.environ['HOME'],
-        ".config/sublime-text-3/Packages/User/OpenUri.sublime-settings"
-    ))
-    # if os.path.isfile(openuri_path):
-    #     with open(openuri_path) as conf:
-    #         openuri_config = json.load(conf)
+    # openuri_path = os.path.realpath(os.path.join(
+    #     os.environ['HOME'],
+    #     ".config/sublime-text/Packages/User/OpenUri.sublime-settings"
+    # ))
+    # # if os.path.isfile(openuri_path):
+    # #     with open(openuri_path) as conf:
+    # #         openuri_config = json.load(conf)
 
-    openuri_config = {}
-    openuri_config['show_open_button'] = "hover"
-    openuri_config['image_files'] = {}
-    openuri_config['image_files']['phantom'] = "Packages/${package_name}/images/FontAwesome/link.png"
-    openuri_config['image_files']['popup'] = "Packages/${package_name}/images/FontAwesome/link.png"
-    openuri_config['image_colors'] = {}
-    openuri_config['image_colors']['phantom'] = wal_colors[4]
-    openuri_config['image_colors']['popup'] = wal_colors[4]
-    with open(openuri_path, 'w') as file:
-        json.dump(openuri_config, file, indent=4)
+    # openuri_config = {}
+    # openuri_config['show_open_button'] = "hover"
+    # openuri_config['image_files'] = {}
+    # openuri_config['image_files']['phantom'] = "Packages/${package_name}/images/FontAwesome/link.png"
+    # openuri_config['image_files']['popup'] = "Packages/${package_name}/images/FontAwesome/link.png"
+    # openuri_config['image_colors'] = {}
+    # openuri_config['image_colors']['phantom'] = wal_colors[4]
+    # openuri_config['image_colors']['popup'] = wal_colors[4]
+    # with open(openuri_path, 'w') as file:
+    #     json.dump(openuri_config, file, indent=4)

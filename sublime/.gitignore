@@ -1,3 +1,9 @@
+@linux/.config/sublime-text/*
+!@linux/.config/sublime-text/Packages
+
+@osx/Library/Application Support/Sublime Text/*
+!@osx/Library/Application Support/Sublime Text/Packages
+
 _common/Packages/*
 
 !_common/Packages/User

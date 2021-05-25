@@ -2,6 +2,8 @@
     "always_show_minimap_viewport": true,
     "auto_complete_commit_on_tab": true,
     "caret_style": "phase",
+    "close_find_after_find_all": true,
+    "close_find_after_replace_all": true,
     "close_windows_when_empty": false,
     "color_scheme": "Packages/User/Themes/Pywal.sublime-color-scheme",
     "copy_with_empty_selection": false,
@@ -36,6 +38,7 @@
         "*.zsh.zwc",
         ".DS_Store"
     ],
+    "file_tab_style": "rounded",
     "folder_exclude_patterns":
     [
         ".capistrano",
@@ -45,12 +48,12 @@
         "app/cache",
         "var/cache"
     ],
-
     "font_size": 12,
     "font_options":
     [
         "subpixel_antialias"
     ],
+    "hardware_acceleration": "opengl",
     "highlight_line": true,
     "hide_pointer_while_typing": false,
     "ignored_packages":
@@ -68,13 +71,15 @@
     "match_brackets_content": false,
     "open_files_in_new_window": false,
     "overlay_scroll_bars": "enabled",
+    "relative_line_numbers": true,
     "scroll_speed": 0,
     "show_encoding": true,
     "show_full_path": false,
     "skin": "DA UI/Minimal",
     "theme": "DA.sublime-theme",
     "translate_tabs_to_spaces": true,
+    "tree_animation_enabled": false,
     "trim_trailing_white_space_on_save": true,
     "update_check": false,
-    "word_wrap": false
+    "word_wrap": false,
 }
