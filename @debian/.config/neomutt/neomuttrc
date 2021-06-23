@@ -85,16 +85,25 @@ set indent_str='> '
 set attribution="\n$indent_str%f wrote, on %d:"
 
 # Sidebar
-set sidebar_divider_char = ' │ '
+set sidebar_divider_char = ' ▏' # ' │ '
 set sidebar_folder_indent = yes
 set sidebar_format = '%D%?F? [%F]?%* %?N?%N/?%S'
 set sidebar_short_path = yes
 set sidebar_visible = yes
 set sidebar_width = 25
 
-# Status bar
-set status_on_top = yes
-set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+# Index
+set index_format = "%?M?  ↳&%4? %Z  %{!%d %b · %T} %-20.20n (%?l?%4l&%4c?) %s"
+set to_chars = ""
+set crypt_chars = " "
+set flag_chars = "     "
+
+# Status bar for the different views
+set status_on_top = no
+set status_format = "───[ %D ] %?r?[   %m ] ?%?n?[   %n ] ?%?d?[   %d ] ?%?t?[   %t ] ?%?F?[   %F ] ?%?p?[   %p ]?%|─"
+set pager_format = "───[ %n ] [%T %s]%* [   %{!%d %b · %T} ] %?X?[   %X ]? [   %P ]─"
+set compose_format = "───[  %l ] [  %a ]%>─"
+set attach_format = "%u%D   %T%-75.75d %?T?%&   ?  %5s · %m/%M"
 
 # Events
 set mail_check_stats = yes
