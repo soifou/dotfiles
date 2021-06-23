@@ -1,161 +1,198 @@
-export LF_ICONS="\
-di=:\
-fi=:\
-ln=:\
-or=:\
-ex=:\
-*.vimrc=:\
-*.viminfo=:\
-*.gitignore=:\
-*.c=:\
-*.cc=:\
-*.clj=:\
-*.coffee=:\
-*.cpp=:\
-*.css=:\
-*.d=:\
-*.dart=:\
-*.erl=:\
-*.exs=:\
-*.fs=:\
-*.go=:\
-*.h=:\
-*.hh=:\
-*.hpp=:\
-*.hs=:\
-*.html=:\
-*.java=:\
-*.jl=:\
-*.js=:\
-*.json=:\
-*.lua=:\
-*.md=:\
-*.php=:\
-*.pl=:\
-*.pro=:\
-*.py=:\
-*.rb=:\
-*.rs=:\
-*.scala=:\
-*.ts=:\
-*.vim=:\
-*.cmd=:\
-*.ps1=:\
-*.sh=:\
-*.bash=:\
-*.zsh=:\
-*.fish=:\
-*.tar=:\
-*.tgz=:\
-*.arc=:\
-*.arj=:\
-*.taz=:\
-*.lha=:\
-*.lz4=:\
-*.lzh=:\
-*.lzma=:\
-*.tlz=:\
-*.txz=:\
-*.tzo=:\
-*.t7z=:\
-*.zip=:\
-*.z=:\
-*.dz=:\
-*.gz=:\
-*.lrz=:\
-*.lz=:\
-*.lzo=:\
-*.xz=:\
-*.zst=:\
-*.tzst=:\
-*.bz2=:\
-*.bz=:\
-*.tbz=:\
-*.tbz2=:\
-*.tz=:\
-*.deb=:\
-*.rpm=:\
-*.jar=:\
-*.war=:\
-*.ear=:\
-*.sar=:\
-*.rar=:\
-*.alz=:\
-*.ace=:\
-*.zoo=:\
-*.cpio=:\
-*.7z=:\
-*.rz=:\
-*.cab=:\
-*.wim=:\
-*.swm=:\
-*.dwm=:\
-*.esd=:\
-*.jpg=:\
-*.jpeg=:\
-*.mjpg=:\
-*.mjpeg=:\
-*.gif=:\
-*.bmp=:\
-*.pbm=:\
-*.pgm=:\
-*.ppm=:\
-*.tga=:\
-*.xbm=:\
-*.xpm=:\
-*.tif=:\
-*.tiff=:\
-*.png=:\
-*.svg=:\
-*.svgz=:\
-*.mng=:\
-*.pcx=:\
-*.mov=:\
-*.mpg=:\
-*.mpeg=:\
-*.m2v=:\
-*.mkv=:\
-*.webm=:\
-*.ogm=:\
-*.mp4=:\
-*.m4v=:\
-*.mp4v=:\
-*.vob=:\
-*.qt=:\
-*.nuv=:\
-*.wmv=:\
-*.asf=:\
-*.rm=:\
-*.rmvb=:\
-*.flc=:\
-*.avi=:\
-*.fli=:\
-*.flv=:\
-*.gl=:\
-*.dl=:\
-*.xcf=:\
-*.xwd=:\
-*.yuv=:\
-*.cgm=:\
-*.emf=:\
-*.ogv=:\
-*.ogx=:\
-*.aac=:\
-*.au=:\
-*.flac=:\
-*.m4a=:\
-*.mid=:\
-*.midi=:\
-*.mka=:\
-*.mp3=:\
-*.mpc=:\
-*.ogg=:\
-*.ra=:\
-*.wav=:\
-*.oga=:\
-*.opus=:\
-*.spx=:\
-*.xspf=:\
-*.pdf=:\
-*.nix=:\
-"
+## Basic File Types
+tw 
+st 
+ow 
+dt 
+di 
+fi 
+ln 
+or 
+ex 
+
+## Misc
+*.config  
+*webpack* 
+
+## Full Matches
+.DS_Store      
+.Dockerfile    
+CMakeLists.txt 
+.gitlab-ci.yml 
+.gitignore     
+
+## Extension Associations
+*.git     
+*.edn     
+*.pdf     
+*.db      
+*.hs      
+*.vim     
+*.org     
+*.frm     
+*.myd     
+*.myi     
+*.sqlite  
+*.bib     
+*.part    
+*.torrent 
+*.url     
+*.link    
+README    
+
+
+## Languages
+*.c      
+*.cpp    
+*.cc     
+*.css    
+*.scss   
+*.el     
+*.clj    
+*.py     
+*.rb     
+*.go     
+*.html   
+*.java   
+*.lua    
+*.md     
+*.scala  
+*.php    
+*.rs     
+*.js     
+*.json   
+*.kts    
+*.gradle 
+
+## Shells and Command Interpreters
+*.bash 
+*.cmd  
+*.fish 
+*.ps1  
+*.sh   
+*.zsh  
+
+## Archives
+*.7z   
+*.ace  
+*.alz  
+*.arc  
+*.arj  
+*.bz2  
+*.bz   
+*.cab  
+*.cpio 
+*.deb  
+*.dwm  
+*.dz   
+*.ear  
+*.esd  
+*.gz   
+*.jar  
+*.lha  
+*.lrz  
+*.lz4  
+*.lz   
+*.lzh  
+*.lzma 
+*.lzo  
+*.rar  
+*.rpm  
+*.rz   
+*.sar  
+*.swm  
+*.t7z  
+*.tar  
+*.taz  
+*.tbz2 
+*.tbz  
+*.tgz  
+*.tlz  
+*.txz  
+*.tz   
+*.tzo  
+*.tzst 
+*.war  
+*.wim  
+*.xz   
+*.z    
+*.zip  
+*.zoo  
+*.zst  
+
+## Music
+*.aac  
+*.mp3  
+*.alac 
+*.flac 
+*.m4a  
+*.wav  
+*.webm 
+*.mka  
+*.mid  
+*.midi 
+
+## Video
+*.avi  
+*.m2v  
+*.m4v  
+*.mkv  
+*.mov  
+*.mp4  
+*.mp4v 
+
+## Image
+*.asf   
+*.au    
+*.bmp   
+*.cgm   
+*.dl    
+*.emf   
+*.flc   
+*.fli   
+*.flv   
+*.gif   
+*.gl    
+*.jpeg  
+*.jpg   
+*.mjpeg 
+*.mjpg  
+*.mng   
+*.mpc   
+*.mpeg  
+*.mpg   
+*.nuv   
+*.oga   
+*.ogg   
+*.ogm   
+*.ogv   
+*.ogx   
+*.opus  
+*.pbm   
+*.pcx   
+*.pgm   
+*.png   
+*.ppm   
+*.qt    
+*.ra    
+*.rm    
+*.rmvb  
+*.spx   
+*.svg   
+*.svgz  
+*.tga   
+*.tif   
+*.tiff  
+*.vob   
+*.wmv   
+*.xbm   
+*.xcf   
+*.xpm   
+*.xspf  
+*.xwd   
+*.yuv   
+
+## Folders (XXX: Not supported in lf yet)
+.git          
+node_modules  
+.github       
+games         

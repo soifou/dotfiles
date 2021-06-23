@@ -4,7 +4,17 @@ set -e
 
 export OPENER="$XDG_CONFIG_HOME"/lf/open
 
-[ -f "$XDG_CONFIG_HOME"/lf/icons ] && . "$XDG_CONFIG_HOME"/lf/icons
+# See: https://github.com/gokcehan/lf/wiki/Icons
+# To match icons from exa, see: https://github.com/mtoohey31/lf-exa-icons
+[ -f "$XDG_CONFIG_HOME"/lf/icons ] && {
+    LF_ICONS="$(sed "$XDG_CONFIG_HOME"/lf/icons \
+        -e '/^[ \t]*#/d'       \
+        -e '/^[ \t]*$/d'       \
+        -e 's/[ \t]\+/=/g'     \
+        -e 's/$/ /' | tr '\n' :
+    )"
+    export LF_ICONS
+}
 
 if [ -n "$DISPLAY" ]; then
     export FIFO_UEBERZUG="${TMPDIR:-/tmp}/lf-ueberzug-$$"
@@ -22,8 +32,7 @@ if [ -n "$DISPLAY" ]; then
     mkdir -p "$XDG_CACHE_HOME/lf"
 
     # Ueberzug does not work with daemonized terminal.
-    # https://github.com/seebye/ueberzug/issues/103
-    # kitty should be run without --single-instance
+    # hence kitty should be run without --single-instance
     "$GOPATH"/bin/lf "$@" 3>&-
 else
     exec "$GOPATH"/bin/lf "$@"
