@@ -3,9 +3,9 @@
 # see: https://github.com/baskerville/sxhkd/blob/master/src/parse.c
 #
 
-# make sxhkd reload its configuration files and restart bspwm
+# restart bspwm
 super + shift + r
-    pkill -USR1 -x sxhkd && bspc wm -r
+    bspc wm -r
 
 # close/kill node
 super + {_,shift + }q
@@ -107,6 +107,28 @@ super + ctrl + shift + space
 
 
 #
+# toggle
+#
+
+# toggle border of the focused window
+super + shift + comma
+    [ $(bspc config -n focused border_width) = 0 ] && \
+        bspc config -n focused border_width $(bspc config border_width) || \
+        bspc config -n focused border_width 0
+
+# toggle polybar
+super + b
+    polybar-msg cmd toggle; \
+    [ $(bspc config top_padding) = 0 ] && \
+        bspc config top_padding 30 || \
+        bspc config top_padding 0
+
+# manage window gaps
+super + {underscore,plus,minus,equal}
+    bsp-gaps {toggle,plus,minus,equal}
+
+
+#
 # wm independent hotkeys
 #
 
@@ -174,21 +196,9 @@ super + w
 super + x ; {1-4}
     wm-focus {neomutt,newsboat,rtv,weechat}
 
-# manage window gaps
-super + {underscore,plus,minus,equal}
-    bsp-gaps {toggle,plus,minus,equal}
-
-
-# Toggle border of the focused window
-super + shift + comma
-    if [ "$(bspc config -n focused border_width)" = 0 ]; \
-        then bspc config -n focused border_width "$(bspc config border_width)"; \
-        else bspc config -n focused border_width 0; \
-    fi
-
-# polybar toggle
-super + b
-    polybar-msg cmd toggle; [ $(bspc config top_padding) = '0' ] && bspc config top_padding 30 || bspc config top_padding 0
+# Toggle sticky active window
+super + shift + s
+    wmctrl -r ":ACTIVE:" -b "toggle,sticky"
 
 super + F1
     sxhkd-help
