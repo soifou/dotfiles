@@ -26,25 +26,25 @@ MaildirStore gmail-perso-local
     Subfolders Verbatim
 
 Channel gmail-perso-inbox
-    Master :gmail-perso-remote:
-    Slave :gmail-perso-local:
+    Far :gmail-perso-remote:
+    Near :gmail-perso-local:
     Patterns "INBOX"
 
 Channel gmail-perso-sent
-    Master :gmail-perso-remote:"[Gmail]/Sent Mail"
-    Slave :gmail-perso-local:sent
+    Far :gmail-perso-remote:"[Gmail]/Sent Mail"
+    Near :gmail-perso-local:sent
 
 Channel gmail-perso-draft
-    Master :gmail-perso-remote:"[Gmail]/Drafts"
-    Slave :gmail-perso-local:draft
+    Far :gmail-perso-remote:"[Gmail]/Drafts"
+    Near :gmail-perso-local:draft
 
 Channel gmail-perso-spam
-    Master :gmail-perso-remote:"[Gmail]/Spam"
-    Slave :gmail-perso-local:spam
+    Far :gmail-perso-remote:"[Gmail]/Spam"
+    Near :gmail-perso-local:spam
 
 Channel gmail-perso-trash
-    Master :gmail-perso-remote:"[Gmail]/Trash"
-    Slave :gmail-perso-local:trash
+    Far :gmail-perso-remote:"[Gmail]/Trash"
+    Near :gmail-perso-local:trash
 
 Group gmail-perso
     Channel gmail-perso-inbox
@@ -72,25 +72,25 @@ MaildirStore gmail-pro-local
     Subfolders Verbatim
 
 Channel gmail-pro-inbox
-    Master :gmail-pro-remote:
-    Slave :gmail-pro-local:
+    Far :gmail-pro-remote:
+    Near :gmail-pro-local:
     Patterns "INBOX"
 
 Channel gmail-pro-sent
-    Master :gmail-pro-remote:"[Gmail]/Sent Mail"
-    Slave :gmail-pro-local:sent
+    Far :gmail-pro-remote:"[Gmail]/Sent Mail"
+    Near :gmail-pro-local:sent
 
 Channel gmail-pro-draft
-    Master :gmail-pro-remote:"[Gmail]/Drafts"
-    Slave :gmail-pro-local:draft
+    Far :gmail-pro-remote:"[Gmail]/Drafts"
+    Near :gmail-pro-local:draft
 
 Channel gmail-pro-spam
-    Master :gmail-pro-remote:"[Gmail]/Spam"
-    Slave :gmail-pro-local:spam
+    Far :gmail-pro-remote:"[Gmail]/Spam"
+    Near :gmail-pro-local:spam
 
 Channel gmail-pro-trash
-    Master :gmail-pro-remote:"[Gmail]/Trash"
-    Slave :gmail-pro-local:trash
+    Far :gmail-pro-remote:"[Gmail]/Trash"
+    Near :gmail-pro-local:trash
 
 Group gmail-pro
     Channel gmail-pro-inbox
