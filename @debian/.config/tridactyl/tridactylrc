@@ -1,10 +1,10 @@
 " Reset all previous settings
 sanitize tridactyllocal tridactylsync
 
-source_quiet $XDG_CONFIG_HOME/tridactyl/config/disable
-source_quiet $XDG_CONFIG_HOME/tridactyl/config/keybindings
-source_quiet $XDG_CONFIG_HOME/tridactyl/config/search
-source_quiet $XDG_CONFIG_HOME/tridactyl/config/zoom
+source_quiet ~/.config/tridactyl/config/disable
+source_quiet ~/.config/tridactyl/config/keybindings
+source_quiet ~/.config/tridactyl/config/search
+source_quiet ~/.config/tridactyl/config/zoom
 
 " Use my startpage on new tabs
 " set newtab file:///home/user/startpage/index.html
@@ -24,18 +24,16 @@ autocmd UriChange .*youtube\.com js window.location.href.match(".*youtube\.com/(
 colorscheme wal
 
 " Optimize follow link for URL's.
+bindurl duckduckgo.com f hint -Jc .result__title>a.result__a
+bindurl duckduckgo.com F hint -Jbc .result__title>a.result__a
+bindurl giphy.com f hint -Jci a > img
 bindurl youtube.com f hint -Jw
 bindurl youtube.com t hint -J
-bindurl ^https://duckduckgo.com f hint -Jc [class=result__a]
-bindurl ^https://duckduckgo.com F hint -Jbc [class=result__a]
-bindurl giphy.com f hint -Jci a > img
-
 
 " Containers
 autocontain -s google\.(fr|com) google
 autocontain -s youtube\.com google
 autocontain -s amazon\.(fr|com) amazon
-
 
 " Use go<key>/gn<key>/gw<key> to open quickmark for <key>
 " in (o) current / (n) new / (w) window

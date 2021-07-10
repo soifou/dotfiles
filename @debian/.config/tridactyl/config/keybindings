@@ -1,6 +1,13 @@
-" Reload conf on the fly
-bind ,s source $XDG_CONFIG_HOME/tridactyl/tridactylrc
+" Default keybinds: https://github.com/tridactyl/tridactyl/blob/master/src/lib/config.ts
 
+" Reload conf on the fly
+bind ,s source ~/.config/tridactyl/tridactylrc
+
+" Open command prompt
+unbind :
+bind ,; fillcmdline_notrail
+" Allow to copy in the commandline
+unbind --mode=ex <C-c>
 
 " Navigation
 unbind H
@@ -34,51 +41,49 @@ set findcase smart
 
 
 " Play video with mpv
-unbind v
+ " unbind v
 unbind V
 " On current URL
 bind V composite get_current_url | exclaim_quiet mpv
 " Using hint
-bind v hint -JW mpv
-" On youtube
+" bind v hint -JW mpv
 bindurl youtube.com v composite hint -Jpipe ytd-thumbnail>a href | exclaim_quiet mpv
 bindurl dailymotion.com v composite hint -Jpipe a href | exclaim_quiet mpv
 
+" Open link in reader mode
+" bind --mode=normal ,q composite hint -pipe a href | jsb -p tri.excmds.tabopen("about:reader?url=" + JS_ARG)
 
-" Open links in reader mode
-" bind --mode=normal ,r composite hint -pipe a href | jsb -p tri.excmds.tabopen("about:reader?url=" + JS_ARG)
+" Open link in foreground tab
+unbind F
+bind F hint -t
 
+" Open link in new window
+unbind w
+bind w hint -w
 
 " RSS (show feeds in current page and prompt if more than one found)
-alias rsssave jsb -p tri.native.run('cat >> $XDG_CONFIG_HOME/newsboat/urls;notify-send -i RSS_feeds Newsboat "Subscribed!"', JS_ARG + "\n")
+alias rsssave js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('echo ' + url + ' >> ~/.config/newsboat/urls; notify-send -i RSS_feeds Newsboat Subscribed'))
 set rsscmd rsssave %u
+" Subscribe to YouTube channels too
+alias ytrss js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('yt-rss ' + url + ' >> ~/.config/newsboat/urls; notify-send -i RSS_feeds Newsboat Subscribed'))
+bindurl youtube.com n composite get_current_url | ytrss
 bind ,r composite rssexec
 
-
 " Editor
-" Focus an input field, then <C-i> will start vim with content of the input (or blank)
-" Quit with <ESCAPE> or <ENTER>, this will feed the selected input with your entry
-set editorcmd kitty --class floating vim -c "set noshowmode | set noruler | set laststatus=0 | set noshowcmd | set cmdheight=1 | nnoremap <ESC><ESC> :q!<ENTER> | nnoremap <ENTER> :x<ENTER> | inoremap <ENTER> <ESC>:x!<ENTER>" %f
+" Focus an input field, then <C-e> (default <C-i>)
+" will start vim instance with content of the input (or blank)
+set editorcmd kitty --class floating $EDITOR %f
+bind --mode=insert <C-e> editor
+bind --mode=input <C-e> editor
+" Uncomment to trigger editor directly on focus
 " bind --mode=normal gi composite focusinput -l | editor
-
 
 " Toggle pinned tab
 bind ,p pin
 
-
 " Mimic native Firefox url edition
 bind <C-l> current_url open
-
-
-" Allow to copy in the commandline
-unbind --mode=ex <C-c>
 
 " Git{Hub,Lab} git clone via SSH yank
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
 
-" Create an alias named get_password. This alias will grab the url of the current page and pipe it to an arbitrary js command in the background (webextensions have multiple processes, one that lives in the background that can't access pages and others that live in pages and can't run software on your computer).
-" The background process will run pass -c $URL_OF_THE_CURRENT_WEBSITE on your computer, which I believe will output the password for the current website.
-" This output will then be sent back to the page's process to be inserted in the last selected input.
-" This is terrible, probably buggy and I'm sure will require a few adjustments. But it's possible.
-alias get_password composite get_current_url | jsb -p tri.native.run("pass -c " + JS_ARG).then(cmd => tri.excmds.fillinput(cmd.content))
-bind --mode=insert <C-S-l> get_password

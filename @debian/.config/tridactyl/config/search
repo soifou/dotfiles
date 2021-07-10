@@ -1,15 +1,17 @@
 " Disable all built-in searchurls
-"jsb Object.keys(tri.config.get("searchurls")).forEach(u => tri.config.set("searchurls", u, '""'))
+" jsb Object.keys(tri.config.get("searchurls")).forEach(u => tri.config.set("searchurls", u, '""'))
 
 " Set DuckDuckGo as default search engine
 " ie: o tridactyl will show results from duckduckgo
 set searchengine duckduckgo
 
-" Enhance search 
+" Enhance search
 " ie. search tridactyl on github: o gh tridactyl
+
 set searchurls.amazon https://www.amazon.fr/s/ref=nb_sb_noss?field-keywords=%s
 set searchurls.arch https://wiki.archlinux.org/index.php?search=%s&title=Special%3ASearch&go=Go
 set searchurls.gh https://github.com/search?utf8=%E2%9C%93&q=%s&ref=simplesearch
+set searchurls.gi https://gist.github.com/search?q=%s
 set searchurls.gmaps https://www.google.com/maps/search/%s
 set searchurls.imdb https://www.imdb.com/find?q=%s
 set searchurls.mdn https://developer.mozilla.org/en-US/search?q=%s&topic=api&topic=js

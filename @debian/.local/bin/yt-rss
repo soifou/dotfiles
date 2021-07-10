@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+# YT-RSS
+# Credits: Simon Hugh Moore
+# https://github.com/simonhughcom/dotfiles/blob/31fb40bf0a5f533bc43185278526c8e32c32f2ab/newsboat/.local/bin/yt-rss
+# Helper script to get RSS link from youtube channel URL for Newsboat
+
+# newsboat tag for each youtube URL
+primary_tag="YouTube"
+url_prefix="https://www.youtube.com/feeds/videos.xml?channel_id="
+
+# exit if not argument given
+__usage="usage: $(basename "$0") <URL>"
+[ -z "$1" ] && echo "$__usage" && exit 1
+
+# make sure URL is of correct format and ends with '/videos'
+url="https://www.youtube.com$(echo "$1" | grep -o '/\(c\|user\|channel\)/[^/]*')/videos"
+
+# get src and extract ID and title
+src="$(curl -s "$url")"
+id="$(echo "$src" | grep -o '"channelId":"[^"]*"' | sed 's/^"channelId":"//;s/"$//')"
+title="$(echo "$src" | grep -o '"channelId":"[^"]*","title":"[^"]*"' | sed 's/^"channelId":"[^"]*","title":"//;s/"$//')"
+
+# print RSS in Newsboat format with tags
+printf '%s%s\t"~%s" "%s"\n' "$url_prefix" "$id" "$title" "$primary_tag"
