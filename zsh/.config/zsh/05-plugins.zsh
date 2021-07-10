@@ -20,7 +20,7 @@ GIT_AUTO_FETCH_INTERVAL=600
 # zdharma/fast-syntax-highlighting
 # Fix long git commit message highlight
 export 'FAST_HIGHLIGHT[git-cmsg-len]=120'
-# [ -f "$XDG_CONFIG_HOME/fsh/soifou.ini" ] && fast-theme -q XDG:soifou
+[ -f "$XDG_CONFIG_HOME/fsh/base16.ini" ] && fast-theme -q XDG:base16
 
 # zsh-users/zsh-autosuggestions
 # export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
