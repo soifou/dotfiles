@@ -11,6 +11,7 @@ alias du='du -sh'
 alias grep="grep --color=auto"
 alias mkdir="mkdir -p"
 alias rm="rm -I --preserve-root"
+alias tree="exa -a --tree --icons"
 
 # Suffix
 alias -s {mp4,MP4,mkv,MKV,mp3,MP3,mov,MOV,mpg,MPG,m4v,M4V,ogg,OGG,wav,WAV,webm,WEBM}='mpv'
