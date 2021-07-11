@@ -23,8 +23,9 @@ export 'FAST_HIGHLIGHT[git-cmsg-len]=120'
 [ -f "$XDG_CONFIG_HOME/fsh/base16.ini" ] && fast-theme -q XDG:base16
 
 # zsh-users/zsh-autosuggestions
-# export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
-# ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(fzf-completion vi-cmd-mode)
+# Remove history-beginning-search-* widgets from list of widgets that clear autosuggestion
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#history-beginning-search-(back|for)ward}")
+
