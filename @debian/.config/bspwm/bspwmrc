@@ -32,14 +32,16 @@ for i in 2 4; do bspc desktop ^$i --layout monocle; done
 bspc rule -r "*"
 
 # specific desktop
-_r Sublime_text desktop='^2'
+for app in nvim Sublime_text; do
+    _r $app desktop='^2'
+done
 _r Firefox desktop='^3'
 for app in neomutt weechat skype Signal whatsapp mattermost; do
     _r $app desktop='^4'
 done
 # floating
-for app in mpv scummvm Firefox:Places Firefox:Browser; do 
-    _r $app state=floating; 
+for app in mpv scummvm Firefox:Places Firefox:Browser; do
+    _r $app state=floating;
 done
 # center floating, sticky and with a custom size
 for app in mailto music-player tremc; do
