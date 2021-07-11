@@ -4,6 +4,7 @@
 setopt auto_cd                   # cd when just a path is entered
 setopt globdots                  # lets files beginning with a . be matched without explicitly specifying the dot.
 setopt no_flow_control           # Disable start (C-s) and stop (C-q)
+setopt interactivecomments       # allow comments
 
 # History
 setopt bang_hist                 # Treat the '!' character specially during expansion.
