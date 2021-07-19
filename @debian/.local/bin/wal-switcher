@@ -13,22 +13,19 @@ mkdir -p "$WALLPAPER_PATH"
 _wal() {
     wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
         -e -q -n -i "$@" >/dev/null
+
+    # Check if second argument exists, then set current theme to xresources
+    # https://github.com/dylanaraps/pywal/issues/184
+    THEME=dark
+    [ -n "$2" ] && THEME=light
+    echo "*.theme: $THEME" >> "$XDG_CACHE_HOME"/wal/colors.Xresources
 }
 
 if [ -z "$@" ]; then
-    get_options() {
-        options="
-            random
-            theme-light
-            theme-dark
-        "
-        for o in $options; do echo "$o"; done
-    }
-    get_themes() {
-        find -L "$WALLPAPER_PATH" -type f -printf '%P\n' | sort
-    }
-    get_options
-    get_themes
+    _options() { for o in random theme-light theme-dark; do echo "$o"; done; }
+    _themes() { find -L "$WALLPAPER_PATH" -type f -printf '%P\n' | sort; }
+    _options
+    _themes
 else
     THEMES="$@"
 
@@ -70,8 +67,6 @@ else
             #         if term != '/dev/pts/5':
             #             util.save_file(sequences, term)
             _wal "$WALLPAPER_PATH/${THEMES}"
-        # else
-        #     echo "[WARNING] Requested wall '$THEMES' does not exist in $WALLPAPER_PATH"
         fi
     fi
 fi
