@@ -30,7 +30,7 @@
     --tridactyl-hintspan-border-width: 0px;
 
     --tridactyl-hint-active-fg: var(--tridactyl-fg);
-    --tridactyl-hint-active-bg: var(--tridactyl-header-first-bg)
+    --tridactyl-hint-active-bg: var(--tridactyl-header-first-bg);
     --tridactyl-hint-active-outline: 1px solid #cc0000;
 }}
 
@@ -40,6 +40,10 @@
 
 :root.TridactylThemeWal .TridactylModeinput {{
     background-color: {color1}!important;
+}}
+
+:root.TridactylThemeWal #TridactylViewsourceElement {{
+    background: var(--tridactyl-bg)!important;
 }}
 
 :root.TridactylThemeWal #completions .sectionHeader {{
