@@ -21,7 +21,7 @@ map kitty_mod+v paste_from_clipboard
 
 # scrollback
 scrollback_lines 10000
-scrollback_pager nvim -c 'set ft=man' -
+scrollback_pager nvim +Man! -
 map kitty_mod+space show_scrollback
 
 # list all urls found in scrollback in a subwindow with urlscan
