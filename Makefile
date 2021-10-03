@@ -10,6 +10,7 @@ init: .stowrc
 install: init
 	stow @$(OS)
 	stow bat
+	stow beets
 	stow bin
 	stow bundler
 	stow composer
@@ -35,6 +36,7 @@ install: init
 uninstall:
 	stow -D @$(OS)
 	stow -D bat
+	stow -D beets
 	stow -D bin
 	stow -D bundler
 	stow -D composer
