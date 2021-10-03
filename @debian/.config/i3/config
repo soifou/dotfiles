@@ -71,7 +71,7 @@ bindsym $mod+Return exec term
 # Default
 bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,calc:~/.local/bin/rofi/rofi-bc' -show drun"
 # Classic Alt+Tab to list opened apps
-bindsym Mod1+Tab exec --no-startup-id rofi -show window -mode window -config $XDG_CONFIG_HOME/rofi/alttab.rasi -theme menus/alttab.rasi
+bindsym Mod1+Tab exec --no-startup-id rofi -show window -mode window -config $XDG_CONFIG_HOME/rofi/alttab.rasi
 # Manage wallpapers/themes, copy emojis to clipboard (https://github.com/Mange/rofi-emoji)
 bindsym $mod+Shift+Tab exec --no-startup-id rofi -modi 'themes:~/.local/bin/wal-switcher' -show themes -columns 2 -no-sidebar-mode
 # List pass entries using pass-clip (password-store extension): https://github.com/ibizaman/pass-clip

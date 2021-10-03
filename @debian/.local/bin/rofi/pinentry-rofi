@@ -9,8 +9,7 @@ getPassword() {
         -dmenu \
         -password \
         -p " GPG Passphrase $(echo "$DESC" | awk -F"%0A" '{print $3}' | xargs):" \
-        -input /dev/null \
-        -lines 0
+        -input /dev/null
 }
 
 echo OK

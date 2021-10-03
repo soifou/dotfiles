@@ -1,66 +1,71 @@
 @import "~/.cache/wal/colors-rofi.rasi"
 
 * {
-    listview-spacing: 5px;
-    menu-window-padding: 5px 15px;
-    menu-inputbar-margin: 10px 0px;
-    menu-prompt-padding: 10px 20px 10px 20px;
-    menu-prompt-margin: 0px 0px 0px -2px;
-    menu-element-border: 5px;
-    menu-element-padding: 3px 2px 3px 0px;
-    background-color: @background;
-    text-color: @foreground;
+    menu-prompt-padding: 10 20 10 20;
 }
 
 window {
     width: 24.2%;
-    border: 2px solid;
+    border: 2;
     border-color: @accent;
     border-top: 0;
-    padding: @menu-window-padding;
+    padding: 5 15;
     children: [ inputbar, horibox ];
 }
 
 horibox {
     children: [ listview ];
-    padding: 0px 0px 8px 0px;
+    padding: 0 0 8 0;
 }
+
 listview {
     layout: vertical;
-    spacing: @listview-spacing;
+    spacing: 5;
 }
+
 inputbar {
     children: [ textbox-prompt-colon, prompt, entry ];
-    margin: @menu-inputbar-margin;
+    margin: 10 0;
 }
+
 entry {
     padding: @menu-prompt-padding;
+    font: "monospace 12";
 }
+
 prompt,
 textbox-prompt-colon {
     padding: @menu-prompt-padding;
-    border: 2px;
+    border: 2;
     border-color: @accent;
 }
+
 prompt {
-    margin: @menu-prompt-margin;
+    margin: 0 0 0 -2;
     background-color: @background-light;
     text-color: @accent;
 }
+
 textbox-prompt-colon {
     expand: false;
     str: "Packages";
     background-color: @accent;
-    text-color: @background;
+    text-color: @background-color;
 }
+
 element {
     background-color: @background-light;
-    border: @menu-element-border;
-    padding: @menu-element-padding;
-    border-color: @background-light;
+    padding: 5;
+    children: [ element-text ];
 }
-element.selected {
+
+element selected {
     border-color: @accent;
     background-color: @accent;
-    text-color: @background;
+    text-color: @background-color;
+}
+
+element-text selected {
+    background-color: @accent;
+    text-color: @background-color;
 }

@@ -2,15 +2,16 @@
     selected-background: {color2};
     selected-background-faded: {color4}af;
 
-    /* background around menu */
-    shadow:{background}cf;
+    shadow:{background}ef;
 
-    background: {background};
+    text-color: {foreground}7a;
+
+    background-color: {background};
+    background-light: {background}ac;
     foreground: {foreground};
     border-color: {color4};
 
     accent: {color4};
-    background-light: {background}ac;
     on: {color2};
     off: {color6};
 }}

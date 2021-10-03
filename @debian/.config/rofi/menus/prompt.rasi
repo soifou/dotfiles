@@ -1,32 +1,28 @@
+configuration {
+    font: "mono 12";
+}
+
 @import "~/.cache/wal/colors-rofi.rasi"
 
+* {
+    background-color: @accent;
+    color: @text-color;
+}
+
 window {
-    padding: 560;
+    transparency: "screenshot";
     background-color: @shadow;
+    padding: 48% 22%;
+    width: 100%;
+    height: 100%;
 }
 
 mainbox {
-    border: 2;
-    padding: 14;
-    background-color: @background;
+    border: 1;
+    border-radius: 3;
 }
 
 inputbar {
-    spacing: 0;
-    text-color: @foreground;
-    background-color: @background;
-    padding: 10px 0;
+    padding: 12;
 }
 
-entry,
-prompt {
-    spacing: 0;
-    padding: 3;
-    text-color: @foreground;
-    background-color: @background;
-}
-case-indicator,
-listview {
-    background-color: @background;
-    padding: 0;
-}

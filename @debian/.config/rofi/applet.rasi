@@ -4,7 +4,6 @@ configuration {
     location: 3;
     yoffset: 28;
     xoffset: -12;
-    pid: "/run/user/1000/rofi.pid";
     kb-mode-next: "Super+l";
     kb-mode-previous: "Super+h";
     kb-row-up: "Super+k,Up";
