@@ -3,8 +3,8 @@
 # Prefix for macros created using mark-message
 set mark_macro_prefix = ","
 
-# U: Open URLs with urlscan (https://github.com/firecat53/urlscan)
-macro index,pager U '<enter-command>set pipe_decode = yes<enter><pipe-message>urlscan --single -Hcd -r "linkhandler {}"<enter><enter-command>set pipe_decode = no<enter>'
+# U: Open URLs
+# macro index,pager U '<enter-command>set pipe_decode = yes<enter><pipe-message>$URLVIEWER<enter><enter-command>set pipe_decode = no<enter>'
 
 # W: Save selected attachment (set $attach_save_dir var to specify which dir)
 macro attach W "<save-entry><bol><eol>" "Save to downloads folder"

@@ -24,8 +24,8 @@ scrollback_lines 10000
 scrollback_pager nvim +Man! -
 map kitty_mod+space show_scrollback
 
-# list all urls found in scrollback in a subwindow with urlscan
-map kitty_mod+u launch --stdin-source=@screen_scrollback urlscan --single -Hcd -r 'linkhandler "{}"'
+# list all urls found in scrollback in a subwindow
+map kitty_mod+u launch --stdin-source=@screen_scrollback $URLVIEWER
 
 # window config
 map kitty_mod+enter launch --cwd=current --type=window

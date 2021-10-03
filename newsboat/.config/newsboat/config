@@ -25,7 +25,7 @@ show-title-bar no
 # see: https://github.com/newsboat/newsboat/issues/800#issuecomment-600869425
 browser linkhandler
 
-external-url-viewer "urlscan --single -Hcd -r 'linkhandler {}'"
+external-url-viewer $URLVIEWER
 bind-key U show-urls
 
 # Macro trigger is by default ","

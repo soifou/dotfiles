@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# Extract and open URLs from stdin (like urlview/urlscan).
+# Dependencies: xurls, fzf
+
+fzf_cmd() {
+    fzf -d 35% --multi --exit-0 --cycle --no-preview \
+        --bind ctrl-]:abort \
+        --bind ctrl-a:toggle-all \
+        --bind 'ctrl-y:execute-silent(echo {+} | xclip -se c)'
+}
+
+xurls |
+    sort -u |
+    fzf_cmd |
+    xargs -I {} ~/.local/bin/linkhandler {} >/dev/null
