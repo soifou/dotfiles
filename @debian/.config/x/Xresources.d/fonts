@@ -11,4 +11,4 @@ Xft.rgba: rgb
 
 ! Settings specific to libXft
 Xft.autohint: 0
-Xft.embolden 0
+Xft.embolden: 0
