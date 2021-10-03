@@ -26,6 +26,16 @@ if [ "$1" == 'fd' ]; then
     NAME=fd
     BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1_VERSION_amd64.deb"
     GREPVER="fd --version | awk '{print \$2}'"
+elif [ "$1" == 'hyperfine' ]; then
+    REPO=sharkdp/hyperfine
+    NAME=hyperfine
+    BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1-musl_VERSION_amd64.deb"
+    GREPVER="hyperfine --version | awk '{print \$2}'"
+elif [ "$1" == 'gh' ]; then
+    REPO=cli/cli
+    NAME=gh
+    BINFILE="$GH_URL$REPO/releases/download/vVERSION/$1_VERSION_linux_amd64.deb"
+    GREPVER="gh --version | awk '{print \$3}'"
 elif [ "$1" == 'bat' ]; then
     REPO=sharkdp/bat
     NAME=bat
