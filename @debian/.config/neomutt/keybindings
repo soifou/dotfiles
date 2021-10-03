@@ -29,6 +29,8 @@ bind pager,browser gg top-page
 bind pager,browser G bottom-page
 # bind compose \Cp postpone-message
 # bind index \Cp recall-message
+bind index,pager n search-next
+bind index,pager N search-opposite
 bind index,pager S sync-mailbox
 bind index,pager R group-reply
 bind index,pager @ compose-to-sender
