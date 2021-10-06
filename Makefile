@@ -14,6 +14,7 @@ install: init
 	stow bin
 	stow bundler
 	stow composer
+	stow feh
 	stow git
 	stow lf
 	stow lftp
@@ -40,6 +41,7 @@ uninstall:
 	stow -D bin
 	stow -D bundler
 	stow -D composer
+	stow -D feh
 	stow -D git
 	stow -D lf
 	stow -D lftp
