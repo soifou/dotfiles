@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-# Opens with default app.
-# This could be a HTTP link as well as a local file or a directory.
+# Extract and open URIs.
+# Requires mpv, sxiv, zathura, transmission, curl, gallery-dl, gnu-utils
 
 # If no argument given. Exit.
 [ -z "$1" ] && { exit; }
@@ -10,7 +10,11 @@ _torrent() {
     pgrep -x transmission-da || (transmission-daemon && notify-send -i transmission Transmission "Starting daemon..." && sleep 3)
     transmission-remote -a "$1" && notify-send -i transmission Transmission "Torrent added."
 }
-
+_gdl() {
+    imgs=$(gallery-dl -d "$XDG_CACHE_HOME"/gallery-dl -- "$@" 2>/dev/null) || return 1
+    printf '%s\n' "$imgs" | sed 's/^# //' |
+        xargs -d'\n' sh -c 'sxiv -a -- "$@" || mpv -- "$@"' ''
+}
 _o() {
     echo "File: $1"
     echo "mime-type: $(file --mime-type "$1" -bL)"
@@ -23,7 +27,7 @@ _o() {
         image/*) sxiv -b "$1" ;;
         inode/directory) term --class=floating lf "$1" ;;
         text/html) "$BROWSER" "$1" ;;
-        text/*) term --class=floating $EDITOR "$1" ;;
+        text/*) term --class=floating "$EDITOR" "$1" ;;
         *) xdg-open "$1" ;;
     esac
 }
@@ -36,26 +40,22 @@ _dlo() {
 
 # Files/Directories
 if [ -d "$1" ] || [ -f "$1" ]; then
-    _o "$1"; exit 0;
+    _o "$1"
+    exit 0
 fi
 
 case "$1" in
     # Email
-    mailto:*) term --class=mailto neomutt "$1";;
+    mailto:*) term --class=mailto neomutt "$1" ;;
     # Torrent
     magnet:*|*.torrent) _torrent "$1" ;;
     # Video
     *mkv|*webm|*mp4|*youtube.com*|*youtu.be*|*gfycat.com*|*v.redd.it*|*dailymotion.com*|*peertube*)
         setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1 &
-    ;;
+        ;;
     # Images
     *png|*jpg|*jpe|*jpeg|*gif) _dlo "$1" ;;
-    *imgur.com*|*reddit.com/gallery*)
-        curl -s "$1" | sed 's/http/\nhttp/g;s/\\u0026/\&/g' | awk -F \" '
-            !/favicon/&&/png|jpg|jpeg|PNG|JPG|JPEG/&&/preview\.redd\.it|i\.imgur\.com/{
-                gsub(/.*crop.*/,"",$0);gsub(/.*award_images.*/,"",$0);print $1
-            } ' | xargs linkhandler
-    ;;
+    *reddit.com/gallery*|*i.redd.it*|*imgur.com*) _gdl "$1" ;;
     # Documents
     *.pdf|*.ps|*.epub) _dlo "$1" ;;
     # Music
@@ -69,13 +69,11 @@ case "$1" in
     *reddit.com*) rtv "$1" ;;
     # HTTP links
     http*)
-        case $(curl -s -o /dev/null -w '%{content_type}' $1) in
+        case $(curl -s -o /dev/null -w '%{content_type}' "$1") in
             application/pdf) _dlo "$1" ;;
             image/*) _dlo "$1" ;;
-            # text/plain*) _dlo "$1" ;;
             *) "$BROWSER" "$1" ;;
         esac
-    ;;
+        ;;
     *) _dlo "$1" ;;
 esac
-
