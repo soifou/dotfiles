@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Beware! This script is intended to be used by only me, myself and I.
-## It keeps me up to date accross my *nix journey
+## It keeps me up to date across my *nix journey
 
 yn() {
     printf "$(tput bold):: $(tput setaf 2)%s$(tput sgr0) [y/n]: " "$1"
@@ -117,8 +117,13 @@ fi
 if command -v asdf >/dev/null 2>&1; then
     yn "Update asdf?" && asdf update --head
     yn "Update composer from asdf?" && {
-        asdf exec composer selfupdate
+        COMPOSER="asdf exec composer"
+        $COMPOSER selfupdate
         rm -f "$XDG_CONFIG_HOME"/composer/*-old.phar
+        $COMPOSER selfupdate
+        $COMPOSER global outdated
+        sleep 3
+        $COMPOSER global update
     }
 fi
 
@@ -146,16 +151,6 @@ if command -v pip >/dev/null 2>&1; then
         sleep 3
         pip install --upgrade pip
         pip freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U | grep "Successfully installed"
-    fi
-fi
-
-if command -v phpenv >/dev/null 2>&1; then
-    if yn "Update global composer dependencies?"; then
-        composer=$(phpenv which composer)
-        $composer selfupdate
-        $composer global outdated
-        sleep 3
-        $composer global update
     fi
 fi
 
