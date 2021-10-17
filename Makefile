@@ -16,6 +16,7 @@ install: init
 	stow composer
 	stow feh
 	stow git
+	stow kitty
 	stow lf
 	stow lftp
 	stow myrepos
@@ -43,6 +44,7 @@ uninstall:
 	stow -D composer
 	stow -D feh
 	stow -D git
+	stow -D kitty
 	stow -D lf
 	stow -D lftp
 	stow -D myrepos
