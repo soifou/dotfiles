@@ -115,7 +115,10 @@ if command -v anyenv >/dev/null 2>&1; then
 fi
 
 if command -v asdf >/dev/null 2>&1; then
-    yn "Update asdf?" && asdf update --head
+    yn "Update asdf?" && {
+        asdf update --head
+        asdf plugin update --all
+    }
     yn "Update composer from asdf?" && {
         COMPOSER="asdf exec composer"
         $COMPOSER selfupdate
