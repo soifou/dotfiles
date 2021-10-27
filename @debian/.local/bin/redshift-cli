@@ -4,115 +4,88 @@
 
 __usage="
 Usage: $(basename "$0") [OPTIONS]
-Adjust both brightness and temperature screen from redshift according to your geolocation (no daemon required).
-Additionally you can control brigthness screen if you have a monitor without backlight interface (ie. desktop monitor).
+Adjust temperature screen from redshift according to your geolocation (no daemon required).
+Additionally you can control brightness screen if you have a monitor without backlight interface (ie. desktop monitor).
 
 Options:
-  --up             Set screen brightness up to .1
-  --down           Set screen brightness lower to .1
-  --temp [--print] Adjust current temperature according to your geocode [and print to stdout]
-  --toggle         Enable/disable the script
-  -h, help         Show this help.
-
-Example using as a polybar module:
-
-[module/redshift]
-type = custom/script
-interval = 5
-exec = redshift-cli --temp --print
-scroll-up = redshift-cli --up
-scroll-down = redshift-cli --down
-click-left = redshift-cli --toggle
+  -u | --up     Set screen brightness up to .1
+  -d | --down   Set screen brightness lower to .1
+  -a --adjust   Adjust current temperature according to your geocode
+  -t, --toggle  Enable/disable the script
+  -h, help      Show this help.
 "
 
 # Configuration
-icon=
+lightbulb_on=
+lightbulb_off=
 temp_range="6500:2700"
+method=randr
 lat="$OPENWEATHERMAP_LAT"
 long="$OPENWEATHERMAP_LONG"
+
 # For storing current brightness
 tmpfile="${XDG_CACHE_HOME:-~/.cache}"/redshift-cli
-if [ ! -f $tmpfile ]; then
-    touch $tmpfile
-    echo "1.0" >$tmpfile
-fi
+[ ! -f "$tmpfile" ] && { echo 1.0 >"$tmpfile"; }
 brightness=$(cat "$tmpfile")
 
 # Adjust temp and brightness manually
-setTempAndBrightness() {
-    redshift -P -O "$(getTemp)" -g 1.0 -m randr -b "$brightness"
+_adjust() {
+    redshift -P -O "$(_temp)" -g 1.0 -m $method -b "$brightness"
 }
 
 # Get current temperature according to geocode
-getTemp() {
-    echo $(redshift -t $temp_range -l "$lat:$long" -p 2>/dev/null | grep temp | cut -d ":" -f 2 | tr -dc "[:digit:]")
+_temp() {
+    redshift -t $temp_range -l "$lat:$long" -p 2>/dev/null |
+        grep temp |
+        cut -d ":" -f 2 |
+        tr -dc "[:digit:]"
 }
 
-# Import colors from available location
-_color() { xrdb -q | grep -m1 -i "$1" | cut -f2 ; }
-getColors() {
-    color15="$(_color "color15")"
-    color4="$(_color "color4")"
-    color3="$(_color "color3")"
-    color1="$(_color "color1")"
-}
-brightnessUp() {
-    brightness=$(echo "$brightness+.1" | bc -l)
-    result=$(echo "$brightness <= 1.0" | bc -l)
-    [ "$result" = '1' ] &&
-        echo "$brightness" >$tmpfile &&
-        setTempAndBrightness
-}
-brightnessDown() {
-    brightness=$(echo "$brightness-.1" | bc -l)
-    result=$(echo "$brightness > 0.0" | bc -l)
-    [ "$result" = '1' ] &&
-        echo "$brightness" >$tmpfile &&
-        setTempAndBrightness
-}
-displayTemp() {
-    temp=$(getTemp)
-    getColors
-    if [ -z "$temp" ]; then
-        echo "$icon%{F$color4} ${temp}%{F-}" # Greyed out (not running)
-    elif [ "$temp" -ge 6000 ]; then
-        echo "$icon%{F$color15} ${temp}%{F-}" # Blue
-    elif [ "$temp" -ge 4000 ]; then
-        echo "$icon%{F$color3} ${temp}%{F-}" # Yellow
+_display() {
+    t=$(_temp)
+
+    if [ -f "$tmpfile.lock" ]; then
+        echo "$lightbulb_off" # not running
+    elif [ "$t" -ge 6000 ]; then
+        echo "%{F$(_color 4)}$lightbulb_on ${t}%{F-}" # Blue
+    elif [ "$t" -ge 4000 ]; then
+        echo "%{F$(_color 3)}$lightbulb_on ${t}%{F-}" # Yellow
     else
-        echo "$icon%{F$color1} ${temp}%{F-}" # Red
-    fi
-}
-toggleReset() {
-    if [ -f $tmpfile.lock ]; then
-        rm -f $tmpfile.lock
-        setTempAndBrightness
-    else
-        redshift -x
-        touch $tmpfile.lock
+        echo "%{F$(_color 1)}$lightbulb_on ${t}%{F-}" # Red
     fi
 }
 
-_help() {
-    echo "$__usage"
-    exit
+_brightness() {
+    arith="<=" limit=1.0 sign=+
+    [ "$1" = "down" ] && { arith=">" limit=0.1 sign=-; }
+
+    [ "$brightness" != "$limit" ] && {
+        brightness=$(echo "$brightness $sign .1" | bc -l)
+    }
+    result=$(echo "$brightness $arith $limit" | bc -l)
+    [ "$result" = "1" ] && echo "$brightness" >"$tmpfile"
 }
+
+_toggle() {
+    if [ -f "$tmpfile".lock ]; then
+        rm -f "$tmpfile".lock
+    else
+        redshift -m $method -x
+        touch "$tmpfile".lock
+    fi
+    _display
+}
+
+_color() { xrdb -q | grep -m1 -i "color$1" | cut -f2; }
+_help() { echo "$__usage" exit; }
 
 case "$1" in
---up) [ -f $tmpfile.lock ] && exit 0 || brightnessUp ;;
---down) [ -f $tmpfile.lock ] && exit 0 || brightnessDown ;;
---temp)
-    if [ -f $tmpfile.lock ]; then
-        getColors
-        echo "$icon%{F$color15} ----%{F-}"
-        exit 0
-    else
-        setTempAndBrightness
-        if [ "$#" -eq "2" ] && [ "$2" = '--print' ]; then
-            displayTemp
-        fi
-    fi
-    ;;
---toggle) toggleReset >/dev/null ;;
--h | --help | *) _help ;;
+    -u | --up) [ -f $tmpfile.lock ] && exit 0 || _brightness up ;;
+    -d | --down) [ -f $tmpfile.lock ] && exit 0 || _brightness down ;;
+    -a | --adjust)
+        [ ! -f $tmpfile.lock ] && _adjust
+        _display
+        ;;
+    -t | --toggle) _toggle ;;
+    -h | --help | *) _help ;;
 esac
