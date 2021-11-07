@@ -10,8 +10,9 @@ Sync All
 IMAPAccount fleur.fr
     Host imap.gmail.com
     User fleur.fr
-    PassCmd "pass google.com/fleur.fr"
+    PassCmd "pass google.com/mbsync.fleur.fr"
     SSLType IMAPS
+    AuthMechs LOGIN
     # Throttle mbsync so we don't go over gmail's quota.
     # OVERQUOTA error would eventually be returned otherwise.
     # See: https://sourceforge.net/p/isync/mailman/message/35458365/
@@ -59,8 +60,9 @@ Group gmail-perso
 IMAPAccount francois.fleur
     Host imap.gmail.com
     User francois.fleur
-    PassCmd "pass google.com/francois.fleur"
+    PassCmd "pass google.com/mbsync.francois.fleur"
     SSLType IMAPS
+    AuthMechs LOGIN
     PipelineDepth 50
 
 IMAPStore gmail-pro-remote

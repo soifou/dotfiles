@@ -16,5 +16,5 @@ fileext = ".vcf"
 type = "carddav"
 url = "https://apidata.googleusercontent.com/caldav/v2/"
 username = "fleur.fr"
-password.fetch = ["command", "pass", "google.com/fleur.fr"]
+password.fetch = ["command", "pass", "google.com/mbsync.fleur.fr"]
 ; read_only = true
