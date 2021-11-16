@@ -93,7 +93,8 @@ set sidebar_visible = yes
 set sidebar_width = 25
 
 # Index
-set index_format = "%?M?  ↳&%4? %Z  %{!%d %b · %T} %-20.20n (%?l?%4l&%4c?) %s"
+# See: https://neomutt.org/guide/reference.html#3-170-%C2%A0index_format
+set index_format="%4C %Z  %{!%d %b · %T}  %-25.25F   %-80.80s %* %?X?%X  & ? %-4.4c"
 set to_chars = ""
 set crypt_chars = " "
 set flag_chars = "     "
