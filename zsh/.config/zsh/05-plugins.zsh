@@ -7,6 +7,7 @@ antibody bundle <<EOBUNDLES
 # this block is in alphabetic order
 robbyrussell/oh-my-zsh path:plugins/docker/_docker
 robbyrussell/oh-my-zsh path:plugins/git-auto-fetch/git-auto-fetch.plugin.zsh
+hlissner/zsh-autopair
 zsh-users/zsh-autosuggestions
 # these should be at last!
 zdharma-continuum/fast-syntax-highlighting
