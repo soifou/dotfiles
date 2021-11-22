@@ -17,7 +17,10 @@
     default = current
 
 [pull]
-    rebase = false
+    rebase = true
+
+[rebase]
+	autoStash = true
 
 [init]
 	defaultBranch = main
