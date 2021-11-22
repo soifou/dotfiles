@@ -1,10 +1,13 @@
 #!/usr/bin/env sh
 
-_c() {
-    command -v "$1" >/dev/null && "$@"
-}
+_c() { command -v "$1" >/dev/null && "$@"; }
 # keyboard delay/rate
 _c xset r rate 350 45
+# Disable DPMS turning off the screen
+# xset -dpms
+# xset s off
+# Disable bell
+# xset b off
 # keyboard numlock
 _c numlockx on
 # keymap
@@ -24,8 +27,8 @@ _d greenclip daemon
 # screen locker
 _d locker
 # music player daemon
-_d mpd
+# _d mpd
 # no mouse cursor
 _d xbanish
 # reminder
-# _d remind -z1 -k'notify-send -i alarm-clock -u critical REM:\ %s &' "$XDG_DATA_HOME"/remind
+_d remind -z1 -k'notify-send -i bell -u critical Remind %s &' "$XDG_DATA_HOME"/remind

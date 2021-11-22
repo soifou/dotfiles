@@ -1,0 +1,3 @@
+!! Xcursor (some X11 programs may read it from here, i.e. wezterm)
+Xcursor.theme: capitaine-cursors
+Xcursor.size: 24

@@ -3,8 +3,11 @@
 ! Colors (disabled, I use pywal)
 ! #include "Xresources.d/colors"
 
-! Font Settings
-#include "Xresources.d/fonts"
+! Cursor
+#include "Xresources.d/cursor"
+
+! Font
+#include "Xresources.d/font"
 
 ! Terminals
 #include "Xresources.d/urxvt"
