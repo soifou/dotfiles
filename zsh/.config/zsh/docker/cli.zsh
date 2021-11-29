@@ -8,7 +8,7 @@ getContainerPath() {
     fi
 }
 php() {
-    # @NOTE: add custom port in case we want to use the build-in php webserver feature
+    # NOTE: add custom port in case we want to use the build-in php webserver feature
     # available in many php framework. (-p 8080:8080)
     # $ php bin/console server:run 0.0.0.0:8080
     # --add-host domain.test:172.17.0.5 \
@@ -53,7 +53,9 @@ composer() {
         -v $(pwd):/app \
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/composer:php-${PHP_VERSION:-8.0} ${@:1}
+        composer:latest ${@:1}
+        # soifou/composer:php-${PHP_VERSION:-8.0} ${@:1}
+
 }
 php7cc() {
     docker run -it --rm \

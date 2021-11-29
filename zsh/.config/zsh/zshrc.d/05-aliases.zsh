@@ -25,7 +25,6 @@ alias mr="mr -c $XDG_CONFIG_HOME/myrepos/config -t"
 alias yafc="yafc -W $XDG_CONFIG_HOME/yafc"
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 alias scummvm="scummvm -c $XDG_CONFIG_HOME"/scummvm/scummvmrc
-alias residualvm="residualvm -c $XDG_CONFIG_HOME"/residualvm/residualvmrc
 
 ## Git
 alias gaa='git add --all'
@@ -50,10 +49,6 @@ alias ghh='git h'        # show commits history
 alias gm='git bm'       # merge branch to current
 alias gmg='git mg'      # list merged branch(es)
 alias gmgd='git mgd'    # delete merged branch(es)
-
-## Docker
-alias dps='docker container ls --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}"'
-alias dsp='docker system prune -f && docker volume prune -f'
 
 # pastebin
 alias ix="curl -F 'f:1=<-' ix.io"

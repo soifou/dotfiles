@@ -1,0 +1,24 @@
+# Download all files from a gist
+[ $# -ne 2 ] && {
+    echo 'Missing arguments. Syntax: $ dlgist GIST_URL DOWNLOAD_PATH'
+    return
+}
+
+gist_url=$1
+download_path=$2
+mkdir -p $download_path
+echo '[*] Getting all GIST File URLs from '$gist_url
+gists=$(curl -ksL -H 'User-Agent: Mozilla/5.0' $gist_url | grep '<a\ .*href=".*/raw/' | sed 's/.*a\ .*href="//' | sed 's/".*//')
+echo '[*] Downloading all files'
+for lines in $(echo $gists | xargs -L1);
+do
+    [ ! -z $lines ] && {
+        echo $lines
+        gistfile=`echo $lines | sed 's/.*\///'`
+        save_as=$download_path"/"$gistfile
+        echo "Downloading URL: https://gist.github.com"$lines
+        echo "to "$save_as"....."
+        wget -c -O $save_as "https://gist.github.com"$lines
+    }
+done
+

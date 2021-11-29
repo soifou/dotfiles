@@ -130,9 +130,10 @@ if command -v asdf >/dev/null 2>&1; then
     }
 fi
 
-if command -v antibody >/dev/null 2>&1; then
-    yn "Update antibody?" && antibody update
-fi
+[ -f "$XDG_DATA_HOME"/zsh/znap/znap.zsh ] && {
+    yn "Update znap?" &&
+        zsh --singlecommand -c '. "$XDG_DATA_HOME"/zsh/znap/znap.zsh && znap pull && znap status'
+}
 
 if command -v cargo >/dev/null 2>&1; then
     if yn "Update global rust binaries?"; then

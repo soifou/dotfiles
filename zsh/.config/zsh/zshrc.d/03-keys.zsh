@@ -34,7 +34,7 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 export KEYTIMEOUT=1
 
 # Change cursor shape (beam or block) depending on vi mode (insert or normal)
-zle-keymap-select () {
+zle-keymap-select() {
     if [ "$TERM" = "xterm-256color" ] || [ "$TERM" = "xterm-kitty" ] || [ "$TERM" = "screen-256color" ]; then
         [ $KEYMAP = vicmd ] && echo -ne '\e[1 q' || echo -ne '\e[5 q'
     fi
@@ -51,10 +51,44 @@ zle-line-init() {
 }
 zle -N zle-line-init
 
+# Enhance vi mode text object for quote
+# ci", ci', ci`, di", etc
+autoload -U select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+    for c in {a,i}{\',\",\`}; do
+        bindkey -M $m $c select-quoted
+    done
+done
+
+# Enhance vi mode text object for brackets
+# ci{, ci(, ci<, di{, etc
+autoload -U select-bracketed
+zle -N select-bracketed
+for m in visual viopp; do
+    for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+        bindkey -M $m $c select-bracketed
+    done
+done
+
 # 'v' in visual mode opens vim to edit the command in a full editor.
-# autoload -U edit-command-line
-# zle -N edit-command-line
-# bindkey -M vicmd v edit-command-line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# Use c-z to toggle fg and bg
+# https://gist.github.com/CMCDragonkai/6084a504b6a7fee270670fc8f5887eb4
+toggle-ctrl-z() {
+    emulate -R zsh
+    if [[ $#BUFFER -eq 0 && -n $(jobs) ]]; then
+        fg
+        zle redisplay
+    else
+        zle push-input
+    fi
+}
+zle -N toggle-ctrl-z
+bindkey '^Z' toggle-ctrl-z
 
 # Different behaviour to delete words
 # zsh-backward-delete-word () {

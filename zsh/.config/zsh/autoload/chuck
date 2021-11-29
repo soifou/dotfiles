@@ -1,0 +1,2 @@
+# Print a chuck norris joke
+timeout 3 wget "http://api.icndb.com/jokes/random" -qO- | jq ".value | .joke" | tr -d '"'

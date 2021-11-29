@@ -2,6 +2,28 @@
 
 preexec_functions=()
 
+# [ "$TERM" = "xterm-kitty" ] && {
+#     # Update kitty title bar on directory change
+#     # Related config tab_title_template "{title}"
+#     if (( ${+commands[kitty]} )); then
+#         __preexec_kitty_update_tab_title() {
+#             cur=$(pwd)
+#             title="$(basename $cur)"
+#             [ "$HOME" = "$cur" ] && { title="~" ; }
+#             [ -d "$cur/.git" ] && { title=" $title" }
+#             # kitty @ set-tab-title "--match=id:$((KITTY_WINDOW_ID - 1))" "$(basename $(pwd))"
+#             kitty @ set-tab-title "$title"
+#         }
+#         precmd_functions+=(__preexec_kitty_update_tab_title)
+
+#         # docwhat-starship-preexec() {
+#         #   kitty @ set-tab-title "$1"
+#         # }
+#         # preexec_functions+=(docwhat-starship-preexec)
+#     fi
+#     # declare -Ua preexec_functions precmd_functions
+# }
+
 # Updates the GPG-Agent TTY before every command
 # https://www.gnupg.org/documentation/manuals/gnupg/Agent-Options.html
 __preexec_gpg_agent_update_tty() {
