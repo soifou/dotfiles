@@ -4,7 +4,6 @@ Host bitbucket.org
 
 Host *
     GlobalKnownHostsFile ~/.config/ssh/known_hosts
-    IdentityFile ~/.config/ssh/id_rsa.pub
     PasswordAuthentication no
     ChallengeResponseAuthentication no
     Compression yes
