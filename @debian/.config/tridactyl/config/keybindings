@@ -17,6 +17,8 @@ unbind L
 
 bind h back
 bind l forward
+bind gu urlparent
+bind gU urlroot
 
 bind H scrollpx -45
 bind L scrollpx +45
