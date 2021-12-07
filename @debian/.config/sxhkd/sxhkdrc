@@ -168,6 +168,10 @@ XF86Audio{Raise,Lower}Volume
 XF86AudioMute
     pactl set-sink-mute @DEFAULT_SINK@ toggle; xob-utils -u
 
+# notification control
+ctrl + { Escape, space }
+    dunstctl { history-pop, close }
+
 # music player
 super + z
     bsp-scratchpad music-player ncmpcpp-ueberzug
