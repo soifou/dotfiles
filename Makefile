@@ -19,6 +19,7 @@ install: init
 	stow kitty
 	stow lf
 	stow lftp
+	stow mpv
 	stow myrepos
 	stow ncmpcpp
 	stow newsboat
@@ -47,6 +48,7 @@ uninstall:
 	stow -D kitty
 	stow -D lf
 	stow -D lftp
+	stow -D mpv
 	stow -D myrepos
 	stow -D ncmpcpp
 	stow -D newsboat
