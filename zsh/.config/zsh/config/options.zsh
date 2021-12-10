@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+# See: https://zsh.sourceforge.io/Doc/Release/Options.html
+
 # Options
 setopt auto_cd                   # cd when just a path is entered
 setopt globdots                  # lets files beginning with a . be matched without explicitly specifying the dot.

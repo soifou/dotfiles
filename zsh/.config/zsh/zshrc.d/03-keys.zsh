@@ -90,6 +90,27 @@ toggle-ctrl-z() {
 zle -N toggle-ctrl-z
 bindkey '^Z' toggle-ctrl-z
 
+# Replace build-in <C-r> (backward incremental search)
+# with an fzf-driven, searchable list of history entries.
+# Credits: https://github.com/joshskidmore/zsh-fzf-history-search
+command -v fzf >/dev/null && {
+    fzf_history_search() {
+      candidates=(${(f)"$(fc -li -1 0 | fzf +s +m -x -e -q "$BUFFER")"})
+      local ret=$?
+      if [ -n "$candidates" ]; then
+        BUFFER="${candidates[@]/(#m)*/${${(As: :)MATCH}[4,-1]}}"
+        BUFFER="${BUFFER[@]/(#b)(?)\\n/$match[1]
+    }"
+        zle vi-fetch-history -n $BUFFER
+      fi
+      zle reset-prompt
+      return $ret
+    }
+    autoload fzf_history_search
+    zle -N fzf_history_search
+    bindkey '^r' fzf_history_search
+}
+
 # Different behaviour to delete words
 # zsh-backward-delete-word () {
 #     local WORDCHARS="${WORDCHARS:s#/#}"
