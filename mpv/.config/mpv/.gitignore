@@ -1,4 +1,6 @@
 script-opts/torque-progressbar/
-scripts/chapterskip.lua
-scripts/progressbar.lua
-scripts/sponsorblock_minimal.lua
+
+scripts/*
+!scripts/history.lua
+!scripts/notify.lua
+!scripts/redshift_toggle.lua
