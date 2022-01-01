@@ -5,53 +5,53 @@
 # Credits to ilsenatorov for the idea
 # https://github.com/ilsenatorov/dotfiles/blob/big/rofi/themeswitch.sh
 
+set -xe
+
 PYWAL_BACKEND=${PYWAL_BACKEND:-wal}
 PYWAL_SCRIPT=~/.local/bin/wal-changer
 WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
 mkdir -p "$WALLPAPER_PATH"
 
 _wal() {
-    wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT \
-        -e -q -n -i "$@" >/dev/null
+    wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT -e -q -n "$@" >/dev/null
 
     # Check if second argument exists, then set current theme to xresources
     # https://github.com/dylanaraps/pywal/issues/184
     THEME=dark
     [ -n "$2" ] && THEME=light
-    echo "*.theme: $THEME" >> "$XDG_CACHE_HOME"/wal/colors.Xresources
+    echo "*.theme: $THEME" >>"$XDG_CACHE_HOME"/wal/colors.Xresources
+}
+
+# fetch random wallpaper from unsplash
+_unsplash() {
+    RES=$(xrandr --nograb --current | awk '/\*/ {print $1}')
+    THEMES="today"
+    rm -f "$WALLPAPER_PATH/today"
+    curl -o "$WALLPAPER_PATH/${THEMES}" -J -L "https://source.unsplash.com/random/$RES" >/dev/null 2>&1
 }
 
 if [ -z "$@" ]; then
-    _options() { for o in random theme-light theme-dark; do echo "$o"; done; }
-    _themes() { find -L "$WALLPAPER_PATH" -type f -printf '%P\n' | sort; }
-    _options
-    _themes
+    for o in unsplash theme-light theme-dark theme-gruvbox theme-nord theme-onedark theme-random; do echo "$o"; done
+    find -L "$WALLPAPER_PATH" -type f -printf '%P\n' | sort
 else
     THEMES="$@"
 
     case "$THEMES" in
-    random)
-        # fetch random wallpaper from unsplash
-        XRANDR_BIN="$(whereis -b xrandr | awk '{print $2}')"
-        if [ -z "$XRANDR_BIN" ]; then
-            echo missing xrandr, please install dependencies
-            exit 1
-        fi
-        SCREEN_RES=$($XRANDR_BIN | awk '/ primary/{print $4}' | sed -e 's/+.*//g')
-        THEMES="today"
-        rm -f "$WALLPAPER_PATH/today"
-        curl -o "$WALLPAPER_PATH/${THEMES}" -J -L "https://source.unsplash.com/random/$SCREEN_RES" >/dev/null 2>&1
-        ;;
-    theme-light | theme-dark) ;; # nothing to do
-    *) ln -sf "$WALLPAPER_PATH/${THEMES}" "$WALLPAPER_PATH/today" ;;
+        unsplash) _unsplash ;;
+        theme-*) ;; # nothing to do
+        *) ln -sf "$WALLPAPER_PATH/${THEMES}" "$WALLPAPER_PATH/today" ;;
     esac
 
     # generate schemes based on selected wallpaper
     if [ -n "${THEMES}" ]; then
         # reload with light colors
-        [ x"theme-light" = x"${THEMES}" ] && _wal "$WALLPAPER_PATH/today" -l
-        # reload with dark colors
-        [ x"theme-dark" = x"${THEMES}" ] && _wal "$WALLPAPER_PATH/today"
+        [ x"theme-light" = x"${THEMES}" ] && _wal -i "$WALLPAPER_PATH/today" -l
+        [ x"theme-dark" = x"${THEMES}" ] && _wal -i "$WALLPAPER_PATH/today"
+        # load a random build-in colorscheme (does not match wallpaper)
+        [ x"theme-random" = x"${THEMES}" ] && _wal --theme random
+        [ x"theme-gruvbox" = x"${THEMES}" ] && _wal --theme base16-gruvbox-medium
+        [ x"theme-nord" = x"${THEMES}" ] && _wal --theme base16-nord
+        [ x"theme-onedark" = x"${THEMES}" ] && _wal --theme base16-onedark
         # apply selected theme with dark colors
         if [ -f "$WALLPAPER_PATH/${THEMES}" ]; then
             # Need to clear cache of previous colorschemes here
@@ -66,7 +66,7 @@ else
             #     for term in glob.glob(tty_pattern):
             #         if term != '/dev/pts/5':
             #             util.save_file(sequences, term)
-            _wal "$WALLPAPER_PATH/${THEMES}"
+            _wal -i "$WALLPAPER_PATH/${THEMES}"
         fi
     fi
 fi

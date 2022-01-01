@@ -6,8 +6,10 @@ _wallpaper() {
     # or a cinemagraph. Find out what it is, and launch with the appropriate program.
     WALL="$(cat "$XDG_CACHE_HOME"/wal/wal)"
     MIMETYPE=$(file --mime-type "$WALL" -bL)
-    pkill -9 xwinwrap
+
     pkill -9 paperview
+    [ -f "$XDG_CACHE_HOME"/mpvbg.pid ] && kill -9 "$(cat "$XDG_CACHE_HOME"/mpvbg.pid)"
+
     case "$MIMETYPE" in
     # Set wallpaper with feh
     *png* | *jpg* | *jpeg*) feh --no-fehbg --bg-fill "$WALL" & ;;
@@ -27,21 +29,15 @@ _wallpaper() {
         fi
         paperview "$GWF/$GFN" 5 &
         ;;
-    # Play a video on the root window with xwinwrap + mpv
-    # Credits: http://github.com/mitchweaver/bin
-    # @TODO: Apparently we don't need anymore xwinwrap (https://github.com/mitchweaver/bin/commit/39eee9759525a702198ef783916454198e1e3e18)
+    # Play a video on the root window with mpv
     # @see: https://github.com/joshua-sterner/mpvbg/blob/master/mpvbg.sh
     *webm* | *mp4* | *mkv*)
-        command -v xwinwrap >/dev/null 2>&1 || {
-            echo >&2 "Please install first xwinwrap (https://github.com/Aaahh/xwinwrap). Aborting."; exit 1;
-        }
-        xwinwrap -ni -b -ov -ni -s -nf -fs -- \
-            mpv --keepaspect=no --on-all-workspaces --no-config \
-                --no-input-default-bindings --no-stop-screensaver --loop-file \
-                --vd-lavc-fast --x11-bypass-compositor=no \
-                --no-audio --no-osc --no-osd-bar -wid WID \
-                "$WALL"> /dev/null 2>&1 &
-        ;;
+        mpv --no-config -wid 0 --keepaspect=no --loop --really-quiet --name=mpvbg --title=mpvbg "$WALL" &
+        echo $! >"$XDG_CACHE_HOME"/mpvbg.pid
+        # store our pid here so we can avoid killing our background later
+        # Example: $ kill $(pgrep mpv | grep -v $(pgrep -P $(cat $XDG_CACHE_HOME/mpvbg.pid)))
+        #           --- Here we are killing "all mpvs, except with THIS PID"
+        #           --- This lets us kill a video we're watching, without stopping our desktop background!
     esac
 }
 
@@ -96,6 +92,7 @@ _mpv() {
     echo "default-style=\\\fnserif\\\bord0\\\shad0\\\fs20\\\c&H$(rgb_to_brg color2)&\\\3c&H$(rgb_to_brg color4)&
 bar-height-inactive=3
 bar-height-active=10
+bar-hide-inactive=yes
 bar-default-style=\\\bord0\\\shad0
 bar-foreground-style=
 bar-cache-style=\\\c&H$(rgb_to_brg color2)&
@@ -112,15 +109,23 @@ rgb_to_brg() {
 }
 
 _pywalfox() {
-    echo ":: pywalfox reload"
-    # Reload pywalfox extension (https://github.com/Frewacom/Pywalfox)
-    command -v pywalfox >/dev/null 2>&1 && pywalfox update
+    pidof firefox >/dev/null && {
+        echo ":: pywalfox reload"
+        # Reload pywalfox extension (https://github.com/Frewacom/Pywalfox)
+        command -v pywalfox >/dev/null 2>&1 && pywalfox update
+    }
 }
 
 _zathura() {
     echo ":: zathura reload"
     mkdir -p "$XDG_CONFIG_HOME"/zathura
     cat "$XDG_CACHE_HOME"/wal/zathurarc > "$XDG_CONFIG_HOME"/zathura/zathurarc
+}
+
+_delta() {
+    echo ":: delta theme reload"
+    mkdir -p "$XDG_CONFIG_HOME"/git
+    cat "$XDG_CACHE_HOME"/wal/colors-delta > "$XDG_CONFIG_HOME"/git/delta-theme
 }
 
 _xob() {
@@ -143,6 +148,7 @@ _pywalfox
 _mpv
 _dunst
 _zathura
+_delta
 _xob
 _kitty
 _nvim

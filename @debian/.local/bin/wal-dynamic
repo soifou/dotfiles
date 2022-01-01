@@ -1,0 +1,41 @@
+#!/usr/bin/env sh
+
+# Update current dynamic wallpaper if there is one currently set.
+# This script is meant to be executed hourly in a crontab
+# @hourly ~/.local/bin/wal-dynamic
+# Dependencies: pywal, wal-switcher
+# Credits: https://github.com/adi1090x/dynamic-wallpaper
+
+set -xe
+
+# Need to set vital environment variables because I use them in several scripts
+# TODO: only some vars in $HOME/.local/env is needed not in env.local
+[ -f "$HOME"/.local/env ] && . "$HOME"/.local/env
+# Set some variables for this script only
+# enhance path to find pywal and my custom "wal-switcher" script
+PATH="$XDG_LOCAL_HOME/share/asdf/shims:$XDG_LOCAL_HOME/bin:$PATH"
+WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
+WALL_CURRENT=$(readlink "$WALLPAPER_PATH"/today | sed "s|$WALLPAPER_PATH/||g")
+# The wallpaper type: static, dynamic or animated
+WALL_TYPE=$(echo "$WALL_CURRENT" | awk -F/ '{print $1}')
+
+[ "$WALL_TYPE" = "dynamic" ] && {
+    # get the current theme
+    WALL_THEME=$(echo "$WALL_CURRENT" | awk -F/ '{print $2}')
+
+    # get current hour
+    HOUR=$(date +%k)
+    HOUR=$(($HOUR/1))
+
+    # get image extension, this could be either PNG, JPG or JPEG
+    FORMAT=$(find $WALLPAPER_PATH/$WALL_TYPE/$WALL_THEME/ -name "$HOUR.*" -printf "%f\n" | sed "s|$HOUR.||g")
+
+    # check the new wallpaper has not been set already
+    echo "Want to set $WALL_TYPE/$WALL_THEME/$HOUR.$FORMAT"
+    if [ "$(readlink "$WALLPAPER_PATH"/today)" != "$WALLPAPER_PATH/$WALL_TYPE/$WALL_THEME/$HOUR.$FORMAT" ]; then
+        echo "Setting new $WALL_TYPE wall for theme $WALL_THEME..."
+        wal-switcher "$WALL_TYPE/$WALL_THEME/$HOUR.$FORMAT"
+    else
+        echo "Already set for the current time!"
+    fi
+}

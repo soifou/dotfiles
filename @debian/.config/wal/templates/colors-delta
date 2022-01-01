@@ -1,0 +1,20 @@
+[delta "wal"]
+    commit-decoration-style = bold box ul
+    dark = true
+    file-decoration-style = none
+    file-style = omit
+    hunk-header-decoration-style = "{color6}" box ul
+    hunk-header-file-style = "#999999"
+    hunk-header-line-number-style = bold "{color2}"
+    hunk-header-style = file line-number syntax
+    line-numbers = true
+    line-numbers-left-style = "{color6}"
+    line-numbers-minus-style = "{color1}"
+    line-numbers-plus-style = "{color2}"
+    line-numbers-right-style = "{color6}"
+    line-numbers-zero-style = "#999999"
+    minus-emph-style = normal "{color1}"
+    minus-style = normal "{color9}"
+    plus-emph-style = syntax "{color4}"
+    plus-style = syntax "{color10}"
+
