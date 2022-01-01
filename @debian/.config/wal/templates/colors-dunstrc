@@ -7,7 +7,6 @@
     icon_path = /usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/48x48/places/:/usr/share/icons/Papirus/48x48/mimetypes/:/usr/share/icons/Papirus/48x48/devices/:/usr/share/icons/Papirus/48x48/apps/
     max_icon_size = 64
     separator_color = "{color4}"
-    startup_notification = false
     frame_width = 2
     frame_color = "{color4}"
 
