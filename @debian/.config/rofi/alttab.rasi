@@ -1,6 +1,4 @@
 configuration {
-    font: "mono 13";
-    icon-theme: "Papirus";
     window-format: "{w}: {c}";
     show-icons: true;
     window-thumbnail: true;
