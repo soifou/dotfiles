@@ -19,10 +19,6 @@
 () { [ -r $1 ] && . $1 } "$XDG_CACHE_HOME"/p10k-instant-prompt-$USER.zsh
 
 #-----------------------------------------------------
-# Load options
-() { [ -f $1 ] && . $1 } "$ZDOTDIR"/config/options.zsh
-
-#-----------------------------------------------------
 # Load completions
 fpath=(
     "$ZDOTDIR"/completions
@@ -57,6 +53,10 @@ zstyle ':znap:*:*' git-maintenance off
 unset znap_dir
 # Load defer script
 znap source romkatv/zsh-defer
+
+#-----------------------------------------------------
+# Load options
+() { [ -f $1 ] && . $1 } "$ZDOTDIR"/config/options.zsh
 
 #-----------------------------------------------------
 # Load zsh config by deferring them
