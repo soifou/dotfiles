@@ -31,6 +31,7 @@ install: init
 	stow -d sublime @linux
 	stow tremc
 	stow w3m
+	stow wezterm
 	stow wget
 	stow yamllint
 	stow yarn
@@ -61,6 +62,7 @@ uninstall:
 	stow -D tremc
 	stow -D w3m
 	stow -D wget
+	stow -D wezterm
 	stow -D yamllint
 	stow -D yarn
 	stow -D zsh
