@@ -2,6 +2,10 @@
 
 VOLUME_PIPE=/tmp/xob-vol.fifo
 
+# Requirements: pulseaudio-utils (pactl)
+# TODO: migrate to pw-cli (pipewire)
+# https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Migrate-PulseAudio#sinksource-port-volumemuteport-latency
+
 _clean() {
     [ -p "$1" ] && {
         fuser -TERM -s -k "$1"
@@ -18,8 +22,8 @@ _start() {
 
 _update() {
     pgrep -x xob >/dev/null && {
-        VOL=$(pacmd list-sinks | grep -A 15 '* index' | awk '/volume: front/{ print $5 }' | sed 's/[%|,]//g')
-        [ "$(pacmd list-sinks | grep -A 15 '* index' | awk '/muted:/{ print $2 }')" = "yes" ] && VOL="$VOL!"
+        VOL=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/[%|,]//g')
+        [ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" = "yes" ] && VOL="$VOL!"
         echo "$VOL" >>$VOLUME_PIPE
     }
 }
