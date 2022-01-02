@@ -180,9 +180,9 @@ super + z
 super + shift + f
     bsp-scratchpad lf
 
-# torrent
-super + x ; 0
-    bsp-scratchpad tremc
+# torrent, youtube
+super + x ; {0,9}
+    bsp-scratchpad {tremc,ytfzf}
 
 # screenshot
 Print + {_,super,super + shift, super + alt}
