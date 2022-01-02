@@ -1,15 +1,33 @@
 #ifdef _WINDOW_CONFIG
 
 /* default window dimensions (overwritten via -g option): */
-enum {
-	WIN_WIDTH  = 800,
-	WIN_HEIGHT = 600
-};
+static const int WIN_WIDTH  = 800;
+static const int WIN_HEIGHT = 600;
 
-/* colors and font are configured with 'background', 'foreground' and
- * 'font' X resource properties.
- * See X(7) section Resources and xrdb(1) for more information.
+/* colors and font can be overwritten via X resource properties.
+ * See nsxiv(1), X(7) section Resources and xrdb(1) for more information.
  */
+static const char *DEFAULT_WIN_BG     = "white";
+static const char *DEFAULT_WIN_FG     = "black";
+static const char *DEFAULT_MARK_COLOR = NULL;  /* NULL means it will default to window foreground */
+#if HAVE_LIBFONTS
+static const char *DEFAULT_BAR_BG     = NULL;  /* NULL means it will default to window background */
+static const char *DEFAULT_BAR_FG     = NULL;  /* NULL means it will default to window foreground */
+static const char *DEFAULT_FONT       = "monospace-8";
+#endif
+
+#endif
+#ifdef _TITLE_CONFIG
+
+/* default title prefix */
+static const char *TITLE_PREFIX = "nsxiv - ";
+
+/* default title suffixmode, available options are:
+ * SUFFIX_EMPTY
+ * SUFFIX_BASENAME
+ * SUFFIX_FULLPATH
+ */
+static const suffixmode_t TITLE_SUFFIXMODE = SUFFIX_BASENAME;
 
 #endif
 #ifdef _IMAGE_CONFIG
@@ -23,11 +41,11 @@ static const float zoom_levels[] = {
 };
 
 /* default slideshow delay (in sec, overwritten via -S option): */
-enum { SLIDESHOW_DELAY = 5 };
+static const int SLIDESHOW_DELAY = 5;
 
 /* gamma correction: the user-visible ranges [-GAMMA_RANGE, 0] and
  * (0, GAMMA_RANGE] are mapped to the ranges [0, 1], and (1, GAMMA_MAX].
- * */
+ */
 static const double GAMMA_MAX   = 10.0;
 static const int    GAMMA_RANGE = 32;
 
@@ -44,6 +62,15 @@ static const bool ANTI_ALIAS = true;
  */
 static const bool ALPHA_LAYER = false;
 
+/* percentage of memory to use for imlib2's cache size.
+ *   3 means use 3% of total memory which is about 245MiB on 8GiB machine.
+ *   0 or less means disable cache.
+ * 100 means use all available memory (but not above CACHE_SIZE_LIMIT).
+ */
+static const int CACHE_SIZE_MEM_PERCENTAGE = 3;          /* use 3% of total memory for cache */
+static const int CACHE_SIZE_LIMIT = 256 * 1024 * 1024;   /* but not above 256MiB */
+static const int CACHE_SIZE_FALLBACK = 32 * 1024 * 1024; /* fallback to 32MiB if we can't determine total memory */
+
 #endif
 #ifdef _THUMBS_CONFIG
 
@@ -56,10 +83,16 @@ static const int THUMB_SIZE = 3;
 #endif
 #ifdef _MAPPINGS_CONFIG
 
+/* these modifiers will be used when processing keybindings */
+static const unsigned int USED_MODMASK = ShiftMask | ControlMask | Mod1Mask;
+
+/* abort the keyhandler */
+static const KeySym KEYHANDLER_ABORT = XK_Escape;
+
 /* keyboard mappings for image and thumbnail mode: */
 static const keymap_t keys[] = {
 	/* modifiers    key               function              argument */
-	{ 0,            XK_q,             g_quit,               None },
+	{ 0,            XK_q,             g_quit,               0 },
 	{ 0,            XK_Return,        g_switch_mode,        None },
 	{ 0,            XK_f,             g_toggle_fullscreen,  None },
 	{ 0,            XK_b,             g_toggle_bar,         None },
@@ -76,9 +109,9 @@ static const keymap_t keys[] = {
 	{ ControlMask,  XK_Up,            g_scroll_screen,      DIR_UP },
 	{ ControlMask,  XK_l,             g_scroll_screen,      DIR_RIGHT },
 	{ ControlMask,  XK_Right,         g_scroll_screen,      DIR_RIGHT },
-	{ 0,            XK_K,             g_zoom,               -1 },
-	{ 0,            XK_KP_Add,        g_zoom,               +1 },
 	{ 0,            XK_J,             g_zoom,               +1 },
+	{ 0,            XK_KP_Add,        g_zoom,               +1 },
+	{ 0,            XK_K,             g_zoom,               -1 },
 	{ 0,            XK_KP_Subtract,   g_zoom,               -1 },
 	{ 0,            XK_m,             g_toggle_image_mark,  None },
 	{ 0,            XK_M,             g_mark_range,         None },
@@ -112,6 +145,7 @@ static const keymap_t keys[] = {
 	{ ControlMask,  XK_n,             i_navigate_frame,     +1 },
 	{ ControlMask,  XK_p,             i_navigate_frame,     -1 },
 	{ ControlMask,  XK_space,         i_toggle_animation,   None },
+	{ ControlMask,  XK_a,             i_toggle_animation,   None },
 	{ 0,            XK_h,             i_scroll,             DIR_LEFT },
 	{ 0,            XK_Left,          i_scroll,             DIR_LEFT },
 	{ 0,            XK_j,             i_scroll,             DIR_DOWN },
@@ -127,6 +161,7 @@ static const keymap_t keys[] = {
 	{ 0,            XK_equal,         i_set_zoom,           100 },
 	{ 0,            XK_w,             i_fit_to_win,         SCALE_DOWN },
 	{ 0,            XK_W,             i_fit_to_win,         SCALE_FIT },
+	{ 0,            XK_F,             i_fit_to_win,         SCALE_FILL },
 	{ 0,            XK_e,             i_fit_to_win,         SCALE_WIDTH },
 	{ 0,            XK_E,             i_fit_to_win,         SCALE_HEIGHT },
 	{ 0,            XK_less,          i_rotate,             DEGREE_270 },
@@ -143,10 +178,21 @@ static const keymap_t keys[] = {
 static const button_t buttons[] = {
 	/* modifiers    button            function              argument */
 	{ 0,            1,                i_cursor_navigate,    None },
+	{ ControlMask,  1,                i_drag,               DRAG_RELATIVE },
 	{ 0,            2,                i_drag,               DRAG_ABSOLUTE },
 	{ 0,            3,                g_switch_mode,        None },
 	{ 0,            4,                g_zoom,               +1 },
 	{ 0,            5,                g_zoom,               -1 },
+};
+
+/* true means NAV_WIDTH is relative (33%), false means absolute (33 pixels) */
+static const bool NAV_IS_REL = true;
+/* width of navigation area, 0 disables cursor navigation, */
+static const unsigned int NAV_WIDTH = 33;
+
+/* mouse cursor on left, middle and right part of the window */
+static const cursor_t imgcursor[3] = {
+	CURSOR_LEFT, CURSOR_ARROW, CURSOR_RIGHT
 };
 
 #endif
