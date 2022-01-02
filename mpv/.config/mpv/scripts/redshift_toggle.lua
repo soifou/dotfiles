@@ -9,6 +9,7 @@ rs_enabled = true
 function rs_disable()
     if rs_enabled then
         os.execute("redshift-cli -t >/dev/null")
+        os.execute("polybar-msg hook redshift 1 >/dev/null")
         rs_enabled = false
         mp.msg.log("info", "Disabling redshift")
     end
