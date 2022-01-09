@@ -44,7 +44,8 @@ for app in mpv scummvm Firefox:Places Firefox:Browser; do
     _r $app state=floating;
 done
 # center floating, sticky and with a custom size
-for app in mailto music-player tremc lf ytfzf; do
+bspc rule -a "*:music-player" state=floating center=true rectangle=930x400+0+0
+for app in mailto tremc lf ytfzf; do
     _r "*:$app" state=floating center=true sticky=true rectangle=1200x600+0+0
 done
 # bottom floating and sticky
