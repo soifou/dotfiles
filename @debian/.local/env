@@ -61,6 +61,8 @@ export HOMEBREW_PREFIX="$XDG_DATA_HOME"/brew
 export HISTFILE="$XDG_DATA_HOME"/zsh/history
 export KODI_DATA="$XDG_DATA_HOME"/kodi
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
+export TERMINFO="$XDG_DATA_HOME"/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
 export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
 export XCURSOR_PATH=${XCURSOR_PATH}:$XDG_DATA_HOME/icons
 
