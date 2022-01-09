@@ -46,7 +46,7 @@ znap_dir="$XDG_DATA_HOME"/zsh/znap
         https://github.com/marlonrichert/zsh-snap "$znap_dir"
 }
 # Set specific location for plugins dir
-zstyle ':znap:*' plugins-dir $XDG_DATA_HOME/zsh/plugins
+zstyle ':znap:*' plugins-dir $XDG_DATA_HOME/zsh
 # Turn off git maintenance
 zstyle ':znap:*:*' git-maintenance off
 . "$znap_dir"/znap.zsh
