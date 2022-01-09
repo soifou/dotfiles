@@ -78,15 +78,7 @@ bindkey -M vicmd v edit-command-line
 
 # Use c-z to toggle fg and bg
 # https://gist.github.com/CMCDragonkai/6084a504b6a7fee270670fc8f5887eb4
-toggle-ctrl-z() {
-    emulate -R zsh
-    if [[ $#BUFFER -eq 0 && -n $(jobs) ]]; then
-        fg
-        zle redisplay
-    else
-        zle push-input
-    fi
-}
+toggle-ctrl-z() { fg; }
 zle -N toggle-ctrl-z
 bindkey '^Z' toggle-ctrl-z
 
