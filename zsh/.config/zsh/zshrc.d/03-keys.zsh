@@ -76,6 +76,14 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
+# paste yanks to system clipboard
+vi-yank-xclip() {
+    zle vi-yank
+    echo "$CUTBUFFER" | xclip -sel clip
+}
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
+
 # Use c-z to toggle fg and bg
 # https://gist.github.com/CMCDragonkai/6084a504b6a7fee270670fc8f5887eb4
 toggle-ctrl-z() { fg; }
