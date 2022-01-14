@@ -27,10 +27,8 @@
         context                   # user@host
         dir                       # current directory
         vcs                       # git status
-        # command_execution_time  # previous command duration
         # =========================[ Line #2 ]=========================
         newline                   # \n
-        # virtualenv              # python virtual environment
         prompt_char               # prompt symbol
     )
 
@@ -38,9 +36,7 @@
     typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
         # =========================[ Line #1 ]=========================
         command_execution_time    # previous command duration
-        virtualenv                # python virtual environment
-        # context                 # user@host
-        # time                    # current time
+        time                      # current time
         # =========================[ Line #2 ]=========================
         newline                   # \n
     )
@@ -228,7 +224,7 @@
     # If set to true, time will update when you hit enter. This way prompts for the past
     # commands will contain the start times of their commands rather than the end times of
     # their preceding commands.
-    typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=false
+    typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=true
 
     # Transient prompt works similarly to the builtin transient_rprompt option. It trims down prompt
     # when accepting a command line. Supported values:
