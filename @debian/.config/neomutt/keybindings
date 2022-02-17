@@ -1,3 +1,6 @@
+# See: https://neomutt.org/guide/configuration.html#6-%C2%A0changing-the-default-key-bindings
+# Note, hitting ? on each view (index, pager, ...) show a list of current (un)mapped bindings
+
 # Disable
 bind index,pager i noop
 bind index,pager g noop
@@ -35,6 +38,8 @@ bind index,pager S sync-mailbox
 bind index,pager R group-reply
 bind index,pager @ compose-to-sender
 bind editor <Tab> complete-query
+bind index,pager \Cd half-down
+bind index,pager \Cu half-up
 
 # Mouse wheel
 bind index \031 previous-undeleted
