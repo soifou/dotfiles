@@ -46,25 +46,25 @@ unset h
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # set cache file for completions
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompletions-$ZSH_VERSION
+# zstyle ':completion:*' use-cache on
+# zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zcompletions-$ZSH_VERSION
 
 # Compile the completion dump to increase startup speed, if dump is newer or doesn't exist,
 # in the background as this is doesn't affect the current session
-_zpcompinit_custom() {
-    setopt extendedglob local_options
-    autoload -Uz compinit
-    local zcd="$XDG_CACHE_HOME/zcompdump-$ZSH_VERSION"
-    local zcdc="$zcd.zwc"
-    if [[ -f "$zcd"(#qN.m+1) ]]; then
-        compinit -i -d "$zcd"
-        { rm -f "$zcdc" && zcompile "$zcd" } &!
-    else
-        compinit -C -d "$zcd"
-        { [[ ! -f "$zcdc" || "$zcd" -nt "$zcdc" ]] && rm -f "$zcdc" && zcompile "$zcd" } &!
-    fi
-}
-_zpcompinit_custom
+# _zpcompinit_custom() {
+#     setopt extendedglob local_options
+#     autoload -Uz compinit
+#     local zcd="$XDG_CACHE_HOME/zcompdump-$ZSH_VERSION"
+#     local zcdc="$zcd.zwc"
+#     if [[ -f "$zcd"(#qN.m+1) ]]; then
+#         compinit -i -d "$zcd"
+#         { rm -f "$zcdc" && zcompile "$zcd" } &!
+#     else
+#         compinit -C -d "$zcd"
+#         { [[ ! -f "$zcdc" || "$zcd" -nt "$zcdc" ]] && rm -f "$zcdc" && zcompile "$zcd" } &!
+#     fi
+# }
+# _zpcompinit_custom
 
 # Disable higlighted paste
 zle_highlight=('paste:none')
