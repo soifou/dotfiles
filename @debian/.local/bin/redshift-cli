@@ -66,13 +66,14 @@ _brightness() {
     [ "$result" = "1" ] && echo "$brightness" >"$tmpfile"
 }
 
+_off() {
+    redshift -m $method -x
+    touch "$tmpfile".lock
+}
+_on() { rm -f "$tmpfile".lock; }
+
 _toggle() {
-    if [ -f "$tmpfile".lock ]; then
-        rm -f "$tmpfile".lock
-    else
-        redshift -m $method -x
-        touch "$tmpfile".lock
-    fi
+    [ -f "$tmpfile".lock ] && _on || _off
     _display
 }
 
@@ -86,6 +87,8 @@ case "$1" in
         [ ! -f $tmpfile.lock ] && _adjust
         _display
         ;;
+    --on) _on ;;
+    --off) _off ;;
     -t | --toggle) _toggle ;;
     -h | --help | *) _help ;;
 esac
