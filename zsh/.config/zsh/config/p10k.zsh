@@ -52,6 +52,8 @@
     # in Pure that makes prompt drift down whenever you use the Alt-C binding from fzf or similar.
     typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
+    # Enable kitty terminal-shell integration in Powerlevel10k
+    typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
     ################################[ prompt_char: prompt symbol ]################################
 
     # Magenta prompt symbol if the last command succeeded.
