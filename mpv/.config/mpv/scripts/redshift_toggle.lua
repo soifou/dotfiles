@@ -15,7 +15,7 @@ local rs_enabled = true
 
 local function rs_toggle(enabled)
     os.execute("redshift-cli -t >/dev/null")
-    os.execute("polybar-msg hook redshift 1 >/dev/null")
+    os.execute("polybar-msg action \"#redshift.hook.0\" >/dev/null")
     rs_enabled = enabled
 end
 

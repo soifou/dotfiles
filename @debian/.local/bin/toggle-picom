@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
 if pgrep -x picom >/dev/null 2>&1; then
-    polybar-msg hook picom 1
+    polybar-msg action "#picom.hook.0"
     pkill -9 picom
 else
-    polybar-msg hook picom 2
+    polybar-msg action "#picom.hook.1"
     picom -b --experimental-backends
 fi

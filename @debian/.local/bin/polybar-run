@@ -20,10 +20,10 @@ start() {
         # for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
         # for the last one connected on the list
         for m in $(xrandr --query | grep " connected" | cut -d" " -f1 | tail -n1); do
-            SHELL=$(command -v sh) MONITOR=$m polybar -q -c "$XDG_CONFIG_HOME"/polybar/config -r "$POLYBAR_BAR" &
+            SHELL=$(command -v sh) MONITOR=$m polybar -q -r "$POLYBAR_BAR" &
         done
     else
-        SHELL=$(command -v sh) polybar -q -c "$XDG_CONFIG_HOME"/polybar/config -r "$POLYBAR_BAR" &
+        SHELL=$(command -v sh) polybar -q -r "$POLYBAR_BAR" &
     fi
 }
 
