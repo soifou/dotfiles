@@ -14,12 +14,13 @@ local config = {
     hide_tab_bar_if_only_one_tab = true,
     default_cursor_style = "BlinkingBar",
     window_padding = { top = 30, bottom = 30, left = 40, right = 40 },
-    inactive_pane_hsb = { saturation = 1.0, brightness = 1.0 },
+    inactive_pane_hsb = { saturation = 0.9, brightness = 0.8 },
+    term = "wezterm",
 }
 
 local files = { "mapping", "font", "color" }
 for _, f in ipairs(files) do
-    config = merge(config, require("conf." .. f))
+    config = merge(config, require(("conf.%s"):format(f)))
 end
 
 return config

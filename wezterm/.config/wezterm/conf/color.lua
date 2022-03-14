@@ -11,11 +11,6 @@ local xres_colors = function()
     scheme.background = string.match(query, "*.background:[^#]*(#[%a%d]+)")
     scheme.foreground = string.match(query, "*.foreground:[^#]*(#[%a%d]+)")
 
-    -- local theme = string.match(query, "*.theme:[%s]+([%a]+)")
-    -- if theme ~= nil then
-    --     scheme.theme = theme
-    -- end
-
     return scheme
 end
 local xrdb = xres_colors()
@@ -58,8 +53,11 @@ return {
         cursor_bg = xrdb.color3,
         cursor_fg = "black",
         cursor_border = xrdb.color5,
-        selection_fg = xrdb.color3,
-        selection_bg = lighten(xrdb.background, 0.97),
+        -- selection_fg = xrdb.color3,
+        -- selection_bg = lighten(xrdb.background, 0.97),
+        -- See: https://github.com/wez/wezterm/commit/8cb74c62d203303e6de823c935bbe0340314542e
+        selection_fg = "clear",
+        selection_bg = "rgba:50% 50% 50% 50%",
         scrollbar_thumb = "#222222",
         split = lighten(xrdb.background, 0.90),
         ansi = {
