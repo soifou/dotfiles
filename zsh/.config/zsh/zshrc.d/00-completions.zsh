@@ -14,6 +14,10 @@ command -v pip >/dev/null && {
     znap eval kitty 'kitty + complete setup zsh'
 }
 
+command -v pnpm >/dev/null && {
+    () { [ -f $1 ] && . $1 } "$XDG_CONFIG_HOME"/tabtab/zsh/pnpm.zsh
+}
+
 command -v zoxide >/dev/null && {
     export _ZO_EXCLUDE_DIRS="/mnt:/tmp"
     znap eval zoxide 'zoxide init zsh'
