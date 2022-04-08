@@ -28,7 +28,8 @@ _o() {
         inode/directory) term --class=floating lf "$1" ;;
         text/html) "$BROWSER" "$1" ;;
         text/*) term --class=floating "$EDITOR" "$1" ;;
-        *) xdg-open "$1" ;;
+        # fallback
+        *) /usr/bin/xdg-open "$1" ;;
     esac
 }
 

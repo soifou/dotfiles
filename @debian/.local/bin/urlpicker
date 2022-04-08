@@ -1,7 +1,12 @@
 #!/usr/bin/env sh
 
 # Extract and open URLs from stdin (like urlview/urlscan).
-# Dependencies: xurls, fzf
+# Dependencies: xurls, fzf, xclip
+
+# $ urlpicker "http://website.org"
+# $ echo "http://website.org" | urlpicker
+
+OPENER=xdg-open
 
 fzf_cmd() {
     fzf -d 35% --multi --exit-0 --cycle --no-preview \
@@ -10,7 +15,10 @@ fzf_cmd() {
         --bind 'ctrl-y:execute-silent(echo {+} | xclip -se c)'
 }
 
-xurls |
+_process() {
     sort -u |
-    fzf_cmd |
-    xargs -I {} ~/.local/bin/linkhandler {} >/dev/null
+        fzf_cmd |
+        xargs -I {} $OPENER {} >/dev/null
+}
+
+[ -z "$1" ] && xurls | _process || echo "$1" | xurls | _process

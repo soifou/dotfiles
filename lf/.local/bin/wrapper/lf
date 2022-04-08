@@ -2,8 +2,7 @@
 
 set -e
 
-# export OPENER="$XDG_CONFIG_HOME"/lf/open
-export OPENER=linkhandler
+export OPENER=xdg-open
 
 # See: https://github.com/gokcehan/lf/wiki/Icons
 # To match icons from exa, see: https://github.com/mtoohey31/lf-exa-icons

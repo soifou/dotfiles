@@ -23,7 +23,7 @@ show-title-bar no
 
 # Better to have already a GUI browser running
 # see: https://github.com/newsboat/newsboat/issues/800#issuecomment-600869425
-browser linkhandler
+browser xdg-open
 
 external-url-viewer $URLVIEWER
 bind-key U show-urls

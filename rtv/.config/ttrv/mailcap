@@ -1,5 +1,5 @@
 image/x-imgur-album; feh --no-fehbg -B black -g 640x480 %s; test=test -n "$DISPLAY"
-image/*; linkhandler '%s'
+image/*; xdg-open '%s'
 video/x-youtube; mpv --ytdl-format=bestvideo+bestaudio/best '%s'; test=test -n "$DISPLAY"
 video/*; mpv '%s' --loop=inf; test=test -n "$DISPLAY"
-text/html; linkhandler '%s'
+text/html; xdg-open '%s'

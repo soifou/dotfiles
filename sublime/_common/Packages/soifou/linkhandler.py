@@ -10,7 +10,7 @@ class Linkhandler(sublime_plugin.EventListener):
     # ^ that up here is a URL that should be matched
     URL_REGEX = "\\bhttps?://[-A-Za-z0-9+&@#/%?=~_()|!:,.;']*[-A-Za-z0-9+&@#/%=~_(|]"
     DEFAULT_MAX_URLS = 200
-    DEFAULT_OPENER = "linkhandler"
+    DEFAULT_OPENER = "xdg-open"
     SETTINGS_FILENAME = 'Linkhandler.sublime-settings'
 
     urls_for_view = {}
