@@ -37,6 +37,7 @@ bind } followpage next
 bind / fillcmdline find
 bind <C-f> fillcmdline find
 bind n findnext 1
+bind N findnext -1
 bind p findnext -1
 bind ,/ nohlsearch
 set findcase smart
