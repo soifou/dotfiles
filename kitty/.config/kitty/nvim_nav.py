@@ -4,7 +4,6 @@ import re
 from typing import Any, Sequence, cast
 
 from kittens.tui.handler import result_handler
-from kitty.fast_data_types import encode_key_for_tty
 from kitty.key_encoding import KeyEvent, parse_shortcut
 from kitty.typing import BossType, EdgeLiteral
 from kitty.window import Window
@@ -30,7 +29,7 @@ def window_has_navigable_proc(window: Window):
     return False
 
 
-def encode_key_mapping(key_mapping: str):
+def encode_key_mapping(window: Window, key_mapping: str):
     mods, key = parse_shortcut(key_mapping)
     event = KeyEvent(
         mods=mods,
@@ -43,9 +42,7 @@ def encode_key_mapping(key_mapping: str):
         meta=bool(mods & 32),
     ).as_window_system_event()
 
-    return encode_key_for_tty(
-        event.key, event.shifted_key, event.alternate_key, event.mods, event.action
-    )
+    return window.encoded_key(event)
 
 
 @result_handler(no_ui=True)
@@ -62,7 +59,7 @@ def handle_result(
     if source == "kitty":
         if window_has_navigable_proc(window) and not window_has_pager(window):
             key_mapping = args[3]
-            encoded = encode_key_mapping(key_mapping)
+            encoded = encode_key_mapping(window, key_mapping)
             window.write_to_child(encoded)
             return
 
@@ -72,4 +69,3 @@ def handle_result(
 
 def main():
     pass
-
