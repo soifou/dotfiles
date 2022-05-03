@@ -68,8 +68,10 @@ for i = 1, 9 do
     })
 end
 
--- Move between panes and vim splits
--- FIXME: Currently not able to control pane from external program
+-- Move between terminal panes and vim splits seamlessly
+-- FIXME: Currently not able to control pane from external program (here vim)
+-- So we cannot go out from a vim split to a neighbour terminal pane
+-- See discussion: https://github.com/wez/wezterm/discussions/995
 local basename = function(s)
     return string.gsub(s, "(.*[/\\])(.*)", "%2")
 end
