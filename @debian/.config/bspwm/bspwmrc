@@ -40,7 +40,7 @@ for app in neomutt weechat skype Signal whatsapp mattermost; do
     _r $app desktop='^4'
 done
 # floating
-for app in mpv scummvm Firefox:Places Firefox:Browser; do
+for app in mpv scummvm firefox:Places firefox:Browser; do
     _r $app state=floating;
 done
 # center floating, sticky and with a custom size
@@ -49,7 +49,7 @@ for app in mailto tremc lf ytfzf; do
     _r "*:$app" state=floating center=true sticky=true rectangle=1200x600+0+0
 done
 # bottom floating and sticky
-for app in '*:*:mpv-webcam' Firefox:Toolkit; do
+for app in '*:*:mpv-webcam' firefox:Toolkit; do
     _r "$app" state=floating sticky=true layer=above manage=off border=off
 done
 # force some apps to be tiled
