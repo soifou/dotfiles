@@ -54,6 +54,10 @@ def handle_result(
         return
 
     source = args[1]
+
+    # Convert up/down directions to their actual meaning
+    # EdgeLiteral = Literal['left', 'top', 'right', 'bottom']
+    args[2] = 'top' if args[2] == 'up' else ('bottom' if args[2] == 'down' else args[2])
     direction = cast(EdgeLiteral, args[2])
 
     if source == "kitty":
