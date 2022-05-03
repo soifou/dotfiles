@@ -1,4 +1,5 @@
 [alias]
+    c = commit
     hist = log --pretty=format:'%C(auto)%h%Creset » %d%s %Cgreen(%cr) %C(bold red)<%an>%Creset' --abbrev-commit
     ignored = !git ls-files -v | grep "^[[:lower:]]"
     count-commits = shortlog -sn
@@ -28,7 +29,7 @@
             }\
         }\
     };f"
-    
+
     # checkout branch
     co = "!f() {\
         [ $# -ge 1 ] && git checkout ${@} || {\
@@ -38,7 +39,7 @@
             }\
         }\
     };f"
-    
+
     # merge branch to current
     bm = "!f() {\
         [ $# -ge 1 ] && git merge ${@} || {\
@@ -48,7 +49,7 @@
             }\
         }\
     };f"
-    
+
     # cherry-pick
     cp = "!f() {\
         [ $# -ge 1 ] && git cherry-pick ${@} || {\
@@ -61,10 +62,10 @@
             }\
         }\
     };f"
-    
+
     # show merged branch except master/develop and current branch
     mg = !git branch --merged | grep -v '*\\|master\\|develop';\
-    
+
     # delete merged branch(es)
     mgd = "!f() {\
         [ $# -ge 1 ] && git mg | grep ${@} | xargs git branch -d || {\
@@ -75,7 +76,7 @@
             }\
         }\
     };f"
-    
+
     # show commits history
     h = "!f() {\
         command -v fzf >/dev/null && {\

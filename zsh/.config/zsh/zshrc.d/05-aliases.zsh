@@ -40,15 +40,15 @@ alias gl='git pull'
 alias gp='git push'
 alias grh='git reset --hard'
 alias gst='git status'
-## below are those from git aliases
-alias ga='git af'       # add file(s) to repository
-alias gbd='git bd'      # delete branch(es)
-alias gco='git co'      # checkout branch
-alias gcp='git cp'      # cherry-pick
-alias ghh='git h'        # show commits history
-alias gm='git bm'       # merge branch to current
-alias gmg='git mg'      # list merged branch(es)
-alias gmgd='git mgd'    # delete merged branch(es)
+## This commands are declared in ~/.config/git/aliases
+alias ga='git af'    # add file(s) to repository
+alias gbd='git bd'   # delete branch(es)
+alias gco='git co'   # checkout branch
+alias gcp='git cp'   # cherry-pick
+alias ghh='git h'    # show commits history
+alias gm='git bm'    # merge branch to current
+alias gmg='git mg'   # list merged branch(es)
+alias gmgd='git mgd' # delete merged branch(es)
 
 # pastebin
 alias ix="curl -F 'f:1=<-' ix.io"
