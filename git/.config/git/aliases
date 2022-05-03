@@ -83,7 +83,7 @@
             git hist --color=always |\
             fzf -m --ansi --no-height --prompt=' commits history > ' \
             --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | DELTA_FEATURES= delta -n\" \
-            --preview-window border-left |\
+            --preview-window $1 |\
             xargs ;\
         } || {\
             git hist;\
