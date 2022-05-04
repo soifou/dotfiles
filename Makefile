@@ -21,6 +21,7 @@ install: init
 	stow lftp
 	stow mpv
 	stow myrepos
+	stow npm
 	stow nsxiv
 	stow ncmpcpp
 	stow newsboat
@@ -52,6 +53,7 @@ uninstall:
 	stow -D lftp
 	stow -D mpv
 	stow -D myrepos
+	stow -D npm
 	stow -D nsxiv
 	stow -D ncmpcpp
 	stow -D newsboat
