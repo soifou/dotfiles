@@ -35,7 +35,7 @@ bspc rule -r "*"
 for app in nvim Sublime_text; do
     _r $app desktop='^2'
 done
-_r Firefox desktop='^3'
+_r firefox desktop='^3'
 for app in neomutt weechat skype Signal whatsapp mattermost; do
     _r $app desktop='^4'
 done
