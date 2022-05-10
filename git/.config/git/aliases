@@ -77,7 +77,7 @@
         }\
     };f"
 
-    # show commits history
+    # show all commits history
     h = "!f() {\
         command -v fzf >/dev/null && {\
             git hist --color=always |\
@@ -87,6 +87,19 @@
             xargs ;\
         } || {\
             git hist;\
+        }\
+    };f"
+
+    # show commits history for a particular file (similar to gitk)
+    hf = "!f() {\
+        command -v fzf >/dev/null && {\
+            git hist --color=always $2 |\
+            fzf -m --ansi --no-height --prompt=\" commits history for $2 > \" \
+            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show -p --follow --color=always @ $2' | DELTA_FEATURES= delta -n\" \
+            --preview-window $1 |\
+            xargs ;\
+        } || {\
+            git log -p --follow $2;\
         }\
     };f"
 
