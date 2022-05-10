@@ -123,7 +123,6 @@ if command -v asdf >/dev/null 2>&1; then
         COMPOSER="asdf exec composer"
         $COMPOSER selfupdate
         rm -f "$XDG_CONFIG_HOME"/composer/*-old.phar
-        $COMPOSER selfupdate
         $COMPOSER global outdated
         sleep 3
         $COMPOSER global update
