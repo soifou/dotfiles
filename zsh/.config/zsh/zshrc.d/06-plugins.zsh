@@ -3,9 +3,7 @@
 znap source ohmyzsh/ohmyzsh plugins/git-auto-fetch/git-auto-fetch.plugin.zsh
     GIT_AUTO_FETCH_INTERVAL=30
 
-znap source hlissner/zsh-autopair
-
-# znap source Aloxaf/fzf-tab
+znap source zsh-vi-more/vi-increment
 
 znap source zsh-users/zsh-autosuggestions
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
