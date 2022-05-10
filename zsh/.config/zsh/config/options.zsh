@@ -1,12 +1,14 @@
 #!/usr/bin/env zsh
 
-# See: https://zsh.sourceforge.io/Doc/Release/Options.html
+# See: man zshoptions
+# Online version: https://zsh.sourceforge.io/Doc/Release/Options.html
 
 # Options
-setopt auto_cd                   # cd when just a path is entered
-setopt globdots                  # lets files beginning with a . be matched without explicitly specifying the dot.
+setopt auto_cd                   # Change directory when just a path is entered
+setopt globdots                  # Lets files beginning with a . be matched without explicitly specifying the dot.
 setopt no_flow_control           # Disable start (C-s) and stop (C-q)
-setopt interactivecomments       # allow comments
+setopt ignore_eof                # Do not exit on end-of-file (C-d). Require the use of exit or logout instead
+setopt interactivecomments       # Allow comments
 
 # History
 setopt bang_hist                 # Treat the '!' character specially during expansion.
