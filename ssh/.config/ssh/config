@@ -1,15 +1,18 @@
+Host github.com bitbucket.org
+    User git
+
 Host bitbucket.org
     # Bitbucket.org has intentionally disabled ssh multiplexing
     ControlMaster no
 
 Host *
-    GlobalKnownHostsFile ~/.config/ssh/known_hosts
+    UserKnownHostsFile ${XDG_STATE_HOME}/ssh/known_hosts
     PasswordAuthentication no
     ChallengeResponseAuthentication no
     Compression yes
-    # speed up multiple identical connects with multiplexing:
+    # Speed up multiple identical connects with multiplexing:
     # https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing
-    ControlPath /run/user/%i/ssh-%l->%r@%h:%p
+    ControlPath ${XDG_RUNTIME_DIR}/ssh-%l->%r@%h:%p
     ControlMaster auto
     ControlPersist 60m
 

@@ -2,6 +2,4 @@
 
 command -v /usr/bin/scp >/dev/null && \
     /usr/bin/scp -F "$XDG_CONFIG_HOME"/ssh/config \
-    -i "$XDG_CONFIG_HOME"/ssh/id_rsa \
-    -o "UserKnownHostsFile $XDG_CONFIG_HOME/ssh/known_hosts" \
     "$@"
