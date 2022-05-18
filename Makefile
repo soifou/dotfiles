@@ -20,6 +20,7 @@ install: init
 	stow lf
 	stow lftp
 	stow mpv
+	stow mpd
 	stow myrepos
 	stow npm
 	stow nsxiv
@@ -52,6 +53,7 @@ uninstall:
 	stow -D lf
 	stow -D lftp
 	stow -D mpv
+	stow -D mpd
 	stow -D myrepos
 	stow -D npm
 	stow -D nsxiv
