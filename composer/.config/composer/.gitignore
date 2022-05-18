@@ -1,5 +1,4 @@
-cache
-composer.phar
-vendor
-auth.json
-keys.*.pub
+*
+!.gitignore
+!composer.json
+!config.json
