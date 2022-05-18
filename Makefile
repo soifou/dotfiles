@@ -16,6 +16,7 @@ install: init
 	stow composer
 	stow feh
 	stow git
+	stow gnupg
 	stow kitty
 	stow lf
 	stow lftp
@@ -49,6 +50,7 @@ uninstall:
 	stow -D composer
 	stow -D feh
 	stow -D git
+	stow -D gnupg
 	stow -D kitty
 	stow -D lf
 	stow -D lftp
