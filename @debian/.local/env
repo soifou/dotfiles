@@ -5,6 +5,7 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
 # XDG non-official
@@ -41,7 +42,6 @@ export ANSIBLE_CACHE_PLUGINS="$XDG_CACHE_HOME"/ansible/plugins
 export ANSIBLE_LOCAL_TEMP="$XDG_CACHE_HOME"/ansible/tmp
 export ANSIBLE_REMOTE_TEMP=/var/tmp/ansible
 export ANSIBLE_SSH_CONTROL_PATH_DIR="$XDG_CACHE_HOME"/ansible/cp
-export ANTIGEN_COMPDUMP="$XDG_CACHE_HOME"/zcompdump
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export COMPOSER_CACHE_DIR="$XDG_CACHE_HOME"/composer
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
