@@ -10,10 +10,6 @@ command -v pip >/dev/null && {
     }
 }
 
-[ $TERM = 'xterm-kitty' ] && {
-    znap eval kitty 'kitty + complete setup zsh'
-}
-
 command -v pnpm >/dev/null && {
     () { [ -f $1 ] && . $1 } "$XDG_CONFIG_HOME"/tabtab/zsh/pnpm.zsh
 }
