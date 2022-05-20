@@ -1,0 +1,8 @@
+# Cleanup all plugins, plugin manager and prompt
+# Next run, will refetch all in a clean state.
+rm -rf \
+    $XDG_DATA_HOME/zsh/plugins \
+    $XDG_DATA_HOME/zsh/site-functions \
+    $XDG_DATA_HOME/zsh/znap \
+    $XDG_CACHE_HOME/zsh-snap \
+    $XDG_CACHE_HOME/p10k-*
