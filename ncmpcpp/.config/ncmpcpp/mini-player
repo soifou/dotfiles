@@ -15,6 +15,7 @@ now_playing_suffix = "$/b$9"
 ##### UI positions (for cover art) #####
 playlist_display_mode = classic
 visualizer_look = "  "
+visualizer_type = wave_filled
 startup_screen = visualizer
 startup_slave_screen = playlist
 startup_slave_screen_focus = yes
