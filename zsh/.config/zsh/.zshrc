@@ -23,7 +23,7 @@
 fpath=(
     "$ZDOTDIR"/completions
     "$ASDF_DATA_DIR"/completions
-    "$HOMEBREW_PREFIX"/Homebrew/completions/zsh
+    "$HOMEBREW_PREFIX"/share/zsh/site-functions
     $fpath
 )
 
