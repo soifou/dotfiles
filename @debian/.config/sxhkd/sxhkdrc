@@ -69,6 +69,10 @@ super + {o,i}
 super + {_,shift + }{1-9,0}
     bspc {desktop -f,node -d} '^{1-9,0}'
 
+# rotate layout
+super + r
+	bspc node @/ -R 90
+
 #
 # preselect
 #
