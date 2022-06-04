@@ -30,7 +30,8 @@ _wallpaper() {
         paperview "$GWF/$GFN" 5 &
         ;;
     # Play a video on the root window with mpv
-    # @see: https://github.com/joshua-sterner/mpvbg/blob/master/mpvbg.sh
+    # Note this does not work with a compositor running (eg. picom)
+    # see: https://github.com/joshua-sterner/mpvbg/blob/master/mpvbg.sh
     *webm* | *mp4* | *mkv*)
         mpv --no-config -wid 0 --keepaspect=no --loop --really-quiet --name=mpvbg --title=mpvbg "$WALL" &
         echo $! >"$XDG_CACHE_HOME"/mpvbg.pid
@@ -125,7 +126,10 @@ _zathura() {
 _delta() {
     echo ":: delta theme reload"
     mkdir -p "$XDG_CONFIG_HOME"/git
-    cat "$XDG_CACHE_HOME"/wal/colors-delta > "$XDG_CONFIG_HOME"/git/delta-theme
+    cp "$XDG_CACHE_HOME"/wal/colors-delta "$XDG_CONFIG_HOME"/git/delta-theme
+    # handle dark/light theme
+    theme=$(xrdb -query | grep "*.theme" | awk '{print $2}')
+    printf "\t%s=true" "$theme" >> "$XDG_CONFIG_HOME"/git/delta-theme
 }
 
 _xob() {

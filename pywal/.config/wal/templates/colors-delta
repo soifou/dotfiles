@@ -1,6 +1,11 @@
+# Add custom "wal" theme for delta
+# See: delta --show-themes
+# and: https://github.com/dandavison/delta/blob/master/themes.gitconfig
+# Need to set DELTA_FEATURES=wal to enable the theme or
+# [delta]
+#   features = wal
 [delta "wal"]
     commit-decoration-style = bold box ul
-    dark = true
     file-decoration-style = none
     file-style = omit
     hunk-header-decoration-style = "{color6}" box ul
@@ -18,3 +23,5 @@
     plus-emph-style = syntax "{color4}"
     plus-style = syntax "{color10}"
 
+[delta]
+    syntax-theme = base16

@@ -1,0 +1,67 @@
+#!/usr/bin/env sh
+
+# Fetch/change wallpaper and generate a colorscheme
+# Requirements: xrandr, curl, wal
+# Credits to ilsenatorov for the idea
+# https://github.com/ilsenatorov/dotfiles/blob/big/rofi/themeswitch.sh
+
+set -xe
+
+PYWAL_BACKEND=${PYWAL_BACKEND:-wal}
+PYWAL_SCRIPT=~/.local/bin/wal-changer
+WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
+mkdir -p "$WALLPAPER_PATH"
+
+_wal() {
+    wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT -e -q -n "$@" > /dev/null
+
+    # Check if second argument exists, then set current theme to xresources
+    # https://github.com/dylanaraps/pywal/issues/184
+    THEME=dark
+    [ -n "$3" ] && THEME=light
+    echo "*.theme: $THEME" >> "$XDG_CACHE_HOME"/wal/colors.Xresources
+}
+
+# fetch a random wallpaper from unsplash
+_unsplash() {
+    RES=$(xrandr --nograb --current | awk '/\*/ {print $1}')
+    THEMES=static/unsplash
+    curl -o "$WALLPAPER_PATH/$THEMES" -J -L "https://source.unsplash.com/random/$RES" > /dev/null 2>&1
+}
+
+lstrip() { printf '%s\n' "${1##$2}"; }
+
+if [ -z "$@" ]; then
+    PYWAL_THEMES=$(wal --theme | xargs | awk -F: '{print $2$3}' | sed 's|Dark Themes||g' | sed 's|Light Themes||g' | sed 's| - | theme/|g')
+    for o in unsplash theme/light theme/dark theme/random $PYWAL_THEMES; do echo "$o"; done
+    find -L "$WALLPAPER_PATH" -type f -printf '%P\n' | sort
+else
+    THEMES="$@"
+
+    case "$THEMES" in
+        unsplash) _unsplash ;;
+        theme/light) _wal -i "$WALLPAPER_PATH/today" -l ;;
+        theme/dark) _wal -i "$WALLPAPER_PATH/today" ;;
+        theme/*)
+            THEME=$(lstrip "$THEMES" "theme/")
+            _wal --theme $THEME
+            ;;
+    esac
+
+    [ -f "$WALLPAPER_PATH/$THEMES" ] && {
+        ln -sf "$WALLPAPER_PATH/$THEMES" "$WALLPAPER_PATH/today"
+        # Need to clear cache of previous colorschemes here
+        # Argument -c (Delete all cached colorschemes) does not work for me
+        rm -rf "$XDG_CACHE_HOME"/wal
+        # Sometimes process hangs while writing one of /dev/pts/{0,2,5}
+        # filtering the culprit fix the issue, but I don't know why this occurs.
+        # See: https://github.com/dylanaraps/pywal/issues/40
+        # Hotfix: pywal/sequences.py
+        # Writing to "/dev/pts/[0-9] lets you send data to open terminals.
+        # if to_send:
+        #     for term in glob.glob(tty_pattern):
+        #         if term != '/dev/pts/5':
+        #             util.save_file(sequences, term)
+        _wal -i "$WALLPAPER_PATH/$THEMES"
+    }
+fi

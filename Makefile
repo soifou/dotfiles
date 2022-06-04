@@ -29,6 +29,7 @@ install: init
 	stow newsboat
 	stow phpcs
 	stow pip
+	stow pywal
 	stow ripgrep
 	stow rtv
 	stow ssh
@@ -63,6 +64,7 @@ uninstall:
 	stow -D newsboat
 	stow -D phpcs
 	stow -D pip
+	stow -D pywal
 	stow -D ripgrep
 	stow -D rtv
 	stow -D ssh
