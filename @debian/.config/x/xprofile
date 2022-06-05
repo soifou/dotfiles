@@ -13,7 +13,7 @@ _c numlockx on
 # keymap
 _c toggle-xkbkeymap us
 # current wallpaper/colorscheme
-_c wal-switcher theme-dark >/dev/null
+_c wal-switcher theme/dark >/dev/null
 # default cursor (needs xorg-xsetroot)
 _c xsetroot -cursor_name left_ptr
 
