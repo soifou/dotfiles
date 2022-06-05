@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Lftp
+GenericName=Sophisticated file transfer program
+Exec=term --class=lftp lftp
+Terminal=true
+Type=Application
+Icon=system-file-manager
+Categories=System;
+MimeType=x-scheme-handler/ftp;

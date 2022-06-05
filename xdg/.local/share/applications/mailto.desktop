@@ -2,6 +2,6 @@
 Type=Application
 Name=Mailto
 Exec=term --class=mailto neomutt %u
-Terminal=false
+Terminal=true
 MimeType=x-scheme-handler/mailto
 NoDisplay=true

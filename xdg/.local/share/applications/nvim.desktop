@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Nvim
+Exec=term --class=floating nvim %u
+Terminal=false
+MimeType=text/*;
+Icon=nvim
+NoDisplay=true
