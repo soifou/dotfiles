@@ -40,6 +40,7 @@ install: init
 	stow wget
 	stow yamllint
 	stow yarn
+	stow xdg
 	stow zsh
 
 uninstall:
@@ -75,4 +76,5 @@ uninstall:
 	stow -D wezterm
 	stow -D yamllint
 	stow -D yarn
+	stow -D xdg
 	stow -D zsh

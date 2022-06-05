@@ -10,11 +10,15 @@ _torrent() {
     pgrep -x transmission-da || (transmission-daemon && notify-send -i transmission Transmission "Starting daemon..." && sleep 3)
     transmission-remote -a "$1" && notify-send -i transmission Transmission "Torrent added."
 }
+
 _gdl() {
     imgs=$(gallery-dl -d "$XDG_CACHE_HOME"/gallery-dl -- "$@" 2>/dev/null) || return 1
     printf '%s\n' "$imgs" | sed 's/^# //' |
         xargs -d'\n' sh -c 'sxiv -a -- "$@" || mpv -- "$@"' ''
 }
+
+_browser() { "$BROWSER" "$1" && wmctrl -a "$BROWSER"; }
+
 _o() {
     echo "File: $1"
     echo "mime-type: $(file --mime-type "$1" -bL)"
@@ -26,7 +30,7 @@ _o() {
         image/gif) mv "$1" "$1".gif && sxiv -ab "$1".gif ;;
         image/*) sxiv -b "$1" ;;
         inode/directory) term --class=floating lf "$1" ;;
-        text/html) "$BROWSER" "$1" ;;
+        text/html) _browser "$1" ;;
         text/*) term --class=floating "$EDITOR" "$1" ;;
         # fallback
         *) /usr/bin/xdg-open "$1" ;;
@@ -73,7 +77,7 @@ case "$1" in
         case $(curl -s -o /dev/null -w '%{content_type}' "$1") in
             application/pdf) _dlo "$1" ;;
             image/*) _dlo "$1" ;;
-            *) "$BROWSER" "$1" ;;
+            *) _browser "$1" ;;
         esac
         ;;
     *) _dlo "$1" ;;
