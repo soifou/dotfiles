@@ -1,2 +1,0 @@
-set output_plugin=coreaudio
-shell ~/.config/cmus/cmus-osx/media-keys.py &

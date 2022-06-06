@@ -1,5 +1,0 @@
-@linux/.config/VSCodium/*
-!@linux/.config/VSCodium/User
-
-@macos/Library/Application Support/VSCodium/*
-!@macos/Library/Application Support/VSCodium/User
