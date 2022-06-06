@@ -8,7 +8,6 @@ init: .stowrc
 	echo "--verbose" >> .stowrc
 
 install: init
-	stow @$(OS)
 	stow bat
 	stow beets
 	stow bin
@@ -22,13 +21,13 @@ install: init
 	stow lf
 	stow lftp
 	stow mail
-	stow mpv
 	stow mpd
+	stow mpv
 	stow myrepos
-	stow npm
-	stow nsxiv
 	stow ncmpcpp
 	stow newsboat
+	stow npm
+	stow nsxiv
 	stow phpcs
 	stow pip
 	stow pywal
@@ -38,15 +37,16 @@ install: init
 	stow -d sublime @linux
 	stow tremc
 	stow w3m
+	stow weechat
 	stow wezterm
 	stow wget
+	stow xdg
 	stow yamllint
 	stow yarn
-	stow xdg
 	stow zsh
+	stow @$(OS) --override=".*"
 
 uninstall:
-	stow -D @$(OS)
 	stow -D bat
 	stow -D beets
 	stow -D bin
@@ -60,13 +60,13 @@ uninstall:
 	stow -D lf
 	stow -D lftp
 	stow -D mail
-	stow -D mpv
 	stow -D mpd
+	stow -D mpv
 	stow -D myrepos
-	stow -D npm
-	stow -D nsxiv
 	stow -D ncmpcpp
 	stow -D newsboat
+	stow -D npm
+	stow -D nsxiv
 	stow -D phpcs
 	stow -D pip
 	stow -D pywal
@@ -76,9 +76,11 @@ uninstall:
 	stow -D -d sublime @linux
 	stow -D tremc
 	stow -D w3m
-	stow -D wget
+	stow -D weechat
 	stow -D wezterm
+	stow -D wget
+	stow -D xdg
 	stow -D yamllint
 	stow -D yarn
-	stow -D xdg
 	stow -D zsh
+	stow -D @$(OS)
