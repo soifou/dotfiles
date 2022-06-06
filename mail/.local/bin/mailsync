@@ -1,0 +1,120 @@
+#!/usr/bin/env sh
+
+# based on Luke Smith's version
+# modified by nebulaeandstars
+
+# - sync mail for all accounts, or a single account given as an argument.
+# - display a notification showing the number of new mails.
+# - display a notification for each new mail with its subject displayed.
+# - run notmuch to index new mail.
+
+# Run only if user logged in (prevent cron errors)
+pgrep -u "${USER:=$LOGNAME}" > /dev/null || {
+    echo "$USER not logged in; sync will not run."
+    exit
+}
+# Run only if not already running in other instance
+pgrep -x mbsync > /dev/null && {
+    echo "mbsync is already running."
+    exit
+}
+# Checks for internet connection and set notification script.
+ping -q -c 1 1.1.1.1 > /dev/null || {
+    echo "No internet connection detected."
+    exit
+}
+
+# Find out which monitor to use (for notify-send)
+case "$(readlink -f /sbin/init)" in
+    *systemd*) export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus ;;
+esac
+export GPG_TTY=$TTY
+# export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+export DISPLAY=:0
+
+# Source environment variables
+# echo "Sourcing $HOME/.zshenv"
+# source "$HOME/.zshenv"
+[ -f "$HOME"/.local/env ] && . "$HOME"/.local/env
+
+[ -d "$HOME/.local/share/password-store" ] && export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
+SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+LASTRUN_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/neomutt-mailsynclastrun"
+MBSYNCRC="$XDG_CONFIG_HOME"/mbsync/mbsyncrc
+
+# If the MBSYNCRC environment variable is set, alias mbsync to use it
+[ -n "$MBSYNCRC" ] && alias mbsync="mbsync -c $MBSYNCRC" || MBSYNCRC="$HOME/.mbsyncrc"
+
+# If this was run without any arguments, sync all accounts.
+if [ "$#" -eq "0" ]; then
+    accounts="$(awk '/^Channel/ {print $2}' "$MBSYNCRC")"
+# Otherwise, only sync the required channel
+else
+    for arg in "$@"; do
+        [ "${arg%${arg#?}}" = '-' ] && opts="${opts:+${opts} }${arg}" && shift 1
+    done
+    accounts=$*
+fi
+
+# Send a notification listing new mail
+displays="$(pgrep -a X\(org\|wayland\) | grep -wo "[0-9]*:[0-9]\+" | sort -u)"
+notify() { for x in $displays; do
+    export DISPLAY=$x
+    notify-send -i mail-client --urgency normal "Mailsync" "$2 new mail(s) in \`$1\` account."
+done; }
+messageinfo() { for x in $displays; do
+    export DISPLAY=$x
+    notify-send -i mail-client --urgency low "$from:" "$subject"
+done; }
+
+# Check an account for new mail. Notify if there is new content.
+syncandnotify() {
+    acc="$(echo "$account" | sed "s/.*\///")"
+    # echo "Syncing $$acc..."
+
+    # Sync the account using mbsync
+    if [ -z "$opts" ]; then mbsync "$acc" > /dev/null 2>&1; else mbsync "$opts" "$acc" > /dev/null 2>&1; fi
+
+    # Identify new mail
+    acc_path=$(echo $acc | awk -F"-" '{print $2"/"$3}')
+    mailbox=$(echo $acc | awk -F"-" '{print $3}')
+    new=""
+    [ "$mailbox" != "spam" ] \
+        && new=$(find "$XDG_DATA_HOME/mailbox/$acc_path/new/" -type f -newer "$LASTRUN_FILE" 2> /dev/null)
+
+    # Get a count of how many new messages there are
+    newcount=$(echo "$new" | sed '/^\s*$/d' | wc -l)
+    echo "$acc has $newcount new messages."
+
+    # If there is at least one new message:
+    if [ "$newcount" -gt "0" ]; then
+        # Send a notification telling the user
+        # how many new messages there are
+        notify "$acc" "$newcount" &
+
+        # Then, for each new message
+        for file in $new; do
+            # Extract the sender.
+            from=$(awk '/^From: / && ++n ==1,/^\<.*\>:/' "$file" | perl -CS -MEncode -ne 'print decode("MIME-Header", $_)' | awk '{ $1=""; if (NF>=3)$NF=""; print $0 }' | sed 's/^[[:blank:]]*[\"'\''\<]*//;s/[\"'\''\>]*[[:blank:]]*$//')
+            # Extract the subject.
+            subject=$(awk '/^Subject: / && ++n == 1,/^\<.*\>: / && ++i == 2' "$file" | head -n 1 | perl -CS -MEncode -ne 'print decode("MIME-Header", $_)' | sed 's/^Subject: //' | sed 's/^{[[:blank:]]*[\"'\''\<]*//;s/[\"'\''\>]*[[:blank:]]*$//' | tr -d '\n')
+
+            # And send both to the user as a notification.
+            messageinfo &
+        done
+    fi
+}
+
+# Parallelize multiple accounts
+for account in $accounts; do
+    syncandnotify &
+done
+
+# Wait for all accounts to be synced
+wait
+
+# Update the email database
+# notmuch new 2>/dev/null
+
+# Create a touch file that indicates the time of the last run of mailsync
+touch "$LASTRUN_FILE"

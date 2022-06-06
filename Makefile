@@ -21,6 +21,7 @@ install: init
 	stow kitty
 	stow lf
 	stow lftp
+	stow mail
 	stow mpv
 	stow mpd
 	stow myrepos
@@ -58,6 +59,7 @@ uninstall:
 	stow -D kitty
 	stow -D lf
 	stow -D lftp
+	stow -D mail
 	stow -D mpv
 	stow -D mpd
 	stow -D myrepos

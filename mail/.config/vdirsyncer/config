@@ -5,7 +5,8 @@ status_path = "~/.local/share/vdirsyncer/status/"
 a = "gmail_local"
 b = "gmail_remote"
 ; sync from both side
-collections = [ "from b", "from a" ]
+collections = ["from b", "from a"]
+conflict_resolution = ["command", "vimdiff"]
 
 [storage gmail_local]
 type = "filesystem"
