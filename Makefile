@@ -36,6 +36,7 @@ install: init
 	stow ssh
 	stow -d sublime @linux
 	stow tremc
+	stow tridactyl
 	stow w3m
 	stow weechat
 	stow wezterm
@@ -75,6 +76,7 @@ uninstall:
 	stow -D ssh
 	stow -D -d sublime @linux
 	stow -D tremc
+	stow -D tridactyl
 	stow -D w3m
 	stow -D weechat
 	stow -D wezterm

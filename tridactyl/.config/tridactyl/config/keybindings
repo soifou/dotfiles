@@ -67,10 +67,10 @@ bind w hint -w
 " RSS (show feeds in current page and prompt if more than one found)
 alias rsssave js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('echo ' + url + ' >> ~/.config/newsboat/urls; notify-send -i RSS_feeds Newsboat Subscribed'))
 set rsscmd rsssave %u
-" Subscribe to YouTube channels too
-alias ytrss js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('yt-rss ' + url + ' >> ~/.config/newsboat/urls; notify-send -i RSS_feeds Newsboat Subscribed'))
-bindurl youtube.com n composite get_current_url | ytrss
 bind ,r composite rssexec
+" Subscribe to YouTube channels too
+alias ytrss js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('yt-rss ' + url + ' >> ~/.config/newsboat/urls'))
+bindurl youtube.com n composite get_current_url | ytrss
 
 " Editor
 " Focus an input field, then <C-e> (default <C-i>)
