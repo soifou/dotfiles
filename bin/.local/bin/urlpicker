@@ -16,9 +16,9 @@ fzf_cmd() {
 }
 
 _process() {
-    sort -u |
-        fzf_cmd |
-        xargs -I {} $OPENER {} >/dev/null
+    sort -u \
+        | fzf_cmd \
+        | xargs -I {} $OPENER {} > /dev/null
 }
 
 [ -z "$1" ] && xurls | _process || echo "$1" | xurls | _process

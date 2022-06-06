@@ -3,55 +3,55 @@
 ## Beware! This script is intended to be used by only me, myself and I.
 ## It keeps me up to date across my *nix journey
 
+[ -f /System/Library/CoreServices/SystemVersion.plist ] && {
+    echo "Sorry!"
+    exit 1
+}
+
 yn() {
     printf "$(tput bold):: $(tput setaf 2)%s$(tput sgr0) [y/n]: " "$1"
     stty -icanon
-    answer=$(dd ibs=1 count=1 2>/dev/null)
+    answer=$(dd ibs=1 count=1 2> /dev/null)
     stty icanon
     printf '\n'
     [[ "$answer" =~ ^[Yy]$ ]]
 }
 
 debian() {
-    yn "Sync server time?" && sudo ntpdate -b pool.ntp.org
+    yn "Sync server time?" \
+        && sudo ntpdate -b pool.ntp.org
 
-    if yn "Update system?"; then
-        sudo apt upgrade -y 2>/dev/null && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
+    yn "Update system?" && {
+        sudo apt upgrade -y 2> /dev/null && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
         sudo dpkg -l | grep '^rc' | awk '{print $2}' | xargs sudo apt-get purge -y
-    fi
+    }
 
-    if yn "Update GitHub releases?"; then
-        for app in $GH_APPS; do
-            echo "$(tput bold)==> $(tput setaf 2)Upgrade $app...$(tput sgr0)"
-            ghupdate "$app"
-        done
-    fi
-
-    if command -v keybase >/dev/null 2>&1; then
-        if yn "Update Keybase CLI?"; then
+    if command -v keybase > /dev/null 2>&1; then
+        yn "Update Keybase CLI?" && {
             curl -O https://prerelease.keybase.io/keybase_amd64.deb
             sudo dpkg -i keybase_amd64.deb
             sudo apt-get install -f
             run_keybase
             rm -f keybase_amd64.deb
-        fi
+        }
     fi
 }
-arch() {
-    if yn "Update mirrorlist"; then
-        curl -s "https://archlinux.org/mirrorlist/?country=FR&country=GB&country=ES&country=DE&country=CH&protocol=https&ip_version=4&use_mirror_status=on" |
-            sed -e 's/^#Server/Server/' -e '/^#/d' |
-            rankmirrors -n 5 - |
-            sudo tee /etc/pacman.d/mirrorlist
-    fi
 
-    if yn "Update system?"; then
+arch() {
+    yn "Update mirrorlist" && {
+        curl -s "https://archlinux.org/mirrorlist/?country=FR&country=GB&country=ES&country=DE&country=CH&protocol=https&ip_version=4&use_mirror_status=on" \
+            | sed -e 's/^#Server/Server/' -e '/^#/d' \
+            | rankmirrors -n 5 - \
+            | sudo tee /etc/pacman.d/mirrorlist
+    }
+
+    yn "Update system?" && {
         # upgrade all packages but allow downgrade (second u argument)
         # downgrade is needed in case we update mirrorlist
         sudo pacman -Syuu --noconfirm
 
         # autoremove unused dependencies
-        pacman -Qdtq >/dev/null && pacman -Qdtq | xargs sudo pacman --noconfirm -R || echo "No unused dependencies"
+        pacman -Qdtq > /dev/null && pacman -Qdtq | xargs sudo pacman --noconfirm -R || echo "No unused dependencies"
 
         # clean and autoclean
         sudo pacman -Sc --noconfirm
@@ -59,62 +59,44 @@ arch() {
 
         # upgrade AUR packages
         paru -Syu
-    fi
-}
-macos() {
-    yn "Sync server time?" && sudo sntp -sS pool.ntp.org
-    yn "Change wallpaper?" && sh "$XDG_DATA_HOME/bin/unsplash"
+    }
 }
 
 while IFS='=' read -r key val; do
     case $key in
-    ID) distro=$val ;;
+        ID) distro=$val ;;
     esac
-done </etc/os-release
+done < /etc/os-release
 
 [ "$distro" = 'debian' ] && debian
 [ "$distro" = 'arch' ] && arch
-[ -f /System/Library/CoreServices/SystemVersion.plist ] && macos
 
-if [ -d "$XDG_DEVELOP_DIR/dotfiles/$(whoami)" ]; then
-    if yn "Update dots?"; then
-        cd "$XDG_DEVELOP_DIR/dotfiles/$(whoami)" && git pull
-    fi
+if command -v mr > /dev/null 2>&1; then
+    yn "Update local share?" \
+        && mr -c "$XDG_CONFIG_HOME"/myrepos/config -t -d "$XDG_DATA_HOME" update
 fi
 
-if command -v mr >/dev/null 2>&1; then
-    yn "Update local share?" && mr -c "$XDG_CONFIG_HOME"/myrepos/config -t -d "$XDG_DATA_HOME" update
-fi
-
-if command -v docker >/dev/null 2>&1; then
-    if yn "Update docker images?"; then
-        if [[ $(uname) == 'Darwin' ]]; then
-            # @HOTFIX: xhyve keeps resetting dns through resolv.conf, cannot pull image
-            # https://forums.docker.com/t/custom-etc-resolv-conf-in-docker-for-mac-or-using-dns-domain/10035/7
-            echo "nameserver 8.8.8.8" | docker-machine ssh $(docker-machine active) "sudo tee /etc/resolv.conf > /dev/null"
-        fi
-
+if command -v docker > /dev/null 2>&1; then
+    yn "Update docker images?" && {
         docker images --format "{{.Repository}}:{{.Tag}}" | xargs -L1 docker pull | grep "Status:"
         docker system prune -f
         # docker volume prune -f
-    fi
+    }
 fi
 
-if command -v brew >/dev/null 2>&1; then
-    if yn "Update brew?"; then
+if command -v brew > /dev/null 2>&1; then
+    yn "Update brew?" && {
         brew update
         brew upgrade
-        # https://github.com/buo/homebrew-cask-upgrade
-        [ "$(uname)" == 'Darwin' ] && brew cu -ay
         brew cleanup
-    fi
+    }
 fi
 
-if command -v anyenv >/dev/null 2>&1; then
+if command -v anyenv > /dev/null 2>&1; then
     yn "Update anyenv?" && anyenv update
 fi
 
-if command -v asdf >/dev/null 2>&1; then
+if command -v asdf > /dev/null 2>&1; then
     yn "Update asdf?" && {
         asdf update --head
         asdf plugin update --all
@@ -130,63 +112,45 @@ if command -v asdf >/dev/null 2>&1; then
 fi
 
 [ -f "$XDG_DATA_HOME"/zsh/znap/znap.zsh ] && {
-    yn "Update znap?" &&
-        zsh --singlecommand -c '. "$XDG_DATA_HOME"/zsh/znap/znap.zsh && znap pull && znap status'
+    yn "Update znap?" \
+        && zsh --singlecommand -c '. "$XDG_DATA_HOME"/zsh/znap/znap.zsh && znap pull && znap status'
 }
 
-if command -v cargo >/dev/null 2>&1; then
-    if yn "Update global rust binaries?"; then
-        cargo install-update -a
-    fi
+if command -v cargo > /dev/null 2>&1; then
+    yn "Update global rust binaries?" \
+        && cargo install-update -a
 fi
 
-if command -v npm >/dev/null 2>&1; then
-    if yn "Update global node dependencies?"; then
+if command -v npm > /dev/null 2>&1; then
+    yn "Update global node dependencies?" && {
         npm -g outdated
         sleep 3
         npm -g update
-    fi
+    }
 fi
 
-if command -v pip >/dev/null 2>&1; then
-    if yn "Update global python dependencies?"; then
+if command -v pip > /dev/null 2>&1; then
+    yn "Update global python dependencies?" && {
         pip list --outdated
         sleep 3
         pip install --upgrade pip
         pip freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U | grep "Successfully installed"
-    fi
+    }
 fi
 
-if command -v gem >/dev/null 2>&1; then
-    if yn "Update global ruby gems dependencies?"; then
+if command -v gem > /dev/null 2>&1; then
+    yn "Update global ruby gems dependencies?" && {
         gem outdated
         sleep 3
         gem update --system
         gem update
         gem cleanup
-    fi
+    }
 fi
 
-if command -v go >/dev/null 2>&1; then
-    if yn "Update global go dependencies?"; then
-        go get -u -v all
-    fi
-fi
-
-if [ -d "$XDG_CONFIG_HOME"/vim/autoload/plug.vim ]; then
-    if yn "Update vim-plug dependencies?"; then
-        vim -es -u "$XDG_CONFIG_HOME"/vim/vimrc -i NONE -c "PlugUpdate" -c "qa"
-    fi
-fi
-
-if yn "Cleanup trash?"; then
-    if [[ $(uname) == 'Darwin' ]]; then
-        rm -rf "$HOME/.Trash/*"
-        find . -type f -name '*.DS_Store' -ls -delete
-    else
-        rm -rf "$XDG_DATA_HOME/Trash/{files,info}/*"
-        find "$XDG_CACHE_HOME"/lf -type f -mtime +14 -delete
-    fi
+if command -v go > /dev/null 2>&1; then
+    yn "Update global go dependencies?" \
+        && go get -u -v all
 fi
 
 cd "$HOME" || exit

@@ -1,16 +1,17 @@
 #!/usr/bin/env sh
 
+## Housekeeping
 # Remove queue list in task-spooler
 tsp -K
 # Remove all orphaned cache files from the thumbnail cache directory
 sxiv -c
 find "$XDG_CACHE_HOME"/sxiv -depth -type d -empty ! -name "." -exec rmdir {} \;
-# Kill X compositor
-pkill picom
-# Kill all instances of pywalfox
-pkill -f pywalfox
 # Cleanup lf cache
 find "$XDG_CACHE_HOME"/lf -type f -mtime +14 -delete
+
+## Kill remaining processes
+pkill picom
+pkill -f pywalfox
 
 # Finally exit wm
 pgrep -x i3 >/dev/null && i3-msg exit

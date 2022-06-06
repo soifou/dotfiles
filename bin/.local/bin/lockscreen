@@ -32,7 +32,7 @@ case $EFFECT in
     # make pixelated version of screenshot
     'pixelated') convert -quality 1 -scale 10% -scale 1000% "$t" "$tm" ;;
     # corrupted version of screenshot
-    'corrupted') corrupter -add 0 -mag -1 -bheight 10 -lr 0 -stride 2 -meanabber 0 -boffset -75 "$t" "$tm" ;;
+    'corrupted') corrupter -add 0 -mag -9 -bheight 25 -lr -12 -stride 9 -meanabber 0 -boffset -75 "$t" "$tm" ;;
 esac
 
 # remove original screenshot

@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# compress in batch mode some photos using convert (to keep originals)
-# Usage:
-#   $ photo-compress DSC_ prefix
-
-for file in $1*; do convert $file -resize 4200 -quality 80 $2-$file; done

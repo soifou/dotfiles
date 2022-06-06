@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+appname=$1
+summary=$2
+body=$3
+
+filename=$(echo "$summary" | grep -o '".*"' | tr -d '"')
+
+bspc rule -a ranger --one-shot state=floating focus=on sticky=on &&
+    term --class ranger ranger --selectfile ~/Downloads/"$filename"
