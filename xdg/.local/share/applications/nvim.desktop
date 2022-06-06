@@ -1,8 +1,13 @@
 [Desktop Entry]
-Type=Application
-Name=Nvim
-Exec=term --class=floating nvim %u
+Name=Neovim
+Comment=Edit text files
+GenericName=Text editor
+TryExec=nvim
+# Exec=term --class nvim -o window_padding_width=0 nvim %F
+Exec=term --class nvim nvim %F
 Terminal=false
-MimeType=text/*;
+Type=Application
 Icon=nvim
-NoDisplay=true
+Categories=Utility;TextEditor;
+StartupNotify=false
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
