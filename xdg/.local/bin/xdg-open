@@ -17,7 +17,10 @@ _gdl() {
         xargs -d'\n' sh -c 'sxiv -a -- "$@" || mpv -- "$@"' ''
 }
 
-_browser() { "$BROWSER" "$1" && wmctrl -a "$BROWSER"; }
+_browser() {
+    nohup "$BROWSER" "$1" >/dev/null 2>&1
+    wmctrl -a "$BROWSER" # Focus the webbrowser desktop
+}
 
 _o() {
     echo "File: $1"
