@@ -58,14 +58,20 @@ fi
 
 # Send a notification listing new mail
 displays="$(pgrep -a X\(org\|wayland\) | grep -wo "[0-9]*:[0-9]\+" | sort -u)"
-notify() { for x in $displays; do
-    export DISPLAY=$x
-    notify-send -i mail-client --urgency normal "Mailsync" "$2 new mail(s) in \`$1\` account."
-done; }
-messageinfo() { for x in $displays; do
-    export DISPLAY=$x
-    notify-send -i mail-client --urgency low "$from:" "$subject"
-done; }
+
+notify() {
+    for x in $displays; do
+        export DISPLAY=$x
+        notify-send -i folder-teal-mail --urgency normal "Mailsync" "$2 new mail(s) in \`$1\` account."
+    done
+}
+
+messageinfo() {
+    for x in $displays; do
+        export DISPLAY=$x
+        notify-send -i mail-client --urgency critical "$from:" "$subject"
+    done
+}
 
 # Check an account for new mail. Notify if there is new content.
 syncandnotify() {
