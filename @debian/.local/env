@@ -20,7 +20,6 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR"/ssh-agent.socket
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 ## Config
 export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
-export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME="$XDG_CONFIG_HOME"/asdf/tool-versions
 export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/asdf/default-python-packages
 export BUNDLE_USER_HOME="$XDG_CONFIG_HOME"/bundle
 export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
