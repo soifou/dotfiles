@@ -8,6 +8,7 @@ init: .stowrc
 	echo "--verbose" >> .stowrc
 
 install: init
+	stow asdf
 	stow bat
 	stow beets
 	stow bin
@@ -48,6 +49,7 @@ install: init
 	stow @$(OS) --override=".*"
 
 uninstall:
+	stow -D asdf
 	stow -D bat
 	stow -D beets
 	stow -D bin
