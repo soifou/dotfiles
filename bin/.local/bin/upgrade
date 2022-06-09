@@ -149,8 +149,12 @@ if command -v gem > /dev/null 2>&1; then
 fi
 
 if command -v go > /dev/null 2>&1; then
-    yn "Update global go dependencies?" \
-        && go get -u -v all
+    [ -f "$XDG_CONFIG_HOME"/asdf/default-golang-packages ] && {
+        yn "Update global go dependencies?" && {
+            cat "$XDG_CONFIG_HOME"/asdf/default-golang-packages |
+                while read -r app; do go install "$app"; done
+        }
+    }
 fi
 
 cd "$HOME" || exit
