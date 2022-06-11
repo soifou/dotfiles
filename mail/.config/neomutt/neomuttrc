@@ -11,10 +11,10 @@
 set my_mutt = $XDG_CONFIG_HOME/neomutt
 set my_mutt_cache = $XDG_CACHE_HOME/neomutt
 
-source $my_mutt/colors
-source $my_mutt/keybindings
-source $my_mutt/macros
-source $my_mutt/account
+source $my_mutt/neomuttrc.colors
+source $my_mutt/neomuttrc.bindings
+source $my_mutt/neomuttrc.macros
+source $my_mutt/neomuttrc.account
 
 set mailcap_path = $my_mutt/mailcap
 set header_cache = $my_mutt_cache
@@ -109,7 +109,6 @@ set attach_format = "%u%D   %T%-75.75d %?T?%&   ?  %5s · %m/%M"
 # Events
 set mail_check_stats = yes
 set mail_check_stats_interval = 60
-# set new_mail_command = "notify-send -i mail-client 'New Email in %f' '%n new messages, %u unread.' &"
 
 # Use khard as addressbook manager
 set query_command = "khard email --parsable %s"

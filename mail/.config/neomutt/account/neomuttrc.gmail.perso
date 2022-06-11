@@ -1,4 +1,5 @@
 set folder = $XDG_LOCAL_HOME/share/mailbox/perso
 set from = fleur.fr@gmail.com
 set sendmail = "msmtp -a gmail-perso"
-source $my_mbox/gmailrc
+
+source $my_mbox/neomuttrc.gmail
