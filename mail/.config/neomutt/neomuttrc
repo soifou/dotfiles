@@ -46,7 +46,6 @@ set charset = "utf-8"
 set send_charset = "utf-8"
 
 # Speedup
-set mail_check = 120    # How often to check for new mail (time in seconds).
 set sleep_time = 0      # be faster
 set read_inc = 1000     # update progress every n messages read
 set time_inc = 500      # update display every n miliseconds
@@ -107,7 +106,8 @@ set compose_format = "───[  %l ] [  %a ]%>─"
 set attach_format = "%u%D   %T%-75.75d %?T?%&   ?  %5s · %m/%M"
 
 # Events
-set mail_check_stats = yes
+set mail_check = 0      # How often to check for new mail (time in seconds). Disabled, using mbsync.
+set mail_check_stats = no
 set mail_check_stats_interval = 60
 
 # Use khard as addressbook manager
