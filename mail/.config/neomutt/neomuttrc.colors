@@ -26,7 +26,7 @@ color tilde black default
 color message cyan default
 color markers red white
 color attachment white default
-color search brightmagenta default
+color search black yellow
 color status blue default
 color hdrdefault brightgreen default
 color quoted green default

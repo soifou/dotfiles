@@ -16,6 +16,9 @@ bind pager \Ce noop
 bind pager <return> noop
 
 # General
+bind index ,r toggle-read
+bind index <tab> read-thread
+# bind index <backtab> unread-thread
 bind attach <return> view-mailcap
 bind attach l view-mailcap
 bind index G last-entry
