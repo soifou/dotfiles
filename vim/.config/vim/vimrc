@@ -1,210 +1,463 @@
-" 00. Environment
-let g:netrw_home='$XDG_CACHE_HOME'
-set directory=$XDG_CACHE_HOME/vim,~/,/tmp
-set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
-set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+" vimrc with no extra dependencies
+" inspired by https://github.com/jdhao/minimal_vim
 
-" 01. General
-set nocompatible         " get rid of Vi compatibility mode. SET FIRST!
-set encoding=utf-8
-set fileencoding=utf-8
+" XDG {{{
 
-" 02. Plugins
-if empty(glob('~/.config/vim/autoload/plug.vim'))
-  silent !curl -fLo $XDG_CONFIG_HOME/vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" See: https://tlvince.com/vim-respect-xdg
+if !empty($XDG_CONFIG_HOME)
+  set runtimepath-=$HOME/.vim
+  set runtimepath-=$HOME/.vim/after
+  set runtimepath^=$XDG_CONFIG_HOME/vim
+  set runtimepath+=$XDG_DATA_HOME/vim
+  set runtimepath+=$XDG_CONFIG_HOME/vim/after
+
+  set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
+  set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
+
+  let g:netrw_home = $XDG_DATA_HOME."/vim"
+  call mkdir($XDG_DATA_HOME."/vim/spell", 'p')
+  set viewdir=$XDG_DATA_HOME/vim/view | call mkdir(&viewdir, 'p')
+  set backupdir=$XDG_CACHE_HOME/vim/backup | call mkdir(&backupdir, 'p')
+  set directory=$XDG_CACHE_HOME/vim/swap   | call mkdir(&directory, 'p')
+  set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p')
+  set viminfofile=$XDG_CACHE_HOME/vim/viminfo
 endif
-call plug#begin('~/.config/vim/bundle')
-Plug '~/.config/vim/local/wal.vim'
-Plug 'ap/vim-css-color'
-Plug 'arcticicestudio/nord-vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'rhysd/vim-gfm-syntax'
-Plug 'sheerun/vim-polyglot'
-Plug 'w0rp/ale'
-Plug 'scrooloose/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
-call plug#end()
+"}}}
 
-" 03. Events
-" In Makefiles DO NOT use spaces instead of tabs
-autocmd FileType make setlocal noexpandtab
+" Builtin plugins {{{
 
-" In Ruby files, use 2 spaces instead of 4 for tabs
-autocmd FileType ruby setlocal sw=2 ts=2 sts=2
+" Disabled
+let g:loaded_getscriptPlugin = 1
+let g:loaded_gzip = 1
+let g:loaded_logiPat = 1
+let g:loaded_rrhelper = 1
+let g:loaded_spellfile_plugin = 1
+let g:loaded_tarPlugin = 1
+let g:loaded_2html_plugin = 1
+let g:loaded_vimballPlugin = 1
+let g:loaded_zipPlugin = 1
 
-" Enable omnicompletion (to use, hold Ctrl+X then Ctrl+O while in Insert mode)
-set ofu=syntaxcomplete#Complete
-" No swap files, use version control instead
+" Enabled
+runtime! macros/matchit.vim
+" }}}
+
+" Settings {{{
+
+set encoding=utf-8
+scriptencoding utf-8
+filetype plugin indent on
+
+" Enable modeline even if some distro consider it harmful
+" See: /usr/share/vim/vim82/debian.vim
+" See: https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
+set modeline
+
+" Set height of status line
+set laststatus=1
+
+" Changing fillchars for folding, so there is no garbage chars
+set fillchars=fold:\ ,vert:\│
+
+" Split window below/right when creating horizontal/vertical windows
+set splitbelow splitright
+
+" Tweak speed
+set timeout timeoutlen=400
+set ttimeout ttimeoutlen=10
+set updatetime=300
+
+" Uneffective without +clipboard flag (see all flags with vim --version)
+" See: https://vi.stackexchange.com/questions/13564/why-is-vim-for-debian-compiled-without-clipboard
+set clipboard^=unnamed,unnamedplus
+
+" Disable creating swapfiles, see https://stackoverflow.com/q/821902/6064933
 set noswapfile
-" Move viminfo to cache folder
-set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 
-" 04. Theme/Colors
-colorscheme wal
-set t_Co=256              " enable 256-color mode.
-" set termguicolors         " enable true colors support (nord/ayu need this enabled).
-syntax enable             " enable syntax highlighting (previously syntax on).
+" General tab settings
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set shiftwidth=4    " number of spaces to use for autoindent
+set expandtab       " expand tab to spaces so that tabs are spaces
 
-" Prettify JSON files
-autocmd BufRead,BufNewFile *.json set filetype=json
-" Prettify Vagrantfile
-autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
-" Prettify Markdown files
-autocmd BufRead,BufNew,BufNewFile *.md set ft=markdown.gfm
-" Prettify Nginx conf
-au BufRead,BufNewFile */nginx/* set ft=nginx
+" Set matching pairs of characters and highlight matching brackets
+set matchpairs+=<:>,「:」
 
-" 05. Vim UI
-set number                " show line numbers
-" set rnu                   " show relative numbers
-set numberwidth=6         " make the number gutter 6 characters wide
-set cul                   " highlight current line
-set laststatus=2          " last window always has a statusline
-set hlsearch              " Highlight matches
-set incsearch             " Highlight as you type your search.
-set ignorecase            " Make searches case-insensitive.
-set ruler                 " Always show info along bottom.
-set showmatch
+" Show line number and relative line number
+set number relativenumber
 
-" Enable folding
+" Ignore case in general, but become case-sensitive when uppercase is present
+set ignorecase smartcase
+
+" File and script encoding settings for vim
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
+" Break line at predefined characters
+set linebreak
+" Character to show before the lines that have been soft-wrapped
+set showbreak=↪
+
+" List all items and start selecting matches in cmd completion
+set wildmenu
+set wildmode=longest:full
+set wildignore+=*.o,*.obj,*.bin,*.dll,*.exe
+set wildignore+=*/.git/*,*/.svn/*,*/__pycache__/*,*/build/**
+set wildignore+=*.aux,*.pyc,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.pdf
+
+" Show current line where the cursor is
+set cursorline
+
+" Minimum lines to keep above and below cursor when scrolling
+set scrolloff=4
+
+" Use mouse to select text in normal/visual modes
+set mouse=nv
+
+" Do not show mode on command line
+set noshowmode
+
+" Fileformats to use for new files
+set fileformats=unix,dos
+
+" Modes in which cursorline text can be concealed
+set concealcursor=nv
+
+" Ask for confirmation when handling unsaved or read-only files
+set confirm
+
+" Do not use visual and error bells
+set novisualbell noerrorbells
+
+" The level we start to fold
+set foldlevel=0
 set foldmethod=indent
-set foldlevel=99
 
-" Enable indent line
-" let g:indent_guides_auto_colors = 1
-" let g:indent_guides_guide_size = 1
-" let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_start_level = 2
+" The number of command and search history to keep
+set history=500
 
-" Split bar
-set fillchars=vert:│
+" Use list mode and customized listchars
+set list listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:+
 
-" 06. Text Formatting/Layout
-set tabstop=4               " tab spacing
-set nowrap                  " don't wrap text
-set shiftwidth=4            " indent/outdent by 4 columns
+" Auto-write the file based on some condition
+set autowrite
 
-" set autoindent            " auto-indent
-" set softtabstop=4         " unify
-" set shiftround            " always indent/outdent to the nearest tabstop
-set expandtab               " use spaces instead of tabs
-" set smartindent           " automatically insert one extra level of indentation
-" set smarttab              " use tabs at the start of a line, spaces elsewhere
+" Completion behaviour
+set completeopt+=menuone  " Show menu even if there is only one item
+set completeopt-=preview  " Disable the preview window
 
-" Backspace key should delete chars (mac only)
+" Settings for popup menu
+set pumheight=15  " Maximum number of items to show in popup menu
+
+" Scan files given by `dictionary` option
+set complete+=k,kspell complete-=w complete-=b complete-=u complete-=t
+
+" Spell languages
+set spelllang=en
+
+" Align indent to next multiple value of shiftwidth. For its meaning,
+" see http://vim.1045645.n5.nabble.com/shiftround-option-td5712100.html
+set shiftround
+
+" Virtual edit is useful for visual block edit
+set virtualedit=block
+
+set formatoptions=
+set formatoptions+=c  " auto-wrap comments using textwidth, inserting comment leader
+set formatoptions+=j  " remove comment leader when joining lines
+set formatoptions+=l  " long lines, longer than textwidth when insert mode is started, do no break automatically
+set formatoptions-=o  " do not insert comment leader with oO if run from a commented line
+set formatoptions+=r  " but insert it with <cr>
+set formatoptions+=q  " allow formatting of options with gq
+
+set shortmess=
+set shortmess+=F      " don't print file info when entering a buffer
+set shortmess+=c      " no status message for insert mode completions
+set shortmess+=f      " "(3 of 5)" instead of "(file 3 of 5)"
+set shortmess+=i      " "[noeol]" instead of "[Incomplete last line]"
+set shortmess+=l      " "999L, 888C" instead of "999 lines, 888 characters"
+set shortmess+=m      " [+] instead of [MODIFIED]
+set shortmess+=n      " "[New]" instead of "[New File]"
+set shortmess+=t      " t and T truncate messages if they are too long to fit the command line
+set shortmess+=x      " write only short format messages for fileformat: unix, mac, dos
+
+" Tilde (~) is an operator, thus must be followed by motions like `e` or `w`.
+" set tildeop
+
+" Do not add two spaces after a period when joining lines or formatting texts,
+" see https://stackoverflow.com/q/4760428/6064933
+set nojoinspaces
+
+" Text after this column is not highlighted
+set synmaxcol=500
+
+" Search
+set incsearch hlsearch
+
+" Use backsapce to delete
 set backspace=indent,eol,start
 
+if v:version >800
+    set wildoptions=pum
+    set lazyredraw
+endif
 
-" 07. Custom
-" lightline
-let g:lightline = { 'colorscheme': 'wal' }
+"}}}}
 
-" ALE (Asynchronous Lint Engine)
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_completion_enabled = 1
+" Functions {{{
 
-" Open FuzzyFinder with Ctrl+p
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
-" Devicons
-" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-" let g:DevIconsEnableFoldersOpenClose = 1
-"let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-" Find glyph at http://nerdfonts.com/#cheat-sheet
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
-    \ 'html': '',
-    \ 'css': '',
-    \ 'cson': "\ue60b",
-    \ 'less': "\ue758",
-    \ 'md': "\ue73e"
-\ }
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {
-    \ '.gitignore': "\ue702",
-    \ '.php_cs': "\ue608"
-\ }
-
-" NERDTree syntax highlight plugin (vim-nerdtree-syntax-highlight)
-" let s:git_orange = 'F54D27'
-" let s:purple = "834F79"
-" let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
-" let g:NERDTreeExtensionHighlightColor['css'] = s:blue " sets the color of css files to blue
-" let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
-" let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange
-" let g:NERDTreeExactMatchHighlightColor['.php_cs'] = s:purple
-" let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
-" let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
-" let g:NERDTreeSyntaxDisableDefaultExtensions = 1
-" let g:NERDTreeFileExtensionHighlightFullName = 1
-" let g:NERDTreeExactMatchHighlightFullName = 1
-" let g:NERDTreePatternMatchHighlightFullName = 1
-
-"   ~on vimrc source, refresh the devicons
-" if exists('g:loaded_webdevicons')
-"   call webdevicons#refresh()
-" endif
-
-" NERDTree
-let g:NERDTreeMinimalUI = 1
-let NERDTreeCascadeSingleChildDir=0
-" let g:NERDTreeHighlightCursorline = 0
-" let g:NERDTreeDirArrowExpandable = ''
-" let g:NERDTreeDirArrowCollapsible = ''
-" this will enable icon specific colors set " " instead to use only one color
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeIgnore = [
-    \ '^\.DS_Store$[[file]]',
-    \ 'zsh.zwc$[[file]]',
-    \ '^\.git$[[dir]]',
-    \ '^node_modules$[[dir]]'
-\ ]
-" Make colors of directory icons with the same as directory names.
-highlight! link NERDTreeFlags NERDTreeDir
-" Remove trailing slash for dirs
-augroup nerdtreehidecwd
-    autocmd!
-    autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
-augroup end
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-    exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-    exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+function! GetMode()
+    let l:mode=mode(1)
+    if l:mode ==# 'i'
+      return 'INS'
+    elseif l:mode ==# 'c'
+      return 'CMD'
+    elseif l:mode ==# 'v'
+      return 'VISUAL'
+    elseif l:mode ==# 'V'
+      return 'V-LINE'
+    elseif l:mode ==# "\<C-V>"
+      return 'V-BLOCK'
+    elseif l:mode ==? 'R' || l:mode ==? 'Rv'
+      return 'REP'
+    elseif l:mode ==? 't'
+      return 'TERM'
+    endif
+    return 'NORM'
 endfunction
-" Open with Ctrl+n
-map <C-n> :NERDTreeToggle<CR>
-" Open automatically when vim starts up on opening a directory
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-" Close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" mutt: insert attachment with ranger
-" fun! RangerMuttAttach()
-"     if filereadable('/tmp/chosendir')
-"         silent !ranger --choosefiles=/tmp/chosenfiles --choosedir=/tmp/chosendir "$(cat /tmp/chosendir)"
-"     else
-"         silent !ranger --choosefiles=/tmp/chosenfiles --choosedir=/tmp/chosendir
-"     endif
-"     if filereadable('/tmp/chosenfiles')
-"         call append('.', map(readfile('/tmp/chosenfiles'), '"Attach: ".substitute(v:val," ",''\\ '',"g")'))
-"         call system('rm /tmp/chosenfiles')
-"     endif
-"     redraw!
-" endfun
-" map <C-a> magg/Reply-To<CR><ESC>:call RangerMuttAttach()<CR>`a
-" imap <C-a> <ESC>magg/Reply-To<CR><ESC>:call RangerMuttAttach()<CR>`aa
+" Change the statusline color depending on mode
+function! ChangeStatuslineColor()
+  exe "hi! StatusLine ctermbg=5 ctermfg=0"
+  if (mode() =~# '\v(n|no)')
+    exe 'hi! StatusLine ctermfg=0 ctermbg=3'
+  elseif (mode() =~# '\v(v|V)')
+    exe 'hi! StatusLine ctermfg=0 ctermbg=4'
+  elseif (mode() ==# 'i')
+    exe 'hi! StatusLine ctermfg=4 ctermbg=0'
+  endif
+  return ''
+endfunction
 
+function! GetGitBranch()
+    let l:branch = system('cd '.expand('%:p:h').' && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d "\n"')
+    let w:git_branch = !strlen(l:branch) || !isdirectory(expand('%:p:h')) ? '' : ' ' . l:branch . ' │ '
+endfunction
 
-" Split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-nnoremap H gT " Go to prev tab
-nnoremap L gt " Go to next tab
+" Find out current buffer's size and output it.
+function! FileSize()
+  let bytes = getfsize(expand('%:p'))
+  if (bytes >= 1024)
+    let kbytes = bytes / 1024
+  endif
+  if (exists('kbytes') && kbytes >= 1000)
+    let mbytes = kbytes / 1000
+  endif
+
+  if bytes <= 0
+    return '0'
+  endif
+
+  if (exists('mbytes'))
+    return mbytes . 'mb '
+  elseif (exists('kbytes'))
+    return kbytes . 'kb '
+  else
+    return bytes . 'b '
+  endif
+endfunction
+
+"}}}}
+
+" Autocommands {{{
+
+" Do not use smart case in command line mode,
+" extracted from https://vi.stackexchange.com/q/16509/15292
+if exists('##CmdLineEnter')
+    augroup dynamic_smartcase
+        autocmd!
+        autocmd CmdLineEnter : set nosmartcase
+        autocmd CmdLineLeave : set smartcase
+    augroup END
+endif
+"
+if exists('$SSH_TTY')
+    augroup block_cursor
+        au!
+        " Init block cursor on server
+        autocmd VimEnter * silent !echo -ne "\e[2 q"
+    augroup END
+endif
+
+augroup my_rc
+    au!
+    " Automatically VimResized
+    autocmd VimResized * wincmd =
+    " Update git branch variable when opening new buffer
+    autocmd BufEnter * call GetGitBranch()
+    autocmd FileChangedShell * echo " Warning: File changed on disk"
+    " Open help in a vertical split
+    autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | vert resize 80 | endif
+    " Remove trailing whilespace on save
+    autocmd BufWritePre * %s/\s\+$//e
+    " Return to last edit position when opening a file (and center screen)
+    autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g`\"zvzz" | endif
+    " Toggle relative number
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &number | set relativenumber | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave * if &number | set norelativenumber | endif
+augroup END
+"}}}}
+
+" Mappings {{{
+
+let mapleader = ','
+
+" Motions
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <expr> <c-d> pumvisible()?"\<C-p>":"\<c-d>"
+
+" Enter commandline
+nnoremap <Leader>; :
+xnoremap <Leader>; :
+" Saner commandline history
+cnoremap <c-h>  <left>
+cnoremap <c-j>  <down>
+cnoremap <c-k>  <up>
+cnoremap <c-l>  <right>
+cnoremap <c-a>  <home>
+cnoremap <expr> <c-d> pumvisible()?"\<C-p>":"\<c-d>"
+
+" Remap Ex-mode
+nnoremap Q gQ
+
+" Disable annoying command-line window
+nnoremap q: <Nop>
+
+" Quick save
+nnoremap <silent> <Leader><Leader> :w<Enter>
+
+" Yank from current cursor position to the end of the line (make it
+" consistent with the behavior of D, C)
+nnoremap Y y$
+
+" Continuous visual shifting (does not exit Visual mode), `gv` means
+" to reselect previous visual area, see https://superuser.com/q/310417/736190
+xnoremap < <gv
+xnoremap > >gv
+
+" Buffer
+nnoremap <leader>] :bnext<CR>
+nnoremap <leader>[ :bprevious<CR>
+" switch with most recent buffer
+nnoremap <Tab><Tab> :b#<enter>
+nnoremap <Space>x :bdelete!<CR>
+
+" Quickly Move Current Line https://github.com/mhinz/vim-galore#matchit
+nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
+nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
+
+" Quickly Add Empty Lines https://github.com/mhinz/vim-galore#quickly-add-empty-lines
+nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
+nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+
+" Move selected line / block of text in visual mode
+" Capital J/K means you actually need to press Shift
+xnoremap K :move '<-2<CR>gv-gv
+xnoremap J :move '>+1<CR>gv-gv
+
+" Don't copy cut operation (d,x,c,s) when keystroke sequence begin with \
+inoremap \\ "_
+
+" When completion menu is shown, use <cr> to select an item
+" and do not add an annoying newline. Otherwise, <enter> is what it is.
+" For more info, see https://superuser.com/q/246641/736190 and
+" https://unix.stackexchange.com/q/162528/221410
+inoremap <expr> <cr> ((pumvisible())?("\<C-Y>"):("\<cr>"))
+" Navigate through the completion menu.
+inoremap <expr> <Tab>  pumvisible()?"\<C-n>":"\<Tab>"
+inoremap <expr> <S-Tab>  pumvisible()?"\<C-p>":"\<S-Tab>"
+
+" Edit and reload init.vim quickly
+nnoremap <silent> <leader>ev :edit $MYVIMRC<cr>
+nnoremap <silent> <leader>sv :silent update $MYVIMRC <bar> source $MYVIMRC <bar>
+    \ echomsg "Vim config successfully reloaded!"<cr>
+
+" Reselect the text that has just been pasted
+nnoremap <leader>v `[V`]
+
+" Search in selected region
+vnoremap / :<C-U>call feedkeys('/\%>'.(line("'<")-1).'l\%<'.(line("'>")+1)."l")<CR>
+
+" Change current working directory locally and print cwd after that,
+" see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
+nnoremap <silent> <leader>cd :lcd %:p:h<CR>:pwd<CR>
+
+" Clear last search pattern from register (remove highlights)
+nnoremap <C-l> :let @/ = ''<CR>
+"}}}}
+
+" UI {{{
+
+" Change cursor shapes based on whether we are in insert mode,
+" See: https://vi.stackexchange.com/questions/9131/i-cant-switch-to-cursor-in-insert-mode
+let &t_SI = "\<esc>[6 q"
+let &t_EI = "\<esc>[2 q"
+if exists('&t_SR')
+    let &t_SR = "\<esc>[4 q"
+endif
+
+" Disable modifyOtherKeys
+" This is not needed with Kitty terminal
+"if &term =~ 'xterm-kitty'
+"    let [&t_TI, &t_TE] = ['', '']
+"endif
+
+if exists('&termguicolors')
+    " If we want to use true colors, we must a color scheme which support true
+    " colors, for example, https://github.com/sickill/vim-monokai
+    set notermguicolors
+endif
+
+set t_Co=256
+syntax enable
+set background=dark
+
+" NOTE: We use default colorscheme (:h colorscheme)
+" It matches relatively well terminal colors
+" Add some highlights override
+hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Comment ctermfg=247 ctermbg=NONE cterm=NONE
+hi VertSplit ctermfg=247 ctermbg=NONE cterm=NONE
+hi CursorLine ctermfg=NONE ctermbg=235 cterm=NONE
+hi CursorLineNr ctermfg=15 ctermbg=NONE cterm=NONE
+hi LineNr ctermfg=243 ctermbg=NONE cterm=NONE
+hi Visual ctermfg=NONE ctermbg=237 cterm=NONE
+hi Folded ctermfg=0 ctermbg=3 cterm=italic
+hi Search ctermfg=3 ctermbg=0 cterm=reverse
+hi IncSearch ctermfg=208 ctermbg=234 cterm=reverse
+
+" Minimal statusline
+" Inspired by https://github.com/KaraMCC/vim-streamline
+set laststatus=2
+hi StatusLine ctermbg=3 ctermfg=0
+hi StatusLineNC ctermfg=black ctermbg=red cterm=NONE
+hi User1 ctermfg=black ctermbg=magenta
+hi User2 ctermfg=NONE ctermbg=235
+hi User3 ctermfg=black ctermbg=blue
+hi User4 ctermfg=black ctermbg=cyan
+call GetGitBranch()
+set statusline=                             " Cleanup the previous statusline
+set statusline+=%{ChangeStatuslineColor()}  " Change statusline color
+set statusline+=%0*\ %{GetMode()}           " Current mode
+set statusline+=\ %4*\                      " Padding & switch colour
+set statusline+=%(%{w:git_branch}%)         " Current git branch
+set statusline+=%f                          " Filename
+set statusline+=\ %-3(%{FileSize()}%)       " Filesize
+set statusline+=%2*\ %=                     " Center
+set statusline+=%y                          " File type
+set statusline+=\ %4*\ ☰\ %l:%c\ %3p%%\   " Rownumber/total (%)
+"}}}}
+
+" vim: foldmethod=marker:foldlevel=1
