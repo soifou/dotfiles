@@ -26,6 +26,7 @@ local keys = {
     map(mod, "Enter", act({ SplitHorizontal = { domain = "CurrentPaneDomain" } })),
     map("CTRL|" .. mod, "Enter", act({ SplitVertical = { domain = "CurrentPaneDomain" } })),
     map(mod, "q", act({ CloseCurrentPane = { confirm = false } })),
+    map(mod, "f", "TogglePaneZoomState"),
 
     -- Tabs
     map(mod, "t", act({ SpawnTab = "DefaultDomain" })), -- CurrentPaneDomain
@@ -35,7 +36,7 @@ local keys = {
 
     -- Wezterm features
     map(mod, "r", "ReloadConfiguration"),
-    map(mod, "f", act({ Search = { CaseInSensitiveString = "" } })),
+    map(mod, "/", act({ Search = { CaseInSensitiveString = "" } })),
     -- map(mod, "l", act({ ClearScrollback = "ScrollbackAndViewport" })),
     -- map(mod, " ", "QuickSelect"),
     -- map("CTRL|ALT", " ", "QuickSelect"), -- note: eats a valid terminal keybind
@@ -83,7 +84,7 @@ end
 for k, v in pairs({ h = "Left", j = "Down", k = "Up", l = "Right" }) do
     table.insert(keys, {
         key = k,
-        mods = "ALT",
+        mods = mod,
         action = wezterm.action_callback(function(window, pane)
             if is_vim(pane) then
                 window:perform_action(act({ SendKey = { key = k, mods = mod } }), pane)

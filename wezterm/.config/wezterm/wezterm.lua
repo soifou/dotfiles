@@ -16,6 +16,7 @@ local config = {
     force_reverse_video_cursor = true,
     window_padding = { top = 30, bottom = 30, left = 40, right = 40 },
     inactive_pane_hsb = { saturation = 0.9, brightness = 0.8 },
+    adjust_window_size_when_changing_font_size = false, -- I'm using a tiling WM
     term = "wezterm",
 }
 
