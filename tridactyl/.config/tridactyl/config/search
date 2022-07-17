@@ -12,7 +12,7 @@ set searchurls.amazon https://www.amazon.fr/s/ref=nb_sb_noss?field-keywords=%s
 set searchurls.arch https://wiki.archlinux.org/index.php?search=%s&title=Special%3ASearch&go=Go
 set searchurls.gh https://github.com/search?utf8=%E2%9C%93&q=%s&ref=simplesearch
 set searchurls.gi https://gist.github.com/search?q=%s
-set searchurls.gmaps https://www.google.com/maps/search/%s
+set searchurls.maps https://www.google.com/maps/search/%s
 set searchurls.imdb https://www.imdb.com/find?q=%s
 set searchurls.mdn https://developer.mozilla.org/en-US/search?q=%s&topic=api&topic=js
 set searchurls.npm https://www.npmjs.com/search?q=%s
@@ -21,3 +21,4 @@ set searchurls.trf https://www.wordreference.com/redirect/translation.aspx?w=%s&
 set searchurls.w https://en.wikipedia.org/w/index.php?search=%s&title=Special%3ASearch
 set searchurls.wfr https://fr.wikipedia.org/w/index.php?search=%s&title=Sp%E9cial%3ARecherche
 set searchurls.y https://www.youtube.com/results?search_query=%s
+set searchurls.yp https://piped.kavin.rocks/results?search_query=%s
