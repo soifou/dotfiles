@@ -31,6 +31,10 @@ bindkey '^n' down-history
 bindkey '^j' history-beginning-search-forward
 bindkey '^k' history-beginning-search-backward
 
+# Perform history expansion using space
+# See: https://zsh.sourceforge.io/Doc/Release/Expansion.html
+bindkey ' ' magic-space
+
 # Use vi motions in complete tab menu
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history

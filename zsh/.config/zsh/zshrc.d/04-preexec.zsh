@@ -13,6 +13,7 @@ preexec_functions=(__preexec_gpg_agent_update_tty ${preexec_functions[@]})
 
 # Dynamically set delta "side-by-side" feature if screen is wide enough
 # see: https://github.com/dandavison/delta/issues/359#issuecomment-751447860
+# and https://github.com/wfxr/forgit/issues/121
 # Note in case we use delta inside an fzf preview pane on wide screen
 # we need to empty DELTA_FEATURES when invoking fzf.
 __preexec_git_pager() {

@@ -22,7 +22,6 @@ alias -s {pdf,PDF,ps,PS}='zathura'
 # Unclutter home
 alias feh="feh --no-fehbg -B background"
 alias mr="mr -c $XDG_CONFIG_HOME/myrepos/config -t"
-alias mbsync="mbsync -c $XDG_CONFIG_HOME/neomutt/mailboxes/mbsyncrc"
 alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 alias scummvm="scummvm -c $XDG_CONFIG_HOME"/scummvm/scummvmrc
 
