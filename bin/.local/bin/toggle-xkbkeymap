@@ -3,23 +3,33 @@
 # Quickly switch between a given keyboard layout and the US Qwerty one
 # Credits: https://github.com/fmarier/user-scripts/blob/master/toggle-xkbmap
 
-# to see all options with their description
-# $ sed '/^! option$/,/^ *$/!d;//d' /usr/share/X11/xkb/rules/base.lst
-KB_OPTIONS="ctrl:nocaps,terminate:ctrl_alt_bksp"
+case $(uname -n) in
+    macbook)
+        OPTIONS="ctrl:nocaps,altwin:swap_lalt_lwin,terminate:ctrl_alt_bksp"
+        ALT_VARIANT=mac
+        MODEL=apple_laptop
+        ;;
+    *)
+        OPTIONS="ctrl:nocaps,terminate:ctrl_alt_bksp"
+        ALT_VARIANT=latin9
+        MODEL=pc105
+        ;;
+esac
 
 # if layout is not specified, invert layout
-if [ -z "$1" ]; then
-    CURRENT="$(setxkbmap -query | grep layout | perl -pe 's/^layout: +([^ ]+)$/$1/')"
+if [ -z $1 ]; then
+    CURRENT="$(setxkbmap -query | grep layout | awk '{print $2}')"
     [ "$CURRENT" = "us" ] && CURRENT=fr || CURRENT=us
 # layout is specified, switch to it
 else
     CURRENT=$1
 fi
 
-[ "$CURRENT" = "us" ] && VARIANT=intl || VARIANT=latin9
+# set correct variant depending on the language
+[ "$CURRENT" = "us" ] && VARIANT=intl || VARIANT=$ALT_VARIANT
 
-# note we want to replace all previously specified options
+# replace all previously specified options
 # by using the -option flag with an empty argument first.
-setxkbmap -layout "$CURRENT" -variant $VARIANT -option "" -option $KB_OPTIONS
+setxkbmap -layout $CURRENT -model $MODEL -variant $VARIANT -option "" -option $OPTIONS
 
-notify-send -i input-keyboard "Keyboard" "Switched to $CURRENT layout"
+notify-send -i input-keyboard "Keyboard" "Switched to $CURRENT ($VARIANT) layout"
