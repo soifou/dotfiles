@@ -15,25 +15,32 @@ mkdir -p "$WALLPAPER_PATH"
 _wal() {
     wal --backend="$PYWAL_BACKEND" -o $PYWAL_SCRIPT -e -q -n "$@" > /dev/null
 
-    # Check if second argument exists, then set current theme to xresources
-    # https://github.com/dylanaraps/pywal/issues/184
     THEME=dark
+    # If the third argument (-l) is provided, this is a light theme
     [ -n "$3" ] && THEME=light
+
+    # Store current theme to Xresources since there is no other way to know
+    # https://github.com/dylanaraps/pywal/issues/184
     echo "*.theme: $THEME" >> "$XDG_CACHE_HOME"/wal/colors.Xresources
 }
 
-# fetch a random wallpaper from unsplash
+# Fetch a random wallpaper from unsplash
 _unsplash() {
     RES=$(xrandr --nograb --current | awk '/\*/ {print $1}')
     THEMES=static/unsplash
     curl -o "$WALLPAPER_PATH/$THEMES" -J -L "https://source.unsplash.com/random/$RES" > /dev/null 2>&1
 }
 
+# List user and core colorschemes
+_colorschemes() {
+    echo colorscheme/random # this one will fetch randomly a colorscheme
+    wal --theme | xargs | awk -F: '{print $2$3}' | sed -e 's/\x1b\[[0-9;]*m//g' | sed 's|Dark Themes||g' | sed 's|Light Themes||g' | sed 's| - | colorscheme/|g'
+}
+
 lstrip() { printf '%s\n' "${1##$2}"; }
 
 if [ -z "$@" ]; then
-    PYWAL_THEMES=$(wal --theme | xargs | awk -F: '{print $2$3}' | sed 's|Dark Themes||g' | sed 's|Light Themes||g' | sed 's| - | theme/|g')
-    for o in unsplash theme/light theme/dark theme/random $PYWAL_THEMES; do echo "$o"; done
+    for o in unsplash theme/light theme/dark $(_colorschemes); do echo "$o"; done
     find -L "$WALLPAPER_PATH" -type f -printf '%P\n' | sort
 else
     THEMES="$@"
@@ -42,17 +49,19 @@ else
         unsplash) _unsplash ;;
         theme/light) _wal -i "$WALLPAPER_PATH/today" -l ;;
         theme/dark) _wal -i "$WALLPAPER_PATH/today" ;;
-        theme/*)
-            THEME=$(lstrip "$THEMES" "theme/")
+        colorscheme/*)
+            THEME=$(lstrip "$THEMES" "colorscheme/")
             _wal --theme $THEME
             ;;
     esac
 
     [ -f "$WALLPAPER_PATH/$THEMES" ] && {
         ln -sf "$WALLPAPER_PATH/$THEMES" "$WALLPAPER_PATH/today"
+
         # Need to clear cache of previous colorschemes here
         # Argument -c (Delete all cached colorschemes) does not work for me
         rm -rf "$XDG_CACHE_HOME"/wal
+
         # Sometimes process hangs while writing one of /dev/pts/{0,2,5}
         # filtering the culprit fix the issue, but I don't know why this occurs.
         # See: https://github.com/dylanaraps/pywal/issues/40
