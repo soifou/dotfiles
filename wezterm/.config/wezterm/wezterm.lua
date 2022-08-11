@@ -8,20 +8,20 @@ end
 require("conf.event")
 
 local config = {
-    window_close_confirmation = "NeverPrompt",
-    check_for_updates = false,
-    automatically_reload_config = false,
-    hide_tab_bar_if_only_one_tab = true,
-    default_cursor_style = "SteadyBar",
-    force_reverse_video_cursor = true,
-    window_padding = { top = 30, bottom = 30, left = 40, right = 40 },
-    inactive_pane_hsb = { saturation = 0.9, brightness = 0.8 },
     adjust_window_size_when_changing_font_size = false, -- I'm using a tiling WM
+    automatically_reload_config = false,
+    check_for_updates = false,
+    default_cursor_style = "SteadyBar",
+    enable_kitty_keyboard = true,
+    force_reverse_video_cursor = true,
+    hide_tab_bar_if_only_one_tab = true,
+    inactive_pane_hsb = { saturation = 0.9, brightness = 0.8 },
     term = "wezterm",
+    window_close_confirmation = "NeverPrompt",
+    window_padding = { top = 30, bottom = 30, left = 40, right = 40 },
 }
 
-local files = { "mapping", "font", "color" }
-for _, f in ipairs(files) do
+for _, f in ipairs({ "mapping", "font", "color" }) do
     config = merge(config, require(("conf.%s"):format(f)))
 end
 

@@ -6,6 +6,22 @@ local function map(mods, key, action)
     return { mods = mods, key = key, action = action }
 end
 
+local key_tables = {
+    resize_pane = {
+        { key = "h", action = act.AdjustPaneSize({ "Left", 6 }) },
+        { key = "l", action = act.AdjustPaneSize({ "Right", 6 }) },
+        { key = "k", action = act.AdjustPaneSize({ "Up", 2 }) },
+        { key = "j", action = act.AdjustPaneSize({ "Down", 2 }) },
+        -- Cancel the mode by pressing escape
+        { key = "Escape", action = "PopKeyTable" },
+    },
+    select_pane = {
+        -- Interactive select and swap
+        { key = "w", action = act({ PaneSelect = { alphabet = "0123456789" } }) },
+        { key = "s", action = act({ PaneSelect = { mode = "SwapWithActive", alphabet = "0123456789" } }) },
+    },
+}
+
 local keys = {
     -- Font size
     map(mod, "Backspace", "ResetFontSize"),
@@ -27,6 +43,9 @@ local keys = {
     map("CTRL|" .. mod, "Enter", act({ SplitVertical = { domain = "CurrentPaneDomain" } })),
     map(mod, "q", act({ CloseCurrentPane = { confirm = false } })),
     map(mod, "f", "TogglePaneZoomState"),
+    map(mod, "r", act.ActivateKeyTable({ name = 'resize_pane', one_shot = false })),
+    map(mod, "w", act.ActivateKeyTable({ name = 'select_pane', one_shot = true })),
+    map(mod .. "|SHIFT", "r", act.RotatePanes 'Clockwise'),
 
     -- Tabs
     map(mod, "t", act({ SpawnTab = "DefaultDomain" })), -- CurrentPaneDomain
@@ -35,69 +54,63 @@ local keys = {
     map(mod .. "|CTRL", "h", act({ ActivateTabRelative = -1 })),
 
     -- Wezterm features
-    map(mod, "r", "ReloadConfiguration"),
     map(mod, "/", act({ Search = { CaseInSensitiveString = "" } })),
     -- map(mod, "l", act({ ClearScrollback = "ScrollbackAndViewport" })),
     -- map(mod, " ", "QuickSelect"),
     -- map("CTRL|ALT", " ", "QuickSelect"), -- note: eats a valid terminal keybind
-    map(mod .. '|SHIFT', "d", "ShowDebugOverlay"), -- note: it's not a full Lua interpreter
+    -- map(mod .. "|SHIFT", "r", "ReloadConfiguration"),
+    map(mod .. "|SHIFT", "d", "ShowDebugOverlay"), -- note: it's not a full Lua interpreter
     map(mod, "x", "ShowLauncher"),
 
     -- Custom events
     map(mod, "o", act({ EmitEvent = "url-picker" })),
     map(mod .. "|SHIFT", "Enter", act({ EmitEvent = "new-3up-tab" })),
-    map(mod .. "|SHIFT", "l", wezterm.action_callback(function(win, _)
-            local overrides = win:get_config_overrides() or {}
-            if not overrides.harfbuzz_features then
-                -- If we haven't overriden it yet, then override with ligatures disabled
-                overrides.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
-            else
-                -- else we did already, and we should disable the override now
-                overrides.harfbuzz_features = nil
-            end
-            win:set_config_overrides(overrides)
-        end)
-    ),
+    map(mod .. "|SHIFT", "_", act({ EmitEvent = "toggle-padding" })),
+    map(mod .. "|SHIFT", "l", act({ EmitEvent = "toggle-ligatures" })),
 }
 
 -- Tabs selection
 for i = 1, 9 do
-    table.insert(keys, {
-        key = tostring(i),
-        mods = mod,
-        action = act({ ActivateTab = i - 1 }),
-    })
+    table.insert(keys, map(mod, tostring(i), act({ ActivateTab = i - 1 })))
 end
 
--- Move between terminal panes and vim splits seamlessly
--- FIXME: Currently not able to control pane from external program (here vim)
--- So we cannot go out from a vim split to a neighbour terminal pane
--- See discussion: https://github.com/wez/wezterm/discussions/995
-local basename = function(s)
-    return string.gsub(s, "(.*[/\\])(.*)", "%2")
+-- Windows selection
+local move_to_pane = function(key, direction)
+    return wezterm.action_callback(function(window, pane)
+        -- If inside nvim, move to corresponding window (if any)
+        -- An instance of nvim needs to be run with the listen directive
+        -- $ nvim --listen /tmp/nvim-$TERM-$WEZTERM_PANE
+        -- See: https://neovim.io/doc/user/remote.html
+        if pane:get_foreground_process_name():sub(-4) == "nvim" then
+            local success, stdout, stderr = wezterm.run_child_process({
+                "nvim",
+                "--server",
+                "/tmp/nvim-wezterm" .. "-" .. pane:pane_id(),
+                "--remote-expr",
+                string.format('v:lua.require("utils").goto_dir("%s")', key),
+            })
+
+            wezterm.log_info(stdout, success, stderr)
+
+            -- FIXME: why output of goto_dir returns on stderr, not stdout!?
+            -- Exit from here only if valid split
+            if success and stderr ~= "" then return end
+        end
+
+        -- Else move to corresponding wezterm pane.
+        window:perform_action(act.ActivatePaneDirection(direction), pane)
+    end)
 end
-local is_vim = function(pane)
-    local proc = basename(pane:get_foreground_process_name())
-    wezterm.log_info("@is_vim, proc=" .. proc)
-    return proc == "nvim" or proc == "vim" or proc == "dash"
-end
-for k, v in pairs({ h = "Left", j = "Down", k = "Up", l = "Right" }) do
-    table.insert(keys, {
-        key = k,
-        mods = mod,
-        action = wezterm.action_callback(function(window, pane)
-            if is_vim(pane) then
-                window:perform_action(act({ SendKey = { key = k, mods = mod } }), pane)
-            else
-                window:perform_action(act({ ActivatePaneDirection = v }), pane)
-            end
-        end),
-    })
-end
+
+table.insert(keys, map(mod, 'h', move_to_pane('h', 'Left')))
+table.insert(keys, map(mod, 'j', move_to_pane('j', 'Down')))
+table.insert(keys, map(mod, 'k', move_to_pane('k', 'Up')))
+table.insert(keys, map(mod, 'l', move_to_pane('l', 'Right')))
 
 return {
     disable_default_key_bindings = true,
     keys = keys,
+    key_tables = key_tables,
     disable_default_mouse_bindings = false,
     mouse_bindings = {
         -- select on pressing down left button
