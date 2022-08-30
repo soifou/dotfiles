@@ -26,6 +26,7 @@ export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc-2.0
+export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/brew/Brewfile"
 export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME"/httpie
 export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
 export MEDNAFEN_HOME="$XDG_CONFIG_HOME"/mednafen
@@ -36,6 +37,7 @@ export VIMINIT='let $MYVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/vimrc" : "$X
 export WAKATIME_HOME="$XDG_CONFIG_HOME"/wakatime
 export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
 export XINITRC="$XDG_CONFIG_HOME"/x/xinitrc
+export XSERVERRC="$XDG_CONFIG_HOME"/x/xserverrc
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 ## Cache
 export ANSIBLE_CACHE_PLUGINS="$XDG_CACHE_HOME"/ansible/plugins

@@ -12,6 +12,7 @@ install: init
 	stow bat
 	stow beets
 	stow bin
+	stow brew
 	stow bundler
 	stow composer
 	stow feh
@@ -53,6 +54,7 @@ uninstall:
 	stow -D bat
 	stow -D beets
 	stow -D bin
+	stow -D brew
 	stow -D bundler
 	stow -D composer
 	stow -D feh
