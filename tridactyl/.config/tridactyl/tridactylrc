@@ -24,8 +24,8 @@ autocmd UriChange .*youtube\.com js window.location.href.match(".*youtube\.com/(
 colorscheme wal
 
 " Optimize follow link for URL's.
-bindurl duckduckgo.com f hint -Jc .result__title>a.result__a
-bindurl duckduckgo.com F hint -Jbc .result__title>a.result__a
+bindurl duckduckgo.com f hint -Jc [data-testid="result-title-a"]
+bindurl duckduckgo.com F hint -Jbc [data-testid="result-title-a"]
 bindurl giphy.com f hint -Jci a > img
 bindurl youtube.com f hint -Jw
 bindurl youtube.com t hint -J

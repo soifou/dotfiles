@@ -56,13 +56,14 @@ bindurl dailymotion.com v composite hint -Jpipe a href | exclaim_quiet mpv
 " Open link in reader mode
 " bind --mode=normal ,q composite hint -pipe a href | jsb -p tri.excmds.tabopen("about:reader?url=" + JS_ARG)
 
+" Open link in background tab
+bind f hint -b
 " Open link in foreground tab
-unbind F
 bind F hint -t
-
 " Open link in new window
-unbind w
 bind w hint -w
+" Yank link to clipboard
+bind ,y hint -y
 
 " RSS (show feeds in current page and prompt if more than one found)
 alias rsssave js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('echo ' + url + ' >> ~/.config/newsboat/urls; notify-send -i RSS_feeds Newsboat Subscribed'))
