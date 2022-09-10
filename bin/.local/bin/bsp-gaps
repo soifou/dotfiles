@@ -2,12 +2,12 @@
 
 # Manage window gaps for BSPWM
 
-_="bspc config window_gap"
-BSPWM_GAPS=${BSPWM_GAPS:-10}
+gap="bspc config window_gap"
+DEFAULT=${BSPWM_GAPS:-10}
 
 case "$1" in
-    equal) "$($_ $BSPWM_GAPS)" ;;
-    toggle) [ $($_) = '0' ] && $_ $BSPWM_GAPS || $_ 0 ;;
-    plus) "$($_ $(($($_) + 2)))" ;;
-    minus) [ $($_) -ne 0 ] && "$($_ $(($($_) - 2)))" ;;
+    equal) $gap "$DEFAULT" ;;
+    toggle) [ $($gap) = '0' ] && $gap "$DEFAULT" || $gap 0 ;;
+    plus) $gap $(($($gap) + 2)) ;;
+    minus) [ $($gap) -ne 0 ] && $gap $(($($gap) - 2)) ;;
 esac
