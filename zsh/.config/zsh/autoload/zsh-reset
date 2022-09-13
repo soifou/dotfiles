@@ -6,3 +6,7 @@ rm -rf \
     $XDG_DATA_HOME/zsh/znap \
     $XDG_CACHE_HOME/zsh-snap \
     $XDG_CACHE_HOME/p10k-*
+
+# Remove broken symlinks
+# znap store plugin links in $XDG_STATE_HOME
+find $XDG_STATE_HOME -xtype l -exec rm {} \;

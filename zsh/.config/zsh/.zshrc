@@ -48,7 +48,7 @@ znap_dir="$XDG_DATA_HOME"/zsh/znap
 # Set specific location for plugins dir
 zstyle ':znap:*' plugins-dir $XDG_DATA_HOME/zsh/plugins
 # Turn off git maintenance
-zstyle ':znap:*' git-maintenance off
+zstyle ':znap:*:*' git-maintenance off
 . "$znap_dir"/znap.zsh
 unset znap_dir
 # Load defer script
