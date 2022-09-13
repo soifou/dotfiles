@@ -121,7 +121,7 @@ fi
 
 [ -f "$XDG_DATA_HOME"/zsh/znap/znap.zsh ] && {
     yn "Update znap?" \
-        && zsh --singlecommand -c '. "$XDG_DATA_HOME"/zsh/znap/znap.zsh && znap pull && znap status'
+        && zsh --singlecommand -c 'zstyle ":znap:*" plugins-dir "$XDG_DATA_HOME"/zsh/plugins && . "$XDG_DATA_HOME"/zsh/znap/znap.zsh && znap pull && znap status'
 }
 
 if command -v cargo > /dev/null 2>&1; then
