@@ -25,6 +25,9 @@ map [fullscreen] <C-s> toggle_statusbar
 # map f toggle_fullscreen
 # map [fullscreen] f toggle_fullscreen
 
+map [ navigate previous
+map ] navigate next
+
 map u scroll half-up
 map d scroll half-down
 
