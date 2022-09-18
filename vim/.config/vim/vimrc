@@ -329,6 +329,8 @@ cnoremap <C-k>  <Up>
 cnoremap <C-l>  <Right>
 cnoremap <C-a>  <Home>
 cnoremap <expr> <C-d> pumvisible()?"\<C-p>":"\<C-d>"
+" Auto expand current buffer dir
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Remap Ex-mode
 nnoremap Q gQ
