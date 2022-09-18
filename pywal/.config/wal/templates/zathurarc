@@ -4,7 +4,7 @@ set scroll-step 50
 set adjust-open width
 set incremental-search true
 set selection-clipboard clipboard
-set statusbar-basename true
+set statusbar-home-tilde true
 set window-title-home-tilde true
 
 ## Keybindings
