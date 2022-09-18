@@ -129,7 +129,7 @@ set confirm
 set novisualbell noerrorbells
 
 " The level we start to fold
-set foldlevel=0
+set foldlevel=8
 set foldmethod=indent
 
 " The number of command and search history to keep
