@@ -27,6 +27,7 @@
         context                   # user@host
         dir                       # current directory
         vcs                       # git status
+        background_jobs           # presence of background jobs
         # =========================[ Line #2 ]=========================
         newline                   # \n
         prompt_char               # prompt symbol
@@ -104,6 +105,13 @@
     # Yellow previous command duration.
     typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=$yellow
 
+    #######################[ background_jobs: presence of background jobs ]#######################
+    # Show the number of background jobs.
+    typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=true
+    # Background jobs color.
+    typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=6
+    # Custom icon.
+    typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION=''
     #####################################[ vcs: git status ]######################################
 
     # Custom formatter for Git status.
