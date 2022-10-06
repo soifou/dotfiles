@@ -1,9 +1,15 @@
 #!/usr/bin/env zsh
 
-# See: man zshzle
+#-----------------------------------------------------
+# Params: man zshparam
+
+# List of non-alphanumeric chars considered part of a word
 WORDCHARS=
 # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
 KEYTIMEOUT=1
+
+#-----------------------------------------------------
+# Keybinds: man zshzle
 
 # Set viins keymap as default (bindkey -l to list all)
 bindkey -v
@@ -32,6 +38,7 @@ bindkey '^j' history-beginning-search-forward
 bindkey '^k' history-beginning-search-backward
 
 # Perform history expansion using space
+# ie, revealing previous command, !!<Space>
 # See: https://zsh.sourceforge.io/Doc/Release/Expansion.html
 bindkey ' ' magic-space
 
@@ -40,6 +47,10 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+
+# Surround current command with $()
+# <C-s> is available because of no_flow_control
+bindkey -s "^s" '^a$(^e)^a'
 
 #-----------------------------------------------------
 # Cursor shapes
@@ -65,7 +76,7 @@ zle-line-init() {
 zle -N zle-line-init
 
 #-----------------------------------------------------
-# Zsh-contrib (man zshcontrib)
+# Contrib: man zshcontrib
 # https://github.com/zsh-users/zsh/tree/master/Functions/Zle
 
 # Enhance vi mode text object for quote
