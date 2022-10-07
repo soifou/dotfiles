@@ -32,4 +32,4 @@ fi
 # by using the -option flag with an empty argument first.
 setxkbmap -layout $CURRENT -model $MODEL -variant $VARIANT -option "" -option $OPTIONS
 
-notify-send -i input-keyboard "Keyboard" "Switched to $CURRENT ($VARIANT) layout"
+notify-send -i input-keyboard -u low "Keyboard" "Switched to $CURRENT ($VARIANT) layout"

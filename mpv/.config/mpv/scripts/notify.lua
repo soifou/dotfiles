@@ -7,7 +7,7 @@ mp.register_event("file-loaded", function()
     title = mp.get_property("media-title")
     title = (title == mp.get_property("filename") and mp.get_property("path") or title)
 
-    os.execute(("notify-send -i mpv 'Watching now' '%s'"):format(string.gsub(title, "'", "'\"'\"'")))
+    os.execute(("notify-send -i mpv -u low 'Watching now' '%s'"):format(string.gsub(title, "'", "'\"'\"'")))
 end)
 
 -- Send notification when failed to open file.

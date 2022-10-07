@@ -11,9 +11,11 @@ if ! command -v mpdscribble >/dev/null 2>&1; then
     exit 1
 fi
 
+notify() { notify-send -i last-fm -u low Last.fm "$1"; }
+
 love() {
     mpc sendmessage mpdscribble love
-    notify-send -i last-fm Last.fm "Masterpiece 🤟😍🤟"
+    notify "Masterpiece 🤟😍🤟"
 }
 
 status() {
@@ -29,10 +31,10 @@ status() {
 toggle() {
     if pgrep -x mpdscribble >/dev/null 2>&1; then
         pgrep mpdscribble | xargs kill
-        notify-send -i last-fm Last.fm "Scrobbler is now disabled"
+        notify "Scrobbler disabled"
     else
         mpdscribble --conf "$SCROBBLER_CONF_PATH" &
-        notify-send -i last-fm Last.fm "Scrobbler is now enabled"
+        notify "Scrobbler enabled"
     fi
 }
 

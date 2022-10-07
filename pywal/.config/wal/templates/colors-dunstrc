@@ -11,18 +11,18 @@
     frame_color = "{color4}"
 
 [urgency_low]
-    background = "{color4}"
+    background = "{background}"
     foreground = "{foreground}"
     timeout = 5
 
 [urgency_normal]
-    background = "{background}"
-    foreground = "{foreground}"
+    background = "{color4}"
+    foreground = "{background}"
     frame_color = "{color4}"
     timeout = 10
 
 [urgency_critical]
-    background = "{color4}"
+    background = "{color2}"
     foreground = "{background}"
     frame_color = "{color1}"
     timeout = 0

@@ -15,7 +15,7 @@ _color() { xrdb -q | grep -m1 -i "$1" | cut -f2 ; }
 
 refresh() {
     ping -q -c 1 1.1.1.1 >/dev/null || exit
-    sudo apt update >/dev/null 2>&1 || notify-send -i dialog-error "Error downloading updates."
+    sudo apt update >/dev/null 2>&1 || notify-send -i dialog-error -u critical "Error downloading updates."
 }
 
 status() {
@@ -29,14 +29,14 @@ status() {
 
 list() {
     PACKAGES=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX")
-    [ "$PACKAGES" ] && echo "$PACKAGES" || notify-send -i debian-logo "Packages" "Already up to date!"
+    [ "$PACKAGES" ] && echo "$PACKAGES" || notify-send -i debian-logo -u low "Packages" "Already up to date!"
 }
 
 notify() {
     PACKAGES=$(apt list --upgradable 2>/dev/null | grep -v 'Listing...' | sed -e "$REGEX")
     COUNT=$(echo "$PACKAGES" | wc -l)
     if [ "$COUNT" = '0' ]; then
-        notify-send -i debian-logo "Packages" "Already up to date!"
+        notify-send -i debian-logo -u low "Packages" "Already up to date!"
     else
         notify-send -i debian-logo "$COUNT update(s) available" "$PACKAGES"
     fi

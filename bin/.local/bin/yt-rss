@@ -24,4 +24,4 @@ title="$(echo "$src" | grep -o '"channelId":"[^"]*","title":"[^"]*"' | sed 's/^"
 # print RSS in Newsboat format with tags
 printf '%s%s "%s" # %s\n' "$url_prefix" "$id" "$primary_tag" "$title"
 
-notify-send -i RSS_feeds Newsboat "Subscribed to $title"
+notify-send -i RSS_feeds -u low Newsboat "Subscribed to $title"
