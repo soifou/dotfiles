@@ -1,16 +1,17 @@
 #-----------------------------------------------------
 # Vars
+
 HISTFILE="$XDG_DATA_HOME"/zsh/history
 HISTFILESIZE=100000
 HISTSIZE=10000
 SAVEHIST=10000
 # HISTCONTROL=ignoreboth
-
-HISTIGNORE='history:man:run-help'
+HISTIGNORE='history:man:run-help:pass'
 typeset -gT HISTIGNORE histignore
 
 #-----------------------------------------------------
 # Options
+
 setopt bang_hist                 # Treat the '!' character specially during expansion.
 setopt extended_history          # Write the history file in the ":start:elapsed;command" format.
 setopt inc_append_history        # Write to the history file immediately, not when the shell exits.

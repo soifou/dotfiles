@@ -56,7 +56,9 @@ znap source romkatv/zsh-defer
 
 #-----------------------------------------------------
 # Load options
-() { [ -f $1 ] && . $1 } "$ZDOTDIR"/config/options.zsh
+for i in options history; do
+    () { [ -f $1 ] && . $1 } "$ZDOTDIR"/config/$i.zsh
+done
 
 #-----------------------------------------------------
 # Load zsh config by deferring them
