@@ -1,14 +1,6 @@
 #!/usr/bin/env zsh
 
 #-----------------------------------------------------
-# Params: man zshparam
-
-# List of non-alphanumeric chars considered part of a word
-WORDCHARS=
-# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
-KEYTIMEOUT=1
-
-#-----------------------------------------------------
 # Keybinds: man zshzle
 
 # Set viins keymap as default (bindkey -l to list all)
@@ -99,11 +91,21 @@ for m in visual viopp; do
     done
 done
 
+# Add surround using "vim-sandwich" mapping style
+bindkey -rM vicmd 's' # Remove vi-substitute
+autoload -U surround
+for op in add change delete; do
+    zle -N $op-surround surround
+done
+bindkey -M vicmd 'sa' add-surround
+bindkey -M vicmd 'sd' delete-surround
+bindkey -M vicmd 'sr' change-surround
+bindkey -M visual 'sa' add-surround
+
 # Open editor with <C-e> on vicmd keymap
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd '^e' edit-command-line
-
 
 #-----------------------------------------------------
 # Custom
