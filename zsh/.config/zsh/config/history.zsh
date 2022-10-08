@@ -17,7 +17,7 @@ setopt bang_hist                 # Treat the '!' character specially during expa
 setopt extended_history          # Write the history file in the ":start:elapsed;command" format.
 setopt hist_beep                 # Beep when accessing nonexistent history.
 setopt hist_expire_dups_first    # Expire duplicate entries first when trimming history.
-setopt hist_find_no_dups         # Do not display a line previously found.
+# setopt hist_find_no_dups         # Do not display a line previously found.
 setopt hist_ignore_all_dups      # Delete old recorded entry if new entry is a duplicate.
 setopt hist_ignore_dups          # Don't record an entry that was just recorded again.
 setopt hist_ignore_space         # Don't record an entry starting with a space.
@@ -42,13 +42,15 @@ function _zshaddhistory_ignore_command {
     whence ${${(z)1}[1]} >| /dev/null || return 1
 
     # Ignore short commands
-    [[ ${#line} -ge 5 ]] && return 1
+    [[ ${#line} -lt 5 ]] && return 1
 
     # Ignore trivial flags commands
-    [[ $line != *--(help|version) ]] && return 1
+    # [[ $line == *--(help|version) ]] && return 1
 
     # Ignore blacklist commands
     (( $+histignore[(r)${cmd}] )) && return 1
+
+    return 0
 }
 add-zsh-hook zshaddhistory _zshaddhistory_ignore_command
 
