@@ -4,10 +4,12 @@
 # Remove queue list in task-spooler
 tsp -K
 # Remove all orphaned cache files from the thumbnail cache directory
-sxiv -c
-find "$XDG_CACHE_HOME"/sxiv -depth -type d -empty ! -name "." -exec rmdir {} \;
+nsxiv -c
+find "$XDG_CACHE_HOME"/nsxiv -depth -type d -empty ! -name "." -exec rmdir {} \;
 # Cleanup lf cache
 find "$XDG_CACHE_HOME"/lf -type f -mtime +14 -delete
+# Cleanup wakatime log
+cat /dev/null > "$WAKATIME_HOME"/.wakatime.log
 
 ## Kill remaining processes
 pkill picom

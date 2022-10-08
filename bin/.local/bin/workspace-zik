@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Load i3 layout on specific workspace for ncmpcpp player with visualiser and cover art in separate windows
-# Dependencies: jq, kitty, sxiv, compton/picom
+# Dependencies: jq, kitty, nsxiv, compton/picom
 # https://github.com/ameba23/ncmpcpp_i3_screen_layout
 # https://sainathadapa.github.io/2016/03/29/i3-empty-workspace-workaround.html
 # https://sw.kovidgoyal.net/kitty/remote-control.html
@@ -25,7 +25,7 @@ create_workspace() {
     # cover
     # ncmpcpp-art extract
     # feh -^ zik_cover -B black -g 256x256+832+600 -Z -x --reload 5 $COVER_PATH &
-    sxiv -b -N zik_cover -s f "$COVER_PATH" &
+    nsxiv -b -N zik_cover -s f "$COVER_PATH" &
 
     # Extra 1: Custom window background opacity
     # Add the following opacity rule to compton/picom config:

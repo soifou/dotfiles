@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-# Additional external keyboard commands can be defined 
-# using a handler program located in $XDG_CONFIG_HOME/sxiv/exec/key-handler.
+# Additional external keyboard commands can be defined
+# using a handler program located in $XDG_CONFIG_HOME/nsxiv/exec/key-handler.
 # The handler is invoked by pressing Ctrl-x
 
 # Rofi one liner prompt

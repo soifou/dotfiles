@@ -1,7 +1,8 @@
 [Desktop Entry]
-Type=Application
-Name=Simple X Image Viewer
+Name=nsxiv
+Comment=Simple X Image Viewer
 Exec=swallow nsxiv %F
+Type=Application
 NoDisplay=true
-Icon=sxiv
+# Icon=sxiv
 MimeType=image/bmp;image/gif;image/jpeg;image/jpg;image/png;image/tiff;image/x-bmp;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-tga;image/x-xpixmap;

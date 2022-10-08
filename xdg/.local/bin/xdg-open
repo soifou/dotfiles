@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
 # Extract and open URIs.
-# Requires mpv, sxiv, zathura, transmission, curl, gallery-dl, gnu-utils
+# Requires mpv, nsxiv, zathura, transmission, curl, gallery-dl, gnu-utils
+# https://github.com/soystemd/dotfiles/blob/master/scripts/.local/bin/other/pipeurl
 
 # If no argument given. Exit.
 [ -z "$1" ] && { exit; }
@@ -14,7 +15,7 @@ _torrent() {
 _gdl() {
     imgs=$(gallery-dl -d "$XDG_CACHE_HOME"/gallery-dl -- "$@" 2>/dev/null) || return 1
     printf '%s\n' "$imgs" | sed 's/^# //' |
-        xargs -d'\n' sh -c 'sxiv -a -- "$@" || mpv -- "$@"' ''
+        xargs -d'\n' sh -c 'nsxiv -a -- "$@" || mpv -- "$@"' ''
 }
 
 _browser() {
@@ -30,8 +31,8 @@ _o() {
         application/pdf) zathura "$1" ;;
         application/x-bittorrent) _torrent "$1" ;;
         audio/*) mpv "$1" ;;
-        image/gif) mv "$1" "$1".gif && sxiv -ab "$1".gif ;;
-        image/*) sxiv -b "$1" ;;
+        image/gif) mv "$1" "$1".gif && nsxiv -ab "$1".gif ;;
+        image/*) nsxiv -b "$1" ;;
         inode/directory) term --class=floating lf "$1" ;;
         text/html) _browser "$1" ;;
         text/*) term --class=floating "$EDITOR" "$1" ;;

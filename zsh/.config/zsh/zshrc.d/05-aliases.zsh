@@ -15,8 +15,8 @@ alias tree="exa -a --tree --icons"
 
 # Suffix
 alias -s {mp4,MP4,mkv,MKV,mp3,MP3,mov,MOV,mpg,MPG,m4v,M4V,ogg,OGG,wav,WAV,webm,WEBM}='mpv'
-alias -s {jpg,JPG,png,PNG,tif,TIF,tiff,TIFF}='sxiv -b'
-alias -s {gif,GIF}='sxiv -ab'
+alias -s {jpg,JPG,png,PNG,tif,TIF,tiff,TIFF}='nsxiv -b'
+alias -s {gif,GIF}='nsxiv -ab'
 alias -s {pdf,PDF,ps,PS}='zathura'
 
 # Unclutter home
