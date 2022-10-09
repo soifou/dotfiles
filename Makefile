@@ -46,6 +46,7 @@ install: init
 	stow xdg
 	stow yamllint
 	stow yarn
+	stow zathura
 	stow zsh
 	stow @$(OS) --override=".*"
 
@@ -88,5 +89,6 @@ uninstall:
 	stow -D xdg
 	stow -D yamllint
 	stow -D yarn
+	stow -D zathura
 	stow -D zsh
 	stow -D @$(OS)
