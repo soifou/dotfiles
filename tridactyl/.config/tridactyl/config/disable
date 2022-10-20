@@ -1,7 +1,0 @@
-" Disable on some sites
-
-blacklistadd calendar.google.com
-blacklistadd docs.google.com
-blacklistadd drive.google.com
-blacklistadd mail.google.com
-blacklistadd monkeytype.com
