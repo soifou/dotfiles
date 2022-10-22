@@ -3,7 +3,9 @@
 # Wrapper script for remind.
 # Enhance with git subcommand, XDG compliancy and default flags
 
-command -v remind >/dev/null 2>&1 || {
+set -xe
+
+command -v remind > /dev/null 2>&1 || {
     echo >&2 "Please install first remind (https://dianne.skoll.ca/projects/remind). Aborting."
     exit 1
 }
@@ -11,24 +13,32 @@ command -v remind >/dev/null 2>&1 || {
 REMIND_PATH="${REMIND_DIR:=${XDG_DATA_HOME:=$HOME/.local/share}/remind}"
 
 case $1 in
-g*)
-    cd "$REMIND_PATH" || exit
-    shift
-    git "$@"
-    ;;
-*)
-    if [ -f "$REMIND_PATH"/"$1".rem ]; then
-        REMIND_PATH="$REMIND_PATH/$1".rem
-        shift
-    fi
+    e*)
+        if [ -n "$2" ] && [ -f "$REMIND_PATH"/"$2".rem ]; then
+            cd "$REMIND_PATH" || exit
+            REMIND_PATH="$REMIND_PATH/$2".rem
+        fi
 
-    # [-m] Start calendar with Monday rather than Sunday
-    # [-b1] Display time in 24h format
-    set -- \
-        -m \
-        -b1 \
-        "${@}"
-    
-    exec remind "$@" "$REMIND_PATH"
-    ;;
+        $EDITOR "$REMIND_PATH"
+        ;;
+    g*)
+        cd "$REMIND_PATH" || exit
+        shift
+        git "$@"
+        ;;
+    *)
+        if [ -f "$REMIND_PATH"/"$1".rem ]; then
+            REMIND_PATH="$REMIND_PATH/$1".rem
+            shift
+        fi
+
+        # [-m] Start calendar with Monday rather than Sunday
+        # [-b1] Display time in 24h format
+        set -- \
+            -m \
+            -b1 \
+            "${@}"
+
+        exec remind "$@" "$REMIND_PATH"
+        ;;
 esac
