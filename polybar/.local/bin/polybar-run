@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+# Start/restart polybar.
+# Polybar needs to have IPC enabled: https://github.com/polybar/polybar/wiki/Inter-process-messaging
+# NOTE: zsh/fish users have to pass SHELL var to fix "passing env var to custom script not working" issue.
+# see: https://github.com/jaagr/polybar/issues/323#issuecomment-292038260
+
+restart() {
+    polybar-msg cmd restart >/dev/null
+}
+
+start() {
+    # Choose the bar to display depending on current running WM
+    pgrep -x bspwm >/dev/null && POLYBAR_BAR=bspwm
+    POLYBAR_BAR=$(uname -n)-${POLYBAR_BAR:-i3}
+
+    # Launch bar "$POLYBAR_BAR" on all monitors (if any)
+    if command -v xrandr >/dev/null 2>&1; then
+        # for all connected monitors
+        # for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+        # for the last one connected on the list
+        for m in $(xrandr --query | grep " connected" | cut -d" " -f1 | tail -n1); do
+            SHELL=$(command -v sh) MONITOR=$m polybar -q -r "$POLYBAR_BAR" &
+        done
+    else
+        SHELL=$(command -v sh) polybar -q -r "$POLYBAR_BAR" &
+    fi
+}
+
+pgrep -x polybar && restart || start

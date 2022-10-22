@@ -5,7 +5,7 @@ DESC=""
 
 getPassword() {
     DISPLAY=:0 rofi \
-        -theme "$XDG_CONFIG_HOME"/rofi/menus/prompt.rasi \
+        -theme prompt.rasi \
         -dmenu \
         -password \
         -p " GPG Passphrase $(echo "$DESC" | awk -F"%0A" '{print $3}' | xargs):" \

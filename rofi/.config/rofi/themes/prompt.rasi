@@ -1,0 +1,15 @@
+@import "colors.rasi"
+@import "shared.rasi"
+
+window {
+    padding: 48% 30%;
+}
+
+inputbar, prompt, entry {
+    background-color: var(selected-normal-background);
+}
+
+inputbar {
+    padding: 10;
+    children: [prompt, entry];
+}

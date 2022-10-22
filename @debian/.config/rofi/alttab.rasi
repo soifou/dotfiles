@@ -1,9 +1,0 @@
-configuration {
-    window-format: "{w}: {c}";
-    show-icons: true;
-    window-thumbnail: true;
-    theme: "menus/alttab.rasi";
-    kb-accept-entry: "!Alt-Tab,Return";
-    kb-row-down: "Alt-Tab";
-}
-

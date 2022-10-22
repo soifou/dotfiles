@@ -16,6 +16,7 @@ install: init
 	stow bundler
 	stow composer
 	stow feh
+	stow flavours
 	stow fontconfig
 	stow git
 	stow gnupg
@@ -32,8 +33,10 @@ install: init
 	stow nsxiv
 	stow phpcs
 	stow pip
+	stow polybar
 	stow pywal
 	stow ripgrep
+	stow rofi
 	stow rtv
 	stow ssh
 	stow -d sublime @linux
@@ -59,6 +62,7 @@ uninstall:
 	stow -D bundler
 	stow -D composer
 	stow -D feh
+	stow -D flavours
 	stow -D fontconfig
 	stow -D git
 	stow -D gnupg
@@ -75,8 +79,10 @@ uninstall:
 	stow -D nsxiv
 	stow -D phpcs
 	stow -D pip
+	stow -D polybar
 	stow -D pywal
 	stow -D ripgrep
+	stow -D rofi
 	stow -D rtv
 	stow -D ssh
 	stow -D -d sublime @linux

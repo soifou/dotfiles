@@ -6,7 +6,7 @@
 
 # Rofi one liner prompt
 _prompt() {
-    rofi -theme "$XDG_CONFIG_HOME"/rofi/menus/prompt.rasi -dmenu -p "$1 :" -input /dev/null -lines 0
+    rofi -theme prompt.rasi -dmenu -p "$1 :" -input /dev/null -lines 0
 }
 
 while read file; do

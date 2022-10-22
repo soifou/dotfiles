@@ -1,0 +1,33 @@
+/* Main config */
+configuration {
+    modi: [
+        drun,
+        "clipboard:greenclip print",
+        "themes:~/.local/bin/wal-switcher",
+        emoji,
+        "calc:~/.local/bin/rofi-bc"
+    ];
+
+    drun { display-name: ""; }
+    clipboard { display-name: ""; }
+    themes { display-name: ""; }
+    emoji { display-name: ""; }
+    calc { display-name: ""; }
+
+    sorting-method: "fzf";
+    matching: "fuzzy";
+
+    /* See available: rofi -dump-config | grep kb- | sort */
+    kb-mode-complete: "";
+    kb-remove-char-back: "BackSpace";
+    kb-clear-line: "";
+    kb-remove-word-back: "";
+    kb-remove-word-back: "Control+w";
+    kb-remove-to-eol: "";
+    kb-accept-entry: "Return,KP_Enter";
+    kb-cancel: "Escape,Control+bracketleft";
+    kb-mode-next: "Control+l,Super+l";
+    kb-mode-previous: "Control+h,Super+h";
+    kb-row-up: "Control+k,Super+k";
+    kb-row-down: "Control+j,Super+j";
+}

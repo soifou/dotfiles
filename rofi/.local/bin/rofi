@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+case "$(uname -n)" in
+    macbook)
+        # Override default DPI since we cannot set it anymore via xresources
+        set -- -dpi 160 \
+            "${@}"
+
+        /sbin/rofi "$@"
+        ;;
+
+    *) /usr/local/bin/rofi "$@" ;;
+esac

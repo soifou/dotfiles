@@ -1,0 +1,32 @@
+[global]
+    follow = keyboard
+    offset = 10x35
+    font = Monospace 9
+    idle_threshold = 120
+    line_height = 2
+    icon_path = /usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/48x48/places/:/usr/share/icons/Papirus/48x48/mimetypes/:/usr/share/icons/Papirus/48x48/devices/:/usr/share/icons/Papirus/48x48/apps/
+    max_icon_size = 64
+    frame_width = 2
+    frame_color = "{color4}"
+    separator_color = "{color4}"
+
+[urgency_low]
+    background = "{background}"
+    foreground = "{foreground}"
+    timeout = 5
+
+[urgency_normal]
+    background = "{color4}"
+    foreground = "{background}"
+    frame_color = "{color4}"
+    timeout = 10
+
+[urgency_critical]
+    background = "{color2}"
+    foreground = "{background}"
+    frame_color = "{color1}"
+    timeout = 0
+
+[urgent_hints]
+    summary = "*"
+    script = ~/.local/bin/x-urgent-hint

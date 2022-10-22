@@ -1,7 +1,7 @@
 ! Paths below are relative from where this file is read
 
-! Colors (disabled, I use pywal)
-! #include "Xresources.d/colors"
+! Colors
+#include "Xresources.d/colors"
 
 ! Cursor
 #include "Xresources.d/cursor"

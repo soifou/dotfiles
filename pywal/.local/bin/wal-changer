@@ -1,5 +1,22 @@
 #!/usr/bin/env sh
 
+rgb_to_brg() {
+    color=$(xrdb -q | grep -m1 -i "$1" | cut -f2)
+    r="$(echo "$color" | cut -c 2-3)"
+    g="$(echo "$color" | cut -c 4-5)"
+    b="$(echo "$color" | cut -c 6-7)"
+    echo "$b$g$r"
+}
+
+get_theme() {
+    theme=light
+    char=$(xrdb -query | grep "*.background" | awk '{print $2}' | cut -c2-2)
+    if [ $char -eq $char 2> /dev/null ] && [ "$char" -lt 7 ]; then
+        theme=dark
+    fi
+    echo $theme
+}
+
 _wallpaper() {
     echo ":: wallpaper reload"
     # based on what is set as my wallpaper, this could either be a still picture
@@ -9,6 +26,7 @@ _wallpaper() {
 
     pkill -9 paperview
     [ -f "$XDG_CACHE_HOME"/mpvbg.pid ] && kill -9 "$(cat "$XDG_CACHE_HOME"/mpvbg.pid)"
+    rm -f "$XDG_CACHE_HOME"/mpvbg.pid
 
     case "$MIMETYPE" in
     # Set wallpaper with feh
@@ -44,19 +62,29 @@ _wallpaper() {
 
 _xrdb() {
     echo ":: xrdb reload"
-    xrdb -merge -quiet "$XDG_CACHE_HOME"/wal/colors.Xresources
+    cp "$XDG_CACHE_HOME"/wal/colors.Xresources $XDG_CONFIG_HOME/x/Xresources.d/colors
+    xrdb -load "$XDG_CONFIG_HOME"/x/Xresources
 }
 
 _wm() {
+    # NOTE: reload first xresources
+    _xrdb
+
     echo ":: wm reload"
+    # NOTE: this reloads polybar as well (autostarted in wm config)
+    # can't find a way to reload externally without having a fullscreen
+    # issue (polybar is not hidden)
     pgrep -x i3 >/dev/null && i3-msg restart
     pgrep -x bspwm >/dev/null && bspc wm -r
 }
 
 _dunst() {
     echo ":: dunst reload"
+    mkdir -p "$XDG_CONFIG_HOME"/dunst
+    cat "$XDG_CACHE_HOME"/wal/colors-dunst > $XDG_CONFIG_HOME/dunst/dunstrc
+    # NOTE: no way to reload: https://github.com/dunst-project/dunst/issues/719
     pkill dunst
-    dunst -config "$XDG_CACHE_HOME"/wal/colors-dunstrc &
+    dunst &
 }
 
 _lemonbar() {
@@ -81,6 +109,8 @@ _kitty() {
 
     # Reload running invocations
     # see: https://github.com/kovidgoyal/kitty/commit/df05339d2a96d16ee59a78b16d000d57cb68e2b4
+    mkdir -p "$XDG_CONFIG_HOME"/kitty/conf.d
+    cat "$XDG_CACHE_HOME"/wal/colors-kitty > "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf
     pgrep -x kitty >/dev/null && pkill -USR1 kitty >/dev/null
 }
 
@@ -101,13 +131,6 @@ bar-background-style=\\\c&H$(rgb_to_brg color2)&\\\alpha&HFF&
 pause-indicator-foreground-style=\\\c&H$(rgb_to_brg foreground)&
 pause-indicator-background-style=\\\c&H$(rgb_to_brg background)&" > "$PB_PATH"/main.conf
 }
-rgb_to_brg() {
-    color=$(xrdb -q | grep -m1 -i "$1" | cut -f2)
-    r="$(echo "$color" | cut -c 2-3)"
-    g="$(echo "$color" | cut -c 4-5)"
-    b="$(echo "$color" | cut -c 6-7)"
-    echo "$b$g$r"
-}
 
 _pywalfox() {
     pidof firefox >/dev/null && {
@@ -123,13 +146,17 @@ _zathura() {
     cat "$XDG_CACHE_HOME"/wal/colors-zathura > "$XDG_CONFIG_HOME"/zathura/colors
 }
 
+_rofi() {
+    echo ":: rofi reload"
+    mkdir -p "$XDG_CONFIG_HOME"/rofi
+    cat "$XDG_CACHE_HOME"/wal/colors-rofi > "$XDG_CONFIG_HOME"/rofi/colors.rasi
+}
+
 _delta() {
     echo ":: delta theme reload"
     mkdir -p "$XDG_CONFIG_HOME"/git
     cp "$XDG_CACHE_HOME"/wal/colors-delta "$XDG_CONFIG_HOME"/git/delta-theme
-    # handle dark/light theme
-    theme=$(xrdb -query | grep "*.theme" | awk '{print $2}')
-    printf "\t%s=true" "$theme" >> "$XDG_CONFIG_HOME"/git/delta-theme
+    printf "\t%s=true" $(get_theme) >> "$XDG_CONFIG_HOME"/git/delta-theme
 }
 
 _xob() {
@@ -140,17 +167,18 @@ _xob() {
 }
 
 _nvim() {
+    rm -f $XDG_CACHE_HOME/colors.vim
     echo ":: nvim reload"
     pgrep -x nvim >/dev/null && pkill -USR1 nvim
 }
 
 _wallpaper
-_xrdb
 _wm
 _sublime
 _pywalfox
 _mpv
 _dunst
+_rofi
 _zathura
 _delta
 _xob

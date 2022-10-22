@@ -1,0 +1,61 @@
+/* Slightly modified version of
+ * https://github.com/adi1090x/rofi/blob/master/files/launchers/type-1/style-5.rasi
+ * Need to Removed configuration block and imports
+ * For a comprehensive guide to rofi theming,
+ * see: https://github.com/davatorium/rofi/blob/master/doc/rofi-theme.5.markdown
+*/
+@import "vendors/launcher1.5.rasi"
+@import "colors.rasi"
+@import "shared.rasi"
+
+window {
+    padding: 31% 25%;
+}
+
+mainbox {
+    border: 2;
+    background-color: var(background);
+    /* to have less padding, uncomment */
+    /* padding: 10; */
+}
+
+inputbar {
+    padding: 0 10;
+    highlight:  @highlight;
+    /* border:  0px 0px 1px 0px; */
+    /* border-color: @foreground; */
+}
+entry {
+    placeholder-color: var(placeholder-color);
+}
+
+element {
+    border-radius: 2;
+}
+element-text {
+    text-color: var(placeholder-color);
+}
+element-text selected {
+    text-style: bold;
+    text-color: var(background);
+}
+
+button {
+    text-color: var(placeholder-color);
+}
+button selected {
+    text-color: var(foreground);
+    background-color: inherit;
+}
+
+message {
+    width: 100%;
+    height: 100%;
+}
+
+textbox {
+    padding: 13% 1;
+}
+error-message {
+    border-radius: 2;
+}

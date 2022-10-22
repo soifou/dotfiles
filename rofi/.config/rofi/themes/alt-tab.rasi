@@ -1,0 +1,48 @@
+configuration {
+    window-format: "{w}: {c}";
+    window-thumbnail: true;
+    show-icons: true;
+    kb-accept-entry: "!Alt-Tab,Return";
+    kb-row-down: "Alt-Tab";
+}
+
+@import "colors.rasi"
+@import "shared.rasi"
+
+window {
+    padding: 41% 25%;
+}
+
+mainbox {
+    border: 2;
+    border-color: var(border-colour);
+    children: [ listview ];
+}
+
+listview {
+    layout: horizontal;
+    padding: 15 30;
+}
+
+element {
+    orientation: vertical;
+    padding: 3% 0% 1% 0%;
+    width: 10%;
+}
+element selected,
+element-icon selected,
+element-text selected {
+    background-color: var(border-colour);
+}
+
+element-icon {
+    size: 9%;
+    horizontal-align: 0.5;
+}
+element-text {
+    horizontal-align: 0.5;
+    text-color: var(placeholder-color);
+}
+element-text selected {
+    text-color: var(background);
+}

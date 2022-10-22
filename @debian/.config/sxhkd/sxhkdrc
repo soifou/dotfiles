@@ -142,23 +142,15 @@ super {_,shift} + Return
 
 # launcher
 super + d
-    rofi -modi 'drun,clipboard:greenclip print,calc:~/.local/bin/rofi/rofi-bc,emoji' -show drun
-
-# theme switcher
-super + shift + Tab
-    rofi -modi 'themes:~/.local/bin/wal-switcher' -show themes -columns 2 -no-sidebar-mode
+    rofi -show drun -theme launcher
 
 # alt-tab like
 mod1 + Tab
-    rofi -show window -mode window -config $XDG_CONFIG_HOME/rofi/alttab.rasi
+    rofi -show window -theme alt-tab
 
 # pass manager (https://github.com/ibizaman/pass-clip)
 super + p
     pass clip --rofi
-
-# quit launcher
-super + e
-    ~/.local/bin/rofi/rofi-applet --powermenu-classic
 
 # music control
 XF86Audio{Next,Prev,Play,Stop}
@@ -186,7 +178,7 @@ super + shift + f
 
 # torrent, youtube
 super + x ; {0,9}
-    bsp-scratchpad {tremc,ytfzf}
+    bsp-scratchpad {tremc, ytfzf ytfzf -sl}
 
 # screenshot
 Print + {_,super,super + shift, super + alt}
