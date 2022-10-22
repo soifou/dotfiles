@@ -19,5 +19,7 @@ if [ -d "$HOMEBREW_PREFIX" ]; then
     export HOMEBREW_NO_ANALYTICS=1
     export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin${PATH+:$PATH}"
 fi
+## mason.nvim
+[ -d "$XDG_DATA_HOME"/nvim/mason/bin ] && export PATH="$XDG_DATA_HOME/nvim/mason/bin:$PATH"
 ## personal scripts
 [ -d "$HOME"/.local/bin ] && export PATH="${$(find -L "$HOME"/.local/bin -type d -printf %p:)%%:}:$PATH"
