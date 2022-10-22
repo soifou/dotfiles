@@ -36,7 +36,7 @@ case $distro in
         ;;
 esac
 
-COUNT=$(echo "$PACKAGES" | wc -l)
+COUNT=$([ -z "$PACKAGES" ] && echo "0" || echo "$PACKAGES" | wc -l)
 
 _color() { xrdb -q | grep -m1 -i "$1" | cut -f2; }
 _print_count() { [ "$1" -gt "$LIMIT" ] && echo "$BAR_ICON %{F$(_color color1)}${1}%{F-}" || echo "$BAR_ICON $1"; }
