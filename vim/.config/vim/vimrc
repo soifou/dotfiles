@@ -60,6 +60,9 @@ set fillchars=fold:\ ,vert:\│
 
 " Split window below/right when creating horizontal/vertical windows
 set splitbelow splitright
+if exists('+splitkeep')
+  set splitkeep=screen
+endif
 
 " Tweak speed
 set timeout timeoutlen=400
