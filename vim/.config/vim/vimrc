@@ -243,7 +243,7 @@ endfunction
 
 function! GetGitBranch()
     let l:branch = system('cd '.expand('%:p:h').' && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d "\n"')
-    let w:git_branch = !strlen(l:branch) || !isdirectory(expand('%:p:h')) ? '' : ' ' . l:branch . ' │ '
+    let g:git_branch = !strlen(l:branch) || !isdirectory(expand('%:p:h')) ? '' : ' ' . l:branch . ' │ '
 endfunction
 
 " Find out current buffer's size and output it.
@@ -468,7 +468,7 @@ set statusline=                             " Cleanup the previous statusline
 set statusline+=%{ChangeStatuslineColor()}  " Change statusline color
 set statusline+=%0*\ %{GetMode()}           " Current mode
 set statusline+=\ %4*\                      " Padding & switch colour
-set statusline+=%(%{w:git_branch}%)         " Current git branch
+set statusline+=%(%{g:git_branch}%)         " Git branch
 set statusline+=%f                          " Filename
 set statusline+=\ %-3(%{FileSize()}%)       " Filesize
 set statusline+=%2*\ %=                     " Center
