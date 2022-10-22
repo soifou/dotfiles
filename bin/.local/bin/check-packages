@@ -1,23 +1,14 @@
 #!/usr/bin/env sh
 
-# Sync repositories and display/notify user of all upgradable packages with bumped version
-#
-# foo 1.0 => 1.1
-# bar 1.2.12-1 => 1.2.13-1
-#
-# Cron example (every 3hrs): 0 */3 * * * packages-check --refresh
-# Display count of upgradable package (ie. in statusline): packages-check --status
+# Utility to handle packages management:
+#   - Refresh the packages list. Cron example (every 3hrs): 0 */3 * * * check-packages -r
+#   - Display count of upgradable package (ie. in statusline): check-packages -s
+#   - List upgradable packages with bumped versions (à la pacman style): check-packages -l
+#       foo 1.0 -> 1.1
+#       bar 1.2.12-1 -> 1.2.13-1
 
 BAR_ICON=""
-
-_color() { xrdb -q | grep -m1 -i "$1" | cut -f2; }
-_print_count() {
-    if [ "$1" -gt "50" ]; then
-        echo "$BAR_ICON %{F$(_color color1)}${1}%{F-}"
-    else
-        echo "$BAR_ICON $1"
-    fi
-}
+LIMIT=50
 
 while IFS='=' read -r key val; do
     case $key in
@@ -27,47 +18,34 @@ done < /etc/os-release
 
 case $distro in
     debian)
+        UPD_CMD="sudo apt update"
         PKG_REG="a-z+0-9.:\~-"
-        REGEX="s|\([$PKG_REG]*\)/[a-z,]*\s\([$PKG_REG]*\)\s[a-z0-9]*\s\[upgradable\sfrom:\s\([$PKG_REG]*\)[\w\d-]*\]$|\1 \3 => \2|"
-
-        refresh() {
-            ping -q -c 1 1.1.1.1 > /dev/null || exit
-            sudo apt update > /dev/null 2>&1 || notify-send -i dialog-error -u critical "Error downloading updates."
-        }
-
-        status() {
-            COUNT=$(apt list --upgradable 2> /dev/null | grep -v 'Listing...' | sed -e "$REGEX" | wc -l)
-            _print_count "$COUNT"
-        }
-
-        list() {
-            PACKAGES=$(apt list --upgradable 2> /dev/null | grep -v 'Listing...' | sed -e "$REGEX")
-            [ "$PACKAGES" ] && echo "$PACKAGES" || notify-send -i debian-logo -u low "Packages" "Already up to date!"
-        }
+        REGEX="s|\([$PKG_REG]*\)/[a-z,]*\s\([$PKG_REG]*\)\s[a-z0-9]*\s\[upgradable\sfrom:\s\([$PKG_REG]*\)[\w\d-]*\]$|\1 \3 -> \2|"
+        PACKAGES=$(apt list --upgradable 2> /dev/null | grep -v 'Listing...' | sed -e "$REGEX")
+        ICON=debian-logo
         ;;
 
     arch)
-        refresh() {
-            ping -q -c 1 1.1.1.1 > /dev/null || exit
-            sudo pacman -Syyu -p > /dev/null || notify-send "Error downloading updates.
-            Check your internet connection, if pacman is already running, or run update manually to see errors."
-        }
-
-        status() {
-            COUNT=$(pacman -Qu | grep -v "\[ignored\]" | wc -l)
-            _print_count "$COUNT"
-        }
-
-        list() {
-            # COUNT=$(pacman -Qu | grep -v "\[ignored\]" | wc -l)
-            if pacman -Qu | grep -v "\[ignored\]" > /dev/null; then
-                notify-send -i distributor-logo-archlinux "Pacman" "$(pacman -Qu | grep -v "\[ignored\]" | wc -l) updates are available.\n$(pacman -Qu | grep -v "\[ignored\]")"
-            else
-                notify-send -i distributor-logo-archlinux "Packages" "Already up to date!"
-            fi
-        }
+        UPD_CMD="sudo pacman -Syyu -p"
+        PACKAGES=$(pacman -Qu | grep -v "\[ignored\]")
+        ICON=distributor-logo-archlinux
+        ;;
+    *)
+        echo "Not yet handled"
+        exit 1
         ;;
 esac
+
+COUNT=$(echo "$PACKAGES" | wc -l)
+
+_color() { xrdb -q | grep -m1 -i "$1" | cut -f2; }
+_print_count() { [ "$1" -gt "$LIMIT" ] && echo "$BAR_ICON %{F$(_color color1)}${1}%{F-}" || echo "$BAR_ICON $1"; }
+refresh() {
+    ping -q -c 1 1.1.1.1 > /dev/null || exit
+    $UPD_CMD > /dev/null 2>&1 || notify-send -i $ICON -u critical "Error downloading updates."
+}
+status() { _print_count "$COUNT"; }
+list() { [ "$PACKAGES" ] && echo "$PACKAGES" || notify-send -i $ICON -u low "Packages" "Already up to date!"; }
 
 __usage="
 Usage: $(basename "$0") [OPTIONS]
