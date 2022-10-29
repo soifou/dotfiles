@@ -1,6 +1,8 @@
 application/x-php; term --class=floating $EDITOR '%s';
+application/ics; rem ics %s
 application/*; swallow xdg-open '%s'; test=test -n "$DISPLAY"; needsterminal;
 image/*; swallow xdg-open '%s'; test=test -n "$DISPLAY";
+text/calendar; rem ics %s
 text/csv; subl '%s'; test=test -n "$DISPLAY";
 text/html; w3m -dump -I %{charset} -T text/html; copiousoutput;
 text/*; less '%s'; needsterminal

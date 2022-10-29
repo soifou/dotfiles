@@ -6,7 +6,7 @@
 set -xe
 
 command -v remind > /dev/null 2>&1 || {
-    echo >&2 "Please install first remind (https://dianne.skoll.ca/projects/remind). Aborting."
+    echo >&2 "Requires remind (https://dianne.skoll.ca/projects/remind). Aborting."
     exit 1
 }
 
@@ -25,6 +25,18 @@ case $1 in
         cd "$REMIND_PATH" || exit
         shift
         git "$@"
+        ;;
+    ics)
+        [ -z "$2" ] && { echo >&2 "No path file provided"; exit 1; }
+        command -v ics2rem > /dev/null 2>&1 || {
+            echo >&2 "Requires python-remind (https://github.com/jspricke/python-remind/). Aborting."
+            exit 1
+        }
+
+        TIMEZONE=$(timedatectl show | grep Timezone | awk -F= '{print $2}')
+        ics2rem -z "$TIMEZONE" "$2" >> "$REMIND_PATH"/invite.rem
+        # TODO: use uniq to avoid duplicates?
+        [ -n "$DISPLAY" ] && notify-send -i calendar -u low Remind "Invitation added";
         ;;
     *)
         if [ -f "$REMIND_PATH"/"$1".rem ]; then
