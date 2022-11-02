@@ -1,34 +1,37 @@
 #!/usr/bin/env sh
 
+for i in xob wpctl; do
+    [ ! "$(command -v $i)" ] && {
+        echo "Error: prerequisite $i not found in PATH" >&2
+        exit 1
+    }
+done
+
 VOLUME_PIPE=/tmp/xob-vol.fifo
 
-# Requirements: pulseaudio-utils (pactl)
-# TODO: migrate to pw-cli (pipewire)
-# https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Migrate-PulseAudio#sinksource-port-volumemuteport-latency
-
 _clean() {
-    [ -p "$1" ] && {
-        fuser -TERM -s -k "$1"
-        rm -f "$1"
+    [ -p "$VOLUME_PIPE" ] && {
+        fuser -TERM -s -k "$VOLUME_PIPE"
+        rm -f "$VOLUME_PIPE"
     }
 }
 
 _start() {
-    _clean "$1"
-    mkfifo "$1"
-    tail -f "$1" | xob -q &
-    echo "" >"$1"
+    _clean "$VOLUME_PIPE"
+    mkfifo "$VOLUME_PIPE"
+    tail -f "$VOLUME_PIPE" | xob -q &
 }
 
 _update() {
-    pgrep -x xob >/dev/null && {
-        VOL=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/[%|,]//g')
-        [ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" = "yes" ] && VOL="$VOL!"
-        echo "$VOL" >>$VOLUME_PIPE
+    [ -p "$VOLUME_PIPE" ] && {
+        VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}')
+        [ -n "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $3}')" ] && VOL="$VOL!"
+        echo "$VOL" >> $VOLUME_PIPE
     }
 }
 
 case "$1" in
     -u) _update ;;
-    *) _start "$VOLUME_PIPE" ;;
+    -c) _clean ;;
+    *) _start ;;
 esac

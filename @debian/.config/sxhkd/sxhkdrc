@@ -158,11 +158,11 @@ XF86Audio{Next,Prev,Play,Stop}
 
 # audio control
 XF86Audio{Raise,Lower}Volume
-    pactl set-sink-volume @DEFAULT_SINK@ {+,-}5%; xob-utils -u
+    wpctl set-volume @DEFAULT_SINK@ 5%{+,-}; xob-utils -u
 
 # audio mute toggle
 XF86AudioMute
-    pactl set-sink-mute @DEFAULT_SINK@ toggle; xob-utils -u
+    wpctl set-mute @DEFAULT_SINK@ toggle; xob-utils -u
 
 # notification control
 ctrl + { Escape, space, shift + space }
