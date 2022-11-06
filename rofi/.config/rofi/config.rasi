@@ -31,3 +31,6 @@ configuration {
     kb-row-up: "Control+k,Super+k";
     kb-row-down: "Control+j,Super+j";
 }
+
+/* Default theme if not specified */
+@theme "launcher"
