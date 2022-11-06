@@ -104,6 +104,11 @@ if command -v anyenv > /dev/null 2>&1; then
     yn "Update anyenv?" && anyenv update
 fi
 
+if command -v gh > /dev/null 2>&1; then
+    gh extension upgrade --all --dry-run
+    yn "Update gh extensions?" && gh extension upgrade --all --force
+fi
+
 if command -v asdf > /dev/null 2>&1; then
     yn "Update asdf?" && {
         asdf update --head

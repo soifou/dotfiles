@@ -134,9 +134,13 @@ pause-indicator-background-style=\\\c&H$(rgb_to_brg background)&" > "$PB_PATH"/m
 
 _pywalfox() {
     pidof firefox >/dev/null && {
-        echo ":: pywalfox reload"
+        echo ":: firefox reload"
         # Reload pywalfox extension (https://github.com/Frewacom/Pywalfox)
         command -v pywalfox >/dev/null 2>&1 && pywalfox update
+        # Reload tridactyl conf with xdotool, a bit hackish but works.
+        # - Escape: go to normal mode
+        # - comma+s: custom bind to source (reload) config again
+        xdotool search --name "Mozilla Firefox" key Escape key comma+s
     }
 }
 

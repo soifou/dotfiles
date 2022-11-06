@@ -3,7 +3,7 @@
 # Wrapper script for remind.
 # Enhance with git subcommand, XDG compliancy and default flags
 
-set -xe
+# set -xe
 
 command -v remind > /dev/null 2>&1 || {
     echo >&2 "Requires remind (https://dianne.skoll.ca/projects/remind). Aborting."

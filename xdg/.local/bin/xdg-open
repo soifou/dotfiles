@@ -60,7 +60,7 @@ case "$1" in
     magnet:*|*.torrent) _torrent "$1" ;;
     # Video
     *mkv|*webm|*mp4|*youtube.com*|*youtu.be*|*gfycat.com*|*v.redd.it*|*dailymotion.com*|*peertube*)
-        setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1 &
+        nohup mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1
         ;;
     # Images
     *png|*jpg|*jpe|*jpeg|*gif) _dlo "$1" ;;
@@ -75,7 +75,7 @@ case "$1" in
     *paste.debian.net*) _dlo "https://paste.debian.net/plain/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
     *termbin.com*|*0x0.st*|*ix.io*|*.txt) _dlo "$1" ;;
     *ghostbin.co*) _dlo "$1"/raw ;;
-    *reddit.com*) rtv "$1" ;;
+    *reddit.com*) term --class=rtv rtv "$1" ;;
     # HTTP links
     http*)
         case $(curl -s -o /dev/null -w '%{content_type}' "$1") in
