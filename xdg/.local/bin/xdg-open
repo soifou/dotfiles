@@ -35,7 +35,7 @@ _o() {
         image/*) nsxiv -b "$1" ;;
         inode/directory) term --class=floating lf "$1" ;;
         text/html) _browser "$1" ;;
-        text/*) term --class=floating "$EDITOR" "$1" ;;
+        text/*) term "$EDITOR" "$1" ;;
         # fallback
         *) /usr/bin/xdg-open "$1" ;;
     esac
