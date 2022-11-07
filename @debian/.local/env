@@ -21,6 +21,7 @@ export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 ## Config
 export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
 export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/asdf/default-python-packages
+export ASDF_CRATE_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/asdf/default-rust-packages
 export BUNDLE_USER_HOME="$XDG_CONFIG_HOME"/bundle
 export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker

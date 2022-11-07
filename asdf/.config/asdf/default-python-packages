@@ -1,13 +1,11 @@
 ansible
 ansible-lint
 beets
-black
 buku
 gallery-dl
 git+https://github.com/llorllale/ttrv
 httpie
 khal
-mdformat-gfm
 Pillow
 pip
 pycodestyle
@@ -15,6 +13,7 @@ python-mpd2
 python-openstackclient
 pywal
 pywalfox
+remind
 requests
 screenkey
 trash-cli

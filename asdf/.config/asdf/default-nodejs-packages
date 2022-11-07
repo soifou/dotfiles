@@ -3,6 +3,7 @@ dockerfilelint
 eslint_d
 "@fsouza/prettierd"
 jshint
+lebab
 markdownlint-cli
 nativefier
 npm
