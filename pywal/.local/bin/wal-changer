@@ -167,7 +167,9 @@ _xob() {
     echo ":: xob reload"
     mkdir -p "$XDG_CONFIG_HOME"/xob
     cat "$XDG_CACHE_HOME"/wal/colors-xob > "$XDG_CONFIG_HOME"/xob/styles.cfg
-    xob-utils
+    pkill -USR1 xob
+    sleep 1
+    xob-utils &
 }
 
 _nvim() {
@@ -177,6 +179,7 @@ _nvim() {
 }
 
 _wallpaper
+_nvim
 _wm
 _sublime
 _pywalfox
@@ -185,6 +188,5 @@ _dunst
 _rofi
 _zathura
 _delta
-_xob
 _kitty
-_nvim
+_xob
