@@ -86,7 +86,11 @@ fi
 
 if command -v docker > /dev/null 2>&1; then
     yn "Update docker images?" && {
-        docker images --format "{{.Repository}}:{{.Tag}}" | xargs -L1 docker pull | grep "Status:"
+        docker images --format "{{.Repository}}:{{.Tag}}" |\
+            grep -Ev "$(whoami)" |\
+            sort |\
+            xargs -L1 docker pull |\
+            grep "Status:"
         docker system prune -f
         # docker volume prune -f
     }
