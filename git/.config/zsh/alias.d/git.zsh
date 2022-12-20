@@ -1,10 +1,11 @@
 ## Git
 alias gaa='git add --all'
+alias gb='git branch'
 alias gba='git branch -a'
 alias gcam='git commit -a -m'
 alias gcb='git checkout -b'
 alias gcd='git checkout develop'
-alias gcm='git checkout master'
+alias gcm='git checkout main || git checkout master'
 alias gcmsg='git commit -m'
 alias gd='git diff'
 alias gdd="git difftool --no-symlinks --dir-diff"
