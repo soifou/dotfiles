@@ -10,8 +10,12 @@ find "$XDG_CACHE_HOME"/nsxiv -depth -type d -empty ! -name "." -exec rmdir {} \;
 find "$XDG_CACHE_HOME"/lf -type f -mtime +14 -delete
 # Cleanup wakatime log
 cat /dev/null > "$WAKATIME_HOME"/.wakatime.log
+# Keep only 1 week of log of journal
+sudo journalctl --user --vacuum-time=7d
+# Remove duplicates from mpv history
+sort -u -k3 "$XDG_DATA_HOME"/mpv/history.log | sort -o "$XDG_DATA_HOME"/mpv/history.log
 
-## Kill remaining processes
+## Kill reluctant processes
 pkill picom
 pkill -f pywalfox
 

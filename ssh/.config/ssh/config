@@ -8,6 +8,8 @@ Host bitbucket.org
 Host *
     UserKnownHostsFile ${XDG_STATE_HOME}/ssh/known_hosts
     PasswordAuthentication no
+    # HostKeyAlgorithms ssh-rsa,ssh-ed25519
+    # PubkeyAcceptedKeyTypes ssh-rsa,ssh-ed25519
     ChallengeResponseAuthentication no
     Compression yes
     # Speed up multiple identical connects with multiplexing:

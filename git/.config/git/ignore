@@ -41,14 +41,11 @@
 ehthumbs.db
 Thumbs.db
 
-# Custom #
-##########
+# Development #
+###############
+.phpactor.json
 *.tmTheme.chback
 *.crt
-*.phpbrewrc
-*.php_cs.cache
-*.nvmrc
 *.composer
-bin/.phpunit-*
 composer.phar
 node_modules

@@ -4,6 +4,9 @@ set -e
 
 export OPENER=xdg-open
 
+# Remove wrapper dir from PATH to call real lf binary
+PATH=$(echo "$PATH" | tr ":" "\n" | grep -vE 'wrapper' | xargs | sed -e 's/ /:/g')
+
 # See: https://github.com/gokcehan/lf/wiki/Icons
 # To match icons from exa, see: https://github.com/mtoohey31/lf-exa-icons
 [ -f "$XDG_CONFIG_HOME"/lf/icons ] && {
@@ -33,7 +36,7 @@ if [ -n "$DISPLAY" ]; then
 
     # Ueberzug does not work with daemonized terminal.
     # hence kitty should be run without --single-instance
-    "$GOPATH"/bin/lf "$@" 3>&-
+    lf "$@" 3>&-
 else
-    exec "$GOPATH"/bin/lf "$@"
+    lf "$@"
 fi

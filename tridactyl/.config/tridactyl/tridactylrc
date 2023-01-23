@@ -35,7 +35,7 @@ autocmd UriChange .*youtube\.com js window.location.href.match(".*youtube\.com/(
 " Front-end alternative for twitter
 autocmd DocStart ^http(s?)://twitter\.com urlmodify -t twitter.com nitter.net
 " Front-end alternative for reddit
-autocmd DocStart ^http(s?)://www\.reddit\.com urlmodify -t www.reddit.com teddit.net
+" autocmd DocStart ^http(s?)://www\.reddit\.com urlmodify -t www.reddit.com teddit.net
 " }}}
 
 " Follow links {{{

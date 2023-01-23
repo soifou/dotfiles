@@ -1,5 +1,6 @@
 [Unit]
 Description=Execute scripts on IMAP mailbox changes (new/deleted/updated messages) using IDLE, golang version.
+After=gpg-agent.socket
 
 [Service]
 Type=simple

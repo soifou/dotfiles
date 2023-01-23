@@ -2,7 +2,7 @@
 
 # Fetch/change wallpaper and generate a colorscheme
 # Requirements: xrandr, curl, wal
-# TODO: Using maintained fork: https://github.com/eylles/pywal16
+# TODO: maintained fork: https://github.com/eylles/pywal16
 # Credits to ilsenatorov for the idea
 # https://github.com/ilsenatorov/dotfiles/blob/big/rofi/themeswitch.sh
 
@@ -49,8 +49,12 @@ else
             #             util.save_file(sequences, term)
             _wal -i "$WALLPAPER_PATH/today"
         ;;
-        theme/light) _wal -i "$WALLPAPER_PATH/today" -l ;;
         theme/dark) _wal -i "$WALLPAPER_PATH/today" ;;
+        theme/light) _wal -i "$WALLPAPER_PATH/today" -l ;;
         colorscheme/*) _wal --theme "$(lstrip "$SEL" "colorscheme/")" ;;
+        *)
+            ln -sf "$WALLPAPER_PATH/$SEL" "$WALLPAPER_PATH/today"
+            rm -rf "$XDG_CACHE_HOME"/wal
+            _wal -i "$WALLPAPER_PATH/today"
     esac
 fi

@@ -27,7 +27,7 @@ _d greenclip daemon
 # screen locker
 _d locker
 # music player daemon
-# _d mpd
+_d mpd
 # no mouse cursor
 _d xbanish
 # reminder

@@ -1,5 +1,9 @@
+! See: https://www.askapache.com/linux/rxvt-xresources/#Xresources_rxvt
+! Available settings: urxvt --help 2>&1| sed -n '/:  /s/^ */! URxvt*/gp' | sort
+
 ! General settings
-URxvt.scrollBar: none
+URxvt*termName: screen-256color
+URxvt.scrollBar: false
 URxvt.internalBorder: 40
 URxvt.tintColor: white
 URxvt.inheritPixmap: false
@@ -7,11 +11,13 @@ URxvt.inheritPixmap: false
 ! Set urxvt as login shell
 URxvt*loginShell: true
 
+! Fade the text by the given percentage when focus is lost
+URxvt*fading: 30
+
 ! Cursor style
-! To get more, see: https://artisan.karma-lab.net/urxvt-et-styles-curseur
-URxvt*cursorUnderline: true
 URxvt*fadeColor: #000000
-URxvt*cursorBlink: true
+URxvt*cursorBlink: false
+URxvt*cursorUnderline: false
 
 ! Font settings
 URxvt.font: xft:monospace:size=13

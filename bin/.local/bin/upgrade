@@ -76,14 +76,6 @@ if command -v mr > /dev/null 2>&1; then
         && mr -c "$XDG_CONFIG_HOME"/myrepos/config -t -d "$XDG_DATA_HOME" update
 fi
 
-if command -v pass >/dev/null 2>&1; then
-    yn "Update pass?" && pass git pull
-fi
-
-if command -v rem >/dev/null 2>&1; then
-    yn "Update remind?" && rem git pull
-fi
-
 if command -v docker > /dev/null 2>&1; then
     yn "Update docker images?" && {
         docker images --format "{{.Repository}}:{{.Tag}}" |\

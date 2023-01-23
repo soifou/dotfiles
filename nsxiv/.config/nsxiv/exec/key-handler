@@ -22,5 +22,6 @@ while read file; do
     "C-x") rm -f "$file" ;;
     "C-w") cp -f "$file" "${XDG_PICTURES_DIR:-~/Pictures}"/wallpapers/current && wal-switcher current ;;
     "C-m") convert -rotate 90 "$file" "$file" ;;
+    "C-p") lp -d "$PRINTER" "$file" ;;
     esac
 done
