@@ -8,7 +8,7 @@ bspc monitor -d $(seq -s " " 10)
 
 _c border_width         2
 _c window_gap          10
-_c top_padding         30
+pgrep -x polybar >/dev/null && _c top_padding 30 || _c top_padding 0
 _c split_ratio          0.50
 _c borderless_monocle   true
 _c gapless_monocle      true
@@ -58,5 +58,4 @@ _r Zathura state=tiled
 _r "*:floating" state=floating center=true rectangle=930x400+0+0
 
 # autostart
-polybar-run
 pgrep -x sxhkd >/dev/null || sxhkd &

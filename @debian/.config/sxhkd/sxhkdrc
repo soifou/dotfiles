@@ -122,7 +122,7 @@ super + shift + comma
 
 # toggle polybar
 super + b
-    polybar-msg cmd toggle; \
+    pgrep -x polybar && polybar-msg cmd quit || polybar-run; \
     [ $(bspc config top_padding) = 0 ] && \
         bspc config top_padding 30 || \
         bspc config top_padding 0

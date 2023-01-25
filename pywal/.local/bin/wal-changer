@@ -71,11 +71,14 @@ _wm() {
     _xrdb
 
     echo ":: wm reload"
-    # NOTE: this reloads polybar as well (autostarted in wm config)
-    # can't find a way to reload externally without having a fullscreen
-    # issue (polybar is not hidden)
     pgrep -x i3 >/dev/null && i3-msg restart
     pgrep -x bspwm >/dev/null && bspc wm -r
+}
+
+_polybar() {
+    if pgrep -x polybar >/dev/null; then
+        polybar-msg cmd restart
+    fi
 }
 
 _dunst() {
@@ -181,6 +184,7 @@ _nvim() {
 _wallpaper
 _nvim
 _wm
+_polybar
 _sublime
 _pywalfox
 _mpv
