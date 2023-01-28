@@ -1,11 +1,21 @@
 #!/usr/bin/env sh
 
-command -v dunstctl >/dev/null && {
-    if [ "$(dunstctl is-paused)" = "false" ]; then
-        dunstctl set-paused true
-        polybar-msg action "#dunst.hook.1"
-    else
-        dunstctl set-paused false
-        polybar-msg action "#dunst.hook.0"
-    fi
-}
+if ! command -v dunstctl > /dev/null 2>&1; then
+    echo Missing dunsctl, please install first.
+    exit 1
+fi
+
+case "$1" in
+    -t)
+        if [ "$(dunstctl is-paused)" = "false" ]; then
+            dunstctl set-paused true
+            echo 
+        else
+            dunstctl set-paused false
+            echo 
+        fi
+        ;;
+    *)
+        [ "$(dunstctl is-paused)" = "false" ] && echo  || echo 
+        ;;
+esac

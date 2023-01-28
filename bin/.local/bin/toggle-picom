@@ -1,9 +1,21 @@
 #!/usr/bin/env sh
 
-if pgrep -x picom >/dev/null 2>&1; then
-    polybar-msg action "#picom.hook.0"
-    pkill -9 picom
-else
-    polybar-msg action "#picom.hook.1"
-    picom -b
+if ! command -v picom > /dev/null 2>&1; then
+    echo Missing picom, please install first.
+    exit 1
 fi
+
+case "$1" in
+    -t)
+       if pgrep -x picom > /dev/null 2>&1; then
+            pkill -9 picom
+            echo 
+        else
+            picom -b
+            echo 
+        fi
+        ;;
+    *)
+        [ "$(pgrep -x picom)" ] && echo  || echo 
+        ;;
+esac
