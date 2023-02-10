@@ -1,4 +1,6 @@
-# Handle navigating between various splits (vim, kitty, tmux)
+# Handle navigating between various splits (vim, kitty)
+# by inspecting the foreground processes of the current window
+# To debug, check the output of kitty @ ls
 
 import re
 from typing import Any, Sequence, cast
@@ -24,7 +26,7 @@ def window_has_pager(window: Window):
 def window_has_navigable_proc(window: Window):
     fp = window.child.foreground_processes
     for p in fp:
-        if re.search("\\b(n?vim|tmux)$", p["cmdline"][0]):
+        if len(p["cmdline"]) > 0 and re.search("\\b(n?vim)$", p["cmdline"][0]):
             return True
     return False
 
@@ -57,7 +59,7 @@ def handle_result(
 
     # Convert up/down directions to their actual meaning
     # EdgeLiteral = Literal['left', 'top', 'right', 'bottom']
-    args[2] = 'top' if args[2] == 'up' else ('bottom' if args[2] == 'down' else args[2])
+    args[2] = "top" if args[2] == "up" else ("bottom" if args[2] == "down" else args[2])
     direction = cast(EdgeLiteral, args[2])
 
     if source == "kitty":
