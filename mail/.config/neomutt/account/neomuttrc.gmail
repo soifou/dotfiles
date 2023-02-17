@@ -19,3 +19,5 @@ macro index 2 "<change-folder>+draft<enter>"
 macro index 3 "<change-folder>+sent<enter>"
 macro index 4 "<change-folder>+spam<enter>"
 macro index 5 "<change-folder>+trash<enter>"
+
+macro index S "<shell-escape>mailsync $my_mbsync_mailbox &<enter>" "Sync current mailbox using mbsync"

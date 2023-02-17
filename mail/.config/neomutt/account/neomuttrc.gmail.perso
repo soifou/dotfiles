@@ -1,5 +1,6 @@
 set folder = $XDG_LOCAL_HOME/share/mailbox/perso
 set from = fleur.fr@gmail.com
 set sendmail = "msmtp -a gmail-perso"
+set my_mbsync_mailbox = 'gmail-perso-inbox'
 
 source $my_mbox/neomuttrc.gmail
