@@ -1,7 +1,7 @@
 [alias]
     c = commit
     hist = log --pretty=format:'%C(auto)%h%Creset » %d%s %Cgreen(%cr) %C(bold red)<%an>%Creset' --abbrev-commit
-    ignored = !git ls-files -v | grep "^[[:lower:]]"
+    ignored = ls-files -v | grep "^[[:lower:]]"
     count-commits = shortlog -sn
     uncommit = reset --soft HEAD~
 
@@ -54,8 +54,8 @@
     cp = "!f() {\
         [ $# -ge 1 ] && git cherry-pick ${@} || {\
             command -v fzf >/dev/null && {\
-                git log --branches --oneline |\
-                fzf -m --ansi --no-height --prompt=' cherry-pick > ' \
+                git hist --color=always --branches --oneline |\
+                fzf --exact --no-sort -m --ansi --no-height --prompt=' cherry-pick > ' \
                 --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | DELTA_FEATURES= delta -n\" \
                 --preview-window border-left |\
                 awk '{print $1}' | xargs -r git cherry-pick;\
@@ -81,7 +81,7 @@
     h = "!f() {\
         command -v fzf >/dev/null && {\
             git hist --color=always |\
-            fzf -m --ansi --no-height --prompt=' commits history > ' \
+            fzf --exact --no-sort -m --ansi --no-height --prompt=' commits history > ' \
             --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | DELTA_FEATURES= delta -n\" \
             --preview-window $1 |\
             xargs ;\
@@ -94,7 +94,7 @@
     hf = "!f() {\
         command -v fzf >/dev/null && {\
             git hist --color=always $2 |\
-            fzf -m --ansi --no-height --prompt=\" commits history for $2 > \" \
+            fzf --exact --no-sort -m --ansi --no-height --prompt=\" commits history for $2 > \" \
             --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show -p --follow --color=always @ $2' | DELTA_FEATURES= delta -n\" \
             --preview-window $1 |\
             xargs ;\
