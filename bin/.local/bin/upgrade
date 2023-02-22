@@ -126,7 +126,7 @@ fi
             zstyle ":znap:*:*" git-maintenance off &&
             zstyle ":znap:*" plugins-dir "$XDG_DATA_HOME"/zsh/plugins &&
             . "$XDG_DATA_HOME"/zsh/znap/znap.zsh &&
-            znap pull && znap status
+            znap pull | grep updating...
         '
 }
 
