@@ -31,7 +31,7 @@ install: init
 	stow newsboat
 	stow npm
 	stow nsxiv
-	stow phpcs
+	stow php-cs-fixer
 	stow pip
 	stow polybar
 	stow pywal
@@ -77,7 +77,7 @@ uninstall:
 	stow -D newsboat
 	stow -D npm
 	stow -D nsxiv
-	stow -D phpcs
+	stow -D php-cs-fixer
 	stow -D pip
 	stow -D polybar
 	stow -D pywal
