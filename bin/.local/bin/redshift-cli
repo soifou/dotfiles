@@ -8,11 +8,14 @@ Adjust temperature screen from redshift according to your geolocation (no daemon
 Additionally you can control brightness screen if you have a monitor without backlight interface (ie. desktop monitor).
 
 Options:
-  -u | --up     Set screen brightness up to .1
-  -d | --down   Set screen brightness lower to .1
-  -a --adjust   Adjust current temperature according to your geocode
-  -t, --toggle  Enable/disable the script
-  -h, help      Show this help.
+  -s     Current status of redshift (1: on, 0: off)
+  -u     Increase screen brightness to .1
+  -d     Decrease screen brightness to .1
+  -a     Apply redshift with current setting (temperature and brightness)
+  --on   Turn on this script
+  --off  Turn off this script
+  -t     Toggle the state of the script
+  -h     Show this help.
 "
 
 # Configuration
@@ -56,14 +59,19 @@ _display() {
 }
 
 _brightness() {
-    arith="<=" limit=1.0 sign=+
-    [ "$1" = "down" ] && { arith=">" limit=0.1 sign=-; }
+    [ "$1" = "down" ] && {
+        arith=">" limit=0.1 sign=-
+    } || {
+        arith="<=" limit=1.0 sign=+
+    }
 
     [ "$brightness" != "$limit" ] && {
         brightness=$(echo "$brightness $sign .1" | bc -l)
     }
     result=$(echo "$brightness $arith $limit" | bc -l)
     [ "$result" = "1" ] && echo "$brightness" >"$tmpfile"
+
+    _adjust
 }
 
 _off() {
@@ -77,18 +85,17 @@ _toggle() {
     _display
 }
 
+_status() { [ -f "$tmpfile".lock ] && echo 0 || echo 1; }
 _color() { xrdb -q | grep -m1 -i "color$1" | cut -f2; }
 _help() { echo "$__usage" exit; }
 
 case "$1" in
-    -u | --up) [ -f $tmpfile.lock ] && exit 0 || _brightness up ;;
-    -d | --down) [ -f $tmpfile.lock ] && exit 0 || _brightness down ;;
-    -a | --adjust)
-        [ ! -f $tmpfile.lock ] && _adjust
-        _display
-        ;;
+    -s) _status ;;
+    -u) [ -f $tmpfile.lock ] && exit 0 || _brightness up ;;
+    -d) [ -f $tmpfile.lock ] && exit 0 || _brightness down ;;
+    -a) [ ! -f $tmpfile.lock ] && _adjust; _display ;;
     --on) _on ;;
     --off) _off ;;
-    -t | --toggle) _toggle ;;
-    -h | --help | *) _help ;;
+    -t) _toggle ;;
+    -h|*) _help ;;
 esac
