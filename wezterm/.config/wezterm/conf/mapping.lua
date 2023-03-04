@@ -1,26 +1,11 @@
 local wezterm = require("wezterm")
+local utils = require("utils")
 local act = wezterm.action
 local mod = "ALT"
 
 local function map(mods, key, action)
     return { mods = mods, key = key, action = action }
 end
-
-local key_tables = {
-    resize_pane = {
-        { key = "h", action = act.AdjustPaneSize({ "Left", 6 }) },
-        { key = "l", action = act.AdjustPaneSize({ "Right", 6 }) },
-        { key = "k", action = act.AdjustPaneSize({ "Up", 2 }) },
-        { key = "j", action = act.AdjustPaneSize({ "Down", 2 }) },
-        -- Cancel the mode by pressing escape
-        { key = "Escape", action = "PopKeyTable" },
-    },
-    select_pane = {
-        -- Interactive select and swap
-        { key = "w", action = act({ PaneSelect = { alphabet = "0123456789" } }) },
-        { key = "s", action = act({ PaneSelect = { mode = "SwapWithActive", alphabet = "0123456789" } }) },
-    },
-}
 
 local keys = {
     -- Font size
@@ -33,7 +18,6 @@ local keys = {
     map(mod, "u", act({ ScrollByPage = -1 })),
     map(mod, "g", "ScrollToTop"),
     map(mod .. "|SHIFT", "g", "ScrollToBottom"),
-    map(mod, " ", act({ EmitEvent = "trigger-vim-with-scrollback" })),
 
     -- Clipboard
     map(mod, "v", act({ PasteFrom = "Clipboard" })),
@@ -54,13 +38,15 @@ local keys = {
     map(mod .. "|CTRL", "h", act({ ActivateTabRelative = -1 })),
 
     -- Wezterm features
-    map(mod, "/", act({ Search = { CaseInSensitiveString = "" } })),
-    -- map(mod, "l", act({ ClearScrollback = "ScrollbackAndViewport" })),
-    -- map(mod, " ", "QuickSelect"),
-    -- map("CTRL|ALT", " ", "QuickSelect"), -- note: eats a valid terminal keybind
-    -- map(mod .. "|SHIFT", "r", "ReloadConfiguration"),
     map(mod .. "|SHIFT", "d", "ShowDebugOverlay"), -- note: it's not a full Lua interpreter
+    map(mod .. "|SHIFT", "p", "ActivateCommandPalette"),
     map(mod, "x", "ShowLauncher"),
+    -- https://github.com/wez/wezterm/blob/main/docs/scrollback.md#searching-the-scrollback
+    map(mod, "/", act({ Search = { CaseInSensitiveString = "" } })),
+    -- https://github.com/wez/wezterm/blob/main/docs/quickselect.md
+    map(mod, "p", "QuickSelect"),
+    -- https://github.com/wez/wezterm/blob/main/docs/copymode.md
+    map(mod, " ", "ActivateCopyMode"),
 
     -- Custom events
     map(mod, "o", act({ EmitEvent = "url-picker" })),
@@ -101,78 +87,75 @@ local move_to_pane = function(key, direction)
         window:perform_action(act.ActivatePaneDirection(direction), pane)
     end)
 end
-
 table.insert(keys, map(mod, 'h', move_to_pane('h', 'Left')))
 table.insert(keys, map(mod, 'j', move_to_pane('j', 'Down')))
 table.insert(keys, map(mod, 'k', move_to_pane('k', 'Up')))
 table.insert(keys, map(mod, 'l', move_to_pane('l', 'Right')))
+
+-- Key tables: https://wezfurlong.org/wezterm/config/key-tables.html
+local key_tables = {
+    copy_mode = utils.merge(wezterm.gui.default_key_tables().copy_mode, {
+        map('CTRL', '[', act.CopyMode('Close'))
+    }),
+    resize_pane = {
+        { key = "h", action = act.AdjustPaneSize({ "Left", 6 }) },
+        { key = "l", action = act.AdjustPaneSize({ "Right", 6 }) },
+        { key = "k", action = act.AdjustPaneSize({ "Up", 2 }) },
+        { key = "j", action = act.AdjustPaneSize({ "Down", 2 }) },
+        -- Cancel the mode by pressing escape
+        { key = "Escape", action = "PopKeyTable" },
+    },
+    select_pane = {
+        -- Interactive select and swap
+        { key = "w", action = act({ PaneSelect = { alphabet = "0123456789" } }) },
+        { key = "s", action = act({ PaneSelect = { mode = "SwapWithActive", alphabet = "0123456789" } }) },
+    },
+}
+
+-- Mouse bindings
+local mouse_bindings = {
+    -- open link on mod+left click
+    {
+        event = { Up = { streak = 1, button = "Left" } },
+        mods = mod,
+        action = "OpenLinkAtMouseCursor",
+    },
+    -- copy selected text to clipboard
+    {
+        event = { Up = { streak = 1, button = "Left" } },
+        mods = "NONE",
+        action = wezterm.action({ CompleteSelection = "Clipboard" }),
+    },
+    -- copy to clipboard when double-click
+    {
+        event = { Up = { streak = 2, button = "Left" } },
+        mods = "NONE",
+        action = wezterm.action({ CompleteSelection = "Clipboard" }),
+    },
+    -- copy to clipboard when triple-click
+    {
+        event = { Up = { streak = 3, button = "Left" } },
+        mods = "NONE",
+        action = wezterm.action({ CompleteSelection = "Clipboard" }),
+    },
+    -- paste on middle click
+    {
+        event = { Down = { streak = 1, button = "Middle" } },
+        mods = "NONE",
+        action = wezterm.action({ PasteFrom = "Clipboard"}),
+    },
+    -- select whole line on triple-click
+    {
+        event = { Down = { streak = 3, button = "Left" } },
+        mods = "NONE",
+        action = { SelectTextAtMouseCursor = "Line" },
+    },
+}
 
 return {
     disable_default_key_bindings = true,
     keys = keys,
     key_tables = key_tables,
     disable_default_mouse_bindings = false,
-    mouse_bindings = {
-        -- select on pressing down left button
-        -- { event={Down={streak=1, button="Left"}},
-        --     mods="NONE",
-        --     action={SelectTextAtMouseCursor="Cell"}
-        -- },
-        -- -- extend on dragging the pointer…
-        -- { event={Drag={streak=1, button="Left"}},
-        --     mods="NONE",
-        --     action={ExtendSelectionToMouseCursor="Cell"}
-        -- },
-        -- -- …or pressing shift and left button,
-        -- { event={Down={streak=1, button="Left"}},
-        --     mods="SHIFT",
-        --     action={ExtendSelectionToMouseCursor={}}
-        -- },
-        -- -- complete the selection on releasing the left button.
-        -- { event={Up={streak=1, button="Left"}},
-        --     mods="NONE",
-        --     action={CompleteSelection="PrimarySelection"}
-        -- },
-        --     -- select word on double-click,
-        -- { event={Down={streak=2, button="Left"}},
-        --     mods="NONE",
-        --     action={SelectTextAtMouseCursor="Word"}
-        -- },
-        -- open link on mod+left click
-        {
-            event = { Up = { streak = 1, button = "Left" } },
-            mods = mod,
-            action = "OpenLinkAtMouseCursor",
-        },
-        -- copy selected text to clipboard
-        {
-            event = { Up = { streak = 1, button = "Left" } },
-            mods = "NONE",
-            action = wezterm.action({ CompleteSelection = "Clipboard" }),
-        },
-        -- copy to clipboard when double-click
-        {
-            event = { Up = { streak = 2, button = "Left" } },
-            mods = "NONE",
-            action = wezterm.action({ CompleteSelection = "Clipboard" }),
-        },
-        -- copy to clipboard when triple-click
-        {
-            event = { Up = { streak = 3, button = "Left" } },
-            mods = "NONE",
-            action = wezterm.action({ CompleteSelection = "Clipboard" }),
-        },
-        -- paste on middle click
-        {
-            event = { Down = { streak = 1, button = "Middle" } },
-            mods = "NONE",
-            action = "Paste",
-        },
-        -- select whole line on triple-click
-        {
-            event = { Down = { streak = 3, button = "Left" } },
-            mods = "NONE",
-            action = { SelectTextAtMouseCursor = "Line" },
-        },
-    },
+    mouse_bindings = mouse_bindings,
 }
