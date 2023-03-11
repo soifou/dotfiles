@@ -173,9 +173,9 @@ bind >> tabmove +1
 " Find in page
 bind / fillcmdline find
 bind ? fillcmdline find -?
-bind n findnext 1
-bind N findnext -1
-bind p findnext -1
+bind n findnext --search-from-view
+bind N findnext --search-from-view --reverse
+bind p findnext --search-from-view --reverse
 bind <C-l> nohlsearch
 set findcase smart
 
