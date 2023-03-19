@@ -4,29 +4,37 @@
 # Dependencies: hacksaw, ffmpeg
 # Credits: https://github.com/yayayayaka/bin/blob/f87f7696c76607460ed544a7f1b3410814b82bf2/record
 
+for i in hacksaw ffmpeg xclip; do
+    [ ! "$(command -v $i)" ] && {
+        echo "Required $i not found in PATH" >&2
+        exit 1
+    }
+done
+
+# Check prerequisites
 ### CONFIGURATION
 # Where you want your recordings to be stored
-DIR=${XDG_VIDEOS_DIR:-~/Videos}/record
+readonly DIR="${XDG_VIDEOS_DIR:-~/Videos}"/record
 # filename of the recording
 current=$(date +%F_%H-%M-%S)
 ###
 
 usage() {
-    cat <<EOL
-$(basename $0) - Record a selection of the screen with ffmpeg
+    cat << EOL
+$(basename "$0") - Record a selection of the screen with ffmpeg
 
 Usage:
- $(basename $0) [ -h | -a ]
+    $(basename "$0") [ -h | -a ]
 
 Options:
- -a, --with-audio Record a selection of the screen with audio
- -h, --help       Display this help message and quit
+    -a, --with-audio Record a selection of the screen with audio
+    -h, --help       Display this help message and quit
 EOL
     exit 0
 }
 
-_color() { xrdb -q | grep -m1 -i "$1" | cut -f2 ; }
-_h() { hacksaw -c "$(_color color4)" -g 2 -s 2 ; }
+_color() { xrdb -q | grep -m1 -i "$1" | cut -f2; }
+_h() { hacksaw -c "$(_color color4)" -g 2 -s 2; }
 
 record() {
     _h | {
@@ -75,14 +83,6 @@ record_with_audio() {
     }
     printf "%s" "$DIR/$current.mp4" | xclip -selection clipboard
 }
-
-# Check prerequisites
-for i in hacksaw ffmpeg xclip; do
-    if [ ! "$(command -v $i)" ]; then
-        echo "Error: prerequisite $i not found in PATH" >&2
-        exit 1
-    fi
-done
 
 mkdir -p "$DIR"
 

@@ -7,8 +7,8 @@ _color() { xrdb -q | grep -m1 -i "$1" | cut -f2 ; }
 bspc monitor -d $(seq -s " " 10)
 
 _c border_width         2
-_c window_gap          10
-pgrep -x polybar >/dev/null && _c top_padding 30 || _c top_padding 0
+_c window_gap          ${BSPWM_GAPS-10}
+pgrep -x polybar >/dev/null && _c top_padding ${BSPWM_TOP_PADDING:-30} || _c top_padding 0
 _c split_ratio          0.50
 _c borderless_monocle   true
 _c gapless_monocle      true
@@ -36,7 +36,7 @@ for app in nvim Sublime_text; do
     _r $app desktop='^2'
 done
 _r firefox desktop='^3'
-for app in neomutt weechat skype Signal whatsapp mattermost; do
+for app in neomutt weechat skype Signal whatsapp mattermost google-meet; do
     _r $app desktop='^4'
 done
 # floating

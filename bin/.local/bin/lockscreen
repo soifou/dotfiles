@@ -1,48 +1,42 @@
 #!/usr/bin/env sh
 
-# Locks your screen using either a pixelated or corrupted screenshot.
-
-# Exit immediately if a command exits with a non-zero status.
 set -e
 
-# Check for dependency programs
-command -v i3lock >/dev/null || (echo "Please install i3lock." && exit 1)
-command -v scrot >/dev/null || (echo "Please install scrot." && exit 1)
+for i in convert corrupter i3lock scrot xset xrandr; do
+    [ ! "$(command -v $i)" ] && {
+        echo "Required $i not found in PATH" >&2
+        exit 1
+    }
+done
 
-# Check for conflicting xscreensaver process
-pgrep -x "xscreensaver" >/dev/null && (echo "xscreensaver detected. Please stop xscreensaver." && exit 1)
+prelock() {
+    pkill -USR1 dunst
+    xset +dpms dpms 5 5 5
+}
 
-# Check for arguments
-case "$1" in
-    --pixelated) EFFECT=pixelated;;
-    --corrupted) EFFECT=corrupted;;
-    *) EFFECT=pixelated;;
-esac
+lock() {
+    res=$(xrandr --nograb --current | awk '/\*/ {print $1}')
+    RANDOM=$(od -An -N2 < /dev/urandom)
 
-if [ $EFFECT = 'pixelated' ]; then command -v convert >/dev/null || (echo "Please install imagemagick." && exit 1)
-elif [ $EFFECT = 'corrupted' ]; then command -v corrupter >/dev/null || (echo "Please install corrupter (https://github.com/r00tman/corrupter)." && exit 1); fi
+    case "effect-$((RANDOM % 2))" in
+        "effect-0") scrot -q 50 - \
+                | corrupter -add 0 -mag -9 -bheight 25 -lr -12 -stride 9 -meanabber 0 -boffset -75 - \
+                | convert - RGB:- \
+                | i3lock -efn --raw $res:rgb -i /dev/stdin
+            ;;
+        "effect-1") scrot -q 50 - \
+                | convert -quality 1 -scale 10% -scale 1000% - RGB:- \
+                | i3lock -efn --raw $res:rgb -i /dev/stdin
+            ;;
+    esac
+}
 
-# get temp filenames
-t="$(mktemp).png"
-tm="${t}.mod"
-# make original screenshot
-scrot -q 50 "$t"
+postlock() {
+    pkill -USR2 dunst
+    xset dpms 0 0 0
+}
+trap postlock HUP INT TERM
 
-case $EFFECT in
-    # make pixelated version of screenshot
-    'pixelated') convert -quality 1 -scale 10% -scale 1000% "$t" "$tm" ;;
-    # corrupted version of screenshot
-    'corrupted') corrupter -add 0 -mag -9 -bheight 25 -lr -12 -stride 9 -meanabber 0 -boffset -75 "$t" "$tm" ;;
-esac
-
-# remove original screenshot
-rm "$t"
-# Locking
-# -e is supported since i3lock 2.6 (will not validate empty passwords against PAM)
-# i3lock -u -e -i "$tm"
-i3lock -n -i "$tm"
-
-# remove pixelated screenshot
-rm "$tm"
-
-exit 0
+prelock
+lock
+postlock

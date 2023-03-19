@@ -6,16 +6,7 @@ if ! command -v dunstctl > /dev/null 2>&1; then
 fi
 
 case "$1" in
-    -t)
-        if [ "$(dunstctl is-paused)" = "false" ]; then
-            dunstctl set-paused true
-            echo 
-        else
-            dunstctl set-paused false
-            echo 
-        fi
-        ;;
-    *)
-        [ "$(dunstctl is-paused)" = "false" ] && echo  || echo 
-        ;;
+    -t) dunstctl set-paused toggle ;;
 esac
+
+[ "$(dunstctl is-paused)" = "false" ] && echo  || echo 

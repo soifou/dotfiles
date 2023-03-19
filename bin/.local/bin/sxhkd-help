@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-awk '/^[a-zA-Z]/ && last {print $0,"\t",last} {last=""} /^#/{last=$0}' "$XDG_CONFIG_HOME"/sxhkd/sxhkdrc |\
-    column -t -s $'\t' | rofi -dmenu -i
+awk '/^[a-zA-Z]/ && last {print $0,"\t",last} {last=""} /^#/{last=$0}' "$XDG_CONFIG_HOME"/sxhkd/sxhkdrc \
+    | column -t -s $'\t' | rofi -dmenu -i

@@ -2,7 +2,7 @@
 
 # Fetch/change wallpaper and generate a colorscheme
 # Requirements: xrandr, curl, wal
-# TODO: maintained fork: https://github.com/eylles/pywal16
+# TODO: use maintained fork? https://github.com/eylles/pywal16
 # Credits to ilsenatorov for the idea
 # https://github.com/ilsenatorov/dotfiles/blob/big/rofi/themeswitch.sh
 

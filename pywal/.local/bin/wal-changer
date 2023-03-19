@@ -76,9 +76,8 @@ _wm() {
 }
 
 _polybar() {
-    if pgrep -x polybar >/dev/null; then
-        polybar-msg cmd restart
-    fi
+    echo ":: polybar reload"
+    pgrep -x polybar >/dev/null && pkill -USR1 polybar
 }
 
 _dunst() {

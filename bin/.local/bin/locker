@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-LOCKER="$HOME/.local/bin/lockscreen --corrupted"
+LOCKER=lockscreen
 LOCKER_IDLE_TIME_MIN=${LOCKER_IDLE_TIME_MIN:-5}
 LOCKER_IDLE_TIME_SEC=${LOCKER_IDLE_TIME_SEC:-300}
 

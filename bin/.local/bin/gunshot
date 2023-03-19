@@ -1,9 +1,12 @@
 #!/usr/bin/env sh
 
-# Take a screenshot from current window/screen or select a region.
+# Take a screenshot from current window/screen or a selected region.
 
 for i in shotgun hacksaw xdotool notify-send xrdb xclip; do
-    [ ! "$(command -v $i)" ] && { echo "Error: prerequisite $i not found in PATH" >&2 ; exit 1 ; }
+    [ ! "$(command -v $i)" ] && {
+        echo "Required $i not found in PATH" >&2
+        exit 1
+    }
 done
 
 SCREENSHOT_PATH=${XDG_PICTURES_DIR:-~/Pictures}/screenshots
@@ -11,7 +14,7 @@ SP="$SCREENSHOT_PATH/$(date +%s)-$1.png"
 
 _notify() { notify-send -i camera-photo "Screenshot :: $1" "Copied to $2"; }
 _color() { xrdb -q | grep -m1 -i "$1" | cut -f2; }
-_hacksaw() { hacksaw -c "$(_color color4)" -g 2 -s 2 -f "-i %i -g %g" || exit 1 ; }
+_hacksaw() { hacksaw -c "$(_color color4)" -g 2 -s 2 -f "-i %i -g %g" || exit 1; }
 
 mkdir -p "$SCREENSHOT_PATH"
 

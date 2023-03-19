@@ -3,14 +3,19 @@
 # set -xe
 
 for i in curl xrandr; do
-    [ ! "$(command -v $i)" ] && { echo "Error: prerequisite $i not found in PATH" >&2 ; exit 1 ; }
+    [ ! "$(command -v $i)" ] && {
+        echo "Required $i not found in PATH" >&2
+        exit 1
+    }
 done
 
-if [ -z $1 ]; then echo "A provider is required. Possible value: [unsplash]" >&2; exit 1; fi
+if [ -z $1 ]; then
+    echo "Provider required. Possible value: [unsplash]" >&2
+    exit 1
+fi
 
 WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
 mkdir -p "$WALLPAPER_PATH"
-
 
 _unsplash() {
     RES=$(xrandr --nograb --current | awk '/\*/ {print $1}')
