@@ -114,8 +114,7 @@ yank-osc52() {
     # See `man zshexpn`
     CUTBUFFER="${(q-)CUTBUFFER}"
     echo $CUTBUFFER | ${COPY_CMD} >/dev/null 2>&1
-    maxbuf=8388608
-    printf "\033]52;c;$(printf %s $CUTBUFFER | head -c $maxbuf | base64 | tr -d '\r\n')\a"
+    printf "\033]52;c;%s\a" "$(printf %s $CUTBUFFER | head -c 8388608 | base64 -w 0)"
 }
 vi-yank-osc52() { zle vi-yank; yank-osc52; }
 zle -N vi-yank-osc52
