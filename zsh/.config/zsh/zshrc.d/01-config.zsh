@@ -30,16 +30,15 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Override default behaviour for ssh/scp hosts completion.
 # list only entries in ~/.ssh/config.d/* (OpenSSH >= 7.3) or ~/.ssh/config (prior to 7.3), not in /etc/hosts
-# @see: https://serverfault.com/questions/170346/how-to-edit-command-completion-for-ssh-on-zsh
-h=()
-if [[ -r "$XDG_CONFIG_HOME"/ssh/config.d ]]; then
-    h=($h ${${${(@M)${(f)"$(cat "$XDG_CONFIG_HOME"/ssh/config.d/*)"}:#Host *}#Host }:#*[*?]*})
+# See: https://serverfault.com/questions/170346/how-to-edit-command-completion-for-ssh-on-zsh
+if [ -r "$XDG_CONFIG_HOME"/ssh/config.d ]; then
+    zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):*:hosts' hosts .zsh.hosts
+    .zsh.hosts(){
+        typeset -gaU reply=(
+            ${${${(M)${(f)"$(cat "$XDG_CONFIG_HOME"/ssh/config.d/*)"}:#Host *}#Host }:#*[*?]*}
+        )
+    }
 fi
-if [[ $#h -gt 0 ]]; then
-    zstyle ':completion::complete:scp:*' hosts $h
-    zstyle ':completion::complete:ssh:*' hosts $h
-fi
-unset h
 
 # use same colors as the ls command for file/dir completion
 # LS_COLORS env variable need to be set. Either with eval "$(dircolors)"

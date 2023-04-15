@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Global aliases
-alias ls="exa"
+alias ls="exa -a -F"
 alias l="exa -la --group-directories-first --time-style=long-iso"
 alias lt="exa -T"
 alias ..="cd .."
