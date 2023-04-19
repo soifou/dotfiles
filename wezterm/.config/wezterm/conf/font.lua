@@ -18,4 +18,5 @@ return {
     }),
     custom_block_glyphs = true, -- fix alignment of glyphs!
     warn_about_missing_glyphs = false,
+    -- allow_square_glyphs_to_overflow_width = 'Never',
 }

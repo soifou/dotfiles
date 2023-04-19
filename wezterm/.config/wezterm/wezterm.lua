@@ -11,7 +11,6 @@ require('conf.event')
 
 config = utils.merge(config, {
     -- https://wezfurlong.org/wezterm/config/lua/config/index.html
-    adjust_window_size_when_changing_font_size = false, -- I'm using a tiling WM
     automatically_reload_config = false,
     check_for_updates = false,
     default_cursor_style = 'SteadyBar',
@@ -28,5 +27,9 @@ config = utils.merge(config, {
 for _, f in ipairs({ 'mapping', 'font', 'color' }) do
     config = utils.merge(config, require(('conf.%s'):format(f)))
 end
+
+-- Load local config if any
+local ok, local_conf = pcall(require, 'local')
+if ok then config = utils.merge(config, local_conf) end
 
 return config

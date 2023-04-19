@@ -1,7 +1,7 @@
-local wezterm = require("wezterm")
-local utils = require("utils")
+local wezterm = require('wezterm')
+local utils = require('utils')
 local act = wezterm.action
-local mod = "ALT"
+local mod = 'ALT'
 
 local function map(mods, key, action)
     return { mods = mods, key = key, action = action }
@@ -57,7 +57,7 @@ local keys = {
 
 -- Tabs selection
 for i = 1, 9 do
-    table.insert(keys, map(mod, tostring(i), act({ ActivateTab = i - 1 })))
+    keys[#keys+1] = map(mod, tostring(i), act({ ActivateTab = i - 1 }))
 end
 
 -- Windows selection
@@ -87,10 +87,10 @@ local move_to_pane = function(key, direction)
         window:perform_action(act.ActivatePaneDirection(direction), pane)
     end)
 end
-table.insert(keys, map(mod, 'h', move_to_pane('h', 'Left')))
-table.insert(keys, map(mod, 'j', move_to_pane('j', 'Down')))
-table.insert(keys, map(mod, 'k', move_to_pane('k', 'Up')))
-table.insert(keys, map(mod, 'l', move_to_pane('l', 'Right')))
+keys[#keys+1] = map(mod, 'h', move_to_pane('h', 'Left'))
+keys[#keys+1] = map(mod, 'j', move_to_pane('j', 'Down'))
+keys[#keys+1] = map(mod, 'k', move_to_pane('k', 'Up'))
+keys[#keys+1] = map(mod, 'l', move_to_pane('l', 'Right'))
 
 -- Key tables: https://wezfurlong.org/wezterm/config/key-tables.html
 local key_tables = {
@@ -124,25 +124,25 @@ local mouse_bindings = {
     {
         event = { Up = { streak = 1, button = "Left" } },
         mods = "NONE",
-        action = wezterm.action({ CompleteSelection = "Clipboard" }),
+        action = act({ CompleteSelection = "Clipboard" }),
     },
     -- copy to clipboard when double-click
     {
         event = { Up = { streak = 2, button = "Left" } },
         mods = "NONE",
-        action = wezterm.action({ CompleteSelection = "Clipboard" }),
+        action = act({ CompleteSelection = "Clipboard" }),
     },
     -- copy to clipboard when triple-click
     {
         event = { Up = { streak = 3, button = "Left" } },
         mods = "NONE",
-        action = wezterm.action({ CompleteSelection = "Clipboard" }),
+        action = act({ CompleteSelection = "Clipboard" }),
     },
     -- paste on middle click
     {
         event = { Down = { streak = 1, button = "Middle" } },
         mods = "NONE",
-        action = wezterm.action({ PasteFrom = "Clipboard"}),
+        action = act({ PasteFrom = "Clipboard"}),
     },
     -- select whole line on triple-click
     {
