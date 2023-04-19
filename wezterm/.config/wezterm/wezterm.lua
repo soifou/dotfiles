@@ -1,4 +1,5 @@
 local wezterm = require('wezterm')
+local events = require('events')
 local utils = require('utils')
 
 local config = {}
@@ -7,7 +8,7 @@ if wezterm.config_builder then
     config:set_strict_mode(true)
 end
 
-require('conf.event')
+events.attach()
 
 config = utils.merge(config, {
     -- https://wezfurlong.org/wezterm/config/lua/config/index.html
