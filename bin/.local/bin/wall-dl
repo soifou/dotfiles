@@ -2,7 +2,7 @@
 
 # set -xe
 
-for i in curl xrandr; do
+for i in curl jq xrandr; do
     [ ! "$(command -v $i)" ] && {
         echo "Required $i not found in PATH" >&2
         exit 1
@@ -17,17 +17,20 @@ fi
 WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
 mkdir -p "$WALLPAPER_PATH"
 
+res=$(xrandr --nograb --current | awk '/\*/ {print $1}')
+imw=$(echo "${res}" | awk -F 'x' '{print $1}')
+
 _unsplash() {
-    RES=$(xrandr --nograb --current | awk '/\*/ {print $1}')
-    WALL="$WALLPAPER_PATH/static/unsplash"
-    curl -o "$WALL" -J -L "https://source.unsplash.com/random/$RES" > /dev/null 2>&1
-    case $(file --mime-type "$WALL" -bL) in
-        image/jpeg)
-            mv $WALL $WALL.jpg
-            WALL="$WALL".jpg
-            ;;
-    esac
-    ln -sf "$WALL" "$WALLPAPER_PATH/today"
+    # https://unsplash.com/documentation#get-a-random-photo
+    endpoint="https://api.unsplash.com"
+    key=$(pass unsplash.com/access-key)
+    response=$(curl -s "$endpoint/photos/random?orientation=landscape" -H "Authorization: Client-ID $key")
+    # use printf instead of echo to escape correctly
+    id=$(printf '%s' $response | jq -r '.id')
+    img_url="$(printf "%s" $response | jq -r '.urls.raw')?q=75&fm=jpg&w={$imw}&fit=max"
+    wall="$WALLPAPER_PATH/static/unsplash"
+    [ ! -f "$wall-$id.jpg" ] && curl -o "$wall-$id.jpg" -J -L "$img_url" > /dev/null 2>&1
+    ln -sf "$wall-$id.jpg" "$WALLPAPER_PATH/today"
 }
 
 case "$1" in
