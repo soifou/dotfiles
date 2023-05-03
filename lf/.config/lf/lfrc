@@ -4,27 +4,111 @@
 # |___/|/
 #
 
-# Settings
-set hidden false
+%[ $LF_LEVEL -ne 1 ] && lf -remote "send $id echoerr WARNING: You are in a nested lf instance!"
+
+# Settings {{{
+set shellopts '-eu'
+set hiddenfiles ".*"
 set drawbox true
 set ratios 1:2:3
 set icons
-# set hiddenfiles "lost+found:.*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
+set incsearch
+set tabstop 4
+set promptfmt "\033[33;1m%Fλ\033[0m \033[34;1m%d\033[0m\033[1m%f\033[0m"
+set truncatechar ⋯
+set scrolloff 10
+set previewer lf-previewer
+set cleaner lf-cleaner
+# }}}
 
-# Preview
-set previewer ~/.config/lf/preview
-set cleaner ~/.config/lf/clear
+# Commands {{{
+cmd q quit
+cmd open $$LF_OPENER $fx
+cmd open-choose $CHOOSE=1 $LF_OPENER $fx
+cmd toggle-preview ${{
+    if $lf_preview; then
+        lf -remote "send $id set nopreview"
+        lf -remote "send $id set ratios '1:2'"
+        lf -remote "send $id \$echo" # cleanup if image has been drawn
+    else
+        lf -remote "send $id set preview"
+        lf -remote "send $id set ratios '1:2:3'"
+        lf -remote "send $id redraw"
+    fi
+}}
+# Yanks (TODO: use OSC52)
+cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
+cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
+cmd yank-basename $basename -a -- "$fx" | head -c-1 | xclip -i -selection clipboard
+# Bulk rename selected file(s) with vimv (https://github.com/dmulholl/vimv)
+cmd bulkrename ${{
+    # vimv $fx # for absolute path
+    vimv -- $(basename -a -- $fx) # for relative path
+    lf -remote "send $id echo '$(mktemp)'"
+    lf -remote "send $id load"
+    lf -remote "send $id unselect"
+    lf -remote "send $id clear"
+}}
+# Quickly jump to location with zoxide
+cmd zoxide %lf -remote "send $id cd '$(zoxide query $@)'"
+# Jump to a subfolder with fzf
+cmd fzf ${{
+    res="$(fd -H --type d | fzf --no-height --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ] ; then
+        cmd="cd"
+    elif [ -f "$res" ] ; then
+        cmd="select"
+    else
+        exit 0
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+# Compress file(s)
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
+}}
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+# }}}
 
-# Opener
-cmd open $$OPENER $fx
-cmd open-choose $OPENER_CHOOSE="true" $OPENER $fx
+# Keybindings {{{
+# see :maps
+map <tab> :toggle; down
+map <space> invert
+map <esc> quit
+map x cut
+map d delete
+map . set hidden!
+map g? $lf -doc | $PAGER
 map o open
 map O open-choose
+map a push :zoxide<space>
+map Yy yank-path
+map Yd yank-dirname
+map Yb yank-basename
+map gr bulkrename
+map <c-f> fzf
+map P :toggle-preview
+# Open file(s) in vim (in vsplit)
+map e $$EDITOR -O -- $fx
 
-# Quickly jump dirs with zoxide
-cmd az %lf -remote "send $id cd '$(zoxide query $@)'"
-map a push :az<space>
+# see :cmaps
+cmap <c-k> cmd-history-prev
+cmap <c-j> cmd-history-next
+cmap <c-h> cmd-left
+cmap <c-l> cmd-right
+cmap <space> cmd-complete
+cmap <c-i> cmd-menu-complete
+cmap <c-d> cmd-menu-complete-back
+# }}}
 
-# Keybindings
-map D delete
-map . set hidden!
+# vim: foldmethod=marker foldlevel=0 foldnestmax=1
