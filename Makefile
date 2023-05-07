@@ -8,7 +8,6 @@ init: .stowrc
 	echo "--verbose" >> .stowrc
 
 install: init
-	stow asdf
 	stow bat
 	stow beets
 	stow bin
@@ -38,6 +37,7 @@ install: init
 	stow ripgrep
 	stow rofi
 	stow rtv
+	stow rtx
 	stow ssh
 	stow -d sublime @linux
 	stow tremc
@@ -54,7 +54,6 @@ install: init
 	stow @$(OS) --override=".*"
 
 uninstall:
-	stow -D asdf
 	stow -D bat
 	stow -D beets
 	stow -D bin
@@ -84,6 +83,7 @@ uninstall:
 	stow -D ripgrep
 	stow -D rofi
 	stow -D rtv
+	stow -D rtx
 	stow -D ssh
 	stow -D -d sublime @linux
 	stow -D tremc

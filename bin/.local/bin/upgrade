@@ -78,11 +78,11 @@ fi
 
 if command -v docker > /dev/null 2>&1; then
     yn "Update docker images?" && {
-        docker images --format "{{.Repository}}:{{.Tag}}" |\
-            grep -Ev "$(whoami)" |\
-            sort |\
-            xargs -L1 docker pull |\
-            grep "Status:"
+        docker images --format "{{.Repository}}:{{.Tag}}" \
+            | grep -Ev "$(whoami)" \
+            | sort \
+            | xargs -L1 docker pull \
+            | grep "Status:"
         docker system prune -f
         # docker volume prune -f
     }
@@ -96,28 +96,13 @@ if command -v brew > /dev/null 2>&1; then
     }
 fi
 
-if command -v anyenv > /dev/null 2>&1; then
-    yn "Update anyenv?" && anyenv update
-fi
-
 if command -v gh > /dev/null 2>&1; then
     gh extension upgrade --all --dry-run
     yn "Update gh extensions?" && gh extension upgrade --all --force
 fi
 
-if command -v asdf > /dev/null 2>&1; then
-    yn "Update asdf?" && {
-        asdf update --head
-        asdf plugin update --all
-    }
-    yn "Update composer from asdf?" && {
-        COMPOSER="asdf exec composer"
-        $COMPOSER selfupdate
-        rm -f "$XDG_CONFIG_HOME"/composer/*-old.phar
-        $COMPOSER global outdated
-        sleep 3
-        $COMPOSER global update
-    }
+if command -v rtx > /dev/null 2>&1; then
+    yn "Update rtx plugins?" && rtx plugins update
 fi
 
 [ -f "$XDG_DATA_HOME"/zsh/znap/znap.zsh ] && {
@@ -130,9 +115,9 @@ fi
         '
 }
 
-if command -v cargo > /dev/null 2>&1; then
-    yn "Update global rust binaries?" \
-        && cargo install-update -a
+if command -v cargo-install-update > /dev/null 2>&1; then
+    yn "Update global rust dependencies?" \
+        && cargo-install-update install-update -a
 fi
 
 if command -v npm > /dev/null 2>&1; then
@@ -140,6 +125,16 @@ if command -v npm > /dev/null 2>&1; then
         npm -g outdated
         sleep 3
         npm -g update
+    }
+fi
+
+if command -v composer > /dev/null 2>&1; then
+    yn "Update global composer dependencies?" && {
+        composer selfupdate
+        rm -f "$XDG_CONFIG_HOME"/composer/*-old.phar
+        composer global outdated
+        sleep 3
+        composer global update
     }
 fi
 
@@ -163,10 +158,9 @@ if command -v gem > /dev/null 2>&1; then
 fi
 
 if command -v go > /dev/null 2>&1; then
-    [ -f "$XDG_CONFIG_HOME"/asdf/default-golang-packages ] && {
+    [ -f "$ASDF_GOLANG_DEFAULT_PACKAGES_FILE" ] && {
         yn "Update global go dependencies?" && {
-            cat "$XDG_CONFIG_HOME"/asdf/default-golang-packages |
-                while read -r app; do go install "$app"; done
+            while read -r app; do go install "$app"; done < "$ASDF_GOLANG_DEFAULT_PACKAGES_FILE"
         }
     }
 fi

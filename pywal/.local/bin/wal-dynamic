@@ -14,7 +14,7 @@ set -xe
 
 # Set some variables for this script only
 # enhance path to find pywal and my custom "wal-switcher" script
-PATH="$XDG_LOCAL_HOME/share/asdf/shims:$XDG_LOCAL_HOME/bin:$PATH"
+PATH="$XDG_LOCAL_HOME/share/rtx/shims:$XDG_LOCAL_HOME/bin:$PATH"
 WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
 WALL_CURRENT=$(readlink "$WALLPAPER_PATH"/today | sed "s|$WALLPAPER_PATH/||g")
 # The wallpaper type: static, dynamic or animated

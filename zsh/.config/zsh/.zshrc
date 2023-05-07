@@ -22,7 +22,6 @@
 # Load completions
 fpath=(
     "$ZDOTDIR"/completions
-    "$ASDF_DATA_DIR"/completions
     "$HOMEBREW_PREFIX"/share/zsh/site-functions
     $fpath
 )

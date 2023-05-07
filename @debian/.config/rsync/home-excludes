@@ -126,7 +126,6 @@
 .ansible
 .ansible_galaxy
 .anyenv
-.asdf
 .bundler
 .composer/cache
 .composer/vendor

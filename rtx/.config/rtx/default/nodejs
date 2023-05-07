@@ -1,10 +1,8 @@
 csslint
 dockerfilelint
 eslint_d
-"@fsouza/prettierd"
 jshint
 lebab
-markdownlint-cli
 nativefier
 npm
 pnpm
@@ -13,5 +11,4 @@ prettier-plugin-twig-melody
 prettydiff
 sass
 sass-lint
-sql-formatter
 yarn

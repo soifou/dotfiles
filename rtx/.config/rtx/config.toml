@@ -1,0 +1,16 @@
+[tools]
+# global tool versions go here
+# you can set these with `rtx use -g`
+# and `rtx install --install-missing`
+nodejs = 'lts'
+python = '3.11'
+golang = '1.20'
+lua = '5.1'
+rust = '1.69'
+php = '8.2.5'
+
+[settings]
+legacy_version_file = false
+asdf_compat = false
+jobs = 4
+raw = false # pipe plugins to stdin/stdout/stderr
