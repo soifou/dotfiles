@@ -26,7 +26,7 @@ _c pointer_action1 resize_corner
 _c pointer_action3 move
 
 # desktop default layouts
-for i in 2 4; do bspc desktop ^$i --layout monocle; done
+for i in 2 3 4; do bspc desktop ^$i --layout monocle; done
 
 # nuke the previous rules so reloading the config works as intended
 bspc rule -r "*"
@@ -35,7 +35,9 @@ bspc rule -r "*"
 for app in nvim Sublime_text; do
     _r $app desktop='^2'
 done
-_r firefox desktop='^3'
+for app in firefox Brave-browser; do
+    _r $app desktop='^3'
+done
 for app in neomutt weechat skype Signal whatsapp mattermost google-meet; do
     _r $app desktop='^4'
 done

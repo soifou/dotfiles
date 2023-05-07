@@ -109,6 +109,9 @@ super + ctrl + shift + space
 # super + {Left,Down,Up,Right}
 #    bspc node -v {-20 0,0 20,0 -20,20 0}
 
+# Move window or desktop to monitor
+# super + {shift,alt} + {comma,period}
+#   bspc {node,desktop} --to-monitor {next,prev}
 
 #
 # toggle
@@ -174,7 +177,7 @@ ctrl + { Escape, space, shift + space }
 
 # music player
 super + z
-    bsp-scratchpad music-player ncmpcpp-ueberzug
+    TERMINAL="wezterm start" bsp-scratchpad music-player ncmpcpp-ueberzug
 
 # filemanager
 super + shift + f

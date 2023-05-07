@@ -2,6 +2,8 @@
 
 set -e
 
+[ -z "$DISPLAY" ] && exit
+
 for i in xob wpctl; do
     [ ! "$(command -v $i)" ] && {
         echo "Error: prerequisite $i not found in PATH" >&2
@@ -9,29 +11,24 @@ for i in xob wpctl; do
     }
 done
 
-[ -z "$DISPLAY" ] && exit
-
 VOLUME_PIPE=/tmp/xob-vol.fifo
+
+cleanup() {
+    rm "$VOLUME_PIPE" 2> /dev/null
+    pkill -P $$ 2> /dev/null
+}
+
+[ ! -p $VOLUME_PIPE ] && {
+    mkfifo "$VOLUME_PIPE"
+    trap cleanup HUP INT QUIT TERM EXIT
+    tail --follow "$VOLUME_PIPE" | xob -q
+    cleanup
+}
 
 case "$1" in
     -u)
-        [ -p "$VOLUME_PIPE" ] && {
-            VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}')
-            [ -n "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $3}')" ] && VOL="$VOL!"
-            echo "$VOL" > $VOLUME_PIPE
-        }
-        ;;
-    *)
-        [ -p $VOLUME_PIPE ] && { echo "Already running!"; exit 0; }
-
-        cleanup() {
-            rm "$VOLUME_PIPE" 2> /dev/null
-            pkill -P $$ 2> /dev/null
-        }
-
-        mkfifo "$VOLUME_PIPE"
-        trap cleanup HUP INT QUIT TERM EXIT
-        tail --follow "$VOLUME_PIPE" | xob -q
-        cleanup
+        VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}')
+        [ -n "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $3}')" ] && VOL="$VOL!"
+        echo "$VOL" > $VOLUME_PIPE
         ;;
 esac

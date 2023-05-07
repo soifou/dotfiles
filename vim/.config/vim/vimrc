@@ -282,7 +282,7 @@ if exists('##CmdLineEnter')
         autocmd CmdLineLeave : set smartcase
     augroup END
 endif
-"
+
 if exists('$SSH_TTY')
     augroup block_cursor
         au!
@@ -307,6 +307,8 @@ augroup my_rc
     " Toggle relative number
     autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &number | set relativenumber | endif
     autocmd BufLeave,FocusLost,InsertEnter,WinLeave * if &number | set norelativenumber | endif
+    " Yank content into the user clipboard (using OSC52 escape sequence)
+    autocmd TextYankPost * call system("printf $'\\e]52;c;%s\\a' \"$(base64 <<(</dev/stdin))\" >> /dev/tty", v:event.regcontents)
 augroup END
 "}}}}
 

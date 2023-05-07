@@ -4,7 +4,7 @@
     ignored = ls-files -v | grep "^[[:lower:]]"
     count-commits = shortlog -sn
     uncommit = reset --soft HEAD~
-    web = "!gh repo view --web"
+    w = "!xdg-open $(gh repo view --json url -q .url)"
 
     # list last commit for each branches
     blc = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) - %(color:red)%(objectname:short)%(color:reset) - %(color:yellow)%(refname:short)%(color:reset) - (%(color:green)%(committerdate:relative)%(color:reset)) - %(authorname) - %(contents:subject)'

@@ -106,13 +106,15 @@ _sublime() {
 _kitty() {
     echo ":: kitty reload"
 
-    # Reload +kitten diff
+    # Reload kitten diff
     ruby "$XDG_CONFIG_HOME"/wal/generator/kitty.rb
 
     # Reload running invocations
     # see: https://github.com/kovidgoyal/kitty/commit/df05339d2a96d16ee59a78b16d000d57cb68e2b4
     mkdir -p "$XDG_CONFIG_HOME"/kitty/conf.d
     cat "$XDG_CACHE_HOME"/wal/colors-kitty > "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf
+    # NOTE: Sending a USR1 signal resets the font size.
+    # Alternative would be to cat ~/.cache/wal/sequences in zshrc
     pgrep -x kitty >/dev/null && pkill -USR1 kitty >/dev/null
 }
 
@@ -169,9 +171,8 @@ _xob() {
     echo ":: xob reload"
     mkdir -p "$XDG_CONFIG_HOME"/xob
     cat "$XDG_CACHE_HOME"/wal/colors-xob > "$XDG_CONFIG_HOME"/xob/styles.cfg
-    pkill -USR1 xob
-    sleep 1
-    xob-utils &
+    pgrep -x xob >/dev/null && pkill -USR1 xob
+    nohup xob-utils >/dev/null 2>&1
 }
 
 _nvim() {

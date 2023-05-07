@@ -1,6 +1,7 @@
 --theme=base16
 --style=plain
 --italic-text=always
+--force-colorization
 
 # List of supported syntax: bat --list-languages
 --map-syntax '.*ignore:Git Ignore'

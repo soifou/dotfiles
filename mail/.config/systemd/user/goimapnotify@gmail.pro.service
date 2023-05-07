@@ -4,7 +4,7 @@ After=gpg-agent.socket
 
 [Service]
 Type=simple
-ExecStart=%h/.local/share/go/bin/goimapnotify -conf %h/.config/goimapnotify/%i.conf
+ExecStart=sh -c "goimapnotify -conf %h/.config/goimapnotify/%i.conf"
 Restart=always
 RestartSec=30
 

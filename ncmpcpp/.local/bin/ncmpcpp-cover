@@ -6,9 +6,8 @@ set -e
 
 # SETTINGS
 music_library="$XDG_MUSIC_DIR"
-fallback_image="$XDG_CONFIG_HOME/ncmpcpp/vinyl.png"
+fallback_image="$XDG_CONFIG_HOME/ncmpcpp/vinyl.jpg"
 streaming_path="$XDG_CONFIG_HOME/ncmpcpp/radio.jpg"
-# COVER_TMP_PATH="${XDG_CACHE_HOME:-/tmp}/cover"
 
 padding_top=2
 padding_bottom=2
@@ -23,7 +22,7 @@ square_alignment="top"
 left_aligned="true"
 
 # Only set this if the geometries are wrong or ncmpcpp shouts at you to do it.
-# Visually select/highlight a character on your terminal, zoom in an image 
+# Visually select/highlight a character on your terminal, zoom in an image
 # editor and count how many pixels a character's width and height are.
 font_height=
 font_width=
@@ -42,7 +41,7 @@ kill_previous_instances() {
     for pid in $(pidof -x "$script_name"); do
         if [ "$pid" != $$ ]; then
             kill -15 "$pid"
-        fi 
+        fi
     done
 }
 
@@ -53,9 +52,9 @@ find_cover_image() {
     case "$song_dir" in
         http://*|https://*) cover_path="$streaming_path" && return ;;
     esac
-    
+
     # Check if the audio file has an embedded album art
-    ext="$($song_dir | sed 's/^.*\.//')"
+    ext="$(mpc --format %file% current | sed 's/^.*\.//')"
     if [ "$ext" = "flac" ]; then
         # since FFMPEG cannot export embedded FLAC art we use metaflac
         metaflac --export-picture-to=/tmp/mpd_cover.jpg \
@@ -75,14 +74,10 @@ find_cover_image() {
     found_covers="$(find "$album_dir" -type d -exec find {} -maxdepth 1 -type f \
     -iregex ".*/.*\(${album}\|cover\|folder\|artwork\|front\).*[.]\\(jpe?g\|png\|gif\|bmp\)" \; )"
     cover_path="$(echo "$found_covers" | head -n1)"
-    if [ -n "$cover_path" ]; then
-        return
-    fi
+    [ -n "$cover_path" ] && return
 
     # If we still failed to find a cover image, we use the fallback
-    if [ -z "$cover_path" ]; then
-        cover_path=$fallback_image
-    fi
+    cover_path=$fallback_image
 }
 
 display_cover_image() {

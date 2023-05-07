@@ -8,7 +8,7 @@
 --follow
 
 # Exclude directories.
---glob=!{.git,.svn,.tldr,node_modules,Trash,vendor}
+--glob=!{.git,node_modules,vendor}
 
 # Exclude file types.
 --glob=!*.{lock}

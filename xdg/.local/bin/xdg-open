@@ -13,20 +13,14 @@ _torrent() {
 }
 
 _gdl() {
-    imgs=$(gallery-dl -d "$XDG_CACHE_HOME"/gallery-dl -- "$@" 2>/dev/null) || return 1
-    printf '%s\n' "$imgs" | sed 's/^# //' |
-        xargs -d'\n' sh -c 'nsxiv -a -- "$@" || mpv -- "$@"' ''
+    imgs=$(gallery-dl -d "$XDG_CACHE_HOME"/gallery-dl -- "$@" 2> /dev/null) || return 1
+    printf '%s\n' "$imgs" | sed 's/^# //' \
+        | xargs -d'\n' sh -c 'nsxiv -a -- "$@" || mpv -- "$@"' ''
 }
 
-_browser() {
-    nohup "$BROWSER" "$1" >/dev/null 2>&1
-    wmctrl -a "$BROWSER" # Focus the webbrowser desktop
-}
+_browser() { exec setsid -f -- "$BROWSER" "$1" > /dev/null 2>&1; }
 
 _o() {
-    echo "File: $1"
-    echo "mime-type: $(file --mime-type "$1" -bL)"
-
     case $(file --mime-type "$1" -bL) in
         application/pdf) zathura "$1" ;;
         application/x-bittorrent) _torrent "$1" ;;
@@ -43,7 +37,7 @@ _o() {
 
 _dlo() {
     TMPFILE=$(mktemp)
-    curl -sL "$1" >"$TMPFILE"
+    curl -sL "$1" > "$TMPFILE"
     _o "$TMPFILE"
 }
 
@@ -57,23 +51,23 @@ case "$1" in
     # Email
     mailto:*) term --class=mailto neomutt "$1" ;;
     # Torrent
-    magnet:*|*.torrent) _torrent "$1" ;;
+    magnet:* | *.torrent) _torrent "$1" ;;
     # Video
-    *mkv|*webm|*mp4|*youtube.com*|*youtu.be*|*gfycat.com*|*v.redd.it*|*dailymotion.com*|*peertube*)
-        nohup mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" >/dev/null 2>&1
+    *mkv | *webm | *mp4 | *youtube.com* | *youtu.be* | *yewtu.be* | *gfycat.com* | *v.redd.it* | *dailymotion.com* | *peertube*)
+        nohup mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" > /dev/null 2>&1
         ;;
     # Images
-    *png|*jpg|*jpe|*jpeg|*gif) _dlo "$1" ;;
-    *reddit.com/gallery*|*i.redd.it*|*imgur.com*) _gdl "$1" ;;
+    *png | *jpg | *jpe | *jpeg | *gif) _dlo "$1" ;;
+    *reddit.com/gallery* | *i.redd.it* | *imgur.com*) _gdl "$1" ;;
     # Documents
-    *.pdf|*.ps|*.epub) _dlo "$1" ;;
+    *.pdf | *.ps | *.epub) _dlo "$1" ;;
     # Music
-    *mp3|*flac|*opus|*mp3?source*) _dlo "$1" ;;
+    *mp3 | *flac | *opus | *mp3?source*) _dlo "$1" ;;
     # pastebins
     *0paste.com*) _dlo "$1".txt ;;
     *pastebin.com*) _dlo "https://pastebin.com/raw/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
     *paste.debian.net*) _dlo "https://paste.debian.net/plain/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
-    *termbin.com*|*0x0.st*|*ix.io*|*.txt) _dlo "$1" ;;
+    *termbin.com* | *0x0.st* | *ix.io* | *.txt) _dlo "$1" ;;
     *ghostbin.co*) _dlo "$1"/raw ;;
     *reddit.com*) term --class=rtv rtv "$1" ;;
     # HTTP links

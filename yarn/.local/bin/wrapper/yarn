@@ -10,4 +10,4 @@
 # https://github.com/yarnpkg/yarn/issues/4134
 
 set -- "${@}" --use-yarnrc "$XDG_CONFIG_HOME"/yarn/yarnrc
-exec "$ASDF_DATA_DIR"/shims/yarn "$@"
+exec yarn "$@"

@@ -32,9 +32,9 @@ autocmd TabEnter .* unfocus
 autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
 autocmd UriChange .*youtube\.com js window.location.href.match(".*youtube\.com/(c|channel|user)/[^/]*/?$") && tri.excmds.urlmodify("-g", "2", "videos")
 
-" Front-end alternative for twitter
+" Front-end alternatives
 autocmd DocStart ^http(s?)://twitter\.com urlmodify -t twitter.com nitter.net
-" Front-end alternative for reddit
+" autocmd DocStart ^http(s?)://www\.youtube\.com urlmodify -t www.youtube.com yewtu.be
 " autocmd DocStart ^http(s?)://www\.reddit\.com urlmodify -t www.reddit.com teddit.net
 " }}}
 
@@ -81,7 +81,9 @@ set searchengine duckduckgo
 set searchurls.amazon https://www.amazon.fr/s/ref=nb_sb_noss?field-keywords=%s
 set searchurls.arch https://wiki.archlinux.org/index.php?search=%s&title=Special%3ASearch&go=Go
 set searchurls.gh https://github.com/search?utf8=%E2%9C%93&q=%s&ref=simplesearch&type=code
-set searchurls.gi https://gist.github.com/search?q=%s
+set searchurls.gr https://github.com/search?utf8=%E2%9C%93&q=%s&ref=simplesearch&type=repositories
+set searchurls.gi https://github.com/search?utf8=%E2%9C%93&q=%s&ref=simplesearch&type=issues
+set searchurls.gist https://gist.github.com/search?q=%s
 set searchurls.maps https://www.google.com/maps/search/%s
 set searchurls.imdb https://www.imdb.com/find?q=%s
 set searchurls.mdn https://developer.mozilla.org/en-US/search?q=%s&topic=api&topic=js

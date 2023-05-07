@@ -19,6 +19,8 @@ love() {
 }
 
 status() {
+    [ "$(mpc | wc -l)" = "1" ] && exit 0
+
     SCROBBLER_ICON="%{T4}%{T-}"
     color2=$(xrdb -query | grep -e '*color2' | awk -F: '{print $2}' | xargs)
     if pgrep -x mpdscribble >/dev/null 2>&1; then
