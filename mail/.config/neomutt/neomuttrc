@@ -93,17 +93,18 @@ set sidebar_width = 25
 
 # Index
 # See: https://neomutt.org/guide/reference.html#3-170-%C2%A0index_format
-set index_format="%4C %Z  %{!%d %b · %T}  %-25.25F   %-80.80s %* %?X?%X  & ? %-4.4c"
-set to_chars = ""
-set crypt_chars = " "
-set flag_chars = "     "
+set index_format="%4C %Z  %{!%d %b · %T}  %-25.25F   %-80.80s %* %?X?%X  & ? %-4.4c"
+set to_chars = "󰀒"
+set crypt_chars = " "
+set flag_chars = "    "
+
 
 # Status bar for the different views
 set status_on_top = no
-set status_format = "───[ %D ] %?r?[   %m ] ?%?n?[   %n ] ?%?d?[   %d ] ?%?t?[   %t ] ?%?F?[   %F ] ?%?p?[   %p ]?%|─"
-set pager_format = "───[ %n ] [%T %s]%* [   %{!%d %b · %T} ] %?X?[   %X ]? [   %P ]─"
-set compose_format = "───[  %l ] [  %a ]%>─"
-set attach_format = "%u%D   %T%-75.75d %?T?%&   ?  %5s · %m/%M"
+set status_format = "───[ %D ] %?r?[   %m ] ?%?n?[   %n ] ?%?d?[   %d ] ?%?t?[   %t ] ?%?F?[   %F ] ?%?p?[   %p ]?%|─"
+set pager_format = "───[ %n ] [%T %s]%* [   %{!%d %b · %T} ] %?X?[   %X ]? [   %P ]─"
+set compose_format = "───[  %l ] [  %a ]%>─"
+set attach_format = "%u%D   %T%-75.75d %?T?%&   ?  %5s · %m/%M"
 
 # Events
 set mail_check = 0      # How often to check for new mail (time in seconds). Disabled, using mbsync.

@@ -24,7 +24,7 @@ CMakeLists.txt 
 *.git     
 *.edn     
 *.pdf     
-*.db      
+*.db      󰆼
 *.hs      
 *.vim     
 *.org     
@@ -33,7 +33,7 @@ CMakeLists.txt 
 *.myi     
 *.sqlite  
 *.bib     
-*.part    
+*.part    󰋔
 *.torrent 
 *.url     
 *.link    
@@ -195,4 +195,4 @@ README    
 .git          
 node_modules  
 .github       
-games         
+games         󰊗

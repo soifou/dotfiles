@@ -19,8 +19,8 @@ Options:
 "
 
 # Configuration
-lightbulb_on=
-lightbulb_off=
+lightbulb_on=󰌵
+lightbulb_off=󰌶
 temp_range="6500:2700"
 method=randr
 lat="$OPENWEATHERMAP_LAT"

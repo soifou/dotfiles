@@ -11,8 +11,8 @@ configuration {
     drun { display-name: ""; }
     clipboard { display-name: ""; }
     themes { display-name: ""; }
-    emoji { display-name: ""; }
-    calc { display-name: ""; }
+    emoji { display-name: "󰇹"; }
+    calc { display-name: "󰊃"; }
 
     sorting-method: "fzf";
     matching: "fuzzy";

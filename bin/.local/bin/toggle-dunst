@@ -9,4 +9,4 @@ case "$1" in
     -t) dunstctl set-paused toggle ;;
 esac
 
-[ "$(dunstctl is-paused)" = "false" ] && echo  || echo 
+[ "$(dunstctl is-paused)" = "false" ] && echo  || echo 

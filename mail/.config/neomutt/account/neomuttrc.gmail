@@ -8,11 +8,11 @@ set copy = no
 
 ## Mailboxes
 unmailboxes *
-named-mailboxes "⇣ Inbox" +inbox
-named-mailboxes "∗ Drafts" +draft
-named-mailboxes "⇡ Sent" +sent
-named-mailboxes "x Spam" +spam
-named-mailboxes "∇ Trash" +trash
+named-mailboxes "  Inbox" +inbox
+named-mailboxes "  Drafts" +draft
+named-mailboxes "  Sent" +sent
+named-mailboxes "  Spam" +spam
+named-mailboxes "  Trash" +trash
 
 macro index 1 "<change-folder>+inbox<enter>"
 macro index 2 "<change-folder>+draft<enter>"
