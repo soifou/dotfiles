@@ -6,6 +6,8 @@ if command -v rtx > /dev/null; then
     export RTX_NODE_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/rtx/default/nodejs
     export RTX_PYTHON_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/rtx/default/python
 
+    # Make available some binaries that might be used on startup.
+    # These paths will be dynamically managed by rtx during interactive shell.
     rtx_bins=$(rtx bin-paths | xargs | sed -e 's/ /:/g')
     export PATH="$rtx_bins:$PATH"
     unset rtx_bins

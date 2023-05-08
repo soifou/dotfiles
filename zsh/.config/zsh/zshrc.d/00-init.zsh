@@ -10,8 +10,8 @@ command -v pip >/dev/null && {
     }
 }
 
-command -v pnpm >/dev/null && {
-    () { [ -f $1 ] && . $1 } "$XDG_CONFIG_HOME"/tabtab/zsh/pnpm.zsh
+command -v rtx >/dev/null && {
+    eval "$(rtx activate zsh)"
 }
 
 command -v zoxide >/dev/null && {

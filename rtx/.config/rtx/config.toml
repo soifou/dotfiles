@@ -14,3 +14,6 @@ legacy_version_file = false
 asdf_compat = false
 jobs = 4
 raw = false # pipe plugins to stdin/stdout/stderr
+
+[env]
+PHP_WITHOUT_PDO_PGSQL = "yes"
