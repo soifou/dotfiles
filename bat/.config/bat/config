@@ -1,5 +1,5 @@
---theme=base16
---style=plain
+--theme=ansi
+--style=changes
 --italic-text=always
 --force-colorization
 
