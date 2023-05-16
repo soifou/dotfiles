@@ -6,6 +6,7 @@ gallery-dl
 git+https://github.com/llorllale/ttrv
 httpie
 khal
+khard
 Pillow
 pip
 pycodestyle
