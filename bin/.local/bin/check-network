@@ -1,22 +1,38 @@
 #!/usr/bin/env sh
 
-disconnected=󰤮
-wireless_connected=󰤯
-ethernet_connected=󰡁
+ID=$(ip link | awk -F': ' '/state UP/ {print $2}' | head -n1)
+CONNECTIVITY=$(nmcli networking connectivity)
 
-ID="$(ip link | awk '/state UP/ {print $2}')"
+if [ "$CONNECTIVITY" = "full" ]; then
+    case $ID in
+        e*)
+            echo 󰡁
+            exit 0
+            ;;
+        w*)
+            WIFI_STRENGTH=$(sudo awk 'NR==3 {printf("%.0f",$3*10/7)}' /proc/net/wireless)
+            SSID=$(nmcli device show $ID | awk '/GENERAL.CONNECTION:/ {print $2}')
 
-while true; do
-    if (ping -c 1 archlinux.org || ping -c 1 google.com || ping -c 1 bitbucket.org || ping -c 1 github.com || ping -c 1 sourceforge.net) &> /dev/null; then
-        if [[ $ID == e* ]]; then
-            echo "$ethernet_connected"
-            sleep 25
-        else
-            echo "$wireless_connected"
-            sleep 25
-        fi
-    else
-        echo "$disconnected"
-        sleep 0.5
-    fi
-done
+            if [ $WIFI_STRENGTH -ge 80 ]; then
+                echo 󰤨 $SSID
+                exit 0
+            fi
+            if [ $WIFI_STRENGTH -ge 60 ]; then
+                echo 󰤥 $SSID
+                exit 0
+            fi
+            if [ $WIFI_STRENGTH -ge 40 ]; then
+                echo 󰤢 $SSID
+                exit 0
+            fi
+            if [ $WIFI_STRENGTH -ge 20 ]; then
+                echo 󰤟 $SSID
+                exit 0
+            fi
+            if [ $WIFI_STRENGTH -ge 0 ]; then
+                echo 󰤯 $SSID
+                exit 0
+            fi
+            ;;
+    esac
+fi
