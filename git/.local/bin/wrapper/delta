@@ -11,7 +11,7 @@ set -e
 COLUMNS=$(tput cols)
 if [ $COLUMNS -ge 160 ] && [ -z $FZF_PREVIEW_COLUMNS ]; then
     set -- --side-by-side -w "$COLUMNS" "$@"
-elif [ "$COLUMNS" -ge 220 ] && [ -n "$FZF_PREVIEW_COLUMNS" ]; then
+elif [ "$COLUMNS" -ge 240 ] && [ -n "$FZF_PREVIEW_COLUMNS" ]; then
     set -- --side-by-side -w "$FZF_PREVIEW_COLUMNS" "$@"
 fi
 

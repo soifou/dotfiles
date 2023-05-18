@@ -1,8 +1,8 @@
 # Local/private config goes in the include
 [include]
-    path = aliases
-    path = colors
-    path = private
+    path = conf.d/aliases
+    path = conf.d/colors
+    path = conf.d/private
 
 [fetch]
     prune = true

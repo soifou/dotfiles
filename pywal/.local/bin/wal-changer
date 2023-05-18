@@ -163,8 +163,8 @@ _rofi() {
 _delta() {
     echo ":: delta theme reload"
     mkdir -p "$XDG_CONFIG_HOME"/git
-    cp "$XDG_CACHE_HOME"/wal/colors-delta "$XDG_CONFIG_HOME"/git/delta-theme
-    printf "\t%s=true" $(get_theme) >> "$XDG_CONFIG_HOME"/git/delta-theme
+    cp "$XDG_CACHE_HOME"/wal/colors-delta "$XDG_CONFIG_HOME"/git/conf.d/delta-theme
+    printf "\t%s=true" $(get_theme) >> "$XDG_CONFIG_HOME"/git/conf.d/delta-theme
 }
 
 _xob() {

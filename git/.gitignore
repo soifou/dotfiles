@@ -1,2 +1,2 @@
-.config/git/private
-.config/git/delta-theme
+.config/git/conf.d/private
+.config/git/conf.d/delta-theme
