@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+# Dynamically set delta "side-by-side" feature if screen is wide enough or used
+# inside an fzf preview pane.
+#
+# See: https://github.com/dandavison/delta/issues/359#issuecomment-751447860
+# and https://github.com/wfxr/forgit/issues/121
+
+set -e
+
+COLUMNS=$(tput cols)
+if [ $COLUMNS -ge 160 ] && [ -z $FZF_PREVIEW_COLUMNS ]; then
+    set -- --side-by-side -w "$COLUMNS" "$@"
+elif [ "$COLUMNS" -ge 220 ] && [ -n "$FZF_PREVIEW_COLUMNS" ]; then
+    set -- --side-by-side -w "$FZF_PREVIEW_COLUMNS" "$@"
+fi
+
+PATH=$(echo "$PATH" | tr ":" "\n" | grep -vE 'wrapper' | xargs | sed -e 's/ /:/g')
+delta "$@"

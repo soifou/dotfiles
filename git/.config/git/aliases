@@ -57,7 +57,7 @@
             command -v fzf >/dev/null && {\
                 git hist --color=always --branches --oneline |\
                 fzf --exact --no-sort -m --ansi --no-height --prompt=' cherry-pick > ' \
-                --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | DELTA_FEATURES= delta -n\" \
+                --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\" \
                 --preview-window border-left |\
                 awk '{print $1}' | xargs -r git cherry-pick;\
             }\
@@ -83,7 +83,7 @@
         command -v fzf >/dev/null && {\
             git hist --color=always |\
             fzf --exact --no-sort -m --ansi --no-height --prompt=' commits history > ' \
-            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | DELTA_FEATURES= delta -n\" \
+            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\" \
             --preview-window $1 |\
             xargs ;\
         } || {\
@@ -96,7 +96,7 @@
         command -v fzf >/dev/null && {\
             git hist --color=always $2 |\
             fzf --exact --no-sort -m --ansi --no-height --prompt=\" commits history for $2 > \" \
-            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show -p --follow --color=always @ $2' | DELTA_FEATURES= delta -n\" \
+            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show -p --follow --color=always @ $2' | delta -n\" \
             --preview-window $1 |\
             xargs ;\
         } || {\
