@@ -105,17 +105,14 @@ _sublime() {
 
 _kitty() {
     echo ":: kitty reload"
-
     # Reload kitten diff
     ruby "$XDG_CONFIG_HOME"/wal/generator/kitty.rb
-
-    # Reload running invocations
-    # see: https://github.com/kovidgoyal/kitty/commit/df05339d2a96d16ee59a78b16d000d57cb68e2b4
+    # Reload main theme
     mkdir -p "$XDG_CONFIG_HOME"/kitty/conf.d
     cat "$XDG_CACHE_HOME"/wal/colors-kitty > "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf
-    # NOTE: Sending a USR1 signal resets the font size.
-    # Alternative would be to cat ~/.cache/wal/sequences in zshrc
-    pgrep -x kitty >/dev/null && pkill -USR1 kitty >/dev/null
+    # Reload running instances
+    pgrep -x kitty >/dev/null && \
+        kitten @ set-colors --all --configured "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf
 }
 
 _mpv() {
