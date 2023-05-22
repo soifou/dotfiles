@@ -9,19 +9,16 @@
 }
 
 #-----------------------------------------------------
-# Manage my SSH keys
-() { [ -f $1 ] && . $1 } "$ZDOTDIR"/config/gpg.zsh
-
-#-----------------------------------------------------
 # Enable Powerlevel10k instant prompt.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-() { [ -r $1 ] && . $1 } "$XDG_CACHE_HOME"/p10k-instant-prompt-$USER.zsh
+# () { [ -r $1 ] && . $1 } "$XDG_CACHE_HOME"/p10k-instant-prompt-$USER.zsh
 
 #-----------------------------------------------------
 # Load completions
 fpath=(
-    "$ZDOTDIR"/completions
+    "$ZDOTDIR"/site-functions
+    "$XDG_DATA_HOME"/zsh/site-functions
     "$HOMEBREW_PREFIX"/share/zsh/site-functions
     $fpath
 )
@@ -38,37 +35,19 @@ fpath=($my_zsh_fpath $fpath)
 unset my_zsh_fpath
 
 #-----------------------------------------------------
-# Load plugin manager
-znap_dir="$XDG_DATA_HOME"/zsh/znap
-[ ! -f "$znap_dir"/znap.zsh ] && {
-    git clone --recursive \
-        https://github.com/marlonrichert/zsh-snap "$znap_dir"
-}
-# Set specific location for plugins dir
-zstyle ':znap:*' plugins-dir $XDG_DATA_HOME/zsh/plugins
-# Turn off git maintenance
-zstyle ':znap:*:*' git-maintenance off
-. "$znap_dir"/znap.zsh
-unset znap_dir
-# Load defer script
-znap source romkatv/zsh-defer
-
-#-----------------------------------------------------
 # Load options
-for i in options history; do
+for i in znap options history; do
     () { [ -f $1 ] && . $1 } "$ZDOTDIR"/config/$i.zsh
 done
 
 #-----------------------------------------------------
-# Load zsh config by deferring them
-for rc in $ZDOTDIR/zshrc.d/*.zsh; do
-    zsh-defer . $rc
-done
+# Load zsh config
+for rc in $ZDOTDIR/zshrc.d/*.zsh; do zsh-defer . $rc; done
 unset rc
 
 #-----------------------------------------------------
 # Load prompt
-znap source romkatv/powerlevel10k
+[ "$ZNAP_INSTALL" = "1" ] && znap source romkatv/powerlevel10k || . "$XDG_STATE_HOME"/znap/romkatv/powerlevel10k
     () { [ -f $1 ] && . $1 } "$ZDOTDIR"/config/p10k.zsh
 
 #-----------------------------------------------------

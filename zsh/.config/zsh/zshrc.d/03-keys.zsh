@@ -157,7 +157,7 @@ command -v fzf >/dev/null && {
 
     # Fuzzy find children dirs of current with <C-f>
     bindkey -s '^f' '^Ucd "$(fd --type directory | fzf)"^M'
-}# }}}
+} # }}}
 
 # Lf {{{
 command -v lf >/dev/null && {
@@ -174,6 +174,6 @@ command -v lf >/dev/null && {
         fi
     }
     bindkey -s '^o' '^Ulfcd^M'
-}# }}}
+} # }}}
 
 # vim: foldmethod=marker foldlevel=0 foldnestmax=1

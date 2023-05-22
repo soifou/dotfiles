@@ -1,5 +1,12 @@
 #!/usr/bin/env zsh
 
+#-----------------------------------------------------
+# SSH key are managed by gpg-agent
+# The custom location of GNUPGHOME prevents me to set the following
+# hardcoded path "$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh"
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+
+#-----------------------------------------------------
 # Augmented PATH
 
 ## games

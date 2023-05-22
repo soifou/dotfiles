@@ -110,8 +110,8 @@
     typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=6
     # Custom icon.
     typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION=''
-    #####################################[ vcs: git status ]######################################
 
+    #####################################[ vcs: git status ]######################################
     # Custom formatter for Git status.
     #
     # VCS_STATUS_* parameters are set by gitstatus plugin. See reference:
@@ -151,23 +151,22 @@
         fi
 
         local res
-        local where  # branch or tag
+        local where  # branch, tag or revision
         if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
-            res+="${white}${POWERLEVEL9K_VCS_BRANCH_ICON}"
-            where=${(V)VCS_STATUS_LOCAL_BRANCH}
+            res+="${white}${POWERLEVEL9K_VCS_BRANCH_ICON} "
+            where="${(V)VCS_STATUS_LOCAL_BRANCH}"
         elif [[ -n $VCS_STATUS_TAG ]]; then
             res+="${meta}#"
-            where=${(V)VCS_STATUS_TAG}
+            where="${(V)VCS_STATUS_TAG}"
+        elif [[ -n $VCS_STATUS_COMMIT ]]; then
+            res+="${meta}@"
+            where="${VCS_STATUS_COMMIT[1,8]}"
         fi
 
         # If local branch name or tag is at most 32 characters long, show it in full.
         # Otherwise show the first 12 … the last 12.
         (( $#where > 32 )) && where[13,-13]="…"
         res+="${grey}${where//\%/%%}"  # escape %
-
-        # Display the current Git commit if there is no branch or tag.
-        # Tip: To always display the current Git commit, remove `[[ -z $where ]] &&` from the next line.
-        # [[ -z $where ]] && res+="${meta}@${grey}${VCS_STATUS_COMMIT[1,8]}"
 
         # Show tracking branch name if it differs from local branch.
         if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
@@ -214,7 +213,7 @@
     # asynchronously when Git state changes.
     typeset -g POWERLEVEL9K_VCS_MAX_SYNC_LATENCY_SECONDS=0
     # Set branch icon.
-    typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=' '
+    typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
     # When in detached HEAD state, show @commit where branch normally goes.
     typeset -g POWERLEVEL9K_VCS_COMMIT_ICON='@'
     # Disable the default Git status formatting.
@@ -224,6 +223,8 @@
     typeset -g POWERLEVEL9K_VCS_LOADING_CONTENT_EXPANSION='${$((_git_formatter(0)))+${_git_format}}'
     # Enable counters for staged, unstaged, etc.
     typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED,CONFLICTED,COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=-1
+    # typeset -g POWERLEVEL9K_VCS_PREFIX='%fon '
+    typeset -g POWERLEVEL9K_VCS_BACKENDS=(git)
 
     # Grey current time.
     typeset -g POWERLEVEL9K_TIME_FOREGROUND=$grey
@@ -253,7 +254,7 @@
     #   - verbose: Enable instant prompt and print a warning when detecting console output during
     #              zsh initialization. Choose this if you've never tried instant prompt, haven't
     #              seen the warning, or if you are unsure what this all means.
-    typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
+    typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
     # Hot reload allows you to change POWERLEVEL9K options after Powerlevel10k has been initialized.
     # For example, you can type POWERLEVEL9K_BACKGROUND=red and see your prompt turn red. Hot reload

@@ -23,7 +23,5 @@ alias -s {pdf,PDF,ps,PS}='zathura'
 alias feh="feh --no-fehbg -B background"
 alias scummvm="scummvm -c $XDG_CONFIG_HOME"/scummvm/scummvmrc
 
-for alias in $ZDOTDIR/alias.d/*.zsh; do
-    . $alias
-done
+for alias in $ZDOTDIR/alias.d/*.zsh; do . $alias; done
 unset alias
