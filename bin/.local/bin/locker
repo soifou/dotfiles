@@ -10,7 +10,9 @@ if command -v xidlehook >/dev/null; then
     rm -f "$SOCKET"
 
     pgrep xidlehook >/dev/null || xidlehook \
+        --detect-sleep \
         --not-when-fullscreen \
+        --not-when-webcam \
         --socket "$SOCKET" \
         --timer "$LOCKER_IDLE_TIME_SEC" "$LOCKER" ""
 

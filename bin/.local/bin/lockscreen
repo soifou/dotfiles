@@ -11,7 +11,7 @@ done
 
 prelock() {
     pkill -USR1 dunst
-    xset +dpms dpms 5 5 5
+    # xset +dpms dpms 5 5 5
 }
 
 lock() {
@@ -33,7 +33,7 @@ lock() {
 
 postlock() {
     pkill -USR2 dunst
-    xset dpms 0 0 0
+    # xset dpms 0 0 0
 }
 trap postlock HUP INT TERM
 
