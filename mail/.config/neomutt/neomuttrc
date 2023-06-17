@@ -21,36 +21,38 @@ set header_cache = $my_mutt_cache
 set message_cachedir = $my_mutt_cache/messages
 set attach_save_dir = $XDG_DOWNLOAD_DIR
 
+# General
 set rfc2047_parameters = yes
-set sleep_time = 0      # Pause 0 seconds for informational messages
 set mark_old = no       # Unread mail stay unread until read
-set mime_forward = yes  # attachments are forwarded with mail
-set wait_key = no       # won't ask "press key to continue"
-set recall = no         # won't ask "recall postponed" when composing
-set fast_reply          # skip to compose when replying
-set fcc_attach          # save attachments with the body
-set forward_format = "Fwd: %s"  # format of subject when forwarding
-set forward_quote       # include message in forwards
-set reverse_name        # reply as whomever it was to
-set delete = ask-yes    # ask me first when deleting email
-set pager_stop = yes    # don't go to next message if we are at bottom
-set tilde               # show tildes
-set beep = no           # no beep sound
-unset markers           # Disables the `+` displayed at line wraps
-unset help              # No help bar
+set mime_forward = yes  # Attachments are forwarded with mail
+set recall = no         # Won't ask "recall postponed" when composing
+set fast_reply          # Skip to compose when replying
+set fcc_attach          # Save attachments with the body
+set forward_format = "Fwd: %s"  # Format of subject when forwarding
+set forward_quote       # Include message in forwards
+set reverse_name        # Reply as whomever it was to
+set delete = ask-yes    # Ask me first when deleting email
+set text_flowed
+set beep = no           # No beep on error
+set beep_new = no       # No beep on new mail
+set help = no           # No help bar
 set use_from = yes
 set envelope_from = yes
 
 # Encoding
 set charset = "utf-8"
 set send_charset = "utf-8"
+set assumed_charset = "utf-8"
 
 # Speedup
-set sleep_time = 0      # be faster
-set read_inc = 1000     # update progress every n messages read
-set time_inc = 500      # update display every n miliseconds
-set net_inc = 100       # update diplay every n kilobytes for net ops
-set write_inc = 100     # update progress every n messages written
+set sleep_time = 0      # Pause 0 seconds for informational messages
+set read_inc = 1000     # Update progress every n messages read
+set time_inc = 500      # Update display every n miliseconds
+set net_inc = 100       # Update diplay every n kilobytes for net ops
+set write_inc = 100     # Update progress every n messages written
+set mail_check = 0      # How often to check for new mail (time in seconds). Disabled, using mbsync.
+set mail_check_stats = no
+set mail_check_stats_interval = 60
 
 # Print
 set print_command = "lp"
@@ -61,22 +63,14 @@ set signature = $my_mutt/sig/default
 set sig_dashes = yes
 set sig_on_top = yes
 
-# View/Edit
-# It defaults to the value of $VISUAL, or $EDITOR, environment variable,
-# or to the string "vi" if neither of those are set.
-# set editor = $EDITOR
-
 auto_view text/html
-# default to text when available else use w3m/lynx when no text version
+# Default to text when available else use w3m/lynx when no text version
 alternative_order text/plain text/html
 
 # Sort (by threads in reverse chronological order, new on top)
 set sort = reverse-threads
 set sort_aux = last-date-received
 set narrow_tree = yes
-
-# Index page format
-set index_format="%4C %Z %{%b %d %R} %-15.15L (%?l?%4l&%4c?) %s"
 
 # Quote (previous messages in replies)
 set include
@@ -90,6 +84,16 @@ set sidebar_format = '%D%?F? [%F]?%* %?N?%N/?%S'
 set sidebar_short_path = yes
 set sidebar_visible = no
 set sidebar_width = 25
+
+# Pager
+set tilde = yes         # Show tildes
+set wait_key = no       # Won't ask "press key to continue"
+set smart_wrap = yes    # Line wraps at word boundary
+set markers = no        # Disables the `+` displayed at line wraps
+set menu_context = 5    # Minimal of screenlines when scrolling
+set menu_move_off = no  # Bottom entry will never move anywhere besides the bottom
+set menu_scroll = yes   # Scroll line per line instead of page per page when crossing screen boundary
+set pager_stop = yes    # Don't go to next message if we are at bottom
 
 # Index
 # See: https://neomutt.org/guide/reference.html#3-170-%C2%A0index_format
@@ -105,11 +109,6 @@ set status_format = "───[ %D ] %?r?[   %m ] ?%?n?[   %n ] ?%?d?[ 
 set pager_format = "───[ %n ] [%T %s]%* [   %{!%d %b · %T} ] %?X?[   %X ]? [   %P ]─"
 set compose_format = "───[  %l ] [  %a ]%>─"
 set attach_format = "%u%D   %T%-75.75d %?T?%&   ?  %5s · %m/%M"
-
-# Events
-set mail_check = 0      # How often to check for new mail (time in seconds). Disabled, using mbsync.
-set mail_check_stats = no
-set mail_check_stats_interval = 60
 
 # Use khard as addressbook manager
 set query_command = "khard email --parsable %s"

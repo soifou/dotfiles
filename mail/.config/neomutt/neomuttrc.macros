@@ -3,9 +3,6 @@
 # Prefix for macros created using mark-message
 set mark_macro_prefix = ","
 
-# U: Open URLs
-# macro index,pager U '<enter-command>set pipe_decode = yes<enter><pipe-message>$URLVIEWER<enter><enter-command>set pipe_decode = no<enter>'
-
 # W: Save selected attachment (set $attach_save_dir var to specify which dir)
 macro attach W "<save-entry><bol><eol>" "Save to downloads folder"
 
@@ -16,6 +13,14 @@ macro compose A "<shell-escape>neomutt-picker<enter><enter-command>source /tmp/n
 macro index,pager A \
     "<pipe-message>khard add-email<return>" \
     "Add the sender email address to khard"
+
+# H: Open mails w3m can't display properly directly in the web browser using viewhtmlmsg
+# https://github.com/lilydjwg/viewhtmlmsg
+macro index,pager H \
+"<enter-command>set my_wait_key=\$wait_key my_pipe_decode=\$pipe_decode nowait_key nopipe_decode<enter>\
+<pipe-message>viewhtmlmsg -s<enter>\
+<enter-command>set wait_key=\$my_wait_key pipe_decode=\$my_pipe_decode &my_pipe_decode &my_wait_key<enter>" \
+  "view HTML in browser"
 
 # K: Compiles written markdown email to HTML/plain text alternatives
 # Need to delete manually the markdown message
