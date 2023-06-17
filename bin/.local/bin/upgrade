@@ -35,6 +35,14 @@ debian() {
             rm -f keybase_amd64.deb
         }
     fi
+
+    if command -v wezterm > /dev/null 2>&1; then
+        yn "Update Wezterm?" && {
+            curl -LO https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Debian11.deb
+            sudo dpkg -i wezterm-nightly.Debian11.deb
+            rm -I --preserve-root -f wezterm-nightly.Debian11.deb
+        }
+    fi
 }
 
 arch() {
@@ -84,7 +92,6 @@ if command -v docker > /dev/null 2>&1; then
             | xargs -L1 docker pull \
             | grep "Status:"
         docker system prune -f
-        # docker volume prune -f
     }
 fi
 
@@ -97,7 +104,6 @@ if command -v brew > /dev/null 2>&1; then
 fi
 
 if command -v gh > /dev/null 2>&1; then
-    gh extension upgrade --all --dry-run
     yn "Update gh extensions?" && gh extension upgrade --all --force
 fi
 
@@ -110,8 +116,7 @@ fi
         && zsh --singlecommand -c '
             zstyle ":znap:*:*" git-maintenance off &&
             zstyle ":znap:*" plugins-dir "$XDG_DATA_HOME"/zsh/plugins &&
-            . "$XDG_DATA_HOME"/zsh/znap/znap.zsh &&
-            znap pull | grep updating...
+            . "$XDG_DATA_HOME"/zsh/znap/znap.zsh && znap pull
         '
 }
 
@@ -126,6 +131,10 @@ if command -v npm > /dev/null 2>&1; then
         sleep 3
         npm -g update
     }
+fi
+
+if command -v deno > /dev/null 2>&1; then
+    yn "Update deno?" && deno upgrade
 fi
 
 if command -v composer > /dev/null 2>&1; then
@@ -164,5 +173,3 @@ if command -v go > /dev/null 2>&1; then
         }
     }
 fi
-
-cd "$HOME" || exit
