@@ -9,7 +9,6 @@ foreground {foreground}
 selection_background {color1}
 selection_foreground {background}
 url_color {color6}
-cursor {cursor}
 
 active_border_color {color1}
 inactive_border_color {color5}
