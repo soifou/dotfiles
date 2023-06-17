@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
 
 command -v pip >/dev/null && {
-    znap function _pip_completion pip 'eval "$(pip completion --zsh)"'
-    compctl -K    _pip_completion pip
+    znap eval pip 'pip completion zsh'
     # uninstall package with dependencies
     pip-uninstall() {
         for dep in $(pip show $1 | grep Requires | sed 's/Requires: //g; s/,//g') ; do pip uninstall -y $dep ; done
@@ -25,6 +24,9 @@ command -v docker >/dev/null && {
     alias dps='docker container ls --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}"'
     alias dsp='docker system prune -f && docker volume prune -f'
 }
+
+command -v deno >/dev/null &&
+    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_deno ] && znap fpath _deno 'deno completions zsh'
 
 command -v rustup >/dev/null &&
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_rustup ] && znap fpath _rustup 'rustup completions zsh'
