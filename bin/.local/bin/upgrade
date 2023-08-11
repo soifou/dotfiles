@@ -104,11 +104,13 @@ if command -v brew > /dev/null 2>&1; then
 fi
 
 if command -v gh > /dev/null 2>&1; then
-    yn "Update gh extensions?" && gh extension upgrade --all --force
+    yn "Update gh extensions?" && gh extension upgrade --all
 fi
 
 if command -v rtx > /dev/null 2>&1; then
     yn "Update rtx plugins?" && rtx plugins update
+    rtx outdated
+    yn "Update rtx runtime?" && rtx install
 fi
 
 [ -f "$XDG_DATA_HOME"/zsh/znap/znap.zsh ] && {
@@ -131,10 +133,6 @@ if command -v npm > /dev/null 2>&1; then
         sleep 3
         npm -g update
     }
-fi
-
-if command -v deno > /dev/null 2>&1; then
-    yn "Update deno?" && deno upgrade
 fi
 
 if command -v composer > /dev/null 2>&1; then
@@ -167,9 +165,9 @@ if command -v gem > /dev/null 2>&1; then
 fi
 
 if command -v go > /dev/null 2>&1; then
-    [ -f "$ASDF_GOLANG_DEFAULT_PACKAGES_FILE" ] && {
+    [ -f "$RTX_GO_DEFAULT_PACKAGES_FILE" ] && {
         yn "Update global go dependencies?" && {
-            while read -r app; do go install "$app"; done < "$ASDF_GOLANG_DEFAULT_PACKAGES_FILE"
+            while read -r app; do go install "$app"; done < "$RTX_GO_DEFAULT_PACKAGES_FILE"
         }
     }
 fi

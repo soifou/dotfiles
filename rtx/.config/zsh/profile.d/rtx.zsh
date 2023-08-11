@@ -2,7 +2,7 @@
 
 if command -v rtx > /dev/null; then
     export ASDF_CRATE_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/rtx/default/rust
-    export ASDF_GOLANG_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/rtx/default/golang
+    export RTX_GO_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/rtx/default/golang
     export RTX_NODE_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/rtx/default/nodejs
     export RTX_PYTHON_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/rtx/default/python
 
