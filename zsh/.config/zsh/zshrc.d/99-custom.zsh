@@ -9,7 +9,7 @@ command -v pip >/dev/null && {
     }
 }
 
-command -v rtx >/dev/null && znap eval rtx 'rtx activate zsh'
+command -v rtx >/dev/null && znap eval rtx 'rtx completion zsh'
 
 command -v zoxide >/dev/null && {
     export _ZO_EXCLUDE_DIRS="/mnt:/tmp"

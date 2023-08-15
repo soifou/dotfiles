@@ -108,6 +108,7 @@ if command -v gh > /dev/null 2>&1; then
 fi
 
 if command -v rtx > /dev/null 2>&1; then
+    yn "Update rtx ?" && rtx self-update
     yn "Update rtx plugins?" && rtx plugins update
     rtx outdated
     yn "Update rtx runtime?" && rtx install
