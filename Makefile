@@ -3,7 +3,7 @@
 
 OS := $(shell cat /etc/issue | awk -F" " '{print $$1}' | sed 's/./\L&/g')
 
-init: .stowrc
+init:
 	echo "--target=$$(echo $$HOME)" > .stowrc
 	echo "--verbose" >> .stowrc
 

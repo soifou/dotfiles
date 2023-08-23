@@ -1,5 +1,6 @@
 # Init script config - Should be executed in Weechat >= 3.2
-# /eval /exec -oc sed -E 's/^ *//;/^\//!d' ${env:XDG_CONFIG_HOME}/weechat/rc
+# /eval /exec -oc sed -E 's/^ *//;/^\//!d' ${env:XDG_CONFIG_HOME}/weechat/init
+#
 # Credits: https://github.com/codybuell/dotfiles/blob/master/dotfiles/weechatrc
 #
 # You can generate yours by tweaking your current Weechat instance

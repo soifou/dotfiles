@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
 command -v pip >/dev/null && {
-    znap eval pip 'pip completion zsh'
+    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_pip ] && znap fpath _pip 'pip completion zsh'
+
     # uninstall package with dependencies
     pip-uninstall() {
         for dep in $(pip show $1 | grep Requires | sed 's/Requires: //g; s/,//g') ; do pip uninstall -y $dep ; done
@@ -9,7 +10,10 @@ command -v pip >/dev/null && {
     }
 }
 
-command -v rtx >/dev/null && znap eval rtx 'rtx completion zsh'
+command -v rtx >/dev/null && {
+    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_rtx ] && znap fpath _rtx 'rtx completion zsh'
+    znap eval rtx 'rtx activate zsh'
+}
 
 command -v zoxide >/dev/null && {
     export _ZO_EXCLUDE_DIRS="/mnt:/tmp"

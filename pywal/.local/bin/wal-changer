@@ -100,13 +100,15 @@ _lemonbar() {
 _sublime() {
     echo ":: sublime reload"
     # Reload adaptive theme
+    mkdir -p "$XDG_CONFIG_HOME"/sublime-text/Packages/User/Themes
     python "$XDG_CONFIG_HOME"/wal/generator/sublime.py
 }
 
 _kitty() {
     echo ":: kitty reload"
     # Reload kitten diff
-    ruby "$XDG_CONFIG_HOME"/wal/generator/kitty.rb
+    pgrep -x ruby >/dev/null && \
+        "$XDG_CONFIG_HOME"/wal/generator/kitty.rb
     # Reload main theme
     mkdir -p "$XDG_CONFIG_HOME"/kitty/conf.d
     cat "$XDG_CACHE_HOME"/wal/colors-kitty > "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf
@@ -138,7 +140,11 @@ _pywalfox() {
         echo ":: firefox reload"
         # Reload pywalfox extension (https://github.com/Frewacom/Pywalfox)
         command -v pywalfox >/dev/null 2>&1 && pywalfox update
-        # Reload tridactyl conf with xdotool, a bit hackish but works.
+
+        # Generate tridactyl theme
+        mkdir -p $XDG_CONFIG_HOME/tridactyl/themes
+        ln -sf $XDG_CACHE_HOME/wal/colors-tridactyl $XDG_CONFIG_HOME/tridactyl/themes/wal.css
+        # Reload conf with xdotool, a bit hackish but works.
         # - Escape: go to normal mode
         # - comma+s: custom bind to source (reload) config again
         xdotool search --name "Mozilla Firefox" key Escape key comma+s
@@ -159,7 +165,7 @@ _rofi() {
 
 _delta() {
     echo ":: delta theme reload"
-    mkdir -p "$XDG_CONFIG_HOME"/git
+    mkdir -p "$XDG_CONFIG_HOME"/git/conf.d
     cp "$XDG_CACHE_HOME"/wal/colors-delta "$XDG_CONFIG_HOME"/git/conf.d/delta-theme
     printf "\t%s=true" $(get_theme) >> "$XDG_CONFIG_HOME"/git/conf.d/delta-theme
 }
@@ -169,7 +175,7 @@ _xob() {
     mkdir -p "$XDG_CONFIG_HOME"/xob
     cat "$XDG_CACHE_HOME"/wal/colors-xob > "$XDG_CONFIG_HOME"/xob/styles.cfg
     pgrep -x xob >/dev/null && pkill -USR1 xob
-    nohup xob-utils >/dev/null 2>&1
+    setsid -f -- xob-utils
 }
 
 _nvim() {

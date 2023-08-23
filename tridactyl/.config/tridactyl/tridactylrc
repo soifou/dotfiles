@@ -93,7 +93,8 @@ set searchurls.trf https://www.wordreference.com/redirect/translation.aspx?w=%s&
 set searchurls.w https://en.wikipedia.org/w/index.php?search=%s&title=Special%3ASearch
 set searchurls.wfr https://fr.wikipedia.org/w/index.php?search=%s&title=Sp%E9cial%3ARecherche
 set searchurls.y https://www.youtube.com/results?search_query=%s
-set searchurls.yp https://piped.projectsegfau.lt/results?search_query=%s
+set searchurls.yp https://yewtu.be/results?search_query=%s
+set searchurls.yi https://piped.privacydev.net/results?search_query=%s
 set searchurls.rp https://teddit.artemislena.eu/r/all/search?q=%s
 " }}}
 

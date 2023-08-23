@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 # based on Luke Smith's version
 # modified by nebulaeandstars
 
@@ -29,15 +31,8 @@ case "$(readlink -f /sbin/init)" in
     *systemd*) export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus ;;
 esac
 export GPG_TTY=$TTY
-# export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-export DISPLAY=:0
 
-# Source environment variables
-# echo "Sourcing $HOME/.zshenv"
-# source "$HOME/.zshenv"
-[ -f "$HOME"/.local/env ] && . "$HOME"/.local/env
-
-[ -d "$HOME/.local/share/password-store" ] && export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
+[ -d "$XDG_DATA_HOME/password-store" ] && export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 LASTRUN_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/neomutt-mailsynclastrun"
 MBSYNCRC="$XDG_CONFIG_HOME"/mbsync/mbsyncrc

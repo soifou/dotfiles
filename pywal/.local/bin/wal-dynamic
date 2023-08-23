@@ -10,7 +10,7 @@ set -xe
 
 # Need to set vital environment variables because I use them in several scripts
 # FIXME: only some vars are needed not the whole file
-[ -f "$HOME"/.local/env ] && . "$HOME"/.local/env
+[ -f "$HOME"/.zshenv ] && . "$HOME"/.zshenv
 
 # Set some variables for this script only
 # enhance path to find pywal and my custom "wal-switcher" script

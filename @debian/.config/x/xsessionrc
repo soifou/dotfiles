@@ -1,6 +1,3 @@
 #!/usr/bin/env sh
 
-# Already sourced by .zshenv
-# [ -f "$HOME"/.local/env ] && . "$HOME"/.local/env
-
 [ -f "$XDG_CONFIG_HOME"/x/xprofile ] && . "$XDG_CONFIG_HOME"/x/xprofile

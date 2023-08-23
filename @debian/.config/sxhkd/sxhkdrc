@@ -177,7 +177,7 @@ ctrl + { Escape, space, shift + space }
 
 # music player
 super + z
-    TERMINAL="wezterm start" bsp-scratchpad music-player ncmpcpp-ueberzug
+    bsp-scratchpad music-player ncmpcpp-ueberzug
 
 # filemanager
 super + shift + f

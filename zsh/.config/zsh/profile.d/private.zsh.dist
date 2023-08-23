@@ -1,0 +1,19 @@
+## OS Specific
+
+# export XCURSOR_SIZE=24
+
+# Name of the primary monitor
+# Usually from xrandr | grep primary | awk '{print $1}'
+# export MONITOR=
+
+# Name of the printer
+# export PRINTER=
+
+# export BSPWM_GAPS=10
+# export BSPWM_TOP_PADDING=30
+
+# export OPENAI_API_KEY=sk-foo
+
+# export OPENWEATHERMAP_APIKEY=
+# export OPENWEATHERMAP_LAT=
+# export OPENWEATHERMAP_LONG=
