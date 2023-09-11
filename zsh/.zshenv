@@ -70,12 +70,17 @@ export VISUAL=nvim
 export TERMINAL=kitty
 export URLVIEWER=urlpicker
 
+# Use nvim while navigating into manpages
+# `gO` opens the TOC
+# `K` or `C-]` navigate to corresponding man under cursor
 export MANPAGER="nvim --noplugin -c 'unlet! g:loaded_man' -c 'runtime! plugin/man.lua' +Man!"
-# export MANWIDTH=80
+export MANWIDTH=80
 
 export GREP_COLORS="mt=30;43"
 
-export BAT_THEME=ansi
+# Do not clear the screen when quitting
+export LESS="-X"
+
 export GIT_PAGER=delta
 
 export FZF_DEFAULT_OPTS="

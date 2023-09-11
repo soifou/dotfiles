@@ -1,7 +1,7 @@
 # guess project path inside the web container
 getContainerPath() {
     if [[ $DOCKER_WEBROOT_PATH == '/app' ]]; then
-        PROJECT=$(pwd -P | sed -e "s@$XDG_DEVELOP_DIR/@@g")
+        PROJECT=$(pwd | sed -e "s@$XDG_DEVELOP_DIR/@@g")
         echo "$DOCKER_WEBROOT_PATH/$PROJECT"
     else
         echo "$DOCKER_WEBROOT_PATH"
@@ -28,7 +28,7 @@ php() {
         -v /etc/group:/etc/group:ro \
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-${PHP_VERSION:-8.0} ${@:1}
+        soifou/php-alpine:cli-${PHP_VERSION:-8.2}-wkhtmltopdf ${@:1}
 }
 phppm() {
     docker run --rm \

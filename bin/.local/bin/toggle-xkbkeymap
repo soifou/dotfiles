@@ -16,13 +16,14 @@ case $(uname -n) in
         ;;
 esac
 
+CURRENT="$(setxkbmap -query | grep layout | awk '{print $2}')"
+
 # if layout is not specified, invert layout
 if [ -z $1 ]; then
-    CURRENT="$(setxkbmap -query | grep layout | awk '{print $2}')"
     [ "$CURRENT" = "us" ] && CURRENT=fr || CURRENT=us
 # layout is specified, switch to it
 else
-    CURRENT=$1
+    [ $CURRENT = "$1" ] && exit 0 || CURRENT=$1
 fi
 
 # set correct variant depending on the language
@@ -32,4 +33,4 @@ fi
 # by using the -option flag with an empty argument first.
 setxkbmap -layout $CURRENT -model $MODEL -variant $VARIANT -option "" -option $OPTIONS
 
-notify-send -i input-keyboard -u low "Keyboard" "Switched to $CURRENT ($VARIANT) layout"
+[ -n "$DISPLAY" ] && notify-send -i input-keyboard -u low "Keyboard" "Switched to $CURRENT ($VARIANT) layout"

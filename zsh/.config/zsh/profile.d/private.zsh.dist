@@ -17,3 +17,10 @@
 # export OPENWEATHERMAP_APIKEY=
 # export OPENWEATHERMAP_LAT=
 # export OPENWEATHERMAP_LONG=
+
+# Suppress warning messages from org.a11y.Bus
+# See: https://issues.guix.gnu.org/28088
+# export NO_AT_BRIDGE=1
+
+# Disable OpenGL to use sofware rendering (slow)
+# export LIBGL_ALWAYS_SOFTWARE=1
