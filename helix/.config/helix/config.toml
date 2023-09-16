@@ -1,0 +1,73 @@
+theme = "tokyonight"
+
+[editor]
+bufferline = "multiple"
+color-modes = true
+completion-trigger-len = 1
+cursorline = true
+line-number = "relative"
+mouse = false
+true-color = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+
+[editor.file-picker]
+hidden = false
+
+[editor.indent-guides]
+render = true
+character = "▏"
+skip-levels = 1
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = false
+
+[editor.soft-wrap]
+enable = true
+
+[editor.statusline]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[keys.normal]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+"^" = "goto_first_nonwhitespace"
+"%" = "match_brackets"
+y = ["yank", ":clipboard-yank"]
+G = "goto_file_end"
+"ret" = "hover"
+X = "extend_line_above"
+Z = { Z = ":qa" }
+C-y = ["scroll_up"]
+C-e = ["scroll_down"]
+"]" = { e = ["extend_to_line_bounds", "delete_selection", "paste_after"] }
+"[" = { e = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"] }
+"{" = ["goto_prev_paragraph", "collapse_selection", "move_line_up"]
+"}" = ["goto_next_paragraph", "collapse_selection"]
+"*" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
+"#" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_prev"]
+
+[keys.normal.space]
+x = ":buffer-close"
+i = ":toggle lsp.display-inlay-hints"
+"]" = "goto_next_buffer"
+"[" = "goto_previous_buffer"
+
+[keys.normal.","]
+x = ":buffer-close-others"
+f = ":format"
+"," = ["save_selection", ":w"]
+
+[keys.insert]
+"C-[" = "normal_mode"
+C-l = "move_char_right"
+C-h = "move_char_left"
+
+[keys.select]
+esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
+"C-[" = ["collapse_selection", "keep_primary_selection", "normal_mode"]

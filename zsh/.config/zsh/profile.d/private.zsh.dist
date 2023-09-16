@@ -24,3 +24,7 @@
 
 # Disable OpenGL to use sofware rendering (slow)
 # export LIBGL_ALWAYS_SOFTWARE=1
+
+# Set Helix runtime dir
+# https://docs.helix-editor.com/install.html#configuring-helixs-runtime-files
+# export HELIX_RUNTIME=$XDG_DEVELOP_DIR/testing/helix/runtime

@@ -1,0 +1,58 @@
+# See $HELIX_RUNTIME/../languages.toml
+[language-server]
+ansible-language-server = { command = "ansible-language-server", args = ["--stdio"] }
+sql-language-server = { command = "sql-language-server", args = ["up", "--method", "stdio"] }
+deno = { command = "deno",args = ["lsp"],  language-id = "javascript" }
+phpactor = { command = "phpactor", args = ["language-server"] }
+
+[[language]]
+name = "bash"
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = 'shfmt', args = ["-i", "4"] }
+
+[[language]]
+name = "yaml"
+language-servers = [ "yaml-language-server", "ansible-language-server" ]
+injection-regex = "yml|yaml"
+
+[[language]]
+name = "javascript"
+language-servers = [ "deno"]
+formatter = { command = "deno", args = ["fmt", "-", "--ext", "js" ] }
+shebangs = ["deno", "node"]
+roots = ["deno.json", "package.json", "tsconfig.json"]
+# config = { enable = true, lint = true, unstable = true }
+
+[[language]]
+name = "json"
+formatter = { command = "deno", args = ["fmt", "-", "--ext", "json" ] }
+
+[[language]]
+name = "markdown"
+formatter = { command = "deno", args = ["fmt", "-", "--ext", "md" ] }
+
+[[language]]
+name = "typescript"
+formatter = { command = "deno", args = ["fmt", "-", "--ext", "ts" ] }
+
+[[language]]
+name = "sql"
+language-servers = [ "sql-language-sever"]
+scope = "source.sql"
+injection-regex = "sql"
+file-types = ["sql"]
+
+[[language]]
+name = "php"
+language-servers = ["phpactor"]
+scope = "source.php"
+injection-regex = "php"
+file-types = ["php"]
+shebangs = ["php"]
+roots = ["composer.json", "index.php", ".phpactor.json"]
+indent = { tab-width = 4, unit = "    " }
+
+[[language]]
+name = "python"
+formatter = { command = "black", args = ["-", "-l160"]}
+indent = { tab-width = 4, unit = "	" }
