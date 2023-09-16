@@ -1,6 +1,6 @@
 github.com/ericchiang/pup@latest
-github.com/junegunn/fzf@latest
 github.com/mvdan/sh/cmd/shfmt@latest
+github.com/nao1215/gup@latest
 github.com/r00tman/corrupter@latest
 gitlab.com/shackra/goimapnotify@latest
 mvdan.cc/xurls/v2/cmd/xurls@latest

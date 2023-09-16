@@ -23,7 +23,7 @@ if [ -z $1 ]; then
     [ "$CURRENT" = "us" ] && CURRENT=fr || CURRENT=us
 # layout is specified, switch to it
 else
-    [ $CURRENT = "$1" ] && exit 0 || CURRENT=$1
+    CURRENT=$1
 fi
 
 # set correct variant depending on the language

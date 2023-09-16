@@ -5,7 +5,7 @@
 node = 'lts'
 deno = 'latest'
 python = '3.11'
-go = '1.20'
+go = 'latest'
 lua = '5.1'
 rust = '1.69'
 php = '8.2.5'

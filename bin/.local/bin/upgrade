@@ -168,7 +168,8 @@ fi
 if command -v go > /dev/null 2>&1; then
     [ -f "$RTX_GO_DEFAULT_PACKAGES_FILE" ] && {
         yn "Update global go dependencies?" && {
-            while read -r app; do go install "$app"; done < "$RTX_GO_DEFAULT_PACKAGES_FILE"
+            command -v gup > /dev/null 2>&1 && gup update \
+                || while read -r app; do go install "$app"; done < "$RTX_GO_DEFAULT_PACKAGES_FILE"
         }
     }
 fi

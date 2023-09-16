@@ -5,7 +5,7 @@ set -e
 export LF_OPENER=lf-opener
 
 # See: https://github.com/gokcehan/lf/wiki/Icons
-# To match icons from exa, see: https://github.com/mtoohey31/lf-exa-icons
+# To match icons from eza, see: https://github.com/mtoohey31/lf-exa-icons
 [ -f "$XDG_CONFIG_HOME"/lf/icons ] && {
     LF_ICONS="$(
         sed "$XDG_CONFIG_HOME"/lf/icons \
