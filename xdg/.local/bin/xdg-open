@@ -28,8 +28,10 @@ _o() {
         image/gif) mv "$1" "$1".gif && nsxiv -ab "$1".gif ;;
         image/*) nsxiv -b "$1" ;;
         inode/directory) term --class=floating lf "$1" ;;
+        # empty? return error
+        inode/x-empty) return 1 ;;
         text/html) _browser "$1" ;;
-        text/*) term "$EDITOR" "$1" ;;
+        text/*|application/pgp-keys) term "$EDITOR" "$1" ;;
         # fallback
         *) /usr/bin/xdg-open "$1" ;;
     esac
@@ -39,6 +41,13 @@ _dlo() {
     TMPFILE=$(mktemp)
     curl -sL "$1" > "$TMPFILE"
     _o "$TMPFILE"
+}
+
+_dlo_wext() {
+    TMPFILE=$(mktemp)
+    ext=$(echo "$1"|awk -F . '{print $NF}')
+    curl -sL "$1" > "$TMPFILE.$ext"
+    _o "$TMPFILE.$ext"
 }
 
 # Files/Directories
@@ -70,6 +79,8 @@ case "$1" in
     *termbin.com* | *0x0.st* | *ix.io* | *.txt) _dlo "$1" ;;
     *ghostbin.co*) _dlo "$1"/raw ;;
     *reddit.com*) term --class=rtv rtv "$1" ;;
+    *github.com/*) _browser "$1" ;;
+    *raw.githubusercontent.com*) _dlo_wext "$1" ;;
     # HTTP links
     http*)
         case $(curl -s -o /dev/null -w '%{content_type}' "$1") in
