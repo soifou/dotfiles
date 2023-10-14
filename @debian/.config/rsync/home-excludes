@@ -48,7 +48,7 @@
 .config/chromium-backup/*/Service Worker/CacheStorage
 .config/chromium-backup/*/Session Storage
 .config/Code
-.config/Insomnia
+.config/Insomnium
 .config/session
 .config/skypeforlinux
 .config/sublime-text
