@@ -28,3 +28,7 @@
 # Set Helix runtime dir
 # https://docs.helix-editor.com/install.html#configuring-helixs-runtime-files
 # export HELIX_RUNTIME=$XDG_DEVELOP_DIR/testing/helix/runtime
+
+# Set Nvim general log filepath
+# https://neovim.io/doc/user/starting.html#%24NVIM_LOG_FILE
+# export NVIM_LOG_FILE=$XDG_STATE_HOME/nvim/nvim.log

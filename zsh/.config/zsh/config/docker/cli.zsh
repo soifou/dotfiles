@@ -30,13 +30,6 @@ php() {
         --net=$DOCKER_NETWORK_NAME \
         soifou/php-alpine:cli-${PHP_VERSION:-8.2}-wkhtmltopdf ${@:1}
 }
-phppm() {
-    docker run --rm \
-        -v "$PWD":/var/www \
-        -p 8888:80 \
-        --net="$DOCKER_NETWORK_NAME" \
-        phppm/nginx --bootstrap=symfony --static-directory=web/ --app-env=dev
-}
 composer() {
     tty=
     tty -s && tty=--tty
@@ -44,18 +37,25 @@ composer() {
         $tty \
         --interactive \
         --rm \
-        --env SSH_AUTH_SOCK=/ssh-auth.sock \
         -u `id -u`:`id -g` \
+        --env COMPOSER_HOME=/composer \
         -v $COMPOSER_HOME:/composer \
+        --env COMPOSER_CACHE_DIR=/composer/cache \
         -v $COMPOSER_CACHE_DIR:/composer/cache \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
         -v $(pwd):/app \
+        --env SSH_AUTH_SOCK=/ssh-auth.sock \
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        composer:latest ${@:1}
-        # soifou/composer:php-${PHP_VERSION:-8.0} ${@:1}
-
+        soifou/php-alpine:cli-${PHP_VERSION:-8.2}-composer ${@:1}
+}
+phppm() {
+    docker run --rm \
+        -v "$PWD":/var/www \
+        -p 8888:80 \
+        --net="$DOCKER_NETWORK_NAME" \
+        phppm/nginx --bootstrap=symfony --static-directory=web/ --app-env=dev
 }
 php7cc() {
     docker run -it --rm \
