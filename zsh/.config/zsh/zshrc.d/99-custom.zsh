@@ -16,7 +16,7 @@ command -v rtx >/dev/null && {
 }
 
 command -v zoxide >/dev/null && {
-    export _ZO_EXCLUDE_DIRS="/mnt:/tmp"
+    export _ZO_EXCLUDE_DIRS="$HOME:$XDG_CACHE_HOME/*:$XDG_STATE_HOME/*:/mnt/*:/tmp/*"
     znap eval zoxide 'zoxide init zsh'
 }
 

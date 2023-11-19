@@ -10,6 +10,8 @@ SUBS="$XDG_LOCAL_HOME"/share/ttrv/subreddits
 export TTRV_URLVIEWER=$URLVIEWER
 # Set custom mailcap
 export MAILCAPS="$XDG_CONFIG_HOME/ttrv/mailcap"
+# Set custom browser (fallback when no mailcap entry found)
+export BROWSER="xdg-open"
 
 [ -z "$1" ] && {
     [ -f "$SUBS" ] && {

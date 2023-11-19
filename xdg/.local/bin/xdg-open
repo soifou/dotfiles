@@ -62,7 +62,7 @@ case "$1" in
     # Torrent
     magnet:* | *.torrent) _torrent "$1" ;;
     # Video
-    *mkv | *webm | *mp4 | *youtube.com* | *youtu.be* | *yewtu.be* | *gfycat.com* | *v.redd.it* | *dailymotion.com* | *peertube*)
+    *mkv | *webm | *mp4 | */watch/* | *youtube.com* | *youtu.be* | *yewtu.be* | *gfycat.com* | *v.redd.it* | *dailymotion.com* | *peertube*)
         nohup mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" > /dev/null 2>&1
         ;;
     # Images

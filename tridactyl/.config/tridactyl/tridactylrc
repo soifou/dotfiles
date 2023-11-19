@@ -34,7 +34,7 @@ autocmd UriChange .*youtube\.com js window.location.href.match(".*youtube\.com/(
 
 " Front-end alternatives
 autocmd DocStart ^http(s?)://twitter\.com urlmodify -t twitter.com nitter.net
-" autocmd DocStart ^http(s?)://www\.youtube\.com urlmodify -t www.youtube.com yewtu.be
+autocmd DocStart ^http(s?)://www\.youtube\.com urlmodify -t www.youtube.com yewtu.be
 " autocmd DocStart ^http(s?)://www\.reddit\.com urlmodify -t www.reddit.com teddit.net
 " }}}
 
@@ -92,8 +92,7 @@ set searchurls.tre https://www.wordreference.com/redirect/translation.aspx?w=%s&
 set searchurls.trf https://www.wordreference.com/redirect/translation.aspx?w=%s&dict=fren
 set searchurls.w https://en.wikipedia.org/w/index.php?search=%s&title=Special%3ASearch
 set searchurls.wfr https://fr.wikipedia.org/w/index.php?search=%s&title=Sp%E9cial%3ARecherche
-set searchurls.y https://www.youtube.com/results?search_query=%s
-set searchurls.yp https://yewtu.be/results?search_query=%s
+set searchurls.y https://yewtu.be/results?search_query=%s
 set searchurls.yi https://piped.privacydev.net/results?search_query=%s
 set searchurls.rp https://teddit.artemislena.eu/r/all/search?q=%s
 " }}}
@@ -196,6 +195,7 @@ bind V composite get_current_url | exclaim_quiet mpv
 " Using hint
 " bind v hint -JW mpv
 bindurl youtube.com v composite hint -Jpipe ytd-thumbnail>a href | exclaim_quiet mpv
+bindurl yewtu.be v composite hint -Jpipe video-card-row>a href | exclaim_quiet mpv
 bindurl dailymotion.com v composite hint -Jpipe a href | exclaim_quiet mpv
 
 " Open link in foreground tab

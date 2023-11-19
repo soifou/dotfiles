@@ -108,10 +108,12 @@ if command -v gh > /dev/null 2>&1; then
 fi
 
 if command -v rtx > /dev/null 2>&1; then
-    yn "Update rtx ?" && rtx self-update
-    yn "Update rtx plugins?" && rtx plugins update
-    rtx outdated
-    yn "Update rtx runtime?" && rtx install
+    yn "Update rtx ?" && {
+        rtx self-update
+        rtx plugins update
+        rtx outdated
+        yn "Update rtx runtime?" && rtx install
+    }
 fi
 
 [ -f "$XDG_DATA_HOME"/zsh/znap/znap.zsh ] && {
@@ -170,6 +172,8 @@ if command -v go > /dev/null 2>&1; then
         yn "Update global go dependencies?" && {
             command -v gup > /dev/null 2>&1 && gup update \
                 || while read -r app; do go install "$app"; done < "$RTX_GO_DEFAULT_PACKAGES_FILE"
+            # only need binaries, cleanup the pkg/ folder
+            go clean -modcache
         }
     }
 fi
