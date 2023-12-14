@@ -9,13 +9,14 @@ set incremental-search true
 set selection-clipboard clipboard
 set statusbar-home-tilde true
 set window-title-home-tilde true
+set guioptions none # Hide command-line/statusbar
 
 ## Keybindings
 # Make ^n open a new document (like atril/evince):
 # map <C-n> feedkeys ":exec zathura $FILE<Return>"
 
-map <C-s> toggle_statusbar
-map [fullscreen] <C-s> toggle_statusbar
+map <C-e> toggle_statusbar
+map [fullscreen] <C-e> toggle_statusbar
 
 # Follow links in document. To set a custom browser:
 # xdg-mime default firefox.desktop x-scheme-handler/http
