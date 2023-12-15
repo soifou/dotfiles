@@ -35,8 +35,9 @@
 ._*
 .Spotlight-V100
 .Trashes
-# KDE
+# Linux
 .directory
+*.zwc
 # Windows
 ehthumbs.db
 Thumbs.db
