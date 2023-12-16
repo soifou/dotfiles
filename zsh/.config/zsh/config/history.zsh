@@ -11,7 +11,7 @@ SAVEHIST=100000
 HISTCONTROL=ignoreboth # Default (ignorespace+ignoredups)
 
 # Custom
-HISTIGNORE='man:run-help:pass'
+HISTIGNORE='man:run-help:pass:kill'
 typeset -gT HISTIGNORE histignore
 
 #-----------------------------------------------------
