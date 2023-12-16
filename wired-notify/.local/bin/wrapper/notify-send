@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Wrapper script intended to use with wired-notify.
+# If -i|--icon has been provided and its value is not found on the filesystem,
+# found it in the provided icons set or fallback to a default icon.
+#
+# notify-send -i nvim foo -> notify-send -i $icons_path/apps/nvim.svg foo
+
+icons_path=/usr/share/icons/Papirus/22x22
+default_icon=status/dialog-information.svg
+
+ARGS=()
+
+while [ $# -gt 0 ]; do
+    key="$1"
+    case "$key" in
+        -i | --icon)
+            shift
+            arg="$1"
+            shift
+            ;;
+        -i=* | --icon=*)
+            arg="${key#*=}"
+            shift
+            ;;
+        *)
+            ARGS+=("$1")
+            shift
+            ;;
+    esac
+done
+
+set -- "${ARGS[@]}"
+
+[ -n "$arg" ] && {
+    [ ! -f $arg ] && {
+        # arg=$(find $icons_path -name "*$arg*" | head -n1)
+        arg=$(fd -1 -tf -p "$arg" $icons_path)
+        [ "$arg" = "" ] && arg=$icons_path/$default_icon
+    }
+    shift $((OPTIND - 1))
+    set -- -i $arg "$@"
+}
+
+exec /bin/notify-send "$@"

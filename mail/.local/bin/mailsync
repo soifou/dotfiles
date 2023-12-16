@@ -64,7 +64,7 @@ notify() {
 messageinfo() {
     for x in $displays; do
         export DISPLAY=$x
-        notify-send -i mail-client "$from:" "$subject"
+        notify-send -i internet-mail "$from:" "$subject"
     done
 }
 
@@ -85,7 +85,7 @@ syncandnotify() {
 
     # Get a count of how many new messages there are
     newcount=$(echo "$new" | sed '/^\s*$/d' | wc -l)
-    # notify-send -i mail-client -u low "$acc" "$newcount new message(s)"
+    # notify-send -i internet-mail -u low "$acc" "$newcount new message(s)"
 
     # If there is at least one new message:
     if [ "$newcount" -gt "0" ]; then

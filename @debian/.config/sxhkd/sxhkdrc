@@ -173,11 +173,15 @@ super + XF86Audio{Raise,Lower}Volume
 
 # notification control
 ctrl + { Escape, space, shift + space }
-    dunstctl {history-pop, close, close-all}
+    wired {-s 1,-d latest,-d all}
 
 # music player
 super + z
     bsp-scratchpad music-player ncmpcpp-ueberzug
+
+# current song notification
+super + shift + z
+    mpc-notify
 
 # filemanager
 super + shift + f

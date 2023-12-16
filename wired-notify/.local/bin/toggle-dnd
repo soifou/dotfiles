@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+state=$(grep -s o /tmp/wired-dnd-state || echo off)
+
+case "$1" in
+    -t)
+        [ "$state" = "on" ] && state=off || state=on
+        wired --dnd $state
+        echo $state > /tmp/wired-dnd-state
+        ;;
+esac
+
+[ "$state" = "off" ] && echo  || echo 

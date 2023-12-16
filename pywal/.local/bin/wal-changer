@@ -80,15 +80,6 @@ _polybar() {
     pgrep -x polybar >/dev/null && pkill -USR1 polybar
 }
 
-_dunst() {
-    echo ":: dunst reload"
-    mkdir -p "$XDG_CONFIG_HOME"/dunst
-    cat "$XDG_CACHE_HOME"/wal/colors-dunst > $XDG_CONFIG_HOME/dunst/dunstrc
-    # NOTE: no way to reload: https://github.com/dunst-project/dunst/issues/719
-    pkill dunst
-    dunst &
-}
-
 _lemonbar() {
     echo ":: lemonbar reload"
     if pgrep -x lemonbar >/dev/null; then
@@ -184,6 +175,10 @@ _nvim() {
     pgrep -x nvim >/dev/null && pkill -USR1 nvim
 }
 
+[ -d $HOME/.local/bin/wal.d ] && {
+    for i in $HOME/.local/bin/wal.d/*; do . $i; done
+}
+
 _wallpaper
 _nvim
 _wm
@@ -191,7 +186,6 @@ _polybar
 _sublime
 _pywalfox
 _mpv
-_dunst
 _rofi
 _zathura
 _delta

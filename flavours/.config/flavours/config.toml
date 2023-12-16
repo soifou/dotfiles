@@ -1,9 +1,4 @@
 [[item]]
-file = "~/.config/dunst/dunstrc"
-template = "dunst-custom"
-rewrite = true
-hook = 'pkill dunst; dunst &'
-
 [[items]]
 file = "~/.config/kitty/conf.d/colors.conf"
 template = "kitty"
