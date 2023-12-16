@@ -48,8 +48,8 @@ unset rc
 
 #-----------------------------------------------------
 # Load prompt
-[ "$ZNAP_INSTALL" = "1" ] && znap source romkatv/powerlevel10k || . "$XDG_STATE_HOME"/znap/romkatv/powerlevel10k
-    () { [ -f $1 ] && . $1 } "$ZDOTDIR"/config/p10k.zsh
+() { [ -f $1 ] && . $1 || znap source romkatv/powerlevel10k } "$XDG_STATE_HOME"/znap/romkatv/powerlevel10k
+() { [ -f $1 ] && . $1 } "$ZDOTDIR"/config/p10k.zsh
 
 #-----------------------------------------------------
 # Finish profiling
