@@ -29,6 +29,9 @@ command -v docker >/dev/null && {
     alias dsp='docker system prune -f && docker volume prune -f'
 }
 
+command -v rg >/dev/null &&
+    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_ripgrep ] && znap fpath _ripgrep 'rg --generate=complete-zsh'
+
 command -v deno >/dev/null &&
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_deno ] && znap fpath _deno 'deno completions zsh'
 
