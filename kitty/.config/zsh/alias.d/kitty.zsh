@@ -16,5 +16,11 @@
     # It allows to use a pager that lets navigate to hyperlinks.
     #
     # Using a function instead of an alias allow to get files/folder expansion
-    rg() { kitten hyperlinked_grep --smart-case "$@"; }
+    # rg() { kitten hyperlinked_grep --smart-case "$@"; }
+    #
+    # Since the release of ripgrep v14.0, hyperlinks are now builtin.
+    # A notable difference is only line numbers are underlined instead of the
+    # whole line.
+    # See also: https://github.com/kovidgoyal/kitty/issues/6653
+    alias rg='rg --hyperlink-format kitty'
 }
