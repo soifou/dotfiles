@@ -32,10 +32,8 @@ autocmd TabEnter .* unfocus
 autocmd DocStart .*youtube\.com/(c|channel|user)/[^/]*/?$ urlmodify -g 2 videos
 autocmd UriChange .*youtube\.com js window.location.href.match(".*youtube\.com/(c|channel|user)/[^/]*/?$") && tri.excmds.urlmodify("-g", "2", "videos")
 
-" Front-end alternatives
-autocmd DocStart ^http(s?)://twitter\.com urlmodify -t twitter.com nitter.net
-autocmd DocStart ^http(s?)://www\.youtube\.com urlmodify -t www.youtube.com yewtu.be
-" autocmd DocStart ^http(s?)://www\.reddit\.com urlmodify -t www.reddit.com teddit.net
+" Front-end alternatives (disabled - use more convenient ff extension https://libredirect.github.io)
+" autocmd DocStart ^http(s?)://www\.youtube\.com urlmodify -t www.youtube.com yewtu.be
 " }}}
 
 " Follow links {{{
