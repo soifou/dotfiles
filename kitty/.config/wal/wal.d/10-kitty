@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+echo ":: kitty reload"
+
+# Reload kitten diff
+# pgrep -x ruby >/dev/null && \
+#     "$XDG_CONFIG_HOME"/wal/generator/kitty.rb
+
+# Reload main theme
+mkdir -p "$XDG_CONFIG_HOME"/kitty/conf.d
+cat "$XDG_CACHE_HOME"/wal/colors-kitty > "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf
+
+# Reload running instances
+pgrep -x kitty > /dev/null \
+    && kitten @ set-colors --all --configured "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf

@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+echo ":: git-delta theme reload"
+
+get_theme() {
+    theme=light
+    char=$(xrdb -query | grep "*.background" | awk '{print $2}' | cut -c2-2)
+    if [ $char -eq $char 2> /dev/null ] && [ "$char" -lt 7 ]; then
+        theme=dark
+    fi
+    echo $theme
+}
+
+mkdir -p "$XDG_CONFIG_HOME"/git/conf.d
+cp "$XDG_CACHE_HOME"/wal/colors-delta "$XDG_CONFIG_HOME"/git/conf.d/delta-theme
+printf "\t%s=true" $(get_theme) >> "$XDG_CONFIG_HOME"/git/conf.d/delta-theme

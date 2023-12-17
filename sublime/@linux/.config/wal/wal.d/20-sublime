@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+echo ":: sublime reload"
+# Reload adaptive theme
+mkdir -p "$XDG_CONFIG_HOME"/sublime-text/Packages/User/Themes
+python "$XDG_CONFIG_HOME"/wal/generator/sublime.py
