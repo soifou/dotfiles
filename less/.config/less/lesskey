@@ -1,0 +1,16 @@
+#command
+
+h left-scroll
+l right-scroll
+[ prev-file
+] next-file
+/ forw-search ^W
+? back-search ^W
+^e noaction g|$nvim -\n
+
+#line-edit
+^[ abort
+
+#env
+LESS = -R -X -M -F -g --use-color --incsearch --ignore-case --window=-4 --tilde
+LESSCHARSET = utf-8

@@ -26,7 +26,7 @@ export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc-2.0
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/brew/Brewfile"
 export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME"/httpie
-export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
+export LESSKEYIN="$XDG_CONFIG_HOME"/less/lesskey
 export MEDNAFEN_HOME="$XDG_CONFIG_HOME"/mednafen
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PACKER_CONFIG_DIR="$XDG_CONFIG_HOME"/packer
@@ -45,7 +45,6 @@ export ANSIBLE_SSH_CONTROL_PATH_DIR="$XDG_CACHE_HOME"/ansible/cp
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export COMPOSER_CACHE_DIR="$XDG_CACHE_HOME"/composer
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
-export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export NOVACLIENT_UUID_CACHE_DIR="$XDG_CACHE_HOME"/novaclient
 export PACKER_CACHE_DIR="$XDG_CACHE_HOME"/packer
 export RANDFILE="$XDG_CACHE_HOME"/rnd
@@ -61,6 +60,8 @@ export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
 export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
 export XCURSOR_PATH=${XCURSOR_PATH}:$XDG_DATA_HOME/icons
+## State
+export LESSHISTFILE="$XDG_STATE_HOME"/less/history
 
 
 ## Default programs
@@ -77,9 +78,6 @@ export MANPAGER="nvim --noplugin -c 'unlet! g:loaded_man' -c 'runtime! plugin/ma
 export MANWIDTH=80
 
 export GREP_COLORS="mt=30;43"
-
-# Do not clear the screen when quitting
-export LESS="-X"
 
 export GIT_PAGER=delta
 
