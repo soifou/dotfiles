@@ -1,2 +1,4 @@
+# vim: ft=sh
+
 # Print a random (french) insult
 timeout 3 wget "https://www.insult.es/api/random" -qO- | jq ".[] | .value" | tr -d '"#'

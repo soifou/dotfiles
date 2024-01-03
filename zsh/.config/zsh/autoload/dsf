@@ -1,2 +1,5 @@
-# Recursively find top 20 largest files (> 1MB) sort human readable format
-find . -type f -print0 | xargs -0 du -h | sort -hr | head -20
+# vim: ft=sh
+
+# Recursively find top n largest files (> 1MB) sort human readable format
+n=${1:-20}
+find . -type f -print0 | xargs -0 du -h | sort -hr | head --lines=$n

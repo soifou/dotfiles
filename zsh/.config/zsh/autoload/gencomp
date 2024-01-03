@@ -1,0 +1,20 @@
+# vim: ft=sh
+
+# Parse the help text of the given commands and generate a completion function
+# automatically using https://github.com/RobSis/zsh-completion-generator
+
+[ ! "$(command -v help2comp)" ] && {
+    echo "Error: prerequisite help2comp not found in PATH" >&2
+    echo "See: https://github.com/RobSis/zsh-completion-generator" >&2
+    exit 1
+}
+
+_gen() {
+    command -v $1 > /dev/null && {
+        $1 $2 | help2comp $1 > $ZDOTDIR/site-functions/_$1
+        echo "$1: zsh completion files generated in $ZDOTDIR/site-functions/_$1"
+    }
+}
+
+for i in awk bc blkid newsboat mbsync fc-cache ffmpegthumbnailer hadolint inotifywait neomutt wired ansible-playbook; do _gen $i -h; done
+for i in file fzf xh; do _gen $i --help; done

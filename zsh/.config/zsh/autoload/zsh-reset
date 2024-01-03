@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 # Cleanup all plugins, plugin manager and prompt
 # Next run, will refetch all in a clean state.
 rm -rf \

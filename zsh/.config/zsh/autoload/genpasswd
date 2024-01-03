@@ -1,5 +1,6 @@
+# vim: ft=sh
+
 # Generate a random secure password
 length=${1:-20}
-[ $(uname) = "Darwin" ] && LC_ALL=C
-tr -dc A-Za-z0-9 </dev/urandom | head -c ${length} | xargs
-
+[ "$(uname)" = "Darwin" ] && LC_ALL=C
+tr -dc A-Za-z0-9 < /dev/urandom | head -c ${length} | xargs

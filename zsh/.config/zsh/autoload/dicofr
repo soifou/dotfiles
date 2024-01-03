@@ -1,2 +1,4 @@
+# vim: ft=sh
+
 # Dict protocol: English > French
 curl -s dict://dict.org/d:${1}:fd-eng-fra | sed '/^[1-2]/d' | sed '$d'

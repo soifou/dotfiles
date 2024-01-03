@@ -1,2 +1,4 @@
+# vim: ft=sh
+
 # Cool CLI weather display
 curl "wttr.in/$1"

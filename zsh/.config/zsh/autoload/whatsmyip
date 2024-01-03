@@ -1,2 +1,4 @@
+# vim: ft=sh
+
 # Get external IP
-echo "My external IP :`curl -s httpbin.org/ip | grep origin | awk -F: '{print $2}'`"
+echo "My external IP :$(curl -s httpbin.org/ip | grep origin | awk -F: '{print $2}')"

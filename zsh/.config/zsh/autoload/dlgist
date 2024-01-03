@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 # Download all files from a gist
 [ $# -ne 2 ] && {
     echo 'Missing arguments. Syntax: $ dlgist GIST_URL DOWNLOAD_PATH'

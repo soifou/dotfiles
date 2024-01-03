@@ -1,2 +1,4 @@
+# vim: ft=sh
+
 # Dict protocol: English definition
 curl -s dict://dict.org/d:${1}:wn | sed '/^[1-2]/d' | sed '$d'
