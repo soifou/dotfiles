@@ -46,18 +46,18 @@ for app in mpv scummvm firefox:Places firefox:Browser Pavucontrol; do
     _r $app state=floating;
 done
 # center floating, sticky and with a custom size
-bspc rule -a "*:music-player" state=floating center=true rectangle=930x400+0+0
+bspc rule -a "*:music-player" state=floating center=true rectangle=960x400+0+0
 for app in mailto tremc lf ytfzf; do
-    _r "*:$app" state=floating center=true sticky=true rectangle=1200x600+0+0
+    _r "*:$app" state=floating center=true sticky=true rectangle=1280x800+0+0
 done
 # bottom floating and sticky
-for app in '*:*:mpv-webcam' firefox:Toolkit; do
+for app in '*:mpv:mpv-webcam' firefox:Toolkit; do
     _r "$app" state=floating sticky=true layer=above manage=off border=off
 done
 # force some apps to be tiled
 _r Zathura state=tiled
 # floating with custom size
-_r "*:floating" state=floating center=true rectangle=930x400+0+0
+_r "*:floating" state=floating center=true rectangle=960x400+0+0
 
 # autostart
 pgrep -x sxhkd >/dev/null || sxhkd &

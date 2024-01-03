@@ -3,8 +3,8 @@
 # Extract and open URLs from stdin (like urlview/urlscan).
 # Dependencies: xurls, fzf, xclip
 
-# $ urlpicker "http://website.org"
-# $ echo "http://website.org" | urlpicker
+# urlpicker "http://website.org"
+# echo "http://website.org" | urlpicker
 
 OPENER=xdg-open
 
@@ -16,9 +16,7 @@ fzf_cmd() {
 }
 
 _process() {
-    sort -u \
-        | fzf_cmd \
-        | xargs -I {} $OPENER {} > /dev/null
+    xurls | sort -u | fzf_cmd | xargs -I {} $OPENER {} > /dev/null
 }
 
-[ -z "$1" ] && xurls | _process || echo "$1" | xurls | _process
+[ -z "$1" ] &&  _process || echo "$1" | _process
