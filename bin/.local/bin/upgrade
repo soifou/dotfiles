@@ -107,12 +107,12 @@ if command -v gh > /dev/null 2>&1; then
     yn "Update gh extensions?" && gh extension upgrade --all
 fi
 
-if command -v rtx > /dev/null 2>&1; then
-    yn "Update rtx ?" && {
-        rtx self-update
-        rtx plugins update
-        rtx outdated
-        yn "Update rtx runtime?" && rtx install
+if command -v mise > /dev/null 2>&1; then
+    yn "Update mise ?" && {
+        mise self-update
+        mise plugins update
+        mise outdated
+        yn "Update mise runtime?" && mise upgrade
     }
 fi
 
@@ -168,10 +168,10 @@ if command -v gem > /dev/null 2>&1; then
 fi
 
 if command -v go > /dev/null 2>&1; then
-    [ -f "$RTX_GO_DEFAULT_PACKAGES_FILE" ] && {
+    [ -f "$MISE_GO_DEFAULT_PACKAGES_FILE" ] && {
         yn "Update global go dependencies?" && {
             command -v gup > /dev/null 2>&1 && gup update \
-                || while read -r app; do go install "$app"; done < "$RTX_GO_DEFAULT_PACKAGES_FILE"
+                || while read -r app; do go install "$app"; done < "$MISE_GO_DEFAULT_PACKAGES_FILE"
             # only need binaries, cleanup the pkg/ folder
             go clean -modcache
         }

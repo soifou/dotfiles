@@ -20,7 +20,7 @@ fpath=(
     "$ZDOTDIR"/site-functions
     "$XDG_DATA_HOME"/zsh/site-functions
     "$HOMEBREW_PREFIX"/share/zsh/site-functions
-    "$XDG_DATA_HOME"/rtx/installs/python/latest/share/zsh/site-functions
+    "$XDG_DATA_HOME"/mise/installs/python/latest/share/zsh/site-functions
     $fpath
 )
 

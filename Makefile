@@ -37,7 +37,7 @@ install: init
 	stow ripgrep
 	stow rofi
 	stow rtv
-	stow rtx
+	stow mise
 	stow ssh
 	stow -d sublime @linux
 	stow tremc
@@ -83,7 +83,7 @@ uninstall:
 	stow -D ripgrep
 	stow -D rofi
 	stow -D rtv
-	stow -D rtx
+	stow -D mise
 	stow -D ssh
 	stow -D -d sublime @linux
 	stow -D tremc

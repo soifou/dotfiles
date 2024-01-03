@@ -10,9 +10,9 @@ command -v pip >/dev/null && {
     }
 }
 
-command -v rtx >/dev/null && {
-    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_rtx ] && znap fpath _rtx 'rtx completion zsh'
-    znap eval rtx 'rtx activate zsh'
+command -v mise >/dev/null && {
+    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_mise ] && znap fpath _mise 'mise completion zsh'
+    znap eval mise 'mise activate zsh'
 }
 
 command -v zoxide >/dev/null && {
