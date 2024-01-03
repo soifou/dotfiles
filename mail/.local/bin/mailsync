@@ -57,7 +57,7 @@ displays="$(pgrep -a X\(org\|wayland\) | grep -wo "[0-9]*:[0-9]\+" | sort -u)"
 notify() {
     for x in $displays; do
         export DISPLAY=$x
-        notify-send -i folder-teal-mail -u low "Mailsync" "$2 new mail(s) in \`$1\` account."
+        # notify-send -i folder-teal-mail -u low "Mailsync" "$2 new mail(s) in \`$1\` account."
     done
 }
 
