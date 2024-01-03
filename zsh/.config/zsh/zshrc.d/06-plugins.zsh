@@ -10,8 +10,8 @@ znap source zsh-users/zsh-autosuggestions
     ZSH_AUTOSUGGEST_USE_ASYNC=1
     ZSH_AUTOSUGGEST_MANUAL_REBIND=1
     ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
-    # Remove history-beginning-search-* widgets from list of widgets that clear autosuggestion
-    # ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#history-beginning-search-(back|for)ward}")
+    # Reject autosuggestion when using vim `A`
+    ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
 znap source zdharma-continuum/fast-syntax-highlighting
     FAST_HIGHLIGHT[git-cmsg-len]=72
