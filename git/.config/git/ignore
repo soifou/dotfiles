@@ -8,6 +8,7 @@
 *.so
 *.pyc
 *.spl
+*.zwc
 
 # Packages #
 ############
@@ -37,7 +38,6 @@
 .Trashes
 # Linux
 .directory
-*.zwc
 # Windows
 ehthumbs.db
 Thumbs.db
