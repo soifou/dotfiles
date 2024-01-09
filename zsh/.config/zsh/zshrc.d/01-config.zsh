@@ -42,7 +42,7 @@ if [ -r "$XDG_CONFIG_HOME"/ssh/config.d ]; then
 fi
 
 # Use same colors as the ls command for file/dir completion
-# LS_COLORS env variable need to be set. Either with eval "$(dircolors)"
+# LS_COLORS env variable need to be set.
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Set cache file for completions

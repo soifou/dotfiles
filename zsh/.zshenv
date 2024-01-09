@@ -31,7 +31,6 @@ export MEDNAFEN_HOME="$XDG_CONFIG_HOME"/mednafen
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PACKER_CONFIG_DIR="$XDG_CONFIG_HOME"/packer
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/rc
-export VIMINIT='let $MYVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/vimrc" : "$XDG_CONFIG_HOME/nvim/init.lua" | so $MYVIMRC'
 export WAKATIME_HOME="$XDG_CONFIG_HOME"/wakatime
 export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
 export XINITRC="$XDG_CONFIG_HOME"/x/xinitrc

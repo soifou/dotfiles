@@ -29,6 +29,10 @@
 # https://docs.helix-editor.com/install.html#configuring-helixs-runtime-files
 # export HELIX_RUNTIME=$XDG_DEVELOP_DIR/testing/helix/runtime
 
-# Set Nvim general log filepath
-# https://neovim.io/doc/user/starting.html#%24NVIM_LOG_FILE
-# export NVIM_LOG_FILE=$XDG_STATE_HOME/nvim/nvim.log
+# See |$NVIM_APPNAME| and |$NVIM_LOG_FILE|
+# export NVIM_APPNAME=nvim
+# export NVIM_LOG_FILE="$XDG_STATE_HOME/$NVIM_APPNAME/nvim.log"
+# export VIMINIT='let $MYVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/vimrc" : "$XDG_CONFIG_HOME/$NVIM_APPNAME/init.lua" | so $MYVIMRC'
+
+# Useless notifier if managed via homebrew.
+# export GH_NO_UPDATE_NOTIFIER=1
