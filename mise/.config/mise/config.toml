@@ -10,15 +10,5 @@ php = '8.3.1'
 python = '3.11'
 rust = 'latest'
 
-[settings]
-asdf_compat = false
-experimental = true
-jobs = 4
-legacy_version_file = false
-raw = false # pipe plugins to stdin/stdout/stderr
-trusted_config_paths = [
-    '~/.config/mise/config.toml',
-]
-
 [env]
 PHP_WITHOUT_PDO_PGSQL = "yes"
