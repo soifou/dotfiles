@@ -39,6 +39,14 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect '^[' send-break
 
+# Move by physical lines, like gj/gk in vim
+_physical_up_line()   { zle backward-char -n $COLUMNS; }
+_physical_down_line() { zle forward-char  -n $COLUMNS; }
+zle -N physical-up-line _physical_up_line
+zle -N physical-down-line _physical_down_line
+bindkey '^xk' physical-up-line
+bindkey '^xj' physical-down-line
+
 # }}}
 
 # Cursor shapes {{{
