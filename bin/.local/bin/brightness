@@ -1,0 +1,45 @@
+#!/usr/bin/env sh
+
+# Adjust screen brightness using xrandr.
+# Note this is a software only modification, if your hardware has support to
+# actually change the brightness, you will probably prefer to use xbacklight.
+# TODO: if redshift is enabled, use redshift-cli instead
+
+# set -eEu -o pipefail
+set -xe
+IFS=$'\n\t'
+
+min_brightness=0.1
+max_brightness=2.0
+step=.1
+
+get_brightness() {
+    xrandr --verbose | grep -i brightness | awk '{print $2}'
+}
+
+set_brightness() {
+    for monitor in $(get_monitors); do
+        xrandr --output "$monitor" --brightness "$1"
+    done
+}
+
+get_monitors() {
+    xrandr -q | sed -r -n -e 's/^([A-Z0-9-]+) connected .*/\1/p'
+}
+
+case "$1" in
+    up | down)
+        arith="<=" limit=$max_brightness sign=+
+        [ "$1" = "down" ] && { arith=">" limit=$min_brightness sign=-; }
+
+        brightness=$(get_brightness)
+        [ "$brightness" != "$limit" ] && {
+            brightness=$(echo "$brightness $sign $step" | bc -l)
+        }
+        is_ok=$(echo "$brightness $arith $limit" | bc -l)
+        [ "$is_ok" = "0" ] && exit 1
+        ;;
+    *) brightness=$1 ;;
+esac
+
+set_brightness "$brightness"
