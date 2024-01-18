@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=ResidualVM
-Comment=Interpreter for several 3D games
-Exec=residualvm -c ~/.config/residualvm/residualvmrc
-Icon=residualvm
-Terminal=false
-Type=Application
-Categories=Game;AdventureGame;
-StartupNotify=false
