@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+
+_set() { bspc config "$@"; }
+_xrdb() { xrdb -q | grep -m1 -i "$1" | cut -f2; }
+
+bspc monitor -d $(seq -s " " 5)
+
+_set border_width 2
+_set window_gap ${BSPWM_GAPS:-10}
+pgrep -x polybar > /dev/null && _set top_padding ${BSPWM_TOP_PADDING:-30} || _set top_padding 0
+_set split_ratio 0.50
+_set borderless_monocle true
+_set gapless_monocle true
+_set normal_border_color "$(_xrdb "background")"
+_set active_border_color "$(_xrdb "color1")"
+_set focused_border_color "$(_xrdb "color4")"
+_set presel_feedback_color "$(_xrdb "color1")"
+
+# allow the mouse to manipulate windows when the super (mod4) key is pressed
+# tiling/floating windows can be resized with left click
+# floating windows can be moved with right click
+_set pointer_modifier mod4
+_set pointer_action1 resize_side
+_set pointer_action1 resize_corner
+_set pointer_action3 move
+
+# desktop default layouts
+for i in 2 3 4; do bspc desktop ^$i --layout monocle; done
+
+# nuke the previous rules so reloading the config works as intended
+bspc rule -r "*"
+_set external_rules_command ~/.local/bin/bsp-rules
+
+# autostart
+pgrep -x sxhkd > /dev/null || sxhkd &

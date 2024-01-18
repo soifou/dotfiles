@@ -1,0 +1,83 @@
+#!/usr/bin/env sh
+
+window_id=$1
+window_class=$2
+window_instance=$3
+window_options=$4
+window_title="$(xwininfo -id "$window_id" | sed '/^xwininfo/!d ; s,.*"\(.*\)".*,\1,')"
+window_type="$(xprop -id "$window_id" _NET_WM_WINDOW_TYPE | sed '/^_NET_WM_WINDOW_TYPE/!d ; s/^.* = \(.*\),.*/\1/')"
+
+debug=false
+
+# Monitor dimension
+mw=$(xdotool getdisplaygeometry | awk '{print $1}')
+mh=$(xdotool getdisplaygeometry | awk '{print $2}')
+
+# Place the window at the center of the screen
+# eg. _center 2
+# whose size is 2 times smaller than the screen size.
+# when a third argument is provided, eg. 2 3,
+# width is 2 times and height 3 times smaller.
+_center() {
+    printf "%sx%s+0+0" "$(echo $mw/$1 | bc)" "$(echo $mh/${2:-$1} | bc)"
+}
+
+# Place the window at a specific corner of the screen
+# eg. _border bottom right 4
+# This would place the window at the bottom right of the screen,
+# whose size is 4 times smaller than the screen size.
+_border() {
+    res="$(echo $mw/$3 | bc)x$(echo $mh/${4:-$3} | bc)"
+    case "$1" in
+        top)
+            case "$2" in
+                right) echo "$res+$mw+0" ;;
+                left) echo "$res+0+0" ;;
+            esac
+        ;;
+        bottom)
+             case "$2" in
+                right) echo "$res+$mw+$mh" ;;
+                left)  echo "$res+0+$mh" ;;
+            esac
+        ;;
+    esac
+}
+
+case "$window_class" in
+    nvim) echo "desktop=^2 follow=on" ;;
+    firefox | Brave-browser) echo "desktop=^3 follow=on" ;;
+    neomutt | weechat | skype | Signal | whatsapp | mattermost | google-meet) echo "desktop=^4 follow=on" ;;
+    Virt-manager) echo "state=floating desktop=^5 follow=on center=on" ;;
+    mpv | Pavucontrol | scummvm) echo "state=floating center=on" ;;
+    mailto | tremc | lf | ytfzf) echo "state=floating center=true sticky=true rectangle=$(_center 1.3)" ;;
+    music-player) echo "state=floating center=true rectangle=$(_center 1.6 2.5)" ;;
+    *)
+        case "$(xprop -id "$window_id" _NET_WM_WINDOW_TYPE)" in
+            *_NET_WM_WINDOW_TYPE_DIALOG*) echo "state=floating" ;;
+        esac
+        ;;
+esac
+case "$window_class:$window_instance" in
+    [fF]irefox:Places | [fF]irefox:Browser) echo "state=floating center=on" ;;
+esac
+
+case "$window_class:$window_title" in
+    [fF]irefox:Picture-in-Picture) echo "state=floating sticky=true layer=above border=off rectangle=$(_border bottom right 4)";;
+esac
+case "$window_instance" in
+    mpv-webcam) echo "state=floating sticky=true layer=above manage=off border=off" ;;
+esac
+
+if "$debug"; then
+    logfile=/tmp/bspwm_external_rules.log
+    cat << EOF >> "$logfile"
+Id: $window_id
+Class: $window_class
+Instance: $window_instance
+Title: $window_title
+Type: $window_type
+Options: $window_options
+---
+EOF
+fi
