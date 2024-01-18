@@ -21,9 +21,12 @@ debian() {
     yn "Sync server time?" \
         && sudo ntpdate -b pool.ntp.org
 
-    yn "Update system?" && {
-        sudo apt upgrade -y 2> /dev/null && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
-        sudo dpkg -l | grep '^rc' | awk '{print $2}' | xargs sudo apt-get purge -y
+    apt list --upgradable 2>/dev/null | grep upgradable >/dev/null && yn "Update system?" && {
+        apt list --upgradable
+        yn "Upgrade?" && {
+            sudo apt upgrade -y 2> /dev/null && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
+            sudo dpkg -l | grep '^rc' | awk '{print $2}' | xargs sudo apt-get purge -y
+        }
     }
 
     if command -v keybase > /dev/null 2>&1; then
@@ -38,9 +41,9 @@ debian() {
 
     if command -v wezterm > /dev/null 2>&1; then
         yn "Update Wezterm?" && {
-            curl -LO https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Debian11.deb
-            sudo dpkg -i wezterm-nightly.Debian11.deb
-            rm -I --preserve-root -f wezterm-nightly.Debian11.deb
+            curl -LO https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Debian12.deb
+            sudo dpkg -i wezterm-nightly.Debian12.deb
+            rm -I --preserve-root -f wezterm-nightly.Debian12.deb
         }
     fi
 }

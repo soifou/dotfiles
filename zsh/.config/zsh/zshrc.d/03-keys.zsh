@@ -5,9 +5,6 @@
 bindkey -v
 
 # Movements {{{
-# Since default <C-d> behaviour (ignore_eof) has been disabled
-# bind it to something meaningful.
-bindkey '^d' reverse-menu-complete
 
 bindkey '^xl' clear-screen
 bindkey '^h' vi-backward-char
@@ -33,11 +30,15 @@ bindkey '^k' history-beginning-search-backward
 bindkey ' ' magic-space
 
 # Use vi motions in complete tab menu
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect '^h' vi-backward-char
+bindkey -M menuselect '^k' vi-up-line-or-history
+bindkey -M menuselect '^l' vi-forward-char
+bindkey -M menuselect '^j' vi-down-line-or-history
 bindkey -M menuselect '^[' send-break
+bindkey -M menuselect '^w' undo
+bindkey -M menuselect '^o' accept-and-infer-next-history
+# Default <C-d> behaviour (ignore_eof) has been disabled
+bindkey '^d' reverse-menu-complete
 
 # Move by physical lines, like gj/gk in vim
 _physical_up_line()   { zle backward-char -n $COLUMNS; }
@@ -47,28 +48,6 @@ zle -N physical-down-line _physical_down_line
 bindkey '^xk' physical-up-line
 bindkey '^xj' physical-down-line
 
-# }}}
-
-# Cursor shapes {{{
-cursor_block='\e[2 q'
-cursor_beam='\e[6 q'
-# Change cursor shape (beam or block) depending on vi mode (insert or normal)
-terms=(rxvt-unicode-256color xterm-kitty wezterm)
-zle-keymap-select() {
-    if [ ${terms[(i)$TERM]} -le ${#terms} ]; then
-        [ $KEYMAP = vicmd ] && echo -ne $cursor_block || echo -ne $cursor_beam
-    fi
-}
-zle -N zle-keymap-select
-# In case last command was aborted, restore beam cursor shape on new line
-zle-line-init() {
-    if [ -n $ZLE_LINE_ABORTED ]; then
-        if [ ${terms[(i)$TERM]} -le ${#terms} ]; then
-            [ $KEYMAP != vicmd ] && echo -ne $cursor_beam
-        fi
-    fi
-}
-zle -N zle-line-init
 # }}}
 
 # Contrib {{{
@@ -115,8 +94,9 @@ zle -N edit-command-line
 bindkey -M vicmd '^e' edit-command-line
 # }}}
 
-# Yank {{{
-# Sync with the system clipboard using OSC52
+# Misc {{{
+
+# Sync yanks with the system clipboard using OSC52
 yank-osc52() {
     # Use zsh 'q' flag to escape shell-special characters
     # See `man zshexpn`
@@ -132,17 +112,22 @@ zle -N vi-yank-eol-osc52
 bindkey '^y' yank
 bindkey -M vicmd 'y' vi-yank-osc52
 bindkey -M vicmd 'Y' vi-yank-eol-osc52
-# }}}
 
-# fg/bg {{{
+# Append current command with sudo
+_sudo-command-line() {
+    [[ $BUFFER != sudo\ * ]] && LBUFFER="sudo $LBUFFER"
+}
+zle -N sudo-command-line _sudo-command-line
+bindkey "^xs" sudo-command-line
+
+# fg/bg
 # Use c-z to toggle fg and bg
 # https://gist.github.com/CMCDragonkai/6084a504b6a7fee270670fc8f5887eb4
 toggle-ctrl-z() { fg; }
 zle -N toggle-ctrl-z
-bindkey '^Z' toggle-ctrl-z
-# }}}
+bindkey '^z' toggle-ctrl-z
 
-# Fzf {{{
+# Fzf
 command -v fzf >/dev/null && {
     # Replace builtin <C-r> (backward incremental search)
     # with an fzf-driven, searchable list of history entries.
@@ -165,9 +150,9 @@ command -v fzf >/dev/null && {
 
     # Fuzzy find children dirs of current with <C-f>
     bindkey -s '^f' '^Ucd "$(fd --type directory | fzf)"^M'
-} # }}}
+}
 
-# Lf {{{
+# Lf
 command -v lf >/dev/null && {
     # Enter lf from current dir with <C-o>
     # When quitting lf, it will sync the dir where we left on
@@ -182,6 +167,8 @@ command -v lf >/dev/null && {
         fi
     }
     bindkey -s '^o' '^Ulfcd^M'
-} # }}}
+}
+
+# }}}
 
 # vim: foldmethod=marker foldlevel=0 foldnestmax=1

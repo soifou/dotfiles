@@ -3,7 +3,7 @@
 # https://github.com/mpv-player/mpv/wiki/Video4Linux2-Input
 
 pkill -f "mpv-webcam" || \
-    mpv --title="mpv-webcam" --geometry=-0-0 \
+    mpv --title="mpv-webcam" --vf=hflip \
     --no-osc --no-input-default-bindings --input-conf=/dev/null \
     --autofit=30% --profile=low-latency --untimed >/dev/null \
     av://v4l2:/dev/video0 2>&1

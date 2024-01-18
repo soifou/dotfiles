@@ -19,7 +19,10 @@ zstyle ':completion:*' rehash false
 zstyle ':completion:*' accept-exact '*(N)'
 # Kill processus
 zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=0;34=0=01;31'
+zstyle -e ':completion:*:processes' list-colors 'reply=(
+    "=(#bi) #([0-9]#) #([^ ]#) #([^ ]#) #([^ ]#) #([^ ]#) ##*($PREFIX)*=0=1;31=32=35=36=33=1;32"
+    "=(#bi) #([0-9]#) #([^ ]#) #([^ ]#) #([^ ]#) #([^ ]#)*=0=1;31=32=35=36=33"
+)'
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*' force-list always
 zstyle ':completion:*:*:kill:*' insert-ids single
@@ -28,6 +31,13 @@ zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
 # No users completion
 zstyle ':completion:*:*:*:users' ignored-patterns '*' '_*'
+
+# describe options in full
+zstyle ':completion:*:options' description 'yes'
+
+# use generic completion for programs that support --help
+compdef _gnu_generic df dircolors
+# compdef g=git
 
 # Override default behaviour for ssh/scp hosts completion.
 # list only entries in ~/.ssh/config.d/* (OpenSSH >= 7.3) or ~/.ssh/config (prior to 7.3), not in /etc/hosts

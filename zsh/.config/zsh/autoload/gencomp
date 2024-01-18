@@ -18,5 +18,5 @@ _gen() {
     }
 }
 
-for i in ansible-playbook awk bc blkid fc-cache ffmpegthumbnailer hadolint inotifywait mbsync neomutt newsboat wired; do _gen $i -h; done
-for i in file fzf xh; do _gen $i --help; done
+for i in ansible-playbook awk bc blkid fc-cache ffmpegthumbnailer hadolint inotifywait mbsync neomutt newsboat picom scummvm wired; do _gen $i -h; done
+for i in file fzf mednafen xh; do _gen $i --help; done
