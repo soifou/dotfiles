@@ -167,10 +167,6 @@ XF86Audio{Raise,Lower}Volume
 XF86AudioMute
     wpctl set-mute @DEFAULT_SINK@ toggle; xob-utils -u
 
-# brightness control
-super + XF86Audio{Raise,Lower}Volume
-    [ $(redshift-cli -s) = "1" ] && redshift-cli -{u,d} || notify-send -i redshift Redshift "Disabled!"
-
 # notification control
 ctrl + { Escape, space, shift + space }
     wired {-s 1,-d latest,-d all}
@@ -190,10 +186,6 @@ super + shift + f
 # torrent, youtube
 super + x ; {0,9}
     bsp-scratchpad {tremc, ytfzf ytfzf -sl}
-
-# screenshot
-Print + {_,super,super + shift, super + alt}
-    ~/.local/bin/gunshot {_, region, window, screen}
 
 # locker
 super + Escape

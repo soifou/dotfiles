@@ -1,0 +1,20 @@
+# decrease screen brightness
+XF86MonBrightnessDown
+    cd /sys/class/backlight/gmux_backlight/; cur=$(cat brightness); cur=$((cur-20)) ; if [ $cur -lt 1 ]; then cur=5; fi; echo $cur | sudo tee brightness
+
+# increase screen brightness
+XF86MonBrightnessUp
+    cd /sys/class/backlight/gmux_backlight/; cur=$(cat brightness); cur=$((cur+20)) ; if [ $cur -gt 1023 ]; then cur=1023; fi; echo $cur | sudo tee brightness
+
+# decrease keyboard brightness
+XF86KbdBrightnessDown
+    cd /sys/class/leds/smc::kbd_backlight; cur=$(cat brightness); cur=$((cur-5)); if [ $cur -lt 0 ]; then cur=0; fi; echo $cur | sudo tee brightness
+
+# increase keyboard brightness
+XF86KbdBrightnessUp
+    cd /sys/class/leds/smc::kbd_backlight; cur=$(cat brightness); cur=$((cur+5)); if [ $cur -gt 255 ]; then cur=255; fi; echo $cur | sudo tee brightness
+
+# screenshot
+# XF86PowerOff has been ignored, see /etc/systemd/logind.conf
+XF86PowerOff + {_,mod4,mod4 + shift, mod4 + alt}
+    ~/.local/bin/gunshot {_, region, window, screen}

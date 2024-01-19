@@ -31,5 +31,11 @@ for i in 2 3 4; do bspc desktop ^$i --layout monocle; done
 bspc rule -r "*"
 _set external_rules_command ~/.local/bin/bsp-rules
 
-# autostart
-pgrep -x sxhkd > /dev/null || sxhkd &
+# generate and reload keybinds based on current host
+host=$(uname -n)
+sxhkdrc=$XDG_CONFIG_HOME/sxhkd/sxhkdrc
+case "$host" in
+    macbook) cat $sxhkdrc.default $sxhkdrc.$host | sed 's/super/mod4/' > $sxhkdrc ;;
+    *) cat $sxhkdrc.default $sxhkdrc.$host > $sxhkdrc ;;
+esac
+pkill -USR1 -x sxhkd || sxhkd &
