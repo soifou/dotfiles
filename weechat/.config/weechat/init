@@ -1,4 +1,4 @@
-# Init script config - Should be executed in Weechat >= 3.2
+# Init script config - Should be executed in Weechat >= 4.1
 # /eval /exec -oc sed -E 's/^ *//;/^\//!d' ${env:XDG_CONFIG_HOME}/weechat/init
 #
 # Credits: https://github.com/codybuell/dotfiles/blob/master/dotfiles/weechatrc
@@ -11,13 +11,21 @@
 # 3 - Export theses options with its own description
 # /fset -export -help /tmp/my_modified_config.conf
 
-/print -core === GENERAL
-
-# /secure passphrase ****
+/print -core === SECRETS
+# Please replace the values before running the script.
+# Znc server runs usually on a custom port, eg. 5001
+# So do not forget to specify here.
+/secure set znc_server znc.foo.bar/5001
+/secure set znc_user foo
+/secure set znc_pass bar
+# To get the fingerprint of the key configured on the server
+# cat ~/.znc/znc.pem | openssl x509 -sha512 -fingerprint -noout | tr -d ':' | tr 'A-Z' 'a-z' | cut -d = -f 2
+/secure set znc_fingerprint baz
 /set sec.crypt.passphrase_command "pass weechat/passphrase"
 
-/set script.scripts.download_enabled on
 
+/print -core === GENERAL
+/set script.scripts.download_enabled on
 /set weechat.look.bar_more_down "▼"
 /set weechat.look.bar_more_left "◀"
 /set weechat.look.bar_more_right "▶"
@@ -31,6 +39,7 @@
 /set weechat.look.buffer_time_format "${color:252}%H${color:245}:%M${color:240}:%S"
 /set weechat.look.prefix_align_max 10
 
+
 /print -core === IRC
 # use nick color in output of /names (or list of nicks displayed when joining a channel)
 /set irc.look.color_nicks_in_names on
@@ -38,7 +47,6 @@
 /set irc.look.display_host_join off
 # merge server buffers; this option has no effect if a layout is saved and is conflicting with this value (see /help layout)
 /set irc.look.server_buffer independent
-
 /set irc.server_default.capabilities "account-notify,away-notify,cap-notify,multi-prefix,server-time,znc.in/self-message"
 /set irc.server_default.msg_part ""
 /set irc.server_default.msg_quit ""
@@ -47,51 +55,42 @@
 
 
 /print -core === ZNC
-# /secure set znc_server *****
-# /secure set znc_user *****
-# /secure set znc_pass *****
-/server add libera ${sec.data.znc_server} -ssl -username=${sec.data.znc_user}/libera -password=${sec.data.znc_pass} -autoconnect
-
-# On server
-# cat ~/.znc/znc.pem | openssl x509 -sha512 -fingerprint -noout | tr -d ':' | tr 'A-Z' 'a-z' | cut -d = -f 2
-# /secure set znc_fingerprint ****
-# /set irc.server.libera.ssl_fingerprint ${sec.data.znc_fingerprint}
-
+/server add libera ${sec.data.znc_server} -tls -username=${sec.data.znc_user}/libera -password=${sec.data.znc_pass} -autoconnect
+/set irc.server.libera.ssl_fingerprint ${sec.data.znc_fingerprint}
 # TODO: Connect via Certificate instead of NickerServ pass via ZNC.
 # https://www.oftc.net/NickServ/CertFP/#AddCertFPtoNS
 # https://wiki.znc.in/Cert
 # https://libera.chat/guides/certfp
 
 /print -core === LOGGER
-
 /set logger.mask.irc %Y/$server/$channel.%m-%d.log
 /set logger.level.irc 4
 
-/print -core === KEYBINDS
 
+/print -core === KEYBINDS
 /key bind ctrl-K /window scroll -1
 /key bind ctrl-J /window scroll 1
 /key bind meta-n /bar toggle nicklist
 /key bind meta-b /bar toggle buflist
 
-/print -core === COMPLETIONS
 
+/print -core === COMPLETIONS
 # use partial completion rather than full first match
 /set weechat.completion.nick_completer ": "
 /set weechat.completion.partial_completion_command on
 /set weechat.completion.partial_completion_command_arg on
 /set weechat.completion.partial_completion_templates " "
 
-/print -core === TITLE BAR
 
+/print -core === TITLE BAR
 /set weechat.bar.title.hidden on
 /set weechat.bar.title.size 0
 /set weechat.bar.title.separator on
 /set weechat.bar.title.color_bg 0
 /set weechat.bar.title.color_fg *4
 
-/print -core === BUFFER LIST
 
+/print -core === BUFFER LIST
 /script install autosort.py
 /set weechat.bar.buflist.size 18
 /set buflist.format.buffer "${format_number}${indent}${format_nick_prefix}${color_hotlist}${format_name}"
@@ -99,12 +98,12 @@
 /set buflist.format.number "${if:${current_buffer}?${if:${type}==server?${color:*white,4}:${color:1}}${${buffer[last_gui_buffer].number}}${number} :${if:${type}==server?${color:1,default}:${color:2}}${number}${if:${number_displayed}?.: }}"
 /set buflist.format.buffer_current "${color:,240}${format_buffer}"
 
-/print -core === STATUS LIST
 
+/print -core === STATUS LIST
 /set weechat.bar.status.hidden on
 
-/print -core === NICK LIST
 
+/print -core === NICK LIST
 /set weechat.bar.nicklist.size 14
 # Hide nicklist bar (we can query nicks with /names if needed)
 /set weechat.bar.nicklist.hidden on
@@ -116,27 +115,22 @@
 /set irc.look.color_nicks_in_names on
 
 /print -core === INPUT BAR
-
 /bar set input items [time],+buffer_short_name,[input_prompt]+(away)::,[input_search],[input_paste],input_text
 
 /print -core === FILTERS
-
 # filter join/part/quit message
 /set irc.look.smart_filter on
 /filter add irc_smart * irc_smart_filter *
 
 
 /print -core === TRIGGERS
-
 /set trigger.trigger.beep.command "/print -beep;/exec -bg notify-send -i weechat 'Weechat' "${tg_tag_nick}: ${tg_message_nocolor}""
 
 
 /print -core === SECURITY
-
 # disable IRC part and quit messages:
 /set irc.server_default.msg_part ""
 /set irc.server_default.msg_quit ""
-
 # disable answers to all CTCP queries:
 /set irc.ctcp.clientinfo ""
 /set irc.ctcp.finger ""
@@ -147,9 +141,7 @@
 /set irc.ctcp.ping ""
 
 /print -core === OPTIMIZATION
-
 /set weechat.plugin.autoload "*,!guile,!javascript,!lua,!php,!tcl,!perl,!ruby,!fifo,!xfer,!spell"
 
 /python reload
-
 /save
