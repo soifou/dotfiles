@@ -1,18 +1,26 @@
 -- notify
 -- Sends a desktop notification when file loaded or failed to load.
 
-mp.register_event("file-loaded", function()
-    local title, msg
+local notify_cmd = 'notify-send -i /usr/share/icons/Papirus/32x32/apps/mpvz.svg'
 
-    title = mp.get_property("media-title")
-    title = (title == mp.get_property("filename") and mp.get_property("path") or title)
+mp.register_event('file-loaded', function()
+    local title = mp.get_property('media-title')
 
-    os.execute(("notify-send -i mpv -u low 'Watching now' '%s'"):format(string.gsub(title, "'", "'\"'\"'")))
+    if  title == mp.get_property('filename') then
+        title = mp.get_property('path')
+    end
+
+    os.execute(
+        ("%s -u low 'Watching now' '%s'"):format(
+            notify_cmd,
+            string.gsub(title, "'", "'\"'\"'")
+        )
+    )
 end)
 
 -- Send notification when failed to open file.
-mp.register_event("end-file", function(event)
-    if event.reason == "error" then
-        os.execute("notify-send -i mpv Error 'Failed to open file!'")
+mp.register_event('end-file', function(event)
+    if event.reason == 'error' then
+        os.execute(("%s Error 'Fails to open file!'"):format(notify_cmd))
     end
 end)
