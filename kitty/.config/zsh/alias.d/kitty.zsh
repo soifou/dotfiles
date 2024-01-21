@@ -1,26 +1,18 @@
 #!/usr/bin/env zsh
 
 [ "$TERM" = 'xterm-kitty' ] && {
+    # Alternative to git-delta
     alias diff='kitten diff'
-    alias icat='kitten icat'
-    alias ssh='kitten ssh'
 
-    # An enhance version of ripgrep (rg) that hyperlinked
-    # the result of found occurences and allow to open it in your editor.
-    #
-    # Hyperlink is a relative new terminal feature but it involves to use
-    # the mouse, which is an heresy.
-    #
-    # An interesting workaround was raised here:
-    # https://github.com/kovidgoyal/kitty/discussions/5442#discussioncomment-4162976
-    # It allows to use a pager that lets navigate to hyperlinks.
-    #
-    # Using a function instead of an alias allow to get files/folder expansion
-    # rg() { kitten hyperlinked_grep --smart-case "$@"; }
-    #
-    # Since the release of ripgrep v14.0, hyperlinks are now builtin.
-    # A notable difference is only line numbers are underlined instead of the
-    # whole line.
-    # See also: https://github.com/kovidgoyal/kitty/issues/6653
+    # Display images in the terminal
+    alias icat='kitten icat'
+
+    # Hyperlink ripgrep (rg) result of found occurences and allow to open it in
+    # your editor. Need ripgrep v14.0 or higher.
+    # Since kitty v0.32, one can hint visible hyperlinks instead of using mouse.
     alias rg='rg --hyperlink-format kitty'
+
+    # FIXME: Disabled, seems broken with kitty v0.32
+    # `debug_config` crash as well as opening a new tab in a ssh sesion
+    # alias ssh='kitten ssh'
 }
