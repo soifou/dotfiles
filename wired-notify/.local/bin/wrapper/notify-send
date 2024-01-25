@@ -37,7 +37,7 @@ set -- "${ARGS[@]}"
 [ -n "$arg" ] && {
     [ ! -f $arg ] && {
         # arg=$(find $icons_path -name "*$arg*" | head -n1)
-        arg=$(fd -1 -tf -p "$arg" $icons_path)
+        arg=$(fd -1 -tf -L -p "$arg" $icons_path)
         [ "$arg" = "" ] && arg=$icons_path/$default_icon
     }
     shift $((OPTIND - 1))

@@ -1,3 +1,10 @@
+# ╻  ┏━╸┏━┓┏━┓╻┏ ┏━╸╻ ╻
+# ┃  ┣╸ ┗━┓┗━┓┣┻┓┣╸ ┗┳┛
+# ┗━╸┗━╸┗━┛┗━┛╹ ╹┗━╸ ╹
+#
+# [command|line-edit|env] below are sections not comment
+# See man lesskey
+
 #command
 
 h left-scroll
@@ -9,8 +16,13 @@ l right-scroll
 ^e noaction g|$nvim -\n
 
 #line-edit
+
 ^[ abort
 
 #env
-LESS = -R -X -M -F -g --use-color --incsearch --ignore-case --window=-4 --tilde
+
+LESS = -r -X -M -F -g --use-color --incsearch --ignore-case --window=-4 --tilde
 LESSCHARSET = utf-8
+# Designate Unicode Private Use Areas as printable characters
+# Needed for Nerd Fonts icons to display properly in less > 632
+LESSUTFCHARDEF = E000-F8FF:p,F0000-FFFFD:p,100000-10FFFD:p

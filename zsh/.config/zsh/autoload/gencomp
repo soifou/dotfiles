@@ -35,6 +35,7 @@ for i in \
     weechat \
     wired \
     wmctrl \
+    ytfzf \
 ; do _gen $i -h; done
 
 for i in \

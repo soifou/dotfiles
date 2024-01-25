@@ -22,6 +22,8 @@ _d() {
         pgrep -x "$1" >/dev/null || { "$@" & }
     fi
 }
+# gtk settings daemon
+_d xsettingsd -c $XDG_CONFIG_HOME/xsettingsd/xsettingsd.conf
 # clipboard manager for rofi
 _d greenclip daemon
 # screen locker

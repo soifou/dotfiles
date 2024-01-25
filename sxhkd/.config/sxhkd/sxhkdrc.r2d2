@@ -1,7 +1,7 @@
 
 # brightness control
 super + XF86Audio{Raise,Lower}Volume
-    [ $(redshift-cli -s) = "1" ] && redshift-cli -{u,d} || notify-send -i redshift Redshift "Disabled!"
+    brightness {up,down}
 
 # screenshot
 Print + {_,super,super + shift, super + alt}

@@ -12,7 +12,6 @@
     # Since kitty v0.32, one can hint visible hyperlinks instead of using mouse.
     alias rg='rg --hyperlink-format kitty'
 
-    # FIXME: Disabled, seems broken with kitty v0.32
-    # `debug_config` crash as well as opening a new tab in a ssh sesion
-    # alias ssh='kitten ssh'
+    # Supercharge ssh connection
+    alias ssh='kitten ssh'
 }

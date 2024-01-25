@@ -125,10 +125,8 @@ super + shift + comma
 
 # toggle polybar
 super + b
-    pgrep -x polybar && pkill -SIGTERM polybar || polybar-run; \
-    [ $(bspc config top_padding) = 0 ] && \
-        bspc config top_padding $BSPWM_TOP_PADDING || \
-        bspc config top_padding 0
+    pgrep -x polybar >/dev/null && pkill -9 polybar || polybar-run; \
+    [ $(bspc config top_padding) = 0 ] && bspc config top_padding $BSPWM_TOP_PADDING || bspc config top_padding 0
 
 # manage window gaps
 super + {underscore,plus,minus,equal}

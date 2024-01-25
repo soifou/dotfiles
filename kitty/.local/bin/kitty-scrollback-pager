@@ -11,8 +11,7 @@ if [ "$#" -eq 3 ]; then
     INPUT_LINE_NUMBER=${1:-0}
     CURSOR_LINE=${2:-1}
     CURSOR_COLUMN=${3:-1}
-    # Move the cursor
-    AUTOCMD_TERMCLOSE_CMD="call cursor(max([0,${INPUT_LINE_NUMBER}-1])+${CURSOR_LINE}, ${CURSOR_COLUMN}) | if line('.') +1 !=# line('$') | exe 'norm! j' | exe 'norm! zt' | exe 'norm! L' | endif"
+    AUTOCMD_TERMCLOSE_CMD="call cursor(max([0,${INPUT_LINE_NUMBER}-1])+${CURSOR_LINE}, ${CURSOR_COLUMN}) | if line('.') +1 !=# line('$') | exe 'norm! j' | exe 'norm! zt' | exe 'norm! H' | endif"
 fi
 
 exec nvim \

@@ -6,9 +6,9 @@ echo ":: tridactyl reload"
 mkdir -p $XDG_CONFIG_HOME/tridactyl/themes
 ln -sf $XDG_CACHE_HOME/wal/colors-tridactyl $XDG_CONFIG_HOME/tridactyl/themes/wal.css
 
-pidof firefox > /dev/null && {
-    # Reload conf with xdotool, a bit hackish but works.
-    # - Escape: go to normal mode
-    # - comma+s: custom bind to source (reload) config again
-    xdotool search --name "Mozilla Firefox" key Escape key comma+s
-}
+# pidof firefox > /dev/null && {
+#     # HACK: Reload conf with xdotool. This does not work well.
+#     # - Escape: go to normal mode
+#     # - comma+s: custom bind to source (reload) config again
+#     xdotool search --name "Mozilla Firefox" key Escape key comma+s
+# }

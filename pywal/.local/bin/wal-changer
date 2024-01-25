@@ -45,6 +45,29 @@ _wallpaper() {
     esac
 }
 
+_gtk() {
+    echo ":: gtk themes reload"
+
+    theme=light
+    char=$(xrdb -query | grep "*.background" | awk '{print $2}' | cut -c2-2)
+    if [ $char -eq $char 2> /dev/null ] && [ "$char" -lt 7 ]; then
+        theme=dark
+    fi
+
+    [ "$theme" = "dark" ] && {
+        sed -i "s/-light/-dark/g" "$XDG_CONFIG_HOME/xsettingsd/xsettingsd.conf"
+        sed -i "s/-light/-dark/g" "$XDG_CONFIG_HOME/gtk-3.0/settings.ini"
+
+    } || {
+        sed -i "s/-dark/-light/g" "$XDG_CONFIG_HOME/xsettingsd/xsettingsd.conf"
+        sed -i "s/-dark/-light/g" "$XDG_CONFIG_HOME/gtk-3.0/settings.ini"
+    }
+
+    pkill -1 xsettingsd
+}
+
+# NOTE: Some utility depends on xrdb to retrieve new colors so it is important
+# to reload it above all others
 _xrdb() {
     echo ":: xrdb reload"
     cp "$XDG_CACHE_HOME"/wal/colors.Xresources $XDG_CONFIG_HOME/x/Xresources.d/colors
@@ -57,26 +80,16 @@ _wm() {
     pgrep -x bspwm > /dev/null && bspc wm -r
 }
 
-_pywalfox() {
-    pidof firefox > /dev/null && {
-        echo ":: pywalfox reload"
-        # Reload pywalfox extension (https://github.com/Frewacom/Pywalfox)
-        command -v pywalfox > /dev/null 2>&1 && pywalfox update
-    }
-}
-
 _nvim() {
     echo ":: nvim reload"
     pgrep -x nvim > /dev/null && pkill -USR1 nvim
 }
 
 _wallpaper
-# NOTE: Some utility depends on xrdb to retrieve new colors
-# so it is important to reload it above all others
 _xrdb
+_gtk
 _wm
 _nvim
-_pywalfox
 
 [ -d $XDG_CONFIG_HOME/wal/wal.d ] && {
     for i in "$XDG_CONFIG_HOME"/wal/wal.d/*; do . $i; done
