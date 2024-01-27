@@ -21,7 +21,7 @@ debian() {
     yn "Sync server time?" \
         && sudo ntpdate -b pool.ntp.org
 
-    apt list --upgradable 2>/dev/null | grep upgradable >/dev/null && yn "Update system?" && {
+    apt list --upgradable 2> /dev/null | grep upgradable > /dev/null && yn "Update system?" && {
         apt list --upgradable
         yn "Upgrade?" && {
             sudo apt upgrade -y 2> /dev/null && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
@@ -120,12 +120,13 @@ if command -v mise > /dev/null 2>&1; then
 fi
 
 [ -f "$XDG_DATA_HOME"/zsh/znap/znap.zsh ] && {
-    yn "Update znap?" \
-        && zsh --singlecommand -c '
-            zstyle ":znap:*:*" git-maintenance off &&
-            zstyle ":znap:*" plugins-dir "$XDG_DATA_HOME"/zsh/plugins &&
-            . "$XDG_DATA_HOME"/zsh/znap/znap.zsh && znap pull
-        '
+    znap="zstyle ':znap:*' repos-dir $XDG_DATA_HOME/zsh/plugins && zstyle ':znap:*:*' git-maintenance off && . $XDG_DATA_HOME/zsh/znap/znap.zsh && znap"
+    znap_status=$(zsh --singlecommand -c "$znap status" | grep behind)
+    [ -n "$znap_status" ] && {
+        echo $znap_status
+        yn "Update znap?" && zsh --singlecommand -c "$znap pull"
+    }
+    unset znap znap_status
 }
 
 if command -v cargo-install-update > /dev/null 2>&1; then
