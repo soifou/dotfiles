@@ -39,7 +39,6 @@ install: init
 	stow rtv
 	stow mise
 	stow ssh
-	stow -d sublime @linux
 	stow tremc
 	stow tridactyl
 	stow w3m
@@ -85,7 +84,6 @@ uninstall:
 	stow -D rtv
 	stow -D mise
 	stow -D ssh
-	stow -D -d sublime @linux
 	stow -D tremc
 	stow -D tridactyl
 	stow -D w3m

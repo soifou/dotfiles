@@ -1,9 +1,0 @@
-*.cache
-*.last-run
-*.merged-ca-bundle
-*.system-ca-bundle
-*.user-ca-bundle
-HaoGist.sublime-settings
-HaoGist/
-Projects/
-DA Theme.sublime-settings
