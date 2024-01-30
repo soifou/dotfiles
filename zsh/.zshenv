@@ -73,7 +73,7 @@ export URLVIEWER=urlpicker
 # Use nvim while navigating into manpages
 # `gO` opens the TOC
 # `K` or `C-]` navigate to corresponding man under cursor
-export MANPAGER="nvim --noplugin -c 'unlet! g:loaded_man' -c 'runtime! plugin/man.lua' +Man!"
+export MANPAGER="nvim --noplugin -i $XDG_STATE_HOME/nvim/shada/man.shada -c 'unlet! g:loaded_man' -c 'runtime! plugin/man.lua' +Man!"
 export MANWIDTH=80
 
 export GREP_COLORS="mt=30;43"

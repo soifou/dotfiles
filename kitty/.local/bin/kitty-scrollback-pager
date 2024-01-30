@@ -15,7 +15,7 @@ if [ "$#" -eq 3 ]; then
 fi
 
 exec nvim \
-    --noplugin \
+    --noplugin -i $XDG_STATE_HOME/nvim/shada/scrollback.shada \
     -c "map <silent> q :qa!<CR>" \
     -c "set scrollback=10000 scrolloff=0 signcolumn=no laststatus=0" \
     -c "autocmd BufEnter * setlocal nonu nornu" \

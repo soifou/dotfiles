@@ -5,7 +5,7 @@
     alias diff='kitten diff'
 
     # Display images in the terminal
-    alias icat='kitten icat'
+    alias icat='kitten icat --align=left'
 
     # Hyperlink ripgrep (rg) result of found occurences and allow to open it in
     # your editor. Need ripgrep v14.0 or higher.

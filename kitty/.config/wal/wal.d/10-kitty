@@ -7,9 +7,14 @@ echo ":: kitty reload"
 #     "$XDG_CONFIG_HOME"/wal/generator/kitty.rb
 
 # Reload main theme
-mkdir -p "$XDG_CONFIG_HOME"/kitty/conf.d
-cat "$XDG_CACHE_HOME"/wal/colors-kitty > "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf
+kitty_colors=$XDG_CONFIG_HOME/kitty/conf.d/colors.conf
+cat "$XDG_CACHE_HOME"/wal/colors-kitty > $kitty_colors
+kitten @ set-colors --all --configured $kitty_colors
+unset kitty_colors
 
-# Reload running instances
-pgrep -x kitty > /dev/null \
-    && kitten @ set-colors --all --configured "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf
+# Alternative using the kitten theme
+# cat "$XDG_CACHE_HOME"/wal/colors-kitty > "$XDG_CONFIG_HOME"/kitty/themes/wal.conf
+# kitten themes --reload-in=all Wal
+
+# kitten @ signal-child -m all SIGUSR1
+# kill -SIGUSR1 $KITTY_PID
