@@ -5,7 +5,8 @@
     count-commits = shortlog -sn
     uncommit = reset --soft HEAD~
     w = "!xdg-open $(gh repo view --json url -q .url)"
-
+    # show merged branch except main/develop and current branch
+    mg = !git branch --merged | grep -v '*\\|main\\|develop';\
     # list last commit for each branches
     blc = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) - %(color:red)%(objectname:short)%(color:reset) - %(color:yellow)%(refname:short)%(color:reset) - (%(color:green)%(committerdate:relative)%(color:reset)) - %(authorname) - %(contents:subject)'
 
@@ -64,9 +65,6 @@
         }\
     };f"
 
-    # show merged branch except main/develop and current branch
-    mg = !git branch --merged | grep -v '*\\|main\\|develop';\
-
     # delete merged branch(es)
     mgd = "!f() {\
         [ $# -ge 1 ] && git mg | grep ${@} | xargs git branch -d || {\
@@ -88,6 +86,19 @@
             xargs ;\
         } || {\
             git hist;\
+        }\
+    };f"
+
+    # show commits from current remote branch that have been fetched
+    rl = "!f() {\
+        command -v fzf >/dev/null && {\
+            git hist ..origin/HEAD --color=always |\
+            fzf --exact --no-sort -m --ansi --no-height --prompt=' commits history > ' \
+            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\" \
+            --preview-window $1 |\
+            xargs ;\
+        } || {\
+            git hist ..origin/HEAD;\
         }\
     };f"
 
