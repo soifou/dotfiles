@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 
 # Wrapper script for RTV (https://github.com/michael-lazar/rtv)
-# Current fork: https://github.com/tildeclub/ttrv
 # If no argument specified, list a selection of subreddits with fzf
 
 # File containing a list of subs, one per line.
@@ -12,10 +11,12 @@ export TTRV_URLVIEWER=$URLVIEWER
 export MAILCAPS="$XDG_CONFIG_HOME/ttrv/mailcap"
 # Set custom browser (fallback when no mailcap entry found)
 export BROWSER="xdg-open"
+# Use default less behaviour here (notably to clear screen)
+unset LESSKEYIN
 
 [ -z "$1" ] && {
     [ -f "$SUBS" ] && {
-        SUB=$(fzf --no-height < "$SUBS")
-        [ "$SUB" != "" ] && command ttrv -s "$SUB" || echo "Bye!"
+        SUB=$(fzf --print-query --no-height < "$SUBS")
+        command ttrv -s "$SUB"
     }
 } || command ttrv "$@"
