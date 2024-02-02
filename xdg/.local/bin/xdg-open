@@ -57,6 +57,7 @@ if [ -d "$1" ] || [ -f "$1" ]; then
 fi
 
 case "$1" in
+    file://*) _o ${1#file://} ;;
     # Email
     mailto:*) term --class=mailto neomutt "$1" ;;
     # Torrent
