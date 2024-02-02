@@ -16,7 +16,7 @@ unset LESSKEYIN
 
 [ -z "$1" ] && {
     [ -f "$SUBS" ] && {
-        SUB=$(fzf --print-query --no-height < "$SUBS")
+        SUB=$(fzf --print-query --no-height < "$SUBS" | tail -n1)
         command ttrv -s "$SUB"
     }
 } || command ttrv "$@"
