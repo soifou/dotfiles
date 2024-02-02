@@ -7,7 +7,7 @@ go = 'latest'
 lua = '5.1'
 node = 'lts'
 php = '8.3.1'
-python = '3.11'
+python = 'latest'
 rust = 'latest'
 
 [env]
