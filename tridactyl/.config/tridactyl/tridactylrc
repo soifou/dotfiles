@@ -203,7 +203,7 @@ bind F hint -b
 " Open link in new window
 bind w hint -w
 " Yank link to clipboard
-bind ,y hint -y
+bind Y hint -y
 
 " Open in reader mode
 " bind --mode=normal ,q composite hint -pipe a href | jsb -p tri.excmds.tabopen("about:reader?url=" + JS_ARG)
