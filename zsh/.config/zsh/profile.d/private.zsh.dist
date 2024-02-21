@@ -36,3 +36,10 @@
 
 # Useless notifier if managed via homebrew.
 # export GH_NO_UPDATE_NOTIFIER=1
+
+# Always use Unicode line-drawing characters, not VT100-style ones
+# This fix borders for some terminals on gpg-pinentry-curses
+# export NCURSES_NO_UTF8_ACS=1
+
+# Default PHP version to use with docker container
+# export PHP_VERSION=8.3

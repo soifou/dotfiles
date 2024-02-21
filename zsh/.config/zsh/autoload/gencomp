@@ -20,6 +20,7 @@ _gen() {
 
 for i in \
     ansible-playbook \
+    aria2c \
     awk \
     bc \
     blkid \
@@ -44,3 +45,8 @@ for i in \
     mednafen \
     xh \
 ; do _gen $i --help; done
+
+# Other custom completions
+
+## ast-grep
+command -v sg > /dev/null && sg completions > $cpath/_sg
