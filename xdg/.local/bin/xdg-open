@@ -84,7 +84,8 @@ case "$1" in
     *raw.githubusercontent.com*) _dlo_wext "$1" ;;
     # HTTP links
     http*)
-        case $(curl -s -o /dev/null -w '%{content_type}' "$1") in
+        mime=$(curl -s -I $1 | grep "content-type"| awk '{print $2}')
+        case $mime in
             application/pdf) _dlo "$1" ;;
             image/*) _dlo "$1" ;;
             *) _browser "$1" ;;
