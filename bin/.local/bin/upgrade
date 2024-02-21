@@ -132,6 +132,12 @@ fi
 if command -v cargo-install-update > /dev/null 2>&1; then
     yn "Update global rust dependencies?" \
         && cargo-install-update install-update -a
+elif command -v cargo > /dev/null 2>&1; then
+    # FIXME: does not auto install using mise
+    [ -f "$ASDF_CRATE_DEFAULT_PACKAGES_FILE" ] && {
+        yn "Install global rust dependencies?" &&
+            cargo install $(cat $ASDF_CRATE_DEFAULT_PACKAGES_FILE| xargs)
+    }
 fi
 
 if command -v npm > /dev/null 2>&1; then
