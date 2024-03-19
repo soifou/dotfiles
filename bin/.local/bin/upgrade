@@ -180,7 +180,7 @@ fi
 if command -v go > /dev/null 2>&1; then
     [ -f "$MISE_GO_DEFAULT_PACKAGES_FILE" ] && {
         yn "Update global go dependencies?" && {
-            command -v gup > /dev/null 2>&1 && gup update \
+            command -v gup > /dev/null 2>&1 && gup update --exclude=go,gofmt \
                 || while read -r app; do go install "$app"; done < "$MISE_GO_DEFAULT_PACKAGES_FILE"
             # only need binaries, cleanup the pkg/ folder
             go clean -modcache
