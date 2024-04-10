@@ -89,16 +89,16 @@
         }\
     };f"
 
-    # show commits from current remote branch that have been fetched
+    # show commits from current upstream branch (@{u})
     rl = "!f() {\
         command -v fzf >/dev/null && {\
-            git hist ..origin/HEAD --color=always |\
+            git hist ..@{u} --color=always |\
             fzf --exact --no-sort -m --ansi --no-height --prompt=' commits history > ' \
             --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta -n\" \
             --preview-window $1 |\
             xargs ;\
         } || {\
-            git hist ..origin/HEAD;\
+            git hist ..@{u};\
         }\
     };f"
 
