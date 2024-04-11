@@ -15,7 +15,6 @@ export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 [ -d "/opt/firefox" ] && export PATH="/opt/firefox:$PATH"
 ## linuxbrew
 if [ -d "$HOMEBREW_PREFIX" ]; then
-    export HOMEBREW_NO_ANALYTICS=1
     export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin${PATH+:$PATH}"
 fi
 ## composer

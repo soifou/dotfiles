@@ -37,6 +37,10 @@
 # Useless notifier if managed via homebrew.
 # export GH_NO_UPDATE_NOTIFIER=1
 
+# Homebrew
+# export HOMEBREW_NO_ANALYTICS=1
+# export HOMEBREW_NO_AUTO_UPDATE=1
+
 # Always use Unicode line-drawing characters, not VT100-style ones
 # This fix borders for some terminals on gpg-pinentry-curses
 # export NCURSES_NO_UTF8_ACS=1

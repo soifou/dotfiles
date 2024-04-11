@@ -78,11 +78,12 @@ export MANPAGER="nvim --noplugin -i $XDG_STATE_HOME/nvim/shada/man.shada -c 'unl
 export MANWIDTH=80
 
 export GREP_COLORS="mt=30;43"
-
+export BC_ENV_ARGS="-q"
 export GIT_PAGER=delta
 
 export FZF_DEFAULT_OPTS="
     --prompt 'λ '
+    --info=inline-right
     --no-mouse
     --layout=reverse
     --height 20%
