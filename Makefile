@@ -19,6 +19,7 @@ install: init
 	stow fontconfig
 	stow git
 	stow gnupg
+	stow greenclip
 	stow kitty
 	stow lf
 	stow lftp
@@ -64,6 +65,7 @@ uninstall:
 	stow -D fontconfig
 	stow -D git
 	stow -D gnupg
+	stow -D greenclip
 	stow -D kitty
 	stow -D lf
 	stow -D lftp
