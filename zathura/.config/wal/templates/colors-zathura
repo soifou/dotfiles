@@ -1,7 +1,4 @@
-## Colors
-# Generates a zathura colorscheme based on the current wal colors
-# Credits: https://github.com/GideonWolfe/Zathura-Pywal
-
+# Colors
 set recolor "true"
 set completion-bg "{background}"
 set completion-fg "{foreground}"
@@ -28,3 +25,8 @@ set index-active-bg "{foreground}"
 set index-active-fg "{background}"
 set render-loading-bg "{background}"
 set render-loading-fg "{foreground}"
+set highlight-fg "{background}"
+set highlight-active-color "{color3}"
+set highlight-color "{color2}"
+
+# vim: ft=zathurarc

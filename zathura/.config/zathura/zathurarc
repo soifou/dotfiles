@@ -1,7 +1,7 @@
-## Colors
+# Colors
 include ./colors
 
-## Options
+# Options
 set pages-per-row 1
 set scroll-step 50
 set adjust-open width
@@ -9,9 +9,10 @@ set incremental-search true
 set selection-clipboard clipboard
 set statusbar-home-tilde true
 set window-title-home-tilde true
+set highlight-transparency 0.8
 set guioptions none # Hide command-line/statusbar
 
-## Keybindings
+# Keybindings
 # Make ^n open a new document (like atril/evince):
 # map <C-n> feedkeys ":exec zathura $FILE<Return>"
 
