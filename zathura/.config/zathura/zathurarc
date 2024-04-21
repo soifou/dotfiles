@@ -2,6 +2,7 @@
 include ./colors
 
 # Options
+set database sqlite
 set pages-per-row 1
 set scroll-step 50
 set adjust-open width
