@@ -1,0 +1,4 @@
+# vim: ft=sh
+
+# Inline calculator
+echo "$@" | tr 'x' '*' | bc -l

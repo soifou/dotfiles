@@ -1,0 +1,11 @@
+# vim: ft=sh
+
+# remove recursively broken symbolics in cwd
+command -v eza > /dev/null && ls="eza" || ls="ls"
+command -v fd > /dev/null && cmd="fd -t l" || cmd="find -xtype l"
+
+IFS=$'\n' links=$(eval $cmd)
+[ -z $links ] && return
+$ls -l --color=always "${links[@]}"
+echo -n "Remove? [y/N]: "
+read -r -q && rm -- "${links[@]}"

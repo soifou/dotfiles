@@ -1,0 +1,4 @@
+# vim: ft=sh
+
+# https://github.com/soimort/translate-shell
+command -v trans >/dev/null && trans fr:en "$*"
