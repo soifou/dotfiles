@@ -27,7 +27,7 @@ else
 fi
 
 # set correct variant depending on the language
-[ "$CURRENT" = "us" ] && VARIANT=intl || VARIANT=$ALT_VARIANT
+[ "$CURRENT" = "us" ] && VARIANT=altgr-intl || VARIANT=$ALT_VARIANT
 
 # replace all previously specified options
 # by using the -option flag with an empty argument first.
