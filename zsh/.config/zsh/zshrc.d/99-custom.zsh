@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+command -v eza >/dev/null && {
+    alias ls="eza -a -F --hyperlink"
+    alias l="eza -la --group-directories-first --time-style=long-iso --hyperlink"
+    tree() { eza -a --tree --icons "$@" }
+}
+
 command -v pip >/dev/null && {
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_pip ] && znap fpath _pip 'pip completion zsh'
 
@@ -40,4 +46,3 @@ command -v rustup >/dev/null &&
 
 command -v cargo >/dev/null &&
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_cargo ] && znap fpath _cargo 'rustup completions zsh cargo'
-

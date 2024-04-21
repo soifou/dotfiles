@@ -3,7 +3,7 @@
     hist = log --pretty=format:'%C(auto)%h%Creset » %d%s %Cgreen(%cr) %C(bold red)<%an>%Creset' --abbrev-commit
     ignored = ls-files -v | grep "^[[:lower:]]"
     count-commits = shortlog -sn
-    uncommit = reset --soft HEAD~
+    uncommit = "!f() { git reset HEAD~${1-1}; }; f"
     w = "!xdg-open $(gh repo view --json url -q .url)"
     # show merged branch except main/develop and current branch
     mg = !git branch --merged | grep -v '*\\|main\\|develop';\

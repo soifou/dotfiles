@@ -44,6 +44,7 @@ for i in \
     fzf \
     mednafen \
     xh \
+    zstd \
 ; do _gen $i --help; done
 
 # Other custom completions
