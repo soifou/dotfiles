@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Pick a clipboard entry
 command -v fzf > /dev/null && {
     fzf_greenclip() {

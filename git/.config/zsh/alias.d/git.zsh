@@ -1,4 +1,8 @@
-## Git
+#!/usr/bin/env zsh
+
+# Go to the root folder of a git repository
+alias cwd='cd "$(git rev-parse --show-toplevel)"'
+
 alias gaa='git add --all'
 alias gb='git branch'
 alias gba='git branch -a'
@@ -13,7 +17,8 @@ alias gl='git pull'
 alias gp='git push'
 alias grh='git reset --hard'
 alias gst='git status'
-## This commands are declared in ~/.config/git/conf.d/aliases
+
+## Alias of git aliases, declared in ~/.config/git/conf.d/aliases
 alias ga='git af'                    # add file(s) to repository
 alias gbd='git bd'                   # delete branch(es)
 alias gco='git co'                   # checkout branch
