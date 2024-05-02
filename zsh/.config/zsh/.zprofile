@@ -1,21 +1,21 @@
 #!/usr/bin/env zsh
 
 #-----------------------------------------------------
-# SSH key are managed by gpg-agent
-# The custom location of GNUPGHOME prevents me to set the following
-# hardcoded path "$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh"
-export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-
-#-----------------------------------------------------
 # Augmented PATH
 
 ## games
 [ -d "/usr/games" ] && export PATH="/usr/games:$PATH"
 ## firefox latest
 [ -d "/opt/firefox" ] && export PATH="/opt/firefox:$PATH"
-## linuxbrew
+## homebrew
 if [ -d "$HOMEBREW_PREFIX" ]; then
-    export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin${PATH+:$PATH}"
+    export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+    # prefer GNU utils when available
+    for i in coreutils grep; do
+        if [ -d $HOMEBREW_PREFIX/opt/$i/libexec/gnubin ]; then
+            export PATH="$HOMEBREW_PREFIX/opt/$i/libexec/gnubin:$PATH"
+        fi
+    done
 fi
 ## composer
 [ -d "$COMPOSER_HOME" ] && export PATH="$COMPOSER_HOME/vendor/bin:$PATH"

@@ -3,6 +3,7 @@
 case $PINENTRY_USER_DATA in
     tty) exec /usr/bin/pinentry-curses "$@" ;;
     rofi) exec "$HOME"/.local/bin/pinentry-rofi "$@" ;;
+    mac) exec /opt/homebrew/bin/pinentry-mac "$@" ;;
     none)
         echo "pinentry-switcher Error"
         exit 1 # do not ask for passphrase
