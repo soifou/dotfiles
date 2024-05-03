@@ -1,11 +1,10 @@
 #!/usr/bin/env zsh
 
-# unset SSH_AGENT_PID
-
 # SSH key are managed by gpg-agent
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-fi
+ unset SSH_AGENT_PID
+ if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+ fi
 
 # Set GPG_TTY so gpg-agent knows where to prompt.
 export GPG_TTY=$TTY
