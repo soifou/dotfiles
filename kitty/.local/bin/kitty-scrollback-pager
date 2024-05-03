@@ -19,6 +19,7 @@ exec nvim \
     -c "map <silent> q :qa!<CR>" \
     -c "set scrollback=10000 scrolloff=0 signcolumn=no laststatus=0" \
     -c "autocmd BufEnter * setlocal nonu nornu" \
+    -c "autocmd ColorScheme * setlocal winhighlight=Normal:NormalSB" \
     -c "autocmd TermOpen * setlocal modifiable undolevels=1000" \
     -c "autocmd TermClose * ${AUTOCMD_TERMCLOSE_CMD}" \
     -c 'terminal sed </dev/fd/63 -e "s/'$'\x1b'']8;;file:[^\]*[\]//g" && sleep 0.01 && printf "'$'\x1b'']2;"' 63<&0 0< /dev/null

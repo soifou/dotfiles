@@ -15,7 +15,6 @@ export XDG_LOCAL_HOME="$HOME/.local"
 
 ## Runtime
 [ -z $XDG_RUNTIME_DIR ] && export XDG_RUNTIME_DIR=/tmp
-export KITTY_LISTEN_ON=unix:@kitty
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 ## Config
