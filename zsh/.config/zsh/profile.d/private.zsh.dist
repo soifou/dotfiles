@@ -34,6 +34,9 @@
 # export NVIM_LOG_FILE="$XDG_STATE_HOME/$NVIM_APPNAME/nvim.log"
 # export VIMINIT='let $MYVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/vimrc" : "$XDG_CONFIG_HOME/$NVIM_APPNAME/init.lua" | so $MYVIMRC'
 
+# My dotfiles absolute dir path
+# export DOTS_DIR=/home/foo/dots
+
 # Useless notifier if managed via homebrew.
 # export GH_NO_UPDATE_NOTIFIER=1
 
