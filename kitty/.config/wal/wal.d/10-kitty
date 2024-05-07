@@ -9,7 +9,7 @@ echo ":: kitty reload"
 # Reload main theme
 kitty_colors=$XDG_CONFIG_HOME/kitty/conf.d/colors.conf
 cat "$XDG_CACHE_HOME"/wal/colors-kitty > $kitty_colors
-killall -s USR1 kitty
+killall -SIGUSR1 kitty
     # alternatives:
     # kitten @ set-colors --all --configured $kitty_colors
     # kitten @ signal-child -m all SIGUSR1
