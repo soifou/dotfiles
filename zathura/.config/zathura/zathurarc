@@ -10,7 +10,6 @@ set incremental-search true
 set selection-clipboard clipboard
 set statusbar-home-tilde true
 set window-title-home-tilde true
-set highlight-transparency 0.8
 set guioptions none # Hide command-line/statusbar
 
 # Keybindings
