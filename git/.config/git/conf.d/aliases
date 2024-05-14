@@ -4,7 +4,7 @@
     ignored = ls-files -v | grep "^[[:lower:]]"
     count-commits = shortlog -sn
     uncommit = "!f() { git reset HEAD~${1-1}; }; f"
-    w = "!xdg-open $(gh repo view --json url -q .url)"
+    w = "!xdg-open $(git remote get-url origin | sed 's|git@|https://|' | sed 's|:|/|2')"
     # show merged branch except main/develop and current branch
     mg = !git branch --merged | grep -v '*\\|main\\|develop';\
     # list last commit for each branches
