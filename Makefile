@@ -14,7 +14,6 @@ install: init
 	stow brew
 	stow bundler
 	stow composer
-	stow feh
 	stow fontconfig
 	stow git
 	stow gnupg
@@ -58,7 +57,6 @@ uninstall:
 	stow -D brew
 	stow -D bundler
 	stow -D composer
-	stow -D feh
 	stow -D fontconfig
 	stow -D git
 	stow -D gnupg
