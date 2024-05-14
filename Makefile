@@ -33,7 +33,6 @@ install: init
 	stow php-cs-fixer
 	stow pip
 	stow polybar
-	stow pywal
 	stow ripgrep
 	stow rofi
 	stow rtv
@@ -78,7 +77,6 @@ uninstall:
 	stow -D php-cs-fixer
 	stow -D pip
 	stow -D polybar
-	stow -D pywal
 	stow -D ripgrep
 	stow -D rofi
 	stow -D rtv

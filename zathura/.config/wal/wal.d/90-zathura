@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-echo ":: zathura reload"
-mkdir -p "$XDG_CONFIG_HOME"/zathura
-cat "$XDG_CACHE_HOME"/wal/colors-zathura > "$XDG_CONFIG_HOME"/zathura/colors

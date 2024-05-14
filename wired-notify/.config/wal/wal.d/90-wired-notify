@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-echo ":: wired reload"
-mkdir -p "$XDG_CONFIG_HOME"/wired
-cat "$XDG_CACHE_HOME"/wal/wired.ron > $XDG_CONFIG_HOME/wired/wired.ron

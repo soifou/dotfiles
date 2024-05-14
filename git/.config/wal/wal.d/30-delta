@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-echo ":: git-delta theme reload"
-
-mkdir -p "$XDG_CONFIG_HOME"/git/conf.d
-cp "$XDG_CACHE_HOME"/wal/colors-delta "$XDG_CONFIG_HOME"/git/conf.d/delta-theme

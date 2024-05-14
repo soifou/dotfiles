@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-echo ":: rofi reload"
-mkdir -p "$XDG_CONFIG_HOME"/rofi
-cat "$XDG_CACHE_HOME"/wal/colors-rofi > "$XDG_CONFIG_HOME"/rofi/colors.rasi

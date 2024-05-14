@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-echo ":: xob reload"
-mkdir -p "$XDG_CONFIG_HOME"/xob
-cat "$XDG_CACHE_HOME"/wal/colors-xob > "$XDG_CONFIG_HOME"/xob/styles.cfg
-pgrep -x xob > /dev/null && pkill -USR1 xob
-setsid -f -- xob-utils
