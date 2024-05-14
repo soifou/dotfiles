@@ -1,3 +1,0 @@
-default:
-    extension: .Xresources
-    output: xresources
