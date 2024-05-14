@@ -11,7 +11,7 @@ export XDG_CONFIG_DIRS="/etc/xdg"
 # XDG non-official
 export XDG_LOCAL_HOME="$HOME/.local"
 [ -f "$XDG_CONFIG_HOME"/user-dirs.dirs ] && \
-    eval "$(sed 's/^[^#].*/export &/g;t;d' "$XDG_CONFIG_HOME"/user-dirs.dirs)"
+    eval "$(sed 's/^[^#].*/export &/g;t' "$XDG_CONFIG_HOME"/user-dirs.dirs)"
 
 ## Runtime
 [ -z $XDG_RUNTIME_DIR ] && export XDG_RUNTIME_DIR=/tmp
