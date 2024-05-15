@@ -1,0 +1,153 @@
+[$XDG_DEVELOP_DIR/testing/neovim]
+checkout = git clone https://github.com/neovim/neovim
+fixups =
+    sudo rm -rf /usr/local/share/nvim
+    sudo make distclean
+    sudo make CMAKE_BUILD_TYPE=Release install
+skip = is_darwin
+
+[$XDG_DEVELOP_DIR/testing/wallust]
+checkout = git clone -b dev --single-branch https://codeberg.org/explosion-mental/wallust
+fixups =
+    cargo build --release
+    sudo ln -sf $MR_REPO/target/release/wallust /usr/local/bin/wallust
+
+[$XDG_DEVELOP_DIR/testing/giph]
+checkout = git clone https://github.com/phisch/giph
+fixups =
+    sudo make install
+skip = is_darwin
+
+[$XDG_DEVELOP_DIR/testing/gpt4free]
+checkout = git clone https://github.com/xtekky/gpt4free
+
+[$XDG_DEVELOP_DIR/testing/greenclip]
+checkout = git clone https://github.com/erebe/greenclip
+skip = is_darwin
+
+[$XDG_DEVELOP_DIR/testing/git-quick-stats]
+checkout = git clone https://github.com/arzzen/git-quick-stats
+fixups =
+    sudo make install
+
+[$XDG_DEVELOP_DIR/testing/insomnia-plugin-wal-theme]
+checkout = git clone https://github.com/crxssed7/insomnia-plugin-wal-theme
+fixups =
+    mkdir -p $XDG_CONFIG_HOME/Insomnia/plugins
+    ln -sf $MR_REPO $XDG_CONFIG_HOME/Insomnia/plugins/insomnia-plugin-wal-theme
+
+[$XDG_DEVELOP_DIR/testing/nsxiv]
+checkout = git clone https://github.com/nsxiv/nsxiv
+fixups =
+    # ln -sf $XDG_CONFIG_HOME/nsxiv/config.h config.h
+    cp config.def.h config.h
+    sed -i 's/XK_plus/XK_J/' config.h
+    sed -i 's/XK_minus/XK_K/' config.h
+    make clean
+    make
+    sudo make install
+skip = is_darwin
+
+[$XDG_DEVELOP_DIR/testing/pass-clip]
+checkout = git clone https://github.com/ibizaman/pass-clip
+fixups =
+    sudo make install
+    sudo sed -i 's/Copy password into clipboard for 45 seconds//' /usr/lib/password-store/extensions/clip.bash
+skip = is_darwin
+
+[$XDG_DEVELOP_DIR/testing/paperview]
+checkout = git clone https://github.com/glouw/paperview
+fixups =
+    sudo make install DESTDIR=/usr PREFIX=/local
+skip = is_darwin
+
+[$XDG_DEVELOP_DIR/testing/pfetch]
+checkout = git clone https://github.com/Un1q32/pfetch
+post_checkout = sudo ln -sf $MR_REPO/pfetch /usr/local/bin/
+
+[$XDG_DEVELOP_DIR/testing/translate-shell]
+checkout = git clone https://github.com/soimort/translate-shell
+fixups =
+    make TARGET=zsh
+    sudo make install
+
+[$XDG_DEVELOP_DIR/testing/tremc]
+checkout = git clone https://github.com/tremc/tremc
+post_checkout = sudo ln -sf $MR_REPO/tremc /usr/local/bin/
+
+[$XDG_DEVELOP_DIR/testing/shrinkpdf]
+checkout = git clone https://github.com/aklomp/shrinkpdf
+fixups =
+    chmod +x shrinkpdf.sh
+    sudo ln -sf $MR_REPO/shrinkpdf.sh /usr/local/bin/shrinkpdf
+
+[$XDG_DEVELOP_DIR/testing/wired-notify]
+checkout = git clone https://github.com/Toqozz/wired-notify
+fixups =
+    mkdir -p $XDG_CONFIG_HOME/wired
+    # sudo apt install -y libxss-dev
+    cargo build --release
+    chmod +x $MR_REPO/target/release/wired
+    sudo ln -sf $MR_REPO/target/release/wired /usr/local/bin/wired
+skip = is_darwin
+
+[$XDG_DEVELOP_DIR/testing/xbanish]
+checkout = git clone https://github.com/jcs/xbanish
+fixups =
+    make
+    sudo make install
+skip = is_darwin
+
+[$XDG_DEVELOP_DIR/testing/xob]
+checkout = git clone https://github.com/juster-0/xob
+fixups =
+    make
+    sudo make install
+skip = is_darwin
+
+[$XDG_DEVELOP_DIR/testing/xpub]
+checkout = git clone https://github.com/Ventto/xpub
+post_checkout = sudo ln -sf $MR_REPO/src/xpub.sh /usr/local/bin/xpub
+skip = is_darwin
+
+[$XDG_DEVELOP_DIR/testing/ytfzf]
+checkout = git clone https://github.com/pystardust/ytfzf
+fixups =
+    sudo make install
+
+[$XDG_DEVELOP_DIR/testing/zsh-completion-generator]
+checkout = git clone https://github.com/RobSis/zsh-completion-generator
+post_checkout = sudo ln -sf $MR_REPO/help2comp.py /usr/local/bin/help2comp
+
+# [$XDG_DEVELOP_DIR/testing/fontpreview-ueberzug]
+# checkout = git clone https://github.com/OliverLew/fontpreview-ueberzug
+# fixups =
+#     sudo make install
+
+# [$XDG_DEVELOP_DIR/testing/pash]
+# checkout = git clone https://github.com/dylanaraps/pash
+# post_checkout = sudo ln -sf $(pwd)/pash/pash /usr/local/bin/
+
+# [$XDG_DEVELOP_DIR/testing/somafm-cli]
+# checkout = git clone https://github.com/rockymadden/somafm-cli
+# post_checkout = sudo ln -sf $MR_REPO/src/somafm /usr/local/bin/
+
+# [$XDG_DEVELOP_DIR/testing/tuxi]
+# checkout = git clone https://github.com/Bugswriter/tuxi
+# fixups =
+#     sudo make install PREFIX=/usr/local
+
+# [$XDG_DEVELOP_DIR/testing/universal-android-debloater]
+# checkout = git clone https://gitlab.com/W1nst0n/universal-android-debloater.git/
+
+# [$XDG_DEVELOP_DIR/testing/helix]
+# checkout = git clone https://github.com/helix-editor/helix
+# fixups =
+#     mkdir -p $XDG_CONFIG_HOME/helix
+#     cargo install --locked --path helix-term
+#     hx --grammar fetch
+#     hx --grammar build
+#     # No need when HELIX_RUNTIME is defined
+#     # ln -sf $MR_REPO/runtime $XDG_CONFIG_HOME/helix/runtime
+#     # FIXME: why runtime is created even if HELIX_RUNTIME defined?
+#     rm -rf $XDG_CONFIG_HOME/helix/runtime

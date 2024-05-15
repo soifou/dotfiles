@@ -1,0 +1,58 @@
+# ┏━╸╻╺┳╸╻ ╻╻ ╻┏┓
+# ┃╺┓┃ ┃ ┣━┫┃ ┃┣┻┓
+# ┗━┛╹ ╹ ╹ ╹┗━┛┗━┛
+
+[$XDG_DEVELOP_DIR/soifou/adminer]
+checkout = git clone 'git@github.com:soifou/adminer.git' 'adminer'
+
+[$XDG_DEVELOP_DIR/soifou/docker/github/lamp]
+checkout = git clone 'git@github.com:soifou/docker-lamp.git' 'lamp'
+
+[$XDG_DEVELOP_DIR/soifou/docker/github/composer]
+checkout = git clone 'git@github.com:soifou/composer.git' 'composer'
+
+[$XDG_DEVELOP_DIR/soifou/docker/github/mariadb-alpine]
+checkout = git clone 'git@github.com:soifou/mariadb-alpine.git' 'mariadb-alpine'
+
+[$XDG_DEVELOP_DIR/soifou/docker/github/n98-magerun-alpine]
+checkout = git clone 'git@github.com:soifou/n98-magerun-alpine.git' 'n98-magerun-alpine'
+
+[$XDG_DEVELOP_DIR/soifou/docker/github/php-alpine]
+checkout = git clone 'git@github.com:soifou/php-alpine.git' 'php-alpine'
+
+[$XDG_DEVELOP_DIR/soifou/docker/github/wpcli-alpine]
+checkout = git clone 'git@github.com:soifou/wpcli-alpine.git' 'wpcli-alpine'
+
+# ┏━╸╻╺┳╸┏━┓╻  ╻╺┳╸┏━╸
+# ┃╺┓┃ ┃ ┃ ┃┃  ┃ ┃ ┣╸
+# ┗━┛╹ ╹ ┗━┛┗━╸╹ ╹ ┗━╸
+
+[$XDG_CONFIG_HOME/nvim]
+checkout = git clone 'soifou-gitolite:neovim' 'nvim'
+
+[$XDG_DATA_HOME/pass]
+checkout = git clone 'soifou-gitolite:pass-store' 'pass'
+
+[$XDG_DATA_HOME/remind]
+checkout = git clone 'soifou-gitolite:remind' 'remind'
+
+[$XDG_DEVELOP_DIR/soifou/advent-of-code]
+checkout = git clone 'soifou-gitolite:aoc' 'advent-of-code'
+
+[$XDG_DEVELOP_DIR/soifou/docker]
+checkout = git clone 'soifou-gitolite:docker' 'docker'
+
+[$XDG_DEVELOP_DIR/soifou/gitolite]
+checkout = git clone 'soifou-gitolite:gitolite-admin' 'gitolite'
+
+[$XDG_DEVELOP_DIR/soifou/iosevka-custom]
+checkout = git clone 'soifou-gitolite:iosevka-custom' 'iosevka-custom'
+
+[$XDG_DEVELOP_DIR/soifou/ly]
+checkout = git clone 'soifou-gitolite:ly' 'ly'
+
+[$XDG_DEVELOP_DIR/soifou/utils]
+checkout = git clone 'soifou-gitolite:utils' 'utils'
+
+[$XDG_DEVELOP_DIR/soifou/xresources.nvim]
+checkout = git clone 'soifou-gitolite:xresources.nvim' 'xresources.nvim'

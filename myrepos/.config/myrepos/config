@@ -3,5 +3,17 @@
 git_gc = git gc "$@"
 # Run the specified number of jobs in parallel
 jobs = 3
+# Additional functions
+# Builtins: mr config DEFAULT lib
+lib =
+    is_linux() {
+        [ "$(uname)" = 'Linux' ]
+    }
+    is_darwin() {
+        [ "$(uname)" = 'Darwin' ]
+    }
+# List of repositories
+# Need to be included after lib to use our custom functions
+include = cat $XDG_CONFIG_HOME/myrepos/mr.d/*.enabled
 
-include = cat $XDG_DATA_HOME/myrepos/*.enabled
+# vim: ft=dosini
