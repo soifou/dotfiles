@@ -104,14 +104,19 @@ yank-osc52() {
     echo $CUTBUFFER | ${COPY_CMD} >/dev/null 2>&1
     printf "\033]52;c;%s\a" "$(printf %s $CUTBUFFER | head -c 8388608 | base64 -w 0)"
 }
+
 vi-yank-osc52() { zle vi-yank; yank-osc52; }
 zle -N vi-yank-osc52
+bindkey -M vicmd 'y' vi-yank-osc52
+
 vi-yank-eol-osc52() { zle vi-yank-eol; yank-osc52; }
 zle -N vi-yank-eol-osc52
-
-bindkey '^y' yank
-bindkey -M vicmd 'y' vi-yank-osc52
 bindkey -M vicmd 'Y' vi-yank-eol-osc52
+
+vi-yankdel-osc52() { zle vi-delete; yank-osc52; }
+zle -N vi-yankdel-osc52
+bindkey -M vicmd 'd' vi-yankdel-osc52
+bindkey -M vicmd -s 'D' 'd$'
 
 # Append current command with sudo
 _sudo-command-line() {

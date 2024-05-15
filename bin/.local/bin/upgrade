@@ -3,16 +3,11 @@
 ## Beware! This script is intended to be used by only me, myself and I.
 ## It keeps me up to date across my *nix journey
 
-[ -f /System/Library/CoreServices/SystemVersion.plist ] && {
-    echo "Sorry!"
-    exit 1
-}
-
 yn() {
-    printf "$(tput bold):: $(tput setaf 2)%s$(tput sgr0) [y/n]: " "$1"
+    printf "$(tput bold):: $(tput setaf 2)%s$(tput sgr0) [y/N]: " "$1"
     stty -icanon
     answer=$(dd ibs=1 count=1 2> /dev/null)
-    stty icanon
+    # stty icanon
     printf '\n'
     [[ "$answer" =~ ^[Yy]$ ]]
 }
@@ -73,14 +68,35 @@ arch() {
     }
 }
 
-while IFS='=' read -r key val; do
-    case $key in
-        ID) distro=$val ;;
-    esac
-done < /etc/os-release
+macos() {
+    yn "Update system?" && {
+        softwareupdate --install --all
+    }
 
-[ "$distro" = 'debian' ] && debian
-[ "$distro" = 'arch' ] && arch
+    if command -v mas >&-; then
+        mas outdated
+        yn "Update mas" && {
+            mas outdated | while read -r app; do
+                echo "Updating ${app##* }..."
+                mas install "${app%% *}"
+            done
+        }
+    fi
+}
+
+case $OSTYPE in
+    darwin*) macos ;;
+    linux*)
+        while IFS='=' read -r key val; do
+            case $key in
+                ID) distro=$val ;;
+            esac
+        done < /etc/os-release
+
+        [ "$distro" = 'debian' ] && debian
+        [ "$distro" = 'arch' ] && arch
+        ;;
+esac
 
 if command -v mr > /dev/null 2>&1; then
     yn "Update local share?" \
@@ -135,8 +151,8 @@ if command -v cargo-install-update > /dev/null 2>&1; then
 elif command -v cargo > /dev/null 2>&1; then
     # FIXME: does not auto install using mise
     [ -f "$ASDF_CRATE_DEFAULT_PACKAGES_FILE" ] && {
-        yn "Install global rust dependencies?" &&
-            cargo install $(cat $ASDF_CRATE_DEFAULT_PACKAGES_FILE| xargs)
+        yn "Install global rust dependencies?" \
+            && cargo install $(cat $ASDF_CRATE_DEFAULT_PACKAGES_FILE | xargs)
     }
 fi
 

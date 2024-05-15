@@ -3,7 +3,12 @@
 command -v eza >/dev/null && {
     alias ls="eza -a -F --hyperlink"
     alias l="eza -la --group-directories-first --time-style=long-iso --hyperlink"
-    tree() { eza -a --tree --icons "$@" }
+
+    tree() {
+        eza --tree -a --color=always --icons=always \
+            --no-quotes --hyperlink --ignore-glob .git "$@" |
+            sed '1d' | less
+    }
 }
 
 command -v pip >/dev/null && {

@@ -1,3 +1,6 @@
 cache=${XDG_CACHE_HOME}/npm
 init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
 store-dir=${XDG_DEVELOP_DIR}/store/pnpm
+
+fund=false # disable funding reminder, has to be lowercase
+strict_ssl=false # fix hanging at "sill: idealTree build"

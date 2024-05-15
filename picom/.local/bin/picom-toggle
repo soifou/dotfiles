@@ -7,7 +7,7 @@ fi
 
 case "$1" in
     -t)
-       if pgrep -x picom > /dev/null 2>&1; then
+        if pgrep -x picom > /dev/null 2>&1; then
             pkill -9 picom
             echo 
         else
@@ -16,6 +16,6 @@ case "$1" in
         fi
         ;;
     *)
-        [ "$(pgrep -x picom)" ] && echo  || echo 
+        [ "$(pgrep -x picom)" ] && echo   || echo 
         ;;
 esac
