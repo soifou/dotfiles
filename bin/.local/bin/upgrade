@@ -122,10 +122,6 @@ if command -v brew > /dev/null 2>&1; then
     }
 fi
 
-if command -v gh > /dev/null 2>&1; then
-    yn "Update gh extensions?" && gh extension upgrade --all
-fi
-
 if command -v mise > /dev/null 2>&1; then
     yn "Update mise ?" && {
         mise self-update

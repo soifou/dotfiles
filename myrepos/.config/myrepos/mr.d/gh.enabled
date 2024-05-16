@@ -1,0 +1,15 @@
+# ┏━╸╻ ╻╺┳╸┏━╸┏┓╻┏━┓╻┏━┓┏┓╻┏━┓
+# ┣╸ ┏╋┛ ┃ ┣╸ ┃┗┫┗━┓┃┃ ┃┃┗┫┗━┓
+# ┗━╸╹ ╹ ╹ ┗━╸╹ ╹┗━┛╹┗━┛╹ ╹┗━┛
+
+[$XDG_DATA_HOME/gh/extensions/gh-find-code]
+checkout = git clone git@github.com:LangLangBart/gh-find-code.git
+
+[$XDG_DATA_HOME/gh/extensions/gh-install]
+checkout = git clone git@github.com:redraw/gh-install.git
+
+[$XDG_DATA_HOME/gh/extensions/gh-look]
+checkout = git clone git@github.com:LangLangBart/gh-look.git
+
+[$XDG_DATA_HOME/gh/extensions/gh-markdown-preview]
+checkout = git clone git@github.com:yusukebe/gh-markdown-preview.git
