@@ -1,4 +1,4 @@
-script-opts/torque-progressbar/
+script-opts/modernx.conf
 
 scripts/*
 !scripts/history.lua
