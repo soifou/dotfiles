@@ -3,6 +3,8 @@
 ## Beware! This script is intended to be used by only me, myself and I.
 ## It keeps me up to date across my *nix journey
 
+command -v pfetch > /dev/null 2>&1 && pfetch
+
 yn() {
     printf "$(tput bold):: $(tput setaf 2)%s$(tput sgr0) [y/N]: " "$1"
     stty -icanon
@@ -73,13 +75,14 @@ macos() {
         softwareupdate --install --all
     }
 
-    if command -v mas >&-; then
-        mas outdated
-        yn "Update mas" && {
-            mas outdated | while read -r app; do
-                echo "Updating ${app##* }..."
-                mas install "${app%% *}"
-            done
+    if command -v mas > /dev/null 2>&1; then
+        mas outdated || {
+            yn "Update mas" && {
+                mas outdated | while read -r app; do
+                    echo "Updating ${app##* }..."
+                    mas install "${app%% *}"
+                done
+            }
         }
     fi
 }
