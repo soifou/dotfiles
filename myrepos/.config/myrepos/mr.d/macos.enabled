@@ -1,0 +1,19 @@
+[$XDG_DEVELOP_DIR/testing/alloy]
+checkout = git clone https://github.com/ardaku/alloy
+fixups =
+    cargo build --release
+    sudo ln -sf $MR_REPO/target/release/alloy /usr/local/bin/alloy
+skip = ! is_darwin
+
+[$XDG_DEVELOP_DIR/testing/macos-us-altgr-intl]
+checkout = git clone https://github.com/carjorvaz/macos-us-altgr-intl
+fixups =
+    ln -sf $MR_REPO/us-altgr-intl.keylayout ~/Library/Keyboard\ Layouts/
+skip = ! is_darwin
+
+[$XDG_DEVELOP_DIR/testing/setsid-macosx]
+checkout = git clone https://github.com/tzvetkoff/setsid-macosx
+fixups =
+    gcc -o setsid setsid.c
+    sudo ln -sf $MR_REPO/setsid /usr/local/bin/
+skip = ! is_darwin

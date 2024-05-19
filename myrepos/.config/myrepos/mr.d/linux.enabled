@@ -1,0 +1,56 @@
+[$XDG_DEVELOP_DIR/testing/giph]
+checkout = git clone https://github.com/phisch/giph
+fixups =
+    sudo make install
+skip = ! is_linux
+
+[$XDG_DEVELOP_DIR/testing/greenclip]
+checkout = git clone https://github.com/erebe/greenclip
+skip = ! is_linux
+
+[$XDG_DEVELOP_DIR/testing/nsxiv]
+checkout = git clone https://github.com/nsxiv/nsxiv
+fixups =
+    # ln -sf $XDG_CONFIG_HOME/nsxiv/config.h config.h
+    cp config.def.h config.h
+    sed -i 's/XK_plus/XK_J/' config.h
+    sed -i 's/XK_minus/XK_K/' config.h
+    make clean
+    make
+    sudo make install
+skip = ! is_linux
+
+[$XDG_DEVELOP_DIR/testing/paperview]
+checkout = git clone https://github.com/glouw/paperview
+fixups =
+    sudo make install DESTDIR=/usr PREFIX=/local
+skip = ! is_linux
+
+[$XDG_DEVELOP_DIR/testing/wired-notify]
+checkout = git clone https://github.com/Toqozz/wired-notify
+fixups =
+    mkdir -p $XDG_CONFIG_HOME/wired
+    # sudo apt install -y libxss-dev
+    cargo build --release
+    chmod +x $MR_REPO/target/release/wired
+    sudo ln -sf $MR_REPO/target/release/wired /usr/local/bin/wired
+skip = ! is_linux
+
+[$XDG_DEVELOP_DIR/testing/xbanish]
+checkout = git clone https://github.com/jcs/xbanish
+fixups =
+    make
+    sudo make install
+skip = ! is_linux
+
+[$XDG_DEVELOP_DIR/testing/xob]
+checkout = git clone https://github.com/juster-0/xob
+fixups =
+    make
+    sudo make install
+skip = ! is_linux
+
+[$XDG_DEVELOP_DIR/testing/xpub]
+checkout = git clone https://github.com/Ventto/xpub
+post_checkout = sudo ln -sf $MR_REPO/src/xpub.sh /usr/local/bin/xpub
+skip = ! is_linux
