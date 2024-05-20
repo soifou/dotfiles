@@ -9,13 +9,15 @@ sanitize tridactyllocal tridactylsync
 " Use my startpage on new tabs
 " set newtab file:///home/user/startpage/index.html
 
-" set hintdelay 100
+set hintchars asdfghjklqwertpoiuyzxcvb/.,mn
+set hintuppercase false
 
 " Custom theme
-colorscheme wal
+colorscheme base16
 
 " Disable indicator in normal mode
 " set modeindicatormodes {"normal":"false","insert":"true","input":"true","ignore":"true","ex":"true","hint":"true","visual":"true"}
+set modeindicatorshowkeys true
 " }}}
 
 " Autocommands {{{
@@ -67,6 +69,17 @@ blacklistadd drive.google.com
 blacklistadd mail.google.com
 blacklistadd monkeytype.com
 blacklistadd typingclub.com
+" }}}
+
+" Alias {{{
+
+alias db open http://db.test
+alias mail open http://mail.test
+alias cups open http://127.0.0.1:631/
+alias syncthing open http://127.0.0.1:8384/
+
+alias viewarchive js tri.excmds.open("https://web.archive.org/*/" + window.location.href)
+
 " }}}
 
 " Searchurls {{{
@@ -134,6 +147,10 @@ unbind L
 
 bind h back
 bind l forward
+" NOTE: `<count>gu` must be declared before `gu` itself
+bind 2gu urlparent 3
+bind 3gu urlparent 4
+bind 4gu urlparent 5
 bind gu urlparent
 bind gU urlroot
 
@@ -142,16 +159,6 @@ bind L scrollpx +45
 
 bind J zoom 0.1 true
 bind K zoom -0.1 true
-
-" Tabs
-" g0, g$, <M-[0-9] goto first, last, nth
-bind [ tabprev
-bind ] tabnext
-bind << tabmove -1
-bind >> tabmove +1
-bind gd tabdetach
-bind gD composite tabduplicate; tabdetach
-bind ,p pin  " Toggle pinned tab
 
 bind { followpage prev
 bind } followpage next
@@ -162,6 +169,16 @@ bind <C-i> jumpnext
 " bind g; changelistjump -1
 " bind g, changelistjump 1
 
+" Tabs
+" g0, g$, <M-[0-9] goto first, last, nth
+bind [ tabprev
+bind ] tabnext
+bind << tabmove -1
+bind >> tabmove +1
+bind gd tabdetach
+bind gD composite tabduplicate; tabdetach
+bind ,p pin  " Toggle pinned tab
+bind d composite tab #; tabclose #
 
 " Search
 bind / fillcmdline find
