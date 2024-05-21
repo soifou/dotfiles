@@ -98,9 +98,10 @@ bindkey -M vicmd '^e' edit-command-line
 
 # Sync yanks with the system clipboard using OSC52
 yank-osc52() {
-    # Use zsh 'q' flag to escape shell-special characters
+    # Modify the buffer before storing the value into the clipboard
+    # eg. q add quotes around if contains spaces
     # See `man zshexpn`
-    CUTBUFFER="${(q-)CUTBUFFER}"
+    # CUTBUFFER="${(q-)CUTBUFFER}"
     echo $CUTBUFFER | ${COPY_CMD} >/dev/null 2>&1
     printf "\033]52;c;%s\a" "$(printf %s $CUTBUFFER | head -c 8388608 | base64 -w 0)"
 }
