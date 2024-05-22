@@ -3,7 +3,7 @@ ansible-lint
 beets
 buku
 gallery-dl
-git+https://github.com/llorllale/ttrv
+git+https://github.com/tildeclub/ttrv
 httpie
 khal
 khard
