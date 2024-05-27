@@ -1,0 +1,3 @@
+.cache/newsboat/*
+!.cache/newsboat/.gitkeep
+.config/newsboat/urls
