@@ -1,39 +1,41 @@
 #!/usr/bin/env sh
 
-# set -xe
+WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
+static_dir="$WALLPAPER_PATH/static"
+mkdir -p "$static_dir"
 
-for i in curl jq xrandr; do
-    [ ! "$(command -v $i)" ] && {
-        echo "Required $i not found in PATH" >&2
+_screen_width() {
+    case "$(uname)" in
+        Darwin)
+            w=$(yabai -m query --displays --display | jq '.frame.w' | awk -F. '{print $1}')
+            ;;
+        Linux)
+            res=$(xrandr --nograb --current | awk '/\*/ {print $1}')
+            w=$(echo "${res}" | awk -F 'x' '{print $1}')
+            ;;
+    esac
+
+    [ -z "$w" ] && {
+        echo "Unable to guess screen width"
         exit 1
     }
-done
-
-if [ -z $1 ]; then
-    echo "Provider required. Possible value: [unsplash]" >&2
-    exit 1
-fi
-
-WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
-mkdir -p "$WALLPAPER_PATH"
-
-res=$(xrandr --nograb --current | awk '/\*/ {print $1}')
-imw=$(echo "${res}" | awk -F 'x' '{print $1}')
+    echo $w
+}
 
 _unsplash() {
+    unsplash_dir=$static_dir/unsplash
+    mkdir -p $unsplash_dir
     # https://unsplash.com/documentation#get-a-random-photo
     endpoint="https://api.unsplash.com"
     key=$(pass unsplash.com/access-key)
     response=$(curl -s "$endpoint/photos/random?orientation=landscape" -H "Authorization: Client-ID $key")
-    # use printf instead of echo to escape correctly
-    id=$(printf '%s' $response | jq -r '.id')
-    img_url="$(printf "%s" $response | jq -r '.urls.raw')?q=75&fm=jpg&w={$imw}&fit=max"
-    wall="$WALLPAPER_PATH/static/unsplash"
-    [ ! -f "$wall-$id.jpg" ] && curl -o "$wall-$id.jpg" -J -L "$img_url" > /dev/null 2>&1
-    ln -sf "$wall-$id.jpg" "$WALLPAPER_PATH/today"
+    slug=$(printf '%s' $response | jq -r '.slug')
+    img_url="$(printf "%s" $response | jq -r '.urls.raw')?q=75&fm=jpg&w=$(_screen_width)&fit=max"
+    [ ! -f "$unsplash_dir/$slug.jpg" ] \
+        && curl -o "$unsplash_dir/$slug.jpg" -J -L "$img_url" > /dev/null 2>&1
+    echo "$unsplash_dir/$slug.jpg"
 }
 
 case "$1" in
-    unsplash) _unsplash ;;
-    *) echo "unknown provider" ;;
+    *) _unsplash ;;
 esac
