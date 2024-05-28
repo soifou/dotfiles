@@ -5,10 +5,6 @@
 
 # File containing a list of subs, one per line.
 SUBS="$XDG_LOCAL_HOME"/share/ttrv/subreddits
-# Set custom urlviewer
-export TTRV_URLVIEWER=$URLVIEWER
-# Set custom mailcap
-export MAILCAPS="$XDG_CONFIG_HOME/ttrv/mailcap"
 # Set custom browser (fallback when no mailcap entry found)
 export BROWSER="xdg-open"
 # Use default less behaviour here (notably to clear screen)
