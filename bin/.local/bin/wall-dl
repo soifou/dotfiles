@@ -10,8 +10,7 @@ _screen_width() {
             w=$(yabai -m query --displays --display | jq '.frame.w' | awk -F. '{print $1}')
             ;;
         Linux)
-            res=$(xrandr --nograb --current | awk '/\*/ {print $1}')
-            w=$(echo "${res}" | awk -F 'x' '{print $1}')
+            w=$(xrandr --nograb --current | awk '/\*/ {print $1}' | awk -F 'x' '{print $1}')
             ;;
     esac
 
