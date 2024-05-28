@@ -28,8 +28,7 @@ fixups =
 [$XDG_DEVELOP_DIR/testing/pass-clip]
 checkout = git clone https://github.com/ibizaman/pass-clip
 fixups =
-    sudo make install
-    sudo sed -i 's/Copy password into clipboard for 45 seconds//' /usr/lib/password-store/extensions/clip.bash
+    ln -sf $MR_REPO/clip.bash $PASSWORD_STORE_DIR/.extensions/clip.bash
 
 [$XDG_DEVELOP_DIR/testing/pfetch]
 checkout = git clone https://github.com/Un1q32/pfetch

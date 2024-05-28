@@ -30,8 +30,8 @@ checkout = git clone 'git@github.com:soifou/wpcli-alpine.git' 'wpcli-alpine'
 [$XDG_CONFIG_HOME/nvim]
 checkout = git clone 'soifou-gitolite:neovim' 'nvim'
 
-[$XDG_DATA_HOME/pass]
-checkout = git clone 'soifou-gitolite:pass-store' 'pass'
+[$XDG_DATA_HOME/password-store]
+checkout = git clone 'soifou-gitolite:pass-store' 'password-store'
 
 [$XDG_DATA_HOME/remind]
 checkout = git clone 'soifou-gitolite:remind' 'remind'
