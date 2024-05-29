@@ -126,7 +126,8 @@ bind g? help
 " Command prompt
 unbind :
 bind ,; fillcmdline_notrail
-unbind --mode=ex <C-c> " Allow to copy in the commandline
+" Allow to copy in the commandline
+unbind --mode=ex <C-c>
 bind --mode=ex <C-i> ex.next_completion
 bind --mode=ex <C-d> ex.prev_completion
 bind --mode=ex <C-k> ex.prev_history
@@ -233,10 +234,14 @@ bind --mode=visual <C-j> js document.getSelection().modify("extend","forward","l
 bind --mode=visual <C-l> js document.getSelection().modify("extend","forward","character")
 
 " Hints
-bind ,f hint -t " Open link in foreground tab
-bind F hint -b  " Open link in background tab
-bind w hint -w  " Open link in new window
-bind Y hint -y  " Yank link to clipboard
+" Open link in foreground tab
+bind F hint -t
+" Open link in background tab
+bind ,f hint -b
+" Open link in new window
+bind w hint -w
+" Yank link to clipboard
+bind Y hint -y
 
 " Optimize follow link for URL's.
 bindurl duckduckgo.com f hint -Jc [data-testid="result-title-a"]
