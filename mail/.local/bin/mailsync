@@ -51,23 +51,6 @@ else
     accounts=$*
 fi
 
-# Send a notification listing new mail
-displays="$(pgrep -a X\(org\|wayland\) | grep -wo "[0-9]*:[0-9]\+" | sort -u)"
-
-notify() {
-    for x in $displays; do
-        export DISPLAY=$x
-        # notify-send -i folder-teal-mail -u low "Mailsync" "$2 new mail(s) in \`$1\` account."
-    done
-}
-
-messageinfo() {
-    for x in $displays; do
-        export DISPLAY=$x
-        notify-send -i internet-mail "$from:" "$subject"
-    done
-}
-
 # Check an account for new mail. Notify if there is new content.
 syncandnotify() {
     acc="$(echo "$account" | sed "s/.*\///")"
@@ -91,7 +74,7 @@ syncandnotify() {
     if [ "$newcount" -gt "0" ]; then
         # Send a notification telling the user
         # how many new messages there are
-        notify "$acc" "$newcount" &
+        # notify "$acc" "$newcount" &
 
         # Then, for each new message
         for file in $new; do
@@ -101,7 +84,7 @@ syncandnotify() {
             subject=$(awk '/^Subject: / && ++n == 1,/^\<.*\>: / && ++i == 2' "$file" | head -n 1 | perl -CS -MEncode -ne 'print decode("MIME-Header", $_)' | sed 's/^Subject: //' | sed 's/^{[[:blank:]]*[\"'\''\<]*//;s/[\"'\''\>]*[[:blank:]]*$//' | tr -d '\n')
 
             # And send both to the user as a notification.
-            messageinfo &
+            notify-send -i internet-mail "$from:" "$subject"
         done
     fi
 }

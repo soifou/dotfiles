@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+case "$(uname)" in
+    Darwin)
+        set -- --tls-trust-file=$HOMEBREW_PREFIX/etc/ca-certificates/cert.pem \
+            "${@}"
+        ;;
+esac
+
+PATH=$(echo "$PATH" | tr ":" "\n" | grep -vE 'wrapper' | xargs | sed -e 's/ /:/g')
+exec msmtp "$@"
