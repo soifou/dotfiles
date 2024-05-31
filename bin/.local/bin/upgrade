@@ -26,16 +26,6 @@ debian() {
         }
     }
 
-    if command -v keybase > /dev/null 2>&1; then
-        yn "Update Keybase CLI?" && {
-            curl -O https://prerelease.keybase.io/keybase_amd64.deb
-            sudo dpkg -i keybase_amd64.deb
-            sudo apt-get install -f
-            run_keybase
-            rm -f keybase_amd64.deb
-        }
-    fi
-
     if command -v wezterm > /dev/null 2>&1; then
         yn "Update Wezterm?" && {
             curl -LO https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Debian12.deb

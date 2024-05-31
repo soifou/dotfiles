@@ -85,8 +85,6 @@
 .local/kitty.app
 .local/share/akonadi
 .local/share/icons
-.local/share/keybase/kbfs_block_cache
-.local/share/keybase/kbfs_sync_cache
 .local/share/org.kde.gwenview/recentfolders
 .local/share/Trash
 .local/share/vagrant/gems
