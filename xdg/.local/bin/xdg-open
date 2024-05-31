@@ -1,39 +1,52 @@
 #!/usr/bin/env sh
 
-# Extract and open URIs.
-# Requires mpv, nsxiv, zathura, transmission, curl, gallery-dl, gnu-utils
-# https://github.com/soystemd/dotfiles/blob/master/scripts/.local/bin/other/pipeurl
+set -x
 
-# If no argument given. Exit.
-[ -z "$1" ] && { exit; }
+[ -z "$1" ] && { exit 1; }
 
+case "$(uname)" in
+    Darwin)
+        image="qview"
+        video="ts mpv --no-terminal"
+        fallback=/usr/bin/open
+        ;;
+    Linux)
+        image="nsxiv -q -ab"
+        video="tsp mpv --no-terminal"
+        fallback=/usr/bin/xdg-open
+        ;;
+esac
+pdf=zathura
+web=firefox
+
+# ---
+
+_web() { exec setsid -- $web "$1" > /dev/null 2>&1; }
 _torrent() {
     pgrep -x transmission-da || (transmission-daemon && notify-send -i transmission -u low Transmission "Starting daemon..." && sleep 3)
     transmission-remote -a "$1" && notify-send -i transmission -u low Transmission "Torrent added."
 }
-
 _gdl() {
-    imgs=$(gallery-dl -d "$XDG_CACHE_HOME"/gallery-dl -- "$@" 2> /dev/null) || return 1
-    printf '%s\n' "$imgs" | sed 's/^# //' \
-        | xargs -d'\n' sh -c 'nsxiv -a -- "$@" || mpv -- "$@"' ''
+    rm -rf $XDG_CACHE_HOME/gallery-dl
+    # For .gifv links, gallery-dl convert it to mp4, thus the fallback to video player
+    gallery-dl \
+        -d $XDG_CACHE_HOME/gallery-dl \
+        --exec-after "$image {_directory}/* || $video {_directory}/*" \
+        -- "$@" > /dev/null 2>&1
 }
-
-_browser() { exec setsid -f -- "$BROWSER" "$1" > /dev/null 2>&1; }
 
 _o() {
     case $(file --mime-type "$1" -bL) in
-        application/pdf) zathura "$1" ;;
+        application/pdf) $pdf "$1" ;;
         application/x-bittorrent) _torrent "$1" ;;
-        audio/*) mpv "$1" ;;
-        image/gif) mv "$1" "$1".gif && nsxiv -ab "$1".gif ;;
-        image/*) nsxiv -b "$1" ;;
+        audio/*) $video "$1" ;;
+        image/*) $image "$1" ;;
         inode/directory) term --class=floating lf "$1" ;;
         # empty? return error
-        inode/x-empty) return 1 ;;
-        text/html) _browser "$1" ;;
-        text/*|application/pgp-keys) term "$EDITOR" "$1" ;;
-        # fallback
-        *) /usr/bin/xdg-open "$1" ;;
+        inode/x-empty) exit 1 ;;
+        text/html) _web "$1" ;;
+        text/* | application/pgp-keys) term "$EDITOR" "$1" ;;
+        *) $fallback "$1" ;;
     esac
 }
 
@@ -45,7 +58,7 @@ _dlo() {
 
 _dlo_wext() {
     TMPFILE=$(mktemp)
-    ext=$(echo "$1"|awk -F . '{print $NF}')
+    ext=$(echo "$1" | awk -F . '{print $NF}')
     curl -sL "$1" > "$TMPFILE.$ext"
     _o "$TMPFILE.$ext"
 }
@@ -57,39 +70,87 @@ if [ -d "$1" ] || [ -f "$1" ]; then
 fi
 
 case "$1" in
+    # Protocols
     file://*) _o ${1#file://} ;;
-    # Email
     mailto:*) term --class=mailto neomutt "$1" ;;
-    # Torrent
     magnet:* | *.torrent) _torrent "$1" ;;
     # Video
-    *mkv | *webm | *mp4 | */watch/* | *youtube.com* | *youtu.be* | *yewtu.be* | *gfycat.com* | *v.redd.it* | *dailymotion.com* | *peertube*)
-        nohup mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) -quiet "$1" > /dev/null 2>&1
+    *.mkv | \
+        *.webm | \
+        *.mp4 | \
+        */watch/* | \
+        *youtube.com* | \
+        *youtu.be* | \
+        *yewtu.be* | \
+        *gfycat.com* | \
+        *v.redd.it* | \
+        *dailymotion.com* | \
+        *peertube*)
+        $video "$1"
         ;;
     # Images
-    *png | *jpg | *jpe | *jpeg | *gif) _dlo "$1" ;;
-    *reddit.com/gallery* | *i.redd.it* | *imgur.com*) _gdl "$1" ;;
+    *.png | \
+        *.jpg | \
+        *.jpe | \
+        *.jpeg | \
+        *.gif | \
+        *.webp)
+        _dlo "$1"
+        ;;
+    # Archives
+    *.iso | \
+        *.img | \
+        *.bin | \
+        *.tar | \
+        *.tar.bz2 | \
+        *.tbz2 | \
+        *.tar.gz | \
+        *.tgz | \
+        *.tar.xz | \
+        *.txz | \
+        *.zip | \
+        *.7z | \
+        *.rar)
+        term --class=floating --hold aria2c --dir="$XDG_DOWNLOAD_DIR" "$1"
+        ;;
     # Documents
-    *.pdf | *.ps | *.epub) _dlo "$1" ;;
+    *.pdf | \
+        *.ps | \
+        *.djvu | \
+        *.cbr | \
+        *.cbz | \
+        *.epub)
+        _dlo "$1"
+        ;;
     # Music
-    *mp3 | *flac | *opus | *mp3?source*) _dlo "$1" ;;
-    # pastebins
+    *.mp3 | \
+        *.flac | \
+        *.opus | \
+        *mp3?source*)
+        _dlo "$1"
+        ;;
+    # URLs
+    *reddit.com/gallery* | *i.redd.it* | *preview.redd.it* | *imgur.com*) _gdl "$1" ;;
     *0paste.com*) _dlo "$1".txt ;;
     *pastebin.com*) _dlo "https://pastebin.com/raw/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
     *paste.debian.net*) _dlo "https://paste.debian.net/plain/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
     *termbin.com* | *0x0.st* | *ix.io* | *.txt) _dlo "$1" ;;
     *ghostbin.co*) _dlo "$1"/raw ;;
     *reddit.com*) term --class=rtv rtv "$1" ;;
-    *github.com/*) _browser "$1" ;;
-    *raw.githubusercontent.com*) _dlo_wext "$1" ;;
-    # HTTP links
-    http*)
-        mime=$(curl -s -I $1 | grep "content-type"| awk '{print $2}')
-        case $mime in
-            application/pdf) _dlo "$1" ;;
-            image/*) _dlo "$1" ;;
-            *) _browser "$1" ;;
-        esac
+    *codeberg.org/*/raw/* | *raw.githubusercontent.com*) _dlo_wext "$1" ;;
+    *github.com/* | *codeberg.org/* ) _web "$1" ;;
+    # Consider anything else has HTTP links
+    *)
+        res=$(curl -m 3 -sI $1)
+        if [ $? -eq 6 ]; then # unknown host
+            _dlo "$1"
+        else
+            mime=$($res | grep "content-type" | awk '{print $2}' | sed 's/;//' || 'text/html')
+            case $mime in
+                application/pdf) _dlo "$1" ;;
+                image/*) _dlo "$1" ;;
+                *) _web "$1" ;;
+            esac
+        fi
         ;;
-    *) _dlo "$1" ;;
 esac
