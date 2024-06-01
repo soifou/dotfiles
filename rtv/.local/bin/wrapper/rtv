@@ -5,10 +5,10 @@
 
 # File containing a list of subs, one per line.
 SUBS="$XDG_LOCAL_HOME"/share/ttrv/subreddits
-# Set custom browser (fallback when no mailcap entry found)
+# Override browser (fallback to it when no mailcap entry found)
 export BROWSER="xdg-open"
-# Use default less behaviour here (notably to clear screen)
-unset LESSKEYIN
+# Override less behaviour to clear screen
+export PAGER="less --clear-screen"
 
 [ -z "$1" ] && {
     [ -f "$SUBS" ] && {
