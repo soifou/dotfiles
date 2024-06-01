@@ -1,11 +1,33 @@
 #!/usr/bin/env sh
 
+# set -x
+
 # Launches kitty in single-instance mode if available.  Otherwise,
 # launches a URxvt client, starting the URxvt server if necessary.
 # Credits: https://github.com/sunaku/home/blob/master/bin/terminal
 
-command -v kitty >/dev/null &&
+command -v kitty >/dev/null && {
+    # `--class` argument is only used in a X11 env
+    # substitute it with `--title` instead
+    if [ "$(uname)" = "Darwin" ]; then
+        ARGS=()
+        while [ $# -gt 0 ]; do
+            case "$1" in
+                --class*)
+                    ARGS+=("${1//class/title}")
+                    shift
+                    ;;
+                *)
+                    ARGS+=("$1")
+                    shift
+                    ;;
+            esac
+        done
+        set -- "${ARGS[@]}"
+    fi
+
     exec kitty --single-instance --listen-on "$KITTY_LISTEN_ON" "$@"
+}
 
 urxvtc "$@"
 status=$?

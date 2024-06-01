@@ -75,6 +75,12 @@ macos() {
             }
         }
     fi
+
+    yn "Sync fonts?" && {
+        rm -f ~/Library/Fonts/*.ttf
+        find $XDG_DATA_HOME/fonts -name "*.ttf" -type f -exec cp {} ~/Library/Fonts \;
+        sudo fc-cache -fv
+    }
 }
 
 case $OSTYPE in

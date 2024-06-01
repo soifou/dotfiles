@@ -268,7 +268,7 @@ bindurl youtube.com n composite get_current_url | ytrss
 " Editor
 " Focus an input field, then <C-x>e will start vim instance with content of the
 " input (or blank)
-set editorcmd kitty --class floating $EDITOR %f
+set editorcmd term --class floating $EDITOR %f
 bind --mode=insert <C-x>e editor
 bind --mode=input <C-x>e editor
 " Uncomment to trigger editor directly on focus

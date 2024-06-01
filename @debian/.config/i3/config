@@ -100,7 +100,7 @@ bindsym $mod+w exec --no-startup-id ~/.local/bin/toggle-webcam
 # =============================================================================
 set $m ncmpcpp-ueberzug
 for_window [class="$m"] floating enable resize set 930 400; move scratchpad
-exec --no-startup-id $TERMINAL --class=$m $m
+exec --no-startup-id term --class=$m $m
 bindsym $mod+z [class="$m"] scratchpad show; [class="$m"] move position center
 bindsym $mod+Shift+z exec ~/.local/bin/workspace-zik
 
@@ -109,7 +109,7 @@ bindsym $mod+Shift+z exec ~/.local/bin/workspace-zik
 # =============================================================================
 set $f lf
 for_window [class="$f"] floating enable resize set 1024 600; move scratchpad
-exec --no-startup-id $TERMINAL --class=$f $f
+exec --no-startup-id term --class=$f $f
 bindsym $mod+Shift+f [class="$f"] scratchpad show; [class="$f"] move position center
 
 # =============================================================================
@@ -117,7 +117,7 @@ bindsym $mod+Shift+f [class="$f"] scratchpad show; [class="$f"] move position ce
 # =============================================================================
 # set $t tremc
 # for_window [class="$t"] floating enable resize set 1024 600; move scratchpad
-# exec --no-startup-id $TERMINAL --class=$t $t
+# exec --no-startup-id term --class=$t $t
 # bindsym $mod+Shift+t [class="$t"] scratchpad show; [class="$t"] move position center
 
 
