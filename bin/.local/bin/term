@@ -1,6 +1,4 @@
-#!/usr/bin/env sh
-
-# set -x
+#!/usr/bin/env bash
 
 # Launches kitty in single-instance mode if available.  Otherwise,
 # launches a URxvt client, starting the URxvt server if necessary.
