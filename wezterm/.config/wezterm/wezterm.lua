@@ -1,3 +1,4 @@
+-- TODO: use lua types from justinsgithub/wezterm-types
 local wezterm = require('wezterm')
 local events = require('events')
 local utils = require('utils')
@@ -10,8 +11,10 @@ end
 
 events.attach()
 
-config = utils.merge(config, {
-    -- https://wezfurlong.org/wezterm/config/lua/config/index.html
+-- https://wezfurlong.org/wezterm/config/lua/config/index.html
+---@type _.wezterm.ConfigBuilder
+---@diagnostic disable: missing-fields
+local prefs = {
     automatically_reload_config = false,
     check_for_updates = false,
     default_cursor_style = 'SteadyBar',
@@ -23,7 +26,8 @@ config = utils.merge(config, {
     use_fancy_tab_bar = false,
     window_close_confirmation = 'NeverPrompt',
     window_padding = { top = 25, bottom = 25, left = 34, right = 34 },
-})
+}
+config = utils.merge(config, prefs)
 
 for _, f in ipairs({ 'mapping', 'font', 'color' }) do
     config = utils.merge(config, require(('conf.%s'):format(f)))

@@ -46,6 +46,8 @@ local function lighten(hex, amount, fg)
     return blend(hex, fg or xrdb.foreground, math.abs(amount))
 end
 
+---@type _.wezterm.ConfigBuilder
+---@diagnostic disable: missing-fields
 return {
     colors = {
         foreground = xrdb.foreground,

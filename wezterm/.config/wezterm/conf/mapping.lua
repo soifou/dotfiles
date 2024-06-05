@@ -3,10 +3,12 @@ local utils = require('utils')
 local act = wezterm.action
 local mod = 'ALT'
 
+---@return _.wezterm.KeyBinding
 local function map(mods, key, action)
     return { mods = mods, key = key, action = action }
 end
 
+---@type _.wezterm.KeyBinding[]
 local keys = {
     -- Font size
     map(mod, "Backspace", "ResetFontSize"),
@@ -113,6 +115,7 @@ local key_tables = {
 }
 
 -- Mouse bindings
+---@type _.wezterm.MouseBinding[]
 local mouse_bindings = {
     -- open link on mod+left click
     {
@@ -152,6 +155,8 @@ local mouse_bindings = {
     },
 }
 
+---@type _.wezterm.ConfigBuilder
+---@diagnostic disable: missing-fields
 return {
     disable_default_key_bindings = true,
     keys = keys,
