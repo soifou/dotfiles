@@ -98,6 +98,7 @@ set searchurls.arch https://wiki.archlinux.org/index.php?search=%s&title=Special
 set searchurls.gh https://github.com/search?utf8=%E2%9C%93&q=%s&ref=simplesearch&type=code
 set searchurls.gr https://github.com/search?utf8=%E2%9C%93&q=%s&ref=simplesearch&type=repositories
 set searchurls.gi https://github.com/search?utf8=%E2%9C%93&q=%s&ref=simplesearch&type=issues
+set searchurls.gu https://github.com/search?utf8=%E2%9C%93&q=%s&ref=simplesearch&type=users
 set searchurls.gist https://gist.github.com/search?q=%s
 set searchurls.maps https://www.google.com/maps/search/%s
 set searchurls.imdb https://www.imdb.com/find?q=%s
