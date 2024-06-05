@@ -1,16 +1,44 @@
-# guess project path inside the web container
-getContainerPath() {
-    if [[ $DOCKER_WEBROOT_PATH == '/app' ]]; then
-        PROJECT=$(pwd | sed -e "s@$XDG_DEVELOP_DIR/@@g")
-        echo "$DOCKER_WEBROOT_PATH/$PROJECT"
-    else
-        echo "$DOCKER_WEBROOT_PATH"
-    fi
+DOCKER_NETWORK_NAME=lamp-network
+LAMP_REPO="$XDG_DEVELOP_DIR/soifou/docker/github/lamp"
+
+alias lamp="docker compose -f $LAMP_REPO/docker-compose.yml"
+
+## databases aliases
+alias mysql="lamp exec db mysql -uroot -proot"
+alias mysqldump="lamp exec db mysqldump -uroot -proot"
+alias mysqlimport="lamp exec -T db mysql -uroot -proot"
+alias psql="lamp exec postgres psql -U postgres"
+alias mongo="lamp exec mongo"
+
+alias sf="php bin/console"
+
+# list volumes/binds by container
+alias dvbc="docker container ls --format '{{ .ID }}' | xargs -I {} docker inspect -f '{{ .Name }}{{ printf \"\\n\" }}{{ range .Mounts }}{{ printf \"\\n\\t\" }}{{ .Type }} {{ if eq .Type \"bind\" }}{{ .Source }}{{ end }}{{ .Name }} => {{ .Destination }}{{ end }}{{ printf \"\\n\" }}' {}"
+
+# switch to different php-fpm versions
+lamp-fpm() {
+    docker compose -f $LAMP_REPO/docker-compose.yml stop php
+    docker compose -f $LAMP_REPO/docker-compose.yml rm -f php
+    [ "$1" ] &&
+        docker compose -f $LAMP_REPO/docker-compose.yml -f "$LAMP_REPO/docker-compose.php$1.yml" up -d php ||
+        docker compose -f $LAMP_REPO/docker-compose.yml up -d php
 }
+
+# switch to different mariadb versions
+lamp-mariadb() {
+    docker compose -f $LAMP_REPO/docker-compose.yml stop db
+    docker compose -f $LAMP_REPO/docker-compose.yml rm -f db
+    [ "$1" ] &&
+        docker compose -f "$LAMP_REPO/docker-compose.mariadb$1.yml" up -d db ||
+        docker compose -f $LAMP_REPO/docker-compose.yml up -d db
+}
+
 php() {
+    cpath="/app/${$(pwd)//$XDG_DEVELOP_DIR/}"
+
     # NOTE: add custom port in case we want to use the build-in php webserver feature
     # available in many php framework. (-p 8080:8080)
-    # $ php bin/console server:run 0.0.0.0:8080
+    # php bin/console server:run 0.0.0.0:8080
     # --add-host domain.test:172.17.0.5 \
     tty=
     tty -s && tty=--tty
@@ -18,18 +46,19 @@ php() {
         $tty \
         --interactive \
         --rm \
-        -v "$PWD":$(getContainerPath) \
-        -w $(getContainerPath) \
+        -v "$PWD":$cpath \
+        -w $cpath \
         -u `id -u`:`id -g` \
 		--env SSH_AUTH_SOCK=/ssh-auth.sock \
-        --env COMPOSER_HOME=$(getContainerPath)/.composer \
-        --env COMPOSER_CACHE_DIR=$(getContainerPath)/.composer/cache \
+        --env COMPOSER_HOME=$cpath/.composer \
+        --env COMPOSER_CACHE_DIR=$cpath/.composer/cache \
         -v /etc/passwd:/etc/passwd:ro \
         -v /etc/group:/etc/group:ro \
         -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-${PHP_VERSION:-8.2}-wkhtmltopdf ${@:1}
+        soifou/php-alpine:cli-${PHP_VERSION:-8.3}-wkhtmltopdf ${@:1}
 }
+
 composer() {
     tty=
     tty -s && tty=--tty
@@ -46,87 +75,10 @@ composer() {
         -v /etc/group:/etc/group:ro \
         -v $(pwd):/app \
         --env SSH_AUTH_SOCK=/ssh-auth.sock \
-        -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-${PHP_VERSION:-8.2}-composer ${@:1}
+        soifou/php-alpine:cli-${PHP_VERSION:-8.3}-composer ${@:1}
 }
-phppm() {
-    docker run --rm \
-        -v "$PWD":/var/www \
-        -p 8888:80 \
-        --net="$DOCKER_NETWORK_NAME" \
-        phppm/nginx --bootstrap=symfony --static-directory=web/ --app-env=dev
-}
-php7cc() {
-    docker run -it --rm \
-        -v $(pwd):/app \
-        --net=$DOCKER_NETWORK_NAME \
-        ypereirareis/php7cc:latest php7cc $1
-}
-wp() {
-    tty=
-    tty -s && tty=--tty
-    docker run \
-        $tty \
-        --interactive \
-        --rm \
-        -v $(pwd):/mnt \
-        -u `id -u`:`id -g` \
-        --net=$DOCKER_NETWORK_NAME \
-        soifou/wpcli-alpine:latest ${@:1}
-}
-magerun() {
-    tty=
-    tty -s && tty=--tty
-    docker run \
-        $tty \
-        --interactive \
-        --rm \
-        -v $XDG_CONFIG_HOME/magerun:/.n98-magerun \
-        -v $(pwd):/mnt \
-        -u `id -u`:`id -g` \
-        --net=$DOCKER_NETWORK_NAME \
-        soifou/n98-magerun-alpine ${@:1}
-}
-gitcheck() {
-    docker run --rm \
-        -v `pwd`:/files:ro \
-        badele/alpine-gitcheck
-}
-drush() {
-    docker run --rm -it \
-        -v $(pwd):/var/www/html \
-        -v ~/.composer:/home/composer/.composer \
-        -v ~/.ssh/id_rsa:/home/composer/.ssh/id_rsa:ro \
-        -v $(pwd)/aliases.drushrc.php:/root/.drush/aliases.drushrc.php \
-        -v $SSH_AUTH_SOCK:/ssh-auth.sock \
-        --env SSH_AUTH_SOCK=/ssh-auth.sock \
-        --net=$DOCKER_NETWORK_NAME \
-        drupaldocker/drush:8-alpine drush ${@:1}
-}
-drupal() {
-    docker run -ti --rm \
-        -v "$PWD":$(getContainerPath) \
-        -v ~/.console:/.console \
-        -w $(getContainerPath) \
-        -u `id -u`:`id -g` \
-        --net=$DOCKER_NETWORK_NAME \
-        drupalconsole/console:alpine ${@:1}
-}
-htop() {
-    docker run --rm -it \
-        --pid host \
-        --net none \
-        --name htop \
-        jess/htop
-}
-cloc() {
-    docker run -it --rm \
-        -v $(pwd):/mnt/code \
-        -u $(id -u $(whoami)) \
-        -w /mnt/code \
-        oopschen/docker-cloc:alpine ${@:1}
-}
+
 ngrok() {
     if [ "$#" -ne 2 ]; then
         echo "\e[0;35mOops, syntax is:\e[0m\n $ ngrok [web_container] [domain.dev]"
@@ -143,6 +95,7 @@ ngrok() {
         echo "To stop: docker kill $NGROK_CONTAINER_NAME"
     fi
 }
+
 adb() {
     if [[ $(docker ps | grep adbd | wc -l) == 0 ]]; then
         echo "\e[0;35mStarting an adbd server..."
@@ -154,6 +107,7 @@ adb() {
         --net container:adbd \
         sorccu/adb adb ${@:1}
 }
+
 dip() {
     if [ "$#" -ne 1 ]; then
         echo "\e[0;35mOops, syntax is:\e[0m\n $ dip [web_container]"

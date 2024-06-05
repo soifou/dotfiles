@@ -111,8 +111,6 @@ export LIBVIRT_DEFAULT_URI='qemu:///system'
 
 export DOCKER_BUILDKIT=1
 export BUILDKIT_PROGRESS=auto
-export DOCKER_NETWORK_NAME=lamp-network
-export DOCKER_WEBROOT_PATH=/app
 
 export ANSIBLE_CONFIG=$XDG_DEVELOP_DIR/$USER/ansible/sandbox/ansible.cfg
 export ANSIBLE_VAULT_PASSWORD_FILE=$XDG_LOCAL_HOME/bin/ansible-vault-pass
