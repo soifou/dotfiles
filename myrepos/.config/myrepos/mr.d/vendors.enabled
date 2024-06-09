@@ -11,9 +11,6 @@ fixups =
     cargo build --release
     sudo ln -sf $MR_REPO/target/release/wallust /usr/local/bin/wallust
 
-[$XDG_DEVELOP_DIR/testing/gpt4free]
-checkout = git clone https://github.com/xtekky/gpt4free
-
 [$XDG_DEVELOP_DIR/testing/git-quick-stats]
 checkout = git clone https://github.com/arzzen/git-quick-stats
 fixups =
@@ -58,6 +55,9 @@ fixups =
 [$XDG_DEVELOP_DIR/testing/zsh-completion-generator]
 checkout = git clone https://github.com/RobSis/zsh-completion-generator
 post_checkout = sudo ln -sf $MR_REPO/help2comp.py /usr/local/bin/help2comp
+
+# [$XDG_DEVELOP_DIR/testing/gpt4free]
+# checkout = git clone https://github.com/xtekky/gpt4free
 
 # [$XDG_DEVELOP_DIR/testing/fontpreview-ueberzug]
 # checkout = git clone https://github.com/OliverLew/fontpreview-ueberzug
