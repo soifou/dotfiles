@@ -77,8 +77,8 @@ macos() {
     fi
 
     yn "Sync fonts?" && {
-        rm -f ~/Library/Fonts/*.ttf
-        find $XDG_DATA_HOME/fonts -name "*.ttf" -type f -exec cp {} ~/Library/Fonts \;
+        rm -f ~/Library/Fonts/*.{o,t}tf
+        find $XDG_DATA_HOME/fonts -name "*.*tf" -type f -exec cp {} ~/Library/Fonts \;
         sudo fc-cache -fv
     }
 }
