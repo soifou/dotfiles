@@ -1,0 +1,26 @@
+---
+configurations:
+    - alias: gmail-perso
+      host: imap.gmail.com
+      port: 993
+      tls: true
+      tlsOptions:
+        rejectUnauthorized: false
+      username: fleur.fr
+      passwordCMD: pass google.com/mbsync.fleur.fr
+      boxes:
+        - mailbox: INBOX
+          onNewMail: mailsync gmail-perso-inbox
+          onNewMailPost: SKIP
+    - alias: gmail-pro
+      host: imap.gmail.com
+      port: 993
+      tls: true
+      tlsOptions:
+        rejectUnauthorized: false
+      username: francois.fleur
+      passwordCMD: pass google.com/mbsync.francois.fleur
+      boxes:
+        - mailbox: INBOX
+          onNewMail: mailsync gmail-pro-inbox
+          onNewMailPost: SKIP
