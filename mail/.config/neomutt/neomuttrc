@@ -1,10 +1,7 @@
-#  _   _                            _   _
-# | \ | |                          | | | |
-# |  \| | ___  ___  _ __ ___  _   _| |_| |_
-# | . ` |/ _ \/ _ \| '_ ` _ \| | | | __| __|
-# | |\  |  __/ (_) | | | | | | |_| | |_| |_
-# |_| \_|\___|\___/|_| |_| |_|\__,_|\__|\__|
-# https://neomutt.org/code/config_vars.html
+# ┏┓╻┏━╸┏━┓┏┳┓╻ ╻╺┳╸╺┳╸
+# ┃┗┫┣╸ ┃ ┃┃┃┃┃ ┃ ┃  ┃
+# ╹ ╹┗━╸┗━┛╹ ╹┗━┛ ╹  ╹
+# https://neomutt.org/man/neomuttrc
 # https://neomutt.org/guide/configuration.html
 # https://neomutt.org/guide/reference
 
@@ -22,22 +19,16 @@ set message_cachedir = $my_mutt_cache/messages
 set attach_save_dir = $XDG_DOWNLOAD_DIR
 
 # General
-set rfc2047_parameters = yes
 set mark_old = no       # Unread mail stay unread until read
 set mime_forward = yes  # Attachments are forwarded with mail
 set recall = no         # Won't ask "recall postponed" when composing
-set fast_reply          # Skip to compose when replying
-set fcc_attach          # Save attachments with the body
+set fast_reply = yes    # Skip to compose when replying
 set forward_format = "Fwd: %s"  # Format of subject when forwarding
-set forward_quote       # Include message in forwards
-set reverse_name        # Reply as whomever it was to
-set delete = ask-yes    # Ask me first when deleting email
-set text_flowed
+set forward_quote = yes # Include message in forwards
+set reverse_name = yes  # Reply as whomever it was to
+set text_flowed = yes
 set beep = no           # No beep on error
-set beep_new = no       # No beep on new mail
 set help = no           # No help bar
-set use_from = yes
-set envelope_from = yes
 
 # Encoding
 set charset = "utf-8"
@@ -51,8 +42,6 @@ set time_inc = 500      # Update display every n miliseconds
 set net_inc = 100       # Update diplay every n kilobytes for net ops
 set write_inc = 100     # Update progress every n messages written
 set mail_check = 0      # How often to check for new mail (time in seconds). Disabled, using mbsync.
-set mail_check_stats = no
-set mail_check_stats_interval = 60
 
 # Print
 set print_command = "lp"
@@ -60,35 +49,31 @@ set print = ask-yes
 
 # Signature
 set signature = $my_mutt/sig/default
-set sig_dashes = yes
 set sig_on_top = yes
 
-auto_view text/html
 # Default to text when available else use w3m/lynx when no text version
 alternative_order text/plain text/html
+auto_view text/html
 
 # Sort (by threads in reverse chronological order, new on top)
-set sort = reverse-threads
-set sort_aux = last-date-received
+set sort = reverse-date-received
+set sort_aux = reverse-threads
 set narrow_tree = yes
 
 # Quote (previous messages in replies)
-set include
-set indent_str='> '
+set include = yes
 set attribution="\n$indent_str%f wrote, on %d:"
 
 # Sidebar
-set sidebar_divider_char = ' ▏' # ' │ '
+set sidebar_divider_char = ' │ '
 set sidebar_folder_indent = yes
 set sidebar_format = '%D%?F? [%F]?%* %?N?%N/?%S'
 set sidebar_short_path = yes
-set sidebar_visible = no
 set sidebar_width = 25
 
 # Pager
 set tilde = yes         # Show tildes
 set wait_key = no       # Won't ask "press key to continue"
-set smart_wrap = yes    # Line wraps at word boundary
 set markers = no        # Disables the `+` displayed at line wraps
 set menu_context = 5    # Minimal of screenlines when scrolling
 set menu_move_off = no  # Bottom entry will never move anywhere besides the bottom
@@ -102,15 +87,13 @@ set to_chars = "󰀒"
 set crypt_chars = " "
 set flag_chars = "    "
 
-
-# Status bar for the different views
-set status_on_top = no
+# Status bar
 set status_format = "───[ %D ] %?r?[   %m ] ?%?n?[   %n ] ?%?d?[   %d ] ?%?t?[   %t ] ?%?F?[   %F ] ?%?p?[   %p ]?%|─"
 set pager_format = "───[ %n ] [%T %s]%* [   %{!%d %b · %T} ] %?X?[   %X ]? [   %P ]─"
 set compose_format = "───[  %l ] [  %a ]%>─"
 set attach_format = "%u%D   %T%-75.75d ?  %5s · %m/%M"
 
-# Use khard as addressbook manager
+# Address book manager
 set query_command = "khard email --parsable %s"
 
 # Alert before sending if body contains words regarding attachments and none has been attached

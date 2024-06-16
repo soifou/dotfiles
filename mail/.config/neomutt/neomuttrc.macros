@@ -6,7 +6,7 @@ set mark_macro_prefix = ","
 # W: Save selected attachment (set $attach_save_dir var to specify which dir)
 macro attach W "<save-entry><bol><eol>" "Save to downloads folder"
 
-# A: Attach files with lf file manager (press Space to select file(s) then o)
+# A: Attach files using a TUI file manager
 macro compose A "<shell-escape>neomutt-picker<enter><enter-command>source /tmp/neomutt-attachments<enter>" "Attach with lf"
 
 # A: Add sender to khard addressbook

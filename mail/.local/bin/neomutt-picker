@@ -1,15 +1,20 @@
 #!/usr/bin/env sh
 
-# Use lf filemanager (https://github.com/gokcehan/lf) in neomutt to add file as attachment
-# In lf, select file(s) with <space> then press <o> to valid selection(s)
+# Use a filemanager to add file(s) as attachment in a mail using neomutt.
+# Select hovered file(s) using <space>, press <o> to valid selection(s).
 # Credits: https://www.reddit.com/r/commandline/comments/cbxvdf/combine_neomutt_with_ranger/eu8xdip/
 
 tmpfile=/tmp/neomutt-attachments
 
 if [ -z "$1" ]; then
-    lf -selection-path $tmpfile &&
-        sed -i 's/^/<attach-file>/' $tmpfile &&
-        sed -i 's/$/<enter>/' $tmpfile &&
-        sed -i ':a;N;$!ba;s/\\n//g' $tmpfile &&
-        sed -i 's/^/push /' $tmpfile
+    if command -v yazi > /dev/null 2>&1; then
+        yazi --chooser-file $tmpfile
+    else
+        lf -selection-path $tmpfile
+    fi
+
+    sed -i 's/^/<attach-file>/' $tmpfile \
+        && sed -i 's/$/<enter>/' $tmpfile \
+        && sed -i ':a;N;$!ba;s/\\n//g' $tmpfile \
+        && sed -i 's/^/push /' $tmpfile
 fi
