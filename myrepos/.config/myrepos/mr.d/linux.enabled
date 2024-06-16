@@ -31,6 +31,9 @@ checkout = git clone https://github.com/Toqozz/wired-notify
 fixups =
     mkdir -p $XDG_CONFIG_HOME/wired
     # sudo apt install -y libxss-dev
+    # FIXME: https://github.com/rust-lang/rustup/issues/2704#issuecomment-815062952
+    # rustup component remove cargo
+    # rustup component add cargo
     cargo build --release
     chmod +x $MR_REPO/target/release/wired
     sudo ln -sf $MR_REPO/target/release/wired /usr/local/bin/wired
@@ -53,4 +56,10 @@ skip = ! is_linux
 [$XDG_DEVELOP_DIR/testing/xpub]
 checkout = git clone https://github.com/Ventto/xpub
 post_checkout = sudo ln -sf $MR_REPO/src/xpub.sh /usr/local/bin/xpub
+skip = ! is_linux
+
+[$XDG_DEVELOP_DIR/testing/zwm]
+checkout = git clone https://github.com/Yazeed1s/zwm
+fixups =
+    sudo make install
 skip = ! is_linux
