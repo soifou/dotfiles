@@ -29,6 +29,7 @@ for i in \
     hadolint \
     inotifywait \
     mbsync \
+    mpd \
     neomutt \
     newsboat \
     picom \

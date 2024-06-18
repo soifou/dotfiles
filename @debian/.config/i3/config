@@ -98,7 +98,7 @@ bindsym $mod+w exec --no-startup-id ~/.local/bin/toggle-webcam
 # =============================================================================
 # Music
 # =============================================================================
-set $m ncmpcpp-ueberzug
+set $m ncmpcpp-miniplayer
 for_window [class="$m"] floating enable resize set 930 400; move scratchpad
 exec --no-startup-id term --class=$m $m
 bindsym $mod+z [class="$m"] scratchpad show; [class="$m"] move position center

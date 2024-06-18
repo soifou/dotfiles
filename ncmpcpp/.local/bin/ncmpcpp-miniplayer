@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+export FIFO_ICAT="/tmp/mpd-icat-${PPID}"
+
+cleanup() {
+    rm "$FIFO_ICAT" 2>/dev/null
+    rm /tmp/mpd_cover.jpg 2>/dev/null
+    pkill -P $$ 2>/dev/null
+    pkill -f ncmpcpp-cover
+}
+
+pkill -P $$ 2>/dev/null
+rm "$FIFO_ICAT" 2>/dev/null
+mkfifo "$FIFO_ICAT" >/dev/null
+trap cleanup EXIT 2>/dev/null
+tail --follow "$FIFO_ICAT" | xargs -L1 kitten icat &
+
+ncmpcpp --quiet -c "$XDG_CONFIG_HOME"/ncmpcpp/miniplayer
+cleanup

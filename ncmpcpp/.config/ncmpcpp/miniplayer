@@ -9,7 +9,7 @@ mpd_port = "6600"
 ##### song format #####
 song_list_format = " $5{%a  %t $R%l}|{%f}"
 song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%b (%y) $4⟫$3⟫ $5%t"
-now_playing_prefix = " $b$5"
+now_playing_prefix = " $b$5"
 now_playing_suffix = "$/b$9"
 
 ##### UI positions (for cover art) #####
