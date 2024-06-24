@@ -56,7 +56,7 @@ alternative_order text/plain text/html
 auto_view text/html
 
 # Sort (by threads in reverse chronological order, new on top)
-set sort = reverse-date-received
+set sort = threads
 set sort_aux = reverse-threads
 set narrow_tree = yes
 
