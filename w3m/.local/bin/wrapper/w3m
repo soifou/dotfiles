@@ -5,8 +5,11 @@ set -- -config "${XDG_CONFIG_HOME}"/w3m/config \
     -no-mouse \
     "${@}"
 
+# Remove wrapper dir from PATH to call real binary
+PATH=$(echo "$PATH" | tr ":" "\n" | grep -vE 'wrapper' | xargs | sed -e 's/ /:/g')
+
 # Run w3m
 command -v w3m >/dev/null && \
     # Fake home folder to avoid w3m keeps creating an empty dir
     HOME="${XDG_DATA_HOME}"/w3m \
-    /usr/bin/w3m "$@"
+    w3m "$@"
