@@ -32,6 +32,12 @@ fixups =
 checkout = git clone https://github.com/Un1q32/pfetch
 post_checkout = sudo ln -sf $MR_REPO/pfetch /usr/local/bin/
 
+[$XDG_DEVELOP_DIR/testing/shrinkpdf]
+checkout = git clone https://github.com/aklomp/shrinkpdf
+fixups =
+    chmod +x shrinkpdf.sh
+    sudo ln -sf $MR_REPO/shrinkpdf.sh /usr/local/bin/shrinkpdf
+
 [$XDG_DEVELOP_DIR/testing/translate-shell]
 checkout = git clone https://github.com/soimort/translate-shell
 fixups =
@@ -42,11 +48,9 @@ fixups =
 checkout = git clone https://github.com/tremc/tremc
 post_checkout = sudo ln -sf $MR_REPO/tremc /usr/local/bin/
 
-[$XDG_DEVELOP_DIR/testing/shrinkpdf]
-checkout = git clone https://github.com/aklomp/shrinkpdf
-fixups =
-    chmod +x shrinkpdf.sh
-    sudo ln -sf $MR_REPO/shrinkpdf.sh /usr/local/bin/shrinkpdf
+[$XDG_DEVELOP_DIR/testing/viewhtmlmsg]
+checkout = git clone https://github.com/lilydjwg/viewhtmlmsg
+post_checkout = sudo ln -sf $MR_REPO/viewhtmlmsg /usr/local/bin/
 
 [$XDG_DEVELOP_DIR/testing/ytfzf]
 checkout = git clone https://github.com/pystardust/ytfzf
