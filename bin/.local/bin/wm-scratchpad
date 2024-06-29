@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# Emulate i3 scratchpad
+
+[ -z "$2" ] && PROGRAM=$1 || PROGRAM=$2
+
+case "$(uname)" in
+    Darwin)
+        yabai -m window --toggle $1 || term --title=$1 $1
+        ;;
+    Linux)
+        xdotool search --onlyvisible --classname "$1" windowunmap \
+            || ( xdotool search --classname "$1" windowmap; xdotool search --classname "$1" windowactivate; ) \
+            || ( term --class "$1" "$PROGRAM"; xdotool search --classname "$1" windowraise; )
+        ;;
+esac

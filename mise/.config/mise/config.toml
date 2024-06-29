@@ -9,6 +9,7 @@ node = 'lts'
 php = '8.3.1'
 python = 'latest'
 rust = 'latest'
+usage = "latest"
 
 [env]
 PHP_WITHOUT_PDO_PGSQL = "yes"

@@ -1,9 +1,25 @@
 #!/usr/bin/env sh
 
-# Hides your terminal window before launching an external program and unhides it after quitting.
-# Dependency: xdo (https://github.com/baskerville/xdo)
+# Hides your terminal window before launching an external program and unhides it
+# after quitting.
 
-id=$(xdo id)
-xdo hide
-$("$@") > /dev/null 2>&1
-xdo show "$id"
+case "$(uname)" in
+    Darwin)
+        scratchpad=$(yabai -m query --windows --window | jq -r ".scratchpad")
+        [ -z $scratchpad ] && {
+            # See: https://github.com/koekeishiya/yabai/issues/1123
+            yabai -m window --insert stack
+            "$@"
+        } || {
+            yabai -m window --toggle $scratchpad
+            "$@"
+            yabai -m window --toggle $scratchpad
+        }
+        ;;
+    Linux)
+        id=$(xdo id)
+        xdo hide
+        $("$@") > /dev/null 2>&1
+        xdo show "$id"
+        ;;
+esac

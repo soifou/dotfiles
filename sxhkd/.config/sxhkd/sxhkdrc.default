@@ -171,7 +171,7 @@ ctrl + { Escape, space, shift + space }
 
 # music player
 super + z
-    bsp-scratchpad music-player ncmpcpp-miniplayer
+    wm-scratchpad music-player ncmpcpp-miniplayer
 
 # current song notification
 super + shift + z
@@ -179,11 +179,11 @@ super + shift + z
 
 # filemanager
 super + shift + f
-    bsp-scratchpad lf
+    wm-scratchpad lf
 
 # torrent, youtube
 super + x ; {0,9}
-    bsp-scratchpad {tremc, ytfzf ytfzf -sl}
+    wm-scratchpad {tremc, ytfzf ytfzf -sl}
 
 # locker
 super + Escape

@@ -1,10 +1,8 @@
-application/x-php; term --class=floating $EDITOR '%s';
 application/ics; rem ics %s
-application/*; swallow xdg-open '%s'; test=test -n "$DISPLAY"; needsterminal;
-image/*; swallow xdg-open '%s'; test=test -n "$DISPLAY";
+application/*; swallow xdg-open %s
+audio/*; mpv '%s'
+image/*; swallow xdg-open %s
 text/calendar; rem ics %s
-text/csv; subl '%s'; test=test -n "$DISPLAY";
 text/html; w3m -dump -I %{charset} -T text/html; copiousoutput;
 text/*; less '%s'; needsterminal
-video/*; mpv '%s' --loop=inf; test=test -n "$DISPLAY"
-audio/*; mpv '%s';
+video/*; mpv '%s' --loop=inf
