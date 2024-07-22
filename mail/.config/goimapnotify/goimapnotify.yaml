@@ -5,7 +5,8 @@ configurations:
       port: 993
       tls: true
       tlsOptions:
-        rejectUnauthorized: false
+        rejectUnauthorized: true
+        starttls: false
       username: fleur.fr
       passwordCMD: pass google.com/mbsync.fleur.fr
       boxes:
@@ -17,7 +18,8 @@ configurations:
       port: 993
       tls: true
       tlsOptions:
-        rejectUnauthorized: false
+        rejectUnauthorized: true
+        starttls: false
       username: francois.fleur
       passwordCMD: pass google.com/mbsync.francois.fleur
       boxes:
