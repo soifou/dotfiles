@@ -6,12 +6,10 @@ znap source ohmyzsh/ohmyzsh plugins/git-auto-fetch/git-auto-fetch.plugin.zsh
 znap source zsh-vi-more/vi-increment
 
 znap source zsh-users/zsh-autosuggestions
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-    ZSH_AUTOSUGGEST_USE_ASYNC=1
-    ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-    ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
-    # Reject autosuggestion when using vim `A`
-    ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
+    # Defaults: zsh-users/zsh-autosuggestions/blob/master/src/config.zsh
+    # FIXME: `completion` strategy break somehow kitty shell-integration cursor shape
+    # Do not accept suggestion when using `forward-char` widget
+    ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/forward-char/}")
 
 znap source zdharma-continuum/fast-syntax-highlighting
     FAST_HIGHLIGHT[git-cmsg-len]=72
