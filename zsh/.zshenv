@@ -19,6 +19,7 @@ export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 ## Config
 export BUNDLE_USER_HOME="$XDG_CONFIG_HOME"/bundle
+export COLIMA_HOME="$XDG_CONFIG_HOME"/colima
 export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
