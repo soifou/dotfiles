@@ -182,8 +182,8 @@ super + shift + f
     wm-scratchpad lf
 
 # torrent, youtube
-super + x ; {0,9}
-    wm-scratchpad {tremc, ytfzf ytfzf -sl}
+super + x ; {0,9,8,t}
+    wm-scratchpad {tremc, ytfzf ytfzf -sl, play, typioca}
 
 # locker
 super + Escape

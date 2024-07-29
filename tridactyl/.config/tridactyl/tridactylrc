@@ -73,10 +73,11 @@ blacklistadd typingclub.com
 
 " Alias {{{
 
-alias db open http://db.test
-alias mail open http://mail.test
-alias cups open http://127.0.0.1:631/
-alias syncthing open http://127.0.0.1:8384/
+alias mail tabopen https://mail.test
+alias mercure tabopen https://mercure.test
+alias traefik tabopen https://router.test
+alias cups tabopen http://127.0.0.1:631/
+alias syncthing tabopen http://127.0.0.1:8384/
 
 alias viewarchive js tri.excmds.open("https://web.archive.org/*/" + window.location.href)
 
@@ -89,7 +90,7 @@ alias viewarchive js tri.excmds.open("https://web.archive.org/*/" + window.locat
 
 " Set DuckDuckGo as default search engine
 " ie: o tridactyl will show results from duckduckgo
-set searchengine duckduckgo
+" set searchengine duckduckgo
 
 " Enhance search
 " ie. search tridactyl on github: o gh tridactyl
@@ -253,7 +254,7 @@ bindurl youtube.com t hint -J
 
 " Focus hidden inputs (gi) on some websites
 bindurl ^https://github.com gi hint -Vc .AppHeader-searchButton
-bindurl ^http://db.test gi hint -Vc .sqlarea,input
+bindurl adminer.* gi hint -Vc .sqlarea,input
 
 " Open in reader mode
 " bind --mode=normal ,q composite hint -pipe a href | jsb -p tri.excmds.tabopen("about:reader?url=" + JS_ARG)

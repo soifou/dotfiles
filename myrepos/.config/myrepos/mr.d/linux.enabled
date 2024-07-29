@@ -26,6 +26,18 @@ fixups =
     sudo make install DESTDIR=/usr PREFIX=/local
 skip = ! is_linux
 
+# [$XDG_DEVELOP_DIR/testing/rofi-emoji]
+# checkout = git clone https://github.com/Mange/rofi-emoji
+# fixups =
+#     autoreconf -i
+#     rm -rf build
+#     mkdir build
+#     cd build/
+#     ../configure
+#     make
+#     sudo make install
+# skip = ! is_linux
+
 [$XDG_DEVELOP_DIR/testing/wired-notify]
 checkout = git clone https://github.com/Toqozz/wired-notify
 fixups =
@@ -63,3 +75,4 @@ checkout = git clone https://github.com/Yazeed1s/zwm
 fixups =
     sudo make install
 skip = ! is_linux
+

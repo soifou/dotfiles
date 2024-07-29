@@ -137,6 +137,7 @@ case "$1" in
     *termbin.com* | *0x0.st* | *ix.io* | *.txt) _dlo "$1" ;;
     *ghostbin.co*) _dlo "$1"/raw ;;
     *reddit.com*) term --class=rtv rtv "$1" ;;
+    /r/* ) term --class=rtv rtv "https://www.reddit.com/$1" ;;
     *codeberg.org/*/raw/* | *raw.githubusercontent.com*) _dlo_wext "$1" ;;
     *github.com/* | *codeberg.org/* ) _web "$1" ;;
     # Consider anything else has HTTP links

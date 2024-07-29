@@ -1,71 +1,26 @@
-DOCKER_NETWORK_NAME=lamp-network
-LAMP_REPO="$XDG_DEVELOP_DIR/soifou/docker/github/lamp"
-
-alias lamp="docker compose -f $LAMP_REPO/docker-compose.yml"
-
-## databases aliases
-alias mysql="lamp exec db mysql -uroot -proot"
-alias mysqldump="lamp exec db mysqldump -uroot -proot"
-alias mysqlimport="lamp exec -T db mysql -uroot -proot"
-alias psql="lamp exec postgres psql -U postgres"
-alias mongo="lamp exec mongo"
-
 alias sf="php bin/console"
 
 # list volumes/binds by container
 alias dvbc="docker container ls --format '{{ .ID }}' | xargs -I {} docker inspect -f '{{ .Name }}{{ printf \"\\n\" }}{{ range .Mounts }}{{ printf \"\\n\\t\" }}{{ .Type }} {{ if eq .Type \"bind\" }}{{ .Source }}{{ end }}{{ .Name }} => {{ .Destination }}{{ end }}{{ printf \"\\n\" }}' {}"
 
-# switch to different php-fpm versions
-lamp-fpm() {
-    docker compose -f $LAMP_REPO/docker-compose.yml stop php
-    docker compose -f $LAMP_REPO/docker-compose.yml rm -f php
-    [ "$1" ] &&
-        docker compose -f $LAMP_REPO/docker-compose.yml -f "$LAMP_REPO/docker-compose.php$1.yml" up -d php ||
-        docker compose -f $LAMP_REPO/docker-compose.yml up -d php
-}
-
-# switch to different mariadb versions
-lamp-mariadb() {
-    docker compose -f $LAMP_REPO/docker-compose.yml stop db
-    docker compose -f $LAMP_REPO/docker-compose.yml rm -f db
-    [ "$1" ] &&
-        docker compose -f "$LAMP_REPO/docker-compose.mariadb$1.yml" up -d db ||
-        docker compose -f $LAMP_REPO/docker-compose.yml up -d db
-}
-
 php() {
     cpath="/app/${$(pwd)//$XDG_DEVELOP_DIR/}"
 
-    # NOTE: add custom port in case we want to use the build-in php webserver feature
-    # available in many php framework. (-p 8080:8080)
-    # php bin/console server:run 0.0.0.0:8080
-    # --add-host domain.test:172.17.0.5 \
     tty=
     tty -s && tty=--tty
-    docker run \
-        $tty \
-        --interactive \
-        --rm \
+
+    docker run $tty -i --rm \
+        -u `id -u`:`id -g` \
         -v "$PWD":$cpath \
         -w $cpath \
-        -u `id -u`:`id -g` \
-		--env SSH_AUTH_SOCK=/ssh-auth.sock \
-        --env COMPOSER_HOME=$cpath/.composer \
-        --env COMPOSER_CACHE_DIR=$cpath/.composer/cache \
-        -v /etc/passwd:/etc/passwd:ro \
-        -v /etc/group:/etc/group:ro \
-        -v $SSH_AUTH_SOCK:/ssh-auth.sock \
         --net=$DOCKER_NETWORK_NAME \
-        soifou/php-alpine:cli-${PHP_VERSION:-8.3}-wkhtmltopdf ${@:1}
+        soifou/php-alpine:cli-${PHP_VERSION:-8.3}-wkhtmltopdf php ${@:1}
 }
 
 composer() {
     tty=
     tty -s && tty=--tty
-    docker run \
-        $tty \
-        --interactive \
-        --rm \
+    docker run $tty -i --rm \
         -u `id -u`:`id -g` \
         --env COMPOSER_HOME=/composer \
         -v $COMPOSER_HOME:/composer \
