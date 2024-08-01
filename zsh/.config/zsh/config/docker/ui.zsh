@@ -12,15 +12,7 @@ audacity() {
         --name audacity \
         soifou/audacity
 }
-# transmission-qt() {
-#     docker run --rm -it \
-#         -v /tmp/.X11-unix:/tmp/.X11-unix \
-#         -v $HOME/Downloads:/Torrents \
-#         -v $HOME/.config/transmission:/root/.config/transmission \
-#         -v /etc/machine-id:/etc/machine-id \
-#         -e DISPLAY=unix$DISPLAY \
-#         soifou/transmission-qt
-# }
+
 snes9x() {
     docker run --rm -it \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
