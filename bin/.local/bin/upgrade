@@ -117,6 +117,10 @@ if command -v brew > /dev/null 2>&1; then
     yn "Update brew?" && {
         brew update
         brew upgrade
+        case $OSTYPE in
+            # FIXME: Figure out why casks are not detected as outdated
+            darwin*) brew upgrade --cask $(brew list --cask | xargs) ;;
+        esac
         brew cleanup
     }
 fi
