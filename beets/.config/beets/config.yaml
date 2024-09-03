@@ -8,6 +8,8 @@ library: ~/Music/beets.db
 import:
     move: yes
     write: yes
+    # Prefer transliterated english names
+    languages: en
 
 plugins:
     - embedart
