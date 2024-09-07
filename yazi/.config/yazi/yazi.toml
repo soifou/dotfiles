@@ -1,0 +1,12 @@
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+[manager]
+linemode = "size"
+ratio = [ 1, 4, 3 ]
+scrolloff = 5
+show_hidden = true
+show_symlink = true
+sort_by = "modified"
+sort_dir_first = true
+sort_reverse = true
+sort_sensitive = true

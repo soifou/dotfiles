@@ -102,6 +102,12 @@ if command -v mr > /dev/null 2>&1; then
         && mr -c "$XDG_CONFIG_HOME"/myrepos/config -t -d "$XDG_DATA_HOME" update
 fi
 
+if command -v yazi > /dev/null 2>&1; then
+    if command -v ya > /dev/null 2>&1; then
+        yn "Update yazi plugins?" && ya pack -u
+    fi
+fi
+
 if command -v docker > /dev/null 2>&1; then
     yn "Update docker images?" && {
         docker images --format "{{.Repository}}:{{.Tag}}" \

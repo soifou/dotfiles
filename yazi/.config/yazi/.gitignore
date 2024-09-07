@@ -1,0 +1,4 @@
+flavors/*
+!flavors/.gitkeep
+plugins/*
+!plugins/.gitkeep
