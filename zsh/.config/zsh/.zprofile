@@ -10,12 +10,14 @@
 ## homebrew
 if [ -d "$HOMEBREW_PREFIX" ]; then
     export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
-    # prefer GNU utils when available
-    for i in coreutils grep; do
-        if [ -d $HOMEBREW_PREFIX/opt/$i/libexec/gnubin ]; then
-            export PATH="$HOMEBREW_PREFIX/opt/$i/libexec/gnubin:$PATH"
-        fi
-    done
+    case $OSTYPE in
+        darwin*)
+            # prefer GNU utils when available
+            for i in $(fd -t d --base-directory $HOMEBREW_PREFIX/Cellar gnubin | awk -F/ '{print $1}'); do
+                export PATH="$HOMEBREW_PREFIX/opt/$i/libexec/gnubin:$PATH"
+            done
+        ;;
+    esac
 fi
 ## composer
 [ -d "$COMPOSER_HOME" ] && export PATH="$COMPOSER_HOME/vendor/bin:$PATH"
