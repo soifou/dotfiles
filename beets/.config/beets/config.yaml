@@ -1,9 +1,10 @@
 ---
-# Credit to: https://gist.github.com/DjSlash/3313266de1b696667725
-
 ## Global options
 directory: ~/Music/library
 library: ~/Music/beets.db
+
+include:
+    - secret.yaml
 
 import:
     move: yes
@@ -12,6 +13,7 @@ import:
     languages: en
 
 plugins:
+    - discogs
     - embedart
     - fetchart
     - inline
@@ -20,9 +22,8 @@ plugins:
     - mpdupdate
     - the
 
-# We can include password file too
-# include:
-    # - mbpasswd.yaml
+discogs:
+    index_tracks: yes
 
 # I don't want underscores as per the default, just remove it.
 # http://beets.readthedocs.io/en/latest/reference/config.html#replace

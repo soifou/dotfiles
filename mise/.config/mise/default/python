@@ -12,6 +12,7 @@ pip
 pycodestyle
 python-mpd2
 python-openstackclient
+python3-discogs-client
 pywal
 pywalfox
 remind
