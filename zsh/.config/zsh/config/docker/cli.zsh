@@ -42,9 +42,9 @@ adb() {
 }
 
 dip() {
-    if [ "$#" -ne 1 ]; then
-        echo "\e[0;35mOops, syntax is:\e[0m\n $ dip [web_container]"
-    else
-        docker inspect $1 | grep IPAddress | tail -n1 | awk -F\" '{print $4}'
-    fi
+    container=$1
+    [ "$#" -ne 1 ] && {
+        container=$(docker container ls --format="table {{.Names}}" | sed '1d' | fzf)
+    }
+    docker inspect $container | grep IPAddress | tail -n1 | awk -F\" '{print $4}'
 }
