@@ -10,34 +10,12 @@
     # list last commit for each branches
     blc = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) - %(color:red)%(objectname:short)%(color:reset) - %(color:yellow)%(refname:short)%(color:reset) - (%(color:green)%(committerdate:relative)%(color:reset)) - %(authorname) - %(contents:subject)'
 
-    # add file(s) to repository
-    af = "!f() {\
-        [ $# -ge 1 ] && git add --verbose ${@} || {\
-            command -v fzf >/dev/null && {\
-                git ls-files -o --exclude-standard | fzf -m --no-height --prompt=' add file(s) > ' \
-                --preview 'bat -n --color=always --line-range :500 {1}' \
-                --preview-window border-left |\
-                tr '\\\n' ' ' | xargs -r git add --verbose;\
-            }\
-        }\
-    };f"
-
     # delete branch(es) except develop, main and current
     bd = "!f() {\
         [ $# -ge 1 ] && git branch | grep -v '*\\|main\\|develop' | grep ${@} | xargs git branch -d || {\
             command -v fzf >/dev/null && {\
                 git branch --sort=authordate | grep -v '*\\|main\\|develop' |\
                 fzf -m --prompt=' delete branch(es) > ' | tr -d ' \\*' | xargs -r git branch -d;\
-            }\
-        }\
-    };f"
-
-    # checkout branch
-    co = "!f() {\
-        [ $# -ge 1 ] && git checkout ${@} || {\
-            command -v fzf >/dev/null && {\
-                git branch --sort=authordate | grep -v '*' |\
-                fzf --prompt=' checkout > ' | xargs -n 1 git checkout;\
             }\
         }\
     };f"

@@ -3,12 +3,14 @@
 # Go to the root folder of a git repository
 alias cwd='cd "$(git rev-parse --show-toplevel)"'
 
+alias ga='git add'
 alias gaa='git add --all'
 alias gb='git branch'
 alias gba='git branch -a'
 alias gcam='git commit -a -m'
 alias gcb='git checkout -b'
 alias gcd='git checkout develop'
+alias gco='git checkout'
 alias gcm='git checkout main || git checkout master'
 alias gcmsg='git commit -m'
 alias gd='git diff'
@@ -19,9 +21,7 @@ alias grh='git reset --hard'
 alias gst='git status'
 
 ## Alias of git aliases, declared in ~/.config/git/conf.d/aliases
-alias ga='git af'                    # add file(s) to repository
 alias gbd='git bd'                   # delete branch(es)
-alias gco='git co'                   # checkout branch
 alias gcp='git cp'                   # cherry-pick
 alias grl='git rl "border-left"'     # show commits from current remote branch that have been fetched
 alias ghh='git h "border-left"'      # show commits history (vertical)
