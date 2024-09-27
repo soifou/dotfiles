@@ -6,7 +6,7 @@ fixups =
     sudo make CMAKE_BUILD_TYPE=Release install
 
 [$XDG_DEVELOP_DIR/testing/wallust]
-checkout = git clone -b dev --single-branch https://codeberg.org/explosion-mental/wallust
+checkout = git clone https://codeberg.org/explosion-mental/wallust
 fixups =
     cargo build --release
     cp -f $MR_REPO/completions/_wallust ~/.local/share/zsh/site-functions/
