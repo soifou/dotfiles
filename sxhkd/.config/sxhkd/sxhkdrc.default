@@ -155,7 +155,7 @@ super + p
 
 # music control
 XF86Audio{Next,Prev,Play,Stop}
-    mpc {next,prev,toggle,stop} >/dev/null
+    rmpc {next,prev,togglepause,stop} >/dev/null
 
 # audio control
 XF86Audio{Raise,Lower}Volume
@@ -172,10 +172,6 @@ ctrl + { Escape, space, shift + space }
 # music player
 super + z
     wm-scratchpad music-player rmpc
-
-# current song notification
-super + shift + z
-    mpc-notify
 
 # filemanager
 super + shift + f

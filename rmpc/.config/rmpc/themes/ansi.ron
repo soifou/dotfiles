@@ -5,16 +5,17 @@
     album_art_position: Left,
     album_art_width_percent: 33,
     default_album_art_path: None,
-    show_song_table_header: true,
+    show_song_table_header: false,
     draw_borders: true,
     browser_column_widths: [20, 38, 42],
     background_color: None,
+    text_color: None,
     header_background_color: None,
     modal_background_color: None,
     tab_bar: (
         enabled: true,
         active_style: (fg: "black", bg: "blue", modifiers: "Bold"),
-        inactive_style: (),
+        inactive_style: (fg: "blue", bg: "black"),
     ),
     highlighted_item_style: (fg: "blue", modifiers: "Bold"),
     current_item_style: (fg: "black", bg: "blue", modifiers: "Bold"),
@@ -23,7 +24,7 @@
     symbols: (song: "󰈣 ", dir: " ", marker: "▍"),
     progress_bar: (
         symbols: ["─", "╼", " "],
-        track_style: (fg: "#1e2030"),
+        track_style: (fg: "green"),
         elapsed_style: (fg: "blue"),
         thumb_style: (fg: "blue"),
     ),
@@ -107,5 +108,20 @@
             ),
         ],
     ),
+    browser_song_format: [
+        (
+            kind: Group([
+                (kind: Property(Track)),
+                (kind: Text(" ")),
+            ])
+        ),
+        (
+            kind: Group([
+                (kind: Property(Artist)),
+                (kind: Text(" - ")),
+                (kind: Property(Title)),
+            ]),
+            default: (kind: Property(Filename))
+        ),
+    ],
 )
-

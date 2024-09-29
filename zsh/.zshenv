@@ -59,7 +59,7 @@ export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export XCURSOR_PATH=${XCURSOR_PATH}:$XDG_DATA_HOME/icons
 ## State
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history
-
+export MPD_HOST="$XDG_STATE_HOME"/mpd/socket
 
 ## Default programs
 export BROWSER=firefox
