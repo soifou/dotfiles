@@ -12,6 +12,12 @@ fixups =
     cp -f $MR_REPO/completions/_wallust ~/.local/share/zsh/site-functions/
     sudo ln -sf $MR_REPO/target/release/wallust /usr/local/bin/wallust
 
+[$XDG_DEVELOP_DIR/testing/rmpc]
+checkout = git clone https://github.com/mierak/rmpc
+fixups =
+    cargo build --release
+    sudo ln -sf $MR_REPO/target/release/rmpc /usr/local/bin/rmpc
+
 [$XDG_DEVELOP_DIR/testing/git-quick-stats]
 checkout = git clone https://github.com/arzzen/git-quick-stats
 fixups =
