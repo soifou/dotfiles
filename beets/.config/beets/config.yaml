@@ -72,19 +72,17 @@ album_fields:
     cdtype: u'[%s]' % (albumtype.lower()) if albumtype else u''
     notalbum: 0 if albumtype and albumtype.lower() == 'album' else 1
 
-# the
-# https://beets.readthedocs.io/en/latest/plugins/the.html
+# the: https://beets.readthedocs.io/en/latest/plugins/the.html
 # I use this one because $albumartist_sort is not what I want in my paths.
 the:
     a: no
 
+# mpdupdate: https://docs.beets.io/en/latest/plugins/mpdupdate.html#mpdupdate-plugin
 # Needs extra lib "python-mpd2" lib if using python 3.6
-mpd:
-    host: localhost
-    port: 6600
+# mpd: ~
 
+# embedart: https://beets.readthedocs.io/en/latest/plugins/embedart.html
 embedart:
-    # "Avoid embedding album art for files that already have art embedded."  See
-    # <https://beets.readthedocs.io/en/latest/plugins/embedart.html>.
+    # Avoid embedding album art for files that already have art embedded.
     ifempty: yes
     maxwidth: 1000
