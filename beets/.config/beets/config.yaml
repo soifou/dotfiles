@@ -81,8 +81,32 @@ the:
 # Needs extra lib "python-mpd2" lib if using python 3.6
 # mpd: ~
 
+# fetchart: https://beets.readthedocs.io/en/latest/plugins/fetchart.html
+fetchart:
+    sources:
+        - coverart: release
+        - coverart: releasegroup
+        - albumart
+        - amazon
+        - google
+        - itunes
+        - fanarttv
+        - lastfm
+        - wikipedia
+    auto: yes
+    cautious: yes
+    minwidth: 500
+    maxwidth: 1200
+    cover_format: jpeg
+    store_source: yes
+
 # embedart: https://beets.readthedocs.io/en/latest/plugins/embedart.html
 embedart:
     # Avoid embedding album art for files that already have art embedded.
     ifempty: yes
     maxwidth: 1000
+
+# lyrics: https://beets.readthedocs.io/en/stable/plugins/lyrics.html
+lyrics:
+    # Prefer synced over plain lyrics
+    synced: yes
