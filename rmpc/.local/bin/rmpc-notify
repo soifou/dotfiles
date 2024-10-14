@@ -2,7 +2,7 @@
 
 TMP_DIR="/tmp/rmpc"
 
-mkdir -p "$TMP_DIR" && cp  $XDG_CONFIG_HOME/rmpc/vinyl.jpg $TMP_DIR/default_album_art.jpg
+mkdir -p "$TMP_DIR" && cp $XDG_CONFIG_HOME/rmpc/vinyl.jpg $TMP_DIR/default_album_art.jpg
 
 # Where to temporarily store the album art received from rmpc
 # NOTE: notify-send need an image extension to actually display it!

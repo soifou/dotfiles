@@ -47,7 +47,7 @@ Options:
   -l, --love             Show some love to current track.
   -s, --status           Display status of the scrobbler.
   -t, --toggle           Toggle scrobbling.
-  -h, help               Show this help.
+  -h, --help             Show this help.
 "
 _help(){ echo "$__usage"; exit; }
 
@@ -55,5 +55,6 @@ case "$1" in
     --love|-l) love ;;
     --status|-s) status ;;
     --toggle|-t) toggle ;;
-    --help|-h|*) _help ;;
+    --help|-h) _help ;;
+    *) toggle ;;
 esac
