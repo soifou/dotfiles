@@ -3,4 +3,5 @@ script-opts/modernx.conf
 scripts/*
 !scripts/history.lua
 !scripts/notify.lua
+!scripts/pause_indicator.lua
 !scripts/redshift_toggle.lua
