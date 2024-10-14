@@ -42,30 +42,30 @@
             "S":       ExternalCommand(command: ["scrobbler"], description: "Toggle Last.fm scrobbling mode"),
         },
         navigation: {
-            "k":       Up,
-            "j":       Down,
             "h":       Left,
+            "j":       Down,
+            "k":       Up,
             "l":       Right,
-            "<C-k>":   PaneUp,
-            "<C-j>":   PaneDown,
             "<C-h>":   PaneLeft,
+            "<C-j>":   PaneDown,
+            "<C-k>":   PaneUp,
             "<C-l>":   PaneRight,
+            "<C-d>":   DownHalf,
             "<C-u>":   UpHalf,
+            "J":       MoveDown,
+            "K":       MoveUp,
+            "n":       NextResult,
             "N":       PreviousResult,
             "a":       Add,
             "A":       AddAll,
-            "n":       NextResult,
             "g":       Top,
-            "<Space>": Select,
             "G":       Bottom,
+            "<Space>": Select,
             "<CR>":    Confirm,
             "i":       FocusInput,
-            "J":       MoveDown,
-            "<C-d>":   DownHalf,
             "/":       EnterSearch,
             "<C-c>":   Close,
             "<Esc>":   Close,
-            "K":       MoveUp,
             "D":       Delete,
         },
         queue: {
@@ -88,49 +88,24 @@
                 (value: "genre",       label: "Genre"),
             ],
         ),
-        tabs: [
-            (
-                name: "Queue",
-                border_type: None,
-                pane: Split(
-                    direction: Vertical,
-                    panes: [
-                        (size: "25%", pane: Pane(AlbumArt)),
-                        (size: "75%", pane: Pane(Queue))
-                    ],
-                ),
-            ),
-            (
-                name: "Directories",
-                border_type: None,
-                pane: Pane(Directories),
-            ),
-            (
-                name: "Artists",
-                border_type: None,
-                pane: Pane(Artists),
-            ),
-            (
-                name: "Album Artists",
-                border_type: None,
-                pane: Pane(AlbumArtists),
-            ),
-            (
-                name: "Albums",
-                border_type: None,
-                pane: Pane(Albums),
-            ),
-            (
-                name: "Playlists",
-                border_type: None,
-                pane: Pane(Playlists),
-            ),
-            (
-                name: "Search",
-                border_type: None,
-                pane: Pane(Search),
-            ),
-        ],
     ),
+    tabs: [
+        (
+            name: "Queue",
+            border_type: Full,
+            pane: Split(
+                direction: Horizontal,
+                panes: [
+                    (size: "72%", pane: Pane(Queue)),
+                    (size: "28%", pane: Pane(AlbumArt))
+                ],
+            ),
+        ),
+        (name: "Directories", border_type: Full, pane: Pane(Directories)),
+        (name: "Artists", border_type: None, pane: Pane(Artists)),
+        (name: "Album Artists", border_type: None, pane: Pane(AlbumArtists)),
+        (name: "Albums", border_type: None, pane: Pane(Albums)),
+        (name: "Playlists", border_type: None, pane: Pane(Playlists)),
+        (name: "Search", border_type: None, pane: Pane(Search)),
+    ],
 )
-

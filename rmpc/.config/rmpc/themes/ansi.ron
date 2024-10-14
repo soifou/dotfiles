@@ -2,8 +2,6 @@
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
 (
-    album_art_position: Left,
-    album_art_width_percent: 33,
     default_album_art_path: None,
     show_song_table_header: false,
     draw_borders: true,
@@ -36,28 +34,20 @@
     ),
     song_table_format: [
         (
-            prop: (kind: Property(Artist),
-                default: (kind: Text("Unknown"))
-            ),
-            width_percent: 20,
+            prop: (kind: Property(Artist), default: (kind: Text("Unknown"))),
+            width_percent: 22,
         ),
         (
-            prop: (kind: Property(Title),
-                default: (kind: Text("Unknown"))
-            ),
+            prop: (kind: Property(Title), default: (kind: Property(Filename))),
             width_percent: 35,
         ),
         (
-            prop: (kind: Property(Album), style: (fg: "white"),
-                default: (kind: Text("Unknown Album"), style: (fg: "white"))
-            ),
-            width_percent: 30,
+            prop: (kind: Property(Album), default: (kind: Text("Unknown Album"))),
+            width_percent: 37,
         ),
         (
-            prop: (kind: Property(Duration),
-                default: (kind: Text("-"))
-            ),
-            width_percent: 15,
+            prop: (kind: Property(Duration), default: (kind: Text("-"))),
+            width_percent: 6,
             alignment: Right,
         ),
     ],
@@ -70,7 +60,9 @@
                     (kind: Text("]"), style: (fg: "yellow", modifiers: "Bold"))
                 ],
                 center: [
-                    (kind: Property(Song(Title)), style: (modifiers: "Bold"),
+                    (
+                        kind: Property(Song(Title)),
+                        style: (modifiers: "Bold"),
                         default: (kind: Text("No Song"), style: (modifiers: "Bold"))
                     )
                 ],
@@ -88,11 +80,14 @@
                     (kind: Text(" kbps)"))
                 ],
                 center: [
-                    (kind: Property(Song(Artist)), style: (fg: "yellow", modifiers: "Bold"),
+                    (
+                        kind: Property(Song(Artist)),
+                        style: (fg: "yellow", modifiers: "Bold"),
                         default: (kind: Text("Unknown"), style: (fg: "yellow", modifiers: "Bold"))
                     ),
                     (kind: Text(" - ")),
-                    (kind: Property(Song(Album)),
+                    (
+                        kind: Property(Song(Album)),
                         default: (kind: Text("Unknown Album"))
                     )
                 ],
