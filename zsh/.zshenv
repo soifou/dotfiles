@@ -27,6 +27,7 @@ export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/brew/Brewfile"
 export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME"/httpie
 export LESSKEYIN="$XDG_CONFIG_HOME"/less/lesskey
 export MEDNAFEN_HOME="$XDG_CONFIG_HOME"/mednafen
+export MR_CONFIG="$XDG_CONFIG_HOME/myrepos/config"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PACKER_CONFIG_DIR="$XDG_CONFIG_HOME"/packer
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/rc
