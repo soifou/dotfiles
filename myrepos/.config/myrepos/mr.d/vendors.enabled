@@ -31,7 +31,7 @@ fixups =
     ln -sf $MR_REPO $XDG_CONFIG_HOME/Insomnia/plugins/insomnia-plugin-wal-theme
 
 [$XDG_DEVELOP_DIR/testing/pass-clip]
-checkout = git clone https://github.com/ibizaman/pass-clip
+checkout = git clone -b provider-choose https://github.com/soifou/pass-clip
 fixups =
     ln -sf $MR_REPO/clip.bash $PASSWORD_STORE_DIR/.extensions/clip.bash
 
