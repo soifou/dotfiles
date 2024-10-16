@@ -1,15 +1,24 @@
+[settings]
+pipx_uvx = true
+
 [tools]
 # global tool versions go here
-# you can set these with `mise use -g`
-# and `mise install --yes
-deno = 'latest'
-go = 'latest'
-lua = '5.1'
-node = 'lts'
-php = '8.3.1'
-python = 'latest'
-rust = 'latest'
+# you can set these with `mise use -g` and `mise install --yes
+# or choose using mise upgrade --interactive
+deno = "latest"
+go = "latest"
+lua = "5.1"
+node = "lts"
+php = "8.3.1"
+python = "latest"
+rust = "latest"
 usage = "latest"
+# ---
+"ubi:BurntSushi/ripgrep" = { version = "latest", exe = "rg" }
+"ubi:achristmascarl/rainfrog" = "latest"
+"ubi:astral-sh/uv" = "latest"
+"ubi:eza-community/eza" = "latest"
+"ubi:junegunn/fzf" = "latest"
 
 [env]
 PHP_WITHOUT_PDO_PGSQL = "yes"
