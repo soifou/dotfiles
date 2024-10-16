@@ -13,7 +13,7 @@
     tab_bar: (
         enabled: true,
         active_style: (fg: "black", bg: "blue", modifiers: "Bold"),
-        inactive_style: (fg: "blue", bg: "black"),
+        inactive_style: (fg: "blue"),
     ),
     highlighted_item_style: (fg: "blue", modifiers: "Bold"),
     current_item_style: (fg: "black", bg: "blue", modifiers: "Bold"),

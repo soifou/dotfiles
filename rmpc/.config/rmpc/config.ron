@@ -6,6 +6,7 @@
     cache_dir: Some("/tmp/rmpc/cache"),
     on_song_change: ["rmpc-notify"],
     volume_step: 5,
+    scrolloff: 2,
     status_update_interval_ms: 1000,
     select_current_song_on_change: false,
     album_art: (

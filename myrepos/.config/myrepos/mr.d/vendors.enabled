@@ -16,6 +16,7 @@ fixups =
 checkout = git clone https://github.com/mierak/rmpc
 fixups =
     cargo build --release
+    cp -f $MR_REPO/target/completions/_rmpc ~/.local/share/zsh/site-functions/
     sudo ln -sf $MR_REPO/target/release/rmpc /usr/local/bin/rmpc
 
 [$XDG_DEVELOP_DIR/testing/git-quick-stats]
