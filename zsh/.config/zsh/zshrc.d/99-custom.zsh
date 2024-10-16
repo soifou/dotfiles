@@ -39,40 +39,40 @@ command -v cargo >/dev/null &&
 command -v mise >/dev/null && {
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_mise ] && znap fpath _mise 'mise completion zsh'
     znap eval mise 'mise activate zsh'
+}
 
-    ## eza
-    mise which eza && {
-        alias ls="eza -a -F --hyperlink"
-        alias l="eza -la --group-directories-first --time-style=long-iso --hyperlink"
-        tree() {
-            eza --tree -a --color=always --icons=always \
-                --no-quotes --hyperlink --ignore-glob .git "$@" |
-                sed '1d' | less
-        }
+# NOTE: Tools installed using mise must be declared *after* activating mise
+
+command -v eza >/dev/null && {
+    alias ls="eza -a -F --hyperlink"
+    alias l="eza -la --group-directories-first --time-style=long-iso --hyperlink"
+    tree() {
+        eza --tree -a --color=always --icons=always \
+            --no-quotes --hyperlink --ignore-glob .git "$@" |
+            sed '1d' | less
     }
+}
 
-    ## fzf
-    mise which fzf && {
-        # Replace builtin <C-r> (backward incremental search)
-        # with an fzf-driven, searchable list of history entries.
-        # Credits: https://github.com/joshskidmore/zsh-fzf-history-search
-        fzf_history_search() {
-          candidates=(${(f)"$(fc -li -1 0 | fzf --info=hidden +s -e -q "$BUFFER")"})
-          local ret=$?
-          if [ -n "$candidates" ]; then
-            BUFFER="${candidates[@]/(#m)*/${${(As: :)MATCH}[4,-1]}}"
-            BUFFER="${BUFFER[@]/(#b)(?)\\n/$match[1]
-        }"
-            zle vi-fetch-history -n $BUFFER
-          fi
-          zle reset-prompt
-          return $ret
-        }
-        autoload fzf_history_search
-        zle -N fzf_history_search
-        bindkey '^r' fzf_history_search
-
-        # Fuzzy find children dirs of current with <C-f>
-        bindkey -s '^f' '^Ucd "$(fd --type directory | fzf)"^M'
+command -v fzf >/dev/null && {
+    # Replace builtin <C-r> (backward incremental search)
+    # with an fzf-driven, searchable list of history entries.
+    # Credits: https://github.com/joshskidmore/zsh-fzf-history-search
+    fzf_history_search() {
+      candidates=(${(f)"$(fc -li -1 0 | fzf --info=hidden +s -e -q "$BUFFER")"})
+      local ret=$?
+      if [ -n "$candidates" ]; then
+        BUFFER="${candidates[@]/(#m)*/${${(As: :)MATCH}[4,-1]}}"
+        BUFFER="${BUFFER[@]/(#b)(?)\\n/$match[1]
+    }"
+        zle vi-fetch-history -n $BUFFER
+      fi
+      zle reset-prompt
+      return $ret
     }
+    autoload fzf_history_search
+    zle -N fzf_history_search
+    bindkey '^r' fzf_history_search
+
+    # Fuzzy find children dirs of current with <C-f>
+    bindkey -s '^f' '^Ucd "$(fd --type directory | fzf)"^M'
 }
