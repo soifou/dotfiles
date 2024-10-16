@@ -133,31 +133,6 @@ toggle-ctrl-z() { fg; }
 zle -N toggle-ctrl-z
 bindkey '^z' toggle-ctrl-z
 
-# Fzf
-command -v fzf >/dev/null && {
-    # Replace builtin <C-r> (backward incremental search)
-    # with an fzf-driven, searchable list of history entries.
-    # Credits: https://github.com/joshskidmore/zsh-fzf-history-search
-    fzf_history_search() {
-      candidates=(${(f)"$(fc -li -1 0 | fzf --info=hidden +s -e -q "$BUFFER")"})
-      local ret=$?
-      if [ -n "$candidates" ]; then
-        BUFFER="${candidates[@]/(#m)*/${${(As: :)MATCH}[4,-1]}}"
-        BUFFER="${BUFFER[@]/(#b)(?)\\n/$match[1]
-    }"
-        zle vi-fetch-history -n $BUFFER
-      fi
-      zle reset-prompt
-      return $ret
-    }
-    autoload fzf_history_search
-    zle -N fzf_history_search
-    bindkey '^r' fzf_history_search
-
-    # Fuzzy find children dirs of current with <C-f>
-    bindkey -s '^f' '^Ucd "$(fd --type directory | fzf)"^M'
-}
-
 # Lf
 command -v lf >/dev/null && {
     # Enter lf from current dir with <C-o>
