@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+set -e
+
+PATH=$(echo "$PATH" | tr ":" "\n" | grep -vE 'wrapper' | xargs | sed -e 's/ /:/g')
+
+find_mrconfig() {
+    local dir="$1"
+    local limit="$2"
+    local count=0
+
+    while [ $count -lt $limit ]; do
+        if [ -f "$dir/.mrconfig" ]; then
+            echo "$dir/.mrconfig"
+            return
+        fi
+        dir=$(dirname "$dir")
+        count=$((count + 1))
+    done
+
+    echo "${MR_CONFIG:-}"
+}
+
+config_file=$(find_mrconfig "$(pwd)" 2)
+[ -z "$config_file" ] \
+    && command mr "$@" \
+    || command mr --trust-all --config "$config_file" "$@"
