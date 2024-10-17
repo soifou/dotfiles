@@ -2,8 +2,6 @@
 
 set -e
 
-PATH=$(echo "$PATH" | tr ":" "\n" | grep -vE 'wrapper' | xargs | sed -e 's/ /:/g')
-
 find_mrconfig() {
     local dir="$1"
     local limit="$2"
@@ -23,5 +21,5 @@ find_mrconfig() {
 
 config_file=$(find_mrconfig "$(pwd)" 2)
 [ -z "$config_file" ] \
-    && command mr "$@" \
-    || command mr --trust-all --config "$config_file" "$@"
+    && command $HOMEBREW_PREFIX/bin/mr "$@" \
+    || command $HOMEBREW_PREFIX/bin/mr --trust-all --config "$config_file" "$@"
