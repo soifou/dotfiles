@@ -1,24 +1,34 @@
+[env]
+MISE_NODE_DEFAULT_PACKAGES_FILE = "{{env.XDG_CONFIG_HOME}}/mise/default/nodejs"
+NODE_OPTIONS = "--disable-warning=ExperimentalWarning"
+
 [settings]
+asdf_compat = false
+experimental = true
+go_default_packages_file = "~/.config/mise/default/golang"
+jobs = 4
+legacy_version_file = false
 pipx_uvx = true
+python_compile = true
+python_default_packages_file = "~/.config/mise/default/python"
+raw = false                                                    # pipe plugins to stdin/stdout/stderr
+trusted_config_paths = [ '~/.config/mise' ]
 
 [tools]
-# global tool versions go here
-# you can set these with `mise use -g` and `mise install --yes
-# or choose using mise upgrade --interactive
 deno = "latest"
 go = "latest"
 lua = "5.1"
-node = "lts"
-php = "8.3.1"
+node = "23.0.0"
 python = "latest"
 rust = "latest"
 usage = "latest"
+
+# Backends
+# ---
+"cargo:vimv" = "latest"
 # ---
 "ubi:BurntSushi/ripgrep" = { version = "latest", exe = "rg" }
 "ubi:achristmascarl/rainfrog" = "latest"
 "ubi:astral-sh/uv" = "latest"
-"ubi:eza-community/eza" = "latest"
+"ubi:cargo-bins/cargo-binstall" = "latest"
 "ubi:junegunn/fzf" = "latest"
-
-[env]
-PHP_WITHOUT_PDO_PGSQL = "yes"

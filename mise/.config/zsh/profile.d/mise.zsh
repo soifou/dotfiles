@@ -1,10 +1,9 @@
 #!/usr/bin/env zsh
 
 if command -v mise > /dev/null; then
-    export ASDF_CRATE_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/mise/default/rust
-    export MISE_GO_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/mise/default/golang
-    export MISE_NODE_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/mise/default/nodejs
-    export MISE_PYTHON_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/mise/default/python
+    # Set local config
+    [ ! -f $XDG_CONFIG_HOME/mise/config.local.toml ] \
+        && ln -s $XDG_CONFIG_HOME/mise/config.{$(uname -n),local}.toml
 
     # Make available some binaries that might be used on startup.
     # These paths will be dynamically managed by mise during interactive shell.

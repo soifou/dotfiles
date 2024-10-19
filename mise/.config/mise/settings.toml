@@ -1,9 +1,0 @@
-asdf_compat = false
-experimental = true
-jobs = 4
-legacy_version_file = false
-python_compile = true
-raw = false # pipe plugins to stdin/stdout/stderr
-trusted_config_paths = [
-    '~/.config/mise/config.toml',
-]
