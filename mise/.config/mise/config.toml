@@ -6,12 +6,14 @@ NODE_OPTIONS = "--disable-warning=ExperimentalWarning"
 asdf_compat = false
 experimental = true
 go_default_packages_file = "~/.config/mise/default/golang"
+go_set_gobin = true
+go_set_gopath = true
 jobs = 4
 legacy_version_file = false
 pipx_uvx = true
 python_compile = true
 python_default_packages_file = "~/.config/mise/default/python"
-raw = false                                                    # pipe plugins to stdin/stdout/stderr
+raw = false
 trusted_config_paths = [ '~/.config/mise' ]
 
 [tools]
