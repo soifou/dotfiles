@@ -9,19 +9,20 @@ _prompt() {
     rofi -theme prompt.rasi -dmenu -p "$1 :" -input /dev/null -lines 0
 }
 
-while read file; do
+while read -r file; do
     case "$1" in
-    "C-r")
-        name="$(_prompt "Rename")"
-        [ "$name" != "" ] && mv "$file" "$(dirname $file)/$name"
-        ;;
-    "C-d")
-        name="$(_prompt "Confirm deletion (y)")"
-        [ "$name" = "y" ] && rm -f "$file"
-        ;;
-    "C-x") rm -f "$file" ;;
-    "C-w") cp -f "$file" "${XDG_PICTURES_DIR:-~/Pictures}"/wallpapers/current && wal-switcher current ;;
-    "C-m") convert -rotate 90 "$file" "$file" ;;
-    "C-p") lp -d "$PRINTER" "$file" ;;
+        "C-r")
+            name="$(_prompt "Rename")"
+            [ "$name" != "" ] && mv "$file" "$(dirname $file)/$name"
+            ;;
+        "C-d")
+            name="$(_prompt "Confirm deletion (y)")"
+            [ "$name" = "y" ] && rm -f "$file"
+            ;;
+        "C-x") rm -f "$file" ;;
+        "C-w") ln -sf "$file" "${XDG_PICTURES_DIR:-~/Pictures}"/wallpapers/current \
+            && theme-select themes/dark ;;
+        "C-m") convert -rotate 90 "$file" "$file" ;;
+        "C-p") lp -d "$PRINTER" "$file" ;;
     esac
 done

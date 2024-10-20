@@ -1,0 +1,170 @@
+#!/usr/bin/env sh
+
+set -x
+
+[ -z "$1" ] && {
+    echo "Argument required"
+    exit 1
+}
+
+_wallust() { wallust -q -s -d $XDG_CONFIG_HOME/wallust "$@"; }
+
+_generate_palette() {
+    if [ ! -f "$file" ]; then
+        _wallust theme $1
+        return 1
+    fi
+
+    mime=$(file --mime-type $file | awk '{print $2}')
+    case "$mime" in
+        application/json)
+            _wallust cs --format pywal $file
+            [ $? -eq 1 ] && {
+                echo "Failed when generating templates"
+                exit 1
+            }
+            wall=$(cat $file | jq -er .wallpaper)
+            [ $wall != "null" ] && {
+                file=$WALLPAPER_PATH/$wall
+                mime=$(file --mime-type $file | awk '{print $2}')
+                ln -sf "$file" "$WALLPAPER_PATH/current"
+            }
+            ;;
+        image/*)
+            _wallust run --palette ${2:-dark} $file
+            [ $? -eq 1 ] && {
+                echo "Failed when generating templates"
+                exit 1
+            }
+            ;;
+    esac
+}
+
+_reload_wallpaper() {
+    # FIXME: do not kill if no wall
+    pgrep -x paperview && pkill -9 paperview
+
+    [ -f "$XDG_CACHE_HOME"/mpvbg.pid ] && {
+        kill -9 "$(cat "$XDG_CACHE_HOME"/mpvbg.pid)"
+        rm -f "$XDG_CACHE_HOME"/mpvbg.pid
+    }
+
+    case "$mime" in
+        *png* | *jpg* | *jpeg*)
+            # FIXME: apply on if not the same
+            # [ "$(readlink -f "$WALLPAPER_PATH/current")" != "$file" ] && xwallpaper --zoom "$file"
+            xwallpaper --zoom "$file"
+            ;;
+        # Set gif with paperview, a high performance animated desktop background setter
+        *gif*)
+            command -v paperview > /dev/null 2>&1 || {
+                echo >&2 "Please install first paperview (https://github.com/glouw/paperview). Aborting."
+                exit 1
+            }
+
+            GWF="$XDG_CACHE_HOME"/paperview
+            GFN="$(basename -s .gif "$file")"
+            mkdir -p "$GWF/$GFN"
+            if [ -n "$(find "$GWF/$GFN" -prune -empty 2> /dev/null)" ]; then
+                cp "$file" "$GWF/$GFN"
+                cd "$GWF/$GFN" || exit
+                convert -coalesce "$GFN".gif out.bmp
+                rm -f "$GFN".gif
+            fi
+            paperview "$GWF/$GFN" 5 &
+            ;;
+        # Play a video on the root window with mpv
+        # Note this does not work with a compositor running (eg. picom)
+        # see: https://github.com/joshua-sterner/mpvbg/blob/master/mpvbg.sh
+        *webm* | *mp4* | *mkv*)
+            mpv --no-config -wid 0 --keepaspect=no --loop --really-quiet --name=mpvbg --title=mpvbg "$file" &
+            echo $! > "$XDG_CACHE_HOME"/mpvbg.pid
+            # store our pid here so we can avoid killing our background later
+            # Example: $ kill $(pgrep mpv | grep -v $(pgrep -P $(cat $XDG_CACHE_HOME/mpvbg.pid)))
+            #           --- Here we are killing "all mpvs, except with THIS PID"
+            #           --- This lets us kill a video we're watching, without stopping our desktop background!
+            ;;
+    esac
+}
+
+_guess_theme() {
+    colors="$XDG_CACHE_HOME/colors.json"
+    [ -f $colors ] || { echo dark; exit; }
+    case "$(cat $colors | jq -r ".special.background" | cut -c2-2)" in
+        A | B | C | D | E | F | 7 | 8 | 9) echo light ;;
+        *) echo dark ;;
+    esac
+}
+
+# TODO: Reload icon themes
+# rofi -icon-theme: "Papirus-Dark"
+# Search for Papirus in dots too
+
+# TODO: Only apply if current theme has changed current
+# TODO: https://github.com/vinceliuice/WhiteSur-gtk-theme
+_reload_gtk() {
+    configs="xsettingsd/xsettingsd.conf gtk-3.0/settings.ini"
+    # We suppose here the Gtk theme name is Adwaita-[dark|light]
+    # using xfconf, eg. xfconf-query -c xsettings -p /Net/ThemeName -s Adwaita-dark
+    [ "$theme" = "dark" ] && pattern="-light/-dark" || pattern="-dark/-light"
+
+    for i in $configs; do
+        sed -i "s/$pattern/g" "$XDG_CONFIG_HOME/$i"
+    done
+
+    pkill -1 xsettingsd
+}
+
+_reload() { pgrep -x "$1" > /dev/null && pkill -USR1 "$1"; }
+
+# -------------
+
+file="$(readlink -f $1)"
+_generate_palette "$@"
+theme=$(_guess_theme)
+
+[ -n "$KITTY_PID" ] && {
+    kill -s USR1 $KITTY_PID
+    kitten @ set-colors --all --configured "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf
+}
+# killall -SIGUSR1 kitty
+# _reload kitty
+
+_reload nvim
+
+case "$(uname -s)" in
+    Darwin)
+        # Set theme
+        case $theme in
+            dark) dark="true" ;;
+            light) dark="false" ;;
+        esac
+        osascript -e "tell app \"System Events\" to tell appearance preferences to set dark mode to $dark"
+
+        # Set wallpaper on all spaces
+        # NOTE: Need first to set System Settings > Wallpaper > "Show on all Spaces"
+        # See: https://apple.stackexchange.com/questions/465221/modify-show-on-all-spaces-wallpaper-setting-by-shell-on-macos-sonoma
+        case "$mime" in
+            *png* | *jpg* | *jpeg*)
+                plist="$HOME/Library/Application Support/com.apple.wallpaper/Store/Index.plist"
+                old=$(plutil -p "$plist" | grep -m 1 relative | awk '{print $3}' | xargs)
+                new="file://$file"
+                [ $old != $new ] && {
+                    /usr/libexec/PlistBuddy \
+                        -c "set AllSpacesAndDisplays:Desktop:Content:Choices:0:Files:0:relative $new" \
+                        "$plist"
+                    killall WallpaperAgent
+                }
+                ;;
+        esac
+        ;;
+    Linux)
+        command -v xrdb > /dev/null && xrdb -load "$XDG_CONFIG_HOME"/x/Xresources
+        # pgrep -x i3 > /dev/null && i3-msg restart
+        pgrep -x bspwm > /dev/null && bspc wm -r
+        _reload polybar
+        _reload xob
+        _reload_gtk
+        _reload_wallpaper
+        ;;
+esac

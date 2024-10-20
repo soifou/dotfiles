@@ -1,0 +1,74 @@
+#!/usr/bin/env sh
+
+set -x
+
+# Can be used with fzf, choose or rofi:
+#   theme-select $(theme-select | [fzf|choose|rofi -dmenu])
+
+WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
+mkdir -p "$WALLPAPER_PATH"
+
+list() {
+    fd -I -c never --base-directory $XDG_CONFIG_HOME/wallust --exclude templates -e json --type f | sed 's/.json//'
+    fd -c never --base-directory "$WALLPAPER_PATH" --type f
+    f=$XDG_DATA_HOME/zsh/site-functions/_wallust
+    [ -f $f ] && grep :theme $f | perl -lne 'print $& if m/(?<=\()[^)]*(?=\))/g' | tr ' ' '\n' | awk '{print "colorschemes/builtin/" $0}'
+    [ -f $WALLPAPER_PATH/current ] && printf "themes/dark\nthemes/light\n"
+    printf "%s\n%s\n%s\n%s\n%s" static/random vid/random dynamic/random animated/random provider/unsplash
+}
+
+[ -z "$*" ] && { list | sort; exit; }
+
+shuffle() { find $WALLPAPER_PATH/$1/* -type f | shuf -n 1; }
+lstrip() { printf '%s\n' "${1##$2}"; }
+
+case "$@" in
+    # Fetch an image from an external provider and generate a colorscheme from it
+    provider/*)
+        provider="$(lstrip $1 "provider/")"
+        img=$(wall-dl $provider)
+        [ $? -eq 1 ] && {
+            echo "Failed d/l wallpaper using $provider provider... abort"
+            exit 1
+        }
+        ln -sf $img "$WALLPAPER_PATH/current"
+        theme-apply $img
+        ;;
+    # Generate a light or dark colorscheme from current wallpaper
+    themes/dark | themes/light)
+        theme-apply "$WALLPAPER_PATH/current" "$(lstrip $1 "themes/")"
+        ;;
+    # Apply a theme (wallpaper and colorscheme)
+    themes/*)
+        t=$XDG_CONFIG_HOME/wallust/$1.json
+        [ ! -f $t ] && { echo "Theme not found"; exit 1; }
+        theme-apply $t
+        [ "$1" != "themes/current" ] && ln -sf $t $XDG_CONFIG_HOME/wallust/themes/current.json
+        ;;
+    # Apply a builtin wallust colorscheme (independant from wallpaper)
+    colorschemes/builtin/*)
+        theme-apply "$(lstrip "$1" "colorschemes/builtin/")"
+        ;;
+    # Apply a custom colorscheme (not available in wallust builtins)
+    colorschemes/custom/*)
+        theme-apply "$XDG_CONFIG_HOME/wallust/colorschemes$(lstrip "$1" "colorschemes").json"
+        ;;
+    # Apply a wallpaper
+    static/* | vid/* | dynamic/* | animated/*)
+        img="$WALLPAPER_PATH/$1"
+        case "$1" in
+            static/random) img=$(shuffle static) ;;
+            vid/random) img=$(shuffle vid) ;;
+            dynamic/random) img=$(shuffle dynamic) ;;
+            animated/random) img=$(shuffle animated) ;;
+        esac
+        [ ! -f $img ] && { echo "File $img not found"; exit 1; }
+
+        ln -sf $img "$WALLPAPER_PATH/current"
+        theme-apply "$img" ${2:-dark}
+        ;;
+    *)
+        echo "Please choose an item in the list"
+        exit 1
+        ;;
+esac

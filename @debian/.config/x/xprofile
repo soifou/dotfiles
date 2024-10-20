@@ -6,7 +6,7 @@ _c xset r rate 350 45
 # keyboard numlock
 _c numlockx on
 # current wallpaper/colorscheme
-_c wal-switcher theme/dark > /dev/null
+_c theme-select static/random > /dev/null
 # default cursor (needs xorg-xsetroot)
 _c xsetroot -cursor_name left_ptr
 

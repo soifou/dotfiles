@@ -2,8 +2,7 @@
 configuration {
     modi: [
         drun,
-        "clipboard:greenclip print",
-        "themes:~/.local/bin/wal-switcher",
+        "themes:~/.local/bin/theme-select",
         emoji,
         "calc:~/.local/bin/rofi-bc"
     ];

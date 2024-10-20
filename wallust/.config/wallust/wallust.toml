@@ -1,0 +1,50 @@
+# See: https://codeberg.org/explosion-mental/wallust/src/branch/master/docs/parameters
+
+# How the image is parse, in order to get the colors
+# full - resized - wal - thumb -  fastresize - kmeans
+backend = "wal"
+
+# What color space to use to produce and select the most prominent colors
+# lab - labmixed - lch - lchmixed - lchansi
+color_space = "lchmixed"
+
+# Use the most prominent colors in a way that makes sense, a scheme color palette
+# ansidark - dark (default) - harddark - light - softdark - softlight
+# variation: [palette]16 - [palette]comp - [palette]comp16
+# palette = "darkcomp16"
+
+# Ensures a "readable contrast" (OPTIONAL, disabled by default)
+# Should only be enabled when you notice an unreadable contrast frequently happening
+# with your images. The reference color for the contrast is the background color.
+check_contrast = true
+
+# Method to use when the gathered colors aren't enough
+# interpolation (default) - complementary
+fallback_generator = "complementary"
+
+# Alpha value for templating, by default 100 (no other use whatsoever)
+# 1 - 100 (default)
+# alpha = 100
+
+# Color saturation (OPTIONAL, disabled by default)
+# 1 - 100
+# usually something higher than 50 increases the saturation and below decreases
+# it (on a scheme with strong and vivid colors)
+saturation = 10
+
+# Difference between similar colors, used inside the colorspace.
+# 1 - 100
+# threshold = 10
+
+[templates]
+colors = { template = "colors.json", target = "~/.cache/colors.json" }
+git_delta = { template = "git-delta.ini", target = "~/.config/git/conf.d/delta-theme" }
+kitty = { template = "kitty.conf", target = "~/.config/kitty/conf.d/colors.conf" }
+mpv_modernx = { template = "mpv-modernx.conf", target = "~/.config/mpv/script-opts/modernx.conf" }
+rofi = { template = "rofi.rasi", target = "~/.config/rofi/colors.rasi" }
+tridactyl = { template = "tridactyl.css", target = "~/.config/tridactyl/themes/base16.css" }
+vim = { template = "colors.vim", target = "~/.cache/colors.vim" }
+wired = { template = "wired.ron", target = "~/.config/wired/wired.ron" }
+xob = { template = "xob.cfg", target = "~/.config/xob/styles.cfg" }
+xres = { template = "Xresources", target = "~/.config/x/Xresources.d/colors" }
+zathura = { template = "zathura", target = "~/.config/zathura/colors" }

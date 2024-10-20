@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+
+# Update dynamic wallpaper if there is one currently set.
+# This script is meant to be executed hourly in a crontab
+# @hourly ~/.local/bin/theme-dynamic
+# Credits: https://github.com/adi1090x/dynamic-wallpaper
+
+set -xe
+
+# Enhance path to find `wallust` and my custom `theme-apply` script
+PATH="$XDG_LOCAL_HOME/bin:$PATH"
+
+WALLPAPER_PATH=${XDG_PICTURES_DIR:-~/Pictures}/wallpapers
+current=$(readlink "$WALLPAPER_PATH"/current | sed "s|$WALLPAPER_PATH/||g")
+# Possible value: static, dynamic or animated
+type=$(echo "$current" | awk -F/ '{print $1}')
+
+[ "$type" = "dynamic" ] && {
+    # get the current theme
+    theme=$(echo "$current" | awk -F/ '{print $2}')
+    # get current hour
+    hour=$(date +%k | xargs)
+    # get image extension, this could be either PNG, JPG or JPEG
+    ext=$(find $WALLPAPER_PATH/$type/$theme/ -name "$hour.*" -printf "%f\n" | sed "s|$hour.||g")
+
+    # check whether the new wallpaper has not been set already
+    new="$type/$theme/$hour.$ext"
+    echo "Want to set $new"
+    if [ "$(readlink "$WALLPAPER_PATH"/current)" != "$WALLPAPER_PATH/$new" ]; then
+        echo "Setting new $type wallpaper for theme $theme..."
+        theme-apply "$WALLPAPER_PATH/$new"
+    else
+        echo "Already set for the current time!"
+    fi
+}
