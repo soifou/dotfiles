@@ -11,10 +11,9 @@ mkdir -p "$WALLPAPER_PATH"
 list() {
     fd -I -c never --base-directory $XDG_CONFIG_HOME/wallust --exclude templates -e json --type f | sed 's/.json//'
     fd -c never --base-directory "$WALLPAPER_PATH" --type f
-    f=$XDG_DATA_HOME/zsh/site-functions/_wallust
-    [ -f $f ] && grep :theme $f | perl -lne 'print $& if m/(?<=\()[^)]*(?=\))/g' | tr ' ' '\n' | awk '{print "colorschemes/builtin/" $0}'
+    wallust theme list | sed '/[:) ]$/{d}' | sed 's|- |colorschemes/builtin/|g'
     [ -f $WALLPAPER_PATH/current ] && printf "themes/dark\nthemes/light\n"
-    printf "%s\n%s\n%s\n%s\n%s" static/random vid/random dynamic/random animated/random provider/unsplash
+    printf "%s\n%s\n%s\n%s\n%s\n%s" colorschemes/builtin/random static/random vid/random dynamic/random animated/random provider/unsplash
 }
 
 [ -z "$*" ] && { list | sort; exit; }

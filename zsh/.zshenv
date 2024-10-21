@@ -84,7 +84,6 @@ export FZF_DEFAULT_OPTS="
     --info=inline-right
     --no-mouse
     --layout=reverse
-    --height 20%
     --cycle
     --bind ctrl-q:ignore,ctrl-z:ignore
     --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
