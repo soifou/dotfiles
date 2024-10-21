@@ -59,6 +59,10 @@ post_checkout = sudo ln -sf $MR_REPO/tremc /usr/local/bin/
 checkout = git clone https://github.com/lilydjwg/viewhtmlmsg
 post_checkout = sudo ln -sf $MR_REPO/viewhtmlmsg /usr/local/bin/
 
+[$XDG_DEVELOP_DIR/testing/magic-tape]
+checkout = git clone https://gitlab.com/christosangel/magic-tape.git/
+post_checkout = sudo ln -sf $MR_REPO/magic-tape.sh /usr/local/bin/magic-tape
+
 [$XDG_DEVELOP_DIR/testing/ytfzf]
 checkout = git clone https://github.com/pystardust/ytfzf
 fixups =

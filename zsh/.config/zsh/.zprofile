@@ -5,8 +5,6 @@
 
 ## games
 [ -d "/usr/games" ] && export PATH="/usr/games:$PATH"
-## firefox latest
-[ -d "/opt/firefox" ] && export PATH="/opt/firefox:$PATH"
 ## homebrew
 if [ -d "$HOMEBREW_PREFIX" ]; then
     export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"

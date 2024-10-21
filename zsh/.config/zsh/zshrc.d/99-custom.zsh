@@ -57,7 +57,7 @@ command -v fzf >/dev/null && {
     # with an fzf-driven, searchable list of history entries.
     # Credits: https://github.com/joshskidmore/zsh-fzf-history-search
     fzf_history_search() {
-      candidates=(${(f)"$(fc -li -1 0 | fzf --info=hidden +s -e -q "$BUFFER")"})
+      candidates=(${(f)"$(fc -li -1 0 | fzf --height=20% --info=hidden +s -e -q "$BUFFER")"})
       local ret=$?
       if [ -n "$candidates" ]; then
         BUFFER="${candidates[@]/(#m)*/${${(As: :)MATCH}[4,-1]}}"
