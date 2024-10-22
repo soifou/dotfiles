@@ -1,18 +1,5 @@
-alias sf="php bin/console"
-
 # list volumes/binds by container
 alias dvbc="docker container ls --format '{{ .ID }}' | xargs -I {} docker inspect -f '{{ .Name }}{{ printf \"\\n\" }}{{ range .Mounts }}{{ printf \"\\n\\t\" }}{{ .Type }} {{ if eq .Type \"bind\" }}{{ .Source }}{{ end }}{{ .Name }} => {{ .Destination }}{{ end }}{{ printf \"\\n\" }}' {}"
-
-php() {
-    [ -f ./.env.local ] && docker run -it --rm \
-        -v .:/app \
-        -v ./.env.local:/app/.env.local \
-        -w /app \
-        --net=network.${DOCKER_NETWORK_NAME:-shared} \
-        soifou/php-alpine:cli-${PHP_VERSION:-8.3}-wkhtmltopdf php $@
-
-    [ ! -f ./.env.local ] && mise x php -- php $@
-}
 
 composer() {
     docker run -it --rm \

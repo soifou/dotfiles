@@ -22,6 +22,9 @@
 # See: https://issues.guix.gnu.org/28088
 # export NO_AT_BRIDGE=1
 
+# Suppress experimental warning from node
+# export NODE_OPTIONS = "--disable-warning=ExperimentalWarning"
+
 # Disable OpenGL to use sofware rendering (slow)
 # export LIBGL_ALWAYS_SOFTWARE=1
 
