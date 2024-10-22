@@ -190,7 +190,7 @@
         local res
         local where  # branch, tag or revision
         if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
-            res+="${white}${POWERLEVEL9K_VCS_BRANCH_ICON} "
+            res+="${red}${POWERLEVEL9K_VCS_BRANCH_ICON}  "
             where="${(V)VCS_STATUS_LOCAL_BRANCH}"
         elif [[ -n $VCS_STATUS_TAG ]]; then
             res+="${meta}#"
@@ -250,7 +250,7 @@
     # asynchronously when Git state changes.
     typeset -g POWERLEVEL9K_VCS_MAX_SYNC_LATENCY_SECONDS=0
     # Set branch icon.
-    typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
+    typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=󰊢
     # When in detached HEAD state, show @commit where branch normally goes.
     typeset -g POWERLEVEL9K_VCS_COMMIT_ICON='@'
     # Disable the default Git status formatting.

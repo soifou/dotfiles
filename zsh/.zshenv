@@ -94,7 +94,10 @@ export FZF_DEFAULT_OPTS="
 "
 
 case $OSTYPE in
-    darwin*) export HOMEBREW_PREFIX=/opt/homebrew ;;
+    darwin*)
+        export HOMEBREW_PREFIX=/opt/homebrew
+        export FONTCONFIG_PATH=$HOMEBREW_PREFIX/etc/fonts
+    ;;
     *) export HOMEBREW_PREFIX="$XDG_DATA_HOME"/brew ;;
 esac
 
