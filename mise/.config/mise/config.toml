@@ -1,7 +1,3 @@
-[env]
-MISE_NODE_DEFAULT_PACKAGES_FILE = "{{env.XDG_CONFIG_HOME}}/mise/default/nodejs"
-NODE_OPTIONS = "--disable-warning=ExperimentalWarning"
-
 [settings]
 asdf_compat = false
 experimental = true
@@ -14,6 +10,7 @@ pipx_uvx = true
 python_compile = true
 python_default_packages_file = "~/.config/mise/default/python"
 raw = false
+status.show_env = true
 trusted_config_paths = [ '~/.config/mise' ]
 
 [tools]

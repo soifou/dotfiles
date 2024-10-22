@@ -44,6 +44,8 @@ Thumbs.db
 
 # Development #
 ###############
+.devrc
+.mise.local.toml
 .phpactor.json
 *.tmTheme.chback
 *.crt
