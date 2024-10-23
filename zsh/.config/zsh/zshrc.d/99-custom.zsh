@@ -1,5 +1,15 @@
 #!/usr/bin/env zsh
 
+command -v eza >/dev/null && {
+    alias ls="eza -a -F --hyperlink"
+    alias l="eza -la --group-directories-first --time-style=long-iso --hyperlink"
+    tree() {
+        eza --tree -a --color=always --icons=always \
+            --no-quotes --hyperlink --ignore-glob .git "$@" |
+            sed '1d' | less
+    }
+}
+
 command -v pip >/dev/null && {
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_pip ] && znap fpath _pip 'pip completion zsh'
 
@@ -24,6 +34,9 @@ command -v docker >/dev/null && {
     alias dsp='docker system prune -f && docker volume prune -f'
 }
 
+command -v symfony >/dev/null &&
+    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_symfony ] && znap fpath _symfony 'symfony self:completion zsh'
+
 command -v rg >/dev/null &&
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_ripgrep ] && znap fpath _ripgrep 'rg --generate=complete-zsh'
 
@@ -39,40 +52,4 @@ command -v cargo >/dev/null &&
 command -v mise >/dev/null && {
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_mise ] && znap fpath _mise 'mise completion zsh'
     znap eval mise 'mise activate zsh'
-}
-
-# NOTE: Tools installed using mise must be declared *after* activating mise
-
-command -v eza >/dev/null && {
-    alias ls="eza -a -F --hyperlink"
-    alias l="eza -la --group-directories-first --time-style=long-iso --hyperlink"
-    tree() {
-        eza --tree -a --color=always --icons=always \
-            --no-quotes --hyperlink --ignore-glob .git "$@" |
-            sed '1d' | less
-    }
-}
-
-command -v fzf >/dev/null && {
-    # Replace builtin <C-r> (backward incremental search)
-    # with an fzf-driven, searchable list of history entries.
-    # Credits: https://github.com/joshskidmore/zsh-fzf-history-search
-    fzf_history_search() {
-      candidates=(${(f)"$(fc -li -1 0 | fzf --height=20% --info=hidden +s -e -q "$BUFFER")"})
-      local ret=$?
-      if [ -n "$candidates" ]; then
-        BUFFER="${candidates[@]/(#m)*/${${(As: :)MATCH}[4,-1]}}"
-        BUFFER="${BUFFER[@]/(#b)(?)\\n/$match[1]
-    }"
-        zle vi-fetch-history -n $BUFFER
-      fi
-      zle reset-prompt
-      return $ret
-    }
-    autoload fzf_history_search
-    zle -N fzf_history_search
-    bindkey '^r' fzf_history_search
-
-    # Fuzzy find children dirs of current with <C-f>
-    bindkey -s '^f' '^Ucd "$(fd --type directory | fzf)"^M'
 }

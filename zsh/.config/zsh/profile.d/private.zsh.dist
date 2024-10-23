@@ -23,7 +23,7 @@
 # export NO_AT_BRIDGE=1
 
 # Suppress experimental warning from node
-# export NODE_OPTIONS = "--disable-warning=ExperimentalWarning"
+# export NODE_OPTIONS="--disable-warning=ExperimentalWarning"
 
 # Disable OpenGL to use sofware rendering (slow)
 # export LIBGL_ALWAYS_SOFTWARE=1

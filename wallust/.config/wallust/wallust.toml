@@ -30,7 +30,7 @@ fallback_generator = "complementary"
 # 1 - 100
 # usually something higher than 50 increases the saturation and below decreases
 # it (on a scheme with strong and vivid colors)
-saturation = 10
+saturation = 20
 
 # Difference between similar colors, used inside the colorspace.
 # 1 - 100
