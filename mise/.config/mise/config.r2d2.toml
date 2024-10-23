@@ -1,5 +1,4 @@
 [tools]
-php = "8.3.12"
 "cargo:hacksaw" = "latest"
 "cargo:shotgun" = "latest"
 "ubi:eza-community/eza" = "latest"
