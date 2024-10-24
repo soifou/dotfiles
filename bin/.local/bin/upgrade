@@ -99,7 +99,7 @@ esac
 
 if command -v mr > /dev/null 2>&1; then
     yn "Update local share?" \
-        && mr -d "$XDG_DATA_HOME" update
+        && mr -c $MR_CONFIG -d "$XDG_DATA_HOME" update
 fi
 
 if command -v yazi > /dev/null 2>&1; then
@@ -183,7 +183,6 @@ if command -v gem > /dev/null 2>&1; then
         gem outdated
         sleep 3
         gem update --system
-        gem update
         gem cleanup
     }
 fi
