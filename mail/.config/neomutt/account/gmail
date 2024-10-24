@@ -1,3 +1,5 @@
+# vim: ft=neomuttrc
+
 set spoolfile = +inbox
 set postponed = +draft
 # Gmail's SMTP server stores the message automatically

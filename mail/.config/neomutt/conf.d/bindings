@@ -1,3 +1,5 @@
+# vim: ft=neomuttrc
+
 # See: https://neomutt.org/guide/configuration.html#6-%C2%A0changing-the-default-key-bindings
 # Hitting ? on each view (index, pager, ...) show a list of current (un)mapped bindings
 # Some vim bindings are available at: /usr/share/doc/neomutt/vim-keys/vim-keys.rc

@@ -1,0 +1,18 @@
+# vim: ft=neomuttrc
+
+set my_mbox = $XDG_CONFIG_HOME/neomutt/account
+
+set realname = "François Fleur"
+set mbox_type = Maildir
+
+# Default account
+source $my_mbox/gmail-perso
+
+# Folder hooks, source in account configuration each time the mailbox
+# subdirectory changes.
+folder-hook perso/* source $my_mbox/gmail-perso
+folder-hook pro/* source $my_mbox/gmail-pro
+
+# Use F-keys to change between accounts:
+macro index <f2> '<enter-command>source $my_mbox/gmail-perso<enter><change-folder>!<enter>'
+macro index <f3> '<enter-command>source $my_mbox/gmail-pro<enter><change-folder>!<enter>'

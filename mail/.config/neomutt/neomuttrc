@@ -8,11 +8,6 @@
 set my_mutt = $XDG_CONFIG_HOME/neomutt
 set my_mutt_cache = $XDG_CACHE_HOME/neomutt
 
-source $my_mutt/neomuttrc.colors
-source $my_mutt/neomuttrc.bindings
-source $my_mutt/neomuttrc.macros
-source $my_mutt/neomuttrc.account
-
 set mailcap_path = $my_mutt/mailcap
 set header_cache = $my_mutt_cache
 set message_cachedir = $my_mutt_cache/messages
@@ -105,3 +100,9 @@ set attach_keyword = "\\<[Cc]i-joint\\>|\\<[Ff]ichier joint\\>"
 # https://neomutt.org/guide/reference.html#simple-search
 # From: OR Subject: OR To:
 set simple_search = "~f %s | ~s %s | ~t %s"
+
+# Additional configuration
+source $my_mutt/conf.d/colors
+source $my_mutt/conf.d/bindings
+source $my_mutt/conf.d/macros
+source $my_mutt/conf.d/account

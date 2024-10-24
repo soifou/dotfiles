@@ -1,4 +1,4 @@
-# Macros
+# vim: ft=neomuttrc
 
 # Prefix for macros created using mark-message
 set mark_macro_prefix = ","
