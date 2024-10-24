@@ -89,7 +89,7 @@ set flag_chars = "    "
 
 # Status bar
 set status_format = "───[ %D ] %?r?[   %m ] ?%?n?[   %n ] ?%?d?[   %d ] ?%?t?[   %t ] ?%?F?[   %F ] ?%?p?[   %p ]?%|─"
-set pager_format = "───[ %n ] [%T %s]%* [   %{!%d %b · %T} ] %?X?[   %X ]? [   %P ]─"
+set pager_format = "───[ %n ] [ %T  %s ]%* [   %{!%d %b · %T} ] %?X?[   %X ]? [ %c ] [   %P ]─"
 set compose_format = "───[  %l ] [  %a ]%>─"
 set attach_format = "%u%D   %T%-75.75d ?  %5s · %m/%M"
 

@@ -18,6 +18,7 @@ color normal default default
 color indicator brightblack green
 color sidebar_highlight brightblack green
 color sidebar_divider blue default
+color tree green default # Threads tree
 color sidebar_flagged red default
 color sidebar_new green default
 color normal brightyellow default
@@ -41,6 +42,8 @@ color underline black default
 color normal default default
 
 # Regex highlighting:
+# color index blue color0 "~z 262144-" # bigger than 256 KiB
+color index yellow black ~v # collapsed thread
 color header blue default ".*"
 color header brightmagenta default "^(From)"
 color header brightcyan default "^(Subject)"
