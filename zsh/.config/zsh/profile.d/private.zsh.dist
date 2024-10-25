@@ -53,3 +53,5 @@
 
 # Default PHP version to use with docker container
 # export PHP_VERSION=8.3
+# Build options
+# export PHP_CONFIGURE_OPTIONS="--with-openssl --with-curl --with-zlib --with-readline --with-gettext --with-sodium"
