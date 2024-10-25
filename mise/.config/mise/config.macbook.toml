@@ -1,4 +1,3 @@
 [tools]
 "cargo:hacksaw" = "latest"
 "cargo:shotgun" = "latest"
-"ubi:eza-community/eza" = "latest"

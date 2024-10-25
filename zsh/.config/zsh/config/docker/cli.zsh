@@ -31,7 +31,7 @@ adb() {
 dip() {
     container=$1
     [ "$#" -ne 1 ] && {
-        container=$(docker container ls --format="table {{.Names}}" | sed '1d' | fzf)
+        container=$(docker container ls --format="table {{.Names}}" | sed '1d' | fzf --height=20%)
     }
     docker inspect $container | grep IPAddress | tail -n1 | awk -F\" '{print $4}'
 }
