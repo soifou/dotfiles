@@ -17,3 +17,11 @@ fixups =
     gcc -o setsid setsid.c
     sudo ln -sf $MR_REPO/setsid /usr/local/bin/
 skip = ! is_darwin
+
+[$XDG_DEVELOP_DIR/testing/run-on-macos-screen-unlock]
+checkout = git clone https://github.com/coolaj86/run-on-macos-screen-unlock
+fixups =
+    swiftc ./run-on-macos-screen-unlock.swift
+    xattr -r -d com.apple.quarantine ./run-on-macos-screen-unlock
+    ln -sf $MR_REPO/run-on-macos-screen-unlock $HOME/.local/bin/
+skip = ! is_darwin

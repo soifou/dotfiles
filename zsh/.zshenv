@@ -30,6 +30,7 @@ export MEDNAFEN_HOME="$XDG_CONFIG_HOME"/mednafen
 export MR_CONFIG="$XDG_CONFIG_HOME/myrepos/config"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PACKER_CONFIG_DIR="$XDG_CONFIG_HOME"/packer
+export RAINFROG_CONFIG="$XDG_CONFIG_HOME"/rainfrog
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/rc
 export WAKATIME_HOME="$XDG_CONFIG_HOME"/wakatime
 export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
