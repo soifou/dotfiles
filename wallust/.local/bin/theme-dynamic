@@ -5,7 +5,7 @@
 # @hourly ~/.local/bin/theme-dynamic
 # Credits: https://github.com/adi1090x/dynamic-wallpaper
 
-set -xe
+set -e
 
 # Enhance path to find `wallust` and my custom `theme-apply` script
 PATH="$XDG_LOCAL_HOME/bin:$PATH"

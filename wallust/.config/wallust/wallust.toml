@@ -48,3 +48,4 @@ wired = { template = "wired.ron", target = "~/.config/wired/wired.ron" }
 xob = { template = "xob.cfg", target = "~/.config/xob/styles.cfg" }
 xres = { template = "Xresources", target = "~/.config/x/Xresources.d/colors" }
 zathura = { template = "zathura", target = "~/.config/zathura/colors" }
+yazi = { template = "yazi.toml", target = "~/.config/yazi/theme.toml" }

@@ -1,5 +1,0 @@
-"$schema" = "https://yazi-rs.github.io/schemas/theme.json"
-
-[status]
-separator_close  = ""
-separator_open = ""

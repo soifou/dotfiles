@@ -25,12 +25,12 @@ usage = "latest"
 
 # Backends
 # ---
+"cargo:eza" = "latest"
 "cargo:vimv" = "latest"
 # ---
 "ubi:BurntSushi/ripgrep" = { version = "latest", exe = "rg" }
 "ubi:achristmascarl/rainfrog" = "latest"
 "ubi:astral-sh/uv" = "latest"
 "ubi:cargo-bins/cargo-binstall" = "latest"
-"ubi:eza-community/eza" = "latest"
 "ubi:junegunn/fzf" = "latest"
 "ubi:symfony-cli/symfony-cli" = { version = "latest", exe = "symfony" }

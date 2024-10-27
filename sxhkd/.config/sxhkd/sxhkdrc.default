@@ -171,7 +171,7 @@ ctrl + { Escape, space, shift + space }
 
 # music player
 super + z
-    wm-scratchpad music-player rmpc
+    wm-scratchpad rmpc
 
 # filemanager
 super + shift + f
