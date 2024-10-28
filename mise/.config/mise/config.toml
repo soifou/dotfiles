@@ -21,9 +21,6 @@ node = "23.0.0"
 php = "8.3.13"
 python = "latest"
 rust = "latest"
-usage = "latest"
-
-# Backends
 # ---
 "cargo:eza" = "latest"
 "cargo:vimv" = "latest"
@@ -32,5 +29,6 @@ usage = "latest"
 "ubi:achristmascarl/rainfrog" = "latest"
 "ubi:astral-sh/uv" = "latest"
 "ubi:cargo-bins/cargo-binstall" = "latest"
+"ubi:jdx/usage" = "latest"
 "ubi:junegunn/fzf" = "latest"
 "ubi:symfony-cli/symfony-cli" = { version = "latest", exe = "symfony" }
