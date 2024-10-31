@@ -22,3 +22,8 @@
 
 ; [include]
 ;     path = delta-theme
+
+[delta]
+    navigate = true   # use n and N to move between diff sections
+    hyperlinks = true
+    hyperlinks-file-link-format = "file://{path}#{line}"
