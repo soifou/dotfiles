@@ -76,6 +76,7 @@
             "a":       AddToPlaylist,
             "d":       Delete,
             "i":       ShowInfo,
+            "C":       JumpToCurrent,
         },
         search: (
             case_sensitive: false,
