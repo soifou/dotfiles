@@ -40,7 +40,7 @@
             "r":       ToggleRepeat,
             "?":       ShowHelp,
             "O":       ShowOutputs,
-            "S":       ExternalCommand(command: ["scrobbler"], description: "Toggle Last.fm scrobbling mode"),
+            "S":       ExternalCommand(command: ["scrobbler", "--toggle"], description: "Toggle Last.fm scrobbling mode"),
         },
         navigation: {
             "h":       Left,

@@ -3,7 +3,7 @@
 #![enable(unwrap_variant_newtypes)]
 (
     default_album_art_path: None,
-    show_song_table_header: false,
+    show_song_table_header: true,
     draw_borders: true,
     browser_column_widths: [20, 38, 42],
     background_color: None,
@@ -34,7 +34,7 @@
     ),
     song_table_format: [
         (
-            prop: (kind: Property(Artist), default: (kind: Text("Unknown"))),
+            prop: (kind: Property(Artist), default: (kind: Text("Unknown"), style: (fg: "red"))),
             width_percent: 22,
         ),
         (
@@ -42,11 +42,12 @@
             width_percent: 35,
         ),
         (
-            prop: (kind: Property(Album), default: (kind: Text("Unknown Album"))),
+            prop: (kind: Property(Album), default: (kind: Text("Unknown"), style: (fg: "red"))),
             width_percent: 37,
         ),
         (
-            prop: (kind: Property(Duration), default: (kind: Text("-"))),
+            prop: (kind: Property(Duration), default: (kind: Text(" "))),
+            label: "Time",
             width_percent: 6,
             alignment: Right,
         ),

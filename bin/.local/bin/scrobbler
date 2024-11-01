@@ -56,5 +56,5 @@ case "$1" in
     --status|-s) status ;;
     --toggle|-t) toggle ;;
     --help|-h) _help ;;
-    *) toggle ;;
+    *) _help ;;
 esac
