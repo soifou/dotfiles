@@ -4,8 +4,10 @@
 # Search hidden files and directories.
 --hidden
 
-# Follow symbolic links.
+# Follow symbolic links...
 --follow
+# .. but don't report broken
+--no-messages
 
 # Exclude directories.
 --glob=!{.git,node_modules,vendor}
