@@ -1,16 +1,11 @@
 #!/usr/bin/env sh
 
 redirect() { exec < /dev/null 1>&0 2>&0; }
-
 fork() { exec setsid -f -- swallow "$@"; }
-
-spawn() {
-    redirect
-    fork "$@"
-}
-
-choose() { printf '%s' "$1"; }
-[ -n "$CHOOSE" ] && choose() { printf '%s\0' "$@" | fzf --read0 --no-sort --phony --layout=reverse; }
+spawn() { redirect; fork "$@"; }
+[ -n "$CHOOSE" ] &&
+    choose() { printf '%s\0' "$@" | fzf --read0 --no-sort --phony --layout=reverse; } ||
+    choose() { printf '%s' "$1"; }
 
 case "$1" in
     *.7z | *.a | *.ace | *.alz | *.arc | *.arj | *.bz | *.bz2 | *.cab | *.cpio | *.deb | *.gz | *.jar | \
@@ -99,7 +94,7 @@ case "$(file -Lb --mime-type -- "$1")" in
     *)
         case "$(choose editor pager)" in
             editor) exec $EDITOR -- "$@" ;;
-            pager) exec $PAGER -- "$@" ;;
+            pager) exec ${PAGER:-less} -- "$@" ;;
             *) exit ;;
         esac
         ;;

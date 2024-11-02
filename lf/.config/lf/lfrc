@@ -8,6 +8,7 @@
 
 # Settings {{{
 set shellopts '-eu'
+set hidden
 set hiddenfiles ".*"
 set drawbox true
 set ratios 1:2:3
@@ -23,8 +24,8 @@ set cleaner lf-cleaner
 
 # Commands {{{
 cmd q quit
-cmd open $$LF_OPENER $fx
-cmd open-choose $CHOOSE=1 $LF_OPENER $fx
+cmd open ${{ lf-opener $fx; }}
+cmd open-choose ${{ CHOOSE=1 lf-opener $fx; }}
 cmd toggle-preview ${{
     if $lf_preview; then
         lf -remote "send $id set nopreview"
