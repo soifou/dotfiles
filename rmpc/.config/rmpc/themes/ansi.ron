@@ -35,20 +35,20 @@
     song_table_format: [
         (
             prop: (kind: Property(Artist), default: (kind: Text("Unknown"), style: (fg: "red"))),
-            width_percent: 22,
+            width: "26%",
         ),
         (
             prop: (kind: Property(Title), default: (kind: Property(Filename))),
-            width_percent: 35,
+            width: "34%",
         ),
         (
             prop: (kind: Property(Album), default: (kind: Text("Unknown"), style: (fg: "red"))),
-            width_percent: 37,
+            width: "35%",
         ),
         (
             prop: (kind: Property(Duration), default: (kind: Text(" "))),
             label: "Time",
-            width_percent: 6,
+            width: "5", // Fixed width, usually duration take 5 chars (mm:ss)
             alignment: Right,
         ),
     ],

@@ -11,7 +11,7 @@
     select_current_song_on_change: false,
     album_art: (
         method: Kitty,
-        max_size_px: (width: 1500, height: 1500),
+        max_size_px: (width: 0, height: 0),
     ),
     keybinds: (
         global: {
@@ -20,8 +20,8 @@
             "3":       SwitchToTab("Artists"),
             "4":       SwitchToTab("Album Artists"),
             "5":       SwitchToTab("Albums"),
-            "6":       SwitchToTab("Playlists"),
-            "7":       SwitchToTab("Search"),
+            "9":       SwitchToTab("Playlists"),
+            "0":       SwitchToTab("Search"),
             "<Tab>":   NextTab,
             "<C-S-i>": PreviousTab,
             "<S-Tab>": PreviousTab,
@@ -40,6 +40,7 @@
             "r":       ToggleRepeat,
             "?":       ShowHelp,
             "O":       ShowOutputs,
+            "P":       ShowDecoders,
             "S":       ExternalCommand(command: ["scrobbler", "--toggle"], description: "Toggle Last.fm scrobbling mode"),
         },
         navigation: {
@@ -59,6 +60,7 @@
             "N":       PreviousResult,
             "a":       Add,
             "A":       AddAll,
+            "D":       Delete,
             "g":       Top,
             "G":       Bottom,
             "<Space>": Select,
@@ -67,14 +69,14 @@
             "/":       EnterSearch,
             "<C-c>":   Close,
             "<Esc>":   Close,
-            "D":       Delete,
+            "r":       Rename,
         },
         queue: {
-            "D":       DeleteAll,
             "<CR>":    Play,
             "<C-s>":   Save,
             "a":       AddToPlaylist,
             "d":       Delete,
+            "D":       DeleteAll,
             "i":       ShowInfo,
             "C":       JumpToCurrent,
         },
