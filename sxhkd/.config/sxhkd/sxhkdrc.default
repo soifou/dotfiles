@@ -173,9 +173,9 @@ ctrl + { Escape, space, shift + space }
 super + z
     wm-scratchpad rmpc
 
-# filemanager
+# file manager
 super + shift + f
-    wm-scratchpad lf
+    wm-scratchpad yazi
 
 # torrent, youtube
 super + x ; {0,9,8,t}
@@ -193,7 +193,7 @@ super + w
 super + x ; {1-4}
     wm-focus {neomutt,newsboat,rtv,weechat}
 
-# Toggle sticky active window
+# toggle sticky active window
 super + shift + s
     wmctrl -r ":ACTIVE:" -b "toggle,sticky"
 

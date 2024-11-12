@@ -19,7 +19,7 @@
     current_item_style: (fg: "black", bg: "blue", modifiers: "Bold"),
     borders_style: (fg: "blue"),
     highlight_border_style: (fg: "blue"),
-    symbols: (song: "󰈣 ", dir: " ", marker: "▍"),
+    symbols: (song: "󰈣 ", dir: " ", marker: "▍", ellipsis: "…"),
     progress_bar: (
         symbols: ["─", "╼", " "],
         track_style: (fg: "green"),
@@ -35,15 +35,15 @@
     song_table_format: [
         (
             prop: (kind: Property(Artist), default: (kind: Text("Unknown"), style: (fg: "red"))),
-            width: "26%",
+            width: "20%",
         ),
         (
             prop: (kind: Property(Title), default: (kind: Property(Filename))),
-            width: "34%",
+            width: "35%",
         ),
         (
             prop: (kind: Property(Album), default: (kind: Text("Unknown"), style: (fg: "red"))),
-            width: "35%",
+            width: "45%",
         ),
         (
             prop: (kind: Property(Duration), default: (kind: Text(" "))),
