@@ -23,6 +23,8 @@ python = "latest"
 rust = "latest"
 # ---
 "cargo:eza" = "latest"
+"cargo:hacksaw" = { version = "latest", os = ["linux"] }
+"cargo:shotgun" = { version = "latest", os = ["linux"] }
 "cargo:vimv" = "latest"
 # ---
 "ubi:BurntSushi/ripgrep" = { version = "latest", exe = "rg" }

@@ -3,6 +3,7 @@ ansible-lint
 beets
 buku
 gallery-dl
+mailcap-fix
 git+https://github.com/tildeclub/ttrv
 khal
 khard
