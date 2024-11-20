@@ -1,8 +1,11 @@
 application/ics; rem ics %s
+application/msword; catdoc %s; copiousoutput
+application/vnd.oasis.opendocument.text; pandoc --from odt --to markdown %s; copiousoutput
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; pandoc --from docx --to markdown %s; copiousoutput
 application/*; swallow xdg-open %s
 audio/*; mpv '%s'
 image/*; swallow xdg-open %s
 text/calendar; rem ics %s
-text/html; w3m -dump -I %{charset} -T text/html; copiousoutput;
+text/html; rdrview %s -H | w3m -dump -I %{charset} -T text/html; copiousoutput;
 text/*; less '%s'; needsterminal
 video/*; mpv '%s' --loop=inf

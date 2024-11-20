@@ -12,10 +12,11 @@ bind index \Cf noop
 bind index \Cb noop
 bind index h noop
 bind index u noop
-bind editor <space> noop
+bind index,editor <space> noop
 bind pager \Cb noop
 bind pager \Ce noop
 bind pager <return> noop
+bind index V noop # bound to "show-version"
 
 # General
 bind index ]c next-unread
@@ -27,6 +28,9 @@ bind attach <return> view-mailcap
 bind attach l view-mailcap
 bind index G last-entry
 bind index gg first-entry
+bind index zz current-middle
+bind index zt current-top
+bind index zb current-bottom
 bind pager,attach h exit
 bind pager j next-line
 bind pager k previous-line
@@ -45,6 +49,7 @@ bind browser,index,pager n search-next
 bind browser,index,pager N search-opposite
 bind index,pager S sync-mailbox
 bind index,pager R group-reply
+bind index,pager gU list-unsubscribe
 bind index,pager @ compose-to-sender
 bind editor <Tab> complete-query
 bind index,pager \Cd half-down
@@ -70,4 +75,5 @@ bind pager,index dt  delete-subthread
 bind pager,index gt  next-thread
 bind pager,index gT  previous-thread
 bind index za  collapse-thread
-bind index zA  collapse-all # Missing :folddisable/foldenable
+bind index zM  collapse-all
+bind index zR  collapse-all

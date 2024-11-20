@@ -14,16 +14,16 @@ set message_cachedir = $my_mutt_cache/messages
 set attach_save_dir = $XDG_DOWNLOAD_DIR
 
 # General
-set mark_old = no       # Unread mail stay unread until read
-set mime_forward = yes  # Attachments are forwarded with mail
-set recall = no         # Won't ask "recall postponed" when composing
-set fast_reply = yes    # Skip to compose when replying
-set forward_format = "Fwd: %s"  # Format of subject when forwarding
-set forward_quote = yes # Include message in forwards
-set reverse_name = yes  # Reply as whomever it was to
+set mark_old = no
+set mime_forward = yes
+set recall = no
+set fast_reply = yes
+set forward_format = "Fwd: %s"
+set forward_quote = yes
+set reverse_name = yes
 set text_flowed = yes
-set beep = no           # No beep on error
-set help = no           # No help bar
+set beep = no
+set help = no
 
 # Encoding
 set charset = "utf-8"
@@ -31,12 +31,12 @@ set send_charset = "utf-8"
 set assumed_charset = "utf-8"
 
 # Speedup
-set sleep_time = 0      # Pause 0 seconds for informational messages
-set read_inc = 1000     # Update progress every n messages read
-set time_inc = 500      # Update display every n miliseconds
-set net_inc = 100       # Update diplay every n kilobytes for net ops
-set write_inc = 100     # Update progress every n messages written
-set mail_check = 0      # How often to check for new mail (time in seconds). Disabled, using mbsync.
+set sleep_time = 0
+set read_inc = 1000
+set time_inc = 500
+set net_inc = 100
+set write_inc = 100
+set mail_check = 0
 
 # Print
 set print_command = "lp"
@@ -67,13 +67,14 @@ set sidebar_short_path = yes
 set sidebar_width = 25
 
 # Pager
-set tilde = yes         # Show tildes
-set wait_key = no       # Won't ask "press key to continue"
-set markers = no        # Disables the `+` displayed at line wraps
-set menu_context = 5    # Minimal of screenlines when scrolling
-set menu_move_off = no  # Bottom entry will never move anywhere besides the bottom
-set menu_scroll = yes   # Scroll line per line instead of page per page when crossing screen boundary
-set pager_stop = yes    # Don't go to next message if we are at bottom
+set pager = builtin
+set tilde = yes
+set wait_key = no
+set markers = no
+set menu_context = 3
+set menu_move_off = no
+set menu_scroll = yes
+set pager_stop = yes
 
 # Index
 # See: https://neomutt.org/guide/reference.html#3-170-%C2%A0index_format
