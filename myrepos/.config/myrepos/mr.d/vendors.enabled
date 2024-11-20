@@ -39,6 +39,13 @@ fixups =
 checkout = git clone https://github.com/Un1q32/pfetch
 post_checkout = sudo ln -sf $MR_REPO/pfetch /usr/local/bin/
 
+[$XDG_DEVELOP_DIR/testing/rdrview]
+checkout = git clone https://github.com/eafer/rdrview
+fixups =
+    make clean
+    make
+    sudo make install
+
 [$XDG_DEVELOP_DIR/testing/shrinkpdf]
 checkout = git clone https://github.com/aklomp/shrinkpdf
 fixups =
