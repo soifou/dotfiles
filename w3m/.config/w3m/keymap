@@ -1,109 +1,267 @@
-# A sample of ~/.w3m/keymap (default)
-#
-# Ctrl  : C-, ^
-# Escape: ESC-, M-, ^[
-# Space : SPC, ' '
-# Tab   : TAB, ^i, ^I
-# Delete: DEL, ^?
-# Up    : UP, ^[[A
-# Down  : DOWN, ^[[B
-# Right : RIGHT, ^[[C
-# Left  : LEFT, ^[[D
+# vim: foldmethod=marker foldlevel=0 foldnestmax=1
 
-# Page/Cursor motion 
-keymap C-f NEXT_PAGE
-keymap C-b PREV_PAGE
+# Memo {{{
+# Ctrl      : C-, ^
+# Escape    : ESC-, M-, ^[
+# Space     : SPC, ' '
+# Tab       : TAB, ^i, ^I
+# Shift+Tab : ^[[Z
+# Delete    : DEL, ^?
+# Up        : UP, ^[[A
+# Down      : DOWN, ^[[B
+# Right     : RIGHT, ^[[C
+# Left      : LEFT, ^[[D
+# Re Pag    : M-[5~
+# Av Pag    : M-[6~
+# Enter     : C-j  RET(pendant confirm)
+# }}}
+
+# Unbind {{{
+keymap K NULL
+keymap J NULL
+keymap SPC NULL
+keymap - NULL
+keymap + NULL
+keymap C-v NULL
+keymap ESC-v NULL
+keymap C-f NULL
+keymap C-b NULL
+keymap C-n NULL
+keymap C-p NULL
+keymap < NULL
+keymap > NULL
+keymap . NULL
+keymap , NULL
+keymap ^ NULL
+keymap C-a NULL
+keymap W NULL
+keymap ^[[6~ NULL
+keymap ^[[5~ NULL
+keymap g NULL
+keymap ^[[1~ NULL
+keymap ^[[4~ NULL
+keymap ESC-< NULL
+keymap ESC-> NULL
+keymap [ NULL
+keymap ] NULL
+keymap ^[[Z NULL
+keymap ESC-m NULL
+keymap ( NULL
+keymap ) NULL
+keymap C-m NULL
+keymap ESC-C-j NULL
+keymap ESC-C-m NULL
+keymap ESC-w NULL
+keymap ESC-W NULL
+keymap C-s NULL
+keymap = NULL
+keymap ESC-l NULL
+keymap U NULL
+keymap V NULL
+keymap v NULL
+keymap R NULL
+keymap ESC-s NULL
+keymap : NULL
+keymap C-q NULL
+keymap T NULL
+keymap } NULL
+keymap { NULL
+keymap ESC-a NULL
+keymap ESC-b NULL
+keymap c NULL
+keymap ESC-: NULL
+keymap C-h NULL
+keymap q NULL
+keymap Q NULL
+keymap C-w NULL
+keymap C-d NULL
+keymap C-u NULL
+keymap RIGHT NULL
+keymap l NULL
+keymap LEFT NULL
+keymap h NULL
+keymap j NULL
+keymap DOWN NULL
+keymap k NULL
+keymap UP NULL
+keymap C-e NULL
+keymap C-y NULL
+keymap 0 NULL
+keymap $ NULL
+keymap Z NULL
+keymap z NULL
+keymap ESC-g NULL
+keymap gg NULL
+keymap G NULL
+keymap w NULL
+keymap b NULL
+keymap ESC-TAB NULL
+keymap f NULL
+keymap C-o NULL
+keymap TAB NULL
+keymap C-j NULL
+keymap C-] NULL
+keymap I NULL
+keymap ESC-I NULL
+keymap y NULL
+keymap u NULL
+keymap i NULL
+keymap gC-g NULL
+keymap C-g NULL
+keymap ";" NULL
+keymap M NULL
+keymap ESC-M NULL
+keymap F NULL
+keymap ESC-u NULL
+keymap t NULL
+keymap @ NULL
+keymap "#" NULL
+keymap | NULL
+keymap B NULL
+keymap L NULL
+keymap H NULL
+keymap s NULL
+keymap gf NULL
+keymap S NULL
+keymap E NULL
+keymap ESC-e NULL
+keymap C-r NULL
+keymap r NULL
+keymap C-l NULL
+keymap C-t NULL
+keymap d NULL
+keymap gt NULL
+keymap gT NULL
+keymap ESC-t NULL
+keymap C-wL NULL
+keymap C-wH NULL
+keymap a NULL
+keymap n NULL
+keymap N NULL
+keymap / NULL
+keymap ? NULL
+keymap C-@ NULL
+keymap ESC-n NULL
+keymap ESC-p NULL
+keymap \" NULL
+keymap ^[[2~ NULL
+keymap ^[[28~ NULL
+keymap ^[[E NULL
+keymap ^[[L NULL
+keymap o NULL
+keymap C-k NULL
+keymap D NULL
+keymap m NULL
+keymap ESC-c NULL
+keymap ESC-o NULL
+keymap ESC-k NULL
+keymap \\ NULL
+keymap ! NULL
+keymap C-z NULL
+keymap ZZ NULL
+keymap ZQ NULL
+# }}}
+
+# Menus {{{
+keymap ",;" COMMAND
+keymap g? HELP
+keymap go OPTIONS
+keymap gm MENU
+keymap gM SELECT_MENU
+keymap gh HISTORY
+keymap gb VIEW_BOOKMARK
+keymap gf LIST_MENU
+keymap gF MOVE_LIST_MENU
+keymap gw DOWNLOAD_LIST
+keymap gs VIEW  # Show code source
+# Info
+keymap i INFO
+keymap s PEEK
+keymap p PEEK_LINK
+# keymap i PEEK_IMG
+# keymap I VIEW_IMAGE
+keymap C-g LINE_INFO
+keymap v COOKIE
+# }}}
+
+# Navigation {{{
+keymap C-i NEXT
+keymap C-o PREV
+keymap q PREV
+keymap C-e UP
+keymap C-y DOWN
+keymap C-d NEXT_PAGE
+keymap C-u PREV_PAGE
+keymap gg BEGIN
+keymap gl GOTO_LINE
+keymap G END
+keymap zz CENTER_V
+# }}}
+
+# Motions {{{
 keymap l MOVE_RIGHT
 keymap h MOVE_LEFT
-keymap j MOVE_DOWN
-keymap k MOVE_UP
-keymap < SHIFT_LEFT
-keymap > SHIFT_RIGHT
-keymap \^,C-a LINE_BEGIN
-keymap $,C-e LINE_END
-keymap Z CENTER_H
-keymap z CENTER_V
-keymap g BEGIN
-keymap G END
+keymap j MOVE_DOWN1
+keymap k MOVE_UP1
+keymap 0 LINE_BEGIN
+keymap $ LINE_END
 keymap w NEXT_WORD
 keymap b PREV_WORD
-keymap TAB NEXT_LINK
-keymap ESC-TAB PREV_LINK
 keymap u UNDO
 keymap C-r REDO
-keymap L LIST_MENU
+# }}}
 
-# Hyperlink operation
-keymap M MARK_WORD
-# keymap M  MARK_URL
-keymap C-t TAB_LINK
-keymap C-s SAVE_LINK
-keymap V  VIEW_IMAGE
-# keymap V  PEEK_IMG
-keymap i  INFO
-
-keymap ESC-i SAVE_IMAGE
-keymap p   PEEK_LINK
-keymap C-g LINE_INFO
-keymap O EXTERN_LINK
-
-# File/Stream operation
-keymap o GOTO
-keymap @ READ_SHELL
-keymap # PIPE_SHELL
-keymap |   PIPE_BUF
-
-# Buffer operation
-keymap B BACK
-keymap . NEXT
-keymap , PREV
-keymap S SELECT_MENU
-keymap ESC-s SAVE
-keymap v VIEW
-keymap P PRINT
-keymap E EDIT
-keymap ESC-e EDIT_SCREEN
-keymap r RELOAD
-keymap ESC-r RESHAPE
-
-# Tab operation
-keymap C-p PREV_TAB
-keymap C-n NEXT_TAB
-keymap t NEW_TAB
-keymap T TAB_MENU
-keymap d CLOSE_TAB
-
-keymap ESC-b VIEW_BOOKMARK
-keymap ESC-a ADD_BOOKMARK
-
-# Search 
+# Search {{{
 keymap / ISEARCH
 keymap ? ISEARCH_BACK
 keymap n SEARCH_NEXT
 keymap N SEARCH_PREV
+# }}}
 
-# Dictionay look-up
-keymap ESC-w DICT_WORD
-keymap ESC-W DICT_WORD_AT
+# Link {{{
+keymap C-] GOTO_LINK
+keymap gd GOTO_LINK
+keymap C-n NEXT_LINK
+keymap C-p PREV_LINK
+keymap y EXTERN
+keymap O EXTERN_LINK
+# ,f toggle hints, <num>f follow a link, <num>F open link in a tab
+keymap ,f COMMAND "SET_OPTION display_link_number=toggle ; RESHAPE"
+keymap f  COMMAND "SET_OPTION display_link_number=0 ; RESHAPE ; LINK_BEGIN ; GOTO_LINK"
+keymap F  COMMAND "SET_OPTION display_link_number=0 ; RESHAPE ; LINK_BEGIN ; TAB_LINK"
+keymap gD TAB_LINK
+# keymap C-j GOTO_LINK
+# }}}
 
-# Mark operation
-keymap m MARK
-keymap ] NEXT_MARK
-keymap [ PREV_MARK
-keymap  \"  REG_MARK
+# Tab {{{
+keymap x CLOSE_TAB
+keymap C-t NEW_TAB
+keymap C-l NEXT_TAB
+keymap C-h PREV_TAB
+keymap gt NEXT_TAB
+keymap gT PREV_TAB
+keymap ] NEXT_TAB
+keymap [ PREV_TAB
+keymap t TAB_GOTO
+keymap T TAB_MENU
+# }}}
 
-# bookmark operation
-keymap ESC-b VIEW_BOOKMARK
-keymap ESC-a ADD_BOOKMARK
-
-# Misc operation
-keymap \\ MENU
-keymap H HELP
-keymap ESC-o OPTIONS
-keymap ESC-k COOKIE
-keymap ESC-h HISTORY
-keymap ESC-c COMMAND
-keymap ! EXEC_SHELL
-keymap ESC-z INTERRUPT
-keymap C    CHARSET
-
+# Actions {{{
+keymap o GOTO
+keymap :w SAVE
+keymap C-s SAVE
+keymap C-a ADD_BOOKMARK
+keymap :p PRINT
+keymap :e LOAD
+keymap r RELOAD
+keymap ZZ EXIT
+keymap ZQ QUIT
+keymap Q QUIT
+keymap :q QUIT
+# keymap C-i SAVE_IMAGE
+# keymap C-d SAVE_LINK
+# keymap ESC-C-j SUBMIT
+# External
+keymap R COMMAND "READ_SHELL 'rdrview $W3M_URL -H 2> /dev/null 1> /tmp/readable.html' ; LOAD /tmp/readable.html"
+# keymap yy EXTERN 'printf %s | xclip -selection clipboard'
+# }}}
