@@ -1,1 +1,3 @@
 [tools]
+"cargo:hacksaw" = "latest"
+"cargo:shotgun" = "latest"
