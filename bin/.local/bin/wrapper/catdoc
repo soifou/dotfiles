@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+case "$(uname -n)" in
+    silicon) textutil -stdout -cat txt "$@" ;;
+    *) catdoc "$@" ;;
+esac
