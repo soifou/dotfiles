@@ -54,6 +54,7 @@ auto_view text/html
 set sort = threads
 set sort_aux = reverse-threads
 set narrow_tree = yes
+set collapse_all = yes
 
 # Quote (previous messages in replies)
 set include = yes
@@ -77,8 +78,8 @@ set menu_scroll = yes
 set pager_stop = yes
 
 # Index
-# See: https://neomutt.org/guide/reference.html#3-170-%C2%A0index_format
-set index_format="%4C %Z  %{!%d %b · %T}  %-25.25F   %-80.80s %* %?X?%X  & ? %-4.4c"
+# See: https://neomutt.org/guide/reference.html#index-format
+set index_format = "%4C %Z %{!%d %b · %T} %-25.25F %-80.80s %* %M%?M?󰻞 ? %?X?%X  &  ?%-4.4c"
 set to_chars = "󰀒"
 set crypt_chars = " "
 set flag_chars = "    "
