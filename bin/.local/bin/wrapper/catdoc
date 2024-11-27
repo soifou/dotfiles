@@ -2,5 +2,5 @@
 
 case "$(uname -n)" in
     silicon) textutil -stdout -cat txt "$@" ;;
-    *) catdoc "$@" ;;
+    *) PATH=$(echo "$PATH" | tr ":" "\n" | grep -vE 'wrapper' | xargs | sed -e 's/ /:/g') catdoc "$@" ;;
 esac

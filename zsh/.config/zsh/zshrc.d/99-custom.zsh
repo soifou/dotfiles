@@ -51,5 +51,4 @@ command -v cargo >/dev/null &&
 
 command -v mise >/dev/null && {
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_mise ] && znap fpath _mise 'mise completion zsh'
-    znap eval mise 'mise activate zsh'
 }

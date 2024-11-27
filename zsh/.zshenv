@@ -81,15 +81,18 @@ export BC_ENV_ARGS="-q"
 export GIT_PAGER=delta
 
 export FZF_DEFAULT_OPTS="
-    --prompt 'λ '
+    --prompt 'λ ' --marker │ --pointer ▌ --separator ─ --scrollbar │
+    --preview-window=border-thinblock
     --info=inline-right
     --no-mouse
     --layout=reverse
     --cycle
-    --bind ctrl-q:ignore,ctrl-z:ignore
+    --bind ctrl-q:abort,ctrl-z:ignore
     --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
     --bind ctrl-f:half-page-down,ctrl-b:half-page-up
     --bind ctrl-h:backward-char,ctrl-l:forward-char
+    --bind ctrl-e:change-preview-window\(down\|hidden\|\)
+    --bind ctrl-a:toggle-all
     --color fg:8,fg+:7,bg:-1,bg+:-1,hl:4,hl+:4
     --color info:8,prompt:7,spinner:1,pointer:1,marker:1,border:4,gutter:-1
 "
