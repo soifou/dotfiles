@@ -10,6 +10,11 @@
 BAR_ICON=
 LIMIT=50
 
+BOLD_WHITE="\e[1;37m"
+RED="\e[31m"
+GREEN="\e[32m"
+RESET="\e[0m"
+
 while IFS='=' read -r key val; do
     case $key in
         ID) distro=$val ;;
@@ -45,7 +50,22 @@ refresh() {
     $UPD_CMD > /dev/null 2>&1 || notify-send -i $ICON -u critical "Error downloading updates."
 }
 status() { _print_count "$COUNT"; }
-list() { [ "$PACKAGES" ] && echo "$PACKAGES" || notify-send -i $ICON -u low "Packages" "Already up to date!"; }
+list() {
+    [ "$PACKAGES" ] && {
+        case "$1" in
+            --ansi)
+                echo "$PACKAGES" | while IFS= read -r line; do
+                    package_name=$(echo "$line" | awk '{print $1}')
+                    outdated_version=$(echo "$line" | awk '{print $2}')
+                    new_version=$(echo "$line" | awk '{print $4}')
+
+                    printf "%b%s %b%s %b-> %b%s%b\n" $BOLD_WHITE $package_name $RED $outdated_version $BOLD_WHITE $GREEN $new_version $RESET
+                done
+                ;;
+            *) echo "$PACKAGES" ;;
+        esac
+    } || notify-send -i $ICON -u low "Packages" "Already up to date!"
+}
 
 __usage="
 Usage: $(basename "$0") [OPTIONS]
@@ -53,7 +73,7 @@ Handle package distribution using package manager.
 Options:
   -r, --refresh          Refresh the package list
   -s, --status           Display how many packages are upgradable
-  -l, --list             List upgradable packages
+  -l, --list [--ansi]    List upgradable packages
   -h, help               Show this help
 "
 _help() {
@@ -64,6 +84,6 @@ _help() {
 case "$1" in
     --refresh | -r) refresh ;;
     --status | -s) status ;;
-    --list | -l) list ;;
+    --list | -l) list $2 ;;
     --help | -h | *) _help ;;
 esac

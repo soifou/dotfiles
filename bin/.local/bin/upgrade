@@ -19,7 +19,7 @@ debian() {
         && sudo ntpdate -b pool.ntp.org
 
     apt list --upgradable 2> /dev/null | grep upgradable > /dev/null && yn "Update system?" && {
-        apt list --upgradable
+        check-packages -l --ansi
         yn "Upgrade?" && {
             sudo apt upgrade -y 2> /dev/null && sudo apt autoremove -y && sudo apt clean && sudo apt autoclean
             sudo dpkg -l | grep '^rc' | awk '{print $2}' | xargs sudo apt-get purge -y
@@ -43,20 +43,23 @@ arch() {
             | sudo tee /etc/pacman.d/mirrorlist
     }
 
-    yn "Update system?" && {
-        # upgrade all packages but allow downgrade (second u argument)
-        # downgrade is needed in case we update mirrorlist
-        sudo pacman -Syuu --noconfirm
+    pacman -Qu > /dev/null 2>&1 && yn "Update system?" && {
+        check-packages -l --ansi
+        yn "Upgrade?" && {
+            # upgrade all packages but allow downgrade (second u argument)
+            # downgrade is needed in case we update mirrorlist
+            sudo pacman -Syuu --noconfirm
 
-        # autoremove unused dependencies
-        pacman -Qdtq > /dev/null && pacman -Qdtq | xargs sudo pacman --noconfirm -R || echo "No unused dependencies"
+            # autoremove unused dependencies
+            pacman -Qdtq > /dev/null && pacman -Qdtq | xargs sudo pacman --noconfirm -R || echo "No unused dependencies"
 
-        # clean and autoclean
-        sudo pacman -Sc --noconfirm
-        sudo pacman -Scc --noconfirm
+            # clean and autoclean
+            sudo pacman -Sc --noconfirm
+            sudo pacman -Scc --noconfirm
 
-        # upgrade AUR packages
-        paru -Syu
+            # upgrade AUR packages
+            paru -Syu
+        }
     }
 }
 
