@@ -77,14 +77,13 @@ set menu_move_off = no
 set menu_scroll = yes
 set pager_stop = yes
 
-# Index
-# See: https://neomutt.org/guide/reference.html#index-format
-set index_format = "%4C %Z %{!%d %b · %T} %-25.25F %-80.80s %* %M%?M?󰻞 ? %?X?%X  &  ?%-4.4c"
-set to_chars = "󰀒"
+# Chars
+set to_chars = ""
 set crypt_chars = " "
-set flag_chars = "    "
+set flag_chars = "󰑚    "
 
-# Status bar
+# Format
+set index_format = "%4C %zs %zc %zt %8<[y?%<[7d?%<[d?%[%H:%M ]&%[%a %d ]>&%[%b %d ]>&%['%y %b]>· %-30.30F %-90.90s %4M%?M?󰻞 ? %* %?X?%X  & ?│ %-4.4c"
 set status_format = "───[ %D ] %?r?[   %m ] ?%?n?[   %n ] ?%?d?[   %d ] ?%?t?[   %t ] ?%?F?[   %F ] ?%?p?[   %p ]?%|─"
 set pager_format = "───[ %n ] [ %T  %s ]%* [   %{!%d %b · %T} ] %?X?[   %X ]? [ %c ] [   %P ]─"
 set compose_format = "───[  %l ] [  %a ]%>─"
