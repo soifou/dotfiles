@@ -4,34 +4,14 @@
 (
     default_album_art_path: None,
     show_song_table_header: true,
-    draw_borders: true,
-    browser_column_widths: [20, 38, 42],
-    background_color: None,
-    text_color: None,
-    header_background_color: None,
-    modal_background_color: None,
-    tab_bar: (
-        enabled: true,
-        active_style: (fg: "black", bg: "blue", modifiers: "Bold"),
-        inactive_style: (fg: "blue"),
-    ),
-    highlighted_item_style: (fg: "blue", modifiers: "Bold"),
+    tab_bar: (),
+    highlighted_item_style: (fg: "yellow", modifiers: "Bold"),
     current_item_style: (fg: "black", bg: "blue", modifiers: "Bold"),
-    borders_style: (fg: "blue"),
-    highlight_border_style: (fg: "blue"),
+    borders_style: (fg: "blue", bg: "black"),
+    highlight_border_style: (fg: "blue"), // queue list
     symbols: (song: "󰈣 ", dir: " ", marker: "▍", ellipsis: "…"),
-    progress_bar: (
-        symbols: ["─", "╼", " "],
-        track_style: (fg: "green"),
-        elapsed_style: (fg: "blue"),
-        thumb_style: (fg: "blue"),
-    ),
-    scrollbar: (
-        symbols: ["", "┃", "", ""],
-        track_style: (),
-        ends_style: (),
-        thumb_style: (fg: "blue"),
-    ),
+    progress_bar: (symbols: ["─", "╼", " "]),
+    scrollbar: (symbols: ["", "│", "", ""]),
     song_table_format: [
         (
             prop: (kind: Property(Artist), default: (kind: Text("Unknown"), style: (fg: "red"))),
