@@ -1,8 +1,8 @@
 [plugin]
 deps = [
-    { use = "dedukun/relative-motions", rev = "1d6d686" },
-    { use = "yazi-rs/plugins:full-border", rev = "f1fb6cc" },
-    { use = "yazi-rs/plugins:hide-preview", rev = "f1fb6cc" },
+    { use = "dedukun/relative-motions", rev = "df97039" },
+    { use = "yazi-rs/plugins:full-border", rev = "62f0789" },
+    { use = "yazi-rs/plugins:hide-preview", rev = "62f0789" },
 ]
 
 [flavor]

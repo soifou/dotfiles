@@ -3,7 +3,7 @@
 [manager]
 prepend_keymap = [
 	{ on = [ "?" ], run = "help", desc = "Show help" },
-	{ on = [ "<C-i>" ], run = [ "select --state=none" ], desc = "Toggle the current selection state" },
+	{ on = [ "<C-i>" ], run = [ "toggle --state=none" ], desc = "Toggle the current selection state" },
 
     { on = [ "1" ], run = "plugin relative-motions --args=1", desc = "Move in relative steps"},
     { on = [ "2" ], run = "plugin relative-motions --args=2", desc = "Move in relative steps"},
