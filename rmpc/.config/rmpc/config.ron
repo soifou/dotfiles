@@ -13,6 +13,10 @@
         method: Kitty,
         max_size_px: (width: 0, height: 0),
     ),
+    artists: (
+        album_display_mode: SplitByDate,
+        album_sort_by: Date,
+    ),
     keybinds: (
         global: {
             "1":       SwitchToTab("Queue"),
@@ -47,6 +51,8 @@
             "j":       Down,
             "k":       Up,
             "l":       Right,
+            "<Tab>":   Right,
+            "<S-Tab>": Left,
             "<C-h>":   PaneLeft,
             "<C-j>":   PaneDown,
             "<C-k>":   PaneUp,
@@ -62,7 +68,7 @@
             "D":       Delete,
             "g":       Top,
             "G":       Bottom,
-            "<Tab>":   Select,
+            "<C-e>":   Select,
             "<CR>":    Confirm,
             "i":       FocusInput,
             "/":       EnterSearch,
