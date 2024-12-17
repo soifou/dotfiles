@@ -81,7 +81,7 @@ export BC_ENV_ARGS="-q"
 export GIT_PAGER=delta
 
 export FZF_DEFAULT_OPTS="
-    --prompt 'λ ' --marker │ --pointer ▌ --separator ─ --scrollbar │
+    --prompt 'λ ' --marker │ --pointer ▌ --separator ─ --scrollbar │ --ellipsis …
     --preview-window=border-thinblock
     --info=inline-right
     --no-mouse
