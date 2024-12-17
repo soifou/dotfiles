@@ -1,6 +1,7 @@
 [settings]
 asdf_compat = false
 experimental = true
+lockfile = false
 go_default_packages_file = "~/.config/mise/default/golang"
 go_set_gobin = true
 go_set_gopath = true
@@ -25,7 +26,6 @@ rust = "latest"
 "cargo:eza" = "latest"
 "cargo:vimv" = "latest"
 # ---
-"ubi:BurntSushi/ripgrep" = { version = "latest", exe = "rg" }
 "ubi:achristmascarl/rainfrog" = "latest"
 "ubi:astral-sh/uv" = "latest"
 "ubi:cargo-bins/cargo-binstall" = "latest"
