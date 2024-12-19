@@ -77,14 +77,16 @@ zstyle ':completion:*:default' list-colors \
 zle_highlight=('paste:none')
 
 # Override default behaviour for ssh/scp hosts completion.
-# list only entries in ~/.ssh/config.d/* (OpenSSH >= 7.3) or ~/.ssh/config (prior to 7.3), not in /etc/hosts
+# List only entries in `ssh_folder`, not in /etc/hosts
+# Exclude hosts that contain a wildcard (*).
 # See: https://serverfault.com/questions/170346/how-to-edit-command-completion-for-ssh-on-zsh
 ssh_folder="$XDG_CONFIG_HOME"/ssh/config.d
 if [ -r $ssh_folder ]; then
     zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):*:hosts' hosts .zsh.hosts
-    .zsh.hosts(){
-        typeset -gaU reply=(
-            ${${${(M)${(f)"$(cat $ssh_folder/*)"}:#Host *}#Host }:#*[*?]*}
-        )
+    .zsh.hosts() {
+        local -a lines hosts
+        lines=(${(f)"$(cat "$ssh_folder"/*(.N))"})
+        hosts=(${${(M)lines:#Host *}#Host })
+        reply=(${hosts:#*\**})
     }
 fi
