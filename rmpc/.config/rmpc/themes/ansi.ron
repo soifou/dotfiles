@@ -7,7 +7,7 @@
     tab_bar: (),
     highlighted_item_style: (fg: "yellow", modifiers: "Bold"),
     current_item_style: (fg: "black", bg: "blue", modifiers: "Bold"),
-    borders_style: (fg: "blue", bg: "black"),
+    borders_style: (fg: "blue", bg: None),
     highlight_border_style: (fg: "blue"), // queue list
     symbols: (song: "󰈣 ", dir: " ", marker: "▍", ellipsis: "…"),
     progress_bar: (symbols: ["─", "╼", " "]),
