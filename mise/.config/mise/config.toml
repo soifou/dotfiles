@@ -29,6 +29,7 @@ rust = "latest"
 "ubi:achristmascarl/rainfrog" = "latest"
 "ubi:astral-sh/uv" = "latest"
 "ubi:cargo-bins/cargo-binstall" = "latest"
+"ubi:dandavison/delta" = "latest"
 "ubi:jdx/usage" = "latest"
 "ubi:junegunn/fzf" = "latest"
 "ubi:symfony-cli/symfony-cli" = { version = "latest", exe = "symfony" }
