@@ -1,0 +1,8 @@
+# ┏┳┓┏━┓┏━╸┏━┓┏━┓
+# ┃┃┃┣━┫┃  ┃ ┃┗━┓
+# ╹ ╹╹ ╹┗━╸┗━┛┗━┛
+
+font-size = 23
+font-thicken = true
+macos-window-shadow = false
+quit-after-last-window-closed = true

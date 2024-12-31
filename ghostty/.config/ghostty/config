@@ -1,0 +1,25 @@
+# ┏━╸╻ ╻┏━┓┏━┓╺┳╸╺┳╸╻ ╻
+# ┃╺┓┣━┫┃ ┃┗━┓ ┃  ┃ ┗┳┛
+# ┗━┛╹ ╹┗━┛┗━┛ ╹  ╹  ╹
+#
+# default: ghostty +show-config --default --docs
+
+font-family = Iosevka Custom
+
+theme = wal
+
+adjust-cell-height = 20%
+
+minimum-contrast = 1.1
+
+cursor-style = bar
+cursor-opacity = 0.8
+cursor-invert-fg-bg = true
+
+window-padding-x = 20
+window-padding-y = 20
+
+window-decoration = false
+mouse-hide-while-typing = true
+
+config-file = private
