@@ -3,4 +3,9 @@
 # Generate a random secure password
 length=${1:-20}
 [ "$(uname)" = "Darwin" ] && LC_ALL=C
-tr -dc A-Za-z0-9 < /dev/urandom | head -c ${length} | xargs
+
+tr -dc A-Za-z0-9_./@# < /dev/urandom | head -c ${length} | xargs
+
+# Some other native methods using base64
+# openssl rand -base64 "$(echo "scale=0;$length*3/4" | bc)"
+# gpg --gen-random --armor 1 "$(echo "scale=0;$length*3/4" | bc)"
