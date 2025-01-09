@@ -108,6 +108,7 @@ yank-osc52() {
 
 vi-yank-osc52() { zle vi-yank; yank-osc52; }
 zle -N vi-yank-osc52
+bindkey '^y' vi-yank-osc52
 bindkey -M vicmd 'y' vi-yank-osc52
 
 vi-yank-eol-osc52() { zle vi-yank-eol; yank-osc52; }
