@@ -1,4 +1,4 @@
-script-opts/modernx.conf
+script-opts/modernz.conf
 
 scripts/*
 !scripts/history.lua

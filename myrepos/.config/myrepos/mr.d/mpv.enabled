@@ -3,9 +3,11 @@
 # ┗━┛┗━┛┗━╸
 # Alternatives: https://github.com/po5/thumbfast#ui-support
 
-[$XDG_DATA_HOME/mpv/modernX]
-checkout = git clone https://github.com/zydezu/modernX
-post_checkout = ln -sf $MR_REPO/modernx.lua $XDG_CONFIG_HOME/mpv/scripts/modernx.lua
+[$XDG_DATA_HOME/mpv/ModernZ]
+checkout = git clone https://github.com/Samillion/ModernZ
+post_checkout =
+    ln -sf $MR_REPO/modernz.lua $XDG_CONFIG_HOME/mpv/scripts/
+    ln -sf $MR_REPO/extras/pause-indicator-lite/pause_indicator_lite.lua $XDG_CONFIG_HOME/mpv/scripts/
 
 # ┏━┓╻  ╻ ╻┏━╸╻┏┓╻┏━┓
 # ┣━┛┃  ┃ ┃┃╺┓┃┃┗┫┗━┓
@@ -13,20 +15,20 @@ post_checkout = ln -sf $MR_REPO/modernx.lua $XDG_CONFIG_HOME/mpv/scripts/modernx
 
 [$XDG_DATA_HOME/mpv/thumbfast]
 checkout = git clone https://github.com/po5/thumbfast
-post_checkout = ln -sf $MR_REPO/thumbfast.lua $XDG_CONFIG_HOME/mpv/scripts/thumbfast.lua
+post_checkout = ln -sf $MR_REPO/thumbfast.lua $XDG_CONFIG_HOME/mpv/scripts/
 
 [$XDG_DATA_HOME/mpv/chapterskip]
 checkout = git clone https://github.com/l-jared/chapterskip
-post_checkout = ln -sf $MR_REPO/chapterskip.lua $XDG_CONFIG_HOME/mpv/scripts/chapterskip.lua
+post_checkout = ln -sf $MR_REPO/chapterskip.lua $XDG_CONFIG_HOME/mpv/scripts/
 
 [$XDG_DATA_HOME/mpv/mpv_sponsorblock_minimal]
 checkout = git clone https://codeberg.org/jouni/mpv_sponsorblock_minimal
-post_checkout = ln -sf $MR_REPO/sponsorblock_minimal.lua $XDG_CONFIG_HOME/mpv/scripts/sponsorblock_minimal.lua
+post_checkout = ln -sf $MR_REPO/sponsorblock_minimal.lua $XDG_CONFIG_HOME/mpv/scripts/
 
 [$XDG_DATA_HOME/mpv/mpv-reload]
 checkout = git clone https://github.com/4e6/mpv-reload
-post_checkout = ln -sf $MR_REPO/reload.lua $XDG_CONFIG_HOME/mpv/scripts/reload.lua
+post_checkout = ln -sf $MR_REPO/reload.lua $XDG_CONFIG_HOME/mpv/scripts/
 
 [$XDG_DATA_HOME/mpv/mpv-iptv]
 checkout = git clone https://github.com/gthreepw00d/mpv-iptv
-post_checkout = ln -sf $MR_REPO/iptv.lua $XDG_CONFIG_HOME/mpv/scripts/iptv.lua
+post_checkout = ln -sf $MR_REPO/iptv.lua $XDG_CONFIG_HOME/mpv/scripts/
