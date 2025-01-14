@@ -18,10 +18,10 @@ fixups =
     sudo ln -sf $MR_REPO/setsid /usr/local/bin/
 skip = ! is_darwin
 
-[$XDG_DEVELOP_DIR/testing/run-on-macos-screen-unlock]
-checkout = git clone https://github.com/coolaj86/run-on-macos-screen-unlock
+[$XDG_DEVELOP_DIR/testing/run-on-macos-screen-events]
+checkout = git clone -b patch-1 https://github.com/d3p/run-on-macos-screen-events
 fixups =
-    swiftc ./run-on-macos-screen-unlock.swift
-    xattr -r -d com.apple.quarantine ./run-on-macos-screen-unlock
-    ln -sf $MR_REPO/run-on-macos-screen-unlock $HOME/.local/bin/
+    swiftc ./run-on-macos-screen-events.swift
+    xattr -r -d com.apple.quarantine ./run-on-macos-screen-events
+    ln -sf $MR_REPO/run-on-macos-screen-events $HOME/.local/bin/
 skip = ! is_darwin
