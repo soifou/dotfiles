@@ -23,6 +23,8 @@ php = "8.3.13"
 python = "latest"
 rust = "latest"
 # ---
+"aqua:phiresky/ripgrep-all" = "latest"
+# ---
 "cargo:eza" = "latest"
 "cargo:vimv" = "latest"
 # ---

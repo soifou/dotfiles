@@ -177,9 +177,13 @@ super + z
 super + shift + f
     wm-scratchpad yazi
 
-# torrent, youtube
-super + x ; {0,9,8,t}
-    wm-scratchpad {tremc, ytfzf ytfzf -sl, play, typioca}
+# clipboard manager
+super + space
+    clipcat-menu insert
+
+# misc apps
+super + x ; {0,9,p,t}
+    wm-scratchpad {tremc, magic-tape, play, typioca}
 
 # locker
 super + Escape

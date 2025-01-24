@@ -8,6 +8,10 @@ set -e
 #
 # notify-send -i nvim foo -> notify-send -i $icons_path/apps/nvim.svg foo
 
+# TODO: try out kitten notify: kovidgoyal/kitty/issues/7685
+# The icon pack need however to be convert into png (kitten does not support svg).
+# Like: shimmerproject/elementary-xfce/blob/master/svgtopng
+
 icons_path=/usr/share/icons/Papirus/22x22
 default_icon=status/dialog-information.svg
 

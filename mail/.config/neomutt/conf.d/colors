@@ -45,7 +45,7 @@ color normal default default
 
 # Regex highlighting:
 # color index blue color0 "~z 262144-" # bigger than 256 KiB
-color index yellow black ~v # collapsed thread
+color index yellow default ~v # collapsed thread
 color header blue default ".*"
 color header brightmagenta default "^(From)"
 color header brightcyan default "^(Subject)"

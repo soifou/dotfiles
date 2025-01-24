@@ -18,7 +18,7 @@ _d() {
 # gtk settings daemon
 _d xsettingsd -c $XDG_CONFIG_HOME/xsettingsd/xsettingsd.conf
 # clipboard manager
-_d greenclip daemon
+_d clipcatd --no-daemon
 # screen locker
 _d locker
 # music player daemon

@@ -69,7 +69,7 @@ bindsym $mod+Return exec term
 # Launcher
 # =============================================================================
 # Default
-bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,clipboard:greenclip print,calc:~/.local/bin/rofi/rofi-bc' -show drun"
+bindsym $mod+d exec --no-startup-id "rofi -modi 'drun,calc:~/.local/bin/rofi/rofi-bc' -show drun"
 # Classic Alt+Tab to list opened apps
 bindsym Mod1+Tab exec --no-startup-id rofi -show window -mode window -config $XDG_CONFIG_HOME/rofi/alttab.rasi
 # Manage wallpapers/themes, copy emojis to clipboard (https://github.com/Mange/rofi-emoji)

@@ -18,7 +18,7 @@ _generate_palette() {
     mime=$(file --mime-type $file | awk '{print $2}')
     case "$mime" in
         application/json)
-            _wallust cs --format pywal $file
+            _wallust cs $file
             [ $? -eq 1 ] && {
                 echo "Failed when generating templates"
                 exit 1

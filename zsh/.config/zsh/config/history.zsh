@@ -9,10 +9,7 @@ HISTFILESIZE=100000
 HISTSIZE=120000 # Larger than $SAVEHIST for hist_expire_dups_first to work
 SAVEHIST=100000
 HISTCONTROL=ignoreboth # Default (ignorespace+ignoredups)
-
-# Custom
-HISTIGNORE='man:run-help:pass:kill'
-typeset -gT HISTIGNORE histignore
+HISTORY_IGNORE="(ls|l|ll|lt|[bf]g|man|pass|kill|exit|reset|clear|cd|cd -|cd ..|cd ../|pwd|date|* --help)"
 
 #-----------------------------------------------------
 # Options

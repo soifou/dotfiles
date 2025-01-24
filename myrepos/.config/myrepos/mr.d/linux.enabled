@@ -38,6 +38,14 @@ skip = ! is_linux
 #     sudo make install
 # skip = ! is_linux
 
+[$XDG_DEVELOP_DIR/testing/pavucontrolrs]
+checkout = git clone https://github.com/tu500/pavucontrolrs
+fixups =
+    cargo build --release
+    chmod +x $MR_REPO/target/release/pavucontrolrs
+    sudo ln -sf $MR_REPO/target/release/pavucontrolrs /usr/local/bin/pavucontrolrs
+skip = ! is_linux
+
 [$XDG_DEVELOP_DIR/testing/wired-notify]
 checkout = git clone https://github.com/Toqozz/wired-notify
 fixups =

@@ -70,10 +70,9 @@ post_checkout = sudo ln -sf $MR_REPO/viewhtmlmsg /usr/local/bin/
 checkout = git clone -b macos-compatibility https://gitlab.com/soifou/magic-tape.git/
 post_checkout = ln -sf $MR_REPO/magic-tape.sh $HOME/.local/bin/magic-tape
 
-[$XDG_DEVELOP_DIR/testing/ytfzf]
-checkout = git clone https://github.com/pystardust/ytfzf
-fixups =
-    sudo make install
+[$XDG_DEVELOP_DIR/testing/yt-x]
+checkout = git clone https://github.com/Benexl/yt-x
+post_checkout = ln -sf $MR_REPO/yt-x $HOME/.local/bin/yt-x
 
 [$XDG_DEVELOP_DIR/testing/zsh-completion-generator]
 checkout = git clone https://github.com/RobSis/zsh-completion-generator

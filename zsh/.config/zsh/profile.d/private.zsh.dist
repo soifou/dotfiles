@@ -55,3 +55,6 @@
 # export PHP_VERSION=8.3
 # Build options
 # export PHP_CONFIGURE_OPTIONS="--with-openssl --with-curl --with-zlib --with-readline --with-gettext --with-sodium"
+
+# https://github.com/Benexl/yt-x
+# export YT_X_FZF_OPTS="$FZF_DEFAULT_OPTS"
