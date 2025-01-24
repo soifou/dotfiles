@@ -75,15 +75,16 @@ case "$1" in
     mailto:*) term --class=mailto neomutt "$1" ;;
     magnet:* | *.torrent) _torrent "$1" ;;
     # Providers
-    *reddit.com/gallery* | *i.redd.it* | *preview.redd.it* | *imgur.com*) _gdl "$1" ;;
     *0paste.com*) _dlo "$1".txt ;;
     *pastebin.com*) _dlo "https://pastebin.com/raw/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
     *paste.debian.net*) _dlo "https://paste.debian.net/plain/$(echo "$1" | grep / | cut -d/ -f4-)" ;;
     *termbin.com* | *0x0.st* | *ix.io* | *.txt) _dlo "$1" ;;
     *ghostbin.co*) _dlo "$1"/raw ;;
+    *reddit.com/login/* | *reddit.com/api/v1/*) _web "$1" ;;
+    *reddit.com/gallery* | *i.redd.it* | *preview.redd.it* | *imgur.com*) _gdl "$1" ;;
     *reddit.com/*/player) $video "$(curl -L --silent "$1" | pup 'div.video-player .landscape attr{data-hls-url}')" ;;
     *reddit.com*) term --class=rtv rtv "$1" ;;
-    /r/* ) term --class=rtv rtv "https://www.reddit.com/$1" ;;
+    /r/*) term --class=rtv rtv "https://www.reddit.com/$1" ;;
     *codeberg.org/*/raw/* | *raw.githubusercontent.com*) _dlo_wext "$1" ;;
     *github.com/* | *codeberg.org/* ) _web "$1" ;;
     # Extensions
