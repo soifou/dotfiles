@@ -3,7 +3,6 @@ asdf_compat = false
 experimental = true
 lockfile = false
 go_default_packages_file = "~/.config/mise/default/golang"
-go_set_gobin = true
 go_set_gopath = true
 jobs = 4
 legacy_version_file = false
