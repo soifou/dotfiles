@@ -21,6 +21,7 @@ node = "23.0.0"
 php = "8.3.13"
 python = "latest"
 rust = "latest"
+zig = "latest"
 # ---
 "aqua:phiresky/ripgrep-all" = "latest"
 # ---

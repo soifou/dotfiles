@@ -78,6 +78,14 @@ post_checkout = ln -sf $MR_REPO/yt-x $HOME/.local/bin/yt-x
 checkout = git clone https://github.com/RobSis/zsh-completion-generator
 post_checkout = sudo ln -sf $MR_REPO/help2comp.py /usr/local/bin/help2comp
 
+[$XDG_DEVELOP_DIR/testing/superhtml]
+checkout = git clone https://github.com/kristoff-it/superhtml
+fixups =
+    zig build -Dlog=false
+    ln -sf $MR_REPO/zig-out/bin/superhtml $HOME/.local/bin/
+    # FIXME: Even with -Dlog this fill up too much
+    ln -sf /dev/null $HOME/.cache/superhtml.log
+
 # [$XDG_DEVELOP_DIR/testing/gpt4free]
 # checkout = git clone https://github.com/xtekky/gpt4free
 
