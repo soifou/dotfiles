@@ -2,6 +2,7 @@ background = {{background}}
 foreground = {{foreground}}
 selection-background = {{color8}}
 selection-foreground = {{foreground}}
+split-divider-color = {{color5}}
 palette = 0={{color0}}
 palette = 1={{color1}}
 palette = 2={{color2}}

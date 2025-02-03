@@ -10,16 +10,46 @@ theme = wal
 
 adjust-cell-height = 20%
 
-minimum-contrast = 1.1
-
 cursor-style = bar
 cursor-opacity = 0.8
 cursor-invert-fg-bg = true
+selection-invert-fg-bg = true
 
 window-padding-x = 20
 window-padding-y = 20
+window-inherit-font-size = true
 
-window-decoration = false
+confirm-close-surface = false
+window-decoration = none
 mouse-hide-while-typing = true
 
-config-file = private
+config-file = ?private
+
+keybind = cmd+d=unbind
+keybind = cmd+h=unbind
+keybind = super+h=unbind
+
+keybind = cmd+q=close_surface
+
+keybind = cmd+enter=new_split:right
+keybind = cmd+ctrl+enter=new_split:down
+
+keybind = cmd+h=goto_split:left
+keybind = cmd+j=goto_split:down
+keybind = cmd+k=goto_split:up
+keybind = cmd+l=goto_split:right
+
+
+keybind = cmd+r>j=resize_split:down,32
+keybind = cmd+r>k=resize_split:up,32
+keybind = cmd+r>h=resize_split:left,32
+keybind = cmd+r>l=resize_split:right,32
+
+keybind = cmd+backspace=reset_font_size
+
+keybind = cmd+shift+u=scroll_page_up
+keybind = cmd+shift+d=scroll_page_down
+
+keybind = cmd+t>t=new_tab
+keybind = cmd+ctrl+h=previous_tab
+keybind = cmd+ctrl+l=next_tab
