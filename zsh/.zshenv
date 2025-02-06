@@ -82,14 +82,13 @@ export GIT_PAGER=delta
 
 export FZF_DEFAULT_OPTS="
     --prompt 'λ ' --marker │ --pointer ▌ --separator ─ --scrollbar │ --ellipsis …
-    --preview-window=border-thinblock
     --info=inline-right
     --no-mouse
     --layout=reverse
     --cycle
     --bind ctrl-q:abort,ctrl-z:ignore
-    --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
-    --bind ctrl-f:half-page-down,ctrl-b:half-page-up
+    --bind ctrl-d:half-page-down,ctrl-u:half-page-up
+    --bind ctrl-f:preview-half-page-down,ctrl-b:preview-half-page-up
     --bind ctrl-h:backward-char,ctrl-l:forward-char
     --bind ctrl-e:change-preview-window\(down\|hidden\|\)
     --bind ctrl-a:toggle-all
