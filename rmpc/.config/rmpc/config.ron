@@ -4,6 +4,7 @@
 (
     theme: Some("ansi"),
     cache_dir: Some("/tmp/rmpc/cache"),
+    lyrics_dir: Some("~/Music/library"),
     on_song_change: ["rmpc-notify"],
     volume_step: 5,
     scrolloff: 2,
@@ -51,8 +52,6 @@
             "j":       Down,
             "k":       Up,
             "l":       Right,
-            "<Tab>":   Right,
-            "<S-Tab>": Left,
             "<C-h>":   PaneLeft,
             "<C-j>":   PaneDown,
             "<C-k>":   PaneUp,
@@ -68,7 +67,8 @@
             "D":       Delete,
             "g":       Top,
             "G":       Bottom,
-            "<C-e>":   Select,
+            "<Tab>":   Select,
+            "<C-a>":   InvertSelection,
             "<CR>":    Confirm,
             "i":       FocusInput,
             "/":       EnterSearch,
@@ -107,7 +107,13 @@
                 direction: Horizontal,
                 panes: [
                     (size: "72%", pane: Pane(Queue)),
-                    (size: "28%", pane: Pane(AlbumArt))
+                    (size: "28%", pane: Split(
+                        direction: Vertical,
+                        panes: [
+                            (size: "86%", pane: Pane(AlbumArt)),
+                            (size: "14%", pane: Pane(Lyrics)),
+                        ]
+                    )),
                 ],
             ),
         ),
