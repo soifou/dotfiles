@@ -27,7 +27,7 @@ post_checkout = ln -sf $MR_REPO/sponsorblock_minimal.lua $XDG_CONFIG_HOME/mpv/sc
 
 [$XDG_DATA_HOME/mpv/mpv-reload]
 checkout = git clone https://github.com/4e6/mpv-reload
-post_checkout = ln -sf $MR_REPO/reload.lua $XDG_CONFIG_HOME/mpv/scripts/
+post_checkout = ln -sf $MR_REPO/main.lua $XDG_CONFIG_HOME/mpv/scripts/reload.lua
 
 [$XDG_DATA_HOME/mpv/mpv-iptv]
 checkout = git clone https://github.com/gthreepw00d/mpv-iptv
