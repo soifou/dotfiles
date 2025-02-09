@@ -1,27 +1,38 @@
 #!/usr/bin/env zsh
 
-# NOTE: kitty with default `shell-integration` already manage cursor shape.
-case "$TERM" in
-    xterm-kitty|xterm-ghostty) ;;
-    *)
-        cursor_block='\e[2 q'
-        cursor_beam='\e[6 q'
-        # Change cursor shape (beam or block) depending on vi mode (insert or normal)
-        terms=(rxvt-unicode-256color wezterm)
-        zle-keymap-select() {
-            if [ ${terms[(i)$TERM]} -le ${#terms} ]; then
-                [ $KEYMAP = vicmd ] && echo -ne $cursor_block || echo -ne $cursor_beam
-            fi
-        }
-        zle -N zle-keymap-select
-        # In case last command was aborted, restore beam cursor shape on new line
-        zle-line-init() {
-            if [ -n $ZLE_LINE_ABORTED ]; then
-                if [ ${terms[(i)$TERM]} -le ${#terms} ]; then
-                    [ $KEYMAP != vicmd ] && echo -ne $cursor_beam
-                fi
-            fi
-        }
-        zle -N zle-line-init
-        ;;
-esac
+# Define cursor shapes
+cursor_block='\e[1 q'
+cursor_beam='\e[5 q'
+
+set_cursor_shape() { echo -ne $1; }
+
+# Set cursor shape based on vi mode
+zle-keymap-select() {
+    if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+        set_cursor_shape $cursor_block
+    elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
+        set_cursor_shape $cursor_beam
+    fi
+}
+zle -N zle-keymap-select
+
+# Ensure beam cursor when starting new line
+zle-line-init() {
+    zle -K viins
+    set_cursor_shape $cursor_beam
+}
+zle -N zle-line-init
+
+# Ensure beam cursor when exiting zsh
+zle-line-finish() {
+    set_cursor_shape $cursor_beam
+}
+zle -N zle-line-finish
+
+# Initial cursor shape
+set_cursor_shape $cursor_beam
+
+# Restore cursor shape before executing a command
+preexec() {
+    set_cursor_shape $cursor_beam
+}
