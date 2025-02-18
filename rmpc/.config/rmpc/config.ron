@@ -102,26 +102,25 @@
     tabs: [
         (
             name: "Queue",
-            border_type: Full,
             pane: Split(
                 direction: Horizontal,
                 panes: [
                     (size: "72%", pane: Pane(Queue)),
-                    (size: "28%", pane: Split(
+                    (size: "28%", borders: "LEFT", pane: Split(
                         direction: Vertical,
                         panes: [
-                            (size: "86%", pane: Pane(AlbumArt)),
-                            (size: "14%", pane: Pane(Lyrics)),
+                            (size: "72%", pane: Pane(AlbumArt)),
+                            (size: "28%", pane: Pane(Lyrics)),
                         ]
                     )),
                 ],
             ),
         ),
-        (name: "Directories", border_type: Full, pane: Pane(Directories)),
-        (name: "Artists", border_type: None, pane: Pane(Artists)),
-        (name: "Album Artists", border_type: None, pane: Pane(AlbumArtists)),
-        (name: "Albums", border_type: None, pane: Pane(Albums)),
-        (name: "Playlists", border_type: None, pane: Pane(Playlists)),
-        (name: "Search", border_type: None, pane: Pane(Search)),
+        (name: "Directories", pane: Pane(Directories)),
+        (name: "Artists", pane: Pane(Artists)),
+        (name: "Album Artists", pane: Pane(AlbumArtists)),
+        (name: "Albums", pane: Pane(Albums)),
+        (name: "Playlists", pane: Pane(Playlists)),
+        (name: "Search", pane: Pane(Search)),
     ],
 )

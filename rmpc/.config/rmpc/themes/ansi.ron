@@ -4,6 +4,8 @@
 (
     default_album_art_path: None,
     show_song_table_header: true,
+    draw_borders: false,
+    modal_backdrop: true,
     tab_bar: (),
     highlighted_item_style: (fg: "yellow", modifiers: "Bold"),
     current_item_style: (fg: "black", bg: "blue", modifiers: "Bold"),
@@ -32,6 +34,15 @@
             alignment: Right,
         ),
     ],
+        layout: Split(
+        direction: Vertical,
+        panes: [
+            (pane: Pane(Header), size: "2"),
+            (pane: Pane(Tabs), borders: "TOP", size: "2"),
+            (pane: Pane(TabContent), borders: "ALL", size: "100%"),
+            (pane: Pane(ProgressBar), size: "1"),
+        ]
+    ),
     header: (
         rows: [
             (
