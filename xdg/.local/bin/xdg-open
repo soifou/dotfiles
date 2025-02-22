@@ -46,6 +46,7 @@ _o() {
         inode/x-empty) exit 1 ;;
         text/html) _web "$1" ;;
         text/* | application/pgp-keys) term "$EDITOR" "$1" ;;
+        video/*) $video "$1" ;;
         *) $fallback "$1" ;;
     esac
 }
