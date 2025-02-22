@@ -30,6 +30,7 @@ zig = "latest"
 # ---
 "ubi:achristmascarl/rainfrog" = "latest"
 "ubi:astral-sh/uv" = "latest"
+"ubi:boxdot/gurk-rs" = { version = "latest", exe = "gurk" }
 "ubi:cargo-bins/cargo-binstall" = "latest"
 "ubi:dandavison/delta" = "latest"
 "ubi:jdx/usage" = "latest"

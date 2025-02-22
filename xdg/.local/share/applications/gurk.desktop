@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=gurk
+Comment=gurk-rs
+GenericName=Signal Messenger client for terminal
+Exec=wm-focus gurk
+Terminal=true
+Type=Application
+Icon=org.signal.Signal
+Categories=InstantMessaging;

@@ -278,7 +278,7 @@ for_window [class=".*"] border pixel $border_pixels
 # Assign apps to workspace
 assign [class="Subl|VSCodium|Atom"] 2
 assign [class="Chromium|Firefox|qutebrowser"] 3
-assign [class="Slack|Signal|neomutt|weechat|mattermost|skype|whatsapp|messages"] 4
+assign [class="neomutt|gurk|weechat|mattermost|skype|whatsapp|messages"] 4
 assign [class="VirtualBox Machine"] 5
 assign [class="Insomnium"] 6
 

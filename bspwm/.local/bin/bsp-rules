@@ -47,7 +47,7 @@ _border() {
 case "$window_class" in
     nvim) echo "desktop=^2 follow=on" ;;
     firefox | Brave-browser) echo "desktop=^3 follow=on" ;;
-    neomutt | weechat | skype | Signal | whatsapp | mattermost | google-meet) echo "desktop=^4 follow=on" ;;
+    neomutt | gurk | weechat | skype | whatsapp | mattermost | google-meet) echo "desktop=^4 follow=on" ;;
     Virt-manager) echo "state=floating desktop=^5 follow=on center=on" ;;
     mpv | Pavucontrol | scummvm | floating) echo "state=floating center=on" ;;
     mailto | lf | yazi | magic-tape) echo "state=floating center=true rectangle=$(_center 1.3)" ;;
