@@ -25,3 +25,10 @@ fixups =
     xattr -r -d com.apple.quarantine ./run-on-macos-screen-events
     ln -sf $MR_REPO/run-on-macos-screen-events $HOME/.local/bin/
 skip = ! is_darwin
+
+[$XDG_DEVELOP_DIR/testing/lctl]
+checkout = git clone https://github.com/newtonne/lctl
+fixups =
+    ln -sf $MR_REPO/lctl.sh ~/.local/bin/lctl
+    cp -f $MR_REPO/completions/_lctl ~/.local/share/zsh/site-functions/
+skip = ! is_darwin
