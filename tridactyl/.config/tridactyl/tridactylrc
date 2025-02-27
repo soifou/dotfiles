@@ -178,7 +178,7 @@ bind << tabmove -1
 bind >> tabmove +1
 bind gd tabdetach
 bind gD composite tabduplicate; tabdetach
-bind ,p pin  " Toggle pinned tab
+bind ,p pin
 bind d composite tab #; tabclose #
 
 " Search
