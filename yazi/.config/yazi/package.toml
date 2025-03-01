@@ -1,7 +1,7 @@
 [[plugin.deps]]
 use = "dedukun/relative-motions"
-rev = "a1466a9"
-hash = "26d7fd10e163e0624d733c067eba4b61"
+rev = "8103065"
+hash = "9f13f0740fa3a0c18e47ec6fb62ddfaa"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"

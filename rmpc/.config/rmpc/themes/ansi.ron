@@ -55,7 +55,7 @@
                     (
                         kind: Property(Song(Title)),
                         style: (modifiers: "Bold"),
-                        default: (kind: Text("No Song"), style: (modifiers: "Bold"))
+                        default: (kind: Property(Song(Other("name"))), style: (modifiers: "Bold"))
                     )
                 ],
                 right: [

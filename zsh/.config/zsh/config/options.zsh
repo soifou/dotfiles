@@ -17,3 +17,4 @@ setopt globdots                  # Lets files beginning with a . be matched with
 setopt no_flow_control           # Disable start (C-s) and stop (C-q)
 setopt ignore_eof                # Do not exit on end-of-file (C-d). Require the use of exit or logout instead
 setopt interactivecomments       # Allow comments
+setopt rm_star_silent            # Disable the double verification (using rm -I instead)

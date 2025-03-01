@@ -43,6 +43,9 @@
 # Useless notifier if managed via homebrew.
 # export GH_NO_UPDATE_NOTIFIER=1
 
+# Prevent rate-limiting when requesting github releases using UBI provider
+# export MISE_GITHUB_TOKEN=github_pat_foo
+
 # Homebrew
 # export HOMEBREW_NO_ANALYTICS=1
 # export HOMEBREW_NO_AUTO_UPDATE=1
