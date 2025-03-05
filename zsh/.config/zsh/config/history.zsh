@@ -1,15 +1,14 @@
 # History
 #-----------------------------------------------------
 # https://zsh.sourceforge.io/Doc/Release/Options.html#History
+
 #-----------------------------------------------------
 # Vars
-
 HISTFILE="${XDG_DATA_HOME:-~/.local/share}"/zsh/history
 HISTFILESIZE=100000
 HISTSIZE=120000 # Larger than $SAVEHIST for hist_expire_dups_first to work
 SAVEHIST=100000
-HISTCONTROL=ignoreboth # Default (ignorespace+ignoredups)
-HISTORY_IGNORE="(ls|l|ll|lt|[bf]g|man|pass|kill|exit|reset|clear|cd|cd -|cd ..|cd ../|pwd|date|* --help)"
+HISTORY_IGNORE="(ls|l|[bf]g|zathura *|fancy-cat *|man|pass|kill|exit|reset|clear|cd(| -| ..)|pwd|date|* --help)"
 
 #-----------------------------------------------------
 # Options
@@ -20,7 +19,6 @@ setopt hist_beep                 # Beep when accessing nonexistent history.
 setopt hist_expire_dups_first    # Expire duplicate entries first when trimming history.
 setopt hist_find_no_dups         # Do not display a line previously found.
 setopt hist_ignore_all_dups      # Delete old recorded entry if new entry is a duplicate.
-setopt hist_ignore_dups          # Don't record an entry that was just recorded again.
 setopt hist_ignore_space         # Don't record an entry starting with a space.
 setopt hist_no_store             # Do not record `history` command to history
 setopt hist_reduce_blanks        # Remove superfluous blanks before recording entry.
