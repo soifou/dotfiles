@@ -24,6 +24,14 @@ checkout = git clone https://github.com/arzzen/git-quick-stats
 fixups =
     sudo make install
 
+[$XDG_DEVELOP_DIR/testing/fancy-cat]
+checkout = git clone https://github.com/freref/fancy-cat
+fixups =
+    git submodule update --init --recursive
+    zig build --fetch
+    zig build --release=small
+    ln -sf $MR_REPO/zig-out/bin/fancy-cat ~/.local/bin/
+
 [$XDG_DEVELOP_DIR/testing/insomnia-plugin-wal-theme]
 checkout = git clone https://github.com/crxssed7/insomnia-plugin-wal-theme
 fixups =
