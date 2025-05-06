@@ -124,11 +124,8 @@ _generate_palette "$@"
 theme=$(_guess_theme)
 
 [ -n "$KITTY_PID" ] && {
-    kill -s USR1 $KITTY_PID
     kitten @ set-colors --all --configured "$XDG_CONFIG_HOME"/kitty/conf.d/colors.conf
 }
-# killall -SIGUSR1 kitty
-# _reload kitty
 
 _reload nvim
 
