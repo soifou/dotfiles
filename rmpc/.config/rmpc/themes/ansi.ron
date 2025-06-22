@@ -2,7 +2,6 @@
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
 (
-    default_album_art_path: None,
     show_song_table_header: true,
     draw_borders: false,
     modal_backdrop: true,
@@ -11,9 +10,22 @@
     current_item_style: (fg: "black", bg: "blue", modifiers: "Bold"),
     borders_style: (fg: "blue", bg: None),
     highlight_border_style: (fg: "blue"), // queue list
-    symbols: (song: "󰈣 ", dir: " ", marker: "▍", ellipsis: "…"),
-    progress_bar: (symbols: ["─", "╼", " "]),
+    symbols: (
+        song: "󰈣 ",
+        dir: " ",
+        marker: "▍",
+        ellipsis: "…",
+        song_style: (fg: "green", bg: None),
+        dir_style: (fg: "blue", bg: None),
+    ),
+    progress_bar: (
+        symbols: ["▂", "▂", ""],
+        elapsed_style: (fg: "green"),
+        thumb_style: (fg: "dark_gray"),
+    ),
     scrollbar: (symbols: ["", "│", "", ""]),
+    preview_label_style: (fg: "yellow"),
+    preview_metadata_group_style: (fg: "green", modifiers: "Bold"),
     song_table_format: [
         (
             prop: (kind: Property(Artist), default: (kind: Text("Unknown"), style: (fg: "red"))),
@@ -34,7 +46,7 @@
             alignment: Right,
         ),
     ],
-        layout: Split(
+    layout: Split(
         direction: Vertical,
         panes: [
             (pane: Pane(Header), size: "2"),

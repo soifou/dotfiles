@@ -6,18 +6,9 @@
     cache_dir: Some("/tmp/rmpc/cache"),
     lyrics_dir: Some("~/Music/library"),
     on_song_change: ["rmpc-notify"],
-    volume_step: 5,
     scrolloff: 2,
-    status_update_interval_ms: 1000,
-    select_current_song_on_change: false,
-    album_art: (
-        method: Kitty,
-        max_size_px: (width: 0, height: 0),
-    ),
-    artists: (
-        album_display_mode: SplitByDate,
-        album_sort_by: Date,
-    ),
+    rewind_to_start_sec: 30,
+    album_art: (method: Kitty),
     keybinds: (
         global: {
             "1":       SwitchToTab("Queue"),
@@ -38,13 +29,15 @@
             "f":       SeekForward,
             "b":       SeekBack,
             "s":       ToggleSingle,
-            "R":       ToggleRandom,
+            "x":       ToggleRandom,
             "c":       ToggleConsume,
             "p":       TogglePause,
             "r":       ToggleRepeat,
+            "I":       ShowCurrentSongInfo,
             "?":       ShowHelp,
             "O":       ShowOutputs,
             "P":       ShowDecoders,
+            "R":       AddRandom,
             "S":       ExternalCommand(command: ["scrobbler", "--toggle"], description: "Toggle Last.fm scrobbling mode"),
         },
         navigation: {
@@ -82,22 +75,9 @@
             "a":       AddToPlaylist,
             "d":       Delete,
             "D":       DeleteAll,
-            "i":       ShowInfo,
             "C":       JumpToCurrent,
+            "X":       Shuffle,
         },
-        search: (
-            case_sensitive: false,
-            mode: Contains,
-            tags: [
-                (value: "any",         label: "Any Tag"),
-                (value: "artist",      label: "Artist"),
-                (value: "album",       label: "Album"),
-                (value: "albumartist", label: "Album Artist"),
-                (value: "title",       label: "Title"),
-                (value: "filename",    label: "Filename"),
-                (value: "genre",       label: "Genre"),
-            ],
-        ),
     ),
     tabs: [
         (
