@@ -4,4 +4,5 @@ github.com/nao1215/gup@latest
 github.com/r00tman/corrupter@latest
 github.com/showwin/speedtest-go@latest
 gitlab.com/shackra/goimapnotify@latest
+honnef.co/go/tools/cmd/staticcheck@latest
 mvdan.cc/xurls/v2/cmd/xurls@latest
