@@ -183,7 +183,7 @@ super + space
 
 # misc apps
 super + x ; {0,9,p,t}
-    wm-scratchpad {tremc, magic-tape, play, typioca}
+    wm-scratchpad {tremc -X, magic-tape, play, typioca}
 
 # locker
 super + Escape

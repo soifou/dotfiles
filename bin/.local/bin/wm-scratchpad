@@ -2,15 +2,38 @@
 
 # Emulate i3 scratchpad
 
-[ -z "$2" ] && PROGRAM=$1 || PROGRAM=$2
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <cmd> [--wm-class=foo] [args...]"
+    exit 1
+fi
+
+cmd="$1"
+shift
+wm_class="$cmd"
+
+set -- "$@"
+args=""
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --wm-class=*) wm_class="${1#--wm-class=}" ;;
+        *) [ -n "$args" ] && args="$args $1" || args="$1" ;;
+    esac
+    shift
+done
 
 case "$(uname)" in
     Darwin)
-        yabai -m window --toggle $1 || term --title=$1 $1
+        yabai -m window --toggle "$wm_class" > /dev/null 2>&1 || term --title="$wm_class" "$cmd" $args
         ;;
     Linux)
-        xdotool search --onlyvisible --classname "$1" windowunmap \
-            || ( xdotool search --classname "$1" windowmap; xdotool search --classname "$1" windowactivate; ) \
-            || ( term --class "$1" "$PROGRAM"; xdotool search --classname "$1" windowraise; )
+        xdotool search --onlyvisible --classname "$wm_class" windowunmap \
+            || (
+                xdotool search --classname "$wm_class" windowmap
+                xdotool search --classname "$wm_class" windowactivate
+            ) \
+            || (
+                term --class "$wm_class" "$cmd" $args
+                xdotool search --classname "$wm_class" windowraise
+            )
         ;;
 esac
