@@ -155,8 +155,8 @@ bind 4gu urlparent 5
 bind gu urlparent
 bind gU urlroot
 
-bind H scrollpx -45
-bind L scrollpx +45
+bind H scrollpx -150
+bind L scrollpx +150
 
 bind J zoom 0.1 true
 bind K zoom -0.1 true
