@@ -107,7 +107,7 @@ fi
 
 if command -v yazi > /dev/null 2>&1; then
     if command -v ya > /dev/null 2>&1; then
-        yn "Update yazi plugins?" && ya pack -u
+        yn "Update yazi plugins?" && ya pkg upgrade
     fi
 fi
 

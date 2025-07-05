@@ -1,6 +1,6 @@
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
-[manager]
+[mgr]
 linemode = "size"
 ratio = [ 1, 4, 3 ]
 scrolloff = 3
