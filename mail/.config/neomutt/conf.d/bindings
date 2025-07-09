@@ -8,12 +8,9 @@
 bind pager,index d noop
 bind index,pager i noop
 bind index,pager g noop
-bind index \Cf noop
-bind index \Cb noop
 bind index h noop
 bind index u noop
 bind index,editor <space> noop
-bind pager \Cb noop
 bind pager \Ce noop
 bind pager <return> noop
 bind index V noop # bound to "show-version"
@@ -54,6 +51,8 @@ bind index,pager @ compose-to-sender
 bind editor <Tab> complete-query
 bind index,pager \Cd half-down
 bind index,pager \Cu half-up
+bind index,pager \Cf next-page
+bind index,pager \Cb previous-page
 
 # Mouse wheel
 bind index \031 previous-undeleted
