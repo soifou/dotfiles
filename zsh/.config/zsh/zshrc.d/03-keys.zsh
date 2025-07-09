@@ -74,8 +74,12 @@ for m in visual viopp; do
     done
 done
 
+# Remap vi-substitute from 's' to 'S' to free up 's' for surround mappings below
+# 'S' and 'cc' have the same purpose, and I am used to 'cc' anyway
+bindkey -rM vicmd 's'
+bindkey -M vicmd 'S' vi-substitute
+
 # Add surround using "vim-sandwich" mapping style
-bindkey -rM vicmd 's' # Remove vi-substitute
 autoload -U surround
 for op in add change delete; do
     zle -N $op-surround surround
@@ -84,6 +88,7 @@ bindkey -M vicmd 'sa' add-surround
 bindkey -M vicmd 'sd' delete-surround
 bindkey -M vicmd 'sr' change-surround
 bindkey -M visual 'sa' add-surround
+
 # Surround current command with $()
 # <C-s> is available because of no_flow_control
 bindkey -s "^s" '^a$(^e)^a'
