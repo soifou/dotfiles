@@ -22,6 +22,7 @@ command -v pip >/dev/null && {
 
 command -v zoxide >/dev/null && {
     export _ZO_EXCLUDE_DIRS="$HOME:$XDG_CACHE_HOME/*:$XDG_STATE_HOME/*:/mnt/*:/tmp/*"
+    export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
     znap eval zoxide 'zoxide init zsh'
 }
 
