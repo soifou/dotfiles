@@ -29,6 +29,7 @@ zig = "latest"
 "cargo:vimv" = "latest"
 # ---
 "ubi:achristmascarl/rainfrog" = "latest"
+"ubi:akiomik/mado" = "latest"
 "ubi:astral-sh/uv" = "latest"
 "ubi:boxdot/gurk-rs" = { version = "latest", exe = "gurk" }
 "ubi:cargo-bins/cargo-binstall" = "latest"
