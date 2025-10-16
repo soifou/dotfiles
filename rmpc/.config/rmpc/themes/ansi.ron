@@ -13,14 +13,16 @@
     symbols: (
         song: "󰈣 ",
         dir: " ",
+        playlist: " ",
         marker: "▍",
         ellipsis: "…",
         song_style: (fg: "green", bg: None),
         dir_style: (fg: "blue", bg: None),
+        playlist_style: (fg: "red", bg: None),
     ),
     progress_bar: (
         symbols: ["▂", "▂", ""],
-        elapsed_style: (fg: "green"),
+        elapsed_style: (fg: "blue"),
         thumb_style: (fg: "dark_gray"),
     ),
     scrollbar: (symbols: ["", "│", "", ""]),
