@@ -81,7 +81,7 @@ export BC_ENV_ARGS="-q"
 export GIT_PAGER=delta
 
 export FZF_DEFAULT_OPTS="
-    --prompt 'λ ' --marker │ --pointer ▌ --separator ─ --scrollbar │ --ellipsis …
+    --prompt 'λ ' --marker │ --pointer ▌ --separator ─ --scrollbar │ --ellipsis … --gutter ' '
     --info=inline-right
     --no-mouse
     --layout=reverse
@@ -93,7 +93,7 @@ export FZF_DEFAULT_OPTS="
     --bind ctrl-e:change-preview-window\(down\|hidden\|\)
     --bind ctrl-a:toggle-all
     --color fg:8,fg+:7,bg:-1,bg+:-1,hl:4,hl+:4
-    --color info:8,prompt:7,spinner:1,pointer:1,marker:1,border:4,gutter:-1
+    --color info:8,prompt:7,spinner:1,pointer:1,marker:1,border:4
 "
 
 case $OSTYPE in
