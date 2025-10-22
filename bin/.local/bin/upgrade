@@ -177,7 +177,7 @@ if command -v pip > /dev/null 2>&1; then
         pip list --outdated
         sleep 3
         pip install --upgrade pip
-        pip freeze --local | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U | grep "Successfully installed"
+        pip freeze | grep -v -E '^-e|git+' | cut -d = -f 1 | xargs -n1 pip install -U | grep "Successfully installed"
     }
 fi
 
