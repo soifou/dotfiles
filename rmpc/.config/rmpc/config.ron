@@ -5,7 +5,7 @@
     theme: Some("ansi"),
     cache_dir: Some("/tmp/rmpc/cache"),
     lyrics_dir: Some("~/Music/library"),
-    on_song_change: ["rmpc-notify"],
+    on_song_change: ["rmpc-notify", "--on-song-change"],
     scrolloff: 2,
     rewind_to_start_sec: 30,
     album_art: (method: Kitty),
@@ -40,6 +40,7 @@
             "P":       ShowDecoders,
             "R":       AddRandom,
             "S":       ExternalCommand(command: ["scrobbler", "--toggle"], description: "Toggle Last.fm scrobbling mode"),
+            "<Space>": ExternalCommand(command: ["rmpc-notify"], description: "Show song info (w. partial webradio support)"),
         },
         navigation: {
             "h":       Left,

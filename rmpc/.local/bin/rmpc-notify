@@ -1,21 +1,117 @@
 #!/usr/bin/env sh
 
-TMP_DIR="/tmp/rmpc"
+# Sends a desktop notification of the currently playing song with special
+# handling for some Radio France webradios (FIP and its subchannels).
+#
+# For local files, simply extracts metadata from rmpc output.
+# For supported Radio France streams, queries their official API to retrieve the
+# song details not provided by the Icecast servers.
+#
+# Requires: rmpc, jq, curl, and notify-send
 
-mkdir -p "$TMP_DIR" && cp $XDG_CONFIG_HOME/rmpc/vinyl.jpg $TMP_DIR/default_album_art.jpg
+# set -xe
 
-# Where to temporarily store the album art received from rmpc
-# NOTE: notify-send need an image extension to actually display it!
-ALBUM_ART_PATH="$TMP_DIR/notification_cover.jpg"
+album_art() {
+    local tmp_dir album_art_path default_album_art_path
+    tmp_dir="/tmp/rmpc"
 
-# Path to fallback album art if no album art is found by rmpc/mpd
-DEFAULT_ALBUM_ART_PATH="$TMP_DIR/default_album_art.jpg"
+    mkdir -p "$tmp_dir"
+    cp "${XDG_CONFIG_HOME:-"$HOME/.config"}/rmpc/vinyl.jpg" "$tmp_dir/default_album_art.jpg"
 
-# Save album art of the currently playing song to a file
-if ! rmpc albumart --output "$ALBUM_ART_PATH"; then
-    # Use default album art if rmpc returns non-zero exit code
-    ALBUM_ART_PATH="${DEFAULT_ALBUM_ART_PATH}"
-fi
+    # Where to temporarily store the album art received from rmpc
+    # NOTE: notify-send need an image extension to actually display it!
+    album_art_path="$tmp_dir/notification_cover.jpg"
+    default_album_art_path="$tmp_dir/default_album_art.jpg"
 
-# Send the notification
-notify-send -i "${ALBUM_ART_PATH}" "Now Playing" "$ARTIST - $TITLE"
+    # Try to save album art of currently playing song; fallback if failed
+    if ! rmpc albumart --output "$album_art_path"; then
+        album_art_path="$default_album_art_path"
+    fi
+
+    echo "$album_art_path"
+}
+
+get_radio_name() {
+    local file="$1"
+    local filename radio_name
+    # Extract last component before ? (query string)
+    filename=$(echo $file | jq -r '.file | split("/")[-1] | split("?")[0]')
+    # Remove endings like _hifi.m3u8, -hifi.aac, .mp3, etc, and 'fip' prefix
+    radio_name=$(echo "$filename" | sed -E 's/([_-][^._-]+)?(\.m3u8|\.aac|\.mp3)$//' | sed 's/fip//')
+    [ "$radio_name" = "sacrefrancais" ] && radio_name="sacre_francais"
+    echo "$radio_name"
+}
+
+handle_webradio() {
+    local song="$1"
+    local filename url json radio_name
+
+    # FIP is the BEST radio in the world but their icecast server doesn't provide song info.
+    # Retrieve song info from their API instead
+    echo $song | jq -r '.file' | grep -E 'stream.radiofrance.fr|icecast.radiofrance.fr' > /dev/null && {
+        # Extract the webradio from the URL's last segment, dropping any query string.
+        filename=$(echo $song | jq -r '.file | split("/")[-1] | split("?")[0]')
+        # Remove suffixes like _hifi.m3u8, -hifi.aac, etc., and the 'fip' prefix.
+        radio_name=$(echo "$filename" | sed -E 's/([_-][^._-]+)?(\.m3u8|\.aac|\.mp3)$//' | sed 's/fip//')
+        # This one needs underscore...
+        [ "$radio_name" = "sacrefrancais" ] && radio_name=sacre_francais
+
+        url=https://www.radiofrance.fr/fip/api/live
+        # An emtpy value is valid (main FIP webradio), but subradios need to be specified with a query string
+        [ -n "$radio_name" ] && url="$url?webradio=fip_$radio_name"
+
+        json=$(curl -sGk -m 5 $url | jq '[.now][]')
+
+        TITLE="$(echo "$json" | jq -r '.firstLine.title')"
+        ARTIST="$(echo "$json" | jq -r '.secondLine.title')"
+        # ALBUM="$(echo "$json" | jq -r '.song.release.title')"
+        DATE="$(echo "$json" | jq -r '.song.year')"
+        return
+    }
+
+    local metadata
+    metadata=$(echo "$1" | jq -e '.metadata')
+    [ -z "$metadata" ] && {
+        echo "Sorry, this stream is not supported yet"
+        exit 1
+    }
+
+    # Likely an icecast server that works!
+    echo "$metadata" | jq -r '.title' | IFS=' - ' read -r ARTIST TITLE
+    DATE="$(echo "$metadata" | jq -r '.name')"
+}
+
+localfile() {
+    local metadata
+    metadata=$(echo "$1" | jq -e '.metadata')
+    [ -z "$metadata" ] && exit 1
+
+    TITLE="$(echo "$metadata" | jq -r '.title')"
+    ARTIST="$(echo "$metadata" | jq -r '.artist')"
+    # ALBUM="$(echo "$metadata" | jq -r '.album')"
+    DATE="$(echo "$metadata" | jq -r '.date')"
+}
+
+main() {
+    local song force=1
+
+    while [ $# -gt 0 ]; do
+        case "$1" in
+            --on-song-change) force=0 ;;
+            *) ;;
+        esac
+        shift
+    done
+
+    song=$(rmpc song)
+    if echo "$song" | jq -e '.file | startswith("http")' > /dev/null; then
+        handle_webradio "$song"
+    # When run manually this script need to fetch metadata from rmpc
+    elif [ $force -eq 1 ]; then
+        localfile "$song"
+    fi
+
+    notify-send -i "$(album_art)" "Now Playing" "$ARTIST - $TITLE ($DATE)"
+}
+
+main "$@"
