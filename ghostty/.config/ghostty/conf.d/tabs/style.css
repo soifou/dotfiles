@@ -1,0 +1,21 @@
+tabbar tabbox {
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	min-height: 20px;
+	text-align: left;
+	font-family: monospace;
+}
+
+tabbar tabbox tabboxchild {
+	padding: 0;
+	margin: 0;
+	border-radius: 0;
+}
+
+tabbar tabbox tab {
+	padding: 0;
+	margin: 0;
+	border-radius: 0;
+	transition-duration: 0ms !important;
+}

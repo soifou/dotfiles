@@ -1,0 +1,39 @@
+# vim: ft=ghostty
+
+keybind = clear
+
+# keybind = cmd+d=unbind
+# keybind = cmd+h=unbind
+# keybind = super+h=unbind
+
+keybind = cmd+v=paste_from_clipboard
+
+keybind = cmd+==increase_font_size:2
+keybind = cmd+-=decrease_font_size:2
+keybind = cmd+backspace=reset_font_size
+
+keybind = cmd+q=close_surface
+
+keybind = cmd+enter=new_split:auto
+keybind = cmd+ctrl+enter=new_split:down
+keybind = cmd+f=toggle_split_zoom
+
+keybind = cmd+h=goto_split:left
+keybind = cmd+j=goto_split:down
+keybind = cmd+k=goto_split:up
+keybind = cmd+l=goto_split:right
+
+keybind = cmd+r>j=resize_split:down,32
+keybind = cmd+r>k=resize_split:up,32
+keybind = cmd+r>h=resize_split:left,32
+keybind = cmd+r>l=resize_split:right,32
+
+keybind = cmd+shift+u=scroll_page_up
+keybind = cmd+shift+d=scroll_page_down
+
+# FIXME: unsable with yabai
+# keybind = cmd+t>t=new_tab
+# keybind = cmd+ctrl+h=previous_tab
+# keybind = cmd+ctrl+l=next_tab
+# keybind = cmd+shift+l=move_tab:1
+# keybind = cmd+shift+h=move_tab:-1

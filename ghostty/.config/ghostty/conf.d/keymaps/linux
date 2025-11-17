@@ -1,0 +1,35 @@
+# vim: ft=ghostty
+
+keybind = clear
+
+keybind = alt+v=paste_from_clipboard
+
+keybind = alt+==increase_font_size:2
+keybind = alt+-=decrease_font_size:2
+keybind = alt+backspace=reset_font_size
+
+keybind = alt+q=close_surface
+
+keybind = alt+enter=new_split:auto
+keybind = alt+ctrl+enter=new_split:down
+keybind = alt+f=toggle_split_zoom
+
+keybind = alt+h=goto_split:left
+keybind = alt+j=goto_split:down
+keybind = alt+k=goto_split:up
+keybind = alt+l=goto_split:right
+
+keybind = alt+r>j=resize_split:down,32
+keybind = alt+r>k=resize_split:up,32
+keybind = alt+r>h=resize_split:left,32
+keybind = alt+r>l=resize_split:right,32
+
+keybind = alt+shift+u=scroll_page_up
+keybind = alt+shift+d=scroll_page_down
+
+keybind = alt+t>t=new_tab
+keybind = alt+ctrl+h=previous_tab
+keybind = alt+ctrl+l=next_tab
+keybind = alt+shift+l=move_tab:1
+keybind = alt+shift+h=move_tab:-1
+keybind = alt+t>o=toggle_tab_overview

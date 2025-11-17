@@ -1,0 +1,8 @@
+# vim: ft=ghostty
+
+font-size = 16
+adjust-cursor-thickness = 1
+
+gtk-custom-css = tabs/style.css
+
+config-file = keymaps/linux

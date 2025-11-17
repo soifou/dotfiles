@@ -1,0 +1,14 @@
+# vim: ft=ghostty
+
+font-size = 23
+font-thicken = true
+
+copy-on-select = true
+window-save-state = never
+# window-decoration = auto
+quit-after-last-window-closed = true
+
+macos-window-shadow = false
+# macos-titlebar-style = hidden
+
+config-file = keymaps/macos

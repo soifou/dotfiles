@@ -1,3 +1,5 @@
+shaders/
+!shaders/.gitkeep
 themes/
 !themes/.gitkeep
-private
+custom
