@@ -63,6 +63,7 @@ fixups =
 [$XDG_DEVELOP_DIR/testing/translate-shell]
 checkout = git clone https://github.com/soimort/translate-shell
 fixups =
+    make clean
     make TARGET=zsh
     sudo make install
 

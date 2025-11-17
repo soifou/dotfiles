@@ -23,6 +23,8 @@ skip = ! is_linux
 [$XDG_DEVELOP_DIR/testing/paperview]
 checkout = git clone https://github.com/glouw/paperview
 fixups =
+    make clean
+    make
     sudo make install DESTDIR=/usr PREFIX=/local
 skip = ! is_linux
 
@@ -62,6 +64,7 @@ skip = ! is_linux
 [$XDG_DEVELOP_DIR/testing/xbanish]
 checkout = git clone https://github.com/jcs/xbanish
 fixups =
+    make clean
     make
     sudo make install
 skip = ! is_linux
@@ -69,6 +72,7 @@ skip = ! is_linux
 [$XDG_DEVELOP_DIR/testing/xob]
 checkout = git clone https://github.com/juster-0/xob
 fixups =
+    make clean
     make
     sudo make install
 skip = ! is_linux
@@ -81,6 +85,7 @@ skip = ! is_linux
 [$XDG_DEVELOP_DIR/testing/zwm]
 checkout = git clone https://github.com/Yazeed1s/zwm
 fixups =
+    make clean
+    make
     sudo make install
 skip = ! is_linux
-
