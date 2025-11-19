@@ -49,6 +49,5 @@ for i in \
 ; do _gen $i --help; done
 
 # Other custom completions
-
-## ast-grep
-command -v sg > /dev/null && sg completions > $cpath/_sg
+command -v sg > /dev/null && sg completions > $cpath/_sg  ## ast-grep
+command -v mago > /dev/null && mago generate-completions zsh > $cpath/_mago

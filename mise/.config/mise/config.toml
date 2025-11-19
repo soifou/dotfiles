@@ -33,6 +33,7 @@ zig = "latest"
 "ubi:astral-sh/uv" = "latest"
 "ubi:boxdot/gurk-rs" = { version = "latest", exe = "gurk" }
 "ubi:cargo-bins/cargo-binstall" = "latest"
+"ubi:carthage-software/mago" = "latest"
 "ubi:dandavison/delta" = "latest"
 "ubi:jdx/usage" = "latest"
 "ubi:junegunn/fzf" = "latest"
