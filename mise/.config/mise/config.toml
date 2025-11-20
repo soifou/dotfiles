@@ -31,7 +31,7 @@ zig = "latest"
 "ubi:achristmascarl/rainfrog" = "latest"
 "ubi:akiomik/mado" = "latest"
 "ubi:astral-sh/uv" = "latest"
-"ubi:boxdot/gurk-rs" = { version = "latest", exe = "gurk" }
+"ubi:boxdot/gurk-rs" = { version = "latest", extract_all = "true" }
 "ubi:cargo-bins/cargo-binstall" = "latest"
 "ubi:carthage-software/mago" = "latest"
 "ubi:dandavison/delta" = "latest"
