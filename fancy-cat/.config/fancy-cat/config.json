@@ -1,0 +1,19 @@
+{
+  "KeyMap": {
+    "next": { "key": "]" },
+    "prev": { "key": "[" },
+    "scroll_up": { "key": "k" },
+    "scroll_down": { "key": "j" },
+    "scroll_left": { "key": "h" },
+    "scroll_right": { "key": "l" },
+    "zoom_in": { "key": "J" },
+    "zoom_out": { "key": "K" },
+    "width_mode": { "key": "w" },
+    "colorize": { "key": "i" },
+    "quit": { "key": "q", "modifiers": [] },
+    "enter_command_mode": { "key": ":" }
+  },
+  "StatusBar": {
+    "enabled": false
+  }
+}
