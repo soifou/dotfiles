@@ -16,7 +16,14 @@ case "$(uname)" in
         fallback=/usr/bin/xdg-open
         ;;
 esac
-pdf=zathura
+
+# get_pdf() {
+#     bspc query -T -d | jq -er '.layout == "monocle"' > /dev/null && echo 'zathura' || {
+#         echo "kitten @launch --cwd=current --type=overlay fancy-cat"
+#     }
+# }
+# pdf=$(get_pdf)
+pdf="kitten @launch --cwd=current --type=overlay fancy-cat"
 web=firefox
 
 # ---
@@ -45,6 +52,7 @@ _o() {
         # empty? return error
         inode/x-empty) exit 1 ;;
         text/html) _web "$1" ;;
+        text/calendar) rem ics $1 ;;
         text/* | application/pgp-keys) term "$EDITOR" "$1" ;;
         video/*) $video "$1" ;;
         *) $fallback "$1" ;;
@@ -87,7 +95,7 @@ case "$1" in
     *reddit.com*) term --class=rtv rtv "$1" ;;
     /r/*) term --class=rtv rtv "https://www.reddit.com/$1" ;;
     *codeberg.org/*/raw/* | *raw.githubusercontent.com*) _dlo_wext "$1" ;;
-    *github.com/* | *codeberg.org/* ) _web "$1" ;;
+    *github.com/* | *codeberg.org/*) _web "$1" ;;
     # Extensions
     # Video
     *.mkv | \
@@ -150,7 +158,7 @@ case "$1" in
         if [ $? -eq 6 ]; then # unknown host
             _dlo "$1"
         else
-            mime=$($res | grep "content-type" | awk '{print $2}' | sed 's/;//' || 'text/html')
+            mime=$(grep "^content-type" "$res" | awk '{print $2}' | sed 's/;//' || 'text/html')
             case $mime in
                 application/pdf) _dlo "$1" ;;
                 image/*) _dlo "$1" ;;

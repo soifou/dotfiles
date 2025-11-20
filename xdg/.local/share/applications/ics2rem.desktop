@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Ics2rem
+Exec=term --class=ics2rem rem ics %u
+Terminal=true
+MimeType=text/calendar;
+Icon=org.gnome.Calendar-symbolic
+NoDisplay=true

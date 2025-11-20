@@ -29,6 +29,7 @@ text/x-pascal=nvim.desktop;
 text/x-tcl=nvim.desktop;
 text/x-tex=nvim.desktop;
 text/xml=nvim.desktop;
+text/calendar=ics2rem.desktop
 
 # Images
 image/bmp=nsxiv.desktop;
