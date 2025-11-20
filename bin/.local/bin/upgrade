@@ -79,6 +79,10 @@ macos() {
         }
     fi
 
+    if command -v colima > /dev/null 2>&1; then
+        yn "Update colima container runtime?" && colima update
+    fi
+
     yn "Sync fonts?" && {
         rm -f ~/Library/Fonts/*.{o,t}tf
         find $XDG_DATA_HOME/fonts -name "*.*tf" -type f -exec cp {} ~/Library/Fonts \;
