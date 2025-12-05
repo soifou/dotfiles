@@ -40,7 +40,7 @@
             "P":       ShowDecoders,
             "R":       AddRandom,
             "S":       ExternalCommand(command: ["scrobbler", "--toggle"], description: "Toggle Last.fm scrobbling mode"),
-            "<Space>": ExternalCommand(command: ["rmpc-notify"], description: "Show song info (w. partial webradio support)"),
+            "i":       ExternalCommand(command: ["rmpc-notify"], description: "Show song info (w. partial webradio support)"),
         },
         navigation: {
             "h":       Left,
@@ -62,10 +62,10 @@
             "D":       Delete,
             "g":       Top,
             "G":       Bottom,
-            "<Tab>":   Select,
+            "<Space>": Select,
             "<C-a>":   InvertSelection,
             "<CR>":    Confirm,
-            "i":       FocusInput,
+            "<Tab>":   FocusInput,
             "/":       EnterSearch,
             "<C-[>":   Close,
             "<Esc>":   Close,
@@ -92,7 +92,8 @@
                         direction: Vertical,
                         panes: [
                             (size: "72%", pane: Pane(AlbumArt)),
-                            (size: "28%", pane: Pane(Lyrics)),
+                            (size: "28%", pane: Pane(Cava)),
+                            // (size: "28%", pane: Pane(Lyrics)),
                         ]
                     )),
                 ],
@@ -105,4 +106,26 @@
         (name: "Playlists", pane: Pane(Playlists)),
         (name: "Search", pane: Pane(Search)),
     ],
+    cava: (
+        framerate: 60,
+        autosens: true,
+        sensitivity: 100,
+        lower_cutoff_freq: 50, // not passed to cava if not provided
+        higher_cutoff_freq: 10000, // not passed to cava if not provided
+        input: (
+            method: Fifo,
+            source: "/tmp/mpd.fifo",
+            sample_rate: 44100,
+            channels: 2,
+            sample_bits: 16,
+        ),
+        smoothing: (
+            noise_reduction: 77,
+            monstercat: false,
+            waves: false,
+        ),
+        // this is a list of floating point numbers thats directly passed to cava
+        // they are passed in order that they are defined
+        eq: []
+    ),
 )

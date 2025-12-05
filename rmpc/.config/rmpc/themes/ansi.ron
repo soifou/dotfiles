@@ -20,6 +20,15 @@
         dir_style: (fg: "blue", bg: None),
         playlist_style: (fg: "red", bg: None),
     ),
+    cava: (
+        bar_color: Rows([
+            "red",
+            "red",
+            "green",
+            "green",
+            "blue",
+        ]),
+    ),
     progress_bar: (
         symbols: ["▂", "▂", ""],
         elapsed_style: (fg: "blue"),
