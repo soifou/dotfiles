@@ -18,7 +18,11 @@ alias gdd="git difftool --no-symlinks --dir-diff"
 alias gl='git pull'
 alias gp='git push'
 alias grh='git reset --hard'
-alias gst='git status'
+
+# Git status lacks hyperlink support
+command -v add-osc-8-hyperlink >/dev/null && {
+    gst() { git -c color.status=always status "$@" | add-osc-8-hyperlink; }
+} || alias gst='git status'
 
 ## Alias of git aliases, declared in ~/.config/git/conf.d/aliases
 alias gbd='git bd'                   # delete branch(es)

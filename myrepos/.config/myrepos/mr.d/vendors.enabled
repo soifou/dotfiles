@@ -19,6 +19,12 @@ fixups =
     cp -f $MR_REPO/target/completions/_rmpc ~/.local/share/zsh/site-functions/
     sudo ln -sf $MR_REPO/target/release/rmpc /usr/local/bin/rmpc
 
+[$XDG_DEVELOP_DIR/testing/add-osc-8-hyperlink-rs]
+checkout = git clone https://github.com/konradko/add-osc-8-hyperlink-rs
+fixups =
+    cargo build --release
+    sudo ln -sf $MR_REPO/target/release/add-osc-8-hyperlink /usr/local/bin/add-osc-8-hyperlink
+
 [$XDG_DEVELOP_DIR/testing/git-quick-stats]
 checkout = git clone https://github.com/arzzen/git-quick-stats
 fixups =
