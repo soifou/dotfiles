@@ -8,7 +8,7 @@ HISTFILE="${XDG_DATA_HOME:-~/.local/share}"/zsh/history
 HISTFILESIZE=100000
 HISTSIZE=120000 # Larger than $SAVEHIST for hist_expire_dups_first to work
 SAVEHIST=100000
-HISTORY_IGNORE="(ls|l|[bf]g|zathura *|fancy-cat *|man|pass|kill|exit|reset|clear|cd(| -| ..)|pwd|date|* --help)"
+HISTORY_IGNORE="(ls|l|[bf]g|rm *|zathura *|fancy-cat *|man|pass|kill|exit|reset|clear|cd(| -| ..)|pwd|date|* --help)"
 
 #-----------------------------------------------------
 # Options

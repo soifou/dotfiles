@@ -1,6 +1,7 @@
 ansible
 ansible-lint
 beets
+beets[lyrics]
 buku
 gallery-dl
 git+https://github.com/tildeclub/ttrv
