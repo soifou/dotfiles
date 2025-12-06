@@ -21,7 +21,7 @@ l right-scroll
 
 #env
 
-LESS = -R -X -M -s -g --use-color --incsearch --ignore-case --window=-4 --tilde
+LESS = -R -X -M -s -g --use-color --incsearch --window=-4 --tilde
 LESSCHARSET = utf-8
 # Designate Unicode Private Use Areas as printable characters
 # Needed for Nerd Fonts icons to display properly in less > 632
