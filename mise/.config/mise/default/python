@@ -15,4 +15,4 @@ python3-discogs-client
 remind
 trash-cli
 vdirsyncer
-yt-dlp
+yt-dlp[default]
