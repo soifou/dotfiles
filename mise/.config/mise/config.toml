@@ -38,3 +38,4 @@ zig = "latest"
 "ubi:jdx/usage" = "latest"
 "ubi:junegunn/fzf" = "latest"
 "ubi:symfony-cli/symfony-cli" = { version = "latest", exe = "symfony" }
+"ubi:typst/typst" = "latest"
