@@ -8,15 +8,6 @@ checkout = git clone 'git@github.com:soifou/adminer.git' 'adminer'
 [$XDG_DEVELOP_DIR/soifou/docker/github/lamp]
 checkout = git clone 'git@github.com:soifou/docker-lamp.git' 'lamp'
 
-[$XDG_DEVELOP_DIR/soifou/docker/github/composer]
-checkout = git clone 'git@github.com:soifou/composer.git' 'composer'
-
-[$XDG_DEVELOP_DIR/soifou/docker/github/mariadb-alpine]
-checkout = git clone 'git@github.com:soifou/mariadb-alpine.git' 'mariadb-alpine'
-
-[$XDG_DEVELOP_DIR/soifou/docker/github/n98-magerun-alpine]
-checkout = git clone 'git@github.com:soifou/n98-magerun-alpine.git' 'n98-magerun-alpine'
-
 [$XDG_DEVELOP_DIR/soifou/docker/github/php-alpine]
 checkout = git clone 'git@github.com:soifou/php-alpine.git' 'php-alpine'
 
@@ -38,6 +29,9 @@ checkout = git clone 'soifou-gitolite:remind' 'remind'
 
 [$XDG_DEVELOP_DIR/soifou/advent-of-code]
 checkout = git clone 'soifou-gitolite:aoc' 'advent-of-code'
+
+[$XDG_DEVELOP_DIR/soifou/curriculum]
+checkout = git clone 'soifou-gitolite:curriculum' 'curriculum'
 
 [$XDG_DEVELOP_DIR/soifou/docker]
 checkout = git clone 'soifou-gitolite:docker' 'docker'
