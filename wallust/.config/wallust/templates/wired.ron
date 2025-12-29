@@ -7,6 +7,7 @@
 
     poll_interval: 16,
     max_notifications: 8,
+    notify_on_reload: false,
     history_length: 100,
     replacing_enabled: true,
     replacing_resets_timeout: true,
