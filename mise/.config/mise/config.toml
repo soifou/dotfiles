@@ -17,9 +17,10 @@ trusted_config_paths = [ '~/.config/mise' ]
 deno = "latest"
 go = "latest"
 lua = "5.1"
-node = "23.0.0"
+node = "latest"
 php = "8.4.4"
 python = "latest"
+ruby = "latest"
 rust = "latest"
 zig = "latest"
 # ---
@@ -28,14 +29,14 @@ zig = "latest"
 "cargo:eza" = "latest"
 "cargo:vimv" = "latest"
 # ---
-"ubi:achristmascarl/rainfrog" = "latest"
-"ubi:akiomik/mado" = "latest"
-"ubi:astral-sh/uv" = "latest"
-"ubi:boxdot/gurk-rs" = { version = "latest", extract_all = "true" }
-"ubi:cargo-bins/cargo-binstall" = "latest"
-"ubi:carthage-software/mago" = "latest"
-"ubi:dandavison/delta" = "latest"
-"ubi:jdx/usage" = "latest"
-"ubi:junegunn/fzf" = "latest"
-"ubi:symfony-cli/symfony-cli" = { version = "latest", exe = "symfony" }
-"ubi:typst/typst" = "latest"
+"github:achristmascarl/rainfrog" = "latest"
+"github:akiomik/mado" = "latest"
+"github:astral-sh/uv" = "latest"
+"github:boxdot/gurk-rs" = { version = "latest", extract_all = "true" }
+"github:cargo-bins/cargo-binstall" = "latest"
+"github:carthage-software/mago" = "latest"
+"github:dandavison/delta" = "latest"
+"github:jdx/usage" = "latest"
+"github:junegunn/fzf" = "latest"
+"github:symfony-cli/symfony-cli" = { version = "latest", exe = "symfony" }
+"github:typst/typst" = "latest"
