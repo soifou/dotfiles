@@ -1,0 +1,37 @@
+first_name_only = false
+show_receipts = true
+bell = true
+colored_messages = true
+default_keybindings = true
+
+[notifications]
+enabled = true
+show_message_text = true
+show_message_chat = true
+show_reactions = true
+mute_reactions_bell = false
+
+[user]
+display_name = "François"
+
+[keybindings.anywhere]
+ctrl-c = ""
+ctrl-q = "quit"
+
+[keybindings.normal]
+ctrl-j = "select_message next entry"
+ctrl-k = "select_message previous entry"
+tab = "select_channel next"
+ctrl-shift-i = "select_channel previous"
+ctrl-e = "edit_message"
+ctrl-d = "toggle_multiline"
+ctrl-h = "move_text previous character"
+ctrl-l = "move_text next character"
+ctrl-o = "open_file"
+
+[keybindings.message_selected]
+alt-y = ""
+alt-w = ""
+ctrl-y = "copy_message selected"
+ctrl-t = "react :thumbsup:"
+ctrl-shift-t = "react :heart:"

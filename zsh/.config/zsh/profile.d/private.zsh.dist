@@ -61,3 +61,4 @@
 
 # https://github.com/Benexl/yt-x
 # export YT_X_FZF_OPTS="$FZF_DEFAULT_OPTS"
+# export GURK_PASSPHRASE_COMMAND="pass gurk/soifou"
