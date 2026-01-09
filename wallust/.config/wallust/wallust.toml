@@ -37,7 +37,8 @@ saturation = 20
 # threshold = 10
 
 [templates]
-colors = { template = "colors.json", target = "~/.cache/colors.json" }
+theme = { template = "theme.json", target = "~/.cache/wallust/theme.json" }
+#
 git_delta = { template = "git-delta.ini", target = "~/.config/git/conf.d/delta-theme" }
 kitty = { template = "kitty.conf", target = "~/.config/kitty/conf.d/colors.conf" }
 ghostty = { template = "ghostty", target = "~/.config/ghostty/themes/wal" }

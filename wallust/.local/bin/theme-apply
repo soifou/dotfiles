@@ -88,9 +88,9 @@ _reload_wallpaper() {
 }
 
 _guess_theme() {
-    colors="$XDG_CACHE_HOME/colors.json"
-    [ -f $colors ] || { echo dark; exit; }
-    case "$(cat $colors | jq -r ".special.background" | cut -c2-2)" in
+    theme="$XDG_CACHE_HOME/wallust/theme.json"
+    [ -f $theme ] || { echo dark; exit; }
+    case "$(cat $theme | jq -r ".special.background" | cut -c2-2)" in
         A | B | C | D | E | F | 7 | 8 | 9) echo light ;;
         *) echo dark ;;
     esac

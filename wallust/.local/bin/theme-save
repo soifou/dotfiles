@@ -17,7 +17,7 @@ lstrip() { printf '%s\n' "${1##$2}"; }
 # Add current wallpaper to the json file
 wall=$(readlink -f $WALLPAPER_PATH/current)
 w=$(lstrip $wall $WALLPAPER_PATH/)
-jq ". += {\"wallpaper\": \"$w\"}" $XDG_CACHE_HOME/colors.json > $theme_path/$1.json
+jq ". += {\"wallpaper\": \"$w\"}" $XDG_CACHE_HOME/wallust/theme.json > $theme_path/$1.json
 ln -sf $theme_path/$1.json $theme_path/current.json
 
 notify-send -i application-x-theme Wallust "Current theme $1 saved"
