@@ -9,9 +9,17 @@ alias gb='git branch'
 alias gba='git branch -a'
 alias gcam='git commit -a -m'
 alias gcb='git checkout -b'
-alias gcd='git checkout develop'
 alias gco='git checkout'
-alias gcm='git checkout main || git checkout master'
+gcm() {
+    for branch in main master; do
+        if git show-ref --verify --quiet refs/heads/$branch; then
+            git checkout $branch
+            return 0
+        fi
+    done
+    echo "Error: no main/master branch here" >&2
+    exit 1
+}
 alias gcmsg='git commit -m'
 alias gd='git diff'
 alias gdd="git difftool --no-symlinks --dir-diff"
@@ -20,7 +28,7 @@ alias gp='git push'
 alias grh='git reset --hard'
 
 # Git status lacks hyperlink support
-command -v add-osc-8-hyperlink >/dev/null && {
+command -v add-osc-8-hyperlink > /dev/null && {
     gst() { git -c color.status=always status "$@" | add-osc-8-hyperlink; }
 } || alias gst='git status'
 
