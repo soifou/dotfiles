@@ -11,6 +11,86 @@ index b0e194e..d0ed90a 100644
  
          return cls._parse_ttrv_file(config)
  
+diff --git a/terminal.py b/terminal.py
+index 807edf5..ecebd2b 100644
+--- a/terminal.py
++++ b/terminal.py
+@@ -585,54 +585,28 @@ class Terminal(object):
+ 
+         if self.display:
+             with self.loader('Opening page in a new window'):
+-
+-                def open_url_silent(url):
+-                    # This used to be done using subprocess.Popen().
+-                    # It was switched to multiprocessing.Process so that we
+-                    # can re-use the webbrowser instance that has been patched
+-                    # by TTRV. It's also safer because it doesn't inject
+-                    # python code through the command line.
+-
+-                    # Suppress stdout/stderr from the browser, see
+-                    # https://stackoverflow.com/questions/2323080. We can't
+-                    # depend on replacing sys.stdout & sys.stderr because
+-                    # webbrowser uses Popen().
+-                    stdout, stderr = os.dup(1), os.dup(2)
+-                    null = os.open(os.devnull, os.O_RDWR)
+-                    try:
+-                        os.dup2(null, 1)
+-                        os.dup2(null, 2)
+-                        if self.config['force_new_browser_window']:
+-                            webbrowser.open_new(url)
+-                        else:
+-                            webbrowser.open_new_tab(url)
+-                    finally:
+-                        try:
+-                            os.close(null)
+-                        except OSError:
+-                            pass
+-                        os.dup2(stdout, 1)
+-                        os.dup2(stderr, 2)
+-
+-                p = Process(target=open_url_silent, args=(url,))
+-                p.start()
+-                # Give the browser 7 seconds to open a new tab. Because the
+-                # display is set, calling webbrowser should be non-blocking.
+-                # If it blocks or returns an error, something went wrong.
++                # Use subprocess.Popen to avoid pickling entirely
++                import subprocess
++                cmd = ['python', '-c', f'''
++        import os, sys, webbrowser
++        stdout, stderr = os.dup(1), os.dup(2)
++        null = os.open(os.devnull, os.O_RDWR)
++        try:
++            os.dup2(null, 1)
++            os.dup2(null, 2)
++            webbrowser.{"open_new" if self.config["force_new_browser_window"] else "open_new_tab"}("{url}")
++        finally:
++            try: os.close(null)
++            except OSError: pass
++            os.dup2(stdout, 1)
++            os.dup2(stderr, 2)
++        ''']
++                p = subprocess.Popen(cmd)
+                 try:
+-                    p.join(7)
+-                    if p.is_alive():
+-                        raise exceptions.BrowserError(
+-                            'Timeout waiting for browser to open')
+-                finally:
+-                    # This will be hit on the browser timeout, but also if the
+-                    # user presses the ESC key. We always want to kill the
+-                    # webbrowser process if it hasn't opened the tab and
+-                    # terminated by now.
+-                    try:
+-                        p.terminate()
+-                    except OSError:
+-                        pass
++                    p.wait(timeout=7)
++                except subprocess.TimeoutExpired:
++                    p.kill()
++                    raise exceptions.BrowserError('Timeout waiting for browser to open')
+         else:
+             with self.suspend():
+                 if self.config['force_new_browser_window']:
 diff --git a/theme.py b/theme.py
 index af662df..9cc7fae 100644
 --- a/theme.py
