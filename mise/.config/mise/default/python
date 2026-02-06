@@ -9,10 +9,12 @@ mailcap-fix
 khal
 khard
 pip
+pyrefly
 python-mpd2
 python-openstackclient
 python3-discogs-client
 remind
 trash-cli
+ty
 vdirsyncer
 yt-dlp[default]
