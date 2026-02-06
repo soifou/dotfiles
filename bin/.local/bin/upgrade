@@ -142,7 +142,11 @@ if command -v mise > /dev/null 2>&1; then
         mise self-update
         mise plugins update
         mise outdated
-        yn "Update mise runtime?" && mise upgrade --interactive
+        yn "Update mise runtime?" && {
+            mise upgrade --interactive
+            mise ls --prunable
+            mise prune --yes
+        }
     }
 fi
 
