@@ -1,6 +1,7 @@
 [alias]
     c = commit
     hist = log --pretty=format:'%C(auto)%h%Creset » %d%s %Cgreen(%cr) %C(bold red)<%an>%Creset' --abbrev-commit
+    slist = stash list --color=always --pretty=format:'%gd » %s %Cgreen(%cr) %C(bold red)<%an>%Creset'
     ignored = ls-files -v | grep "^[[:lower:]]"
     count-commits = shortlog -sn
     uncommit = "!f() { git reset HEAD~${1-1}; }; f"
@@ -9,6 +10,8 @@
     mg = !git branch --merged | grep -v '*\\|main\\|develop';\
     # list last commit for each branches
     blc = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) - %(color:red)%(objectname:short)%(color:reset) - %(color:yellow)%(refname:short)%(color:reset) - (%(color:green)%(committerdate:relative)%(color:reset)) - %(authorname) - %(contents:subject)'
+    # fetch locally a pull request
+    fpr = "!f() { git fetch origin pull/$1/head:pr-$1; }; f"
 
     # delete branch(es) except develop, main and current
     bd = "!f() {\
@@ -90,6 +93,21 @@
             xargs ;\
         } || {\
             git log -p --follow $2;\
+        }\
+    };f"
+
+    # show stash list, apply <C-p> or drop <C-x> selected
+    sl = "!f() {\
+        command -v fzf >/dev/null && {\
+            git slist |\
+            fzf --exact --no-sort -m --ansi --no-height \
+            --bind \"ctrl-x:execute(echo {} | cut -d' ' -f1 | xargs git stash drop)+reload(git slist)\" \
+            --bind \"ctrl-p:execute(echo {} | cut -d' ' -f1 | xargs git stash apply)+reload(git slist)\" \
+            --preview \"echo {} | cut -d' ' -f1 | xargs git stash show --color=always -p | delta\" \
+            --preview-window $1 |\
+            cut -d' ' -f1;\
+        } || {\
+            git stash list;\
         }\
     };f"
 

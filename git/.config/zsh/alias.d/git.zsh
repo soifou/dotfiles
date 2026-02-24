@@ -40,6 +40,7 @@ alias ghh='git h "border-left"'      # show commits history (vertical)
 alias ghv='git h "down,border-top"'  # show commits history (horizontal)
 alias gfh='git hf "border-left"'     # show commits history for particular file (vertical)
 alias gfv='git hf "down,border-top"' # show commits history for particular file (horizontal)
+alias gsl='git sl "border-left"'     # show stash list (vertical)
 alias gm='git bm'                    # merge branch to current
 alias gmg='git mg'                   # list merged branch(es)
 alias gmgd='git mgd'                 # delete merged branch(es)
