@@ -6,6 +6,7 @@
 [$XDG_DATA_HOME/mpv/ModernZ]
 checkout = git clone https://github.com/Samillion/ModernZ
 post_checkout =
+    ln -sf $MR_REPO/modernz-icons.ttf $XDG_CONFIG_HOME/mpv/fonts/
     ln -sf $MR_REPO/modernz.lua $XDG_CONFIG_HOME/mpv/scripts/
     ln -sf $MR_REPO/extras/pause-indicator-lite/pause_indicator_lite.lua $XDG_CONFIG_HOME/mpv/scripts/
 

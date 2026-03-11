@@ -1,3 +1,6 @@
+fonts/*
+!fonts/.gitkeep
+
 script-opts/modernz.conf
 
 scripts/*
