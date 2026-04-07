@@ -28,6 +28,7 @@ zig = "latest"
 "cargo:vimv" = "latest"
 # ---
 "github:achristmascarl/rainfrog" = "latest"
+"github:ajenbo/phpantom_lsp" = "latest"
 "github:akiomik/mado" = "latest"
 "github:astral-sh/uv" = "latest"
 "github:boxdot/gurk-rs" = { version = "latest", extract_all = "true" }
