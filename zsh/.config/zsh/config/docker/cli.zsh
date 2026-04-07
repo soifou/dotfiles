@@ -12,6 +12,7 @@ composer() {
         -v /etc/group:/etc/group:ro \
         -v .:/app \
         -w /app \
+        -u $(id -u):$(id -g) \
         --net=network.${DOCKER_NETWORK_NAME:-shared} \
         soifou/php-alpine:cli-${PHP_VERSION:-8.3}-composer ${@:1}
 }

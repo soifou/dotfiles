@@ -12,14 +12,17 @@
 # export BSPWM_GAPS=10
 # export BSPWM_TOP_PADDING=30
 
-# export OPENAI_API_KEY=sk-foo
-
 # export OPENWEATHERMAP_APIKEY=
 # export OPENWEATHERMAP_LAT=
 # export OPENWEATHERMAP_LONG=
 
+# LLMs
+# export OPENAI_API_KEY=sk-foo
+# export OPENROUTER_API_KEY=sk-foo
+
 # Suppress warning messages from org.a11y.Bus
 # See: https://issues.guix.gnu.org/28088
+# https://bbs.archlinux.org/viewtopic.php?id=189975
 # export NO_AT_BRIDGE=1
 
 # Suppress experimental warning from node
@@ -59,6 +62,14 @@
 # Build options
 # export PHP_CONFIGURE_OPTIONS="--with-openssl --with-curl --with-zlib --with-readline --with-gettext --with-sodium"
 
+# Don't cache any tests
+# export GOFLAGS="-count=1"
+
 # https://github.com/Benexl/yt-x
 # export YT_X_FZF_OPTS="$FZF_DEFAULT_OPTS"
+
+# FIXME: Neovim keep saying
+# vim_mktempdir:3281: $TMPDIR tempdir not a directory (or does not exist)
+# export TMPDIR=/tmp
+
 # export GURK_PASSPHRASE_COMMAND="pass gurk/soifou"
