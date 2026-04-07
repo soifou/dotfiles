@@ -12,6 +12,3 @@ znap source zsh-users/zsh-autosuggestions
     # FIXME: `completion` strategy break somehow kitty shell-integration cursor shape
     # Do not accept suggestion when using `forward-char` widget
     ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/forward-char/}")
-
-znap source zdharma-continuum/fast-syntax-highlighting
-    FAST_HIGHLIGHT[git-cmsg-len]=72

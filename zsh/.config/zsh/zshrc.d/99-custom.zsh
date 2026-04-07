@@ -26,6 +26,11 @@ command -v zoxide >/dev/null && {
     znap eval zoxide 'zoxide init zsh'
 }
 
+command -v zsh-patina >/dev/null && {
+    znap eval zsh-patina 'zsh-patina activate'
+    pgrep zsh-patina || zsh-patina restart
+}
+
 command -v docker >/dev/null && {
     for d in cli ui private ; do
         () { [ -f $1 ] && zsh-defer . $1 } "$ZDOTDIR"/config/docker/$d.zsh

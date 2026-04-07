@@ -35,6 +35,6 @@ zig = "latest"
 "github:carthage-software/mago" = "latest"
 "github:dandavison/delta" = "latest"
 "github:jdx/usage" = "latest"
-"github:junegunn/fzf" = "latest"
+"github:michel-kraemer/zsh-patina" = { version = "latest", postinstall = "rm -f ~/.cache/zsh-snap/eval/zsh-patina.*" }
 "github:symfony-cli/symfony-cli" = { version = "latest", exe = "symfony" }
 "github:typst/typst" = "latest"
