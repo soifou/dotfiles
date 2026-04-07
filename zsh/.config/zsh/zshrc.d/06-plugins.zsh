@@ -4,8 +4,9 @@ znap source ohmyzsh/ohmyzsh plugins/git-auto-fetch/git-auto-fetch.plugin.zsh
     GIT_AUTO_FETCH_INTERVAL=30
 
 znap source zsh-vi-more/vi-increment
-znap source tunacuma/zsh-vi-man
-    # ZVM_MAN_PAGER="less +G"
+
+znap source sobolevn/wakatime-zsh-plugin
+    ZSH_WAKATIME_BIN="$WAKATIME_HOME/.wakatime/wakatime-cli"
 
 znap source zsh-users/zsh-autosuggestions
     # Defaults: zsh-users/zsh-autosuggestions/blob/master/src/config.zsh
