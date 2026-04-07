@@ -59,8 +59,8 @@
             "N":       PreviousResult,
             "a":       Add,
             "A":       AddAll,
-            "D":       Delete,
-            "g":       Top,
+            "dd":      Delete,
+            "gg":      Top,
             "G":       Bottom,
             "<Space>": Select,
             "<C-a>":   InvertSelection,
@@ -75,7 +75,7 @@
             "<CR>":    Play,
             "<C-s>":   Save,
             "a":       AddToPlaylist,
-            "d":       Delete,
+            "dd":      Delete,
             "D":       DeleteAll,
             "C":       JumpToCurrent,
             "X":       Shuffle,
@@ -87,12 +87,13 @@
             pane: Split(
                 direction: Horizontal,
                 panes: [
-                    (size: "72%", pane: Pane(Queue)),
-                    (size: "28%", borders: "LEFT", pane: Split(
+                    (size: "73%", pane: Pane(Queue)),
+                    (size: "27%", borders: "LEFT", pane: Split(
                         direction: Vertical,
                         panes: [
-                            (size: "72%", pane: Pane(AlbumArt)),
-                            (size: "28%", pane: Pane(Cava)),
+                            (size: "73%", pane: Pane(AlbumArt)),
+                            // (size: "2%", pane: Pane(Property(content: [ (kind: Text(" ")), ]))),
+                            (size: "27%", pane: Pane(Cava)),
                             // (size: "28%", pane: Pane(Lyrics)),
                         ]
                     )),

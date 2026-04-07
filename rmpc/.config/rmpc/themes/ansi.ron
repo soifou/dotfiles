@@ -3,6 +3,7 @@
 #![enable(unwrap_variant_newtypes)]
 (
     show_song_table_header: true,
+    header_column_widths: [20, 50, 30],
     draw_borders: false,
     modal_backdrop: true,
     tab_bar: (),
