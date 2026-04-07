@@ -1,14 +1,12 @@
 [settings]
-asdf_compat = false
 experimental = true
 lockfile = false
-go_default_packages_file = "~/.config/mise/default/golang"
-go_set_gopath = true
+go.default_packages_file = "~/.config/mise/default/golang"
+go.set_gopath = true
 jobs = 4
-legacy_version_file = false
-pipx_uvx = true
-python_compile = true
-python_default_packages_file = "~/.config/mise/default/python"
+pipx.uvx = true
+python.compile = true
+python.default_packages_file = "~/.config/mise/default/python"
 raw = false
 status.show_env = true
 trusted_config_paths = [ '~/.config/mise' ]
