@@ -9,6 +9,7 @@ sanitize tridactyllocal tridactylsync
 " Use my startpage on new tabs
 " set newtab file:///home/user/startpage/index.html
 
+hintstylesnohighlights
 set hintchars asdfghjklqwertpoiuyzxcvb/.,mn
 set hintuppercase false
 
