@@ -8,6 +8,16 @@ skip = ! is_linux
 checkout = git clone https://github.com/erebe/greenclip
 skip = ! is_linux
 
+[$XDG_DEVELOP_DIR/testing/nchat]
+checkout = git clone https://github.com/d99kris/nchat
+fixups =
+    mkdir -p build
+    cd build
+    cmake ..
+    make -s
+    sudo make install
+skip = ! is_linux
+
 [$XDG_DEVELOP_DIR/testing/nsxiv]
 checkout = git clone https://github.com/nsxiv/nsxiv
 fixups =

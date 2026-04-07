@@ -12,6 +12,12 @@ fixups =
     cp -f $MR_REPO/completions/_wallust ~/.local/share/zsh/site-functions/
     sudo ln -sf $MR_REPO/target/release/wallust /usr/local/bin/wallust
 
+[$XDG_DEVELOP_DIR/testing/wakafetch]
+checkout = git clone https://github.com/soifou/wakafetch
+fixups =
+    go build
+    ln -sf $MR_REPO/wakafetch $HOME/.local/bin/wakafetch
+
 [$XDG_DEVELOP_DIR/testing/rmpc]
 checkout = git clone https://github.com/mierak/rmpc
 fixups =
@@ -36,7 +42,7 @@ fixups =
     git submodule update --init --recursive
     zig build --fetch
     zig build --release=small
-    ln -sf $MR_REPO/zig-out/bin/fancy-cat ~/.local/bin/
+    ln -sf $MR_REPO/zig-out/bin/fancy-cat $HOME/.local/bin/
 
 [$XDG_DEVELOP_DIR/testing/insomnia-plugin-wal-theme]
 checkout = git clone https://github.com/crxssed7/insomnia-plugin-wal-theme
