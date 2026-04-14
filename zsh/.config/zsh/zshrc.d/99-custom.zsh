@@ -27,8 +27,10 @@ command -v zoxide >/dev/null && {
 }
 
 command -v zsh-patina >/dev/null && {
+    export ZSH_PATINA_CONFIG_PATH="$ZDOTDIR/config/zsh-patina.toml"
     znap eval zsh-patina 'zsh-patina activate'
     pgrep zsh-patina || zsh-patina restart
+    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_zsh-patina ] && znap fpath _zsh-patina 'zsh-patina completion'
 }
 
 command -v docker >/dev/null && {
