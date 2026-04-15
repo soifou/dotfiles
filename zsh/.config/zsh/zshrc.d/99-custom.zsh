@@ -42,6 +42,9 @@ command -v docker >/dev/null && {
     alias dsp='docker system prune -f && docker volume prune -f'
 }
 
+command -v typst >/dev/null &&
+    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_typst ] && znap fpath _typst 'typst completions zsh'
+
 command -v symfony >/dev/null &&
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_symfony ] && znap fpath _symfony 'symfony self:completion zsh'
 
