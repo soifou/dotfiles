@@ -69,11 +69,11 @@ macos() {
     }
 
     if command -v mas > /dev/null 2>&1; then
-        mas outdated || {
+        mas outdated && {
             yn "Update mas" && {
                 mas outdated | while read -r app; do
                     echo "Updating ${app##* }..."
-                    mas install "${app%% *}"
+                    mas update "${app%% *}"
                 done
             }
         }
