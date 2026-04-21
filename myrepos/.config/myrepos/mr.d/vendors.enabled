@@ -55,6 +55,11 @@ checkout = git clone https://github.com/ibizaman/pass-clip
 fixups =
     ln -sf $MR_REPO/clip.bash $PASSWORD_STORE_DIR/.extensions/clip.bash
 
+[$XDG_DEVELOP_DIR/testing/pass-ln]
+checkout = git clone https://github.com/radian-software/pass-ln
+fixups =
+    ln -sf $MR_REPO/pass-ln.bash $PASSWORD_STORE_DIR/.extensions/ln.bash
+
 [$XDG_DEVELOP_DIR/testing/pfetch]
 checkout = git clone https://github.com/Un1q32/pfetch
 post_checkout = sudo ln -sf $MR_REPO/pfetch /usr/local/bin/

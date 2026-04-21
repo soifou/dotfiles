@@ -5,8 +5,12 @@ znap source ohmyzsh/ohmyzsh plugins/git-auto-fetch/git-auto-fetch.plugin.zsh
 
 znap source zsh-vi-more/vi-increment
 
-znap source sobolevn/wakatime-zsh-plugin
-    ZSH_WAKATIME_BIN="$WAKATIME_HOME/.wakatime/wakatime-cli"
+[ -n $WAKATIME_HOME ] && {
+    znap source sobolevn/wakatime-zsh-plugin
+        [ -z $WAKATIME_API_KEY ] && export WAKATIME_API_KEY=$(pass wakapi/api-key)
+        command -v wakatime-cli >/dev/null || ln -sf $WAKATIME_HOME/.wakatime/wakatime-cli $XDG_LOCAL_HOME/bin/wakatime-cli
+        ZSH_WAKATIME_BIN=wakatime-cli
+}
 
 znap source zsh-users/zsh-autosuggestions
     # Defaults: zsh-users/zsh-autosuggestions/blob/master/src/config.zsh
