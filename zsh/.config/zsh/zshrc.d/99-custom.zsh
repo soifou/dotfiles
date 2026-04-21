@@ -10,6 +10,10 @@ command -v eza >/dev/null && {
     }
 }
 
+command -v fd >/dev/null && {
+    alias fd="fd --hyperlink=auto"
+}
+
 command -v pip >/dev/null && {
     [ ! -f $XDG_DATA_HOME/zsh/site-functions/_pip ] && znap fpath _pip 'pip completion zsh'
 
