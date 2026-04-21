@@ -25,14 +25,6 @@ debian() {
             sudo dpkg -l | grep '^rc' | awk '{print $2}' | xargs sudo apt-get purge -y
         }
     }
-
-    if command -v wezterm > /dev/null 2>&1; then
-        yn "Update Wezterm?" && {
-            curl -LO https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Debian12.deb
-            sudo dpkg -i wezterm-nightly.Debian12.deb
-            rm -I --preserve-root -f wezterm-nightly.Debian12.deb
-        }
-    fi
 }
 
 arch() {
