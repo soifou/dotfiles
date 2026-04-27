@@ -1,28 +1,24 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-# Use neovim as scrollback pager for kitty
-# Adapted from https://github.com/kovidgoyal/kitty/issues/719#issuecomment-952039731
+# Nvim as a kitty scrollback pager, require nvim 0.12+. |terminal-scrollback-pager|
+# Usage from kitty config: scrollback_pager kitty-scrollback-pager 'INPUT_LINE_NUMBER' 'CURSOR_LINE' 'CURSOR_COLUMN'
+# Keeps exact scroll position (for history) and cursor position (for prompt), smoother on the eyes.
 
-set -eu
+INPUT_LINE_NUMBER=${1:-0}
+CURSOR_LINE=${2:-1}
+CURSOR_COLUMN=${3:-1}
 
-AUTOCMD_TERMCLOSE_CMD="normal G"
+TARGET_LINE=$((INPUT_LINE_NUMBER + CURSOR_LINE))
+[ "$CURSOR_COLUMN" -ne 0 ] && {
+    cmd=zb
+    CURSOR_COLUMN=$((CURSOR_COLUMN + 1))
+    TARGET_LINE=$((TARGET_LINE - 1))
+} || cmd=zt
+callback="execute('call cursor(min([line(\"$\"), max([1, $TARGET_LINE])]), $CURSOR_COLUMN) | normal! $cmd')"
 
-if [ "$#" -eq 3 ]; then
-    INPUT_LINE_NUMBER=${1:-0}
-    CURSOR_LINE=${2:-1}
-    CURSOR_COLUMN=${3:-1}
-    AUTOCMD_TERMCLOSE_CMD="call cursor(max([0,${INPUT_LINE_NUMBER}-1])+${CURSOR_LINE}, ${CURSOR_COLUMN}) | if line('.') +1 !=# line('$') | exe 'norm! zt' | endif"
-fi
-
-f=/tmp/kitty.scrollback-$KITTY_PID
-trap 'rm -f $f' QUIT EXIT
-
-nvim \
-    --noplugin -i $XDG_STATE_HOME/nvim/shada/scrollback.shada \
-    -c "map <silent> q :qa!<CR>" \
-    -c "set scrollback=10000 scrolloff=0 signcolumn=no laststatus=0" \
-    -c "autocmd BufEnter * setlocal nonu nornu" \
-    -c "autocmd ColorScheme * setlocal winhighlight=Normal:NormalSB" \
-    -c "autocmd TermOpen * setlocal modifiable undolevels=1000" \
-    -c "autocmd TermClose * ${AUTOCMD_TERMCLOSE_CMD}" \
-    -c "sil w! $f | te sed <$f -e 's/'$'\x1b'']8;;file:[^\]*[\]//g' && sleep 0.01 && printf ''$'\x1b'']2;'"
+exec nvim -u NONE \
+    --cmd 'nnoremap q ZQ' \
+    +'call nvim_open_term(0, {})' \
+    +"call timer_start(10, {-> $callback })" \
+    +'set ei=FileType ls=0 ch=0 cb=unnamed ma ul=100' \
+    +'autocmd TextYankPost * silent! lua vim.hl.on_yank {higroup="Visual"}'
