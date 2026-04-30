@@ -15,8 +15,6 @@ command -v fd >/dev/null && {
 }
 
 command -v pip >/dev/null && {
-    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_pip ] && znap fpath _pip 'pip completion zsh'
-
     # uninstall package with dependencies
     pip-uninstall() {
         for dep in $(pip show $1 | grep Requires | sed 's/Requires: //g; s/,//g') ; do pip uninstall -y $dep ; done
@@ -34,7 +32,6 @@ command -v zsh-patina >/dev/null && {
     export ZSH_PATINA_CONFIG_PATH="$ZDOTDIR/config/zsh-patina.toml"
     znap eval zsh-patina 'zsh-patina activate'
     pgrep zsh-patina || zsh-patina restart
-    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_zsh-patina ] && znap fpath _zsh-patina 'zsh-patina completion'
 }
 
 command -v docker >/dev/null && {
@@ -44,26 +41,4 @@ command -v docker >/dev/null && {
 
     alias dps='docker container ls --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}"'
     alias dsp='docker system prune -f && docker volume prune -f'
-}
-
-command -v typst >/dev/null &&
-    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_typst ] && znap fpath _typst 'typst completions zsh'
-
-command -v symfony >/dev/null &&
-    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_symfony ] && znap fpath _symfony 'symfony self:completion zsh'
-
-command -v rg >/dev/null &&
-    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_ripgrep ] && znap fpath _ripgrep 'rg --generate=complete-zsh'
-
-command -v deno >/dev/null &&
-    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_deno ] && znap fpath _deno 'deno completions zsh'
-
-command -v rustup >/dev/null &&
-    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_rustup ] && znap fpath _rustup 'rustup completions zsh'
-
-command -v cargo >/dev/null &&
-    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_cargo ] && znap fpath _cargo 'rustup completions zsh cargo'
-
-command -v mise >/dev/null && {
-    [ ! -f $XDG_DATA_HOME/zsh/site-functions/_mise ] && znap fpath _mise 'mise completion zsh'
 }
