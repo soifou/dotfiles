@@ -1,9 +1,10 @@
 [$XDG_DEVELOP_DIR/testing/neovim]
 checkout = git clone https://github.com/neovim/neovim
 fixups =
-    sudo rm -rf /usr/local/share/nvim
+    sudo rm -rf /usr/local/share/nvim /usr/local/lib/nvim
     sudo make distclean
     sudo make CMAKE_BUILD_TYPE=Release install
+    # sudo zig build install --prefix /usr/local -Doptimize=ReleaseFast
 
 [$XDG_DEVELOP_DIR/testing/wallust]
 checkout = git clone https://codeberg.org/explosion-mental/wallust
