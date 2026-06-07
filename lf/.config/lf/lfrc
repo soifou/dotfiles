@@ -84,15 +84,16 @@ cmd zip ${{
 # Keybindings {{{
 # see :maps
 map <tab> :toggle; down
-map <space> invert
+map a invert
 map <esc> quit
 map x cut
 map d delete
 map . set hidden!
 map g? $lf -doc | $PAGER
 map o open
+map <enter> open
 map O open-choose
-map a push :zoxide<space>
+map z push :zoxide<space>
 map Yy yank-path
 map Yd yank-dirname
 map Yb yank-basename
