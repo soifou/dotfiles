@@ -1,135 +1,267 @@
-tap "amar1729/formulae"
-tap "d99kris/nchat"
-tap "felixkratz/formulae"
-tap "homebrew/bundle"
-tap "homebrew/services"
-tap "koekeishiya/formulae"
-tap "lujstn/tap"
-tap "pders01/unmenu"
-tap "zegervdv/zathura"
-brew "libpng"
-brew "freetype"
-brew "libunistring"
-brew "gettext"
-brew "fontconfig"
-brew "jpeg-turbo"
+tap "amar1729/formulae", trusted: true
+tap "asmvik/formulae", trusted: true
+tap "felixkratz/formulae", trusted: true
+tap "lujstn/tap", trusted: true
+tap "pders01/unmenu", trusted: true
+tap "zegervdv/zathura", trusted: true
+# Password hashing library and CLI utility
 brew "argon2"
+# C string library for manipulating Unicode strings
+brew "libunistring"
+# GNU internationalization (i18n) and localization (l10n) library
+brew "gettext"
+# Download with resuming and segmented downloading
 brew "aria2"
+# Spell checker with better logic than ispell
 brew "aspell"
+# Automatic configure script builder
 brew "autoconf"
+# Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
+# Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Parser generator
 brew "bison"
+# Yet another cross-platform graphical process/system monitor
 brew "bottom"
+# Freely available high-quality data compressor
 brew "bzip2"
+# Powerful, enterprise-ready, open source web server with automatic HTTPS
 brew "caddy"
+# Library for manipulating PNG images
+brew "libpng"
+# Software library to render fonts
+brew "freetype"
+# XML-based font configuration API for X Windows
+brew "fontconfig"
+# Perl compatible regular expressions library with a new API
+brew "pcre2"
+# Console-based Audio Visualizer for ALSA
+brew "cava"
+# Fuzzy matcher that uses std{in,out} and a native GUI
 brew "choose-gui"
-brew "libidn2"
-brew "libnghttp2"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
+# Cross-platform make
+brew "cmake"
+# Container runtimes on MacOS (and Linux) with minimal setup
 brew "colima"
+# GNU File, Shell, and Text utilities
 brew "coreutils"
-brew "rtmpdump"
+# Reimplementation of ctags(1)
+brew "ctags"
+# HTTP/2 C Library
+brew "libnghttp2"
+# Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
-brew "krb5"
+# JPEG image codec that aids compression and decompression
+brew "jpeg-turbo"
+# Lightweight DNS forwarder and DHCP server
 brew "dnsmasq"
+# Pack, ship and run any application as a lightweight container
 brew "docker"
+# Docker CLI plugin for extended build capabilities with BuildKit
 brew "docker-buildx"
+# Isolated development environments using Docker
 brew "docker-compose"
+# Disk Usage/Free Utility - a better 'df' alternative
 brew "duf"
+# Select default apps for documents and URL schemes on macOS
 brew "duti"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# Collection of GNU find, xargs, and locate
 brew "findutils"
+# ODBC 3 connectivity for UNIX
 brew "unixodbc"
+# Libraries to talk to Microsoft SQL Server and Sybase databases
 brew "freetds"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GNU awk utility
 brew "gawk"
+# Library for encoding and decoding .avif files
 brew "libavif"
+# Graphics library to dynamically manipulate images
 brew "gd"
+# GitHub command-line tool
 brew "gh"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@78"
+# Interpreter for PostScript and PDF
 brew "ghostscript"
+# International domain name library (IDNA2008, Punycode and TR46)
+brew "libidn2"
+# GNU Privacy Guard (OpenPGP)
 brew "gnupg"
+# GNU implementation of the famous stream editor
 brew "gnu-sed"
+# Pure Go implementation of jq
 brew "gojq"
+# GNU grep, egrep and fgrep
 brew "grep"
+# Sharp cut(1) clone
 brew "hck"
+# Post-modern modal text editor
 brew "helix"
+# Command-line benchmarking tool
 brew "hyperfine"
-brew "libzip"
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
+# Synchronize a maildir with an IMAP server
 brew "isync"
+# Image manipulation library
 brew "jpeg"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
+# Network authentication protocol
+brew "krb5"
+# Pager program similar to more
 brew "less"
+# Terminal file manager
 brew "lf"
+# Sophisticated file transfer program
 brew "lftp"
+# BSD-style licensed readline alternative
 brew "libedit"
-brew "libgit2@1.7"
+# Conversion library
 brew "libiconv"
+# Implementation of the file(1) command
+brew "libmagic"
+# Postgres C API library
 brew "libpq"
-brew "pkgconf"
+# NaCl networking and cryptography library
+brew "libsodium"
+# GNOME XML library
 brew "libxml2"
+# C library for reading, creating, and modifying zip archives
+brew "libzip"
+# Swiss Army Knife for macOS
 brew "m-cli"
+# Mac App Store command-line interface
 brew "mas"
+# Like sed, awk, cut, join & sort for name-indexed data such as CSV
 brew "miller"
+# Minify and secure Docker images
 brew "mintoolkit"
+# Simple tool to make locally trusted development certificates
 brew "mkcert"
+# Music Player Daemon
 brew "mpd"
+# Last.fm reporting client for mpd
 brew "mpdscribble"
+# Media player based on MPlayer and mplayer2
 brew "mpv"
+# Multiple Repository management tool
 brew "mr"
+# SMTP client that can be used as an SMTP plugin for Mutt
 brew "msmtp"
+# Lightweight PDF and XPS viewer
 brew "mupdf"
+# E-mail reader with support for Notmuch, NNTP and much more
 brew "neomutt"
+# RSS/Atom feed reader for text terminals
 brew "newsboat"
+# Libraries for security-enabled client and server applications
 brew "nss"
+# Open source suite of directory software
 brew "openldap"
-brew "openssl@1.1"
+# Swiss-army knife of markup format conversion
 brew "pandoc"
+# Password manager
 brew "pass"
-brew "pcre"
+# Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Package compiler and linker metadata toolkit
+brew "pkgconf"
+# Protocol buffers (Google's data interchange format)
 brew "protobuf"
-brew "pup"
+# Generate C-based recognizers from regular expressions
 brew "re2c"
+# Sophisticated calendar and alarm
 brew "remind"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Utility that provides fast incremental file transfer
 brew "rsync"
+# Tool for downloading RTMP streaming media
+brew "rtmpdump"
+# 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
+# SOcket CAT: netcat on steroids
 brew "socat"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Open source continuous file synchronization application
 brew "syncthing", restart_service: :changed
+# Batch system to run tasks one after another
 brew "task-spooler"
+# Send macOS User Notifications from the command-line
 brew "terminal-notifier"
+# Granddaddy of HTML tools, with support for modern standards
 brew "tidy-html5"
+# Color-based alternative to figlet (uses libcaca)
 brew "toilet"
+# Program that allows you to count code, quickly
 brew "tokei"
+# Lightweight BitTorrent client
 brew "transmission-cli", restart_service: :changed
+# Parser generator tool
 brew "tree-sitter-cli"
+# Command-line unarchiving tools supporting multiple formats
 brew "unar"
+# Pager/text based browser
 brew "w3m"
+# Executes a program periodically, showing output fullscreen
 brew "watch"
+# Extensible IRC client
 brew "weechat"
+# Internet file retriever
 brew "wget"
+# Lexical database for the English language
+brew "wordnet"
+# Fake keyboard/mouse input and window management for X
 brew "xdotool"
+# Friendly and fast tool for sending HTTP requests
 brew "xh"
+# Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# General-purpose lossless data-compression library
 brew "zlib"
+# Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Host application for browser extension providing access to your password store
 brew "amar1729/formulae/browserpass"
-brew "d99kris/nchat/nchat", args: ["without-telegram"]
+# Simple hotkey-daemon for macOS.
+brew "asmvik/formulae/skhd"
+# A tiling window manager for macOS based on binary space partitioning.
+brew "asmvik/formulae/yabai"
+# A window border system for macOS
 brew "felixkratz/formulae/borders"
-brew "koekeishiya/formulae/skhd"
-brew "koekeishiya/formulae/yabai"
+# Custom GPG pinentry program for macOS that allows using Touch ID for fetching the password from
+# the macOS keychain.
 brew "lujstn/tap/pinentry-touchid"
-brew "zegervdv/zathura/zathura"
-brew "zegervdv/zathura/zathura-pdf-poppler"
+# Enable Windows-like alt-tab
 cask "alt-tab"
+# Android SDK component
+cask "android-platform-tools"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"
+# Web browser focusing on privacy
 cask "brave-browser"
+# Preference Pane for controlling cursor hiding
 cask "cursorcerer"
+# Web browser
 cask "firefox"
+# Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# GPU-based terminal emulator
 cask "kitty"
+# Image viewer
 cask "qview"
+# Menu bar app that provides more control over Night Shift
 cask "shifty"
-cask "signal"
-cask "unmenu"
+cask "pders01/unmenu/unmenu"
+mas "Xcode", id: 497799835
