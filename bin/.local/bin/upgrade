@@ -124,9 +124,9 @@ fi
 if command -v brew > /dev/null 2>&1; then
     yn "Update brew?" && {
         brew update
-        brew upgrade
+        brew upgrade -y
         case $OSTYPE in
-            darwin*) brew upgrade --cask --greedy ;;
+            darwin*) brew upgrade -y --cask --greedy ;;
         esac
         brew cleanup
     }
