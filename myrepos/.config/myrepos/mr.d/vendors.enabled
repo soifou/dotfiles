@@ -26,6 +26,15 @@ fixups =
     cp -f $MR_REPO/target/completions/_rmpc ~/.local/share/zsh/site-functions/
     sudo ln -sf $MR_REPO/target/release/rmpc /usr/local/bin/rmpc
 
+[$XDG_DEVELOP_DIR/testing/nchat]
+checkout = git clone https://github.com/d99kris/nchat
+fixups =
+    mkdir -p build
+    cd build
+    cmake ..
+    make -s
+    sudo make install
+
 [$XDG_DEVELOP_DIR/testing/add-osc-8-hyperlink-rs]
 checkout = git clone https://github.com/konradko/add-osc-8-hyperlink-rs
 fixups =
