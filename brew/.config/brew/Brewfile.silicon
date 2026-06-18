@@ -1,9 +1,8 @@
 tap "amar1729/formulae", trusted: true
 tap "asmvik/formulae", trusted: true
-tap "felixkratz/formulae", trusted: true
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 tap "lujstn/tap", trusted: true
 tap "pders01/unmenu", trusted: true
-tap "zegervdv/zathura", trusted: true
 # Password hashing library and CLI utility
 brew "argon2"
 # C string library for manipulating Unicode strings

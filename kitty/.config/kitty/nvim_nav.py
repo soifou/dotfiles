@@ -1,6 +1,12 @@
-# Handle navigating between various splits (vim, kitty)
-# by inspecting the foreground processes of the current window
+# Handle navigating between (n)vim and kitty splits.
+#
+# This works by inspecting the foreground processes of the current window.
 # To debug, check the output of kitty @ ls
+#
+# In addition to have a seamless navigation between different apps, there is an
+# interesting UX feature. When you're in `stack` layout, you can still navigate
+# between panes using `top`/`bottom` or `left`/`right`, kind of workspaces
+# *inside* one WM workspace. Neat!
 
 import re
 from typing import Any, Sequence, cast

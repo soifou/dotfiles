@@ -27,16 +27,24 @@ case $1 in
         git "$@"
         ;;
     ics)
-        [ -z "$2" ] && { echo >&2 "No path file provided"; exit 1; }
+        [ -z "$2" ] && {
+            echo >&2 "No path file provided"
+            exit 1
+        }
         command -v ics2rem > /dev/null 2>&1 || {
             echo >&2 "Requires python-remind (https://github.com/jspricke/python-remind/). Aborting."
             exit 1
         }
 
-        TIMEZONE=$(timedatectl show | grep Timezone | awk -F= '{print $2}')
+        case $OSTYPE in
+            darwin*) TIMEZONE=$(sudo systemsetup -gettimezone | awk -F': ' '{print $2}') ;;
+            linux*) TIMEZONE=$(timedatectl show | grep Timezone | awk -F= '{print $2}') ;;
+        esac
+
         ics2rem -z "$TIMEZONE" "$2" >> "$REMIND_PATH"/invite.rem
+
         # TODO: use uniq to avoid duplicates?
-        [ -n "$DISPLAY" ] && notify-send -i calendar -u low Remind "Invitation added";
+        notify-send -i calendar -u low Remind "Invitation added"
         ;;
     *)
         if [ -f "$REMIND_PATH"/"$1".rem ]; then
