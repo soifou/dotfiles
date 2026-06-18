@@ -2,7 +2,7 @@ first_name_only = false
 show_receipts = true
 bell = true
 colored_messages = true
-default_keybindings = true
+default_keybindings = false
 
 [notifications]
 enabled = true
@@ -15,23 +15,40 @@ mute_reactions_bell = false
 display_name = "François"
 
 [keybindings.anywhere]
-ctrl-c = ""
 ctrl-q = "quit"
 
 [keybindings.normal]
+ctrl-n = "select_channel next"
+ctrl-p = "select_channel previous"
 ctrl-j = "select_message next entry"
 ctrl-k = "select_message previous entry"
-tab = "select_channel next"
-ctrl-shift-i = "select_channel previous"
-ctrl-e = "edit_message"
-ctrl-d = "toggle_multiline"
+ctrl-u = "kill_backward_line"
+ctrl-w = "kill_word"
+backspace = "delete_character previous"
+ctrl-a = "beginning_of_line"
+ctrl-e = "end_of_line"
+left = "move_text previous character"
+right = "move_text next character"
 ctrl-h = "move_text previous character"
 ctrl-l = "move_text next character"
+ctrl-b = "move_text previous word"
+ctrl-f = "move_text next word"
+# toggle
+ctrl-d = "toggle_multiline"
+ctrl-shift-m = "toggle_mute_channel"
+ctrl-shift-c = "toggle_channel_list"
+ctrl-shift-f = "toggle_channel_modal"
+# actions
+tab = "react"
 ctrl-o = "open_file"
+ctrl-shift-e = "open_editor"
 
 [keybindings.message_selected]
-alt-y = ""
-alt-w = ""
+ctrl-e = "edit_message"
 ctrl-y = "copy_message selected"
 ctrl-t = "react :thumbsup:"
 ctrl-shift-t = "react :heart:"
+
+[keybindings.multiline]
+down = "move_text next line"
+up = "move_text previous line"
