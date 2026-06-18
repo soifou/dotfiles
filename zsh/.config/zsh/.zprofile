@@ -6,7 +6,7 @@
 ## games
 [ -d "/usr/games" ] && export PATH="/usr/games:$PATH"
 ## nvim
-[ -d "$XDG_DEVELOP_DIR"/nvim/bin ] && export PATH="$XDG_DEVELOP_DIR/nvim/bin:$PATH"
+[ -d "$XDG_PROJECTS_DIR"/nvim/bin ] && export PATH="$XDG_PROJECTS_DIR/nvim/bin:$PATH"
 [ -d "$XDG_DATA_HOME"/nvim/mason/bin ] && export PATH="$XDG_DATA_HOME/nvim/mason/bin:$PATH"
 ## nix
 [ -f $XDG_CACHE_HOME/fsh/nix.sh ] && . $XDG_CACHE_HOME/fsh/nix.sh

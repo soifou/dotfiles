@@ -33,7 +33,7 @@
 
 # Set Helix runtime dir
 # https://docs.helix-editor.com/install.html#configuring-helixs-runtime-files
-# export HELIX_RUNTIME=$XDG_DEVELOP_DIR/testing/helix/runtime
+# export HELIX_RUNTIME=$XDG_PROJECTS_DIR/testing/helix/runtime
 
 # See |$NVIM_APPNAME| and |$NVIM_LOG_FILE|
 # export NVIM_APPNAME=nvim

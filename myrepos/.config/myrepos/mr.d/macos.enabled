@@ -1,24 +1,24 @@
-[$XDG_DEVELOP_DIR/testing/alloy]
+[$XDG_PROJECTS_DIR/testing/alloy]
 checkout = git clone https://github.com/ardaku/alloy
 fixups =
     cargo build --release
     sudo ln -sf $MR_REPO/target/release/alloy /usr/local/bin/alloy
 skip = ! is_darwin
 
-[$XDG_DEVELOP_DIR/testing/macos-us-altgr-intl]
+[$XDG_PROJECTS_DIR/testing/macos-us-altgr-intl]
 checkout = git clone https://github.com/carjorvaz/macos-us-altgr-intl
 fixups =
     ln -sf $MR_REPO/us-altgr-intl.keylayout ~/Library/Keyboard\ Layouts/
 skip = ! is_darwin
 
-[$XDG_DEVELOP_DIR/testing/setsid-macosx]
+[$XDG_PROJECTS_DIR/testing/setsid-macosx]
 checkout = git clone https://github.com/tzvetkoff/setsid-macosx
 fixups =
     gcc -o setsid setsid.c
     sudo ln -sf $MR_REPO/setsid /usr/local/bin/
 skip = ! is_darwin
 
-[$XDG_DEVELOP_DIR/testing/run-on-macos-screen-events]
+[$XDG_PROJECTS_DIR/testing/run-on-macos-screen-events]
 checkout = git clone -b patch-1 https://github.com/d3p/run-on-macos-screen-events
 fixups =
     swiftc ./run-on-macos-screen-events.swift
@@ -26,7 +26,7 @@ fixups =
     ln -sf $MR_REPO/run-on-macos-screen-events $HOME/.local/bin/
 skip = ! is_darwin
 
-[$XDG_DEVELOP_DIR/testing/lctl]
+[$XDG_PROJECTS_DIR/testing/lctl]
 checkout = git clone https://github.com/newtonne/lctl
 fixups =
     ln -sf $MR_REPO/lctl.sh ~/.local/bin/lctl

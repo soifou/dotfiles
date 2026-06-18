@@ -1,32 +1,40 @@
-[$XDG_DEVELOP_DIR/testing/neovim]
+[$XDG_PROJECTS_DIR/testing/neovim]
 checkout = git clone https://github.com/neovim/neovim
 fixups =
     sudo rm -rf /usr/local/share/nvim /usr/local/lib/nvim
     sudo make distclean
     sudo make CMAKE_BUILD_TYPE=Release install
-    # sudo zig build install --prefix /usr/local -Doptimize=ReleaseFast
+    # ---
+    # Zig build is:
+    # - slower on my machine (+60s), even with -Doptimize=ReleaseFast
+    # - create a useless /usr/local/runtime/doc but same folder exist in
+    #   /usr/local/share/nvim/runtime/doc (+ tags file)
+    # - mask the commit in the version
+    # ---
+    # sudo rm -rf /usr/local/runtime
+    # sudo zig build install --prefix /usr/local -Doptimize=Debug
 
-[$XDG_DEVELOP_DIR/testing/wallust]
+[$XDG_PROJECTS_DIR/testing/wallust]
 checkout = git clone https://codeberg.org/explosion-mental/wallust
 fixups =
     cargo build --release
     cp -f $MR_REPO/completions/_wallust ~/.local/share/zsh/site-functions/
     sudo ln -sf $MR_REPO/target/release/wallust /usr/local/bin/wallust
 
-[$XDG_DEVELOP_DIR/testing/wakafetch]
+[$XDG_PROJECTS_DIR/testing/wakafetch]
 checkout = git clone https://github.com/soifou/wakafetch
 fixups =
     go build
     ln -sf $MR_REPO/wakafetch $HOME/.local/bin/wakafetch
 
-[$XDG_DEVELOP_DIR/testing/rmpc]
+[$XDG_PROJECTS_DIR/testing/rmpc]
 checkout = git clone https://github.com/mierak/rmpc
 fixups =
     cargo build --release
     cp -f $MR_REPO/target/completions/_rmpc ~/.local/share/zsh/site-functions/
     sudo ln -sf $MR_REPO/target/release/rmpc /usr/local/bin/rmpc
 
-[$XDG_DEVELOP_DIR/testing/nchat]
+[$XDG_PROJECTS_DIR/testing/nchat]
 checkout = git clone https://github.com/d99kris/nchat
 fixups =
     mkdir -p build
@@ -35,18 +43,18 @@ fixups =
     make -s
     sudo make install
 
-[$XDG_DEVELOP_DIR/testing/add-osc-8-hyperlink-rs]
+[$XDG_PROJECTS_DIR/testing/add-osc-8-hyperlink-rs]
 checkout = git clone https://github.com/konradko/add-osc-8-hyperlink-rs
 fixups =
     cargo build --release
     sudo ln -sf $MR_REPO/target/release/add-osc-8-hyperlink /usr/local/bin/add-osc-8-hyperlink
 
-[$XDG_DEVELOP_DIR/testing/git-quick-stats]
+[$XDG_PROJECTS_DIR/testing/git-quick-stats]
 checkout = git clone https://github.com/arzzen/git-quick-stats
 fixups =
     sudo make install
 
-[$XDG_DEVELOP_DIR/testing/fancy-cat]
+[$XDG_PROJECTS_DIR/testing/fancy-cat]
 checkout = git clone https://github.com/freref/fancy-cat
 fixups =
     git submodule update --init --recursive
@@ -54,91 +62,91 @@ fixups =
     zig build --release=small
     ln -sf $MR_REPO/zig-out/bin/fancy-cat $HOME/.local/bin/
 
-[$XDG_DEVELOP_DIR/testing/insomnia-plugin-wal-theme]
+[$XDG_PROJECTS_DIR/testing/insomnia-plugin-wal-theme]
 checkout = git clone https://github.com/crxssed7/insomnia-plugin-wal-theme
 fixups =
     mkdir -p $XDG_CONFIG_HOME/Insomnia/plugins
     ln -sf $MR_REPO $XDG_CONFIG_HOME/Insomnia/plugins/insomnia-plugin-wal-theme
 
-[$XDG_DEVELOP_DIR/testing/pass-clip]
+[$XDG_PROJECTS_DIR/testing/pass-clip]
 checkout = git clone https://github.com/ibizaman/pass-clip
 fixups =
     ln -sf $MR_REPO/clip.bash $PASSWORD_STORE_DIR/.extensions/clip.bash
 
-[$XDG_DEVELOP_DIR/testing/pass-ln]
+[$XDG_PROJECTS_DIR/testing/pass-ln]
 checkout = git clone https://github.com/radian-software/pass-ln
 fixups =
     ln -sf $MR_REPO/pass-ln.bash $PASSWORD_STORE_DIR/.extensions/ln.bash
 
-[$XDG_DEVELOP_DIR/testing/pfetch]
+[$XDG_PROJECTS_DIR/testing/pfetch]
 checkout = git clone https://github.com/Un1q32/pfetch
 post_checkout = sudo ln -sf $MR_REPO/pfetch /usr/local/bin/
 
-[$XDG_DEVELOP_DIR/testing/rdrview]
+[$XDG_PROJECTS_DIR/testing/rdrview]
 checkout = git clone https://github.com/eafer/rdrview
 fixups =
     make clean
     make
     sudo make install
 
-[$XDG_DEVELOP_DIR/testing/shrinkpdf]
+[$XDG_PROJECTS_DIR/testing/shrinkpdf]
 checkout = git clone https://github.com/aklomp/shrinkpdf
 fixups =
     chmod +x shrinkpdf.sh
     sudo ln -sf $MR_REPO/shrinkpdf.sh /usr/local/bin/shrinkpdf
 
-[$XDG_DEVELOP_DIR/testing/translate-shell]
+[$XDG_PROJECTS_DIR/testing/translate-shell]
 checkout = git clone https://github.com/soimort/translate-shell
 fixups =
     make clean
     make TARGET=zsh
     sudo make install
 
-[$XDG_DEVELOP_DIR/testing/tremc]
+[$XDG_PROJECTS_DIR/testing/tremc]
 checkout = git clone https://github.com/tremc/tremc
 post_checkout = sudo ln -sf $MR_REPO/tremc /usr/local/bin/
 
-[$XDG_DEVELOP_DIR/testing/viewhtmlmsg]
+[$XDG_PROJECTS_DIR/testing/viewhtmlmsg]
 checkout = git clone https://github.com/lilydjwg/viewhtmlmsg
 post_checkout = sudo ln -sf $MR_REPO/viewhtmlmsg /usr/local/bin/
 
-[$XDG_DEVELOP_DIR/testing/magic-tape]
+[$XDG_PROJECTS_DIR/testing/magic-tape]
 checkout = git clone -b macos-compatibility https://gitlab.com/soifou/magic-tape.git/
 post_checkout = ln -sf $MR_REPO/magic-tape.sh $HOME/.local/bin/magic-tape
 
-[$XDG_DEVELOP_DIR/testing/yt-x]
+[$XDG_PROJECTS_DIR/testing/yt-x]
 checkout = git clone https://github.com/Benexl/yt-x
 post_checkout = ln -sf $MR_REPO/yt-x $HOME/.local/bin/yt-x
 
-[$XDG_DEVELOP_DIR/testing/zsh-completion-generator]
+[$XDG_PROJECTS_DIR/testing/zsh-completion-generator]
 checkout = git clone https://github.com/RobSis/zsh-completion-generator
 post_checkout = sudo ln -sf $MR_REPO/help2comp.py /usr/local/bin/help2comp
 
-# [$XDG_DEVELOP_DIR/testing/gpt4free]
+# [$XDG_PROJECTS_DIR/testing/gpt4free]
 # checkout = git clone https://github.com/xtekky/gpt4free
 
-# [$XDG_DEVELOP_DIR/testing/fontpreview-ueberzug]
+# [$XDG_PROJECTS_DIR/testing/fontpreview-ueberzug]
 # checkout = git clone https://github.com/OliverLew/fontpreview-ueberzug
 # fixups =
 #     sudo make install
 
-# [$XDG_DEVELOP_DIR/testing/pash]
+# [$XDG_PROJECTS_DIR/testing/pash]
 # checkout = git clone https://github.com/dylanaraps/pash
 # post_checkout = sudo ln -sf $(pwd)/pash/pash /usr/local/bin/
 
-# [$XDG_DEVELOP_DIR/testing/somafm-cli]
+# [$XDG_PROJECTS_DIR/testing/somafm-cli]
 # checkout = git clone https://github.com/rockymadden/somafm-cli
 # post_checkout = sudo ln -sf $MR_REPO/src/somafm /usr/local/bin/
 
-# [$XDG_DEVELOP_DIR/testing/tuxi]
+# [$XDG_PROJECTS_DIR/testing/tuxi]
 # checkout = git clone https://github.com/Bugswriter/tuxi
 # fixups =
 #     sudo make install PREFIX=/usr/local
 
-# [$XDG_DEVELOP_DIR/testing/universal-android-debloater]
+# [$XDG_PROJECTS_DIR/testing/universal-android-debloater]
 # checkout = git clone https://gitlab.com/W1nst0n/universal-android-debloater.git/
 
-# [$XDG_DEVELOP_DIR/testing/helix]
+# [$XDG_PROJECTS_DIR/testing/helix]
 # checkout = git clone https://github.com/helix-editor/helix
 # fixups =
 #     mkdir -p $XDG_CONFIG_HOME/helix

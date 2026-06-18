@@ -121,7 +121,7 @@ export LIBVIRT_DEFAULT_URI='qemu:///system'
 export DOCKER_BUILDKIT=1
 export BUILDKIT_PROGRESS=auto
 
-export ANSIBLE_CONFIG=$XDG_DEVELOP_DIR/$USER/ansible/sandbox/ansible.cfg
+export ANSIBLE_CONFIG=$XDG_PROJECTS_DIR/$USER/ansible/sandbox/ansible.cfg
 export ANSIBLE_VAULT_PASSWORD_FILE=$XDG_LOCAL_HOME/bin/ansible-vault-pass
 export ANSIBLE_VAULT_IDENTITY_LIST=soifou@$ANSIBLE_VAULT_PASSWORD_FILE
 export ANSIBLE_HOST_KEY_CHECKING=False

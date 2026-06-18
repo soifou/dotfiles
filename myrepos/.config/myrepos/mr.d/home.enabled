@@ -2,16 +2,16 @@
 # ┃╺┓┃ ┃ ┣━┫┃ ┃┣┻┓
 # ┗━┛╹ ╹ ╹ ╹┗━┛┗━┛
 
-[$XDG_DEVELOP_DIR/soifou/adminer]
+[$XDG_PROJECTS_DIR/soifou/adminer]
 checkout = git clone 'git@github.com:soifou/adminer.git' 'adminer'
 
-[$XDG_DEVELOP_DIR/soifou/docker/github/lamp]
+[$XDG_PROJECTS_DIR/soifou/docker/github/lamp]
 checkout = git clone 'git@github.com:soifou/docker-lamp.git' 'lamp'
 
-[$XDG_DEVELOP_DIR/soifou/docker/github/php-alpine]
+[$XDG_PROJECTS_DIR/soifou/docker/github/php-alpine]
 checkout = git clone 'git@github.com:soifou/php-alpine.git' 'php-alpine'
 
-[$XDG_DEVELOP_DIR/soifou/docker/github/wpcli-alpine]
+[$XDG_PROJECTS_DIR/soifou/docker/github/wpcli-alpine]
 checkout = git clone 'git@github.com:soifou/wpcli-alpine.git' 'wpcli-alpine'
 
 # ┏━╸╻╺┳╸┏━┓╻  ╻╺┳╸┏━╸
@@ -27,26 +27,26 @@ checkout = git clone 'soifou-gitolite:pass-store' 'password-store'
 [$XDG_DATA_HOME/remind]
 checkout = git clone 'soifou-gitolite:remind' 'remind'
 
-[$XDG_DEVELOP_DIR/soifou/advent-of-code]
+[$XDG_PROJECTS_DIR/soifou/advent-of-code]
 checkout = git clone 'soifou-gitolite:aoc' 'advent-of-code'
 
-[$XDG_DEVELOP_DIR/soifou/curriculum]
+[$XDG_PROJECTS_DIR/soifou/curriculum]
 checkout = git clone 'soifou-gitolite:curriculum' 'curriculum'
 
-[$XDG_DEVELOP_DIR/soifou/docker]
+[$XDG_PROJECTS_DIR/soifou/docker]
 checkout = git clone 'soifou-gitolite:docker' 'docker'
 
-[$XDG_DEVELOP_DIR/soifou/gitolite]
+[$XDG_PROJECTS_DIR/soifou/gitolite]
 checkout = git clone 'soifou-gitolite:gitolite-admin' 'gitolite'
 
-[$XDG_DEVELOP_DIR/soifou/iosevka-custom]
+[$XDG_PROJECTS_DIR/soifou/iosevka-custom]
 checkout = git clone 'soifou-gitolite:iosevka-custom' 'iosevka-custom'
 
-[$XDG_DEVELOP_DIR/soifou/ly]
+[$XDG_PROJECTS_DIR/soifou/ly]
 checkout = git clone 'soifou-gitolite:ly' 'ly'
 
-[$XDG_DEVELOP_DIR/soifou/utils]
+[$XDG_PROJECTS_DIR/soifou/utils]
 checkout = git clone 'soifou-gitolite:utils' 'utils'
 
-[$XDG_DEVELOP_DIR/soifou/xresources.nvim]
-checkout = git clone 'soifou-gitolite:xresources.nvim' 'xresources.nvim'
+[$XDG_PROJECTS_DIR/soifou/ansi16.nvim]
+checkout = git clone 'soifou-gitolite:ansi16.nvim' 'ansi16.nvim'

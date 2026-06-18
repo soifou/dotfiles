@@ -1,14 +1,14 @@
-[$XDG_DEVELOP_DIR/testing/giph]
+[$XDG_PROJECTS_DIR/testing/giph]
 checkout = git clone https://github.com/phisch/giph
 fixups =
     sudo make install
 skip = ! is_linux
 
-[$XDG_DEVELOP_DIR/testing/greenclip]
+[$XDG_PROJECTS_DIR/testing/greenclip]
 checkout = git clone https://github.com/erebe/greenclip
 skip = ! is_linux
 
-[$XDG_DEVELOP_DIR/testing/nsxiv]
+[$XDG_PROJECTS_DIR/testing/nsxiv]
 checkout = git clone https://github.com/nsxiv/nsxiv
 fixups =
     # ln -sf $XDG_CONFIG_HOME/nsxiv/config.h config.h
@@ -20,7 +20,7 @@ fixups =
     sudo make install
 skip = ! is_linux
 
-[$XDG_DEVELOP_DIR/testing/paperview]
+[$XDG_PROJECTS_DIR/testing/paperview]
 checkout = git clone https://github.com/glouw/paperview
 fixups =
     make clean
@@ -28,7 +28,7 @@ fixups =
     sudo make install DESTDIR=/usr PREFIX=/local
 skip = ! is_linux
 
-# [$XDG_DEVELOP_DIR/testing/rofi-emoji]
+# [$XDG_PROJECTS_DIR/testing/rofi-emoji]
 # checkout = git clone https://github.com/Mange/rofi-emoji
 # fixups =
 #     autoreconf -i
@@ -40,7 +40,7 @@ skip = ! is_linux
 #     sudo make install
 # skip = ! is_linux
 
-[$XDG_DEVELOP_DIR/testing/pavucontrolrs]
+[$XDG_PROJECTS_DIR/testing/pavucontrolrs]
 checkout = git clone https://github.com/tu500/pavucontrolrs
 fixups =
     cargo build --release
@@ -48,7 +48,7 @@ fixups =
     sudo ln -sf $MR_REPO/target/release/pavucontrolrs /usr/local/bin/pavucontrolrs
 skip = ! is_linux
 
-[$XDG_DEVELOP_DIR/testing/wired-notify]
+[$XDG_PROJECTS_DIR/testing/wired-notify]
 checkout = git clone https://github.com/Toqozz/wired-notify
 fixups =
     mkdir -p $XDG_CONFIG_HOME/wired
@@ -61,7 +61,7 @@ fixups =
     sudo ln -sf $MR_REPO/target/release/wired /usr/local/bin/wired
 skip = ! is_linux
 
-[$XDG_DEVELOP_DIR/testing/xbanish]
+[$XDG_PROJECTS_DIR/testing/xbanish]
 checkout = git clone https://github.com/jcs/xbanish
 fixups =
     make clean
@@ -69,7 +69,7 @@ fixups =
     sudo make install
 skip = ! is_linux
 
-[$XDG_DEVELOP_DIR/testing/xob]
+[$XDG_PROJECTS_DIR/testing/xob]
 checkout = git clone https://github.com/juster-0/xob
 fixups =
     make clean
@@ -77,12 +77,12 @@ fixups =
     sudo make install
 skip = ! is_linux
 
-[$XDG_DEVELOP_DIR/testing/xpub]
+[$XDG_PROJECTS_DIR/testing/xpub]
 checkout = git clone https://github.com/Ventto/xpub
 post_checkout = sudo ln -sf $MR_REPO/src/xpub.sh /usr/local/bin/xpub
 skip = ! is_linux
 
-[$XDG_DEVELOP_DIR/testing/zwm]
+[$XDG_PROJECTS_DIR/testing/zwm]
 checkout = git clone https://github.com/Yazeed1s/zwm
 fixups =
     make clean
