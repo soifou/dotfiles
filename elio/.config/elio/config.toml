@@ -1,0 +1,12 @@
+# https://github.com/elio-fm/elio/blob/main/examples/config.toml
+
+[keys]
+search_files = "/"
+toggle_selection = ["ctrl+i", "space"]
+cycle_places_next = "ctrl+n"
+cycle_places_previous = "ctrl+p"
+page_up = "ctrl+u"
+page_down = "ctrl+d"
+jump_first = "home"
+scroll_preview_up = ["ctrl+b", "["]
+scroll_preview_down = ["ctrl+f", "]"]

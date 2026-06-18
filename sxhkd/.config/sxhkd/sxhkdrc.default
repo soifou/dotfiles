@@ -175,7 +175,7 @@ super + z
 
 # file manager
 super + shift + f
-    wm-scratchpad yazi
+    wm-scratchpad elio
 
 # clipboard manager
 super + space

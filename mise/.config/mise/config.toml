@@ -35,6 +35,7 @@ zig = "latest"
 "github:cargo-bins/cargo-binstall" = "latest"
 "github:carthage-software/mago" = "latest"
 "github:dandavison/delta" = "latest"
+"github:elio-fm/elio" = "latest"
 "github:jdx/usage" = "latest"
 "github:kristoff-it/superhtml" = "latest"
 "github:michel-kraemer/zsh-patina" = { version = "latest", postinstall = '''

@@ -8,8 +8,10 @@ macro index,pager,generic g? "!w3m /usr/share/doc/neomutt/html/index.html\n" "Sh
 # W: Save selected attachment (set $attach_save_dir var to specify which dir)
 macro attach W "<save-entry><bol><eol>" "Save to downloads folder"
 
-# A: Attach files using a TUI file manager
-macro compose A "<shell-escape>neomutt-picker<enter><enter-command>source /tmp/neomutt-attachments<enter>" "Attach with lf"
+# a: Attach files using a TUI file manager (replace builtin feature)
+# The trailing | means execute the script and treat the output of the script as NeoMutt commands.
+# Commands prefixed by a space don't get added to the command history.
+macro compose a "<enter-command> source neomutt-picker|<enter>" "Attach files using a TUI file manager"
 
 # A: Add sender to khard addressbook
 macro index,pager A \

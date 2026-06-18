@@ -1,20 +1,46 @@
 #!/usr/bin/env sh
 
-# Use a filemanager to add file(s) as attachment in a mail using neomutt.
-# Select hovered file(s) using <space>, press <o> to valid selection(s).
-# Credits: https://www.reddit.com/r/commandline/comments/cbxvdf/combine_neomutt_with_ranger/eu8xdip/
+# Use a filemanager to add file(s) as attachments in neomutt
+# Inspired by https://github.com/neomutt/neomutt/discussions/4603
 
-tmpfile=/tmp/neomutt-attachments
+fm_supported="lf yazi elio"
 
-if [ -z "$1" ]; then
-    if command -v yazi > /dev/null 2>&1; then
-        yazi --chooser-file $tmpfile
-    else
-        lf -selection-path $tmpfile
+pick_cmd() {
+    case "$1" in
+        lf) echo "lf -selection-path /dev/stdout" ;;
+        yazi) echo "yazi --chooser-file /dev/stdout" ;;
+        elio) echo "elio --chooser-file /dev/stdout" ;;
+        *)
+            echo "Unsupported file picker: $1" >&2
+            return 1
+            ;;
+    esac
+}
+
+detect_picker() {
+    # explicit
+    if [ -n "${FILEMANAGER:-}" ] && command -v "$FILEMANAGER" > /dev/null 2>&1; then
+        echo "$FILEMANAGER"
+        return 0
     fi
 
-    sed -i 's/^/<attach-file>/' $tmpfile \
-        && sed -i 's/$/<enter>/' $tmpfile \
-        && sed -i ':a;N;$!ba;s/\\n//g' $tmpfile \
-        && sed -i 's/^/push /' $tmpfile
-fi
+    # fallback
+    for p in $fm_supported; do
+        command -v "$p" > /dev/null 2>&1 && { echo "$p"; return 0; }
+    done
+
+    return 1
+}
+
+fm=$(detect_picker) || {
+    echo "No file picker found ($fm_supported)" >&2
+    exit 1
+}
+
+cmd=$(pick_cmd "$fm") || exit 1
+
+files=$($cmd)
+[ $? -ne 0 ] && exit 1
+[ -z "$files" ] && exit 0
+
+printf "%s\n" "$files" | awk 'BEGIN { printf "push " } { printf "<attach-file>\"%s\"<enter>", $0 }'
