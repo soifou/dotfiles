@@ -166,7 +166,7 @@ XF86AudioMute
     wpctl set-mute @DEFAULT_SINK@ toggle; xob-utils -u
 
 # notification control
-ctrl + { Escape, space, shift + space }
+super + { shift + space, space, shift + Escape }
     wired {-s 1,-d latest,-d all}
 
 # music player
