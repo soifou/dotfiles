@@ -2,7 +2,6 @@
     "license": "MIT",
     "require": {
         "deployer/deployer": "^7.0",
-        "friendsofphp/php-cs-fixer": "^3.1",
         "friendsoftwig/twigcs": "^6.0",
         "nikic/php-parser": "^5.3",
         "squizlabs/php_codesniffer": "^4.0"
