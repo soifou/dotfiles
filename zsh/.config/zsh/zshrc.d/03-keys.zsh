@@ -160,23 +160,16 @@ command -v fzf >/dev/null && {
     # with an fzf-driven, searchable list of history entries.
     # Credits: https://github.com/joshskidmore/zsh-fzf-history-search
     fzf_history_search() {
-      candidates=(${(f)"$(fc -li -1 0 | fzf --height=20% --info=hidden +s -e -q "$BUFFER")"})
-      local ret=$?
-      if [ -n "$candidates" ]; then
-        BUFFER="${candidates[@]/(#m)*/${${(As: :)MATCH}[4,-1]}}"
-        BUFFER="${BUFFER[@]/(#b)(?)\\n/$match[1]
-    }"
-        zle vi-fetch-history -n $BUFFER
-      fi
-      zle reset-prompt
-      return $ret
+        local sel=$(fc -li -1 0 | fzf --height=20% +s --exact -q "$BUFFER" --accept-nth=4..) || ""
+        BUFFER="${sel:-$BUFFER}"
+        zle reset-prompt
+        [ -n "$sel" ] && zle end-of-line
     }
-    autoload fzf_history_search
     zle -N fzf_history_search
     bindkey '^r' fzf_history_search
 
-    # Fuzzy find children dirs of current with <C-f>
-    bindkey -s '^f' '^Ucd "$(fd --type directory | fzf)"^M'
+    # Jump to a children dir of cwd
+    bindkey -s '^f' '^Ucd "$(fd --type directory | fzf --height=20%)"^M'
 }
 # }}}
 
