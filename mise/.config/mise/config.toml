@@ -34,6 +34,7 @@ zig = "latest"
 "github:boxdot/gurk-rs" = { version = "latest", extract_all = "true" }
 "github:cargo-bins/cargo-binstall" = "latest"
 "github:carthage-software/mago" = "latest"
+"github:d99kris/nchat" = "latest"
 "github:dandavison/delta" = "latest"
 "github:elio-fm/elio" = "latest"
 "github:jdx/usage" = "latest"
