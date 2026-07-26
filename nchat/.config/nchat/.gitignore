@@ -1,0 +1,8 @@
+emojis/*
+!emojis/version
+history/*
+!history/version
+profiles/*
+!profiles/version
+debug.info
+log.*
