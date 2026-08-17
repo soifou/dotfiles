@@ -48,6 +48,8 @@
 
 # Prevent rate-limiting when requesting github releases using UBI provider
 # export MISE_GITHUB_TOKEN=github_pat_foo
+# Don't scan some paths, e.g. neo-tree.nvim use its own mise.toml
+# export MISE_IGNORED_CONFIG_PATHS="$XDG_DATA_HOME/nvim"
 
 # Homebrew
 # export HOMEBREW_NO_ANALYTICS=1
