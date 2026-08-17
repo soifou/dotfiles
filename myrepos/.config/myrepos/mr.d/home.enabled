@@ -14,6 +14,9 @@ checkout = git clone 'git@github.com:soifou/php-alpine.git' 'php-alpine'
 [$XDG_PROJECTS_DIR/soifou/docker/github/wpcli-alpine]
 checkout = git clone 'git@github.com:soifou/wpcli-alpine.git' 'wpcli-alpine'
 
+[$XDG_PROJECTS_DIR/soifou/notes.nvim]
+checkout = git clone 'git@github.com:soifou/notes.nvim' 'notes.nvim'
+
 # ┏━╸╻╺┳╸┏━┓╻  ╻╺┳╸┏━╸
 # ┃╺┓┃ ┃ ┃ ┃┃  ┃ ┃ ┣╸
 # ┗━┛╹ ╹ ┗━┛┗━╸╹ ╹ ┗━╸
