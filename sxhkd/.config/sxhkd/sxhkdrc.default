@@ -178,7 +178,7 @@ super + shift + f
     wm-scratchpad elio
 
 # clipboard manager
-super + space
+super + shift + d
     clipcat-menu insert
 
 # misc apps

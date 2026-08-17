@@ -1,7 +1,9 @@
 # https://github.com/elio-fm/elio/blob/main/examples/config.toml
 
 [keys]
-search_files = "/"
+search_files = "f"
+search_folders = "F"
+filter_directory = "/"
 toggle_selection = ["ctrl+i", "space"]
 cycle_places_next = "ctrl+n"
 cycle_places_previous = "ctrl+p"
