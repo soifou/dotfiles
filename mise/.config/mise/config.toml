@@ -28,7 +28,6 @@ zig = "latest"
 "cargo:vimv" = "latest"
 # ---
 "github:achristmascarl/rainfrog" = "latest"
-"github:PHPantom-dev/phpantom_lsp" = "latest"
 "github:akiomik/mado" = "latest"
 "github:astral-sh/uv" = "latest"
 "github:boxdot/gurk-rs" = { version = "latest", extract_all = "true" }
@@ -38,7 +37,6 @@ zig = "latest"
 "github:dandavison/delta" = "latest"
 "github:elio-fm/elio" = "latest"
 "github:jdx/usage" = "latest"
-"github:kristoff-it/superhtml" = "latest"
 "github:michel-kraemer/zsh-patina" = { version = "latest", postinstall = '''
   mkdir -p $XDG_CACHE_HOME/zsh-snap/eval
   rm -f $XDG_CACHE_HOME/zsh-snap/eval/zsh-patina.zsh{,.zwc} $XDG_DATA_HOME/zsh/site-functions/_zsh-patina{,.zwc}
