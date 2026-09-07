@@ -165,8 +165,8 @@ bind K zoom -0.1 true
 bind { followpage prev
 bind } followpage next
 
-bind <C-o> jumpprev
-bind <C-i> jumpnext
+bind gp jumpprev
+bind gn jumpnext
 
 " bind g; changelistjump -1
 " bind g, changelistjump 1
@@ -205,6 +205,7 @@ bind --mode=insert <C-b> text.backward_word
 bind --mode=insert <C-j> text.next_line
 bind --mode=insert <C-k> text.previous_line
 bind --mode=insert <C-w> text.backward_kill_word
+unbind --mode=insert <C-o>
 bind --mode=insert <C-o>gU text.upcase_word
 bind --mode=insert <C-o>gu text.downcase_word
 bind --mode=insert <C-o>c$ text.kill_line
@@ -222,6 +223,7 @@ bind --mode=input <C-b> text.backward_word
 bind --mode=input <C-j> text.next_line
 bind --mode=input <C-k> text.previous_line
 bind --mode=input <C-w> text.backward_kill_word
+unbind --mode=insert <C-o>
 bind --mode=input <C-o>gU text.upcase_word
 bind --mode=input <C-o>gu text.downcase_word
 bind --mode=input <C-o>c$ text.kill_line

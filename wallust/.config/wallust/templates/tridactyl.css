@@ -26,6 +26,7 @@
     --tridactyl-highlight-box-fg: var(--tridactyl-fg);
 
     --tridactyl-hintspan-fg: var(--tridactyl-bg);
+    --tridactyl-hintspan-active-fg: var(--tridactyl-bg);
     --tridactyl-hintspan-bg: var(--tridactyl-header-second-bg);
     --tridactyl-hintspan-border-width: 0px;
 
