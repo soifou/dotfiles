@@ -1,0 +1,75 @@
+#!/usr/bin/env sh
+
+# mise global postinstall hook
+
+set -eu
+
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/mise/default"
+
+install_python_packages() {
+    install_dir=$1 packages_file=$2
+    echo "mise postinstall: installing Python packages into $install_dir" >&2
+
+    uv pip install --python "$install_dir/bin/python" --quiet -r "$packages_file" \
+        || echo "mise postinstall: uv pip install failed for $install_dir" >&2
+    pip list
+}
+
+install_node_packages() {
+    install_dir=$1 packages_file=$2
+    echo "mise postinstall: installing Node packages into $install_dir" >&2
+    (
+        cd "$install_dir" || exit 1
+        npm install --global --silent $(cat "$packages_file") \
+            || echo "mise postinstall: npm install failed for $install_dir" >&2
+        npm list --depth=0 -g
+    )
+}
+
+install_go_packages() {
+    install_dir=$1 packages_file=$2
+    echo "mise postinstall: installing Go packages into $install_dir" >&2
+    (
+        export GOROOT="$install_dir"
+        export PATH="$install_dir/bin:$PATH"
+        # NOTE: Set explicitly GOBIN because GOPATH defaults to ~/.cache/go (set in .zshenv)
+        export GOBIN="$install_dir/bin"
+
+        while IFS= read -r package || [ -n "$package" ]; do
+            case "$package" in '' | \#*) continue ;; esac
+            go install "$package" || echo "mise postinstall: go install failed for $package in $install_dir" >&2
+        done < "$packages_file"
+        gup list
+    )
+}
+
+install_zsh_patina() {
+    cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh-snap/eval"
+    data_dir="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions"
+    mkdir -p "$cache_dir"
+    echo "mise postinstall: refresh zsh-patina cache and completions" >&2
+    rm -f \
+        "$cache_dir/zsh-patina.zsh" \
+        "$cache_dir/zsh-patina.zsh.zwc" \
+        "$data_dir/_zsh-patina" \
+        "$data_dir/_zsh-patina.zwc" \
+        || echo "mise postinstall: failed to refresh zsh-patina cache/completions" >&2
+    zsh-patina status && zsh-patina restart || zsh-patina start
+}
+
+install() {
+    tool=$1 install_dir=$2
+    [ -n "$install_dir" ] || return 0
+    case "$tool" in
+        python) install_python_packages "$install_dir" "$config_dir/$tool" ;;
+        node) install_node_packages "$install_dir" "$config_dir/$tool" ;;
+        go) install_go_packages "$install_dir" "$config_dir/$tool" ;;
+        "github:michel-kraemer/zsh-patina") install_zsh_patina ;;
+    esac
+}
+
+printf '%s' "${MISE_INSTALLED_TOOLS:-[]}" \
+    | jq -r '.[] | "\(.name)\t\(.install_path)"' \
+    | while IFS="$(printf '\t')" read -r tool install_dir; do
+        install "$tool" "$install_dir"
+    done

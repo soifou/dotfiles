@@ -1,15 +1,12 @@
 [settings]
 experimental = true
 lockfile = false
-go.default_packages_file = "~/.config/mise/default/golang"
-go.set_gopath = true
 jobs = 4
-pipx.uvx = true
-python.compile = true
-python.default_packages_file = "~/.config/mise/default/python"
 raw = false
 status.show_env = true
-trusted_config_paths = [ '~/.config/mise' ]
+
+[hooks]
+postinstall = '"${XDG_CONFIG_HOME:-$HOME/.config}/mise/postinstall"'
 
 [tools]
 deno = "latest"
@@ -17,7 +14,7 @@ go = "latest"
 lua = "5.1"
 node = "latest"
 php = "8.4.4"
-python = "latest"
+python = "3.14"
 ruby = "latest"
 rust = "latest"
 zig = "latest"
@@ -37,9 +34,6 @@ zig = "latest"
 "github:dandavison/delta" = "latest"
 "github:elio-fm/elio" = "latest"
 "github:jdx/usage" = "latest"
-"github:michel-kraemer/zsh-patina" = { version = "latest", postinstall = '''
-  mkdir -p $XDG_CACHE_HOME/zsh-snap/eval
-  rm -f $XDG_CACHE_HOME/zsh-snap/eval/zsh-patina.zsh{,.zwc} $XDG_DATA_HOME/zsh/site-functions/_zsh-patina{,.zwc}
-''' }
+"github:michel-kraemer/zsh-patina" = "latest"
 "github:symfony-cli/symfony-cli" = { version = "latest", exe = "symfony" }
 "github:typst/typst" = "latest"

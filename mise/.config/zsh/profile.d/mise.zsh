@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
-export MISE_NODE_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/mise/default/nodejs
-
+export MISE_TRUSTED_CONFIG_PATHS="${MISE_TRUSTED_CONFIG_PATHS:-$XDG_CONFIG_HOME/mise}"
 [ -d "$XDG_DATA_HOME/mise/shims" ] && export PATH="$XDG_DATA_HOME/mise/shims:$PATH"
 
 # Set local config
