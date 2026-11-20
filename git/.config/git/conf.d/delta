@@ -1,0 +1,44 @@
+[core]
+    pager = delta
+
+[pager]
+    diff = delta --tui
+    show = delta --tui
+    log = delta --tui
+
+[delta]
+    navigate = true   # use n and N to move between diff sections
+    hyperlinks = true
+    hyperlinks-file-link-format = "file://{path}#{line}"
+    # hyperlinks-commit-link-format = "git://commit/origin/{commit}/"
+    side-by-side = 160
+    side-by-side-fill-empty = true
+    features = wallust
+
+# https://github.com/dandavison/delta/tree/main/manual/src/tui.md#keys
+[delta-tui "bindings.root"]
+    quit = ctrl+c
+    quit = q
+    toggle-section = z+a
+    toggle-all-sections = z+R
+    toggle-all-sections = z+M
+    hide-file = z+d
+    half-page-down = d
+    half-page-up = u
+    unstage = z+u
+
+# Override "side-by-side" feature to set colors for line-numbers
+# https://github.com/dandavison/delta/issues/549#issuecomment-1211881415
+[delta "side-by-side"]
+	side-by-side = true
+    line-numbers = true
+    line-numbers-left-format = "{nm:>3} │ "
+    line-numbers-right-format = "{np:>3} │ "
+    line-numbers-left-style = red
+    line-numbers-minus-style = red italic
+    line-numbers-plus-style = green italic
+    line-numbers-right-style = green
+    line-numbers-zero-style = grey italic
+
+[include]
+    path = delta-theme

@@ -39,7 +39,7 @@
             command -v fzf >/dev/null && {\
                 git hist --color=always --branches --oneline |\
                 fzf --exact --no-sort -m --ansi --no-height --prompt=' cherry-pick > ' \
-                --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta\" \
+                --preview 'git show --color=always {1} | delta -w "${FZF_PREVIEW_COLUMNS}"' \
                 --preview-window border-left |\
                 awk '{print $1}' | xargs -r git cherry-pick;\
             }\
@@ -61,9 +61,10 @@
     h = "!f() {\
         command -v fzf >/dev/null && {\
             git hist --color=always |\
-            fzf --exact --no-sort -m --ansi --no-height --prompt=' commits history > ' \
-            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta\" \
-            --preview-window $1 |\
+            fzf --exact --no-sort -m --ansi --no-height \
+                --prompt ' commits history > ' \
+                --preview 'git show --color=always {1} | delta -w "${FZF_PREVIEW_COLUMNS}"' \
+                --preview-window $1 |\
             xargs ;\
         } || {\
             git hist;\
@@ -74,22 +75,24 @@
     rl = "!f() {\
         command -v fzf >/dev/null && {\
             git hist ..@{u} --color=always |\
-            fzf --exact --no-sort -m --ansi --no-height --prompt=' commits history > ' \
-            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show --color=always @' | delta\" \
-            --preview-window $1 |\
+            fzf --exact --no-sort -m --ansi --no-height \
+                --prompt ' commits history > ' \
+                --preview 'git show --color=always {1} | delta -w "${FZF_PREVIEW_COLUMNS}"' \
+                --preview-window $1 |\
             xargs ;\
         } || {\
             git hist ..@{u};\
         }\
     };f"
 
-    # show commits history for a particular file (similar to gitk)
+    # show commits history for a single file (similar to gitk)
     hf = "!f() {\
         command -v fzf >/dev/null && {\
             git hist --color=always $2 |\
-            fzf --exact --no-sort -m --ansi --no-height --prompt=\" commits history for $2 > \" \
-            --preview \"echo {} | grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I@ sh -c 'git show -p --follow --color=always @ $2' | delta\" \
-            --preview-window $1 |\
+            fzf --exact --no-sort -m --ansi --no-height \
+                --prompt \" commits history for $2 > \" \
+                --preview \"git show -p --follow --color=always {1} '$2' | delta -w \"\\${FZF_PREVIEW_COLUMNS}\"\" \
+                --preview-window $1 |\
             xargs ;\
         } || {\
             git log -p --follow $2;\
@@ -101,10 +104,10 @@
         command -v fzf >/dev/null && {\
             git slist |\
             fzf --exact --no-sort -m --ansi --no-height \
-            --bind \"ctrl-x:execute(echo {} | cut -d' ' -f1 | xargs git stash drop)+reload(git slist)\" \
-            --bind \"ctrl-p:execute(echo {} | cut -d' ' -f1 | xargs git stash apply)+reload(git slist)\" \
-            --preview \"echo {} | cut -d' ' -f1 | xargs git stash show --color=always -p | delta\" \
-            --preview-window $1 |\
+                --bind \"ctrl-x:execute(echo {} | cut -d' ' -f1 | xargs git stash drop)+reload(git slist)\" \
+                --bind \"ctrl-p:execute(echo {} | cut -d' ' -f1 | xargs git stash apply)+reload(git slist)\" \
+                --preview 'git stash show --color=always -p {1} | delta -w \"${FZF_PREVIEW_COLUMNS}\"' \
+                --preview-window $1 |\
             cut -d' ' -f1;\
         } || {\
             git stash list;\

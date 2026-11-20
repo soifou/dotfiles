@@ -84,7 +84,6 @@ export MANWIDTH=80
 
 export GREP_COLORS="mt=30;43"
 export BC_ENV_ARGS="-q"
-export GIT_PAGER=delta
 
 export FZF_DEFAULT_OPTS="
     --prompt 'λ ' --marker │ --pointer ▌ --separator ─ --scrollbar │ --ellipsis … --gutter ' '

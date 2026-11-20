@@ -7,7 +7,6 @@
 ;     gpgsign = true
 
 [diff]
-    tool = delta
     colorMoved = default
 
 [difftool]
@@ -17,13 +16,12 @@
 [difftool "kitty"]
     cmd = kitty +kitten diff $LOCAL $REMOTE
 
-[difftool "delta"]
-    cmd = delta $LOCAL $REMOTE
+[merge]
+    tool = nvimdiff
+    prompt = false
 
-; [include]
-;     path = delta-theme
+[mergetool "nvimdiff"]
+    cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
-[delta]
-    navigate = true   # use n and N to move between diff sections
-    hyperlinks = true
-    hyperlinks-file-link-format = "file://{path}#{line}"
+[include]
+    path = delta
