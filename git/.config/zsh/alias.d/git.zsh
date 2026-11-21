@@ -29,7 +29,7 @@ alias grh='git reset --hard'
 
 # Git status lacks hyperlink support
 command -v add-osc-8-hyperlink > /dev/null && {
-    gst() { git -c color.status=always status "$@" | add-osc-8-hyperlink | less -FRX; }
+    gst() { git -c color.status=always status "$@" | add-osc-8-hyperlink | less -FRX -DO-; }
 } || alias gst='git status'
 
 ## Alias of git aliases, declared in ~/.config/git/conf.d/aliases
